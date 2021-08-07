@@ -23,8 +23,6 @@ A ferramenta _[Terraform](https://www.terraform.io/)_ é independente de qualque
 
 ![alt_text](./images/ch2_2-5_1.jpg  "Terraform OCI Provider")
 
-<br>
-
 ### __Como o Terraform funciona?__
 
 O _[Terraform](https://www.terraform.io/)_ lê todos os arquivos com a extensão __.tf__ do diretório corrente e os concatena. O nome do arquivo não importa! Todos __*.tf__ serão concatenados! Você é livre para definir um nome de arquivo __variables.tf__ ou __vars.tf__, por exemplo.
