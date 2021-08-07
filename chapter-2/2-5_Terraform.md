@@ -52,7 +52,7 @@ O próprio _[OCI](https://www.oracle.com/cloud/)_ auxilia na criação das chave
 
 Transportando os valores para o arquivo, temos:
 
-```
+```terraform
 darmbrust@hoodwink:~/oci-tf$ cat terraform.tfvars
 #
 # terraform.tfvars
