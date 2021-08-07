@@ -30,8 +30,9 @@ A ferramenta _[Terraform](https://www.terraform.io/)_ é independente de qualque
 O _[Terraform](https://www.terraform.io/)_ lê todos os arquivos com a extensão __.tf__ do diretório corrente e os concatena. O nome do arquivo não importa! Todos __*.tf__ serão concatenados! Você é livre para definir um nome de arquivo __variables.tf__ ou __vars.tf__, por exemplo.
 
 ```
-darmbrust@hoodwink:~/oci-tf$ ls -1
+darmbrust@hoodwink:~/oci-tf$ ls -1F
 datasources.tf
+keys/
 main.tf
 outputs.tf
 providers.tf
@@ -41,8 +42,73 @@ vars.tf
 
 Vamos aos detalhes. Toda comunicação com o _[OCI](https://www.oracle.com/cloud/)_ necessita de um _[usuário](https://docs.oracle.com/pt-br/iaas/Content/GSG/Tasks/addingusers.htm)_, _[credenciais](https://docs.oracle.com/pt-br/iaas/Content/Identity/Concepts/usercredentials.htm)_ válidas para _autenticação_, e _[políticas](https://docs.oracle.com/pt-br/iaas/Content/Identity/Concepts/policies.htm)_ que _autorizem_ a criação de recursos em uma _[região](https://docs.oracle.com/pt-br/iaas/Content/General/Concepts/regions.htm)_ e _[tenancy](https://docs.oracle.com/pt-br/iaas/Content/GSG/Concepts/settinguptenancy.htm)_. O _[Terraform](https://www.terraform.io/)_ necessita que essas informações sejam especificadas de alguma forma via variáveis de ambiente, linha de comando ou em arquivo.
 
-Particularmente, eu gosto de especificar esses valores utilizando o arquivo _"terraform.tfvars"_ que possui um significado especial. Ele será processado pelo _[Terraform](https://www.terraform.io/)_ toda vez que precisar se comunicar com o _[OCI](https://www.oracle.com/cloud/)_.
+Particularmente, eu gosto de especificar esses valores utilizando o arquivo _"terraform.tfvars"_ que possui um significado especial. Ele será processado pelo _[Terraform](https://www.terraform.io/)_ toda vez que você precisar se comunicar com o _[OCI](https://www.oracle.com/cloud/)_ através do _[Terraform](https://www.terraform.io/)_.
 
+O próprio _[OCI](https://www.oracle.com/cloud/)_ auxilia na criação das chaves de acesso e demais valores para preenchermos o arquivo _"terraform.tfvars"_:
 
+<br>
 
+![alt_text](./images/ch2_2-5_2.jpg  "OCI - Configuration File Preview")
 
+<br>
+
+Transportando os valores para o arquivo, temos:
+
+```
+darmbrust@hoodwink:~/oci-tf$ cat terraform.tfvars
+#
+# terraform.tfvars
+#
+
+api_private_key_path = "./keys/oci.key"
+api_fingerprint = "a6:73:ee:05:7e:56:47:ab:60:d3:76:f4:01:01:de:55"
+user_id = "ocid1.user.oc1..aaaaaaaay3rey4zdxzyj1oz3rey267ovskbi72vix3reytptcyehqmqbsr76q"
+tenancy_id = "ocid1.tenancy.oc1..aaaaaaaaz4oeus54ktfstpwc4z3muju5xec7nppp33rt4r4x2v1xydt4pf5qrrq"
+compartment_id = "ocid1.tenancy.oc1..aaaaaaaaz4oeus54ktfstjwc4z3muj15xec7nyq33rt1r4x2vadt1pf1qrrq"
+```
+
+>_**__NOTA:__** Não versione o arquivo _"terraform.tfvars"_ nem o diretório _"keys/"_. Eles contém informações sensíveis para o acesso._
+
+<br>
+
+Aqui entra outro conceito importante do _[Terraform](https://www.terraform.io/)_: _[Variáveis de Input](https://www.terraform.io/docs/language/values/variables.html)_ ou entrada.
+
+<br>
+
+### __Variáveis de Input ou entrada__
+
+_[Variáveis de Input](https://www.terraform.io/docs/language/values/variables.html)_ ou para entrada de dados, é o meio pelo qual parametrizamos ou informamos ao código _[Terraform](https://www.terraform.io/)_, sobre um determinado valor. Em nosso exemplo, iremos informar ao _[Terraform](https://www.terraform.io/)_, através do conjunto _"nome variável = valor"_ contidos no arquivo _"terraform.tfvars"_, informações de autenticação necessárias para a construção da infraestrutura no _[OCI](https://www.oracle.com/cloud/)_.
+
+<br>
+
+```terraform
+darmbrust@hoodwink:~/oci-tf$ cat vars.tf
+#
+# vars.tf
+#
+
+variable "api_private_key_path" {
+  description = "The path to oci api private key."
+  type = string
+}
+
+variable "api_fingerprint" {
+  description = "Fingerprint of oci api private key."
+  type = string
+}
+
+variable "user_id" {
+  description = "The id of the user that terraform will use to create the resources."
+  type = string
+}
+
+variable "tenancy_id" {
+  description = "The tenancy id in which to create the resources."
+  type = string
+}
+
+variable "compartment_id" {
+  description = "The compartment id where to create all resources."
+  type = string
+}
+```
