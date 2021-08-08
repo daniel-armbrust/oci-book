@@ -104,8 +104,6 @@ compartment_id = "ocid1.compartment.oc1..aaaaaaaaro7baesc4z3untyqxajzotsthm4baa6
 
 >_**__NOTA:__** Não versione o arquivo _"terraform.tfvars"_ nem o diretório _"keys/"_. Eles contém informações sensíveis para o acesso._
 
-<br>
-
 ### __Variáveis de Input (entrada de dados)__
 
 _[Variáveis de Input](https://www.terraform.io/docs/language/values/variables.html)_ ou para entrada de dados, é o meio pelo qual parametrizamos ou informamos ao código _[Terraform](https://www.terraform.io/)_, sobre um determinado valor. Em nosso exemplo, iremos informar ao _[Terraform](https://www.terraform.io/)_, através do conjunto _"nome variável = valor"_ contidos no arquivo _"terraform.tfvars"_, informações de autenticação necessárias para a construção da infraestrutura no _[OCI](https://www.oracle.com/cloud/)_.
