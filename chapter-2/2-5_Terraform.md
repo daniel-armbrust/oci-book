@@ -31,7 +31,7 @@ Escrito na linguagem de programação _[Go](https://pt.wikipedia.org/wiki/Go_(li
 2. Descompacte e mova o binário para algum lugar em que sua variável de ambiente _[PATH](https://en.wikipedia.org/wiki/PATH_(variable))_ faça referência.
 3. Pronto!
 
-No meu caso, estou usando um sistema operacional _[Linux](https://pt.wikipedia.org/wiki/Linux)_ em processador _[ARM 32-bits](https://pt.wikipedia.org/wiki/Linux)_.
+No meu caso, estou usando um sistema operacional _[Linux](https://pt.wikipedia.org/wiki/Linux)_ em processador _[ARM 32-bits](https://pt.wikipedia.org/wiki/Arquitetura_ARM)_.
 
 ```linux
 darmbrust@hoodwink:~/oci-tf$ sudo su -
@@ -59,6 +59,8 @@ on linux_arm
 
 O _[Terraform](https://www.terraform.io/)_ lê todos os arquivos com a extensão __.tf__ do diretório corrente (onde você está) e os concatena. O nome do arquivo não importa! Todos __*.tf__ serão concatenados! Você é livre para definir um nome de arquivo __variables.tf__ ou __vars.tf__, por exemplo.
 
+Abaixo, apresento nosso projeto de exemplo para nos guiar neste entendimento:
+
 ```
 darmbrust@hoodwink:~/oci-tf$ ls -1F
 datasources.tf
@@ -75,9 +77,9 @@ Para que o _[Terraform](https://www.terraform.io/)_ possa criar e gerenciar noss
 
 Toda comunicação com o _[OCI](https://www.oracle.com/cloud/)_ necessita de um _[usuário](https://docs.oracle.com/pt-br/iaas/Content/GSG/Tasks/addingusers.htm)_, _[credenciais](https://docs.oracle.com/pt-br/iaas/Content/Identity/Concepts/usercredentials.htm)_ válidas para _autenticação_, e _[políticas](https://docs.oracle.com/pt-br/iaas/Content/Identity/Concepts/policies.htm)_ que _autorizem_ a criação de recursos em uma _[região](https://docs.oracle.com/pt-br/iaas/Content/General/Concepts/regions.htm)_ e _[tenancy](https://docs.oracle.com/pt-br/iaas/Content/GSG/Concepts/settinguptenancy.htm)_ específicos. O _[Terraform](https://www.terraform.io/)_ necessita que essas informações sejam especificadas de alguma forma via variáveis de ambiente, linha de comando ou em arquivo.
 
-Particularmente, eu gosto de especificar esses valores utilizando o arquivo _"terraform.tfvars"_ que possui um significado especial. Ele será processado pelo _[Terraform](https://www.terraform.io/)_ toda vez que você precisar se comunicar com o _[OCI](https://www.oracle.com/cloud/)_ através do _[Terraform](https://www.terraform.io/)_.
+Particularmente, eu gosto de especificar esses valores utilizando o arquivo _"terraform.tfvars"_ que possui um significado especial. Ele será processado pelo _[Terraform](https://www.terraform.io/)_ toda vez que você precisar se comunicar com o _[OCI](https://www.oracle.com/cloud/)_.
 
-O próprio _[OCI](https://www.oracle.com/cloud/)_ auxilia na criação das chaves de acesso e demais valores para preenchermos o arquivo _"terraform.tfvars"_:
+O próprio _[OCI](https://www.oracle.com/cloud/)_ já facilita a criação das chaves de acesso e demais valores para preenchermos o arquivo _"terraform.tfvars"_:
 
 <br>
 
