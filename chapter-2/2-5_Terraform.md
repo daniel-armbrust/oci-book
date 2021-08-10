@@ -5,7 +5,7 @@
 ### __Visão Geral__
 _[Terraform](https://www.terraform.io/)_ é uma ferramenta que permite definir, provisionar e gerenciar sua infraestrutura através de código (criar, atualizar e destruir). O conceito por trás do termo _"infraestrutura como código"_ é simples: você define recursos cloud (vm, banco de dados, redes, etc) em um ou mais arquivos de configuração (infraestrutura em código). O código utiliza uma _"abordagem declarativa"_. Isto significa que é possível definir qual é o _“estado esperado”_ da sua infraestrutura, através de instruções simples e diretas.
 
-Codificar em _[Terraform](https://www.terraform.io/)_, significa codificar em uma linguagem especifica chamada _HashiCorp Configuration Language (HCL)_. Esta foi criada pela _HashiCorp_ com o intuito de substituir configurações antes escritas em formato _[JSON](https://pt.wikipedia.org/wiki/JSON)_ ou _[XML](https://pt.wikipedia.org/wiki/XML)_. 
+Codificar em _[Terraform](https://www.terraform.io/)_, significa codificar em uma linguagem especifica chamada _HashiCorp Configuration Language (HCL)_. Esta foi criada pela _HashiCorp_ com o intuito de substituir configurações antes escritas em formato _[JSON](https://pt.wikipedia.org/wiki/JSON)_ ou _[XML](https://pt.wikipedia.org/wiki/XML)_. Seu principal propósito é declarar _(recursos)[https://www.terraform.io/docs/language/resources/index.html]_, que representam objetos de infraestrutura.
 
 Quando falamos sobre a ação de provisionar infraestrutura, estamos nos referindo à criação ou implantação (deploy) dos componentes que formam uma infraestrutura. Isto é diferente do _“gerenciamento de configuração”_, feito por ferramentas como _[Ansible](https://docs.ansible.com/ansible/latest/index.html)_, por exemplo.
 
@@ -55,11 +55,11 @@ Terraform v1.0.4
 on linux_arm
 ```
 
-### __Terraform e OCI__
+### __Como o Terraform funciona?__
 
-O _[Terraform](https://www.terraform.io/)_ lê todos os arquivos com a extensão __.tf__ do diretório corrente (onde você está) e os concatena. O nome do arquivo não importa! Todos __*.tf__ serão concatenados! Você é livre para definir um nome de arquivo __variables.tf__ ou __vars.tf__, por exemplo.
+O _[Terraform](https://www.terraform.io/)_ lê todos os arquivos com a extensão __.tf__ do diretório corrente _(root module)_ e os concatena. Os nomes dos arquivos não importam! Todos __*.tf__ do diretório corrente _(root module)_ serão concatenados! Você é livre para definir qualquer nome de arquivo que quiser. A ferramenta não obedece nenhuma lógica quando for ler arquivos com a extensão __.tf__. Porém, por questões de boas práticas, a _HashiCorp_ recomenda que existam no mínimo os arquivos _*main.tf*_, _*variables.tf*_ e _*outputs.tf*_ por diretório de módulo, independente de possuirem conteúdo ou não.
 
-Abaixo, apresento nosso projeto de exemplo para nos guiar neste entendimento:
+Abaixo, uma visão de um simnples _root module_ que eu particularmente gosto:
 
 ```
 darmbrust@hoodwink:~/oci-tf$ ls -1F
@@ -70,8 +70,28 @@ modules/
 outputs.tf
 providers.tf
 terraform.tfvars
-vars.tf
+variables.tf
 ```
+
+Como já foi dito, o _[Terraform](https://www.terraform.io/)_ é composto de um único binário executável. Ele aceita vários subcomandos (ou argumentos) diferentes sendo os principais: _init_, _validate_, _plan_, _apply_ e _destroy_. Iremos apresentar maiores detalhes no decorrer do texto, porém quero focar no básico do _fluxo lógico_ usado pela ferramenta quando disparamos a ação de criar uma infraestrutura. Ao entender este _fluxo lógico_ básico, compor sua infraestrutura dentro dos padrões do _[Terraform](https://www.terraform.io/)_, ficará mais fácil. Observe a imagem abaixo:
+
+<br>
+
+![alt_text](./images/tf-workflow-1-1.jpg  "Terraform Basic Workflow")
+
+<br>
+
+**1.** Toda criação de infraestrutura vem de um subcomando _apply_. Isto irá transformar o que eu tenho codificado em infraestrutura real. <br>
+**2.** O _[Terraform](https://www.terraform.io/)_ processa a entrada de dados do _"meio externo"_ para o _root module_ através: <br>
+**2.1.** Pelo uso do argumento __*-var*__ no qual especifica variável e valor (ex: _-var="display_name=vcn"_) <br>
+**2.2.** Através de arquivos de definições de variáveis __*\*.tfvars*__, carregados automaticamente pela ferramenta ou que sejam especificandos. <br>
+**2.3.** Através de variáveis de ambientes que contenham o prefixo __*TF\_VAR\_\<nome\>\=\<valor\>*__ (ex: _TF_VAR_display_name="vcn"_). <br>
+**3.** O _root module_ processa os recursos para a criação da infraestrutura. <br>
+**4.** Outros módulos _(child modules)_ podem ser chamados a partir do _root module_ para construção da infraestrutura. <br>
+
+Iremos detalhar um pouco mais cada recurso relevante da linguagem. Para detalhes, consulte a documentação oficial _[aqui](https://www.terraform.io/docs/language/index.html)_.
+
+### __Terraform e OCI__
 
 Para que o _[Terraform](https://www.terraform.io/)_ possa criar e gerenciar nossa infraestrutura no _[OCI](https://www.oracle.com/cloud/)_, devemos primeiramente parametrizar-lo com alguns valores.  
 
