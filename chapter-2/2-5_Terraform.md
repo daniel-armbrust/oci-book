@@ -86,8 +86,8 @@ Como já foi dito, o _[Terraform](https://www.terraform.io/)_ é composto de um 
 2.1. Pelo uso do argumento __*-var*__ no qual especifica variável e valor (ex: _-var="display_name=vcn"_) <br>
 2.2. Através de arquivos de definições de variáveis __*\*.tfvars*__, carregados automaticamente pela ferramenta ou que sejam especificandos. <br>
 2.3. Através de variáveis de ambientes que contenham o prefixo __*TF\_VAR\_\<nome\>\=\<valor\>*__ (ex: _TF_VAR_display_name="vcn"_). <br>
-3. O _root module_ processa os recursos para a criação da infraestrutura. <br>
-4. Outros módulos _(child modules)_ podem ser chamados a partir do _root module_ para construção da infraestrutura. <br>
+3. O _"root module"_ processa os recursos para a criação da infraestrutura. <br>
+4. Outros módulos _(child modules)_ podem ser chamados a partir do _"root module"_ para construção da infraestrutura. <br>
 
 Iremos detalhar um pouco mais cada recurso relevante da linguagem. Para detalhes, consulte a documentação oficial _[aqui](https://www.terraform.io/docs/language/index.html)_.
 
