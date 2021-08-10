@@ -81,8 +81,8 @@ Como já foi dito, o _[Terraform](https://www.terraform.io/)_ é composto de um 
 
 <br>
 
-1. Toda criação de infraestrutura vem de um subcomando _apply_. Isto irá transformar o que eu tenho codificado em infraestrutura real. <br>
-2. O _[Terraform](https://www.terraform.io/)_ processa a entrada de dados do _"meio externo"_ para o _root module_ através: <br>
+1. Toda criação de infraestrutura vem de um subcomando _"apply"_. Isto irá transformar o que eu tenho codificado em infraestrutura real. <br>
+2. O _[Terraform](https://www.terraform.io/)_ processa a entrada de dados do _"meio externo"_ para o _"root module"_ através: <br>
 2.1. Pelo uso do argumento __*-var*__ no qual especifica variável e valor (ex: _-var="display_name=vcn"_) <br>
 2.2. Através de arquivos de definições de variáveis __*\*.tfvars*__, carregados automaticamente pela ferramenta ou que sejam especificandos. <br>
 2.3. Através de variáveis de ambientes que contenham o prefixo __*TF\_VAR\_\<nome\>\=\<valor\>*__ (ex: _TF_VAR_display_name="vcn"_). <br>
