@@ -59,7 +59,7 @@ on linux_arm
 
 O _[Terraform](https://www.terraform.io/)_ lê todos os arquivos com a extensão __.tf__ do diretório corrente _(root module)_ e os concatena. Os nomes dos arquivos não importam! Todos __*.tf__ do diretório corrente _(root module)_ serão concatenados! Você é livre para definir qualquer nome de arquivo que quiser. A ferramenta não obedece nenhuma lógica quando for ler arquivos com a extensão __.tf__. Porém, por questões de boas práticas, a _HashiCorp_ recomenda que existam no mínimo os arquivos _*main.tf*_, _*variables.tf*_ e _*outputs.tf*_ por diretório de módulo, independente de possuirem conteúdo ou não.
 
-Abaixo, uma visão de um simnples _root module_ que eu particularmente gosto:
+Abaixo, uma visão de um simples _root module_ que eu particularmente gosto:
 
 ```
 darmbrust@hoodwink:~/oci-tf$ ls -1F
@@ -73,7 +73,7 @@ terraform.tfvars
 variables.tf
 ```
 
-Como já foi dito, o _[Terraform](https://www.terraform.io/)_ é composto de um único binário executável. Ele aceita vários subcomandos (ou argumentos) diferentes sendo os principais: _init_, _validate_, _plan_, _apply_ e _destroy_. Iremos apresentar maiores detalhes no decorrer do texto, porém quero focar no básico do _fluxo lógico_ usado pela ferramenta quando disparamos a ação de criar uma infraestrutura. Ao entender este _fluxo lógico_ básico, compor sua infraestrutura dentro dos padrões do _[Terraform](https://www.terraform.io/)_, ficará mais fácil. Observe a imagem abaixo:
+Como já foi dito, o _[Terraform](https://www.terraform.io/)_ é composto de um único binário executável. Ele aceita vários subcomandos (ou argumentos) diferentes sendo os principais: _"init"_, _"validate"_, _"plan"_, _"apply"_ e _"destroy"_. Iremos apresentar maiores detalhes no decorrer do texto, porém quero focar no básico do _fluxo lógico_ usado pela ferramenta quando disparamos a ação de criar uma infraestrutura. Ao entender este _fluxo lógico_ básico, compor sua infraestrutura dentro dos padrões do _[Terraform](https://www.terraform.io/)_ ficará mais fácil. Observe a imagem abaixo:
 
 <br>
 
@@ -89,7 +89,95 @@ Como já foi dito, o _[Terraform](https://www.terraform.io/)_ é composto de um 
 3. O _"root module"_ processa os recursos para a criação da infraestrutura. <br>
 4. Outros módulos _(child modules)_ podem ser chamados a partir do _"root module"_ para construção da infraestrutura. <br>
 
-Iremos detalhar um pouco mais cada recurso relevante da linguagem. Para detalhes, consulte a documentação oficial _[aqui](https://www.terraform.io/docs/language/index.html)_.
+A partir deste desenho básico, iremos aos detalhes.
+
+### __Variáveis de Input (entrada de dados)__
+
+_[Variáveis de Input](https://www.terraform.io/docs/language/values/variables.html)_ ou para entrada de dados, é o meio pelo qual parametrizamos ou informamos ao código _[Terraform](https://www.terraform.io/)_ sobre um determinado valor. Toda declaração de variável no _[Terraform](https://www.terraform.io/)_, obedece a seguinte estrutura:
+
+```terraform
+variable "<NOME>" {
+    description = "<DESCRIÇÃO>"
+    type = <TIPO DE DADOS>
+    default = <VALOR PADRÃO A SER USADO NA AUSÊNCIA DE UM VALOR>
+}
+```
+
+Por exemplo:
+
+```terraform
+variable "vcn_display_name" {
+    description = "A user-friendly name for OCI VCN."
+    type = string
+    default = "vcn"
+}
+```
+
+No _[Terraform](https://www.terraform.io/)_, dentro de um mesmo módulo, nomes de variáveis devem ser únicos. Caso contrário, teremos um erro conforme mostrado abaixo:
+
+```
+darmbrust@hoodwink:~/oci-tf$ terraform validate
+╷
+│ Error: Duplicate variable declaration
+│
+│   on variables.tf line 25:
+│   25: variable "user_id" {
+│
+│ A variable named "user_id" was already declared at variables.tf:20,1-19. Variable names must be unique within a module.
+╵
+```
+
+Os argumentos _"description"_, _"type"_ e _"default"_, são opcionais. O argumento _"description"_ é uma maneira de você documentar qual o propósito da variável (boa prática). Já o argumento "_type_", você restringe qual é o tipo de valor aceito pela variável. Se você não especificar um tipo, o tipo "_any_" (qualquer tipo) será usado. Por último, o argumento "_default_" torna a variável opcional. Caso a variável não receba um valor, o valor contido em "_default_" será usado.
+
+Para maiores detalhes sobre o uso de variáveis e quais os tipos de dados suportados, consulte a _[documentação oficial](https://www.terraform.io/docs/language/values/variables.html)_.
+
+### __Valores de Output (saida de dados)__
+
+
+### __Módulos__
+
+
+Quando informamos valores através do _root module_
+
+Em nosso exemplo, iremos informar ao _[Terraform](https://www.terraform.io/)_, através do conjunto _"nome variável = valor"_ contidos no arquivo _"terraform.tfvars"_, informações de autenticação necessárias para a construção da infraestrutura no _[OCI](https://www.oracle.com/cloud/)_.
+
+<br>
+
+```terraform
+darmbrust@hoodwink:~/oci-tf$ cat variables.tf
+#
+# variables.tf
+#
+
+variable "api_private_key_path" {
+  description = "The path to oci api private key."
+  type = string
+}
+
+variable "api_fingerprint" {
+  description = "Fingerprint of oci api private key."
+  type = string
+}
+
+variable "user_id" {
+  description = "The id of the user that terraform will use to create the resources."
+  type = string
+}
+
+variable "tenancy_id" {
+  description = "The tenancy id in which to create the resources."
+  type = string
+}
+
+variable "compartment_id" {
+  description = "The compartment id where to create all resources."
+  type = string
+}
+```
+
+<br>
+
+Lembre-se: toda vez que eu desejar que o _[Terraform](https://www.terraform.io/)_ saiba de algo, eu devo utilizar uma _[Variáveis de Input](https://www.terraform.io/docs/language/values/variables.html)_.
 
 ### __Terraform e OCI__
 
@@ -124,44 +212,3 @@ compartment_id = "ocid1.compartment.oc1..aaaaaaaaro7baesc4z3untyqxajzotsthm4baa6
 
 >_**__NOTA:__** Não versione o arquivo _"terraform.tfvars"_ nem o diretório _"keys/"_. Eles contém informações sensíveis para o acesso._
 
-### __Variáveis de Input (entrada de dados)__
-
-_[Variáveis de Input](https://www.terraform.io/docs/language/values/variables.html)_ ou para entrada de dados, é o meio pelo qual parametrizamos ou informamos ao código _[Terraform](https://www.terraform.io/)_, sobre um determinado valor. Em nosso exemplo, iremos informar ao _[Terraform](https://www.terraform.io/)_, através do conjunto _"nome variável = valor"_ contidos no arquivo _"terraform.tfvars"_, informações de autenticação necessárias para a construção da infraestrutura no _[OCI](https://www.oracle.com/cloud/)_.
-
-<br>
-
-```terraform
-darmbrust@hoodwink:~/oci-tf$ cat vars.tf
-#
-# vars.tf
-#
-
-variable "api_private_key_path" {
-  description = "The path to oci api private key."
-  type = string
-}
-
-variable "api_fingerprint" {
-  description = "Fingerprint of oci api private key."
-  type = string
-}
-
-variable "user_id" {
-  description = "The id of the user that terraform will use to create the resources."
-  type = string
-}
-
-variable "tenancy_id" {
-  description = "The tenancy id in which to create the resources."
-  type = string
-}
-
-variable "compartment_id" {
-  description = "The compartment id where to create all resources."
-  type = string
-}
-```
-
-<br>
-
-Lembre-se: toda vez que eu desejar que o _[Terraform](https://www.terraform.io/)_ saiba de algo, eu devo utilizar uma _[Variáveis de Input](https://www.terraform.io/docs/language/values/variables.html)_.
