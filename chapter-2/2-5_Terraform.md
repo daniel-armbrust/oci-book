@@ -55,7 +55,7 @@ Terraform v1.0.4
 on linux_arm
 ```
 
-### __Como o Terraform funciona?__
+### __Básico do básico...__
 
 O _[Terraform](https://www.terraform.io/)_ lê todos os arquivos com a extensão __.tf__ do diretório corrente _(root module)_ e os concatena. Os nomes dos arquivos não importam! Você é livre para definir qualquer nome de arquivo que quiser. A ferramenta não obedece nenhuma lógica quando for ler arquivos com a extensão __.tf__. 
 
@@ -92,8 +92,97 @@ resource "oci_core_subnet" "subnet" {
 
 ```
 
+O binário executável do _[Terraform](https://www.terraform.io/)_ aceita vários subcomandos (ou argumentos), sendo os principais: _"init"_, _"validate"_, _"plan"_, _"apply"_ e _"destroy"_. Começaremos pelo _"init"_ que lê o bloco _"provider { ... }"_ e faz download do _pluging_ que foi especificado:
 
-Como já foi dito, o _[Terraform](https://www.terraform.io/)_ é composto de um único binário executável. Ele aceita vários subcomandos (ou argumentos) diferentes sendo os principais: _"init"_, _"validate"_, _"plan"_, _"apply"_ e _"destroy"_. Iremos apresentar maiores detalhes no decorrer do texto, porém quero focar no básico do _fluxo lógico_ quando disparamos a ação de criar uma infraestrutura. Ao entender este _fluxo lógico_ básico, compor sua infraestrutura dentro dos padrões do _[Terraform](https://www.terraform.io/)_ ficará mais fácil. Observe a imagem abaixo:
+```
+darmbrust@hoodwink:~/oci-tf$ terraform init
+
+Initializing the backend...
+
+Initializing provider plugins...
+- Finding latest version of hashicorp/oci...
+- Installing hashicorp/oci v4.39.0...
+- Installed hashicorp/oci v4.39.0 (signed by HashiCorp)
+
+Terraform has created a lock file .terraform.lock.hcl to record the provider
+selections it made above. Include this file in your version control repository
+so that Terraform can guarantee to make the same selections by default when
+you run "terraform init" in the future.
+
+Terraform has been successfully initialized!
+
+You may now begin working with Terraform. Try running "terraform plan" to see
+any changes that are required for your infrastructure. All Terraform commands
+should now work.
+
+If you ever set or change modules or backend configuration for Terraform,
+rerun this command to reinitialize your working directory. If you forget, other
+commands will detect it and remind you to do so if necessary.
+
+darmbrust@hoodwink:~/oci-tf$ ls -hl .terraform/providers/registry.terraform.io/hashicorp/oci/4.39.0/linux_arm/
+total 66M
+-rwxr-xr-x 1 darmbrust darmbrust 66M Aug 13 17:08 terraform-provider-oci_v4.39.0_x4
+```
+
+Após instalação do _pluging_, podemos verificar o _"plano de execução"_ através do comando _"plan"_. Esta ação verifica quais recursos serão criados, removidos ou alterados:
+
+```
+darmbrust@hoodwink:~/oci-tf$ terraform plan
+
+Terraform used the selected providers to generate the following execution plan. Resource actions are indicated with the following symbols:
+  + create
+
+Terraform will perform the following actions:
+
+  # oci_core_subnet.subnet will be created
+  + resource "oci_core_subnet" "subnet" {
+      + availability_domain        = (known after apply)
+      + cidr_block                 = "10.10.0.0/24"
+      + compartment_id             = "ocid1.compartment.oc1..aaaaaaaaro7baesc4z3untyqxajzotsthm4baa6bwumacmb1xydw6gvb2mq"
+      + defined_tags               = (known after apply)
+      + dhcp_options_id            = (known after apply)
+      + display_name               = (known after apply)
+      + dns_label                  = (known after apply)
+      + freeform_tags              = (known after apply)
+      + id                         = (known after apply)
+      + ipv6cidr_block             = (known after apply)
+      + ipv6virtual_router_ip      = (known after apply)
+      + prohibit_internet_ingress  = (known after apply)
+      + prohibit_public_ip_on_vnic = (known after apply)
+      + route_table_id             = (known after apply)
+      + security_list_ids          = (known after apply)
+      + state                      = (known after apply)
+      + subnet_domain_name         = (known after apply)
+      + time_created               = (known after apply)
+      + vcn_id                     = (known after apply)
+      + virtual_router_ip          = (known after apply)
+      + virtual_router_mac         = (known after apply)
+    }
+
+  # oci_core_vcn.vcn will be created
+  + resource "oci_core_vcn" "vcn" {
+      + cidr_block               = (known after apply)
+      + cidr_blocks              = [
+          + "10.0.0.0/16",
+        ]
+      + compartment_id           = "ocid1.compartment.oc1..aaaaaaaaro7baesc4z3untyqxajzotsthm4baa6bwumacmb1xydw6gvb2mq"
+      + default_dhcp_options_id  = (known after apply)
+      + default_route_table_id   = (known after apply)
+      + default_security_list_id = (known after apply)
+      + defined_tags             = (known after apply)
+      + display_name             = "vcn_saopaulo"
+      + dns_label                = (known after apply)
+      + freeform_tags            = (known after apply)
+      + id                       = (known after apply)
+      + ipv6cidr_blocks          = (known after apply)
+      + is_ipv6enabled           = (known after apply)
+      + state                    = (known after apply)
+      + time_created             = (known after apply)
+      + vcn_domain_name          = (known after apply)
+    }
+
+Plan: 2 to add, 0 to change, 0 to destroy.
+```
 
 <br>
 
