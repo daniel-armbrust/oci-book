@@ -65,6 +65,7 @@ Toda definição da sua _"[infraestrutura como código](https://pt.wikipedia.org
 
 >_**__NOTA:__** Consulte a página oficial do [OCI Provider](https://registry.terraform.io/providers/hashicorp/oci/latest/docs) para saber detalhes de como usar cada [recurso](https://www.terraform.io/docs/language/resources/index.html) que ele disponibiliza._
 
+Abaixo, um pequeno exemplo para a construção de uma _[VCN](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingVCNs_topic-Overview_of_VCNs_and_Subnets.htm)_ no _[OCI](https://www.oracle.com/cloud/)_:
 
 ```terraform
 darmbrust@hoodwink:~/oci-tf$ cat vcn.tf
@@ -91,27 +92,6 @@ resource "oci_core_subnet" "subnet" {
 
 ```
 
-O elemento mais importante do _[Terraform](https://www.terraform.io/)_ são os _[recursos](https://www.terraform.io/docs/language/resources/index.html)_. Estes representam sua infraestrura.
-
-Parametrizar e declarar recursos, requer que você conheça o seu sistema remoto (provedor de cloud, provedor SaaS, etc). Quando digo _"conhecer"_, quero dizer: _"saber como provisionar recursos virtuais para formar sua infraestrutura"._ W 
-
-Each provider adds a set of resource types and/or data sources that Terraform can manage.
-
-
-
-Abaixo, uma visão de um simples _root module_ que eu particularmente gosto:
-
-```
-darmbrust@hoodwink:~/oci-tf$ ls -1F
-datasources.tf
-keys/
-main.tf
-modules/
-outputs.tf
-providers.tf
-terraform.tfvars
-variables.tf
-``` 
 
 Como já foi dito, o _[Terraform](https://www.terraform.io/)_ é composto de um único binário executável. Ele aceita vários subcomandos (ou argumentos) diferentes sendo os principais: _"init"_, _"validate"_, _"plan"_, _"apply"_ e _"destroy"_. Iremos apresentar maiores detalhes no decorrer do texto, porém quero focar no básico do _fluxo lógico_ quando disparamos a ação de criar uma infraestrutura. Ao entender este _fluxo lógico_ básico, compor sua infraestrutura dentro dos padrões do _[Terraform](https://www.terraform.io/)_ ficará mais fácil. Observe a imagem abaixo:
 
@@ -130,6 +110,22 @@ Como já foi dito, o _[Terraform](https://www.terraform.io/)_ é composto de um 
 4. Outros módulos _(child modules)_ podem ser chamados a partir do _"root module"_ para construção da infraestrutura. <br>
 
 A partir deste desenho básico, iremos aos detalhes.
+
+
+
+Abaixo, uma visão de um simples _root module_ que eu particularmente gosto:
+
+```
+darmbrust@hoodwink:~/oci-tf$ ls -1F
+datasources.tf
+keys/
+main.tf
+modules/
+outputs.tf
+providers.tf
+terraform.tfvars
+variables.tf
+``` 
 
 ### __Variáveis de Input (entrada de dados)__
 
