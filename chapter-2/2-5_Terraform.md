@@ -3,9 +3,9 @@
 ## 2.5 - Usando o Terraform para criar sua Infraestrutura no OCI
 
 ### __Visão Geral__
-_[Terraform](https://www.terraform.io/)_ é uma ferramenta que permite definir, provisionar e gerenciar sua infraestrutura através de código (criar, atualizar e destruir). O conceito por trás do termo _"infraestrutura como código"_ é simples: você define recursos cloud (vm, banco de dados, redes, etc) em um ou mais arquivos de configuração (infraestrutura em código). O código utiliza uma _"abordagem declarativa"_. Isto significa que é possível definir qual é o _“estado esperado”_ da sua infraestrutura, através de instruções simples e diretas.
+_[Terraform](https://www.terraform.io/)_ é uma ferramenta que permite definir, provisionar e gerenciar sua infraestrutura através de código (criar, atualizar e destruir). O conceito por trás do termo _"[infraestrutura como código](https://pt.wikipedia.org/wiki/Infraestrutura_como_C%C3%B3digo)"_ é simples: você define recursos cloud (vm, banco de dados, redes, etc) em um ou mais arquivos de configuração (infraestrutura em código). O código utiliza uma _"abordagem declarativa"_. Isto significa que é possível definir qual é o _“estado esperado”_ da sua infraestrutura, através de instruções simples e diretas.
 
-Codificar em _[Terraform](https://www.terraform.io/)_, significa codificar em uma linguagem especifica chamada _HashiCorp Configuration Language (HCL)_. Esta foi criada pela _HashiCorp_ com o intuito de substituir configurações antes escritas em formato _[JSON](https://pt.wikipedia.org/wiki/JSON)_ ou _[XML](https://pt.wikipedia.org/wiki/XML)_. Seu principal propósito é declarar _(recursos)[https://www.terraform.io/docs/language/resources/index.html]_, que representam objetos de infraestrutura.
+Codificar em _[Terraform](https://www.terraform.io/)_, significa codificar em uma linguagem especifica chamada _HashiCorp Configuration Language (HCL)_. Esta foi criada pela _HashiCorp_ com o intuito de substituir configurações antes escritas em formato _[JSON](https://pt.wikipedia.org/wiki/JSON)_ ou _[XML](https://pt.wikipedia.org/wiki/XML)_. Seu principal propósito é declarar _[recursos](https://www.terraform.io/docs/language/resources/index.html)_, que representam objetos de infraestrutura.
 
 Quando falamos sobre a ação de provisionar infraestrutura, estamos nos referindo à criação ou implantação (deploy) dos componentes que formam uma infraestrutura. Isto é diferente do _“gerenciamento de configuração”_, feito por ferramentas como _[Ansible](https://docs.ansible.com/ansible/latest/index.html)_, por exemplo.
 
@@ -15,7 +15,7 @@ Ferramentas que atuam no _“gerenciamento de configuração”_, fazem deploy d
 
 Depois que você conhecer o _[Terraform](https://www.terraform.io/)_, nunca mais vai querer dar _cliques_ na _[Web Console](https://docs.oracle.com/pt-br/iaas/Content/GSG/Concepts/console.htm)_. O _[Terraform](https://www.terraform.io/)_ facilita e agiliza todo o _"lifecyle"_ da sua infraestrutura. Além disto, o código que provisiona sempre está atualizado, diferente da velha documentação, que sempre está desatualizada.
 
-A ferramenta _[Terraform](https://www.terraform.io/)_ é independente de qualquer provedor Cloud. Ela se integra as APIs de um provedor em especifico através dos chamados _[providers](https://www.terraform.io/docs/language/providers/index.html)_. Estes nada mais são do que _plugins_ que capacitam o _[Terraform](https://www.terraform.io/)_ na comunicação com um sistema remoto em particular. Cada provedor, é responsável por manter seu código _(plugins)_ atualizado no _[Terraform Registry](https://registry.terraform.io/)_.
+A ferramenta _[Terraform](https://www.terraform.io/)_ é independente de qualquer sistema remoto. Ela se integra as APIs de um provedor em especifico através dos chamados _[providers](https://www.terraform.io/docs/language/providers/index.html)_. Estes nada mais são do que _plugins_ que capacitam o _[Terraform](https://www.terraform.io/)_ na comunicação com um sistema remoto em particular. A entidade dona do _[provider](https://www.terraform.io/docs/language/providers/index.html)_, é responsável por manter o código do _(plugin)_ atualizado no _[Terraform Registry](https://registry.terraform.io/)_.
 
 >_**__NOTA:__** A integração da ferramenta em um provedor depende da existência/escrita de um _pluging provider_. Atualmente, todos os grandes provedores de cloud pública já possuem _plugins_ prontos para uso. Estes podem ser verificados _[aqui](https://registry.terraform.io/browse/providers)_._
 
@@ -57,7 +57,45 @@ on linux_arm
 
 ### __Como o Terraform funciona?__
 
-O _[Terraform](https://www.terraform.io/)_ lê todos os arquivos com a extensão __.tf__ do diretório corrente _(root module)_ e os concatena. Os nomes dos arquivos não importam! Todos __*.tf__ do diretório corrente _(root module)_ serão concatenados! Você é livre para definir qualquer nome de arquivo que quiser. A ferramenta não obedece nenhuma lógica quando for ler arquivos com a extensão __.tf__. Porém, por questões de boas práticas, a _HashiCorp_ recomenda que existam no mínimo os arquivos _*main.tf*_, _*variables.tf*_ e _*outputs.tf*_ por diretório de módulo, independente de possuirem conteúdo ou não.
+O _[Terraform](https://www.terraform.io/)_ lê todos os arquivos com a extensão __.tf__ do diretório corrente _(root module)_ e os concatena. Os nomes dos arquivos não importam! Você é livre para definir qualquer nome de arquivo que quiser. A ferramenta não obedece nenhuma lógica quando for ler arquivos com a extensão __.tf__. 
+
+>_**__NOTA:__** Por questões de boas práticas, a HashiCorp recomenda que existam no mínimo os arquivos main.tf, variables.tf e outputs.tf por diretório de módulo, independente de possuirem conteúdo ou não._
+
+Toda definição da sua _"[infraestrutura como código](https://pt.wikipedia.org/wiki/Infraestrutura_como_C%C3%B3digo)"_ começa pela declaração do _[provider](https://www.terraform.io/docs/language/providers/index.html)_. Cada _[provider](https://www.terraform.io/docs/language/providers/index.html)_ disponibiliza diferentes _[recursos](https://www.terraform.io/docs/language/resources/index.html)_ que podem ser usados para criar sua infraestrutura.
+
+
+```terraform
+darmbrust@hoodwink:~/oci-tf$ cat vcn.tf
+
+provider "oci" {
+  region = "sa-saopaulo-1"
+  fingerprint = "a6:73:ee:05:7e:56:47:ab:60:d3:76:f4:01:01:de:55"
+  private_key_path = "./keys/oci.key"
+  tenancy_ocid = "ocid1.tenancy.oc1..aaaaaaaaz4oeus54ktfstpwc4z3muju5xec7nppp33rt4r4x2v1xydt4pf5qrrq"
+  user_ocid = "ocid1.user.oc1..aaaaaaaay3rey4zdxzyj1oz3rey267ovskbi72vix3reytptcyehqmqbsr76q"
+}
+
+resource "oci_core_vcn" "vcn" {
+   compartment_id = "ocid1.compartment.oc1..aaaaaaaaro7baesc4z3untyqxajzotsthm4baa6bwumacmb1xydw6gvb2mq"
+   display_name = "vcn_saopaulo"
+   cidr_blocks = ["10.0.0.0/16"]
+}
+
+resource "oci_core_subnet" "subnet" {
+    cidr_block = "10.10.0.0/24"
+    compartment_id = "ocid1.compartment.oc1..aaaaaaaaro7baesc4z3untyqxajzotsthm4baa6bwumacmb1xydw6gvb2mq"
+    vcn_id = oci_core_vcn.vcn.id
+}
+
+```
+
+O elemento mais importante do _[Terraform](https://www.terraform.io/)_ são os _[recursos](https://www.terraform.io/docs/language/resources/index.html)_. Estes representam sua infraestrura.
+
+Parametrizar e declarar recursos, requer que você conheça o seu sistema remoto (provedor de cloud, provedor SaaS, etc). Quando digo _"conhecer"_, quero dizer: _"saber como provisionar recursos virtuais para formar sua infraestrutura"._ W 
+
+Each provider adds a set of resource types and/or data sources that Terraform can manage.
+
+
 
 Abaixo, uma visão de um simples _root module_ que eu particularmente gosto:
 
@@ -71,9 +109,9 @@ outputs.tf
 providers.tf
 terraform.tfvars
 variables.tf
-```
+``` 
 
-Como já foi dito, o _[Terraform](https://www.terraform.io/)_ é composto de um único binário executável. Ele aceita vários subcomandos (ou argumentos) diferentes sendo os principais: _"init"_, _"validate"_, _"plan"_, _"apply"_ e _"destroy"_. Iremos apresentar maiores detalhes no decorrer do texto, porém quero focar no básico do _fluxo lógico_ usado pela ferramenta quando disparamos a ação de criar uma infraestrutura. Ao entender este _fluxo lógico_ básico, compor sua infraestrutura dentro dos padrões do _[Terraform](https://www.terraform.io/)_ ficará mais fácil. Observe a imagem abaixo:
+Como já foi dito, o _[Terraform](https://www.terraform.io/)_ é composto de um único binário executável. Ele aceita vários subcomandos (ou argumentos) diferentes sendo os principais: _"init"_, _"validate"_, _"plan"_, _"apply"_ e _"destroy"_. Iremos apresentar maiores detalhes no decorrer do texto, porém quero focar no básico do _fluxo lógico_ quando disparamos a ação de criar uma infraestrutura. Ao entender este _fluxo lógico_ básico, compor sua infraestrutura dentro dos padrões do _[Terraform](https://www.terraform.io/)_ ficará mais fácil. Observe a imagem abaixo:
 
 <br>
 
@@ -131,8 +169,45 @@ Os argumentos _"description"_, _"type"_ e _"default"_, são opcionais. O argumen
 
 Para maiores detalhes sobre o uso de variáveis e quais os tipos de dados suportados, consulte a _[documentação oficial](https://www.terraform.io/docs/language/values/variables.html)_.
 
-### __Valores de Output (saida de dados)__
+#TODO: falar sobre o arquivo terraform.tfvars
 
+### __Valores de Output (retorno/saída de dados)__
+
+_[Valores de Output](https://www.terraform.io/docs/language/values/outputs.html)_, são valores que um módulo retorna. A ideia é similar ao valor de retorno de uma função, existente na programação clássica. _[Valores de Output](https://www.terraform.io/docs/language/values/outputs.html)_ possuem alguns casos de uso, que são:
+
+1. Módulos filhos _(child modules)_ podem especificar o que retornar/expor ao módulo pai _(root module)_, através da instrução _"output { ... }"_.
+2. O módulo pai _(root module)_, pode utilizar instruções _"output { ... }"_, para imprimir valores na linha de comando após execução do comando _"terraform apply"_.
+
+Cada _[valor de output](https://www.terraform.io/docs/language/values/outputs.html)_, exportado por um módulo, deve ser devidamente declarado através da instrução _"output { ... }"_. Por exemplo:
+
+```terraform
+output "<IDENTIFICADOR>" {
+   description = "<DESCRIÇÃO>"
+   value = "<EXPRESSÃO>"
+}
+```
+
+Para que o entendimento fique mais claro, vamos exibir os arquivos de um módulo usados para criar uma _[VCN](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingVCNs_topic-Overview_of_VCNs_and_Subnets.htm)_: 
+
+```terraform
+
+darmbrust@hoodwink:~/oci-tf$ cat modules/networking/vcn/main.tf
+
+resource "oci_core_vcn" "vcn" {    
+   compartment_id = var.compartment_id
+   display_name = var.display_name
+   cidr_blocks = ["10.0.0.0/16"] 
+}
+
+darmbrust@hoodwink:~/oci-tf$ cat modules/networking/vcn/outputs.tf
+
+output "vcn_id" {
+   description = "The VCN's Oracle ID (OCID)."
+   value = oci_core_vcn.vcn.id
+}
+```
+
+Um recurso do tipo "oci_core_vcn", devidamente parametrizado, cria uma VCN no OCI.
 
 ### __Módulos__
 
