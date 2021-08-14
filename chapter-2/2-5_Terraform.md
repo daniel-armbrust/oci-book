@@ -57,9 +57,7 @@ on linux_arm
 
 ### __Utilização básica do Terraform__
 
-O _[Terraform](https://www.terraform.io/)_ lê todos os arquivos com a extensão __.tf__ do diretório corrente _(root module)_ e os concatena. Os nomes dos arquivos não importam! Você é livre para definir qualquer nome de arquivo que quiser. A ferramenta não obedece nenhuma lógica quando for ler arquivos com a extensão __.tf__. 
-
->_**__NOTA:__** Por questões de boas práticas, a HashiCorp recomenda que existam no mínimo os arquivos main.tf, variables.tf e outputs.tf por diretório de módulo, independente de possuirem conteúdo ou não._
+O _[Terraform](https://www.terraform.io/)_ lê todos os arquivos com a extensão __.tf__ do diretório corrente _(root module)_ e os concatena. Os nomes dos arquivos não importam. Você é livre para definir qualquer nome de arquivo que quiser. A ferramenta não obedece nenhuma lógica quando for ler arquivos com a extensão __.tf__. 
 
 Toda definição da sua _"[infraestrutura como código](https://pt.wikipedia.org/wiki/Infraestrutura_como_C%C3%B3digo)"_ começa pela declaração do _[provider](https://www.terraform.io/docs/language/providers/index.html)_. Cada _[provider](https://www.terraform.io/docs/language/providers/index.html)_ disponibiliza diferentes _[recursos](https://www.terraform.io/docs/language/resources/index.html)_ que podem ser usados para a construção da sua infraestrutura. Para os exemplos demonstrados aqui, estamos utilizando o _[OCI Provider](https://registry.terraform.io/providers/hashicorp/oci/latest/docs)_. 
 
@@ -411,6 +409,7 @@ Um recurso do tipo "oci_core_vcn", devidamente parametrizado, cria uma VCN no OC
 
 ### __Módulos__
 
+>_**__NOTA:__** Por questões de boas práticas, a HashiCorp recomenda que existam no mínimo os arquivos main.tf, variables.tf e outputs.tf por diretório de módulo, independente de possuirem conteúdo ou não._
 
 Quando informamos valores através do _root module_
 
