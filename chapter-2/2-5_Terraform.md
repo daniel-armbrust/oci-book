@@ -356,6 +356,14 @@ vcp_vcn-dr.tf
 
 >_**__NOTA:__** Acesse o repositório que contém os códigos neste [link aqui](https://github.com/daniel-armbrust/oci-terraform-multiregion)_.
 
+### __Módulo principal (root module)__
+
+O módulo principal ou _root module_, corresponde ao diretório onde é possível executar os comandos _"terraform plan"_ ou _"terraform apply"_. É como se fosse a função _main()_ da linguagem de programação _[C](https://pt.wikipedia.org/wiki/C_(linguagem_de_programa%C3%A7%C3%A3o)_ (onde a execução de um programa começa).
+
+![alt_text](./images/tf-workflow-1-1.jpg  "Terraform Basic Workflow")
+
+Já vimos que toda criação de infraestrutura vem de um subcomando _"apply"_. Isto transforma o que eu tenho codificado em infraestrutura real.
+
 ### __Terraform e OCI__
 
 Toda comunicação com o _[OCI](https://www.oracle.com/cloud/)_ necessita de um _[usuário](https://docs.oracle.com/pt-br/iaas/Content/GSG/Tasks/addingusers.htm)_, _[credenciais](https://docs.oracle.com/pt-br/iaas/Content/Identity/Concepts/usercredentials.htm)_ válidas para _autenticação_ e _[políticas](https://docs.oracle.com/pt-br/iaas/Content/Identity/Concepts/policies.htm)_ que _autorizem_ a criação dos recursos em uma _[região](https://docs.oracle.com/pt-br/iaas/Content/General/Concepts/regions.htm)_ e _[tenancy](https://docs.oracle.com/pt-br/iaas/Content/GSG/Concepts/settinguptenancy.htm)_ específicos.
@@ -419,11 +427,9 @@ darmbrust@hoodwink:~/oci-tf$ terraform validate
 ╵
 ```
 
-Os argumentos _"description"_, _"type"_ e _"default"_, são opcionais. O argumento _"description"_ é uma maneira de você documentar qual o propósito da variável (boa prática). Já o argumento "_type_", você restringe qual é o tipo de valor aceito pela variável. Se você não especificar um tipo, o tipo "_any_" (qualquer tipo) será usado. Por último, o argumento "_default_" torna a variável opcional. Caso a variável não receba um valor, o valor contido em "_default_" será usado.
+Os argumentos _"description"_, _"type"_ e _"default"_, são opcionais. O argumento _"description"_ é uma maneira de você documentar qual o propósito da variável (boa prática). Já o argumento "_type_", permite que você restrinja qual é o tipo de valor aceito pela variável. Se você não especificar um tipo, o tipo "_any_" (qualquer tipo) será usado. Por último, o argumento "_default_" torna a variável opcional. Caso a variável não receba um valor, o valor contido em "_default_" será usado.
 
 Para maiores detalhes sobre o uso de variáveis e quais os tipos de dados suportados, consulte a _[documentação oficial](https://www.terraform.io/docs/language/values/variables.html)_.
-
-#TODO: falar sobre o arquivo terraform.tfvars
 
 ### __Valores de Output (retorno/saída de dados)__
 
