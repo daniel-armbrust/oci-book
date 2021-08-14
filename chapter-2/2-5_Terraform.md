@@ -403,7 +403,7 @@ compartment_id = "ocid1.compartment.oc1..aaaaaaaaro7baesc4z3untyqxajzotsthm4baa6
 
 ### __Variáveis de Input (entrada de dados)__
 
-_[Variáveis de Input](https://www.terraform.io/docs/language/values/variables.html)_ ou para entrada de dados, é o meio pelo qual parametrizamos ou informamos ao código _[Terraform](https://www.terraform.io/)_ sobre um determinado valor. Toda declaração de variável no _[Terraform](https://www.terraform.io/)_, obedece a seguinte estrutura:
+_[Variáveis de Input](https://www.terraform.io/docs/language/values/variables.html)_ ou para entrada de dados, é o meio pelo qual parametrizamos ou informamos a um módulo sobre determinado valor. Toda declaração de variável possui a seguinte estrutura:
 
 ```terraform
 variable "<NOME>" {
@@ -423,7 +423,7 @@ variable "vcn_display_name" {
 }
 ```
 
-No _[Terraform](https://www.terraform.io/)_, dentro de um mesmo módulo, nomes de variáveis devem ser únicos. Caso contrário, teremos um erro conforme mostrado abaixo:
+No _[Terraform](https://www.terraform.io/)_, dentro de um mesmo módulo, nomes de variáveis devem ser únicos. Caso contrário, teremos um erro:
 
 ```
 darmbrust@hoodwink:~/oci-tf$ terraform validate
@@ -443,7 +443,7 @@ Para maiores detalhes sobre o uso de variáveis e quais os tipos de dados suport
 
 ### __Valores de Output (retorno/saída de dados)__
 
-_[Valores de Output](https://www.terraform.io/docs/language/values/outputs.html)_, são valores que um módulo retorna. A ideia é similar ao valor de retorno de uma função, existente na programação clássica. _[Valores de Output](https://www.terraform.io/docs/language/values/outputs.html)_ possuem alguns casos de uso, que são:
+_[Valores de Output](https://www.terraform.io/docs/language/values/outputs.html)_, são valores que um módulo retorna. A ideia é similar ao valor de retorno de uma _função_. _[Valores de Output](https://www.terraform.io/docs/language/values/outputs.html)_ possuem alguns casos de uso, que são:
 
 1. Módulos filhos _(child modules)_ podem especificar o que retornar/expor ao módulo pai _(root module)_, através da instrução _"output { ... }"_.
 2. O módulo pai _(root module)_, pode utilizar instruções _"output { ... }"_, para imprimir valores na linha de comando após execução do comando _"terraform apply"_.
