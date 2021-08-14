@@ -370,8 +370,6 @@ O próprio _[OCI](https://www.oracle.com/cloud/)_ já facilita a criação das c
 
 ![alt_text](./images/ch2_2-5_2.jpg  "OCI - Configuration File Preview")
 
-<br>
-
 Transportando os valores para o arquivo, nós temos:
 
 ```terraform
