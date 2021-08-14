@@ -362,7 +362,7 @@ Similar a uma _função_ em linguagem de programação tradicional, um _[módulo
 
 O módulo principal ou _root module_ é o ponto de partida. É o diretório onde é possível executar os comandos _"terraform plan"_ ou _"terraform apply"_. Encare como se fosse a função _"main()"_ de um programa escrito em _[linguagem C](https://pt.wikipedia.org/wiki/C_(linguagem_de_programa%C3%A7%C3%A3o))_ (onde a execução do programa começa). A partir do _root module_ é que chamamos outros módulos _(child modules)_ para compor o todo.
 
-Todo módulo, seja o _root module_ ou seus _child modules_, podem receber valores através de variáveis. Estas funcionam como _[argumentos do módulo](https://www.terraform.io/docs/language/modules/develop/index.html)_. Podemos informar (parametrizar) valores ao _root module_ através:
+Todo módulo, seja o _root module_ ou seus _child modules_, podem receber valores através de variáveis. Estas funcionam como _[argumentos do módulo](https://www.terraform.io/docs/language/modules/develop/index.html)_. Podemos informar (parametrizar) valores ao _root module_ através
 
 1. Pelo uso do argumento __*-var*__ no qual especifica variável e valor (ex: _-var="display_name=vcn"_) <br>
 2. Através de arquivos de definições de variáveis __*\*.tfvars*__, carregados automaticamente pela ferramenta ou que sejam especificandos. <br>
