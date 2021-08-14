@@ -360,9 +360,9 @@ vcp_vcn-dr.tf
 
 Similar a uma _função_ em linguagem de programação tradicional, um _[módulo](https://www.terraform.io/docs/language/modules/index.html)_ é uma maneira de agrupar código relacionado. É usado como um container para múltiplos _[recursos](https://www.terraform.io/docs/language/resources/index.html)_.
 
-O módulo principal ou _root module_ é o ponto de partida. É o diretório onde é possível executar os comandos _"terraform plan"_ ou _"terraform apply"_. Encare como se fosse a função _main()_ (onde a execução de um programa começa). A partir do _root module_ é que chamamos outros módulos _(child modules)_.
+O módulo principal ou _root module_ é o ponto de partida. É o diretório onde é possível executar os comandos _"terraform plan"_ ou _"terraform apply"_. Encare como se fosse a função _"main()"_ de um programa escrito em _[linguagem C](https://pt.wikipedia.org/wiki/C_(linguagem_de_programa%C3%A7%C3%A3o))_ (onde a execução do programa começa). A partir do _root module_ é que chamamos outros módulos _(child modules)_ para compor o todo.
 
-Todo módulo, seja o _root module_ ou seus _child modules_, podem receber valores através de variáveis (serem parametrizados). Estas funcionam como _[argumentos da função](https://pt.wikipedia.org/wiki/Argumento_de_uma_fun%C3%A7%C3%A3o)_.
+Todo módulo, seja o _root module_ ou seus _child modules_, podem receber valores através de variáveis. Estas funcionam como _[argumentos do módulo](https://www.terraform.io/docs/language/modules/develop/index.html)_.
 
 ![alt_text](./images/tf-workflow-1-1.jpg  "Terraform Basic Workflow")
 
