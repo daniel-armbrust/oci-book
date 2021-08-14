@@ -13,9 +13,9 @@ Ferramentas que atuam no _“gerenciamento de configuração”_, fazem deploy d
 
 >_**__NOTA:__** Tecnicamente tudo que pode ser controlado por uma API pode ser controlado e gerenciado pelo Terraform a partir de plugins específicos. A ferramenta não está limitada somente a operar em cloud computing._
 
-Depois que você conhecer o _[Terraform](https://www.terraform.io/)_, nunca mais vai querer dar _cliques_ na _[Web Console](https://docs.oracle.com/pt-br/iaas/Content/GSG/Concepts/console.htm)_. O _[Terraform](https://www.terraform.io/)_ facilita e agiliza todo o _"lifecyle"_ da sua infraestrutura. Além disto, o código que provisiona sempre está atualizado, diferente da velha documentação, que sempre está desatualizada.
+Depois que você conhecer o _[Terraform](https://www.terraform.io/)_, nunca mais vai querer dar _cliques_ na _[Web Console](https://docs.oracle.com/pt-br/iaas/Content/GSG/Concepts/console.htm)_ para criar seus recursos. O _[Terraform](https://www.terraform.io/)_ facilita e agiliza todo o _"lifecyle"_ da sua infraestrutura. Além disto, o código que provisiona sempre está atualizado, diferente da velha documentação, que sempre está desatualizada.
 
-A ferramenta _[Terraform](https://www.terraform.io/)_ é independente de qualquer sistema remoto. Ela se integra as APIs de um provedor em especifico através dos chamados _[providers](https://www.terraform.io/docs/language/providers/index.html)_. Estes nada mais são do que _plugins_ que capacitam o _[Terraform](https://www.terraform.io/)_ na comunicação com um sistema remoto em particular. A entidade dona do _[provider](https://www.terraform.io/docs/language/providers/index.html)_, é responsável por manter o código do _(plugin)_ atualizado no _[Terraform Registry](https://registry.terraform.io/)_.
+A ferramenta _[Terraform](https://www.terraform.io/)_ é independente de qualquer sistema remoto. Ela se integra as APIs de um provedor em especifico através dos chamados _[providers](https://www.terraform.io/docs/language/providers/index.html)_. Estes nada mais são do que _plugins_ que capacitam o _[Terraform](https://www.terraform.io/)_ na comunicação com um sistema remoto em particular. A entidade dona do _[provider](https://www.terraform.io/docs/language/providers/index.html)_, é responsável por manter o código do _plugin_ atualizado no _[Terraform Registry](https://registry.terraform.io/)_.
 
 >_**__NOTA:__** A integração da ferramenta em um provedor depende da existência/escrita de um _pluging provider_. Atualmente, todos os grandes provedores de cloud pública já possuem _plugins_ prontos para uso. Estes podem ser verificados _[aqui](https://registry.terraform.io/browse/providers)_._
 
@@ -65,7 +65,7 @@ Toda definição da sua _"[infraestrutura como código](https://pt.wikipedia.org
 
 >_**__NOTA:__** Consulte a página oficial do [OCI Provider](https://registry.terraform.io/providers/hashicorp/oci/latest/docs) para saber detalhes de como usar cada [recurso](https://www.terraform.io/docs/language/resources/index.html) que ele disponibiliza._
 
-Abaixo, um pequeno exemplo para a construção de uma _[VCN](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingVCNs_topic-Overview_of_VCNs_and_Subnets.htm)_ no _[OCI](https://www.oracle.com/cloud/)_:
+Vamos utilizar o exemplo abaixo para criar uma _[VCN](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingVCNs_topic-Overview_of_VCNs_and_Subnets.htm)_ no _[OCI](https://www.oracle.com/cloud/)_ e demonstrar o básico da ferramenta:
 
 ```terraform
 darmbrust@hoodwink:~/oci-tf$ cat vcn.tf
