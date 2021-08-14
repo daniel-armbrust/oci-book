@@ -354,7 +354,7 @@ vcp_compute.tf
 vcp_vcn-dr.tf
 ```
 
->_**__NOTA:__** Acesse o repositório que contém os códigos neste [link aqui](https://github.com/daniel-armbrust/oci-terraform-multiregion)_.
+>_**__NOTA:__** Acesse o repositório que contém os códigos neste _[link aqui](https://github.com/daniel-armbrust/oci-terraform-multiregion)_.
 
 ### __Módulo principal (root module)__
 
