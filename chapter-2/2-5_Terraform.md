@@ -375,7 +375,7 @@ O próprio _[OCI](https://www.oracle.com/cloud/)_ já facilita a criação das c
 Transportando os valores para o arquivo, nós temos:
 
 ```terraform
-darmbrust@hoodwink:~/oci-tf$ cat terraform.tfvars
+darmbrust@hoodwink:~/oci-terraform-multiregion$ cat terraform.tfvars
 #
 # terraform.tfvars
 #
