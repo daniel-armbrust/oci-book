@@ -365,7 +365,7 @@ O módulo principal ou _root module_ é o ponto de partida. É o diretório onde
 Todo módulo, seja o _root module_ ou seus _child modules_, podem receber valores através de _[variáveis](https://www.terraform.io/docs/language/values/variables.html)_. Estas funcionam como _[argumentos do módulo](https://www.terraform.io/docs/language/modules/develop/index.html)_. Podemos informar (parametrizar) valores ao _root module_ através:
 
 1. Pelo uso do argumento de linha de comando __*-var*__, no qual é possível especificar variável e valor (ex: _-var="display_name=vcn"_).
-2. Através de arquivos de definições de variáveis __*\*.tfvars*__, carregados automaticamente pela ferramenta ou que sejam especificandos.
+2. Através do arquivo de definições de variáveis __*\*.tfvars*__.
 3. Através de variáveis de ambientes que contenham o prefixo __*TF\_VAR\_\<nome\>\=\<valor\>*__ (ex: _TF_VAR_display_name="vcn"_).
 
 ![alt_text](./images/tf-workflow-1-1.jpg  "Terraform Basic Workflow")
