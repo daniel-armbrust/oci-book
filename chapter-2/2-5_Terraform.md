@@ -17,7 +17,7 @@ Depois que você conhecer o _[Terraform](https://www.terraform.io/)_, nunca mais
 
 A ferramenta _[Terraform](https://www.terraform.io/)_ é independente de qualquer sistema remoto. Ela se integra as APIs de um provedor em especifico através dos chamados _[providers](https://www.terraform.io/docs/language/providers/index.html)_. Estes nada mais são do que _plugins_ que capacitam o _[Terraform](https://www.terraform.io/)_ na comunicação com um sistema remoto em particular. A entidade dona do _[provider](https://www.terraform.io/docs/language/providers/index.html)_, é responsável por manter o código do _plugin_ atualizado no _[Terraform Registry](https://registry.terraform.io/)_.
 
->_**__NOTA:__** A integração da ferramenta em um provedor depende da existência/escrita de um _pluging provider_. Atualmente, todos os grandes provedores de cloud pública já possuem _plugins_ prontos para uso. Estes podem ser verificados _[aqui](https://registry.terraform.io/browse/providers)_._
+>_**__NOTA:__** A integração da ferramenta em um provedor depende da existência/escrita de um pluging provider. Atualmente, todos os grandes provedores de cloud pública já possuem plugins prontos para uso. Estes podem ser verificados [aqui](https://registry.terraform.io/browse/providers)._
 
 <br>
 
@@ -360,7 +360,7 @@ vcp_vcn-dr.tf
 
 Similar a uma _função_ em linguagem de programação tradicional, um _[módulo](https://www.terraform.io/docs/language/modules/index.html)_ é uma maneira de agrupar código relacionado. É usado como um container para múltiplos _[recursos](https://www.terraform.io/docs/language/resources/index.html)_.
 
-O módulo principal ou _root module_ é o ponto de partida. É o diretório onde é possível executar os comandos _"terraform plan"_ ou _"terraform apply"_. Encare como se fosse a função _"main()"_ de um programa escrito em _[linguagem C](https://pt.wikipedia.org/wiki/C_(linguagem_de_programa%C3%A7%C3%A3o))_ (onde a execução do programa começa). A partir do _root module_ é que chamamos outros módulos _(child modules)_ para compor o todo.
+O módulo principal ou _root module_ é o ponto de partida. É o diretório onde é possível executar os comandos _"terraform plan"_ ou _"terraform apply"_. Encare como se fosse a função _"main()"_ de um programa escrito em _[linguagem C](https://pt.wikipedia.org/wiki/C_(linguagem_de_programa%C3%A7%C3%A3o))_ (onde a execução do programa começa). A partir do _root module_ é que chamamos outros módulos _(child modules)_.
 
 Todo módulo, seja o _root module_ ou seus _child modules_, podem receber valores através de _[variáveis](https://www.terraform.io/docs/language/values/variables.html)_. Estas funcionam como _[argumentos do módulo](https://www.terraform.io/docs/language/modules/develop/index.html)_. Podemos informar (parametrizar) valores ao _root module_ através:
 
@@ -368,9 +368,11 @@ Todo módulo, seja o _root module_ ou seus _child modules_, podem receber valore
 2. Através do arquivo de definições de variáveis __*\*.tfvars*__.
 3. Através de variáveis de ambientes que contenham o prefixo __*TF\_VAR\_\<nome\>\=\<valor\>*__ (ex: _TF_VAR_display_name="vcn"_).
 
+<br>
+
 ![alt_text](./images/tf-workflow-1-1.jpg  "Terraform Basic Workflow")
 
-Já vimos que toda criação de infraestrutura vem de um subcomando _"apply"_. Isto transforma o que eu tenho codificado em infraestrutura real.
+>_**__NOTA:__** Por questões de boas práticas, a HashiCorp recomenda que existam no mínimo os arquivos main.tf, variables.tf e outputs.tf por diretório de módulo, independente de possuirem conteúdo ou não._
 
 ### __Terraform e OCI__
 
