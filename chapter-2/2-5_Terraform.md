@@ -358,7 +358,7 @@ vcp_vcn-dr.tf
 
 ### __Módulo principal (root module)__
 
-O módulo principal ou _root module_, corresponde ao diretório onde é possível executar os comandos _"terraform plan"_ ou _"terraform apply"_. É como se fosse a função _main()_ da linguagem de programação _[C](https://pt.wikipedia.org/wiki/C_(linguagem_de_programa%C3%A7%C3%A3o)_ (onde a execução de um programa começa).
+O módulo principal ou _root module_, corresponde ao diretório onde é possível executar os comandos _"terraform plan"_ ou _"terraform apply"_. É como se fosse a função _main()_ da linguagem de programação _[C](https://pt.wikipedia.org/wiki/C_(linguagem_de_programa%C3%A7%C3%A3o))_ (onde a execução de um programa começa).
 
 ![alt_text](./images/tf-workflow-1-1.jpg  "Terraform Basic Workflow")
 
