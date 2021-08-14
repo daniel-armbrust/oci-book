@@ -55,7 +55,7 @@ Terraform v1.0.4
 on linux_arm
 ```
 
-### __Básico do básico...__
+### __Utilização básica do Terraform__
 
 O _[Terraform](https://www.terraform.io/)_ lê todos os arquivos com a extensão __.tf__ do diretório corrente _(root module)_ e os concatena. Os nomes dos arquivos não importam! Você é livre para definir qualquer nome de arquivo que quiser. A ferramenta não obedece nenhuma lógica quando for ler arquivos com a extensão __.tf__. 
 
@@ -94,7 +94,7 @@ resource "oci_core_subnet" "subnet" {
 
 O binário executável do _[Terraform](https://www.terraform.io/)_ aceita vários subcomandos (ou argumentos), sendo os principais: _"init"_, _"validate"_, _"plan"_, _"apply"_ e _"destroy"_. Começaremos pelo _"init"_ que lê o bloco _"provider { ... }"_ e faz download do _pluging_ que foi especificado:
 
-```
+```terraform
 darmbrust@hoodwink:~/oci-tf$ terraform init
 
 Initializing the backend...
@@ -124,9 +124,9 @@ total 66M
 -rwxr-xr-x 1 darmbrust darmbrust 66M Aug 13 17:08 terraform-provider-oci_v4.39.0_x4
 ```
 
-Após instalação do _pluging_, podemos verificar o _"plano de execução"_ através do comando _"plan"_. Esta ação verifica quais recursos serão criados, removidos ou alterados:
+Após instalação do _pluging_, podemos verificar o _"plano de execução"_ através do subcomando _"plan"_. Esta ação verifica quais recursos serão criados, removidos ou alterados:
 
-```
+```terraform
 darmbrust@hoodwink:~/oci-tf$ terraform plan
 
 Terraform used the selected providers to generate the following execution plan. Resource actions are indicated with the following symbols:
@@ -137,7 +137,7 @@ Terraform will perform the following actions:
   # oci_core_subnet.subnet will be created
   + resource "oci_core_subnet" "subnet" {
       + availability_domain        = (known after apply)
-      + cidr_block                 = "10.10.0.0/24"
+      + cidr_block                 = "10.0.10.0/24"
       + compartment_id             = "ocid1.compartment.oc1..aaaaaaaaro7baesc4z3untyqxajzotsthm4baa6bwumacmb1xydw6gvb2mq"
       + defined_tags               = (known after apply)
       + dhcp_options_id            = (known after apply)
@@ -182,6 +182,147 @@ Terraform will perform the following actions:
     }
 
 Plan: 2 to add, 0 to change, 0 to destroy.
+```
+
+A criação dos recursos é feita com o subcomando _"apply"_ após a confirmação do que será criado:
+
+```terraform
+darmbrust@hoodwink:~/oci-tf-simple$ terraform apply
+
+Terraform used the selected providers to generate the following execution plan. Resource actions are indicated with the following symbols:
+  + create
+
+Terraform will perform the following actions:
+
+  # oci_core_subnet.subnet will be created
+  + resource "oci_core_subnet" "subnet" {
+      + availability_domain        = (known after apply)
+      + cidr_block                 = "10.0.10.0/24"
+      + compartment_id             = "ocid1.compartment.oc1..aaaaaaaaro7baesc4z3untyqxajzotsthm4baa6bwumacmb1xydw6gvb2mq"
+      + defined_tags               = (known after apply)
+      + dhcp_options_id            = (known after apply)
+      + display_name               = (known after apply)
+      + dns_label                  = (known after apply)
+      + freeform_tags              = (known after apply)
+      + id                         = (known after apply)
+      + ipv6cidr_block             = (known after apply)
+      + ipv6virtual_router_ip      = (known after apply)
+      + prohibit_internet_ingress  = (known after apply)
+      + prohibit_public_ip_on_vnic = (known after apply)
+      + route_table_id             = (known after apply)
+      + security_list_ids          = (known after apply)
+      + state                      = (known after apply)
+      + subnet_domain_name         = (known after apply)
+      + time_created               = (known after apply)
+      + vcn_id                     = (known after apply)
+      + virtual_router_ip          = (known after apply)
+      + virtual_router_mac         = (known after apply)
+    }
+
+  # oci_core_vcn.vcn will be created
+  + resource "oci_core_vcn" "vcn" {
+      + cidr_block               = (known after apply)
+      + cidr_blocks              = [
+          + "10.0.0.0/16",
+        ]
+      + compartment_id           = "ocid1.compartment.oc1..aaaaaaaaro7baesc4z3untyqxajzotsthm4baa6bwumacmb1xydw6gvb2mq"
+      + default_dhcp_options_id  = (known after apply)
+      + default_route_table_id   = (known after apply)
+      + default_security_list_id = (known after apply)
+      + defined_tags             = (known after apply)
+      + display_name             = "vcn_saopaulo"
+      + dns_label                = (known after apply)
+      + freeform_tags            = (known after apply)
+      + id                       = (known after apply)
+      + ipv6cidr_blocks          = (known after apply)
+      + is_ipv6enabled           = (known after apply)
+      + state                    = (known after apply)
+      + time_created             = (known after apply)
+      + vcn_domain_name          = (known after apply)
+    }
+
+Plan: 2 to add, 0 to change, 0 to destroy.
+
+Do you want to perform these actions?
+  Terraform will perform the actions described above.
+  Only 'yes' will be accepted to approve.
+
+  Enter a value: yes
+
+oci_core_vcn.vcn: Creating...
+oci_core_vcn.vcn: Creation complete after 1s [id=ocid1.vcn.oc1.sa-saopaulo-1.amaaaaaa6noke4qalk4skgcfco3w7kvfnhsld6oykaxp5tarzojdo66qcqoq]
+oci_core_subnet.subnet: Creating...
+oci_core_subnet.subnet: Creation complete after 9s [id=ocid1.subnet.oc1.sa-saopaulo-1.aaaaaaaag3xjulaxu7xgjdtmwgc5jjgelsfibr4gawb7c72gfsq32dvjnxla]
+
+Apply complete! Resources: 2 added, 0 changed, 0 destroyed.
+```
+
+Por fim, para a remoção dos recursos utilize o subcomando _"destroy"_:
+
+```terraform
+darmbrust@hoodwink:~/oci-tf-simple$ terraform destroy
+oci_core_vcn.vcn: Refreshing state... [id=ocid1.vcn.oc1.sa-saopaulo-1.amaaaaaa6noke4qalk4skgcfco3w7kvfnhsld6oykaxp5tarzojdo66qcqoq]
+oci_core_subnet.subnet: Refreshing state... [id=ocid1.subnet.oc1.sa-saopaulo-1.aaaaaaaag3xjulaxu7xgjdtmwgc5jjgelsfibr4gawb7c72gfsq32dvjnxla]
+
+Terraform used the selected providers to generate the following execution plan. Resource actions are indicated with the following symbols:
+  - destroy
+
+Terraform will perform the following actions:
+
+  # oci_core_subnet.subnet will be destroyed
+  - resource "oci_core_subnet" "subnet" {
+      - cidr_block                 = "10.0.10.0/24" -> null
+      - compartment_id             = "ocid1.compartment.oc1..aaaaaaaaro7baesc4z3untyqxajzotsthm4baa6bwumacmb1xydw6gvb2mq" -> null     
+      - dhcp_options_id            = "ocid1.dhcpoptions.oc1.sa-saopaulo-1.aaaaaaaaakt34mjxbhjugnzusdjntjokr2omzf6um66tjkb4rrboukrvtm5a" -> null
+      - display_name               = "subnet20210814112842" -> null
+      - freeform_tags              = {} -> null
+      - id                         = "ocid1.subnet.oc1.sa-saopaulo-1.aaaaaaaag3xjulaxu7xgjdtmwgc5jjgelsfibr4gawb7c72gfsq32dvjnxla" -> null
+      - prohibit_internet_ingress  = false -> null
+      - prohibit_public_ip_on_vnic = false -> null
+      - route_table_id             = "ocid1.routetable.oc1.sa-saopaulo-1.aaaaaaaawqmkrljrusfs3zuoxrljjw56epjljluodukod7srtxqsrmncglgq" -> null
+      - security_list_ids          = [
+          - "ocid1.securitylist.oc1.sa-saopaulo-1.aaaaaaaanrsrjkdkytchlaqbs5tomn6dsxeyh6hbet6eh5u3kx5rqbgwg2vq",
+        ] -> null
+      - state                      = "AVAILABLE" -> null
+      - time_created               = "2021-08-14 11:28:42.637 +0000 UTC" -> null
+      - vcn_id                     = "ocid1.vcn.oc1.sa-saopaulo-1.amaaaaaa6noke4qalk4skgcfco3w7kvfnhsld6oykaxp5tarzojdo66qcqoq" -> null
+      - virtual_router_ip          = "10.0.10.1" -> null
+      - virtual_router_mac         = "00:00:17:0C:57:CD" -> null
+    }
+
+  # oci_core_vcn.vcn will be destroyed
+  - resource "oci_core_vcn" "vcn" {
+      - cidr_block               = "10.0.0.0/16" -> null
+      - cidr_blocks              = [
+          - "10.0.0.0/16",
+        ] -> null
+      - compartment_id           = "ocid1.compartment.oc1..aaaaaaaaro7baesc4z3untyqxajzotsthm4baa6bwumacmb1xydw6gvb2mq" -> null
+      - default_dhcp_options_id  = "ocid1.dhcpoptions.oc1.sa-saopaulo-1.aaaaaaaaakt34mjxbhjugnzusdjntjokr2omzf6um66tjkb4rrboukrvtm5a" -> null
+      - default_route_table_id   = "ocid1.routetable.oc1.sa-saopaulo-1.aaaaaaaawqmkrljrusfs3zuoxrljjw56epjljluodukod7srtxqsrmncglgq" -> null
+      - default_security_list_id = "ocid1.securitylist.oc1.sa-saopaulo-1.aaaaaaaanrsrjkdkytchlaqbs5tomn6dsxeyh6hbet6eh5u3kx5rqbgwg2vq" -> null     
+      - display_name             = "vcn_saopaulo" -> null
+      - freeform_tags            = {} -> null
+      - id                       = "ocid1.vcn.oc1.sa-saopaulo-1.amaaaaaa6noke4qalk4skgcfco3w7kvfnhsld6oykaxp5tarzojdo66qcqoq" -> null
+      - ipv6cidr_blocks          = [] -> null
+      - is_ipv6enabled           = false -> null
+      - state                    = "AVAILABLE" -> null
+      - time_created             = "2021-08-14 11:28:41.889 +0000 UTC" -> null
+    }
+
+Plan: 0 to add, 0 to change, 2 to destroy.
+
+Do you really want to destroy all resources?
+  Terraform will destroy all your managed infrastructure, as shown above.
+  There is no undo. Only 'yes' will be accepted to confirm.
+
+  Enter a value: yes
+
+oci_core_subnet.subnet: Destroying... [id=ocid1.subnet.oc1.sa-saopaulo-1.aaaaaaaag3xjulaxu7xgjdtmwgc5jjgelsfibr4gawb7c72gfsq32dvjnxla]
+oci_core_subnet.subnet: Destruction complete after 2s
+oci_core_vcn.vcn: Destroying... [id=ocid1.vcn.oc1.sa-saopaulo-1.amaaaaaa6noke4qalk4skgcfco3w7kvfnhsld6oykaxp5tarzojdo66qcqoq]
+oci_core_vcn.vcn: Destruction complete after 1s
+
+Destroy complete! Resources: 2 destroyed.
 ```
 
 <br>
