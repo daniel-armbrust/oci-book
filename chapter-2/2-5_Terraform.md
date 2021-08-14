@@ -63,7 +63,7 @@ Toda definição da sua _"[infraestrutura como código](https://pt.wikipedia.org
 
 >_**__NOTA:__** Consulte a página oficial do [OCI Provider](https://registry.terraform.io/providers/hashicorp/oci/latest/docs) para saber detalhes de como usar cada [recurso](https://www.terraform.io/docs/language/resources/index.html) que ele disponibiliza._
 
-Vamos utilizar o exemplo abaixo para criar uma _[VCN](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingVCNs_topic-Overview_of_VCNs_and_Subnets.htm)_ no _[OCI](https://www.oracle.com/cloud/)_ e demonstrar o básico da ferramenta:
+Vamos utilizar o exemplo abaixo para criar uma _[VCN](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingVCNs_topic-Overview_of_VCNs_and_Subnets.htm)_ no _[OCI](https://www.oracle.com/cloud/)_ e demonstrar o básico:
 
 ```terraform
 darmbrust@hoodwink:~/oci-tf$ cat vcn.tf
@@ -126,7 +126,7 @@ total 66M
 -rwxr-xr-x 1 darmbrust darmbrust 66M Aug 13 17:08 terraform-provider-oci_v4.39.0_x4
 ```
 
-Após instalação do _pluging_, podemos verificar o _"plano de execução"_ através do subcomando _"plan"_. Esta ação verifica quais recursos serão criados, removidos ou alterados:
+Após instalação do _pluging_, podemos verificar o _"plano de execução"_ através do subcomando _"plan"_. Esta ação verifica quais _[recursos](https://www.terraform.io/docs/language/resources/index.html)_ serão criados, removidos ou alterados:
 
 ```terraform
 darmbrust@hoodwink:~/oci-tf$ terraform plan
@@ -186,7 +186,7 @@ Terraform will perform the following actions:
 Plan: 2 to add, 0 to change, 0 to destroy.
 ```
 
-A criação dos recursos é feita com o subcomando _"apply"_ após confirmação:
+A criação é feita com o subcomando _"apply"_, após sua confirmação:
 
 ```terraform
 darmbrust@hoodwink:~/oci-tf-simple$ terraform apply
@@ -327,6 +327,68 @@ oci_core_vcn.vcn: Destruction complete after 1s
 Destroy complete! Resources: 2 destroyed.
 ```
 
+### __Um exemplo maior__
+
+A partir do básico apresentado, iremos partir para um novo exemplo com um pouco mais de detalhes e algumas boas práticas para lidar com vários _[recursos](https://www.terraform.io/docs/language/resources/index.html)_.
+
+```
+darmbrust@hoodwink:~$ git clone https://github.com/daniel-armbrust/oci-terraform-multiregion.git
+Cloning into 'oci-terraform-multiregion'...
+
+darmbrust@hoodwink:~$ ls -1F oci-terraform-multiregion/
+datasources.tf
+drg.tf
+gru_compute.tf
+gru_vcn-dev.tf
+gru_vcn-hml.tf
+gru_vcn-prd.tf
+gru_vcn-shared.tf
+LICENSE
+locals.tf
+modules/
+providers.tf
+README.md
+terraform.tfvars.example
+variables.tf
+vcp_compute.tf
+vcp_vcn-dr.tf
+```
+
+>_**__NOTA:__** Acesse o repositório que contém os códigos neste [link aqui](https://github.com/daniel-armbrust/oci-terraform-multiregion)_.
+
+### __Terraform e OCI__
+
+Para que o _[Terraform](https://www.terraform.io/)_ possa criar e gerenciar a infraestrutura no _[OCI](https://www.oracle.com/cloud/)_, devemos primeiramente informar a ferramenta alguns valores.  
+
+Toda comunicação com o _[OCI](https://www.oracle.com/cloud/)_ necessita de um _[usuário](https://docs.oracle.com/pt-br/iaas/Content/GSG/Tasks/addingusers.htm)_, _[credenciais](https://docs.oracle.com/pt-br/iaas/Content/Identity/Concepts/usercredentials.htm)_ válidas para _autenticação_, e _[políticas](https://docs.oracle.com/pt-br/iaas/Content/Identity/Concepts/policies.htm)_ que _autorizem_ a criação de recursos em uma _[região](https://docs.oracle.com/pt-br/iaas/Content/General/Concepts/regions.htm)_ e _[tenancy](https://docs.oracle.com/pt-br/iaas/Content/GSG/Concepts/settinguptenancy.htm)_ específicos. O _[Terraform](https://www.terraform.io/)_ necessita que essas informações sejam especificadas de alguma forma via variáveis de ambiente, linha de comando ou em arquivo.
+
+Particularmente, eu gosto de especificar esses valores utilizando o arquivo _"terraform.tfvars"_ que possui um significado especial. Ele será processado pelo _[Terraform](https://www.terraform.io/)_ toda vez que você precisar se comunicar com o _[OCI](https://www.oracle.com/cloud/)_.
+
+O próprio _[OCI](https://www.oracle.com/cloud/)_ já facilita a criação das chaves de acesso e demais valores para preenchermos o arquivo _"terraform.tfvars"_:
+
+<br>
+
+![alt_text](./images/ch2_2-5_2.jpg  "OCI - Configuration File Preview")
+
+<br>
+
+Transportando os valores para o arquivo, nós temos:
+
+```terraform
+darmbrust@hoodwink:~/oci-tf$ cat terraform.tfvars
+#
+# terraform.tfvars
+#
+
+api_private_key_path = "./keys/oci.key"
+api_fingerprint = "a6:73:ee:05:7e:56:47:ab:60:d3:76:f4:01:01:de:55"
+user_id = "ocid1.user.oc1..aaaaaaaay3rey4zdxzyj1oz3rey267ovskbi72vix3reytptcyehqmqbsr76q"
+tenancy_id = "ocid1.tenancy.oc1..aaaaaaaaz4oeus54ktfstpwc4z3muju5xec7nppp33rt4r4x2v1xydt4pf5qrrq"
+compartment_id = "ocid1.compartment.oc1..aaaaaaaaro7baesc4z3untyqxajzotsthm4baa6bwumacmb1xydw6gvb2mq"
+```
+
+>_**__NOTA:__** Não versione o arquivo _"terraform.tfvars"_ nem o diretório _"keys/"_. Eles contém informações sensíveis para o acesso._
+
 ### __Variáveis de Input (entrada de dados)__
 
 _[Variáveis de Input](https://www.terraform.io/docs/language/values/variables.html)_ ou para entrada de dados, é o meio pelo qual parametrizamos ou informamos ao código _[Terraform](https://www.terraform.io/)_ sobre um determinado valor. Toda declaração de variável no _[Terraform](https://www.terraform.io/)_, obedece a seguinte estrutura:
@@ -453,36 +515,5 @@ variable "compartment_id" {
 
 Lembre-se: toda vez que eu desejar que o _[Terraform](https://www.terraform.io/)_ saiba de algo, eu devo utilizar uma _[Variáveis de Input](https://www.terraform.io/docs/language/values/variables.html)_.
 
-### __Terraform e OCI__
 
-Para que o _[Terraform](https://www.terraform.io/)_ possa criar e gerenciar nossa infraestrutura no _[OCI](https://www.oracle.com/cloud/)_, devemos primeiramente parametrizar-lo com alguns valores.  
-
-Toda comunicação com o _[OCI](https://www.oracle.com/cloud/)_ necessita de um _[usuário](https://docs.oracle.com/pt-br/iaas/Content/GSG/Tasks/addingusers.htm)_, _[credenciais](https://docs.oracle.com/pt-br/iaas/Content/Identity/Concepts/usercredentials.htm)_ válidas para _autenticação_, e _[políticas](https://docs.oracle.com/pt-br/iaas/Content/Identity/Concepts/policies.htm)_ que _autorizem_ a criação de recursos em uma _[região](https://docs.oracle.com/pt-br/iaas/Content/General/Concepts/regions.htm)_ e _[tenancy](https://docs.oracle.com/pt-br/iaas/Content/GSG/Concepts/settinguptenancy.htm)_ específicos. O _[Terraform](https://www.terraform.io/)_ necessita que essas informações sejam especificadas de alguma forma via variáveis de ambiente, linha de comando ou em arquivo.
-
-Particularmente, eu gosto de especificar esses valores utilizando o arquivo _"terraform.tfvars"_ que possui um significado especial. Ele será processado pelo _[Terraform](https://www.terraform.io/)_ toda vez que você precisar se comunicar com o _[OCI](https://www.oracle.com/cloud/)_.
-
-O próprio _[OCI](https://www.oracle.com/cloud/)_ já facilita a criação das chaves de acesso e demais valores para preenchermos o arquivo _"terraform.tfvars"_:
-
-<br>
-
-![alt_text](./images/ch2_2-5_2.jpg  "OCI - Configuration File Preview")
-
-<br>
-
-Transportando os valores para o arquivo, nós temos:
-
-```terraform
-darmbrust@hoodwink:~/oci-tf$ cat terraform.tfvars
-#
-# terraform.tfvars
-#
-
-api_private_key_path = "./keys/oci.key"
-api_fingerprint = "a6:73:ee:05:7e:56:47:ab:60:d3:76:f4:01:01:de:55"
-user_id = "ocid1.user.oc1..aaaaaaaay3rey4zdxzyj1oz3rey267ovskbi72vix3reytptcyehqmqbsr76q"
-tenancy_id = "ocid1.tenancy.oc1..aaaaaaaaz4oeus54ktfstpwc4z3muju5xec7nppp33rt4r4x2v1xydt4pf5qrrq"
-compartment_id = "ocid1.compartment.oc1..aaaaaaaaro7baesc4z3untyqxajzotsthm4baa6bwumacmb1xydw6gvb2mq"
-```
-
->_**__NOTA:__** Não versione o arquivo _"terraform.tfvars"_ nem o diretório _"keys/"_. Eles contém informações sensíveis para o acesso._
 
