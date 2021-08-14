@@ -360,11 +360,9 @@ vcp_vcn-dr.tf
 
 Para que o _[Terraform](https://www.terraform.io/)_ possa criar e gerenciar a infraestrutura no _[OCI](https://www.oracle.com/cloud/)_, devemos primeiramente informar a ferramenta alguns valores.  
 
-Toda comunicação com o _[OCI](https://www.oracle.com/cloud/)_ necessita de um _[usuário](https://docs.oracle.com/pt-br/iaas/Content/GSG/Tasks/addingusers.htm)_, _[credenciais](https://docs.oracle.com/pt-br/iaas/Content/Identity/Concepts/usercredentials.htm)_ válidas para _autenticação_, e _[políticas](https://docs.oracle.com/pt-br/iaas/Content/Identity/Concepts/policies.htm)_ que _autorizem_ a criação de recursos em uma _[região](https://docs.oracle.com/pt-br/iaas/Content/General/Concepts/regions.htm)_ e _[tenancy](https://docs.oracle.com/pt-br/iaas/Content/GSG/Concepts/settinguptenancy.htm)_ específicos. O _[Terraform](https://www.terraform.io/)_ necessita que essas informações sejam especificadas de alguma forma via variáveis de ambiente, linha de comando ou em arquivo.
+Toda comunicação com o _[OCI](https://www.oracle.com/cloud/)_ necessita de um _[usuário](https://docs.oracle.com/pt-br/iaas/Content/GSG/Tasks/addingusers.htm)_, _[credenciais](https://docs.oracle.com/pt-br/iaas/Content/Identity/Concepts/usercredentials.htm)_ válidas para _autenticação_, e _[políticas](https://docs.oracle.com/pt-br/iaas/Content/Identity/Concepts/policies.htm)_ que _autorizem_ a criação dos recursos em uma _[região](https://docs.oracle.com/pt-br/iaas/Content/General/Concepts/regions.htm)_ e _[tenancy](https://docs.oracle.com/pt-br/iaas/Content/GSG/Concepts/settinguptenancy.htm)_ específicos.
 
-Particularmente, eu gosto de especificar esses valores utilizando o arquivo _"terraform.tfvars"_ que possui um significado especial. Ele será processado pelo _[Terraform](https://www.terraform.io/)_ toda vez que você precisar se comunicar com o _[OCI](https://www.oracle.com/cloud/)_.
-
-O próprio _[OCI](https://www.oracle.com/cloud/)_ já facilita a criação das chaves de acesso e demais valores para preenchermos o arquivo _"terraform.tfvars"_:
+Particularmente, eu gosto de especificar esses valores utilizando o arquivo _"terraform.tfvars"_. O próprio _[OCI](https://www.oracle.com/cloud/)_ já facilita a criação das chaves de acesso e demais valores para preenchermos o arquivo:
 
 <br>
 
