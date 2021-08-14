@@ -188,7 +188,7 @@ Terraform will perform the following actions:
 Plan: 2 to add, 0 to change, 0 to destroy.
 ```
 
-A criação dos recursos é feita com o subcomando _"apply"_ após a confirmação do que será criado:
+A criação dos recursos é feita com o subcomando _"apply"_ após confirmação:
 
 ```terraform
 darmbrust@hoodwink:~/oci-tf-simple$ terraform apply
@@ -261,7 +261,7 @@ oci_core_subnet.subnet: Creation complete after 9s [id=ocid1.subnet.oc1.sa-saopa
 Apply complete! Resources: 2 added, 0 changed, 0 destroyed.
 ```
 
-Por fim, para a remoção dos recursos utilize o subcomando _"destroy"_:
+Por fim, para a remoção utilizamos o subcomando _"destroy"_:
 
 ```terraform
 darmbrust@hoodwink:~/oci-tf-simple$ terraform destroy
@@ -328,38 +328,6 @@ oci_core_vcn.vcn: Destruction complete after 1s
 
 Destroy complete! Resources: 2 destroyed.
 ```
-
-<br>
-
-![alt_text](./images/tf-workflow-1-1.jpg  "Terraform Basic Workflow")
-
-<br>
-
-1. Toda criação de infraestrutura vem de um subcomando _"apply"_. Isto irá transformar o que eu tenho codificado em infraestrutura real. <br>
-2. O _[Terraform](https://www.terraform.io/)_ processa a entrada de dados do _"meio externo"_ para o _"root module"_ através: <br>
-2.1. Pelo uso do argumento __*-var*__ no qual especifica variável e valor (ex: _-var="display_name=vcn"_) <br>
-2.2. Através de arquivos de definições de variáveis __*\*.tfvars*__, carregados automaticamente pela ferramenta ou que sejam especificandos. <br>
-2.3. Através de variáveis de ambientes que contenham o prefixo __*TF\_VAR\_\<nome\>\=\<valor\>*__ (ex: _TF_VAR_display_name="vcn"_). <br>
-3. O _"root module"_ processa os recursos para a criação da infraestrutura. <br>
-4. Outros módulos _(child modules)_ podem ser chamados a partir do _"root module"_ para construção da infraestrutura. <br>
-
-A partir deste desenho básico, iremos aos detalhes.
-
-
-
-Abaixo, uma visão de um simples _root module_ que eu particularmente gosto:
-
-```
-darmbrust@hoodwink:~/oci-tf$ ls -1F
-datasources.tf
-keys/
-main.tf
-modules/
-outputs.tf
-providers.tf
-terraform.tfvars
-variables.tf
-``` 
 
 ### __Variáveis de Input (entrada de dados)__
 
