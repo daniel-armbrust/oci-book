@@ -378,7 +378,7 @@ Todo módulo, seja o _root module_ ou seus _child modules_, podem receber valore
 
 Toda comunicação com o _[OCI](https://www.oracle.com/cloud/)_ necessita de um _[usuário](https://docs.oracle.com/pt-br/iaas/Content/GSG/Tasks/addingusers.htm)_, _[credenciais](https://docs.oracle.com/pt-br/iaas/Content/Identity/Concepts/usercredentials.htm)_ válidas para _autenticação_ e _[políticas](https://docs.oracle.com/pt-br/iaas/Content/Identity/Concepts/policies.htm)_ que _autorizem_ a criação dos recursos em uma _[região](https://docs.oracle.com/pt-br/iaas/Content/General/Concepts/regions.htm)_ e _[tenancy](https://docs.oracle.com/pt-br/iaas/Content/GSG/Concepts/settinguptenancy.htm)_ específicos.
 
-Particularmente, eu gosto de especificar esses valores utilizando o arquivo _"terraform.tfvars"_. O próprio _[OCI](https://www.oracle.com/cloud/)_ já facilita a criação das chaves de acesso e demais valores para preenchermos o arquivo:
+Apresentei os conceitos básicos sobre módulos para que possamos informar alguns valores exigidos pelo _[OCI Provider](https://registry.terraform.io/providers/hashicorp/oci/latest/docs)_ ao _[Terraform](https://www.terraform.io/)_. Criaremos o arquivo _"terraform.tfvars"_ com as informações.
 
 <br>
 
@@ -399,7 +399,7 @@ tenancy_id = "ocid1.tenancy.oc1..aaaaaaaaz4oeus54ktfstpwc4z3muju5xec7nppp33rt4r4
 compartment_id = "ocid1.compartment.oc1..aaaaaaaaro7baesc4z3untyqxajzotsthm4baa6bwumacmb1xydw6gvb2mq"
 ```
 
->_**__NOTA:__** Não versione o arquivo _"terraform.tfvars"_ nem o diretório _"keys/"_. Eles contém informações sensíveis de acesso._
+>_**__NOTA:__** Não versione o arquivo _"terraform.tfvars"_ nem o diretório _"keys/"_. Eles contém informações confidenciais de acesso._
 
 ### __Variáveis de Input (entrada de dados)__
 
