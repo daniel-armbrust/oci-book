@@ -327,7 +327,7 @@ oci_core_vcn.vcn: Destruction complete after 1s
 Destroy complete! Resources: 2 destroyed.
 ```
 
-### __Um exemplo maior__
+### __Apresentando um exemplo maior__
 
 A partir do básico apresentado, iremos partir para um novo exemplo com um pouco mais de detalhes e algumas boas práticas para lidar com vários _[recursos](https://www.terraform.io/docs/language/resources/index.html)_.
 
@@ -401,7 +401,7 @@ compartment_id = "ocid1.compartment.oc1..aaaaaaaaro7baesc4z3untyqxajzotsthm4baa6
 
 >_**__NOTA:__** Não versione o arquivo _"terraform.tfvars"_ nem o diretório _"keys/"_. Eles contém informações confidenciais de acesso._
 
-### __Variáveis de Input (entrada de dados)__
+### __Variáveis de Input__
 
 _[Variáveis de Input](https://www.terraform.io/docs/language/values/variables.html)_ ou para entrada de dados, é o meio pelo qual parametrizamos ou informamos a um módulo sobre determinado valor. Toda declaração de variável possui a seguinte estrutura:
 
@@ -441,14 +441,14 @@ Os argumentos _"description"_, _"type"_ e _"default"_, são opcionais. O argumen
 
 Para maiores detalhes sobre o uso de variáveis e quais os tipos de dados suportados, consulte a _[documentação oficial](https://www.terraform.io/docs/language/values/variables.html)_.
 
-### __Valores de Output (retorno/saída de dados)__
+### __Valores de Output__
 
-_[Valores de Output](https://www.terraform.io/docs/language/values/outputs.html)_, são valores que um módulo retorna. A ideia é similar ao valor de retorno de uma _função_. _[Valores de Output](https://www.terraform.io/docs/language/values/outputs.html)_ possuem alguns casos de uso, que são:
+_[Valores de Output](https://www.terraform.io/docs/language/values/outputs.html)_ são valores que um módulo retorna. A ideia é similar ao valor de retorno de uma _função_. _[Valores de Output](https://www.terraform.io/docs/language/values/outputs.html)_ possuem alguns casos de uso, que são:
 
 1. Módulos filhos _(child modules)_ podem especificar o que retornar/expor ao módulo pai _(root module)_, através da instrução _"output { ... }"_.
 2. O módulo pai _(root module)_, pode utilizar instruções _"output { ... }"_, para imprimir valores na linha de comando após execução do comando _"terraform apply"_.
 
-Cada _[valor de output](https://www.terraform.io/docs/language/values/outputs.html)_, exportado por um módulo, deve ser devidamente declarado através da instrução _"output { ... }"_. Por exemplo:
+Cada _[valor de output](https://www.terraform.io/docs/language/values/outputs.html)_ exportado por um módulo, deve ser devidamente declarado através da instrução _"output { ... }"_. Por exemplo:
 
 ```terraform
 output "<IDENTIFICADOR>" {
@@ -457,27 +457,44 @@ output "<IDENTIFICADOR>" {
 }
 ```
 
-Para que o entendimento fique mais claro, vamos exibir os arquivos de um módulo usados para criar uma _[VCN](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingVCNs_topic-Overview_of_VCNs_and_Subnets.htm)_: 
+Para que o entendimento fique mais claro, vou exibir os arquivos usados no módulo que cria uma _[VCN](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingVCNs_topic-Overview_of_VCNs_and_Subnets.htm)_: 
 
 ```terraform
 
-darmbrust@hoodwink:~/oci-tf$ cat modules/networking/vcn/main.tf
+darmbrust@hoodwink:~/oci-terraform-multiregion$ cat modules/networking/vcn/main.tf
+#
+# modules/networking/vcn/main.tf
+# https://registry.terraform.io/providers/hashicorp/oci/latest/docs/resources/core_vcn
+#
 
-resource "oci_core_vcn" "vcn" {    
-   compartment_id = var.compartment_id
-   display_name = var.display_name
-   cidr_blocks = ["10.0.0.0/16"] 
+resource "oci_core_vcn" "vcn" {
+    compartment_id = var.compartment_id
+    cidr_blocks = var.cidr_blocks
+    display_name = var.display_name
+    dns_label = var.dns_label
+    is_ipv6enabled = var.is_ipv6enabled
 }
 
-darmbrust@hoodwink:~/oci-tf$ cat modules/networking/vcn/outputs.tf
+darmbrust@hoodwink:~/oci-terraform-multiregion$ cat modules/networking/vcn/outputs.tf
+#
+# modules/networking/vcn/outputs.tf
+# https://registry.terraform.io/providers/hashicorp/oci/latest/docs/resources/core_vcn
+#
 
-output "vcn_id" {
-   description = "The VCN's Oracle ID (OCID)."
-   value = oci_core_vcn.vcn.id
+output "id" {
+    value = oci_core_vcn.vcn.id
 }
 ```
 
-Um recurso do tipo "oci_core_vcn", devidamente parametrizado, cria uma VCN no OCI.
+Aqui usamos o bloco _"output"_ para retornar o valor do atributo _"id"_ do recurso _"[oci_core_vcn](https://registry.terraform.io/providers/hashicorp/oci/latest/docs/resources/core_vcn)"_. Perceba que o nome do recurso _"vcn"_ é usado na expressão _"value"_ do bloco "_output_".
+
+```terraform
+output "id" {
+    value = <RECURSO>.<IDENTIFICADOR>.<ATRIBUTO EXPORTADO>
+}
+```
+
+>_**__NOTA:__** Lembre-se sempre de consultar a documentação referente ao recurso no qual deseja retornar valores. A documentação dos recursos disponíveis pelo [OCI Provider](https://registry.terraform.io/providers/hashicorp/oci/latest/docs) podem ser consultados [aqui](https://registry.terraform.io/providers/hashicorp/oci/latest/docs)._
 
 ### __Módulos__
 
