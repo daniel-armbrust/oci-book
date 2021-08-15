@@ -518,7 +518,7 @@ locals.tf
 modules/
 providers.tf
 README.md
-terraform.tfvars.example
+terraform.tfvars
 variables.tf
 vcp_compute.tf
 vcp_vcn-dr.tf
