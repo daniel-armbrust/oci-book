@@ -499,3 +499,28 @@ output "id" {
 >_**__NOTA:__** Lembre-se sempre de consultar a documentação referente ao recurso no qual deseja retornar valores. A documentação dos recursos disponíveis pelo [OCI Provider](https://registry.terraform.io/providers/hashicorp/oci/latest/docs) podem ser consultados [aqui](https://registry.terraform.io/providers/hashicorp/oci/latest/docs)._
 
 ### __Detalhes do nosso exemplo__
+
+Aqui, quero apresentar mais detalhes do _fluxo lógico_ usado pelo _[Terraform](https://www.terraform.io/)_ quando disparamos a ação _"apply"_ para a criação dos _[recursos](https://www.terraform.io/docs/language/resources/index.html)_ no _[OCI](https://en.wikipedia.org/wiki/Oracle_Cloud#Infrastructure_as_a_Service_(IaaS))_.
+
+A partir dos arquivos de exemplo:
+
+```
+darmbrust@hoodwink:~/oci-terraform-multiregion$ ls -1F
+datasources.tf
+drg.tf
+gru_compute.tf
+gru_vcn-dev.tf
+gru_vcn-hml.tf
+gru_vcn-prd.tf
+gru_vcn-shared.tf
+LICENSE
+locals.tf
+modules/
+providers.tf
+README.md
+terraform.tfvars.example
+variables.tf
+vcp_compute.tf
+vcp_vcn-dr.tf
+```
+
