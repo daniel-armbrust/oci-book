@@ -512,7 +512,7 @@ Observe a imagem abaixo:
 
 1. Ao disparar o comando _"terraform apply"_, o _[Terraform](https://www.terraform.io/)_ verifica se há definição de variáveis e valores. Em nosso caso, a ferramenta irá processar o arquivo _"terraform.tfvars"_.
 2. Logo após, os valores passam do arquivo _"terraform.tfvars"_ para o arquivo _"variables.tf"_. Note que deve existir uma correlação dos nomes dos identificadores entre o arquivo que define valor (_"terraform.tfvars"_) e o arquivo que recebe valor _("variables.tf")_.
-3. Algumas variáveis, já com os seus respectivos valores, são passadas para o arquivo _"providers.tf"_. Aqui parametrizamos o plugin do OCI.
+3. Algumas variáveis, já com seus respectivos valores, são passadas para o arquivo _"providers.tf"_. Aqui parametrizamos o plugin do _[OCI](https://en.wikipedia.org/wiki/Oracle_Cloud#Infrastructure_as_a_Service_(IaaS))_.
 4. O arquivo _"locals.tf"_ é processando. Alguns dos identificadores contidos em _"locals.tf"_ precisam de valores providos pelo arquivo _"datasources.tf"_.
 5. Inicia-se o processamento dos arquivos que fazem _"chamada"_ aos demais módulos _(child modules)_.
-6. Cada _child modules_ possui seu arquivo _"variables.tf"_, que é a porta de entrada para valores usados para criar recursos.
+6. Cada _child modules_ possui seu arquivo _"variables.tf"_, que é a porta de entrada para valores usados na criação de recursos. Declarações _"resource { ... }"_, usados para criar recurso, estão definidos nos _child modules_. Nenhum arquivo _.tf_ do _root module_ cria recurso.
