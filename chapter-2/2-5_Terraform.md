@@ -502,7 +502,7 @@ output "id" {
 
 Aqui, quero apresentar mais detalhes do _fluxo lógico_ usado pelo _[Terraform](https://www.terraform.io/)_ quando disparamos a ação _"apply"_ para a criação dos _[recursos](https://www.terraform.io/docs/language/resources/index.html)_ no _[OCI](https://en.wikipedia.org/wiki/Oracle_Cloud#Infrastructure_as_a_Service_(IaaS))_.
 
-Observe a imagem abaixo para entender melhor esse _fluxo lógico_:
+Observe a imagem abaixo:
 
 <br>
 
