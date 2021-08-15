@@ -374,6 +374,8 @@ Todo módulo, seja o _root module_ ou seus _child modules_, podem receber valore
 
 >_**__NOTA:__** Por questões de boas práticas, a HashiCorp recomenda que existam no mínimo os arquivos main.tf, variables.tf e outputs.tf por diretório de módulo, independente de possuirem conteúdo ou não._
 
+Eu particularmente gosto de declarar os blocos _"resource"_ dentro de um _child module_. Com isto, o meu _"root module"_, faz "chamadas" ao _child modules_ informando os parâmetros necessários para a construção de determinado recurso.
+
 ### __Terraform e OCI__
 
 Toda comunicação com o _[OCI](https://www.oracle.com/cloud/)_ necessita de um _[usuário](https://docs.oracle.com/pt-br/iaas/Content/GSG/Tasks/addingusers.htm)_, _[credenciais](https://docs.oracle.com/pt-br/iaas/Content/Identity/Concepts/usercredentials.htm)_ válidas para _autenticação_ e _[políticas](https://docs.oracle.com/pt-br/iaas/Content/Identity/Concepts/policies.htm)_ que _autorizem_ a criação dos recursos em uma _[região](https://docs.oracle.com/pt-br/iaas/Content/General/Concepts/regions.htm)_ e _[tenancy](https://docs.oracle.com/pt-br/iaas/Content/GSG/Concepts/settinguptenancy.htm)_ específicos.
@@ -496,51 +498,4 @@ output "id" {
 
 >_**__NOTA:__** Lembre-se sempre de consultar a documentação referente ao recurso no qual deseja retornar valores. A documentação dos recursos disponíveis pelo [OCI Provider](https://registry.terraform.io/providers/hashicorp/oci/latest/docs) podem ser consultados [aqui](https://registry.terraform.io/providers/hashicorp/oci/latest/docs)._
 
-### __Módulos__
-
->_**__NOTA:__** Por questões de boas práticas, a HashiCorp recomenda que existam no mínimo os arquivos main.tf, variables.tf e outputs.tf por diretório de módulo, independente de possuirem conteúdo ou não._
-
-Quando informamos valores através do _root module_
-
-Em nosso exemplo, iremos informar ao _[Terraform](https://www.terraform.io/)_, através do conjunto _"nome variável = valor"_ contidos no arquivo _"terraform.tfvars"_, informações de autenticação necessárias para a construção da infraestrutura no _[OCI](https://www.oracle.com/cloud/)_.
-
-<br>
-
-```terraform
-darmbrust@hoodwink:~/oci-tf$ cat variables.tf
-#
-# variables.tf
-#
-
-variable "api_private_key_path" {
-  description = "The path to oci api private key."
-  type = string
-}
-
-variable "api_fingerprint" {
-  description = "Fingerprint of oci api private key."
-  type = string
-}
-
-variable "user_id" {
-  description = "The id of the user that terraform will use to create the resources."
-  type = string
-}
-
-variable "tenancy_id" {
-  description = "The tenancy id in which to create the resources."
-  type = string
-}
-
-variable "compartment_id" {
-  description = "The compartment id where to create all resources."
-  type = string
-}
-```
-
-<br>
-
-Lembre-se: toda vez que eu desejar que o _[Terraform](https://www.terraform.io/)_ saiba de algo, eu devo utilizar uma _[Variáveis de Input](https://www.terraform.io/docs/language/values/variables.html)_.
-
-
-
+### __Detalhes do nosso exemplo__
