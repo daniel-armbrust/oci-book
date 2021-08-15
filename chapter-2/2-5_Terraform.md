@@ -498,29 +498,21 @@ output "id" {
 
 >_**__NOTA:__** Lembre-se sempre de consultar a documentação referente ao recurso no qual deseja retornar valores. A documentação dos recursos disponíveis pelo [OCI Provider](https://registry.terraform.io/providers/hashicorp/oci/latest/docs) podem ser consultados [aqui](https://registry.terraform.io/providers/hashicorp/oci/latest/docs)._
 
-### __Detalhes do nosso exemplo__
+### __Mais detalhes__
 
 Aqui, quero apresentar mais detalhes do _fluxo lógico_ usado pelo _[Terraform](https://www.terraform.io/)_ quando disparamos a ação _"apply"_ para a criação dos _[recursos](https://www.terraform.io/docs/language/resources/index.html)_ no _[OCI](https://en.wikipedia.org/wiki/Oracle_Cloud#Infrastructure_as_a_Service_(IaaS))_.
 
-A partir dos arquivos de exemplo:
+Observe a imagem abaixo para entender melhor esse _fluxo lógico_:
 
-```
-darmbrust@hoodwink:~/oci-terraform-multiregion$ ls -1F
-datasources.tf
-drg.tf
-gru_compute.tf
-gru_vcn-dev.tf
-gru_vcn-hml.tf
-gru_vcn-prd.tf
-gru_vcn-shared.tf
-LICENSE
-locals.tf
-modules/
-providers.tf
-README.md
-terraform.tfvars
-variables.tf
-vcp_compute.tf
-vcp_vcn-dr.tf
-```
+<br>
 
+![alt_text](./images/tf-workflow-1-2.jpg  "Terraform Workflow")
+
+<br>
+
+1. Ao disparar o comando _"terraform apply"_, o _[Terraform](https://www.terraform.io/)_ verifica se há definição de variáveis e valores. Em nosso caso, a ferramenta irá processar o arquivo _"terraform.tfvars"_.
+2. Logo após, os valores passam do arquivo _"terraform.tfvars"_ para o arquivo _"variables.tf"_. Note que deve existir uma correlação dos nomes dos identificadores entre o arquivo que define valor (_"terraform.tfvars"_) e o arquivo que recebe valor _("variables.tf")_.
+3. Algumas variáveis já com valores, são passados para o arquivo _"providers.tf"_. Aqui parametrizamos o plugin do OCI.
+4. O arquivo _"locals.tf"_ é processando. Alguns dos identificadores contidos em _"locals.tf"_ precisam de valores providos pelo arquivo _"datasources.tf"_.
+5. Inicia-se o processamento dos arquivos que fazem _"chamada"_ aos demais módulos _(child modules)_.
+6. Cada _child modules_ possui seu arquivo _"variables.tf"_, que é a porta de entrada para valores usados para criar recursos.
