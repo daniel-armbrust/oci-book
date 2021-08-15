@@ -126,7 +126,7 @@ total 66M
 -rwxr-xr-x 1 darmbrust darmbrust 66M Aug 13 17:08 terraform-provider-oci_v4.39.0_x4
 ```
 
-Após instalação do _pluging_, podemos verificar o _"plano de execução"_ através do subcomando _"plan"_. Esta ação verifica quais _[recursos](https://www.terraform.io/docs/language/resources/index.html)_ serão criados, removidos ou alterados:
+Após instalação do _pluging_, podemos verificar o _"plano de execução"_ através do subcomando _"plan"_. Esta é uma ação _"somente leitura"_ que verifica quais _[recursos](https://www.terraform.io/docs/language/resources/index.html)_ serão criados, removidos ou alterados. Se existe infraestrutura provisionada, ela não será alterada.
 
 ```terraform
 darmbrust@hoodwink:~/oci-tf$ terraform plan
@@ -185,6 +185,9 @@ Terraform will perform the following actions:
 
 Plan: 2 to add, 0 to change, 0 to destroy.
 ```
+
+>_**__NOTA:__** É sempre uma boa prática verificar o "plano de execução" através do subcomando "plan", antes de realizar o deploy da sua infraestrutura._
+
 
 A criação é feita com o subcomando _"apply"_, após sua confirmação:
 
@@ -352,6 +355,17 @@ terraform.tfvars.example
 variables.tf
 vcp_compute.tf
 vcp_vcn-dr.tf
+
+darmbrust@hoodwink:~$ cd oci-terraform-multiregion/
+
+darmbrust@hoodwink:~/oci-terraform-multiregion$ terraform init
+Initializing modules...
+- gru_dhcp_vcn-dev in modules/networking/dhcp_options
+- gru_dhcp_vcn-hml in modules/networking/dhcp_options
+- gru_dhcp_vcn-prd in modules/networking/dhcp_options
+- gru_dhcp_vcn-shared in modules/networking/dhcp_options
+
+...
 ```
 
 >_**__NOTA:__** Acesse o repositório que contém os códigos neste [link aqui](https://github.com/daniel-armbrust/oci-terraform-multiregion)_.
@@ -518,3 +532,19 @@ Observe a imagem abaixo:
 6. Cada _child modules_ possui seu arquivo _"variables.tf"_, que é a porta de entrada para valores usados na criação de recursos. Declarações _"resource { ... }"_, usados para criar recurso, estão definidos nos _child modules_. Nenhum arquivo _.tf_ do _root module_ cria recurso.
 
 Como já foi dito, o _[Terraform](https://www.terraform.io/)_ não obedece a nenhuma lógica quando ele for ler os arquivos _*.tf_. No fim das contas, tudo será concatenado para formar um arquivo só. Porém, é uma boa prática criar um arquivo _.tf_ que identifique o seu propósito. Ao ver os arquivos, eu posso dizer que o arquivo _"gru_vcn-prd.tf"_ corresponde aos recursos que fazem parte da _"VCN de Produção da região GRU (são paulo)"_, por exemplo.
+
+### __Arquivo State__
+
+O _"[arquivo de estado (state)](https://www.terraform.io/docs/language/state/index.html)"_ é criado e mantido pelo _[Terraform](https://www.terraform.io/)_, para que a ferramenta saiba o que já foi provisionado. A ferramenta sempre compara o _"estado esperado"_ versus _"estado atual"_ (recursos que já foram criados ou não), através das definições presentes nos arquivos _*.tf_ para construir o _"plano de execução"_.
+
+Dois arquivos são criados localmente e que representam o _"estado"_ da sua infraestrutura: 
+
+```
+darmbrust@hoodwink:~/oci-terraform-multiregion$ ls -1F *tfstate*
+terraform.tfstate
+terraform.tfstate.backup
+```
+
+>_**__NOTA:__** Não versione, não edite, não apague e não mexa nestes arquivos. Eles possuem informações sensíveis sobre a sua infraestrutura e altera-los diretamente pode levar a um estado indesejado._
+
+Visto a nota acima, o melhor a fazer é utilizar o _"[remote state](https://www.terraform.io/docs/language/state/remote.html)"_ para gravar o _"[arquivo de estado](https://www.terraform.io/docs/language/state/index.html)"_ em algum serviço de armazenamento remoto, como o _[Object Storage](https://docs.oracle.com/pt-br/iaas/Content/Object/Concepts/objectstorageoverview.htm)_.
