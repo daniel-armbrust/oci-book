@@ -559,4 +559,108 @@ module.gru_vcn-shared.oci_core_vcn.vcn: Refreshing state... [id=ocid1.vcn.oc1.sa
 ...
 ```
 
-Visto a importância do arquivo _"terraform.tfstate"_, o melhor a fazer é utilizar o _"[remote state](https://www.terraform.io/docs/language/state/remote.html)"_ para gravar o _"[arquivo de estado](https://www.terraform.io/docs/language/state/index.html)"_ em algum serviço de armazenamento remoto, como o _[Object Storage](https://docs.oracle.com/pt-br/iaas/Content/Object/Concepts/objectstorageoverview.htm)_.
+Visto a importância do arquivo _"terraform.tfstate"_, o melhor a fazer é configurar o _"[remote state](https://www.terraform.io/docs/language/state/remote.html)"_ para gravar o _"[arquivo de estado](https://www.terraform.io/docs/language/state/index.html)"_ em algum serviço de armazenamento remoto, como o _[Object Storage](https://docs.oracle.com/pt-br/iaas/Content/Object/Concepts/objectstorageoverview.htm)_.
+
+O procedimento oficial, passo-a-passo, pode ser consultado _[aqui](https://docs.oracle.com/en-us/iaas/Content/API/SDKDocs/terraformUsingObjectStore.htm#s3)_. Irei apresentar um resumo abaixo:
+
+
+1. Primeiramente vamos criar um _"Customer Secret Keys"_ especificando o um id de usuário válido (--user-id):
+
+```
+darmbrust@hoodwink:~/oci-terraform-multiregion$ oci iam customer-secret-key create --display-name "terraform-tfstate" --user-id "ocid1.user.oc1..aaaaaaaay..."
+{
+  "data": {
+    "display-name": "terraform-tfstate",
+    "id": "3dd51e72560e61e7fac801ae71e76eaabc1e708",
+    "inactive-status": null,
+    "key": "VvcCzv/+u0O+vzpCzvpCzvcsjYpCzv9ZANwhpvcv86i8=",
+    "lifecycle-state": "ACTIVE",
+    "time-created": "2021-08-16T20:21:18.493000+00:00",
+    "time-expires": null,
+    "user-id": "ocid1.user.oc1..aaaaaaaay..."
+  }
+}
+```
+
+2. O _"[remote state](https://www.terraform.io/docs/language/state/remote.html)"_ é configurado através da definição de _[backend](https://www.terraform.io/docs/language/settings/backends/index.html)_ no _[Terraform](https://www.terraform.io/)_. O _[backend S3](https://www.terraform.io/docs/language/settings/backends/s3.html)_ necessita de um arquivo de credênciais compatível. Para isto, criaremos o arquivo abaixo com os valores do _"Customer Secret Keys"_ que foi criado:
+
+```
+darmbrust@hoodwink:~/oci-terraform-multiregion$ cat ~/.aws/credentials
+[default]
+aws_access_key_id=3dd51e72560e61e7fac801ae71e76eaabc1e708
+aws_secret_access_key=VvcCzv/+u0O+vzpCzvpCzvcsjYpCzv9ZANwhpvcv86i8=
+``` 
+
+3. Após isto, precisamos criar um _[Bucket](https://docs.oracle.com/pt-br/iaas/Content/Object/Tasks/managingbuckets.htm)_ para no qual o arquivo _"terraform.tfstate"_
+será gravado:
+
+```
+darmbrust@hoodwink:~/oci-terraform-multiregion$ oci os bucket create --name "oci-tf-stfile" --compartment-id "ocid1.tenancy.oc1..aaaaaaaa"
+```
+
+4. Vamos obter o valor do _"Object Storage Namespace"_ para formar a URL que fará parte da configuração:
+
+```
+darmbrust@hoodwink:~/oci-terraform-multiregion$ oci os ns get
+{
+  "data": "grh5wylcls2u"
+}
+```
+
+5. A URL do _[Object Storage](https://docs.oracle.com/pt-br/iaas/Content/Object/Concepts/objectstorageoverview.htm)_ segue o formato:
+
+```
+https://<NAMESPACE>.compat.objectstorage.<REGIÃO>.oraclecloud.com
+``` 
+
+Ou seja, temos:
+
+```
+https://grh5wylcls2u.compat.objectstorage.sa-saopaulo-1.oraclecloud.com
+```
+
+6. Adicionamos as configurações do _[backend S3](https://www.terraform.io/docs/language/settings/backends/s3.html)_ no arquivo _"providers.tf"_:
+
+```terraform
+darmbrust@hoodwink:~/oci-terraform-multiregion$ cat providers.tf
+#
+# providers.tf
+#
+
+terraform {
+  required_providers {
+
+    oci = {
+      source = "hashicorp/oci"
+    }
+
+  }
+
+  required_version = ">= 1.0.2"
+
+  backend "s3" {
+    bucket   = "oci-tf-stfile"
+    key      = "terraform.tfstate"
+    region   = "sa-saopaulo-1"
+    endpoint = "https://grh5wylcls2u.compat.objectstorage.sa-saopaulo-1.oraclecloud.com"
+    skip_region_validation      = true
+    skip_credentials_validation = true
+    skip_metadata_api_check     = true
+    force_path_style            = true
+  }
+}
+
+...
+```
+
+7. Pronto! Basta inicializar e a partir de agora o _Bucket "oci-tf-stfile"_ será usado para armazenar o arquivo _"terraform.tfstate"_:
+
+```
+darmbrust@hoodwink:~/oci-terraform-multiregion$ terraform init
+Initializing modules...
+
+Initializing the backend...
+
+Successfully configured the backend "s3"! Terraform will automatically
+use this backend unless the backend configuration changes.
+```
