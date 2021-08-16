@@ -3,7 +3,9 @@
 ## 2.5 - Usando o Terraform para criar sua Infraestrutura no OCI
 
 ### __Visão Geral__
-_[Terraform](https://www.terraform.io/)_ é uma ferramenta que permite definir, provisionar e gerenciar sua infraestrutura através de código (criar, atualizar e destruir). O conceito por trás do termo _"[infraestrutura como código](https://pt.wikipedia.org/wiki/Infraestrutura_como_C%C3%B3digo)"_ é simples: você define recursos cloud (vm, banco de dados, redes, etc) em um ou mais arquivos de configuração (infraestrutura em código). O código utiliza uma _"abordagem declarativa"_. Isto significa que é possível definir qual é o _“estado esperado”_ da sua infraestrutura através de instruções simples e diretas.
+_[Terraform](https://www.terraform.io/)_ é uma ferramenta que permite definir, provisionar e gerenciar sua infraestrutura através de código (criar, atualizar e destruir). Ele utiliza as mesmas APIs que você utilizaria se estivesse escrevendo um script que automatiza a criação da infraestrutura, via _[OCI CLI](https://docs.oracle.com/pt-br/iaas/Content/API/Concepts/cliconcepts.htm)_ por exemplo. A diferença é que o _[Terraform](https://www.terraform.io/)_ não somente faz o _deploy_, mas também gerencia sua infraestrutura.
+
+O conceito por trás do termo _"[infraestrutura como código](https://pt.wikipedia.org/wiki/Infraestrutura_como_C%C3%B3digo)"_ é simples: você define recursos cloud (vm, banco de dados, redes, etc) em um ou mais arquivos de configuração (infraestrutura em código). O código utiliza uma _"abordagem declarativa"_. Isto significa que é possível definir qual é o _“estado esperado”_ da sua infraestrutura através de instruções simples e diretas.
 
 Codificar em _[Terraform](https://www.terraform.io/)_, significa codificar em uma linguagem especifica chamada _HashiCorp Configuration Language (HCL)_. Esta foi criada pela _HashiCorp_ com o intuito de substituir configurações antes escritas em formato _[JSON](https://pt.wikipedia.org/wiki/JSON)_ ou _[XML](https://pt.wikipedia.org/wiki/XML)_. Seu principal propósito é declarar _[recursos](https://www.terraform.io/docs/language/resources/index.html)_ que representam objetos de infraestrutura.
 
@@ -535,9 +537,9 @@ Como já foi dito, o _[Terraform](https://www.terraform.io/)_ não obedece a nen
 
 ### __Arquivo State__
 
-O _"[arquivo de estado (state)](https://www.terraform.io/docs/language/state/index.html)"_ é criado e mantido pelo _[Terraform](https://www.terraform.io/)_, para que a ferramenta saiba o que já foi provisionado. A ferramenta sempre compara o _"estado esperado"_ versus _"estado atual"_ (recursos que já foram criados ou não), através das definições presentes nos arquivos _*.tf_ para construir o _"plano de execução"_.
+O _"[arquivo de estado (state)](https://www.terraform.io/docs/language/state/index.html)"_ é criado para que a ferramenta saiba o que já foi provisionado. Sempre  será comparado o _"estado esperado"_ versus _"estado atual"_ (recursos que já foram criados ou não), através das definições presentes nos arquivos _*.tf_ para construir o _"plano de execução"_.
 
-Dois arquivos são criados localmente e que representam o _"estado"_ da sua infraestrutura: 
+Dois arquivos são criados localmente e que possuem informações sobre o _"estado"_ da sua infraestrutura: 
 
 ```
 darmbrust@hoodwink:~/oci-terraform-multiregion$ ls -1F *tfstate*
@@ -545,6 +547,16 @@ terraform.tfstate
 terraform.tfstate.backup
 ```
 
->_**__NOTA:__** Não versione, não edite, não apague e não mexa nestes arquivos. Eles possuem informações sensíveis sobre a sua infraestrutura e altera-los diretamente pode levar a um estado indesejado._
+>_**__NOTA:__** Não versione, não edite, não apague e não mexa nestes arquivos. Eles possuem informações sensíveis sobre a sua infraestrutura e alterá-los diretamente pode levar a um estado indesejado._
 
-Visto a nota acima, o melhor a fazer é utilizar o _"[remote state](https://www.terraform.io/docs/language/state/remote.html)"_ para gravar o _"[arquivo de estado](https://www.terraform.io/docs/language/state/index.html)"_ em algum serviço de armazenamento remoto, como o _[Object Storage](https://docs.oracle.com/pt-br/iaas/Content/Object/Concepts/objectstorageoverview.htm)_.
+Quando executamos _"terraform plan"_, a ferramenta lê os recursos presente no arquivo _"terraform.tfstate"_ e os compara com o sistema remoto. Isto garante que o _"estado"_ do sistema remoto, é igual ao _"estado"_ existente localmente salvo no arquivo _"terraform.tfstate"_. Se um recurso não existe, ele será criado e seu _"estado"_ será salvo. Caso um recurso exista, seu _"estado"_ será comparado com o _"estado"_ que foi salvo localmente. Esta ação pode ser vista abaixo em _"Refreshing state..."_ por recurso:
+
+```
+darmbrust@hoodwink:~/oci-terraform-multiregion$ terraform plan
+module.gru_drg.oci_core_drg.drg: Refreshing state... [id=ocid1.drg.oc1.sa-saopaulo-1.aaaaaaaak6l3qvnisbzhzhqmucd63bicdxkooza5vjohrl2mijbg66fv4cma]
+module.gru_vcn-hml.oci_core_vcn.vcn: Refreshing state... [id=ocid1.vcn.oc1.sa-saopaulo-1.amaaaaaa6noke4qaspv45pjalzfzmrdesn5wbcmli25dzcev7jcvlztd7qbq]
+module.gru_vcn-shared.oci_core_vcn.vcn: Refreshing state... [id=ocid1.vcn.oc1.sa-saopaulo-1.amaaaaaa6noke4qa3vzxd2p2r2duasfuhmsdpw6jp7dshimyn52ajo2pfqna]
+...
+```
+
+Visto a importância do arquivo _"terraform.tfstate"_, o melhor a fazer é utilizar o _"[remote state](https://www.terraform.io/docs/language/state/remote.html)"_ para gravar o _"[arquivo de estado](https://www.terraform.io/docs/language/state/index.html)"_ em algum serviço de armazenamento remoto, como o _[Object Storage](https://docs.oracle.com/pt-br/iaas/Content/Object/Concepts/objectstorageoverview.htm)_.
