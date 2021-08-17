@@ -1,6 +1,6 @@
 # Capítulo 2: Automação, Arquitetura e DevOps
 
-## 2.5 - Usando o Terraform para criar sua Infraestrutura no OCI
+## 2.5 - Introdução ao Terraform
 
 ### __Visão Geral__
 _[Terraform](https://www.terraform.io/)_ é uma ferramenta que permite definir, provisionar e gerenciar sua infraestrutura através de código (criar, atualizar e destruir). Ele utiliza as mesmas APIs que você utilizaria se estivesse escrevendo um script que automatiza a criação da infraestrutura, via _[OCI CLI](https://docs.oracle.com/pt-br/iaas/Content/API/Concepts/cliconcepts.htm)_ por exemplo. A diferença é que o _[Terraform](https://www.terraform.io/)_ não somente faz o _deploy_, mas também gerencia sua infraestrutura.
