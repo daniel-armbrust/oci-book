@@ -374,11 +374,13 @@ Initializing modules...
 
 ### __Módulo principal (root module)__
 
-Similar a uma _função_ em linguagem de programação tradicional, um _[módulo](https://www.terraform.io/docs/language/modules/index.html)_ é uma maneira de agrupar código relacionado. É usado como um container para múltiplos _[recursos](https://www.terraform.io/docs/language/resources/index.html)_.
+Similar a uma _função_ em linguagem de programação tradicional, um _[módulo](https://www.terraform.io/docs/language/modules/index.html)_ é uma maneira de agrupar código relacionado. É usado como um container para múltiplos _[recursos](https://www.terraform.io/docs/language/resources/index.html)_, promovendo abstração e reutilização de código.
 
-O módulo principal ou _root module_ é o ponto de partida. É o diretório de trabalho, onde se executa os comandos _"terraform plan"_ ou _"terraform apply"_. Encare como se fosse a função _"main()"_ de um programa escrito em _[linguagem C](https://pt.wikipedia.org/wiki/C_(linguagem_de_programa%C3%A7%C3%A3o))_ (onde a execução do programa começa). A partir do _root module_ é que chamamos outros módulos _(child modules)_.
+O módulo principal ou _root module_ é o ponto de partida. É o diretório de trabalho, onde se executa os comandos _"terraform plan"_ ou _"terraform apply"_. Encare como se fosse a função _"main()"_ de um programa escrito em _[linguagem C](https://pt.wikipedia.org/wiki/C_(linguagem_de_programa%C3%A7%C3%A3o))_ (onde a execução do programa começa). A partir do _root module_ é que chamamos outros módulos _(child modules)_ que ajudam na organização geral e reuso das configurações.
 
-Todo módulo, seja o _root module_ ou seus _child modules_, podem receber valores através de _[variáveis](https://www.terraform.io/docs/language/values/variables.html)_. Estas funcionam como _[argumentos do módulo](https://www.terraform.io/docs/language/modules/develop/index.html)_. Podemos informar (parametrizar) valores ao _root module_ através:
+Todo módulo, seja o _root module_ ou seus _child modules_, podem receber valores através de _[variáveis](https://www.terraform.io/docs/language/values/variables.html)_. Estas funcionam como _[argumentos do módulo](https://www.terraform.io/docs/language/modules/develop/index.html)_. Você não precisa saber como um módulo funciona para poder usá-lo. Você só precisa saber quais são seus _valores de entrada (inputs)_ e _saída (outputs)_.
+
+Podemos informar _valores de entrada (inputs)_ ao _root module_ através:
 
 1. Pelo uso do argumento de linha de comando __*-var*__, no qual é possível especificar variável e valor (ex: _-var="display_name=vcn"_).
 2. Através do arquivo de definições de variáveis __*\*.tfvars*__.

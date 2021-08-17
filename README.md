@@ -21,7 +21,8 @@
     2.3 - SDK <br>
     2.4 - CLI <br>
     [2.5 - Introdução ao Terraform](https://github.com/daniel-armbrust/oci-book/blob/main/chapter-2/2-5_Terraform.md) <br>
-    2.6 - Git é o seu amigo <br>
-    2.7 - Modelos de arquitetura (3 camadas, Microsserviços, Cloud Native) <br>
+    2.6 - Docker <br>
+    2.7 - Git é o seu amigo <br>
+    2.8 - Modelos de arquitetura (3 camadas, Microsserviços, Cloud Native) <br>
 
 - Capítulo 3: Aplicação Web #1 - Portal de anuncio de veículos
