@@ -337,10 +337,11 @@ Destroy complete! Resources: 2 destroyed.
 A partir do básico apresentado, iremos partir para um novo exemplo com um pouco mais de detalhes e algumas boas práticas para lidar com vários _[recursos](https://www.terraform.io/docs/language/resources/index.html)_.
 
 ```
-darmbrust@hoodwink:~$ git clone https://github.com/daniel-armbrust/oci-terraform-multiregion.git
-Cloning into 'oci-terraform-multiregion'...
+darmbrust@hoodwink:~$ git clone https://github.com/daniel-armbrust/oci-terraform.git
+Cloning into 'oci-terraform'...
 
-darmbrust@hoodwink:~$ ls -1F oci-terraform-multiregion/
+darmbrust@hoodwink:~$ cd oci-terraform/multiregion/
+darmbrust@hoodwink:~/oci-terraform/multiregion$ ls -1F 
 datasources.tf
 drg.tf
 gru_compute.tf
@@ -358,9 +359,7 @@ variables.tf
 vcp_compute.tf
 vcp_vcn-dr.tf
 
-darmbrust@hoodwink:~$ cd oci-terraform-multiregion/
-
-darmbrust@hoodwink:~/oci-terraform-multiregion$ terraform init
+darmbrust@hoodwink:~/oci-terraform/multiregion$ terraform init
 Initializing modules...
 - gru_dhcp_vcn-dev in modules/networking/dhcp_options
 - gru_dhcp_vcn-hml in modules/networking/dhcp_options
@@ -370,13 +369,15 @@ Initializing modules...
 ...
 ```
 
->_**__NOTA:__** Acesse o repositório que contém os códigos neste [link aqui](https://github.com/daniel-armbrust/oci-terraform-multiregion)_.
+>_**__NOTA:__** Acesse o repositório que contém os códigos neste [link aqui](https://github.com/daniel-armbrust/oci-terraform)_.
 
 ### __Módulo principal (root module)__
 
 Similar a uma _função_ em linguagem de programação tradicional, um _[módulo](https://www.terraform.io/docs/language/modules/index.html)_ é uma maneira de agrupar código relacionado. É usado como um container para múltiplos _[recursos](https://www.terraform.io/docs/language/resources/index.html)_, promovendo abstração e reutilização de código.
 
 O módulo principal ou _root module_ é o ponto de partida. É o diretório de trabalho, onde se executa os comandos _"terraform plan"_ ou _"terraform apply"_. Encare como se fosse a função _"main()"_ de um programa escrito em _[linguagem C](https://pt.wikipedia.org/wiki/C_(linguagem_de_programa%C3%A7%C3%A3o))_ (onde a execução do programa começa). A partir do _root module_ é que chamamos outros módulos _(child modules)_ que ajudam na organização geral e reuso das configurações.
+
+>_**__NOTA:__** É possível que um "módulo filho" (child module) seja composto de outros "módulos filhos" (módulos aninhados)._
 
 Todo módulo, seja o _root module_ ou seus _child modules_, podem receber valores através de _[variáveis](https://www.terraform.io/docs/language/values/variables.html)_. Estas funcionam como _[argumentos do módulo](https://www.terraform.io/docs/language/modules/develop/index.html)_. Você não precisa saber como um módulo funciona para poder usá-lo. Você só precisa saber quais são seus _valores de entrada (inputs)_ e _saída (outputs)_.
 
@@ -390,7 +391,7 @@ Podemos informar _valores de entrada (inputs)_ ao _root module_ através:
 
 ![alt_text](./images/tf-workflow-1-1.jpg  "Terraform Basic Workflow")
 
->_**__NOTA:__** Por questões de boas práticas, a HashiCorp recomenda que existam no mínimo os arquivos main.tf, variables.tf e outputs.tf por diretório de módulo, independente de possuirem conteúdo ou não._
+>_**__NOTA:__** Por questões de boas práticas, a HashiCorp recomenda que existam no mínimo os arquivos main.tf, variables.tf e outputs.tf por diretório de módulo, independente de possuirem conteúdo ou não. Os arquivos versions.tf, providers.tf e README.md, são considerados obrigatórios no root module._  
 
 Eu particularmente gosto de declarar os blocos _"resource"_ dentro de um _child module_. Com isto, o meu _"root module"_, faz "chamadas" ao _child modules_ informando os parâmetros necessários para a construção de determinado recurso.
 
@@ -407,7 +408,7 @@ Apresentei os conceitos básicos sobre módulos para que possamos informar algun
 Transportando os valores para o arquivo, nós temos:
 
 ```terraform
-darmbrust@hoodwink:~/oci-terraform-multiregion$ cat terraform.tfvars
+darmbrust@hoodwink:~/oci-terraform/multiregion$ cat terraform.tfvars
 #
 # terraform.tfvars
 #
@@ -446,7 +447,7 @@ variable "vcn_display_name" {
 No _[Terraform](https://www.terraform.io/)_, dentro de um mesmo módulo, nomes de variáveis devem ser únicos. Caso contrário, teremos um erro:
 
 ```
-darmbrust@hoodwink:~/oci-tf$ terraform validate
+darmbrust@hoodwink:~/oci-terraform/multiregion$ terraform validate
 ╷
 │ Error: Duplicate variable declaration
 │
@@ -481,7 +482,7 @@ Para que o entendimento fique mais claro, vou exibir os arquivos usados no módu
 
 ```terraform
 
-darmbrust@hoodwink:~/oci-terraform-multiregion$ cat modules/networking/vcn/main.tf
+darmbrust@hoodwink:~/oci-terraform/multiregion$ cat modules/networking/vcn/main.tf
 #
 # modules/networking/vcn/main.tf
 # https://registry.terraform.io/providers/hashicorp/oci/latest/docs/resources/core_vcn
@@ -495,7 +496,7 @@ resource "oci_core_vcn" "vcn" {
     is_ipv6enabled = var.is_ipv6enabled
 }
 
-darmbrust@hoodwink:~/oci-terraform-multiregion$ cat modules/networking/vcn/outputs.tf
+darmbrust@hoodwink:~/oci-terraform/multiregion$ cat modules/networking/vcn/outputs.tf
 #
 # modules/networking/vcn/outputs.tf
 # https://registry.terraform.io/providers/hashicorp/oci/latest/docs/resources/core_vcn
@@ -544,7 +545,7 @@ O _"[arquivo de estado (state)](https://www.terraform.io/docs/language/state/ind
 Dois arquivos são criados localmente e que possuem informações sobre o _"estado"_ da sua infraestrutura: 
 
 ```
-darmbrust@hoodwink:~/oci-terraform-multiregion$ ls -1F *tfstate*
+darmbrust@hoodwink:~/oci-terraform/multiregion$ ls -1F *tfstate*
 terraform.tfstate
 terraform.tfstate.backup
 ```
@@ -554,7 +555,7 @@ terraform.tfstate.backup
 Quando executamos _"terraform plan"_, a ferramenta lê os recursos presente no arquivo _"terraform.tfstate"_ e os compara com o sistema remoto. Isto garante que o _"estado"_ do sistema remoto, é igual ao _"estado"_ existente localmente salvo no arquivo _"terraform.tfstate"_. Se um recurso não existe, ele será criado e seu _"estado"_ será salvo. Caso um recurso exista, seu _"estado"_ será comparado com o _"estado"_ que foi salvo localmente. Esta ação pode ser vista abaixo em _"Refreshing state..."_ por recurso:
 
 ```
-darmbrust@hoodwink:~/oci-terraform-multiregion$ terraform plan
+darmbrust@hoodwink:~/oci-terraform/multiregion$ terraform plan
 module.gru_drg.oci_core_drg.drg: Refreshing state... [id=ocid1.drg.oc1.sa-saopaulo-1.aaaaaaaak6l3qvnisbzhzhqmucd63bicdxkooza5vjohrl2mijbg66fv4cma]
 module.gru_vcn-hml.oci_core_vcn.vcn: Refreshing state... [id=ocid1.vcn.oc1.sa-saopaulo-1.amaaaaaa6noke4qaspv45pjalzfzmrdesn5wbcmli25dzcev7jcvlztd7qbq]
 module.gru_vcn-shared.oci_core_vcn.vcn: Refreshing state... [id=ocid1.vcn.oc1.sa-saopaulo-1.amaaaaaa6noke4qa3vzxd2p2r2duasfuhmsdpw6jp7dshimyn52ajo2pfqna]
@@ -569,7 +570,7 @@ O procedimento oficial, passo-a-passo, pode ser consultado _[aqui](https://docs.
 1. Primeiramente vamos criar um _"Customer Secret Keys"_ especificando o um id de usuário válido (--user-id):
 
 ```
-darmbrust@hoodwink:~/oci-terraform-multiregion$ oci iam customer-secret-key create --display-name "terraform-tfstate" --user-id "ocid1.user.oc1..aaaaaaaay..."
+darmbrust@hoodwink:~/oci-terraform/multiregion$ oci iam customer-secret-key create --display-name "terraform-tfstate" --user-id "ocid1.user.oc1..aaaaaaaay..."
 {
   "data": {
     "display-name": "terraform-tfstate",
@@ -587,7 +588,7 @@ darmbrust@hoodwink:~/oci-terraform-multiregion$ oci iam customer-secret-key crea
 2. O _"[remote state](https://www.terraform.io/docs/language/state/remote.html)"_ é configurado através da definição de _[backend](https://www.terraform.io/docs/language/settings/backends/index.html)_ no _[Terraform](https://www.terraform.io/)_. O _[backend S3](https://www.terraform.io/docs/language/settings/backends/s3.html)_ necessita de um arquivo de credênciais compatível. Para isto, criaremos o arquivo abaixo com os valores do _"Customer Secret Keys"_ que foi criado:
 
 ```
-darmbrust@hoodwink:~/oci-terraform-multiregion$ cat ~/.aws/credentials
+darmbrust@hoodwink:~/oci-terraform/multiregion$ cat ~/.aws/credentials
 [default]
 aws_access_key_id=3dd51e72560e61e7fac801ae71e76eaabc1e708
 aws_secret_access_key=VvcCzv/+u0O+vzpCzvpCzvcsjYpCzv9ZANwhpvcv86i8=
@@ -597,13 +598,13 @@ aws_secret_access_key=VvcCzv/+u0O+vzpCzvpCzvcsjYpCzv9ZANwhpvcv86i8=
 será gravado:
 
 ```
-darmbrust@hoodwink:~/oci-terraform-multiregion$ oci os bucket create --name "oci-tf-stfile" --compartment-id "ocid1.tenancy.oc1..aaaaaaaa"
+darmbrust@hoodwink:~/oci-terraform/multiregion$ oci os bucket create --name "oci-tf-stfile" --compartment-id "ocid1.tenancy.oc1..aaaaaaaa"
 ```
 
 4. Vamos obter o valor do _"Object Storage Namespace"_ para formar a URL que fará parte da configuração:
 
 ```
-darmbrust@hoodwink:~/oci-terraform-multiregion$ oci os ns get
+darmbrust@hoodwink:~/oci-terraform/multiregion$ oci os ns get
 {
   "data": "grh5wylcls2u"
 }
@@ -624,7 +625,7 @@ https://grh5wylcls2u.compat.objectstorage.sa-saopaulo-1.oraclecloud.com
 6. Adicionamos as configurações do _[backend S3](https://www.terraform.io/docs/language/settings/backends/s3.html)_ no arquivo _"providers.tf"_:
 
 ```terraform
-darmbrust@hoodwink:~/oci-terraform-multiregion$ cat providers.tf
+darmbrust@hoodwink:~/oci-terraform/multiregion$ cat providers.tf
 #
 # providers.tf
 #
@@ -658,7 +659,7 @@ terraform {
 7. Pronto! Basta inicializar e a partir de agora o _Bucket "oci-tf-stfile"_ será usado para armazenar o arquivo _"terraform.tfstate"_:
 
 ```
-darmbrust@hoodwink:~/oci-terraform-multiregion$ terraform init
+darmbrust@hoodwink:~/oci-terraform/multiregion$ terraform init
 Initializing modules...
 
 Initializing the backend...
