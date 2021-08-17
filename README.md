@@ -25,4 +25,11 @@
     2.7 - Git é o seu amigo <br>
     2.8 - Modelos de arquitetura (3 camadas, Microsserviços, Cloud Native) <br>
 
+- Capítulo 3: Banco de Dados
+    3.1 - Banco de Dados Oracle <br>
+    3.2 - Exadata <br>
+    3.3 - Autonomous DB <br>
+    3.4 - MySQL <br>
+    3.5 - Oracle NoSQL <br>
+
 - Capítulo 3: Aplicação Web #1 - Portal de anuncio de veículos
