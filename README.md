@@ -15,7 +15,7 @@
     1.8 - Resumo dos principais serviços <br>
     1.9 - Entendendo seus limites de Assinatura (Limites de Serviços) <br>
 
-- Capítulo 2: Automação, Arquitetura e DevOps
+- [Capítulo 2: Automação, Arquitetura e DevOps](https://github.com/daniel-armbrust/oci-book/blob/main/chapter-2/README.md) <br>
     2.1 - O surgimento do DevOps <br>
     2.2 - APIs no mundo Cloud <br>
     2.3 - SDK <br>
