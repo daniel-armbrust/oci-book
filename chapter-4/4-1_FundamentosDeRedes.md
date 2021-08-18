@@ -58,9 +58,10 @@ Um dos trabalhos do arquiteto ou engenheiro cloud, é saber utilizar esses recur
 
 Na cloud podemos dizer que tudo é um recurso. Um recurso possui, além de um nome, funcionalidades específicas. Para a maioria dos recursos que você cria, você tem a opção de especificar um nome para exibição. Não há regras, porém vou seguir uma terminologia na qual eu acho útil para identificação dos recursos. Seguindo os recursos do desenho, temos:
 
-- vcn-prd: VCN de produção 10.0.0.0/16 localizada na região de São Paulo.
-- subnprv-db_vcn-prd: Subrede privada 10.0.20.0/24 para banco de dados da VCN de produção.
-- rtb_subnprv-db_vcn-prd: Tabela de roteamento da subrede privada para banco de dados.
-- secl-1_subnprv-db_vcn-prd: Regras de segurança da subrede privada para banco de dados.
-- srgw_vcn-prd: Service Gateway da VCN de produção.
-- mysql_subnprv-db_vcn-prd: Instância MySQL da subrede privada para banco de dados.
+- **vcn-prd**: VCN de produção 10.0.0.0/16 localizada na região de São Paulo. 
+<br><br>
+- **subnprv-db_vcn-prd**: Subrede privada 10.0.20.0/24 para banco de dados da VCN de produção.
+- **rtb_subnprv-db_vcn-prd**: Tabela de roteamento da subrede privada para banco de dados.
+- **secl-1_subnprv-db_vcn-prd**: Regras de segurança da subrede privada para banco de dados.
+- **srgw_vcn-prd**: Service Gateway da VCN de produção.
+- **mysql_subnprv-db_vcn-prd**: Instância MySQL da subrede privada para banco de dados.
