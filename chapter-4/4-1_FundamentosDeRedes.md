@@ -8,7 +8,7 @@ Ao começar a trabalhar com o OCI, uma das primeiras etapas é a configuração 
 
 Descrevo alguns dos componentes existentes no serviço de _[Networking do OCI](https://docs.oracle.com/pt-br/iaas/Content/Network/Concepts/overview.htm)_ abaixo:
 
-**1. VCN (Virtual Cloud Network)**
+1. **VCN (Virtual Cloud Network)**
     - É uma rede virtual privada configurada nos data centers da Oracle e reside em uma única região do OCI.
     - A partir de uma VCN criada e configurada, podemos criar subredes, máquinas virtuais, banco de dados, etc. É o nosso “tapete” para acertarmos os móveis, a mesa, o sofá e a televisão.
     - Para criar uma VCN, você deve escolher um bloco de endereços IPv4 válido. A Oracle recomenda escolher um dos blocos documentados pela _[RFC1918](https://tools.ietf.org/html/rfc1918)_:
@@ -16,7 +16,7 @@ Descrevo alguns dos componentes existentes no serviço de _[Networking do OCI](h
         - 172.16.0.0/12
         - 192.168.0.0/16
 
-**2. SUB-REDES**
+2. **SUB-REDES**
     - É a divisão de uma VCN em partes menores (subdivisões).
     - Cada sub-rede consiste em um intervalo contíguo de endereços IP (para IPv4 e IPv6, se ativado) que não se sobrepõem com outras sub-redes da VCN.    
     - Você pode criar uma subrede em um único _"domínio de disponibilidade"_ ou em uma região (subrede regional).
