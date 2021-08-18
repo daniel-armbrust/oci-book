@@ -8,8 +8,8 @@ Esse livro apresenta o OCI (Oracle Cloud Infraestructure).
 
 - [Capítulo 1: Conceitos e introdução a Computação em Nuvem no OCI](https://github.com/daniel-armbrust/oci-book/blob/main/chapter-1/README.md) <br>
     1.1 - Cloud Computing, Escalabilidade, Elasticidade, Resiliência, Tolerância a Falhas, Computação Distribuída, RPO/RTO, Ambiente de DR <br>
-    [1.2 - Conceitos básicos sobre o OCI](https://github.com/daniel-armbrust/oci-book/blob/main/chapter-1/1.2_ConceitosBasicos.md) <br>
-    [1.3 - Principais recursos da Nuvem (Compute, Network, Storage, IAM, Gateways)](https://github.com/daniel-armbrust/oci-book/blob/main/chapter-1/1.3_PrincipaisRecursos.md) <br>
+    [1.2 - Conceitos básicos sobre o OCI](https://github.com/daniel-armbrust/oci-book/blob/main/chapter-1/1-2_ConceitosBasicos.md) <br>
+    [1.3 - Principais recursos da Nuvem (Compute, Network, Storage, IAM, Gateways)](https://github.com/daniel-armbrust/oci-book/blob/main/chapter-1/1-3_PrincipaisRecursos.md) <br>
     1.4 - Modelos de deployment (IaaS, PaaS, SaaS, FaaS, etc) <br>
     1.5 - Modelos de Cobrança (PAYG, CMMT), Custo, Suporte e SLA <br>
     1.6 - OCI Free Tier + Always Free <br>
@@ -34,4 +34,7 @@ Esse livro apresenta o OCI (Oracle Cloud Infraestructure).
     3.4 - MySQL <br>
     3.5 - Oracle NoSQL <br>
 
-- Capítulo 4: Aplicação Web #1 - Portal de anuncio de veículos
+- [Capítulo 4: Primeira aplicação no OCI](https://github.com/daniel-armbrust/oci-book/blob/main/chapter-4/README.md) <br>
+    [4.1 - Fundamentos de Redes no OCI](https://github.com/daniel-armbrust/oci-book/blob/main/chapter-4/README.md)
+
+- Capítulo 5: Aplicação Web #1 - Portal de anuncio de veículos
