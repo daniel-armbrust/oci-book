@@ -35,6 +35,6 @@ Esse livro apresenta o OCI (Oracle Cloud Infraestructure).
     3.5 - Oracle NoSQL <br>
 
 - [Capítulo 4: Primeira aplicação no OCI](https://github.com/daniel-armbrust/oci-book/blob/main/chapter-4/README.md) <br>
-    [4.1 - Fundamentos de Redes no OCI](https://github.com/daniel-armbrust/oci-book/blob/main/chapter-4/README.md)
+    [4.1 - Fundamentos de Redes no OCI](https://github.com/daniel-armbrust/oci-book/blob/main/chapter-4/4-1_FundamentosDeRedes.md) <br>
 
 - Capítulo 5: Aplicação Web #1 - Portal de anuncio de veículos
