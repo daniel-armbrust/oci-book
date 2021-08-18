@@ -1,6 +1,8 @@
 # OCI Book
 
-## Descrição
+Esse livro apresenta o OCI (Oracle Cloud Infraestructure).
+
+> Autor: **[Daniel Armbrust](https://github.com/daniel-armbrust)**
 
 ## Sumário
 
@@ -32,4 +34,4 @@
     3.4 - MySQL <br>
     3.5 - Oracle NoSQL <br>
 
-- Capítulo 3: Aplicação Web #1 - Portal de anuncio de veículos
+- Capítulo 4: Aplicação Web #1 - Portal de anuncio de veículos
