@@ -18,8 +18,8 @@ Descrevo alguns dos componentes existentes no serviço de _[Networking do OCI](h
 
 2. **SUB-REDES**
     - É a divisão de uma VCN em partes menores (subdivisões).
-    - Cada sub-rede consiste em um intervalo contíguo de endereços IP (para IPv4 e IPv6, se ativado) que não se sobrepõem com outras sub-redes da VCN.    
-    - Você pode criar uma subrede em um único _"domínio de disponibilidade"_ ou em uma região (subrede regional).
+    - Cada subrede consiste em um intervalo contíguo de endereços IP (para IPv4 e IPv6, se ativado) que não se sobrepõem com outras subredes da VCN.    
+    - Você pode criar uma subrede em um único _"domínio de disponibilidade"_ ou em uma região (subrede regional - _modo recomendado_).
     - Recursos criados dentro de uma subrede utilizam a mesma tabela de roteamento, as mesmas listas de segurança (security lists), e mesmas opções de DHCP (dhcp options).
     - Você cria uma subrede como sendo pública ou privada. Uma subrede pública permite expor, através de IP público, um recurso na internet. A subrede privada, não.
 
