@@ -4,9 +4,9 @@
 
 ### __Visão Geral da Rede no OCI__
 
-Uma das primeiras etapas ao começar a implementar seus recursos no OCI, é a configuração da sua rede. o serviço de _[Networking do OCI](https://docs.oracle.com/pt-br/iaas/Content/Network/Concepts/overview.htm)_ disponibiliza versões virtuais dos componentes de rede tradicionais no qual você pode usar para montar sua rede em cloud. Configurar a rede de dados é um pré-requisito para que você possa criar seus recursos.
+Uma das primeiras etapas ao começar a implementar seus recursos no OCI, é a configuração da sua rede. o serviço de _[Networking do OCI](https://docs.oracle.com/pt-br/iaas/Content/Network/Concepts/overview.htm)_ disponibiliza versões virtuais dos componentes de redes tradicionais no qual você pode usar. Configurar a rede de dados é um pré-requisito para que você possa criar seus recursos.
 
-Descrevo alguns dos componentes existentes no serviço de _[Networking do OCI](https://docs.oracle.com/pt-br/iaas/Content/Network/Concepts/overview.htm)_ abaixo:
+Aprensento abaixo, alguns dos componentes existentes do serviço de _[Networking do OCI](https://docs.oracle.com/pt-br/iaas/Content/Network/Concepts/overview.htm)_:
 
 1. **VCN (Virtual Cloud Network)**
     - É uma rede virtual privada configurada nos data centers da Oracle e que reside em uma única região.
@@ -16,7 +16,7 @@ Descrevo alguns dos componentes existentes no serviço de _[Networking do OCI](h
         - 172.16.0.0/12
         - 192.168.0.0/16
 
-2. **SUB-REDES**
+2. **Subredes**
     - É a divisão de uma VCN em partes menores (subdivisões).
     - Cada subrede consiste em um intervalo contíguo de endereços IP (para IPv4 e IPv6, se ativado) que não se sobrepõem com outras subredes da VCN.    
     - Você pode criar uma subrede em um único _"domínio de disponibilidade"_ ou em uma região (subrede regional - _modo recomendado_).
@@ -47,5 +47,20 @@ Descrevo alguns dos componentes existentes no serviço de _[Networking do OCI](h
             - Possibilita conectividade entre VCNs da mesma região. <br><br>
         - **Dynamic Routing Gateway**
             - Possibilita conectividade das suas VCNs com seu ambiente on-premises, através de VPN ou FastConnect (link dedicado). <br><br>
-     
+
+Um dos trabalhos do arquiteto ou engenheiro cloud, é saber utilizar esses recursos para compor sua infraestrutura. Utilizaremos o desenho abaixo como guia do nosso primeiro deploy em OCI:
+
+<br>
+
 ![alt_text](./images/oci_arch1.jpeg  "OCI - Architecture #1")
+
+### __Decompondo o desenho em recursos Cloud__
+
+Na cloud podemos dizer que tudo é um recurso. Um recurso possui, além de um nome, funcionalidades específicas. Para a maioria dos recursos que você cria, você tem a opção de especificar um nome para exibição. Não há regras, porém vou seguir uma terminologia na qual eu acho útil para identificação dos recursos. Seguindo os recursos do desenho, temos:
+
+- vcn-prd: VCN de produção 10.0.0.0/16 localizada na região de São Paulo.
+- subnprv-db_vcn-prd: Subrede privada 10.0.20.0/24 para banco de dados da VCN de produção.
+- rtb_subnprv-db_vcn-prd: Tabela de roteamento da subrede privada para banco de dados.
+- secl-1_subnprv-db_vcn-prd: Regras de segurança da subrede privada para banco de dados.
+- srgw_vcn-prd: Service Gateway da VCN de produção.
+- mysql_subnprv-db_vcn-prd: Instância MySQL da subrede privada para banco de dados.
