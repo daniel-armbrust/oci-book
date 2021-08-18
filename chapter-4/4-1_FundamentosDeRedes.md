@@ -20,7 +20,27 @@ Descrevo alguns dos componentes existentes no serviço de _[Networking do OCI](h
     - É a divisão de uma VCN em partes menores (subdivisões).
     - Cada subrede consiste em um intervalo contíguo de endereços IP (para IPv4 e IPv6, se ativado) que não se sobrepõem com outras subredes da VCN.    
     - Você pode criar uma subrede em um único _"domínio de disponibilidade"_ ou em uma região (subrede regional - _modo recomendado_).
-    - Recursos criados dentro de uma subrede utilizam a mesma tabela de roteamento, as mesmas listas de segurança (security lists), e mesmas opções de DHCP (dhcp options).
+    - Recursos criados dentro de uma subrede utilizam a mesma tabela de roteamento (route table), as mesmas listas de segurança (security lists), e mesmas opções de DHCP (dhcp options).
     - Você cria uma subrede como sendo pública ou privada. Uma subrede pública permite expor, através de IP público, um recurso na internet. A subrede privada, não.
 
+3. **Tabelas de Roteamento (route table)**
+    - Contém regras de roteamento que direcionam o tráfego da subrede “para fora” da VCN.
+    - Subredes dentro da mesma VCN, não precisam de regras de roteamento para se comunicarem.
+    
+4. **Regras de Segurança (security lists)** 
+    - É o firewall da subrede.
+    - É possível bloquear ou liberar o tráfego de rede por protocolos e portas.
+
+5. **Opções de DHCP (dhcp options)**
+    - São configurações informadas pelo protocolo DHCP,a todos os recursos criados dentro de uma subrede. 
+    - É possível definir, por exemplo, quais servidores DNS serão utilizados pelos recursos da subrede.
+
+6. **Gateways de Comunicação**
+    - Existem diferentes _"gateways de comunicação"_ que podem ser usados no OCI. 
+        - **Gateway de Internet (Internet Gateway)**: possibilita comunicação direta vinda da internet. Para isto, é necessário que o recurso tenha um IP público.
+        - **Gateway NAT (NAT Gateway)**: permite que recursos, sem endereço IP público, acessem a internet. Permite comunicação mas evita a exposição do recurso na internet.
+        - **Gateway de Serviço (Service Gateway)**: possibilita que recursos de uma subrede se comuniquem com os serviços do OCI diretamente, sem utilizar a internet.
+        - **Gateway de Pareamento Local (Local Peering Gateway)**: possibilita conectividade entre VCNs da mesma região.
+        - **Gateway de Roteamento Dinâmico (Dynamic Routing Gateway)**: possibilita conectividade das suas VCNs com seu ambiente on-premises, através de VPN ou FastConnect (link dedicado).
+     
 ![alt_text](./images/oci_arch1.jpeg  "OCI - Architecture #1")
