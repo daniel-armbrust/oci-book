@@ -38,10 +38,18 @@ Descrevo alguns dos componentes existentes no serviço de _[Networking do OCI](h
 6. **Gateways de Comunicação**
     - Existem diferentes _"gateways de comunicação"_ que podem ser usados no OCI. Segue resumo: <br>
         - **Gateway de Internet (Internet Gateway)**
-            - possibilita comunicação direta vinda da internet. Para isto, é necessário que o recurso tenha um IP público.
-        - **Gateway NAT (NAT Gateway)**: permite que recursos, sem endereço IP público, acessem a internet. Permite comunicação mas evita a exposição do recurso na internet.
-        - **Gateway de Serviço (Service Gateway)**: possibilita que recursos de uma subrede se comuniquem com os serviços do OCI diretamente, sem utilizar a internet.
-        - **Gateway de Pareamento Local (Local Peering Gateway)**: possibilita conectividade entre VCNs da mesma região.
-        - **Gateway de Roteamento Dinâmico (Dynamic Routing Gateway)**: possibilita conectividade das suas VCNs com seu ambiente on-premises, através de VPN ou FastConnect (link dedicado).
+            - Possibilita comunicação direta vinda da internet. Para isto, é necessário que o recurso tenha um IP público. 
+            
+        - **Gateway NAT (NAT Gateway)**
+            - Permite que recursos, sem endereço IP público, acessem a internet. Permite comunicação mas evita a exposição do recurso na internet.
+            
+        - **Gateway de Serviço (Service Gateway)**
+            - Possibilita que recursos de uma subrede se comuniquem com os serviços do OCI diretamente, sem utilizar a internet.
+            
+        - **Gateway de Pareamento Local (Local Peering Gateway)**
+            - Possibilita conectividade entre VCNs da mesma região.
+            
+        - **Gateway de Roteamento Dinâmico (Dynamic Routing Gateway)**
+            - Possibilita conectividade das suas VCNs com seu ambiente on-premises, através de VPN ou FastConnect (link dedicado).
      
 ![alt_text](./images/oci_arch1.jpeg  "OCI - Architecture #1")
