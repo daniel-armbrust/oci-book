@@ -32,11 +32,11 @@ Descrevo alguns dos componentes existentes no serviço de _[Networking do OCI](h
     - É possível bloquear ou liberar o tráfego de rede por protocolos e portas.
 
 5. **Opções de DHCP (dhcp options)**
-    - São configurações informadas pelo protocolo DHCP,a todos os recursos criados dentro de uma subrede. 
+    - São configurações informadas pelo protocolo DHCP a todos os recursos criados dentro de uma subrede. 
     - É possível definir, por exemplo, quais servidores DNS serão utilizados pelos recursos da subrede.
 
 6. **Gateways de Comunicação**
-    - Existem diferentes _"gateways de comunicação"_ que podem ser usados no OCI. 
+    - Existem diferentes _"gateways de comunicação"_ que podem ser usados no OCI. Segue resumo: <br>
         - **Gateway de Internet (Internet Gateway)**: possibilita comunicação direta vinda da internet. Para isto, é necessário que o recurso tenha um IP público.
         - **Gateway NAT (NAT Gateway)**: permite que recursos, sem endereço IP público, acessem a internet. Permite comunicação mas evita a exposição do recurso na internet.
         - **Gateway de Serviço (Service Gateway)**: possibilita que recursos de uma subrede se comuniquem com os serviços do OCI diretamente, sem utilizar a internet.
