@@ -77,7 +77,9 @@ Seu _[tenancy](https://docs.oracle.com/pt-br/iaas/Content/Identity/Tasks/managin
 
 >_**__NOTA:__** Tecnicamente falando, o **"root compartment"** representa seu [tenancy](https://docs.oracle.com/pt-br/iaas/Content/Identity/Tasks/managingtenancy.htm)._
 
-Abaixo um exemplo:
+Ao começar a trabalhar com o OCI, é importante pensar cuidadosamente sobre a organização dos seus compartimentos. É possível criar tudo embaixo do _root compartment_, porém esta não é uma boa prática.
+
+Abaixo apresento um simples exemplo na divisão dos compartimentos:
 
 ```
 suaEmpresa (root)
