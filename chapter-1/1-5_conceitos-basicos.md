@@ -65,11 +65,11 @@ _[Tenancy](https://docs.oracle.com/pt-br/iaas/Content/Identity/Tasks/managingten
 >_**__NOTA:__** É possível mudar o nome do seu [Tenancy](https://docs.oracle.com/pt-br/iaas/Content/Identity/Tasks/managingtenancy.htm) após a criação da conta. 
 Consulte este [link](https://docs.oracle.com/pt-br/iaas/Content/General/Concepts/renamecloudaccount.htm) para saber como fazer._
 
-Normalmente, uma empresa possui uma única conta cloud para criar e hospedar todos os seus recursos, sejam eles recursos de desenvolvimentos, homologação ou produção. É prudente e seguro, que o time que está desenvolvendo uma aplicação por exemplo, usando os recursos de desenvolvimento, não interfira nos recursos de produção. Ou mesmo que o grupo de pessoas que desenvolve o PROJETO-A, não tenha acesso ao PROJETO-B.
+Normalmente, uma empresa possui uma única conta cloud para criar e hospedar todos os seus recursos, sejam eles recursos de desenvolvimentos, homologação ou produção. É prudente e seguro, que o time que está desenvolvendo uma aplicação por exemplo, usando os recursos de desenvolvimento, não interfira nos recursos de produção. Ou mesmo que o grupo de pessoas que desenvolve o PROJETO-A, não tenha acesso ao PROJETO-B. 
 
 Para realizar este tipo de separação dentro da sua conta, o OCI disponibiliza os chamados _"[compartimentos](https://docs.oracle.com/pt-br/iaas/Content/Identity/Tasks/managingcompartments.htm)"_.
 
-Um _[compartimento](https://docs.oracle.com/pt-br/iaas/Content/Identity/Tasks/managingcompartments.htm)_ pode ser usado para isolar e organizar recursos dentro do mesmo _[tenancy](https://docs.oracle.com/pt-br/iaas/Content/Identity/Tasks/managingtenancy.htm)_. Ele não interfere no funcionamento ou na comunicação entre recursos. Isto significa que uma máquina virtual criada no COMPARTIMENTO-A, não é impedida de "falar" com outra máquina virtual existente no COMPARTIMENTO-B.
+Um _[compartimento](https://docs.oracle.com/pt-br/iaas/Content/Identity/Tasks/managingcompartments.htm)_ pode ser usado para isolar, organizar e controlar o acesso  os recursos dentro do mesmo _[tenancy](https://docs.oracle.com/pt-br/iaas/Content/Identity/Tasks/managingtenancy.htm)_. Ele não interfere no funcionamento ou na comunicação entre recursos. Isto significa que uma máquina virtual criada no COMPARTIMENTO-A, não é impedida de "falar" com outra máquina virtual existente no COMPARTIMENTO-B.
 
 _[Compartimentos](https://docs.oracle.com/pt-br/iaas/Content/Identity/Tasks/managingcompartments.htm)_ são recursos globais. Quando criado, ele se torna presente em todas as regiões no qual seu _[tenancy](https://docs.oracle.com/pt-br/iaas/Content/Identity/Tasks/managingtenancy.htm)_ foi inscrito.
 
@@ -105,3 +105,12 @@ Algumas informações úteis sobre _[compartimentos](https://docs.oracle.com/pt-
 - Quando você trabalha na Web Console, você deve escolher em qual compartimento deseja trabalhar.
 - O OCI também atribuirá ao compartimento um ID exclusivo chamado Oracle Cloud ID (OCID).
 - Depois de criar um novo compartimento, você precisa gravar pelo menos uma política de acesso para ele. Caso contrário, ninguém poderá acessá-lo (exceto administradores ou usuários com permissões definidas no nível do tenancy).
+
+
+### __Oracle Cloud ID (OCID)__
+
+A maioria dos recursos criados no OCI possui um ID exclusivo atribuído pela Oracle chamado _"[OCID (Oracle Cloud Identifier)](https://docs.oracle.com/pt-br/iaas/Content/General/Concepts/identifiers.htm#Resource_Identifiers)"_.
+
+OCID é uma string alfanumérica única por recurso. Esta é usada quando é preciso fazer referência de forma exclusiva. 
+
+>_**__NOTA:__** Quando abrir um ticket no suporte do OCI, você sempre terá que informar o OCID do recurso._
