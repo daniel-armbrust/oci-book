@@ -65,6 +65,20 @@ _[Tenancy](https://docs.oracle.com/pt-br/iaas/Content/Identity/Tasks/managingten
 >_**__NOTA:__** É possível mudar o nome do seu [Tenancy](https://docs.oracle.com/pt-br/iaas/Content/Identity/Tasks/managingtenancy.htm) após a criação da conta. 
 Consulte este [link](https://docs.oracle.com/pt-br/iaas/Content/General/Concepts/renamecloudaccount.htm) para saber como fazer._
 
-Normalmente, uma empresa possui uma única conta cloud para criar e hospedar todos os seus recursos, sejam eles recursos de desenvolvimentos, recursos de homologação ou produção. É prudente e seguro, que o time que está desenvolvendo uma aplicação, usando recursos de desenvolvimento, não interfira nos recursos de produção. Ou mesmo um grupo de pessoas que desenvolve o PROJETO-A, não tenha acesso ao PROJETO-B, mantido por outro grupo de pessoas.
+Normalmente, uma empresa possui uma única conta cloud para criar e hospedar todos os seus recursos, sejam eles recursos de desenvolvimentos, homologação ou produção. É prudente e seguro, que o time que está desenvolvendo uma aplicação, usando os recursos de desenvolvimento, não interfira nos recursos de produção. Ou mesmo que o grupo de pessoas que desenvolve o PROJETO-A, não tenha acesso ao PROJETO-B, por exemplo.
 
-Compartimentos são usados para organizar e isolar seus recursos no OCI.
+Para realizar este tipo de separação dentro da sua conta, o OCI disponibiliza os chamados _"(compartimentos)[https://docs.oracle.com/pt-br/iaas/Content/Identity/Tasks/managingcompartments.htm]"_.
+
+Um _"(compartimento)[https://docs.oracle.com/pt-br/iaas/Content/Identity/Tasks/managingcompartments.htm]"_ pode ser usado para isolar e organizar recursos dentro do mesmo _[tenancy](https://docs.oracle.com/pt-br/iaas/Content/Identity/Tasks/managingtenancy.htm)_. Ele não interferem no funcionamento ou na comunicação dos recursos. 
+
+_"(Compartimentos)[https://docs.oracle.com/pt-br/iaas/Content/Identity/Tasks/managingcompartments.htm]"_ são recursos globais. Quando criado, ele se torna presente em todas as regiões no qual seu _[tenancy](https://docs.oracle.com/pt-br/iaas/Content/Identity/Tasks/managingtenancy.htm)_ foi inscrito.
+
+Seu _[tenancy](https://docs.oracle.com/pt-br/iaas/Content/Identity/Tasks/managingtenancy.htm)_ quando criado, já vem equipado por padrão com o chamado _"root compartment"_. Lembrando que todo recurso criado no OCI, deve obrigatóriamente pertencer a um _"(compartimento)[https://docs.oracle.com/pt-br/iaas/Content/Identity/Tasks/managingcompartments.htm]"_.
+
+>_**__NOTA:__** Tecnicamente falando, o "root compartment" representa seu [tenancy](https://docs.oracle.com/pt-br/iaas/Content/Identity/Tasks/managingtenancy.htm)._
+
+_"(Compartimentos)[https://docs.oracle.com/pt-br/iaas/Content/Identity/Tasks/managingcompartments.htm]"_ 
+
+Isto significa que uma máquina virtual criada no COMPARTIMENTO-A, não é impedida de "falar" com outra máquina virtual existente no COMPARTIMENTO-B. Esta, não é a função dos _"(compartimentos)[https://docs.oracle.com/pt-br/iaas/Content/Identity/Tasks/managingcompartments.htm]"_. 
+
+
