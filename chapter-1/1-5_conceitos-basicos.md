@@ -79,7 +79,7 @@ Seu _[tenancy](https://docs.oracle.com/pt-br/iaas/Content/Identity/Tasks/managin
 
 Ao começar a trabalhar com o OCI, é importante pensar cuidadosamente sobre a organização dos seus _[compartimentos](https://docs.oracle.com/pt-br/iaas/Content/Identity/Tasks/managingcompartments.htm)_. É possível criar tudo embaixo do "_root compartment_", porém esta não é uma boa prática.
 
-Abaixo apresento um simples exemplo na divisão dos compartimentos:
+Abaixo apresento um simples exemplo de uma possível divisão dos compartimentos:
 
 ```
 suaEmpresa (root)
