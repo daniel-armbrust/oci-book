@@ -60,8 +60,21 @@ Na cloud podemos dizer que tudo é um recurso. Um recurso possui, além de um no
 
 - **vcn-prd**: VCN de produção 10.0.0.0/16 localizada na região de São Paulo. 
 <br><br>
+- **subnpub_vcn-prd**: Subrede pública 10.0.5.0/24 da VCN de produção da VCN de produção.
+- **rtb_subnpub_vcn-prd**: Tabela de roteamento da subrede pública da VCN de produção.
+- **secl-1_subnpub_vcn-prd**: Regras de segurança da subrede pública da VCN de produção.
+- **igw_vcn-prd**: Internet Gateway da VCN de produção.
+- **lb_subnpub_vcn-prd**: Load Balancer da subrede pública da VCN de produção.
+<br><br>
+- **subnprv-app_vcn-prd**: Subrede privada 10.0.10.0/24 para aplicação da VCN de produção.
+- **rtb_subnprv-app_vcn-prd**: Tabela de roteamento da subrede privada para aplicação.
+- **secl-1_subnprv-db_vcn-prd**: Regras de segurança da subrede privada para aplicação.
+- **ngw_vcn-prd**: NAT Gateway da VCN de produção.
+- **vm-wordpress_subnprv-app_vcn-prd**: Máquina virtual da aplicação Wordpress.
+- **blk1_vm-wordpress_subnprv-app_vcn-prd**: Bloco de Disco #1 da máquina virtual da aplicação Wordpress.
+<br><br> 
 - **subnprv-db_vcn-prd**: Subrede privada 10.0.20.0/24 para banco de dados da VCN de produção.
 - **rtb_subnprv-db_vcn-prd**: Tabela de roteamento da subrede privada para banco de dados.
 - **secl-1_subnprv-db_vcn-prd**: Regras de segurança da subrede privada para banco de dados.
-- **srgw_vcn-prd**: Service Gateway da VCN de produção.
+- **sgw_vcn-prd**: Service Gateway da VCN de produção.
 - **mysql_subnprv-db_vcn-prd**: Instância MySQL da subrede privada para banco de dados.

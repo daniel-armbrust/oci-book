@@ -1,6 +1,6 @@
 # Capítulo 1: Conceitos e introdução a Computação em Nuvem no OCI
 
-## 1.2 - Conceitos básicos sobre o OCI
+## 1.6 - Conceitos básicos sobre o OCI
 
 ### __Regiões, Domínios de Disponibilidade (AD) e Domínios de Falha (FD)__
 
@@ -55,3 +55,16 @@ Para os exemplos demonstrados no decorrer do livro, utilizaremos as regiões aba
 | Japan East (Tokyo) | ap-tokyo-1 | Tokyo, Japan | NRT | 1
 
 A a lista oficial de todas as regiões disponíveis pode ser visualizada _[neste link](https://docs.oracle.com/pt-br/iaas/Content/General/Concepts/regions.htm#top)_.
+
+### __Tenant e Compartimentos__
+
+Quando você cria uma conta no OCI, é atribuído a você um "espaço", seguro, isolado e criptografado dentro da infraestrutura de nuvem da Oracle. Chamamos este "seu espaço" de _[Tenancy](https://docs.oracle.com/pt-br/iaas/Content/Identity/Tasks/managingtenancy.htm)_.
+
+_[Tenancy](https://docs.oracle.com/pt-br/iaas/Content/Identity/Tasks/managingtenancy.htm)_ é um conceito lógico. Um dos significados da palavra _[Tenancy](https://docs.oracle.com/pt-br/iaas/Content/Identity/Tasks/managingtenancy.htm)_ é "locatário" ou "propriedade arrendada". Isto quer dizer que, ao criar sua conta no OCI, é como se você estivesse "alugando" um "pedaço" da infraestrutura do OCI para o seu próprio uso. Este aluguel existe enquanto você mantém sua conta ativa.
+
+Seu _[Tenancy](https://docs.oracle.com/pt-br/iaas/Content/Identity/Tasks/managingtenancy.htm)_ possui o mesmo nome da sua conta, que foi escolhido no momento da sua subscrição.
+
+>_**__NOTA:__** É possível mudar o nome do seu [Tenancy](https://docs.oracle.com/pt-br/iaas/Content/Identity/Tasks/managingtenancy.htm) após a criação da conta. 
+Consulte este [link](https://docs.oracle.com/pt-br/iaas/Content/General/Concepts/renamecloudaccount.htm) para saber como fazer._
+
+Compartimentos são usados para organizar e isolar seus recursos no OCI.
