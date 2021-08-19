@@ -11,8 +11,8 @@ Esse livro apresenta o OCI (Oracle Cloud Infraestructure).
     1.2 - Modelos de deployment (IaaS, PaaS, SaaS, FaaS, etc) <br>
     1.3 - OCI Free Tier + Always Free <br>
     1.4 - Criando sua conta no OCI <br>
-    1.5 - OCI CLI e Cloud Shell <br>
-    [1.6 - Conceitos básicos sobre o OCI](https://github.com/daniel-armbrust/oci-book/blob/main/chapter-1/1-6_conceitos-basicos.md) <br>
+    [1.5 - Conceitos básicos sobre o OCI](https://github.com/daniel-armbrust/oci-book/blob/main/chapter-1/1-5_conceitos-basicos.md) <br>
+    1.6 - OCI CLI e Cloud Shell <br>    
     [1.7 - Principais serviços e recursos do OCI (Compute, Network, Storage, IAM, Gateways)](https://github.com/daniel-armbrust/oci-book/blob/main/chapter-1/1-7_principais-servicos-recursos.md) <br>    
     1.8 - Modelos de Cobrança (PAYG, CMMT), Custo, Suporte e SLA <br>
     1.9 - Entendendo o Service Limits (Limites de Serviços) <br>
