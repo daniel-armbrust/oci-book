@@ -56,15 +56,15 @@ Para os exemplos demonstrados no decorrer do livro, utilizaremos as regiões aba
 
 A a lista oficial de todas as regiões disponíveis pode ser visualizada _[neste link](https://docs.oracle.com/pt-br/iaas/Content/General/Concepts/regions.htm#top)_.
 
-### __Tenant e Compartimentos__
+### __Tenancy e Compartimentos__
 
 Quando você cria uma conta no OCI, é atribuído a você um "espaço", seguro, isolado e criptografado dentro da infraestrutura de nuvem da Oracle. Chamamos este "seu espaço" de _[Tenancy](https://docs.oracle.com/pt-br/iaas/Content/Identity/Tasks/managingtenancy.htm)_.
 
-_[Tenancy](https://docs.oracle.com/pt-br/iaas/Content/Identity/Tasks/managingtenancy.htm)_ é um conceito lógico. Um dos significados da palavra _[Tenancy](https://docs.oracle.com/pt-br/iaas/Content/Identity/Tasks/managingtenancy.htm)_ é "locatário" ou "propriedade arrendada". Isto quer dizer que, ao criar sua conta no OCI, é como se você estivesse "alugando" um "pedaço" da infraestrutura do OCI para o seu próprio uso. Este aluguel existe enquanto você mantém sua conta ativa.
-
-Seu _[Tenancy](https://docs.oracle.com/pt-br/iaas/Content/Identity/Tasks/managingtenancy.htm)_ possui o mesmo nome da sua conta, que foi escolhido no momento da sua subscrição.
+_[Tenancy](https://docs.oracle.com/pt-br/iaas/Content/Identity/Tasks/managingtenancy.htm)_ é um conceito lógico. Um dos significados da palavra _[Tenancy](https://docs.oracle.com/pt-br/iaas/Content/Identity/Tasks/managingtenancy.htm)_ é "locatário" ou "propriedade arrendada". Isto quer dizer que ao criar sua conta, é como se você estivesse "alugando" uma porção da infraestrutura do OCI para o seu próprio uso. Este aluguel existe enquanto você mantém sua conta ativa.
 
 >_**__NOTA:__** É possível mudar o nome do seu [Tenancy](https://docs.oracle.com/pt-br/iaas/Content/Identity/Tasks/managingtenancy.htm) após a criação da conta. 
 Consulte este [link](https://docs.oracle.com/pt-br/iaas/Content/General/Concepts/renamecloudaccount.htm) para saber como fazer._
+
+Normalmente, uma empresa possui uma única conta cloud para criar e hospedar todos os seus recursos, sejam eles recursos de desenvolvimentos, recursos de homologação ou produção. É prudente e seguro, que o time que está desenvolvendo uma aplicação, usando recursos de desenvolvimento, não interfira nos recursos de produção. Ou mesmo um grupo de pessoas que desenvolve o PROJETO-A, não tenha acesso ao PROJETO-B, mantido por outro grupo de pessoas.
 
 Compartimentos são usados para organizar e isolar seus recursos no OCI.
