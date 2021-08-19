@@ -99,7 +99,7 @@ Algumas informações úteis sobre _[compartimentos](https://docs.oracle.com/pt-
 - Para colocar um novo recurso em um compartimento, você simplesmente especifica esse compartimento ao criar o recurso.
 - A maioria dos recursos pode ser movida entre compartimentos diferentes.
 - Só é possível excluir um compartimento caso ele esteja vazio (sem nenhum recurso criado).
-- Você pode criar subcompartimentos em compartimentos para criar hierarquias com até seis níveis de profundidade.
+- Você pode criar subcompartimentos em compartimentos existes para criar hierarquias com até seis níveis de profundidade.
 - Quando você trabalha na Web Console, escolha em qual compartimento deseja trabalhar.
 - O OCI também atribuirá ao compartimento um ID exclusivo chamado Oracle Cloud ID (OCID).
 - Depois de criar um novo compartimento, você precisa gravar pelo menos uma política de acesso para ele. Caso contrário, ninguém poderá acessá-lo (exceto administradores ou usuários com permissões definidas no nível do tenancy).
