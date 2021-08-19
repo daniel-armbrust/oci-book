@@ -76,3 +76,30 @@ _[Compartimentos](https://docs.oracle.com/pt-br/iaas/Content/Identity/Tasks/mana
 Seu _[tenancy](https://docs.oracle.com/pt-br/iaas/Content/Identity/Tasks/managingtenancy.htm)_ quando criado, já vem equipado por padrão com o chamado **_"root compartment"_**. Este é usado por padrão quando você criar um recurso sem especificar qual seu _[compartimento](https://docs.oracle.com/pt-br/iaas/Content/Identity/Tasks/managingcompartments.htm)_. Lembrando que todo recurso criado no OCI, deve obrigatóriamente pertencer a um _[compartimento](https://docs.oracle.com/pt-br/iaas/Content/Identity/Tasks/managingcompartments.htm)_.
 
 >_**__NOTA:__** Tecnicamente falando, o **"root compartment"** representa seu [tenancy](https://docs.oracle.com/pt-br/iaas/Content/Identity/Tasks/managingtenancy.htm)._
+
+Abaixo um exemplo:
+
+```
+suaEmpresa (root)
+   ├── ProjetoABC                   
+   │     ├── Prod
+   │     ├── Hml
+   │     └── Dev
+   │
+   ├── ProjetoXYZ
+   │     ├── Prod
+   │     ├── Hml
+   │     └── Dev
+   │
+   └── Network
+```
+
+Algumas informações úteis sobre _[compartimentos](https://docs.oracle.com/pt-br/iaas/Content/Identity/Tasks/managingcompartments.htm)_:
+- Ao nomear um compartimento, é permitido no máximo 100 caracteres incluindo letras, números, pontos, hifens e sublinhados.
+- Para colocar um novo recurso em um compartimento, você simplesmente especifica esse compartimento ao criar o recurso.
+- A maioria dos recursos pode ser movida entre compartimentos diferentes.
+- Só é possível excluir um compartimento caso ele esteja vazio (sem nenhum recurso criado).
+- Você pode criar subcompartimentos em compartimentos para criar hierarquias com até seis níveis de profundidade.
+- Quando você trabalha na Web Console, escolha em qual compartimento deseja trabalhar.
+- O OCI também atribuirá ao compartimento um ID exclusivo chamado Oracle Cloud ID (OCID).
+- Depois de criar um novo compartimento, você precisa gravar pelo menos uma política de acesso para ele. Caso contrário, ninguém poderá acessá-lo (exceto administradores ou usuários com permissões definidas no nível do tenancy).
