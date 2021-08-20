@@ -102,12 +102,14 @@ A ideia é termos grupos de usuários, com políticas de autorização, por comp
 | grp-netadm | Usuários administradores das Redes           | cmp-network     |
 | grp-appadm | Usuários administradores das aplicações      | cmp-app         |
 
-Deixando claro que todos os três compartimentos (cmp-database, cmp-network e cmp-app), são "filhos" do compartimento "projeto-wordpress".
+Deixando claro que todos os três compartimentos (cmp-database, cmp-network e cmp-app), são "filhos" do compartimento pai "projeto-wordpress".
 
 ### __Compartimentos__
 
+Primeiramente criaremos o compartimento pai "projeto-wordpress":
+
 ```
-darmbrust@hoodwink:~$ oci iam compartment create --profile meuocibr --region "sa-saopaulo-1" \
+darmbrust@hoodwink:~$ oci iam compartment create --region "sa-saopaulo-1" \
 > --compartment-id ocid1.tenancy.oc1..aaaaaaaavv2qh5asjdcoufmb6fzpnrfqgjxxdzlvjrgkrkytnyyz6zgvjnua \
 > --name "projeto-wordpress" --description "Projeto Wordpress"
 {
@@ -115,7 +117,7 @@ darmbrust@hoodwink:~$ oci iam compartment create --profile meuocibr --region "sa
     "compartment-id": "ocid1.tenancy.oc1..aaaaaaaavv2qh5asjdcoufmb6fzpnrfqgjxxdzlvjrgkrkytnyyz6zgvjnua",
     "defined-tags": {
       "Oracle-Tags": {
-        "CreatedBy": "oracleidentitycloudservice/tispeketro@biyac.com",
+        "CreatedBy": "oracleidentitycloudservice/daniel.armbrust@algumdominio.com",
         "CreatedOn": "2021-08-20T19:08:44.763Z"
       }
     },
@@ -132,8 +134,10 @@ darmbrust@hoodwink:~$ oci iam compartment create --profile meuocibr --region "sa
 }
 ```
 
+Perceba que o pai do compartimento "projeto-wordpress" é o OCID que representa o nosso Tenant. Os próximos que serão criados, são compartimentos filhos do "projeto-wordpress". Para isto, iremos usar o valor contido em "id", que representa o OCID do compartimento "projeto-wordpress" que foi criado, como valor do parâmetro "--compartment-id".
+
 ```
-darmbrust@hoodwink:~$ oci iam compartment create --profile meuocibr --region "sa-saopaulo-1" \
+darmbrust@hoodwink:~$ oci iam compartment create --region "sa-saopaulo-1" \
 > --compartment-id "ocid1.compartment.oc1..aaaaaaaagnkmm5chrzmx6agponivbwohrabrzridbvxpaomwvntlq2qehk5a" \
 > --name "cmp-database" --description "Usuários administradores dos Bancos de Dados"
 {
@@ -141,7 +145,7 @@ darmbrust@hoodwink:~$ oci iam compartment create --profile meuocibr --region "sa
     "compartment-id": "ocid1.compartment.oc1..aaaaaaaagnkmm5chrzmx6agponivbwohrabrzridbvxpaomwvntlq2qehk5a",
     "defined-tags": {
       "Oracle-Tags": {
-        "CreatedBy": "oracleidentitycloudservice/tispeketro@biyac.com",
+        "CreatedBy": "oracleidentitycloudservice/daniel.armbrust@algumdominio.com",
         "CreatedOn": "2021-08-20T19:11:50.186Z"
       }
     },
@@ -155,5 +159,34 @@ darmbrust@hoodwink:~$ oci iam compartment create --profile meuocibr --region "sa
     "time-created": "2021-08-20T19:11:50.303000+00:00"
   },
   "etag": "8e9ee163602cb8b98716c8df27c8a0403a30b938"
+}
+```
+
+Repita o processo para os demais compartimentos que faltaram e teremos nossa estrutura de compartimentos criadas.
+
+>_**__NOTA:__** Compartimentos são recursos globais. Ao se criar um compartimento pelo oci cli, especifique sua **HOME REGION** através da opção **--region**._
+
+### __Grupo e Políticas de Autorização__
+
+```
+darmbrust@hoodwink:~$ oci iam group create --name "grp-dba" --description "Usuários administradores dos Bancos de Dados"
+{
+  "data": {
+    "compartment-id": "ocid1.tenancy.oc1..aaaaaaaavv2qh5asjdcoufmb6fzpnrfqgjxxdzlvjrgkrkytnyyz6zgvjnua",
+    "defined-tags": {
+      "Oracle-Tags": {
+        "CreatedBy": "oracleidentitycloudservice/daniel.armbrust@algumdominio.com",
+        "CreatedOn": "2021-08-20T20:48:05.750Z"
+      }
+    },
+    "description": "Usu\u00e1rios administradores dos Bancos de Dados",
+    "freeform-tags": {},
+    "id": "ocid1.group.oc1..aaaaaaaapqaq4mp2p2yaf5yqut4vcy4i5smhiz22crwim3z363ytvwexk3ta",
+    "inactive-status": null,
+    "lifecycle-state": "ACTIVE",
+    "name": "grp-dba",
+    "time-created": "2021-08-20T20:48:05.810000+00:00"
+  },
+  "etag": "aaa8b6ce8732856f4ca56f901187afda837aebae"
 }
 ```
