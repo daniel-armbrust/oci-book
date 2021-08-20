@@ -82,3 +82,78 @@ Seguindo o desenho, temos:
 - **mysql_subnprv-db_vcn-prd**: Instância MySQL da subrede privada para banco de dados.
 <br><br> 
 - **dhcp_vcn-prd**: DHCP Options da VCN de produção.
+
+Antes de começarmos, vamos criar os respectivos compartimentos abrigar os recursos:
+
+```
+suaEmpresa (root)
+   ├── projeto-wordpress
+   │     ├── cmp-database
+   │     ├── cmp-network
+   │     └── cmp-app
+  ...
+```
+
+A ideia é termos os grupos por compartimentos abaixo:
+
+| Grupo      | Descrição                                    | Compartimento   |
+| ---------- | -------------------------------------------- | --------------- | 
+| grp-dba    | Usuários administradores dos Bancos de Dados | cmp-database    |
+| grp-netadm | Usuários administradores das Redes           | cmp-network     |
+| grp-appadm | Usuários administradores das aplicações      | cmp-app         |
+
+Deixando claro que todos os três compartimentos (cmp-database, cmp-network e cmp-app), são "filhos" do compartimento "projeto-wordpress".
+
+### __Compartimentos__
+
+```
+darmbrust@hoodwink:~$ oci iam compartment create --profile meuocibr --region "sa-saopaulo-1" \
+> --compartment-id ocid1.tenancy.oc1..aaaaaaaavv2qh5asjdcoufmb6fzpnrfqgjxxdzlvjrgkrkytnyyz6zgvjnua \
+> --name "projeto-wordpress" --description "Projeto Wordpress"
+{
+  "data": {
+    "compartment-id": "ocid1.tenancy.oc1..aaaaaaaavv2qh5asjdcoufmb6fzpnrfqgjxxdzlvjrgkrkytnyyz6zgvjnua",
+    "defined-tags": {
+      "Oracle-Tags": {
+        "CreatedBy": "oracleidentitycloudservice/tispeketro@biyac.com",
+        "CreatedOn": "2021-08-20T19:08:44.763Z"
+      }
+    },
+    "description": "Projeto Wordpress",
+    "freeform-tags": {},
+    "id": "ocid1.compartment.oc1..aaaaaaaagnkmm5chrzmx6agponivbwohrabrzridbvxpaomwvntlq2qehk5a",
+    "inactive-status": null,
+    "is-accessible": true,
+    "lifecycle-state": "ACTIVE",
+    "name": "projeto-wordpress",
+    "time-created": "2021-08-20T19:08:44.812000+00:00"
+  },
+  "etag": "316130173d4b2d17074a4731ee8ba79716166ecd"
+}
+```
+
+```
+darmbrust@hoodwink:~$ oci iam compartment create --profile meuocibr --region "sa-saopaulo-1" \
+> --compartment-id "ocid1.compartment.oc1..aaaaaaaagnkmm5chrzmx6agponivbwohrabrzridbvxpaomwvntlq2qehk5a" \
+> --name "cmp-database" --description "Usuários administradores dos Bancos de Dados"
+{
+  "data": {
+    "compartment-id": "ocid1.compartment.oc1..aaaaaaaagnkmm5chrzmx6agponivbwohrabrzridbvxpaomwvntlq2qehk5a",
+    "defined-tags": {
+      "Oracle-Tags": {
+        "CreatedBy": "oracleidentitycloudservice/tispeketro@biyac.com",
+        "CreatedOn": "2021-08-20T19:11:50.186Z"
+      }
+    },
+    "description": "Usu\u00e1rios administradores dos Bancos de Dados",
+    "freeform-tags": {},
+    "id": "ocid1.compartment.oc1..aaaaaaaakehqc6cv7c5my5egzckzhhldw32preke3qzqoeloyy4i3ruiz7jq",
+    "inactive-status": null,
+    "is-accessible": true,
+    "lifecycle-state": "ACTIVE",
+    "name": "cmp-database",
+    "time-created": "2021-08-20T19:11:50.303000+00:00"
+  },
+  "etag": "8e9ee163602cb8b98716c8df27c8a0403a30b938"
+}
+```
