@@ -62,7 +62,7 @@ Seguindo o desenho, temos:
 
 - **vcn-prd**: VCN de produção 10.0.0.0/16 localizada na região de São Paulo. 
 <br><br>
-- **subnpub_vcn-prd**: Subrede pública 10.0.5.0/24 da VCN de produção da VCN de produção.
+- **subnpub_vcn-prd**: Subrede pública 10.0.5.0/24 da VCN de produção.
 - **rtb_subnpub_vcn-prd**: Tabela de roteamento da subrede pública da VCN de produção.
 - **secl-1_subnpub_vcn-prd**: Regras de segurança da subrede pública da VCN de produção.
 - **igw_vcn-prd**: Internet Gateway da VCN de produção.
