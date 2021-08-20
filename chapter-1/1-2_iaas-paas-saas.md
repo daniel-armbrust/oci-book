@@ -1,0 +1,1 @@
+![alt_text](./images/ch1_1-2_4.jpg  "IaaS, PaaS, SaaS")
