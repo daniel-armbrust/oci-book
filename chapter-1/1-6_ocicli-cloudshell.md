@@ -8,7 +8,7 @@ A Computação em Nuvem não existe sem automação! Por conta disto, a Oracle d
 
 O _[OCI CLI](https://docs.oracle.com/pt-br/iaas/Content/API/Concepts/cliconcepts.htm)_ é uma ferramenta de linha de comando que permite você interagir, de um modo mais fácil, com a Oracle Cloud. O _[OCI CLI](https://docs.oracle.com/pt-br/iaas/Content/API/Concepts/cliconcepts.htm)_ fornece mais funcionalidades que a _[Web Console](https://docs.oracle.com/pt-br/iaas/Content/GSG/Tasks/signingin.htm)_.
 
-A referência completa de todos os comandos do OCI CLI pode ser vista _[aqui](https://docs.oracle.com/en-us/iaas/tools/oci-cli/latest/oci_cli_docs/).
+A referência completa de todos os comandos do OCI CLI pode ser vista _[aqui](https://docs.oracle.com/en-us/iaas/tools/oci-cli/latest/oci_cli_docs/)_.
 
 ### __Cloud Shell__
 

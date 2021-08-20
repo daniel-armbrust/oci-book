@@ -164,7 +164,7 @@ darmbrust@hoodwink:~$ oci iam compartment create --region "sa-saopaulo-1" \
 
 Repita o processo para os demais compartimentos que faltaram e teremos nossa estrutura de compartimentos criadas.
 
->_**__NOTA:__** Compartimentos são recursos globais. Ao se criar um compartimento pelo oci cli, especifique sua **HOME REGION** através da opção **--region**._
+>_**__NOTA:__** Recursos que fazem parte do serviço IAM, são globais. Recursos globais devem ser criados na **HOME REGION**. Utilize a opção **--region** para especificar sua **HOME REGION** caso o arquivo de configuração do OCI CLI não faça referência a ela.
 
 ### __Grupo e Políticas de Autorização__
 
