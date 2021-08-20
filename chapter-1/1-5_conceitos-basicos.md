@@ -111,16 +111,18 @@ Algumas informações úteis sobre _[compartimentos](https://docs.oracle.com/pt-
 
 A maioria dos recursos criados no OCI possui um ID exclusivo atribuído pela Oracle chamado _"[OCID (Oracle Cloud Identifier)](https://docs.oracle.com/pt-br/iaas/Content/General/Concepts/identifiers.htm#Resource_Identifiers)"_.
 
-OCID é uma string alfanumérica única por recurso. Esta é usada quando é preciso fazer referência de forma exclusiva a um recurso. 
+_[OCID](https://docs.oracle.com/pt-br/iaas/Content/General/Concepts/identifiers.htm#Resource_Identifiers)_ é uma string alfanumérica única por recurso. Esta é usada quando é preciso fazer referência de forma exclusiva a um recurso que foi criado.
 
- Os OCIDs usam esta sintaxe: 
+ Os [OCIDs](https://docs.oracle.com/pt-br/iaas/Content/General/Concepts/identifiers.htm#Resource_Identifiers) usam esta sintaxe: 
 
 ```
 ocid1.<RESOURCE TYPE>.<REALM>.[REGION][.FUTURE USE].<UNIQUE ID>
 ```
 
+Por exemplo:
+
 ```
 ocid1.instance.oc1.sa-saopaulo-1.antxeljr6noke4qc6gXnyfvzfj43135yh2hpvu5li6n5GF5jgslnldoa
 ```
 
->_**__NOTA:__** Quando abrir um ticket no suporte do OCI, você sempre terá que informar o OCID do recurso._
+>_**__NOTA:__** Quando abrir um ticket no suporte, você sempre terá que informar o OCID do seu tenant e recurso(s) que apresentam problema(s)._
