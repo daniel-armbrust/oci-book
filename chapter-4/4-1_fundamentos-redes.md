@@ -56,7 +56,9 @@ Um dos trabalhos do arquiteto ou engenheiro cloud, é saber utilizar esses recur
 
 ### __Decompondo o desenho em recursos Cloud__
 
-Na cloud podemos dizer que tudo é um recurso. Um recurso possui, além de um nome, funcionalidades específicas. Para a maioria dos recursos que você cria, você tem a opção de especificar um nome para exibição. Não há regras, porém vou seguir uma terminologia na qual eu acho útil para identificação dos recursos. Seguindo os recursos do desenho, temos:
+Na cloud podemos dizer que tudo é um recurso. Um recurso possui, além de um nome, funcionalidades específicas. Para a maioria dos recursos que você cria, você tem a opção de especificar um nome para exibição. Não há regras, porém vou sugerir uma terminologia na qual eu acho útil para identificação. 
+
+Seguindo o desenho, temos:
 
 - **vcn-prd**: VCN de produção 10.0.0.0/16 localizada na região de São Paulo. 
 <br><br>
@@ -78,3 +80,5 @@ Na cloud podemos dizer que tudo é um recurso. Um recurso possui, além de um no
 - **secl-1_subnprv-db_vcn-prd**: Regras de segurança da subrede privada para banco de dados.
 - **sgw_vcn-prd**: Service Gateway da VCN de produção.
 - **mysql_subnprv-db_vcn-prd**: Instância MySQL da subrede privada para banco de dados.
+<br><br> 
+- **dhcp_vcn-prd**: DHCP Options da VCN de produção.
