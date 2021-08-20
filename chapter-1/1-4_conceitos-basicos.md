@@ -1,6 +1,6 @@
 # Capítulo 1: Conceitos e introdução a Computação em Nuvem no OCI
 
-## 1.6 - Conceitos básicos sobre o OCI
+## 1.4 - Conceitos básicos sobre o OCI
 
 ### __Regiões, Domínios de Disponibilidade (AD) e Domínios de Falha (FD)__
 
@@ -60,7 +60,7 @@ A a lista oficial de todas as regiões disponíveis pode ser visualizada _[neste
 
 Quando você cria uma conta no OCI, é atribuído a você um "espaço", seguro, isolado e criptografado dentro da infraestrutura de nuvem da Oracle. Chamamos este "seu espaço" de _[Tenancy](https://docs.oracle.com/pt-br/iaas/Content/Identity/Tasks/managingtenancy.htm)_.
 
-_[Tenancy](https://docs.oracle.com/pt-br/iaas/Content/Identity/Tasks/managingtenancy.htm)_ é um conceito lógico. Um dos significados da palavra _[Tenancy](https://docs.oracle.com/pt-br/iaas/Content/Identity/Tasks/managingtenancy.htm)_ é "locatário" ou "propriedade arrendada". Isto quer dizer que ao criar sua conta, é como se você estivesse "alugando" uma porção da infraestrutura do OCI para o seu próprio uso. Este aluguel existe enquanto você mantém sua conta ativa.
+_[Tenancy](https://docs.oracle.com/pt-br/iaas/Content/Identity/Tasks/managingtenancy.htm)_ é um conceito lógico. Um dos significados da palavra _[Tenancy](https://docs.oracle.com/pt-br/iaas/Content/Identity/Tasks/managingtenancy.htm)_ é "locatário" ou "propriedade arrendada". Isto quer dizer que ao criar sua conta, é como se você estivesse "alugando" uma porção da infraestrutura do OCI para o seu próprio uso. Lembrando que _cloud computing_, por definição é _[Multitenancy](https://en.wikipedia.org/wiki/Multitenancy)_. Isto significa que há diferentes usuários (cloud account) que "alugam" porções da infraestrutura do OCI para uso próprio. Estas são isoladas uma das outras.
 
 >_**__NOTA:__** É possível mudar o nome do seu [Tenancy](https://docs.oracle.com/pt-br/iaas/Content/Identity/Tasks/managingtenancy.htm) após a criação da conta. 
 Consulte este [link](https://docs.oracle.com/pt-br/iaas/Content/General/Concepts/renamecloudaccount.htm) para saber como fazer._
@@ -126,3 +126,8 @@ ocid1.instance.oc1.sa-saopaulo-1.antxeljr6noke4qc6gXnyfvzfj43135yh2hpvu5li6n5GF5
 ```
 
 >_**__NOTA:__** Quando abrir um ticket no suporte, você sempre terá que informar o OCID do seu tenant e recurso(s) que apresentam problema(s)._
+
+
+### __OCI Status__
+
+[OCI Status](https://ocistatus.oraclecloud.com/)

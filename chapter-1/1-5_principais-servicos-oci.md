@@ -1,6 +1,6 @@
 # Capítulo 1: Conceitos e introdução a Computação em Nuvem no OCI
 
-## 1.3 - Principais recursos da Nuvem (Compute, Network, Storage, IAM, Gateways)
+## 1.6 - Introdução aos principais serviços do OCI
 
 ### __Principais Recursos__
 
