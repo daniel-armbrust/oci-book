@@ -6,8 +6,8 @@ Esse livro apresenta o OCI (Oracle Cloud Infraestructure).
 
 ## Sumário
 
-- [Capítulo 1: Conceitos e introdução a Computação em Nuvem no OCI](https://github.com/daniel-armbrust/oci-book/blob/main/chapter-1/README.md) <br>
-    1.1 - Cloud Computing, Escalabilidade, Elasticidade, Resiliência, Tolerância a Falhas, Computação Distribuída, RPO/RTO, Ambiente de DR <br>
+- [Capítulo 1: Conceitos e introdução a Computação em Nuvem no OCI](https://github.com/daniel-armbrust/oci-book/blob/main/chapter-1/README.md) 
+    1.1 - Cloud Computing, Escalabilidade, Elasticidade, Resiliência, Tolerância a Falhas, Computação Distribuída, RPO/RTO, Ambiente de DR
     1.2 - Modelos de deployment (IaaS, PaaS, SaaS, FaaS, etc) <br>
     1.3 - Criando sua conta no OCI <br>    
     [1.4 - Conceitos básicos sobre o OCI](https://github.com/daniel-armbrust/oci-book/blob/main/chapter-1/1-4_conceitos-basicos.md) <br>
