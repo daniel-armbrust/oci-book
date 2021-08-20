@@ -48,7 +48,7 @@ Aprensento abaixo, alguns dos componentes existentes do serviço de _[Networking
         - **Dynamic Routing Gateway**
             - Possibilita conectividade das suas VCNs com seu ambiente on-premises, através de VPN ou FastConnect (link dedicado). <br><br>
 
-Um dos trabalhos do arquiteto ou engenheiro cloud, é saber utilizar esses recursos para compor sua infraestrutura. Utilizaremos o desenho abaixo como guia do nosso primeiro deploy em OCI:
+Um dos trabalhos do arquiteto ou engenheiro cloud, é saber utilizar esses recursos para compor sua infraestrutura. Utilizaremos o desenho abaixo como guia do nosso primeiro deploy no OCI:
 
 <br>
 
@@ -83,7 +83,7 @@ Seguindo o desenho, temos:
 <br><br> 
 - **dhcp_vcn-prd**: DHCP Options da VCN de produção.
 
-Antes de começarmos, vamos criar os respectivos compartimentos abrigar os recursos:
+Antes de começarmos, vamos criar os respectivos compartimentos para abrigar os recursos que iremos criar também:
 
 ```
 suaEmpresa (root)
@@ -94,7 +94,7 @@ suaEmpresa (root)
   ...
 ```
 
-A ideia é termos os grupos por compartimentos abaixo:
+A ideia é termos grupos de usuários, com políticas de autorização, por compartimento:
 
 | Grupo      | Descrição                                    | Compartimento   |
 | ---------- | -------------------------------------------- | --------------- | 
