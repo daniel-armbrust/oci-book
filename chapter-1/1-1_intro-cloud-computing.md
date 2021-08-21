@@ -4,7 +4,7 @@
 
 ### __Introdução__
 
-Antigamente, implantávamos sistemas (deploy) ou em máquinas pequenas, ou em máquinas onde abrigavam vários diferentes sites. Este única máquina é o gargalo (problema). Você nunca sabe se esta máquina aguenta uma carga maior de acessos. E caso ela de fato não aguente, você não tem para onde ir.
+Antigamente, implantávamos sistemas (deploy) ou em máquinas pequenas, ou em máquinas onde abrigavam vários diferentes sites. Esta única máquina é o gargalo (problema). Você nunca sabe se esta máquina aguenta uma carga maior de acessos. E caso ela de fato não aguente, você não tem para onde ir.
 
 A partir deste tipo de problema, surgiram algumas soluções dentro de um mundo que conhecemos hoje como sendo chamado de "Cloud Computing" (Computação em Nuvem ou computação nas nuvens). Neste mundo, eu não estou restrito a uma única máquina. Minha aplicação está dentro de uma "máquina virtual", que está dentro de uma infraestrutura virtual, na qual eu consigo replicar (clones) quantas máquinas eu quiser, na demanda que eu necessitar (em tempo real pelo acesso crescente). Neste modelo, eu não preciso ligar para um time de suporte, para solicitar uma nova máquina e esta estar disponível somente 48 horas depois.
 
