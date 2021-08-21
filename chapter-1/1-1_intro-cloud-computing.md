@@ -12,4 +12,6 @@ No mundo cloud, há flexibilidade. Basicamente, eu posso desenvolver o meu softw
 
 - Concluíndo: _"O mundo cloud foi feito para um momento de demanda imprevísivel."_
 
-Algumas novas linguagens de programação, como o ruby on rails, foi criado em um mundo de startups que é diferente do mundo coorporativo, onde há o desenvolvimento de sistemas internos ou aqueles que ninguém vê. A comunidade de startups tem exigências para a web que incluem escalabilidade, usabilidade, desempenho para criar bons produtos e atrair mais pessoas. Foi criado todo um ferramental, um conjunto de boas práticas, um ciclo de vida de desenvolvimento completamente inspirado no mundo ágil que garante um tipo de software no qual possui "código evolutivo".
+A computação em nuvem possibilitou desenvolver novos produtos, que consequentemente deu espaço as Startups. 
+
+Diferente do mundo coorporativo, onde há o desenvolvimento de sistemas internos ou aqueles que ninguém vê, startups tem exigências para a web que incluem escalabilidade, usabilidade, desenvolvimento ágil, ferramental adequado e desempenho para criar bons produtos e atrair mais pessoas.
