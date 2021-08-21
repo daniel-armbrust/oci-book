@@ -1,6 +1,6 @@
 # Capítulo 1: Conceitos e introdução a Computação em Nuvem no OCI
 
-## 1.4 - Conceitos básicos sobre o OCI
+## 1.5 - Conceitos básicos sobre o OCI
 
 ### __Regiões, Domínios de Disponibilidade (AD) e Domínios de Falha (FD)__
 
