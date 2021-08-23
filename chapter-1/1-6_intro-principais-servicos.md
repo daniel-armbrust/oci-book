@@ -30,6 +30,51 @@ O serviço _[IAM](https://docs.oracle.com/pt-br/iaas/Content/Identity/Concepts/o
 
 >_**__NOTA:__** Recomendamos que você não use as credenciais do usuário administrador para acesso diário. Recomendamos também que você não compartilhe suas credenciais do usuário administrador com outras pessoas, pois isso oferece a eles acesso irrestrito ao seu [tenancy](https://docs.oracle.com/pt-br/iaas/Content/Identity/Tasks/managingtenancy.htm)._
 
+Utilize o comando abaixo para se criar um usuário:
+
+```
+darmbrust@hoodwink:~$ oci iam user create \
+> --name "maria@algumdominio.com.br" \
+> --email "maria@algumdominio.com.br" \
+> --description "Maria das Flores"
+{
+  "data": {
+    "capabilities": {
+      "can-use-api-keys": true,
+      "can-use-auth-tokens": true,
+      "can-use-console-password": true,
+      "can-use-customer-secret-keys": true,
+      "can-use-o-auth2-client-credentials": true,
+      "can-use-smtp-credentials": true
+    },
+    "compartment-id": "ocid1.tenancy.oc1..aaaaaaaavv2qh5asjdcoufmb6fzpnrfqgjxxdzlvjrgkrkytnyyz6zgvjnua",
+    "defined-tags": {
+      "Oracle-Tags": {
+        "CreatedBy": "oracleidentitycloudservice/daniel.armbrust@algumdominio.com",
+        "CreatedOn": "2021-08-23T18:21:55.256Z"
+      }
+    },
+    "description": "Maria das Flores",
+    "email": "maria@algumdominio.com.br",
+    "email-verified": false,
+    "external-identifier": null,
+    "freeform-tags": {},
+    "id": "ocid1.user.oc1..aaaaaaaayjsgfcwmjknz4m5wzxzn3kezqcp4zmaaxp4hvyqdbsfyqtdras4q",
+    "identity-provider-id": null,
+    "inactive-status": null,
+    "is-mfa-activated": false,
+    "last-successful-login-time": null,
+    "lifecycle-state": "ACTIVE",
+    "name": "maria@algumdominio.com.br",
+    "previous-successful-login-time": null,
+    "time-created": "2021-08-23T18:21:55.363000+00:00"
+  },
+  "etag": "123f2d72e088e0d138f571b56be4d5e40a062088"
+}
+```
+
+Perceba que também foi utilizado o e-mail como valor do _login_ do usuário.
+
 Um **grupo** é um meio de se organizar usuários que terão permissões em comum no seu _[tenancy](https://docs.oracle.com/pt-br/iaas/Content/Identity/Tasks/managingtenancy.htm)_. Quando se cria um novo grupo, você deve fornecer um nome exclusivo e inalterável. Este nasce sem nenhuma permissão até que você defina uma política (policy), que dá determinado acesso aos usuários membros do grupo. Lembrando que um usuário pode ser membro de diferentes grupos.
 
 Para se criar um grupo, usamos o comando abaixo:
