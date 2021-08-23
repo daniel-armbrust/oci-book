@@ -70,7 +70,7 @@ darmbrust@hoodwink:~$ oci iam user create --name "mflores" --email "maria@algumd
 }
 ```
 
-Um **grupo** é um meio de se organizar usuários que terão permissões em comum no seu _[tenancy](https://docs.oracle.com/pt-br/iaas/Content/Identity/Tasks/managingtenancy.htm)_. Quando se cria um novo grupo, você deve fornecer um nome exclusivo e inalterável. Este nasce sem nenhuma permissão até que você defina uma política (policy), que dá determinado acesso aos usuários membros do grupo. Lembrando que um usuário pode ser membro de diferentes grupos.
+Um **grupo** é um meio de se organizar usuários que terão permissões em comum. Quando se cria um novo grupo, você deve fornecer um nome exclusivo e inalterável. Este nasce sem nenhuma permissão até que você defina uma política (policy), que dá determinado acesso aos usuários membros do grupo. Lembrando que um usuário pode ser membro de diferentes grupos.
 
 Para se criar um grupo, usamos o comando abaixo:
 
@@ -97,7 +97,7 @@ darmbrust@hoodwink:~$ oci iam group create --name "grp-netadm" --description "Us
 }
 ```
 
-Perceba que todo grupo, igual a todos os outros recursos, possui também um OCID exclusivo:
+Igual a todos os outros recursos, um grupo também possui um OCID exclusivo:
 
 ```
 darmbrust@hoodwink:~$ oci iam group list --query 'data[].[name, id]'
