@@ -33,10 +33,7 @@ O serviço _[IAM](https://docs.oracle.com/pt-br/iaas/Content/Identity/Concepts/o
 Utilize o comando abaixo para se criar um usuário:
 
 ```
-darmbrust@hoodwink:~$ oci iam user create \
-> --name "maria@algumdominio.com.br" \
-> --email "maria@algumdominio.com.br" \
-> --description "Maria das Flores"
+darmbrust@hoodwink:~$ oci iam user create --name "mflores" --email "maria@algumdominio.com.br" --description "Maria das Flores"    
 {
   "data": {
     "capabilities": {
@@ -51,7 +48,7 @@ darmbrust@hoodwink:~$ oci iam user create \
     "defined-tags": {
       "Oracle-Tags": {
         "CreatedBy": "oracleidentitycloudservice/daniel.armbrust@algumdominio.com",
-        "CreatedOn": "2021-08-23T18:21:55.256Z"
+        "CreatedOn": "2021-08-23T18:29:11.203Z"
       }
     },
     "description": "Maria das Flores",
@@ -59,21 +56,19 @@ darmbrust@hoodwink:~$ oci iam user create \
     "email-verified": false,
     "external-identifier": null,
     "freeform-tags": {},
-    "id": "ocid1.user.oc1..aaaaaaaayjsgfcwmjknz4m5wzxzn3kezqcp4zmaaxp4hvyqdbsfyqtdras4q",
+    "id": "ocid1.user.oc1..aaaaaaaagpov2dclzaxb4hoyapkwnwsdcymlvsl3fgrjuhdzka34kd4fmxbq",
     "identity-provider-id": null,
     "inactive-status": null,
     "is-mfa-activated": false,
     "last-successful-login-time": null,
     "lifecycle-state": "ACTIVE",
-    "name": "maria@algumdominio.com.br",
+    "name": "mflores",
     "previous-successful-login-time": null,
-    "time-created": "2021-08-23T18:21:55.363000+00:00"
+    "time-created": "2021-08-23T18:29:11.340000+00:00"
   },
-  "etag": "123f2d72e088e0d138f571b56be4d5e40a062088"
+  "etag": "b2efa082d75f6a8be5b445f96259f1c3638688ba"
 }
 ```
-
-Perceba que também foi utilizado o e-mail como valor do _login_ do usuário.
 
 Um **grupo** é um meio de se organizar usuários que terão permissões em comum no seu _[tenancy](https://docs.oracle.com/pt-br/iaas/Content/Identity/Tasks/managingtenancy.htm)_. Quando se cria um novo grupo, você deve fornecer um nome exclusivo e inalterável. Este nasce sem nenhuma permissão até que você defina uma política (policy), que dá determinado acesso aos usuários membros do grupo. Lembrando que um usuário pode ser membro de diferentes grupos.
 
