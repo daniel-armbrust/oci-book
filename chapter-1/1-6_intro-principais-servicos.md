@@ -157,3 +157,7 @@ darmbrust@hoodwink:~$ oci iam group add-user \
   "etag": "8ca8b8d7addd78c6fbcfc8c647d61680dde14138"
 }
 ```
+
+#### __OCI Web Console__
+
+![alt_text](./images/ch1-6_cloud-login-tenant-name.jpg  "Cloud Login - Tenant Name")
