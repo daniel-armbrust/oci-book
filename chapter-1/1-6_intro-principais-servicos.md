@@ -138,7 +138,7 @@ darmbrust@hoodwink:~$ oci iam group list --query 'data[].[name, id]'
 ]
 ```
 
-Adicionamos um usuário em um grupo através dos seus respectivos OCID:
+Adicionamos um usuário em um grupo, através dos respectivos OCID:
 
 ```
 darmbrust@hoodwink:~$ oci iam group add-user \
