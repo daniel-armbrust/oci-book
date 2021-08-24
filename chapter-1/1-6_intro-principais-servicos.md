@@ -132,8 +132,28 @@ darmbrust@hoodwink:~$ oci iam group list --query 'data[].[name, id]'
     "ocid1.group.oc1..aaaaaaaazhxisz5ho2c3scyxnn4ezvs3gmowq7uuxqekpd65lwpykywzwm4q"
   ],
   [
-    "grp-dba",
-    "ocid1.group.oc1..aaaaaaaapqaq4mp2p2yaf5yqut4vcy4i5smhiz22crwim3z363ytvwexk3ta"
+    "grp-netadm",
+    "ocid1.group.oc1..aaaaaaaatafagegoyy56srtflrknuxzmzmhfgzfyclrbh7ozderdo4z52gda"
   ]
 ]
+```
+
+Adicionamos um usuário em um grupo através dos seus respectivos OCID:
+
+```
+darmbrust@hoodwink:~$ oci iam group add-user \
+> --user-id "ocid1.user.oc1..aaaaaaaagpov2dclzaxb4hoyapkwnwsdcymlvsl3fgrjuhdzka34kd4fmxbq" \
+> --group-id "ocid1.group.oc1..aaaaaaaatafagegoyy56srtflrknuxzmzmhfgzfyclrbh7ozderdo4z52gda"
+{
+  "data": {
+    "compartment-id": "ocid1.tenancy.oc1..aaaaaaaavv2qh5asjdcoufmb6fzpnrfqgjxxdzlvjrgkrkytnyyz6zgvjnua",
+    "group-id": "ocid1.group.oc1..aaaaaaaatafagegoyy56srtflrknuxzmzmhfgzfyclrbh7ozderdo4z52gda",
+    "id": "ocid1.groupmembership.oc1..aaaaaaaamdmqcstqymhuqgc54n2gbjkeq5mj27c3ipagcujmi3jlcyr7znoa",
+    "inactive-status": null,
+    "lifecycle-state": "ACTIVE",
+    "time-created": "2021-08-24T11:22:52.617000+00:00",
+    "user-id": "ocid1.user.oc1..aaaaaaaagpov2dclzaxb4hoyapkwnwsdcymlvsl3fgrjuhdzka34kd4fmxbq"
+  },
+  "etag": "8ca8b8d7addd78c6fbcfc8c647d61680dde14138"
+}
 ```
