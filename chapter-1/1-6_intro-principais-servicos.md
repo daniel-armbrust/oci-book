@@ -26,7 +26,7 @@ Um novo _[Tenant](https://docs.oracle.com/pt-br/iaas/Content/Identity/Tasks/mana
 
 Um **usuário** é um indivíduo da sua organização que precisa gerenciar ou usar os recursos do seu _[Tenant](https://docs.oracle.com/pt-br/iaas/Content/Identity/Tasks/managingtenancy.htm)_. Um usuário não precisa ser uma pessoa. Ele também pode representar uma aplicação.
 
-O serviço _[IAM](https://docs.oracle.com/pt-br/iaas/Content/Identity/Concepts/overview.htm)_ utiliza a combinação _"nome do usuário" (username)_ e _"senha"_ para autenticação. Uma _"senha"_ pode ser uma combinação de caracteres alfanuméricos ou ser representado através de _"[chaves de acesso](https://docs.oracle.com/pt-br/iaas/Content/Identity/Concepts/usercredentials.htm)"_ (método normalmente usado por aplicações).
+O serviço _[IAM](https://docs.oracle.com/pt-br/iaas/Content/Identity/Concepts/overview.htm)_ utiliza a combinação _"nome do usuário" (username)_ e _"senha"_ para autenticação. Uma _"senha"_ pode ser uma combinação de caracteres alfanuméricos ou ser representado através de uma _"[chave de acesso](https://docs.oracle.com/pt-br/iaas/Content/Identity/Concepts/usercredentials.htm)"_ (método normalmente usado por aplicações).
 
 >_**__NOTA:__** Recomendamos que você não use as credenciais do usuário administrador para acesso diário. Recomendamos também que você não compartilhe suas credenciais do usuário administrador com outras pessoas, pois isso oferece a eles acesso irrestrito ao seu [tenancy](https://docs.oracle.com/pt-br/iaas/Content/Identity/Tasks/managingtenancy.htm)._
 
@@ -69,6 +69,31 @@ darmbrust@hoodwink:~$ oci iam user create --name "mflores" --email "maria@algumd
   "etag": "b2efa082d75f6a8be5b445f96259f1c3638688ba"
 }
 ```
+
+Agora, é preciso definir uma senha de acesso. Primeiramente, iremos obter o OCID no qual representa o usuário "mflores" para então definir a nova senha:
+
+```
+darmbrust@hoodwink:~$ oci iam user list --query "data[?name=='mflores'].id"
+[
+  "ocid1.user.oc1..aaaaaaaagpov2dclzaxb4hoyapkwnwsdcymlvsl3fgrjuhdzka34kd4fmxbq"
+]
+```
+
+```
+darmbrust@hoodwink:~$ oci iam user ui-password create-or-reset --user-id ocid1.user.oc1..aaaaaaaagpov2dclzaxb4hoyapkwnwsdcymlvsl3fgrjuhdzka34kd4fmxbq
+{
+  "data": {
+    "inactive-status": null,
+    "lifecycle-state": "ACTIVE",
+    "password": "MxmB5<EAkFKCiy9k[9zA",
+    "time-created": "2021-08-24T10:40:49.628000+00:00",
+    "user-id": "ocid1.user.oc1..aaaaaaaagpov2dclzaxb4hoyapkwnwsdcymlvsl3fgrjuhdzka34kd4fmxbq"
+  },
+  "etag": "05bd43fc36fae50a0f32d808854efe53c5103b78"
+}
+```
+
+>_**__NOTA:__** Para saber mais detalhes sobre os filtros em documentos JSON, consulte este link [aqui](https://jmespath.org/)_. 
 
 Um **grupo** é um meio de se organizar usuários que terão permissões em comum. Quando se cria um novo grupo, você deve fornecer um nome exclusivo e inalterável. Este nasce sem nenhuma permissão até que você defina uma política (policy), que dá determinado acesso aos usuários membros do grupo. Lembrando que um usuário pode ser membro de diferentes grupos.
 
