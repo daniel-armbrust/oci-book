@@ -30,7 +30,7 @@ O serviço _[IAM](https://docs.oracle.com/pt-br/iaas/Content/Identity/Concepts/o
 
 >_**__NOTA:__** Recomendamos que você não use as credenciais do usuário administrador para acesso diário. Recomendamos também que você não compartilhe suas credenciais do usuário administrador com outras pessoas, pois isso oferece a eles acesso irrestrito ao seu [tenancy](https://docs.oracle.com/pt-br/iaas/Content/Identity/Tasks/managingtenancy.htm)._
 
-Utilize o comando abaixo para se criar um usuário:
+Utilize o comando abaixo para se criar um novo usuário:
 
 ```
 darmbrust@hoodwink:~$ oci iam user create --name "mflores" --email "maria@algumdominio.com.br" --description "Maria das Flores"    
