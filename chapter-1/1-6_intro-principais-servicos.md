@@ -160,6 +160,8 @@ darmbrust@hoodwink:~$ oci iam group add-user \
 
 #### __OCI Web Console__
 
+<br>
+
 ![alt_text](./images/ch1-6_cloud-login-tenant-name.jpg  "Cloud Login - Tenant Name")
 
 <br>
