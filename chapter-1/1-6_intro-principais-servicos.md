@@ -6,7 +6,7 @@
 
 https://www.oracle.com/cloud/data-regions/
 
-### __IAM (Identity and Access Management)__
+### __Serviço IAM (Identity and Access Management)__
 
 A principal função do serviço _[IAM](https://docs.oracle.com/pt-br/iaas/Content/Identity/Concepts/overview.htm)_ é a _Gestão de Identidades e Acessos_. 
 
@@ -160,6 +160,10 @@ darmbrust@hoodwink:~$ oci iam group add-user \
 
 #### __OCI Web Console__
 
+Uma das maneiras mais simples de lidar com os recursos do OCI é através da _[Web Console](https://docs.oracle.com/pt-br/iaas/Content/GSG/Tasks/signingin.htm#Signing_In_to_the_Console)_.
+
+Acesse a _Web Console_ através da url _[https://cloud.oracle.com](https://cloud.oracle.com,)_ e insira as credências conforme o exemplo abaixo:
+
 <br>
 
 ![alt_text](./images/ch1-6_cloud-login-tenant-name.jpg  "Cloud Login - Tenant Name")
@@ -167,3 +171,19 @@ darmbrust@hoodwink:~$ oci iam group add-user \
 <br>
 
 ![alt_text](./images/ch1-6_cloud-login-userpass.jpg  "Cloud Login - Username and Password")
+
+<br>
+
+A _Web Console_, como dito, é a maneira mais simples e rápida de lidar com seus recursos cloud. Porém, nem sempre é a mais eficiente. Você verá que quanto mais recursos existir, mais difícil fica, lidar com a administração direta deles somente pela _Web Console_.
+
+#### __Políticas de Autorização (Policy)__
+
+Já sabemos que não é uma boa prática, por exemplo, ter vários usuários membros do grupo **_Administrators_**, ou criar recursos diretamente no **_root compartment_**. A boa prática, é ter um pequeno número de usuários administradores (o recomendado é que só exista um), e que esses administradores concedam o mínimo de acesso necessário, para os demais usuários do seu _[tenancy](https://docs.oracle.com/pt-br/iaas/Content/Identity/Tasks/managingtenancy.htm)_.
+
+As **_Políticas de Autorização_**, ou simplesmente **_Policy (política)_**, é um documento que especifica quem e de que forma, o indivíduo ou aplicação, podem acessar os recursos do seu _[tenancy](https://docs.oracle.com/pt-br/iaas/Content/Identity/Tasks/managingtenancy.htm)_. Uma **_política_** simplesmente permite que um **_grupo de usuários_**, tenha acesso em tipos específicos de recursos, em um compartimento específico.
+
+Um usuário administrador ou administrador do Serviço IAM, desempenha as seguintes atividades:
+1. Definir novos usuários e grupos.
+1. Criar compartimentos específicos para armazenar os recursos.
+1. Escrever as políticas de autorização que permitam os usuários ou grupos, gerenciar os recursos em compartimentos específicos. 
+ 
