@@ -187,3 +187,20 @@ Um usuário administrador ou administrador do Serviço IAM, desempenha as seguin
 2. Criar compartimentos específicos para armazenar os recursos.
 3. Escrever as políticas de autorização que permitam os usuários ou grupos, gerenciar os recursos em compartimentos específicos. 
  
+Uma política possui a seguinte sintaxe:
+
+```
+Allow <subject> to <verb> <resource-type> in <location> where <conditions>
+```
+
+- **subject**
+    - Pode ser um ou mais grupos, ou o valor **any-user** que corresponde todos os usuários do seu  _[tenancy](https://docs.oracle.com/pt-br/iaas/Content/Identity/Tasks/managingtenancy.htm)_.
+    - Um grupo pode ser especificado através do seu nome ou OCID.
+
+- **verb**    
+    - Verbos dizem respeito as ações (operações de API) sobre um recurso. Um verbo especifica um determinado tipo de acesso.
+    - Do menor privilégio ao maior, os verbos podem ser: **inspect**, **read**, **use** e **manage**.
+    - 
+
+>_**__NOTA:__** Para maiores detalhes sobre a sintaxe das políticas, consulte a documentação oficial **[aqui](https://docs.oracle.com/pt-br/iaas/Content/Identity/Concepts/policysyntax.htm)**._
+    
