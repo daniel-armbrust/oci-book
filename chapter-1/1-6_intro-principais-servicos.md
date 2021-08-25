@@ -180,7 +180,7 @@ A _Web Console_, como dito, é a maneira mais simples e rápida de lidar com seu
 
 Já sabemos que não é uma boa prática, por exemplo, ter vários usuários membros do grupo **_Administrators_**, ou criar recursos diretamente no **_root compartment_**. A boa prática, é ter um pequeno número de usuários administradores (o recomendado é que só exista um), e que esses administradores concedam o mínimo de acesso necessário, para os demais usuários do seu _[tenancy](https://docs.oracle.com/pt-br/iaas/Content/Identity/Tasks/managingtenancy.htm)_.
 
-As **_Políticas de Autorização_**, ou simplesmente **_Policy (política)_**, é um documento que especifica quem e de que forma, o indivíduo ou aplicação, podem acessar os recursos do seu _[tenancy](https://docs.oracle.com/pt-br/iaas/Content/Identity/Tasks/managingtenancy.htm)_. Uma **_política_** simplesmente permite que um **_grupo de usuários_**, tenha acesso em tipos específicos de recursos, em um compartimento específico.
+As **_Políticas de Autorização_**, ou simplesmente **_Policy (política)_**, é um documento que especifica quem e de que forma o indivíduo ou aplicação, podem acessar os recursos do seu _[tenancy](https://docs.oracle.com/pt-br/iaas/Content/Identity/Tasks/managingtenancy.htm)_. Uma **_política_** simplesmente permite que um **_grupo de usuários_**, tenha acesso em tipos específicos de recursos, em um compartimento específico.
 
 Um usuário administrador ou administrador do Serviço IAM, desempenha as seguintes atividades:
 1. Definir novos usuários e grupos.
