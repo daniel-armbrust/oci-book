@@ -198,7 +198,7 @@ Allow <subject> to <verb> <resource-type> in <location> where <conditions>
     - Um grupo pode ser especificado através do seu nome ou OCID.
 
 - **verb**    
-    - Verbos dizem respeito as ações (operações de API) sobre um recurso. Um verbo especifica um determinado tipo de acesso.
+    - Verbos dizem respeito as ações (operações em APIs) sobre um recurso. Um verbo especifica um determinado tipo de acesso.
     - Do menor privilégio ao maior, os verbos podem ser: **inspect**, **read**, **use** e **manage**.
     - 
 
