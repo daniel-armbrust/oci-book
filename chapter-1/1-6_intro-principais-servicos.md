@@ -184,6 +184,6 @@ As **_Políticas de Autorização_**, ou simplesmente **_Policy (política)_**, 
 
 Um usuário administrador ou administrador do Serviço IAM, desempenha as seguintes atividades:
 1. Definir novos usuários e grupos.
-1. Criar compartimentos específicos para armazenar os recursos.
-1. Escrever as políticas de autorização que permitam os usuários ou grupos, gerenciar os recursos em compartimentos específicos. 
+2. Criar compartimentos específicos para armazenar os recursos.
+3. Escrever as políticas de autorização que permitam os usuários ou grupos, gerenciar os recursos em compartimentos específicos. 
  
