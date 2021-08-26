@@ -228,3 +228,46 @@ Observe que as instruções sempre começam com a palavra _"Allow"_. Isto quer d
 
 A documentação do OCI possui um conjunto de _[Políticas Comuns](https://docs.oracle.com/pt-br/iaas/Content/Identity/Concepts/commonpolicies.htm)_ que podem ser consultadas e utilizadas, quando é precisamos liberar um acesso em específico. Consulte através deste link _[aqui](https://docs.oracle.com/pt-br/iaas/Content/Identity/Concepts/commonpolicies.htm)_.
 
+```
+darmbrust@hoodwink:~$ oci iam policy create \
+> --compartment-id "ocid1.tenancy.oc1..aaaaaaaavv2qh5asjdcoufmb6fzpnrfqgjxxdzlvjrgkrkytnyyz6zgvjnua" \
+> --name "grp-netadm-policy" \
+> --description "Permite membros do grupo grp-netadm gerenciar redes no OCI." \
+> --statements '["Allow group grp-netadm to manage virtual-network-family in tenancy"]'
+{
+  "data": {
+    "compartment-id": "ocid1.tenancy.oc1..aaaaaaaavv2qh5asjdcoufmb6fzpnrfqgjxxdzlvjrgkrkytnyyz6zgvjnua",
+    "defined-tags": {
+      "Oracle-Tags": {
+        "CreatedBy": "oracleidentitycloudservice/daniel.armbrust@algumdominio.com",
+        "CreatedOn": "2021-08-26T18:45:21.734Z"
+      }
+    },
+    "description": "Permite membros do grupo grp-netadm gerenciar redes no OCI.",
+    "freeform-tags": {},
+    "id": "ocid1.policy.oc1..aaaaaaaak2vbsh3rhgqd33zan63nfxq7zlvqobogxjpu7mjkvvxrfttrfdvq",
+    "inactive-status": null,
+    "lifecycle-state": "ACTIVE",
+    "name": "grp-netadm-policy",
+    "statements": [
+      "Allow group grp-netadm to manage virtual-network-family in tenancy"
+    ],
+    "time-created": "2021-08-26T18:45:21.858000+00:00",
+    "version-date": null
+  },
+  "etag": "91fa3000ed6755e4d547b42f4bab2515caeb748b"
+}
+```
+
+Perceba que o argumento _--statements_ recebe um vetor como valor. Sendo assim, é possível especificar um conjunto de diferentes políticas através de um único comando. Vamos ao exemplo, obtendo o OCID da política que acabamos de criar:
+
+```
+darmbrust@hoodwink:~$ oci iam policy list \
+> --compartment-id "ocid1.tenancy.oc1..aaaaaaaavv2qh5asjdcoufmb6fzpnrfqgjxxdzlvjrgkrkytnyyz6zgvjnua" \
+> --query  "data[?name=='grp-netadm-policy'].id"
+[
+  "ocid1.policy.oc1..aaaaaaaak2vbsh3rhgqd33zan63nfxq7zlvqobogxjpu7mjkvvxrfttrfdvq"
+]
+```
+
+
