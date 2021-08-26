@@ -212,13 +212,13 @@ Observe que as instruções sempre começam com a palavra _"Allow"_. Só é poss
             - Inclui todas os privilégios possíveis para o recurso.           
     
 - **resource-type**    
-    - Tipo do recurso. Há tipos individuais e há tipos que representam uma família de recursos.
+    - Tipo do recurso. Há tipos _individuais_ e há tipos que representam uma _"família de recursos"_.
     - Sempre que um novo tipo de recurso individual surge, ele será automaticamente incluído na sua família correspondente, caso aplicável.
-    - Existe o tipo de recurso _all-resources_ que abrange todos os recursos.
+    - Existe o tipo denominado _all-resources_ que abrange todos os recursos.
     - Exemplos: volume-attachments, virtual-network-family, subnets.
 
 - **location**    
-    - Local onde as política(s) serão aplicada(s). Podemos especificar um compartimento ou todo o tenancy.
+    - Local onde as política(s) serão aplicada(s). Podemos especificar um _compartimento_ ou todo o _tenancy_.
     - Quando aplicamos em um compartimento, o conceito _herança_ entra em vigor. Isto quer dizer que um compartimento _herda_ qualquer política do seu compartimento pai.
 
 - **conditions**    
