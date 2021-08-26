@@ -193,7 +193,7 @@ Uma política possui a seguinte sintaxe:
 Allow <subject> to <verb> <resource-type> in <location> where <conditions>
 ```
 
-Observe que as instruções sempre começam com a palavra _"Allow"_. Só é possível _"permitir um acesso"_. Tudo já é negado por padrão (negação implícita).
+Observe que as instruções sempre começam com a palavra _"Allow"_. Isto quer dizer que só é possível _"permitir um acesso"_. Tudo já é negado por padrão (negação implícita).
 
 - **subject**
     - Pode ser um ou mais grupos, ou o valor **any-user** que corresponde todos os usuários do seu  _[tenancy](https://docs.oracle.com/pt-br/iaas/Content/Identity/Tasks/managingtenancy.htm)_.
