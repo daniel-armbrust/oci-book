@@ -309,3 +309,4 @@ Are you sure you want to continue? [y/N]: y
 }
 ```
 
+Fique atento, pois a operação de atualização remove qualquer sentença anterior existente e substituí com os novos valores. É por isto que este prompt de confirmação aparece.
