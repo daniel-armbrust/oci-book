@@ -264,10 +264,48 @@ Perceba que o argumento _--statements_ recebe um vetor como valor. Sendo assim, 
 ```
 darmbrust@hoodwink:~$ oci iam policy list \
 > --compartment-id "ocid1.tenancy.oc1..aaaaaaaavv2qh5asjdcoufmb6fzpnrfqgjxxdzlvjrgkrkytnyyz6zgvjnua" \
-> --query  "data[?name=='grp-netadm-policy'].id"
+> --query "data[?name=='grp-netadm-policy'].id"
 [
   "ocid1.policy.oc1..aaaaaaaak2vbsh3rhgqd33zan63nfxq7zlvqobogxjpu7mjkvvxrfttrfdvq"
 ]
 ```
 
+Em seguida, iremos atualizar a política com permissões para que iniciem instâncias de computação e também volumes em blocos:
+
+```
+darmbrust@hoodwink:~$ oci iam policy update \
+> --policy-id "ocid1.policy.oc1..aaaaaaaak2vbsh3rhgqd33zan63nfxq7zlvqobogxjpu7mjkvvxrfttrfdvq" \
+> --statements '["Allow group grp-netadm to manage instance-family in tenancy", "Allow group grp-netadm to manage volume-family in tenancy", "Allow group grp-netadm to manage virtual-network-family in tenancy"]' \
+> --version-date ""
+WARNING: The value passed to statements will overwrite all existing statements for this policy. The existing statements are:
+[
+  "Allow group grp-netadm to manage virtual-network-family in tenancy"
+]
+Are you sure you want to continue? [y/N]: y
+{
+  "data": {
+    "compartment-id": "ocid1.tenancy.oc1..aaaaaaaavv2qh5asjdcoufmb6fzpnrfqgjxxdzlvjrgkrkytnyyz6zgvjnua",
+    "defined-tags": {
+      "Oracle-Tags": {
+        "CreatedBy": "oracleidentitycloudservice/daniel.armbrust@algumdominio.com",
+        "CreatedOn": "2021-08-26T18:45:21.734Z"
+      }
+    },
+    "description": "Permite membros do grupo grp-netadm gerenciar redes no OCI.",
+    "freeform-tags": {},
+    "id": "ocid1.policy.oc1..aaaaaaaak2vbsh3rhgqd33zan63nfxq7zlvqobogxjpu7mjkvvxrfttrfdvq",
+    "inactive-status": null,
+    "lifecycle-state": "ACTIVE",
+    "name": "grp-netadm-policy",
+    "statements": [
+      "Allow group grp-netadm to manage instance-family in tenancy",
+      "Allow group grp-netadm to manage volume-family in tenancy",
+      "Allow group grp-netadm to manage virtual-network-family in tenancy"
+    ],
+    "time-created": "2021-08-26T18:45:21.858000+00:00",
+    "version-date": null
+  },
+  "etag": "778c092b7f6d501416c247c43176f8ca3ccc8acd"
+}
+```
 
