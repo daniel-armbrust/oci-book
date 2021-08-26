@@ -193,14 +193,36 @@ Uma política possui a seguinte sintaxe:
 Allow <subject> to <verb> <resource-type> in <location> where <conditions>
 ```
 
+Observe que as instruções sempre começam com a palavra _"Allow"_. Só é possível _"permitir um acesso"_. Tudo já é negado por padrão (negação implícita).
+
 - **subject**
     - Pode ser um ou mais grupos, ou o valor **any-user** que corresponde todos os usuários do seu  _[tenancy](https://docs.oracle.com/pt-br/iaas/Content/Identity/Tasks/managingtenancy.htm)_.
     - Um grupo pode ser especificado através do seu nome ou OCID.
 
 - **verb**    
     - Verbos dizem respeito as ações (operações em APIs) sobre um recurso. Um verbo especifica um determinado tipo de acesso.
-    - Do menor privilégio ao maior, os verbos podem ser: **inspect**, **read**, **use** e **manage**.
-    - 
+    - Do menor privilégio ao maior, os verbos podem ser: 
+        - **inspect** 
+            - Concede o privilégio de listar recursos.
+        - **read**
+            - Inclui o privilégio _inspect_ mais o privilégio de obter metadados de um recurso.
+        - **use** 
+            - Inclui o privilégio _read_ mais o privilégio de trabalhar com recursos existentes.
+        - **manage**.
+            - Inclui todas os privilégios possíveis para o recurso.           
+    
+- **resource-type**    
+    - Tipo do recurso. Há tipos individuais e há tipos que representam uma família de recursos.
+    - Sempre que um novo tipo de recurso individual surge, ele será automaticamente incluído na sua família correspondente, caso aplicável.
+    - Existe o tipo de recurso _all-resources_ que abrange todos os recursos.
+    - Exemplos: volume-attachments, virtual-network-family, subnets.
+
+- **location**    
+    - Local onde as política(s) serão aplicada(s). Podemos especificar um compartimento ou todo o tenancy.
+    - Quando aplicamos em um compartimento, o conceito _herança_ entra em vigor. Isto quer dizer que um compartimento _herda_ qualquer política do seu compartimento pai.
+
+- **conditions**    
+    - É possível especificar uma ou mais condições lógicas que devem ser atendidas para que o acesso seja concedido.
 
 >_**__NOTA:__** Para maiores detalhes sobre a sintaxe das políticas, consulte a documentação oficial **[aqui](https://docs.oracle.com/pt-br/iaas/Content/Identity/Concepts/policysyntax.htm)**._
     
