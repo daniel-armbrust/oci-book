@@ -219,8 +219,8 @@ Observe que as instruções sempre começam com a palavra _"Allow"_. Só é poss
 
 - **location**    
     - Local onde as política(s) serão aplicada(s). Podemos especificar um _compartimento_ ou todo o _tenancy_.
-    - Quando aplicamos em um compartimento, o conceito _herança_ entra em vigor. Isto quer dizer que um compartimento _herda_ qualquer política do seu compartimento pai.
-
+    - Quando aplicamos em um compartimento, o conceito _herança_ entra em vigor. Isto quer dizer que um compartimento _herda_ qualquer política do seu _"compartimento pai_".
+    
 - **conditions**    
     - É possível especificar uma ou mais condições lógicas que devem ser atendidas para que o acesso seja concedido.
 
