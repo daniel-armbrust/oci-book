@@ -310,3 +310,11 @@ Are you sure you want to continue? [y/N]: y
 ```
 
 Fique atento, pois a operação de atualização remove qualquer sentença anterior existente e substituí com os novos valores. É por isto que este prompt de confirmação aparece.
+
+Para finalizar, removemos a política com o comando abaixo:
+
+```
+darmbrust@hoodwink:~$ oci iam policy delete \
+> --policy-id "ocid1.policy.oc1..aaaaaaaak2vbsh3rhgqd33zan63nfxq7zlvqobogxjpu7mjkvvxrfttrfdvq"
+Are you sure you want to delete this resource? [y/N]: y
+```
