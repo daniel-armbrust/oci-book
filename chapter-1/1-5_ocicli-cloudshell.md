@@ -1,6 +1,6 @@
 # Capítulo 1: Conceitos e introdução a Computação em Nuvem no OCI
 
-## 1.4 - OCI CLI e Cloud Shell
+## 1.5 - OCI CLI e Cloud Shell
 
 ### __OCI CLI__
 
