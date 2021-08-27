@@ -28,14 +28,29 @@ O comando acima tenta resolver sozinho diversas dependências para concluir a in
 
 #### __Atualizando o OCI CLI__
 
-É sempre bom verificarmos se realmente estamos utilizando a última versão disponível do OCI CLI.
+É sempre bom verificarmos se realmente estamos utilizando a última versão disponível do _[OCI CLI](https://docs.oracle.com/pt-br/iaas/Content/API/Concepts/cliconcepts.htm)_.
 
 ```
-darmbrust@hoodwink:~$ oci --latest-version
-3.0.1
-You are using OCI CLI version 2.26.2, however version 3.0.1 is available. 
+root@hoodwink:~# oci --latest-version
+3.0.2
+You are using OCI CLI version 2.26.2, however version 3.0.2 is available. 
 You should consider upgrading using https://docs.cloud.oracle.com/en-us/iaas/Content/API/SDKDocs/cliupgrading.htm
 ```
+
+Neste caso, o comando nos avisou que há a necessidade de atualização. Para atualizar, executamos o comando abaixo:
+
+```
+root@hoodwink:~# pip install oci-cli --upgrade
+```
+
+Feito! Podemos verificar a atualizão pois agora não há nenhum aviso:
+
+```
+root@hoodwink:~# oci --latest-version
+3.0.2
+```
+
+Mantenha-se sempre atualizado! Além de corrigir bugs e acrescentar melhorias, atualizar o _[OCI CLI](https://docs.oracle.com/pt-br/iaas/Content/API/Concepts/cliconcepts.htm)_ possibilita interação com novos serviços.
 
 ### __Cloud Shell__
 
