@@ -15,3 +15,7 @@ No mundo cloud, há flexibilidade. Basicamente, eu posso desenvolver o meu softw
 A computação em nuvem possibilitou desenvolver novos produtos, que consequentemente deu espaço as Startups. 
 
 Diferente do mundo coorporativo, onde há o desenvolvimento de sistemas internos ou aqueles que ninguém vê, startups tem exigências para a web que incluem escalabilidade, usabilidade, desenvolvimento ágil, ferramental adequado e desempenho para criar bons produtos e atrair mais pessoas.
+
+### __O surgimento do DevOps__
+
+Trabalhar com Computação em Nuvem exige "uma pegada" meio dev e meio infra. É por conta disto que os profissionais de antigamente, que trabalhavam somente com infraestrutura, adicionaram práticas de desenvolvimento ao seu arsenal de conhecimento. Essa união de conhecimento _Dev + Infra_ deu origem ao termo **DevOps (Desenvolvimento e Operações)**.
