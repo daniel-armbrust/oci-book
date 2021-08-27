@@ -43,7 +43,7 @@ Neste caso, o comando nos avisou que há a necessidade de atualização. Para at
 root@hoodwink:~# pip install oci-cli --upgrade
 ```
 
-Feito! Podemos verificar a atualizão pois agora não há nenhum aviso:
+Feito! Podemos verificar que a ferramenta foi atualizada pois agora não há nenhum aviso:
 
 ```
 root@hoodwink:~# oci --latest-version
