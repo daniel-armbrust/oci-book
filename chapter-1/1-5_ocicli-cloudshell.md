@@ -54,4 +54,11 @@ Mantenha-se sempre atualizado! Além de corrigir bugs e acrescentar melhorias, a
 
 ### __Cloud Shell__
 
-Cloud Shell: A CLI é pré-configurada com suas credenciais e pronta para ser usada imediatamente no Cloud Shell.
+O _[Cloud Shell](https://docs.oracle.com/pt-br/iaas/Content/API/Concepts/devcloudshellintro.htm)_ é um terminal (shell Linux) acessível através da _[Web Console](https://docs.oracle.com/pt-br/iaas/Content/GSG/Tasks/signingin.htm#Signing_In_to_the_Console)_, gratuito e já com o _[OCI CLI](https://docs.oracle.com/pt-br/iaas/Content/API/Concepts/cliconcepts.htm)_ configurado e pronto pra uso. Há também outras ferramentas que já vem instaladas como o _[Ansible](https://docs.oracle.com/pt-br/iaas/Content/API/SDKDocs/ansible.htm)_.
+
+>_**__NOTA:__** A lista das ferramentas disponíveis no [Cloud Shell](https://docs.oracle.com/pt-br/iaas/Content/API/Concepts/devcloudshellintro.htm) pode ser consultada na documentação oficial [aqui](https://docs.oracle.com/pt-br/iaas/Content/API/Concepts/devcloudshellintro.htm#Whats_Included_With_Cloud_Shell)._
+
+O _[Cloud Shell](https://docs.oracle.com/pt-br/iaas/Content/API/Concepts/devcloudshellintro.htm)_ pode ser uma maneira rápida e prática para utilização do _[OCI CLI](https://docs.oracle.com/pt-br/iaas/Content/API/Concepts/cliconcepts.htm)_, sem a necessidade de seguir o processo de instalação. Para iniciar o uso, basta clicar no seu botão localizado no topo da console:
+
+
+
