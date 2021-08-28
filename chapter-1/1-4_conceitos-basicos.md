@@ -132,4 +132,12 @@ ocid1.instance.oc1.sa-saopaulo-1.antxeljr6noke4qc6gXnyfvzfj43135yh2hpvu5li6n5GF5
 
 ### __OCI Status__
 
-[OCI Status](https://ocistatus.oraclecloud.com/)
+_[OCI Status](https://ocistatus.oraclecloud.com)_ ou _[OCI Service Health Dashboard](https://ocistatus.oraclecloud.com)_, é um painel de acesso público que disponibiliza o _"status atual"_ de todos os serviços do OCI por região. Além desta monitoração em tempo real, é possível ver o _[histórico de incidentes](https://ocistatus.oraclecloud.com/history)_ que já ocorreram na infraestrutura do OCI.
+
+Acesse o _[OCI Status](https://ocistatus.oraclecloud.com)_ através deste _[link aqui](https://ocistatus.oraclecloud.com)_.
+
+No canto superior direito do _[OCI Status](https://ocistatus.oraclecloud.com)_, existe um botão _"Subscribe to updates"_. Este possibilita você a receber notificações por e-mail sempre que a infraestrutura do OCI apresentar um problema, atualização de um problema, ou quando o mesmo for resolvido.
+
+É recomendado fazer sua subscrição.
+
+![alt_text](./images/1-4_oci-status.jpg  "OCI Status")
