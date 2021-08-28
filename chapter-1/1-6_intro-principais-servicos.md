@@ -4,6 +4,8 @@
 
 ### __Principais Serviços__
 
+O acesso a novas tecnologias permite que as empresas adotem e ampliem suas soluções tecnológicas, levando a inovação aos seus clientes com maior rapidez.
+
 https://www.oracle.com/cloud/data-regions/
 
 ### __Serviço IAM (Identity and Access Management)__

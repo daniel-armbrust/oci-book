@@ -4,7 +4,9 @@
 
 ### __Regiões, Domínios de Disponibilidade (AD) e Domínios de Falha (FD)__
 
-A infraestrutura do OCI está presente em diversas regiões do globo. Um dos critérios utilizados para a escolha de uma região, está na proximidade do data center aos seus clientes. Quanto menor essa distância, menor a latência e melhor a experiência na utilização dos serviços. De tempos em tempos, a Oracle cria e expande suas regiões pelo mundo.
+A infraestrutura do OCI está presente em diversas regiões do globo. Um dos critérios utilizados para a escolha de uma região, está na proximidade do data center aos seus clientes. Quanto menor essa distância, menor a latência e melhor a experiência na utilização dos serviços. De tempos em tempos, a Oracle cria e expande suas regiões pelo mundo. 
+
+Essa diversidade geográfica pode ser vista na figura abaixo:
 
 ![alt_text](./images/ch1_1-2_1.jpg  "Oracle Cloud Regions Available Worldwide")
 
