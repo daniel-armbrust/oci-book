@@ -13,7 +13,7 @@ Esse livro apresenta o OCI (Oracle Cloud Infraestructure).
     [1.4 - Conceitos básicos sobre o OCI](https://github.com/daniel-armbrust/oci-book/blob/main/chapter-1/1-4_conceitos-basicos.md) <br>
     [1.5 - OCI CLI e Cloud Shell](https://github.com/daniel-armbrust/oci-book/blob/main/chapter-1/1-5_ocicli-cloudshell.md)  
     [1.6 - Introdução aos principais serviços do OCI](https://github.com/daniel-armbrust/oci-book/blob/main/chapter-1/1-6_intro-principais-servicos.md) <br> 
-    1.7 - Modelos de Cobrança (PAYG, CMMT), Custo, Suporte e SLA <br>
+    1.7 - Aspectos básicos do Lift-and-Shift e Modelos de Cobrança <br>
     1.8 - Entendendo o Service Limits (Limites de Serviços) <br>
 
 - [Capítulo 2: Automação, Arquitetura e DevOps](https://github.com/daniel-armbrust/oci-book/blob/main/chapter-2/README.md) <br>
@@ -36,6 +36,6 @@ Esse livro apresenta o OCI (Oracle Cloud Infraestructure).
 - [Capítulo 4: Primeira aplicação no OCI](https://github.com/daniel-armbrust/oci-book/blob/main/chapter-4/README.md) <br>
     [4.1 - Fundamentos de Redes no OCI](https://github.com/daniel-armbrust/oci-book/blob/main/chapter-4/4-1_fundamentos-redes.md) <br>
 
-- Capítulo 5: Aplicação Web #1 - Site sem servidor.
+- Capítulo 5: Criando um site sem servidor.
 
-- Capítulo 5: Aplicação Web #1 - Portal de anuncio de veículos
+- Capítulo 6: Portal de anuncio de veículos
