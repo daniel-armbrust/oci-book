@@ -136,7 +136,7 @@ _[OCI Status](https://ocistatus.oraclecloud.com)_ ou _[OCI Service Health Dashbo
 
 Acesse o _[OCI Status](https://ocistatus.oraclecloud.com)_ através deste _[link aqui](https://ocistatus.oraclecloud.com)_.
 
-No canto superior direito do _[OCI Status](https://ocistatus.oraclecloud.com)_, existe um botão _"Subscribe to updates"_. Este possibilita você a receber notificações por e-mail sempre que a infraestrutura do OCI apresentar um problema, atualização de um problema, ou quando o mesmo for resolvido.
+No canto superior direito do _[OCI Status](https://ocistatus.oraclecloud.com)_, existe um botão _"Subscribe to updates"_. Este possibilita você a receber notificações por e-mail sempre que a infraestrutura do OCI apresentar um problema, atualização de um problema, ou quando um problema for resolvido.
 
 É recomendado fazer sua subscrição.
 
