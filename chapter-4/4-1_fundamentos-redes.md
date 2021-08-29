@@ -173,7 +173,7 @@ darmbrust@hoodwink:~$ oci iam compartment list --query "data[?name=='projeto-wor
 ```
 
 ```
-darmbrust@hoodwink:~/oci-book$ oci iam compartment create \
+darmbrust@hoodwink:~$ oci iam compartment create \
 > --compartment-id "ocid1.compartment.oc1..aaaaaaaagnkmm5chrzmx6agponivbwohrabrzridbvxpaomwvntlq2qehk5a" \
 > --name "cmp-app" \
 > --description "Recursos da aplicação Wordpress"
@@ -200,7 +200,7 @@ darmbrust@hoodwink:~/oci-book$ oci iam compartment create \
 ```
 
 ```
-darmbrust@hoodwink:~/oci-book$ oci iam compartment create \
+darmbrust@hoodwink:~$ oci iam compartment create \
 > --compartment-id "ocid1.compartment.oc1..aaaaaaaagnkmm5chrzmx6agponivbwohrabrzridbvxpaomwvntlq2qehk5a" \
 > --name "cmp-database" \
 > --description "Recursos de Banco de Dados da aplicação Wordpress"
