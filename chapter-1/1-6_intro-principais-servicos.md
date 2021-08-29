@@ -228,7 +228,7 @@ Observe que as instruções sempre começam com a palavra _"Allow"_. Isto quer d
 
 >_**__NOTA:__** Para maiores detalhes sobre a sintaxe das políticas, consulte a documentação oficial **[aqui](https://docs.oracle.com/pt-br/iaas/Content/Identity/Concepts/policysyntax.htm)**._
 
-A documentação do OCI possui um conjunto de _[Políticas Comuns](https://docs.oracle.com/pt-br/iaas/Content/Identity/Concepts/commonpolicies.htm)_ que podem ser consultadas e utilizadas, quando é precisamos liberar um acesso em específico. Consulte através deste link _[aqui](https://docs.oracle.com/pt-br/iaas/Content/Identity/Concepts/commonpolicies.htm)_.
+A documentação do OCI possui um conjunto de _[Políticas Comuns](https://docs.oracle.com/pt-br/iaas/Content/Identity/Concepts/commonpolicies.htm)_ que podem ser consultadas e utilizadas, quando é preciso liberar um acesso em específico. Consulte através deste link _[aqui](https://docs.oracle.com/pt-br/iaas/Content/Identity/Concepts/commonpolicies.htm)_.
 
 ```
 darmbrust@hoodwink:~$ oci iam policy create \
