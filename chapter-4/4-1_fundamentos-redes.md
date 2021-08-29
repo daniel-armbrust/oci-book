@@ -296,4 +296,4 @@ Action completed. Waiting until the resource has entered state: ('AVAILABLE',)
 }
 ```
 
-Por padrão, uma VCN já "nasce" equipada com um _[DHCP Options](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingDHCP.htm#DHCP_Options)_ (default-dhcp-options-id), uma _[Tabela de Roteamento](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingroutetables.htm#Route2)_ (default-route-table-id) e uma _[Security List](https://docs.oracle.com/pt-br/iaas/Content/Network/Concepts/securitylists.htm)_ (default-security-list-id). Estes não podem ser removidos.
+Por padrão, uma VCN já "nasce" equipada com um _[DHCP Options](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingDHCP.htm#DHCP_Options) (default-dhcp-options-id)_, uma _[Tabela de Roteamento](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingroutetables.htm#Route2) (default-route-table-id)_ e uma _[Security List](https://docs.oracle.com/pt-br/iaas/Content/Network/Concepts/securitylists.htm) (default-security-list-id)_. Estes não podem ser removidos.
