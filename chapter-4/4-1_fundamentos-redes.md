@@ -255,7 +255,7 @@ darmbrust@hoodwink:~$ oci iam group create --name "grp-dba" --description "Usuá
 }
 ```
 
-### __Recursos da Rede__
+### __Recursos de Rede__
 
 #### VCN (Virtual Cloud Network)
 
