@@ -10,6 +10,39 @@ Esta diversidade geográfica pode ser vista na imagem abaixo:
 
 ![alt_text](./images/ch1_1-2_1.jpg  "Oracle Cloud Regions Available Worldwide")
 
+Uma outra forma de visualizar as regiões disponíveis é através do comando abaixo:
+
+```
+darmbrust@hoodwink:~$ oci iam region list --output table
++-----+----------------+
+| key | name           |
++-----+----------------+
+| AMS | eu-amsterdam-1 |
+| BOM | ap-mumbai-1    |
+| CWL | uk-cardiff-1   |
+| DXB | me-dubai-1     |
+| FRA | eu-frankfurt-1 |
+| GRU | sa-saopaulo-1  |
+| HYD | ap-hyderabad-1 |
+| IAD | us-ashburn-1   |
+| ICN | ap-seoul-1     |
+| JED | me-jeddah-1    |
+| KIX | ap-osaka-1     |
+| LHR | uk-london-1    |
+| MEL | ap-melbourne-1 |
+| NRT | ap-tokyo-1     |
+| PHX | us-phoenix-1   |
+| SCL | sa-santiago-1  |
+| SJC | us-sanjose-1   |
+| SYD | ap-sydney-1    |
+| VCP | sa-vinhedo-1   |
+| YNY | ap-chuncheon-1 |
+| YUL | ca-montreal-1  |
+| YYZ | ca-toronto-1   |
+| ZRH | eu-zurich-1    |
++-----+----------------+
+```
+
 >_**__NOTA:__** Consulte este [link](https://www.oracle.com/cloud/architecture-and-regions/) para uma visão atualizada sobre o mapa de regiões._
 
 Uma região é composta de múltiplos data centes isolados chamados de _"[Dominios de Disponibilidade (Availability Domains ou AD)](https://docs.oracle.com/pt-br/iaas/Content/General/Concepts/regions.htm#top)"_. Normalmente por região, existem até três _"[Dominios de Disponibilidades](https://docs.oracle.com/pt-br/iaas/Content/General/Concepts/regions.htm#top)"_. Estes não compartilham infraestrutura (energia, refrigeração, rede, etc), são isolados entre si, tolerantes a falhas e dificilmente falham ao mesmo tempo. Caso um _"[dominio de disponibilidade](https://docs.oracle.com/pt-br/iaas/Content/General/Concepts/regions.htm#top)"_ dentro de uma região falhe, ele não afeta a disponibilidade dos outros _"[dominios de disponibilidade](https://docs.oracle.com/pt-br/iaas/Content/General/Concepts/regions.htm#top)"_ existentes na região. Para qualquer região, com apenas um _"[dominio de disponibilidade](https://docs.oracle.com/pt-br/iaas/Content/General/Concepts/regions.htm#top)"_, um segundo _"[dominio de disponibilidade](https://docs.oracle.com/pt-br/iaas/Content/General/Concepts/regions.htm#top)"_ ou região no mesmo país ou área geopolítica será disponibilizada dentro de um ano. A ideia é disponibilizar mais opções de _[recuperação de desastres](https://pt.wikipedia.org/wiki/Recupera%C3%A7%C3%A3o_de_desastres)_ que atendam aos requisitos dos clientes.

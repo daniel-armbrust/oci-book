@@ -228,7 +228,7 @@ darmbrust@hoodwink:~$ oci iam compartment create \
 
 >_**__NOTA:__** Recursos que fazem parte do serviço IAM, são globais. Recursos globais devem ser criados na **HOME REGION**. Utilize a opção **--region** para especificar sua **HOME REGION** caso o arquivo de configuração do OCI CLI não faça referência a ela._
 
-### __Grupo e Políticas de Autorização__
+### __Grupos e Políticas de Autorização__
 
 Criaremos os grupos conforme o comando abaixo:
 
@@ -254,3 +254,6 @@ darmbrust@hoodwink:~$ oci iam group create --name "grp-dba" --description "Usuá
   "etag": "aaa8b6ce8732856f4ca56f901187afda837aebae"
 }
 ```
+
+### __Recursos da Rede__
+
