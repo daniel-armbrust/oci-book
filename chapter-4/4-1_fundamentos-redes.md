@@ -260,7 +260,7 @@ darmbrust@hoodwink:~$ oci iam group create --name "grp-dba" --description "Usuá
 Começaremos pela criação da VCN no compartimento "cmp-network":
 
 ```
-darmbrust@hoodwink:~$ oci network vcn create --profile "meuocibr" \
+darmbrust@hoodwink:~$ oci network vcn create \
 > --compartment-id "ocid1.compartment.oc1..aaaaaaaauvqvbbx3oridcm5d2ztxkftwr362u2vl5zdsayzbehzwbjs56soq" \
 > --cidr-blocks '["10.0.0.0/16"]' \
 > --display-name "vcn-prd" \
