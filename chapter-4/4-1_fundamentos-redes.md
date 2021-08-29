@@ -87,30 +87,59 @@ Antes de começarmos, vamos criar os respectivos compartimentos para abrigar os 
 
 ```
 suaEmpresa (root)
-   ├── projeto-wordpress
+   ├── cmp-network   
+   ├── projeto-wordpress      
    │     ├── cmp-database
-   │     ├── cmp-network
    │     └── cmp-app
   ...
 ```
 
 A ideia é termos grupos de usuários, com políticas de autorização, por compartimento:
 
-| Grupo      | Descrição                                    | Compartimento   |
-| ---------- | -------------------------------------------- | --------------- | 
-| grp-dba    | Usuários administradores dos Bancos de Dados | cmp-database    |
-| grp-netadm | Usuários administradores das Redes           | cmp-network     |
-| grp-appadm | Usuários administradores das aplicações      | cmp-app         |
+| Grupo        | Descrição dos Grupos                            | Compartimento     | Descrição do Compartimento                         | 
+| ------------ | ----------------------------------------------- | ----------------- | -------------------------------------------------- | 
+| grp-dba      | Usuários administradores dos Bancos de Dados    | cmp-database      | Recursos de Banco de Dados da aplicação Wordpress  |
+| grp-netadm   | Usuários administradores das Redes              | cmp-network       | Recursos de Redes de todo o Tenant                 |
+| grp-appadm   | Usuários administradores da aplicação Wordpress | cmp-app           | Recursos da aplicação Wordpress                    |
 
-Deixando claro que todos os três compartimentos (cmp-database, cmp-network e cmp-app), são "filhos" do compartimento pai "projeto-wordpress".
+Note que o compartimento "cmp-app" e "cmp-database" são "filhos" do compartimento pai "projeto-wordpress".
 
 ### __Compartimentos__
 
-Primeiramente criaremos o compartimento pai "projeto-wordpress":
+Primeiramente criaremos o compartimento que irá abrigar os recursos de rede:
 
 ```
-darmbrust@hoodwink:~$ oci iam compartment create --region "sa-saopaulo-1" \
-> --compartment-id ocid1.tenancy.oc1..aaaaaaaavv2qh5asjdcoufmb6fzpnrfqgjxxdzlvjrgkrkytnyyz6zgvjnua \
+darmbrust@hoodwink:~$ oci iam compartment create \
+> --compartment-id "ocid1.tenancy.oc1..aaaaaaaavv2qh5asjdcoufmb6fzpnrfqgjxxdzlvjrgkrkytnyyz6zgvjnua" \
+> --name "cmp-network" \
+> --description "Recursos de Redes de todo o Tenant"
+{
+  "data": {
+    "compartment-id": "ocid1.tenancy.oc1..aaaaaaaavv2qh5asjdcoufmb6fzpnrfqgjxxdzlvjrgkrkytnyyz6zgvjnua",
+    "defined-tags": {
+      "Oracle-Tags": {
+        "CreatedBy": "oracleidentitycloudservice/daniel.armbrust@algumdominio.com",
+        "CreatedOn": "2021-08-29T10:56:45.950Z"
+      }
+    },
+    "description": "Recursos de Redes de todo o Tenant",
+    "freeform-tags": {},
+    "id": "ocid1.compartment.oc1..aaaaaaaauvqvbbx3oridcm5d2ztxkftwr362u2vl5zdsayzbehzwbjs56soq",
+    "inactive-status": null,
+    "is-accessible": true,
+    "lifecycle-state": "ACTIVE",
+    "name": "cmp-network",
+    "time-created": "2021-08-29T10:56:46.068000+00:00"
+  },
+  "etag": "f60c360a752af33bafb60cda00245d8974c0ba46"
+}
+```
+
+Após isto, criaremos o compartimento pai "projeto-wordpress" que irá abrigar todos os recursos relacionados a aplicação:
+
+```
+darmbrust@hoodwink:~$ oci iam compartment create \
+> --compartment-id "ocid1.tenancy.oc1..aaaaaaaavv2qh5asjdcoufmb6fzpnrfqgjxxdzlvjrgkrkytnyyz6zgvjnua" \
 > --name "projeto-wordpress" --description "Projeto Wordpress"
 {
   "data": {
@@ -134,35 +163,68 @@ darmbrust@hoodwink:~$ oci iam compartment create --region "sa-saopaulo-1" \
 }
 ```
 
-Perceba que o pai do compartimento "projeto-wordpress" é o OCID que representa o nosso Tenant. Os próximos que serão criados, são compartimentos filhos do "projeto-wordpress". Para isto, iremos usar o valor contido em "id", que representa o OCID do compartimento "projeto-wordpress" que foi criado, como valor do parâmetro "--compartment-id".
+Perceba que o pai do compartimento "projeto-wordpress" e "cmp-network", é o OCID que representa o nosso Tenant. Qualquer outro compartimento criado e que for filho do "projeto-wordpress", deve utilizar o seu OCID como valor do parâmetro "--compartment-id". Observe isto na criação dos próximos compartimentos:
 
 ```
-darmbrust@hoodwink:~$ oci iam compartment create --region "sa-saopaulo-1" \
+darmbrust@hoodwink:~$ oci iam compartment list --query "data[?name=='projeto-wordpress'].id"
+[
+  "ocid1.compartment.oc1..aaaaaaaagnkmm5chrzmx6agponivbwohrabrzridbvxpaomwvntlq2qehk5a"
+]
+```
+
+```
+darmbrust@hoodwink:~/oci-book$ oci iam compartment create \
 > --compartment-id "ocid1.compartment.oc1..aaaaaaaagnkmm5chrzmx6agponivbwohrabrzridbvxpaomwvntlq2qehk5a" \
-> --name "cmp-database" --description "Usuários administradores dos Bancos de Dados"
+> --name "cmp-app" \
+> --description "Recursos da aplicação Wordpress"
 {
   "data": {
     "compartment-id": "ocid1.compartment.oc1..aaaaaaaagnkmm5chrzmx6agponivbwohrabrzridbvxpaomwvntlq2qehk5a",
     "defined-tags": {
       "Oracle-Tags": {
         "CreatedBy": "oracleidentitycloudservice/daniel.armbrust@algumdominio.com",
-        "CreatedOn": "2021-08-20T19:11:50.186Z"
+        "CreatedOn": "2021-08-29T10:53:14.922Z"
       }
     },
-    "description": "Usu\u00e1rios administradores dos Bancos de Dados",
+    "description": "Recursos da aplicação Wordpress",
     "freeform-tags": {},
-    "id": "ocid1.compartment.oc1..aaaaaaaakehqc6cv7c5my5egzckzhhldw32preke3qzqoeloyy4i3ruiz7jq",
+    "id": "ocid1.compartment.oc1..aaaaaaaamcff6exkhvp4aq3ubxib2wf74v7cx22b3yj56jnfkazoissdzefq",
+    "inactive-status": null,
+    "is-accessible": true,
+    "lifecycle-state": "ACTIVE",
+    "name": "cmp-app",
+    "time-created": "2021-08-29T10:53:15.099000+00:00"
+  },
+  "etag": "be12c5cb887aaaf26dfe4998c77740a90d6c3bba"
+}
+```
+
+```
+darmbrust@hoodwink:~/oci-book$ oci iam compartment create \
+> --compartment-id "ocid1.compartment.oc1..aaaaaaaagnkmm5chrzmx6agponivbwohrabrzridbvxpaomwvntlq2qehk5a" \
+> --name "cmp-database" \
+> --description "Recursos de Banco de Dados da aplicação Wordpress"
+{
+  "data": {
+    "compartment-id": "ocid1.compartment.oc1..aaaaaaaagnkmm5chrzmx6agponivbwohrabrzridbvxpaomwvntlq2qehk5a",
+    "defined-tags": {
+      "Oracle-Tags": {
+        "CreatedBy": "oracleidentitycloudservice/daniel.armbrust@algumdominio.com",
+        "CreatedOn": "2021-08-29T11:05:32.800Z"
+      }
+    },
+    "description": "Recursos de Banco de Dados da aplica\u00e7\u00e3o Wordpress",
+    "freeform-tags": {},
+    "id": "ocid1.compartment.oc1..aaaaaaaa6d2s5sgmxmyxu2vca3pn46y56xisijjyhdjwgqg3f6goh3obj4qq",
     "inactive-status": null,
     "is-accessible": true,
     "lifecycle-state": "ACTIVE",
     "name": "cmp-database",
-    "time-created": "2021-08-20T19:11:50.303000+00:00"
+    "time-created": "2021-08-29T11:05:32.953000+00:00"
   },
-  "etag": "8e9ee163602cb8b98716c8df27c8a0403a30b938"
+  "etag": "7113e72e6cf4dd09177f1e788c01a76a93bd2321"
 }
 ```
-
-Repita o processo para os demais compartimentos que faltaram e teremos nossa estrutura criada.
 
 >_**__NOTA:__** Recursos que fazem parte do serviço IAM, são globais. Recursos globais devem ser criados na **HOME REGION**. Utilize a opção **--region** para especificar sua **HOME REGION** caso o arquivo de configuração do OCI CLI não faça referência a ela.
 
