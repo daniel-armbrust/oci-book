@@ -257,3 +257,43 @@ darmbrust@hoodwink:~$ oci iam group create --name "grp-dba" --description "Usuá
 
 ### __Recursos da Rede__
 
+Começaremos pela criação da VCN no compartimento "cmp-network":
+
+```
+darmbrust@hoodwink:~$ oci network vcn create --profile "meuocibr" \
+> --compartment-id "ocid1.compartment.oc1..aaaaaaaauvqvbbx3oridcm5d2ztxkftwr362u2vl5zdsayzbehzwbjs56soq" \
+> --cidr-blocks '["10.0.0.0/16"]' \
+> --display-name "vcn-prd" \
+> --is-ipv6-enabled false \
+> --wait-for-state AVAILABLE
+Action completed. Waiting until the resource has entered state: ('AVAILABLE',)
+{
+  "data": {
+    "cidr-block": "10.0.0.0/16",
+    "cidr-blocks": [
+      "10.0.0.0/16"
+    ],
+    "compartment-id": "ocid1.compartment.oc1..aaaaaaaauvqvbbx3oridcm5d2ztxkftwr362u2vl5zdsayzbehzwbjs56soq",
+    "default-dhcp-options-id": "ocid1.dhcpoptions.oc1.sa-saopaulo-1.aaaaaaaa5lhwt42vtk36f4xp6ye5aaimetxnxxnbqutydba552radfl4axnq",
+    "default-route-table-id": "ocid1.routetable.oc1.sa-saopaulo-1.aaaaaaaayjxzvc6lnwikuz2nnnre7mty5cfpdv72cvmh2iocrybq3kpmqsxa",
+    "default-security-list-id": "ocid1.securitylist.oc1.sa-saopaulo-1.aaaaaaaauavgqje5buhc7npolmyequp72qepqod5xebjyx2u5ekc5x3lun5q",
+    "defined-tags": {
+      "Oracle-Tags": {
+        "CreatedBy": "oracleidentitycloudservice/daniel.armbrust@algumdominio.com",
+        "CreatedOn": "2021-08-29T19:52:52.652Z"
+      }
+    },
+    "display-name": "vcn-prd",
+    "dns-label": null,
+    "freeform-tags": {},
+    "id": "ocid1.vcn.oc1.sa-saopaulo-1.amaaaaaahcglxkaabicl4jiikcavz2h2nvazibxp4rdiwziqsce4h5wksz2a",
+    "ipv6-cidr-blocks": null,
+    "lifecycle-state": "AVAILABLE",
+    "time-created": "2021-08-29T19:52:52.722000+00:00",
+    "vcn-domain-name": null
+  },
+  "etag": "31468da7"
+}
+```
+
+Por padrão, uma VCN já "nasce" equipada com um _[DHCP Options](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingDHCP.htm#DHCP_Options)_ (default-dhcp-options-id), uma _[Tabela de Roteamento](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingroutetables.htm#Route2)_ (default-route-table-id) e uma _[Security List](https://docs.oracle.com/pt-br/iaas/Content/Network/Concepts/securitylists.htm)_ (default-security-list-id). Estes não podem ser removidos.
