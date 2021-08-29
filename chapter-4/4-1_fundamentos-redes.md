@@ -257,6 +257,8 @@ darmbrust@hoodwink:~$ oci iam group create --name "grp-dba" --description "Usuá
 
 ### __Recursos da Rede__
 
+#### VCN (Virtual Cloud Network)
+
 Começaremos pela criação da VCN no compartimento "cmp-network":
 
 ```
