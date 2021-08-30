@@ -362,4 +362,26 @@ O primeiro gateway que iremos criar é o _[Service Gateway](https://docs.oracle.
 
 >_**__NOTA:__** O [Service Gateway](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/servicegateway.htm) é um serviço regional e permite acessar somente os serviços existentes na mesma região que a VCN._
 
+Antes de criarmos o recurso, vamos listar quais os serviços são no momento suportados de utilização pelo gateway:
 
+```
+darmbrust@hoodwink:~$ oci network service list
+{
+  "data": [
+    {
+      "cidr-block": "all-gru-services-in-oracle-services-network",
+      "description": "All GRU Services In Oracle Services Network",
+      "id": "ocid1.service.oc1.sa-saopaulo-1.aaaaaaaacd57uig6rzxm2qfipukbqpje2bhztqszh3aj7zk2jtvf6gvntena",
+      "name": "All GRU Services In Oracle Services Network"
+    },
+    {
+      "cidr-block": "oci-gru-objectstorage",
+      "description": "OCI GRU Object Storage",
+      "id": "ocid1.service.oc1.sa-saopaulo-1.aaaaaaaalrthnhiysrsux6lnhougwb2wvq37bd2tpf2au4ieahtg57zw7ura",
+      "name": "OCI GRU Object Storage"
+    }
+  ]
+}
+```
+
+No momento, temos suporte a usar todos os serviços da região _(all-gru-services-in-oracle-services-network)_ e o _[Object Storage](https://docs.oracle.com/pt-br/iaas/Content/Object/Concepts/objectstorageoverview.htm) (oci-gru-objectstorage)_.
