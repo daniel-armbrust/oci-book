@@ -356,7 +356,7 @@ Action completed. Waiting until the resource has entered state: ('AVAILABLE',)
 
 #### Subrede Privada - Banco de Dados
 
-##### Service Gateway
+##### **Service Gateway**
 
 O primeiro gateway que iremos criar é o _[Service Gateway](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/servicegateway.htm)_. Este permite que seus recursos acessem os serviços do OCI de forma segura e privada, sem precisar expor os dados à internet pública. Normalmente usamos este tipo de gateway para acessar o serviço _[Object Storage](https://docs.oracle.com/pt-br/iaas/Content/Object/Concepts/objectstorageoverview.htm)_ e possibilitar um banco de dados, por exemplo, realizar seus backups na nuvem. Este também será o nosso propósito!
 
