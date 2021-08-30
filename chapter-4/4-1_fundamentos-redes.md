@@ -259,7 +259,7 @@ darmbrust@hoodwink:~$ oci iam group create --name "grp-dba" --description "Usuá
 
 #### VCN (Virtual Cloud Network)
 
-Começaremos pela criação da VCN no compartimento "cmp-network":
+Começaremos pela criação da _[VCN](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingVCNs_topic-Overview_of_VCNs_and_Subnets.htm)_ no compartimento "cmp-network":
 
 ```
 darmbrust@hoodwink:~$ oci network vcn create \
@@ -298,6 +298,59 @@ Action completed. Waiting until the resource has entered state: ('AVAILABLE',)
 }
 ```
 
-Por padrão, uma VCN já "nasce" equipada com um _[DHCP Options](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingDHCP.htm#DHCP_Options) (default-dhcp-options-id)_, uma _[Tabela de Roteamento](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingroutetables.htm#Route2) (default-route-table-id)_ e uma _[Security List](https://docs.oracle.com/pt-br/iaas/Content/Network/Concepts/securitylists.htm) (default-security-list-id)_. Estes não podem ser removidos. 
+Por padrão, uma _[VCN](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingVCNs_topic-Overview_of_VCNs_and_Subnets.htm)_ já "nasce" equipada com um _[DHCP Options](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingDHCP.htm#DHCP_Options) (default-dhcp-options-id)_, uma _[Tabela de Roteamento](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingroutetables.htm#Route2) (default-route-table-id)_ e uma _[Security List](https://docs.oracle.com/pt-br/iaas/Content/Network/Concepts/securitylists.htm) (default-security-list-id)_. Estes não podem ser removidos. 
 
 Criaremos cada um desses recursos de forma separada. Você é livre para usar os recursos criados por padrão, se preferir.
+
+#### Opções de DHCP (dhcp options)
+
+Para se criar o recurso _[DHCP Options](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingDHCP.htm)_ é necessário informar o OCID da _[VCN](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingVCNs_topic-Overview_of_VCNs_and_Subnets.htm)_ no qual as opções de DHCP serão anexadas. Para isto, começaremos consultado qual OCID da _[VCN](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingVCNs_topic-Overview_of_VCNs_and_Subnets.htm)_ criada:
+
+```
+darmbrust@hoodwink:~$ oci network vcn list \
+> --compartment-id "ocid1.compartment.oc1..aaaaaaaauvqvbbx3oridcm5d2ztxkftwr362u2vl5zdsayzbehzwbjs56soq" \
+> --query 'data[?name=="vcn-prd"].id'
+[
+  "ocid1.vcn.oc1.sa-saopaulo-1.amaaaaaahcglxkaabicl4jiikcavz2h2nvazibxp4rdiwziqsce4h5wksz2a"
+]
+```
+
+A partir do OCID da _[VCN](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingVCNs_topic-Overview_of_VCNs_and_Subnets.htm)_ obtido, criaremos o _[DHCP Options](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingDHCP.htm)_ com o comando abaixo:
+
+```
+darmbrust@hoodwink:~$ oci network dhcp-options create \
+> --compartment-id "ocid1.compartment.oc1..aaaaaaaauvqvbbx3oridcm5d2ztxkftwr362u2vl5zdsayzbehzwbjs56soq" \
+> --options '[{"type": "DomainNameServer", "serverType": "VcnLocalPlusInternet"}]' \
+> --display-name "dhcp_vcn-prd" \
+> --domain-name-type VCN_DOMAIN \
+> --vcn-id "ocid1.vcn.oc1.sa-saopaulo-1.amaaaaaahcglxkaabicl4jiikcavz2h2nvazibxp4rdiwziqsce4h5wksz2a" \
+> --wait-for-state AVAILABLE
+Action completed. Waiting until the resource has entered state: ('AVAILABLE',)
+{
+  "data": {
+    "compartment-id": "ocid1.compartment.oc1..aaaaaaaauvqvbbx3oridcm5d2ztxkftwr362u2vl5zdsayzbehzwbjs56soq",
+    "defined-tags": {
+      "Oracle-Tags": {
+        "CreatedBy": "oracleidentitycloudservice/tispeketro@biyac.com",
+        "CreatedOn": "2021-08-30T14:07:12.746Z"
+      }
+    },
+    "display-name": "dhcp_vcn-prd",
+    "domain-name-type": "VCN_DOMAIN",
+    "freeform-tags": {},
+    "id": "ocid1.dhcpoptions.oc1.sa-saopaulo-1.aaaaaaaawaku2ug5htyapopgpgvtzt5amiyalrrq2bbmczpqif7d6llbmq5q",
+    "lifecycle-state": "AVAILABLE",
+    "options": [
+      {
+        "custom-dns-servers": [],
+        "server-type": "VcnLocalPlusInternet",
+        "type": "DomainNameServer"
+      }
+    ],
+    "time-created": "2021-08-30T14:07:12.842000+00:00",
+    "vcn-id": "ocid1.vcn.oc1.sa-saopaulo-1.amaaaaaahcglxkaabicl4jiikcavz2h2nvazibxp4rdiwziqsce4h5wksz2a"
+  },
+  "etag": "2261b7fb"
+}
+```
+
