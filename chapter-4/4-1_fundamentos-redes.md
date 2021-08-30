@@ -421,3 +421,7 @@ darmbrust@hoodwink:~$ oci network service-gateway create \
   "etag": "c2b79a65"
 }
 ```
+
+#### Tabela de Roteamento
+
+

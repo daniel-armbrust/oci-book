@@ -52,6 +52,33 @@ root@hoodwink:~# oci --latest-version
 
 Mantenha-se sempre atualizado! Além de corrigir bugs e acrescentar melhorias, atualizar o _[OCI CLI](https://docs.oracle.com/pt-br/iaas/Content/API/Concepts/cliconcepts.htm)_ possibilita interação com novos serviços.
 
+#### __Trabalhando com o OCI CLI__
+
+Ao começar a trabalhar com o _[OCI CLI](https://docs.oracle.com/pt-br/iaas/Content/API/Concepts/cliconcepts.htm)_, você irá se deparar com alguns parâmetros de alguns recursos, que exigem valores _"complexos em formato [JSON](https://pt.wikipedia.org/wiki/JSON)"_. Estes valores, como arrays e objetos com mais de um valor, são especificadas no formato _[JSON](https://pt.wikipedia.org/wiki/JSON)"_, através de uma string na linha de comando, ou utilizando os valores dentro de um arquivo.
+
+Podemos consultar os valores necessários para criar um recurso, através da documentação das APIs do OCI, neste link _[aqui](https://docs.oracle.com/en-us/iaas/api/)_. Ou, de uma maneira mais fácil, por recurso, através do comando abaixo:
+
+```
+darmbrust@hoodwink:~$ oci network route-table create --generate-param-json-input route-rules
+[
+  {
+    "cidrBlock": "string",
+    "description": "string",
+    "destination": "string",
+    "destinationType": "string",
+    "networkEntityId": "string"
+  },
+  {
+    "cidrBlock": "string",
+    "description": "string",
+    "destination": "string",
+    "destinationType": "string",
+    "networkEntityId": "string"
+  }
+]
+```
+
+
 ### __Cloud Shell__
 
 O _[Cloud Shell](https://docs.oracle.com/pt-br/iaas/Content/API/Concepts/devcloudshellintro.htm)_ é um terminal (shell Linux) acessível através da _[Web Console](https://docs.oracle.com/pt-br/iaas/Content/GSG/Tasks/signingin.htm#Signing_In_to_the_Console)_, gratuito e já com o _[OCI CLI](https://docs.oracle.com/pt-br/iaas/Content/API/Concepts/cliconcepts.htm)_ configurado e pronto pra uso. Há também outras ferramentas que já vem instaladas como o _[Ansible](https://docs.oracle.com/pt-br/iaas/Content/API/SDKDocs/ansible.htm)_.
