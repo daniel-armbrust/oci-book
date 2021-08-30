@@ -385,3 +385,39 @@ darmbrust@hoodwink:~$ oci network service list
 ```
 
 No momento, temos suporte a usar todos os serviços da região _(all-gru-services-in-oracle-services-network)_ e o _[Object Storage](https://docs.oracle.com/pt-br/iaas/Content/Object/Concepts/objectstorageoverview.htm) (oci-gru-objectstorage)_.
+
+Iremos criar o _[Service Gateway](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/servicegateway.htm)_ para utilizar especificamente o _[Object Storage](https://docs.oracle.com/pt-br/iaas/Content/Object/Concepts/objectstorageoverview.htm)_ com o comando abaixo:
+
+```
+darmbrust@hoodwink:~$ oci network service-gateway create \
+> --compartment-id "ocid1.compartment.oc1..aaaaaaaauvqvbbx3oridcm5d2ztxkftwr362u2vl5zdsayzbehzwbjs56soq" \
+> --services '[{"serviceId": "ocid1.service.oc1.sa-saopaulo-1.aaaaaaaalrthnhiysrsux6lnhougwb2wvq37bd2tpf2au4ieahtg57zw7ura", "serviceName": "OCI GRU Object Storage"}]' \
+> --vcn-id "ocid1.vcn.oc1.sa-saopaulo-1.amaaaaaahcglxkaabicl4jiikcavz2h2nvazibxp4rdiwziqsce4h5wksz2a" \
+> --display-name "srgw_vcn-prd"
+{
+  "data": {
+    "block-traffic": false,
+    "compartment-id": "ocid1.compartment.oc1..aaaaaaaauvqvbbx3oridcm5d2ztxkftwr362u2vl5zdsayzbehzwbjs56soq",
+    "defined-tags": {
+      "Oracle-Tags": {
+        "CreatedBy": "oracleidentitycloudservice/daniel.armbrust@algumdominio.com",
+        "CreatedOn": "2021-08-30T17:16:12.619Z"
+      }
+    },
+    "display-name": "srgw_vcn-prd",
+    "freeform-tags": {},
+    "id": "ocid1.servicegateway.oc1.sa-saopaulo-1.aaaaaaaaocdhz5mzk3pu3cmkn6gfggoqig4qvwrn5mbgbvrtbyz2t2n67rqa",
+    "lifecycle-state": "AVAILABLE",
+    "route-table-id": null,
+    "services": [
+      {
+        "service-id": "ocid1.service.oc1.sa-saopaulo-1.aaaaaaaalrthnhiysrsux6lnhougwb2wvq37bd2tpf2au4ieahtg57zw7ura",
+        "service-name": "OCI GRU Object Storage"
+      }
+    ],
+    "time-created": "2021-08-30T17:16:13.066000+00:00",
+    "vcn-id": "ocid1.vcn.oc1.sa-saopaulo-1.amaaaaaahcglxkaabicl4jiikcavz2h2nvazibxp4rdiwziqsce4h5wksz2a"
+  },
+  "etag": "c2b79a65"
+}
+```
