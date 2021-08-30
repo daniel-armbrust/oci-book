@@ -315,7 +315,7 @@ darmbrust@hoodwink:~$ oci network vcn list \
 ]
 ```
 
-A partir do OCID da _[VCN](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingVCNs_topic-Overview_of_VCNs_and_Subnets.htm)_ obtido, criaremos o _[DHCP Options](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingDHCP.htm)_ com o comando abaixo:
+A partir do valor OCID da _[VCN](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingVCNs_topic-Overview_of_VCNs_and_Subnets.htm)_ criada, criaremos o _[DHCP Options](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingDHCP.htm)_ com o comando abaixo:
 
 ```
 darmbrust@hoodwink:~$ oci network dhcp-options create \
