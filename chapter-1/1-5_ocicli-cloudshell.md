@@ -101,6 +101,32 @@ darmbrust@hoodwink:~$ oci network vcn create \
 
 Usar o parâmetro _"--wait-for-state"_, pode ser útil quando você for programar a criação dos seus recursos no OCI. 
 
+Lembrando que o _"ciclo de vida"_ de um recurso, pode ser consultado com o comando abaixo:
+
+```
+darmbrust@hoodwink:~$ oci work-requests
+Usage: oci work-requests [OPTIONS] COMMAND [ARGS]...
+
+  Many of the CLI operations that you use to create and configure Compute
+  resources do not take effect immediately. In these cases, the operation
+  spawns an asynchronous workflow to fulfill the request. Work requests
+  provide visibility into the status of these in-progress, long-running
+  workflows.
+
+  For more information about work requests and the operations that spawn
+  work requests, see [Viewing the State of a Compute Work Request].
+
+Options:
+  -?, -h, --help  For detailed help on any of these individual commands, enter
+                  <command> --help.
+
+
+Commands:
+  work-request            An asynchronous work request.
+  work-request-error      An error encountered while executing an operation...
+  work-request-log-entry  A log message from executing an operation that is...
+```
+
 ### __Cloud Shell__
 
 O _[Cloud Shell](https://docs.oracle.com/pt-br/iaas/Content/API/Concepts/devcloudshellintro.htm)_ é um terminal (shell Linux) acessível através da _[Web Console](https://docs.oracle.com/pt-br/iaas/Content/GSG/Tasks/signingin.htm#Signing_In_to_the_Console)_, gratuito e já com o _[OCI CLI](https://docs.oracle.com/pt-br/iaas/Content/API/Concepts/cliconcepts.htm)_ configurado e pronto pra uso. Há também outras ferramentas que já vem instaladas como o _[Ansible](https://docs.oracle.com/pt-br/iaas/Content/API/SDKDocs/ansible.htm)_.
