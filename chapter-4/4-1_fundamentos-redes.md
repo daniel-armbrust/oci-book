@@ -474,3 +474,68 @@ Action completed. Waiting until the resource has entered state: ('AVAILABLE',)
 ```
 
 #### Security List
+
+Para a subrede de banco de dados, iremos permitir somente tráfego de entrada na porta 3306/TCP a partir das portas clientes 1024/TCP até 65535/TCP. Isto é feito pelos parâmetros _"--egress-security-rules"_ e _"--ingress-security-rules"_, que permitem especificar regras de saída e entrada.
+
+```
+darmbrust@hoodwink:~$ oci network security-list create \
+> --compartment-id "ocid1.compartment.oc1..aaaaaaaauvqvbbx3oridcm5d2ztxkftwr362u2vl5zdsayzbehzwbjs56soq" \
+> --egress-security-rules '[{"destination": "0.0.0.0/0", "protocol": "all", "isStateless": true}]' \
+> --ingress-security-rules '[{"source": "0.0.0.0/0", "protocol": "6", "isStateless": true, "tcpOptions": {"destinationPortRange": {"min": 3306, "max": 3306}, "sourcePortRange": {"min": 1024, "max": 65535}}}]' \
+> --vcn-id "ocid1.vcn.oc1.sa-saopaulo-1.amaaaaaahcglxkaabicl4jiikcavz2h2nvazibxp4rdiwziqsce4h5wksz2a" \
+> --display-name "secl-1_subnprv-db_vcn-prd" \
+> --wait-for-state AVAILABLE
+Action completed. Waiting until the resource has entered state: ('AVAILABLE',)
+{
+  "data": {
+    "compartment-id": "ocid1.compartment.oc1..aaaaaaaauvqvbbx3oridcm5d2ztxkftwr362u2vl5zdsayzbehzwbjs56soq",
+    "defined-tags": {
+      "Oracle-Tags": {
+        "CreatedBy": "oracleidentitycloudservice/tispeketro@biyac.com",
+        "CreatedOn": "2021-08-31T14:22:46.542Z"
+      }
+    },
+    "display-name": "secl-1_subnprv-db_vcn-prd",
+    "egress-security-rules": [
+      {
+        "description": null,
+        "destination": "0.0.0.0/0",
+        "destination-type": "CIDR_BLOCK",
+        "icmp-options": null,
+        "is-stateless": true,
+        "protocol": "all",
+        "tcp-options": null,
+        "udp-options": null
+      }
+    ],
+    "freeform-tags": {},
+    "id": "ocid1.securitylist.oc1.sa-saopaulo-1.aaaaaaaal4rgkk7np7hoxt5cjr6topysdp4b4xrudlk4mbmvibf5knz72bgq",
+    "ingress-security-rules": [
+      {
+        "description": null,
+        "icmp-options": null,
+        "is-stateless": true,
+        "protocol": "6",
+        "source": "0.0.0.0/0",
+        "source-type": "CIDR_BLOCK",
+        "tcp-options": {
+          "destination-port-range": {
+            "max": 3306,
+            "min": 3306
+          },
+          "source-port-range": {
+            "max": 65535,
+            "min": 1024
+          }
+        },
+        "udp-options": null
+      }
+    ],
+    "lifecycle-state": "AVAILABLE",
+    "time-created": "2021-08-31T14:22:46.587000+00:00",
+    "vcn-id": "ocid1.vcn.oc1.sa-saopaulo-1.amaaaaaahcglxkaabicl4jiikcavz2h2nvazibxp4rdiwziqsce4h5wksz2a"
+  },
+  "etag": "da35004c"
+}
+
+```
