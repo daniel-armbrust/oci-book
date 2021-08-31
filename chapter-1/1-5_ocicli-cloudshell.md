@@ -54,7 +54,7 @@ Mantenha-se sempre atualizado! Além de corrigir bugs e acrescentar melhorias, a
 
 #### __Trabalhando com o OCI CLI__
 
-Ao começar a trabalhar com o _[OCI CLI](https://docs.oracle.com/pt-br/iaas/Content/API/Concepts/cliconcepts.htm)_ você irá se deparar com parâmetros que exigem valores _"complexos no formato [JSON](https://pt.wikipedia.org/wiki/JSON)"_. Estes são arrays e objetos que exigem mais de um valor e devem ser especificados no formato _[JSON](https://pt.wikipedia.org/wiki/JSON)"_, através de uma string na linha de comando, ou utilizando um arquivo.
+Ao começar a trabalhar com o _[OCI CLI](https://docs.oracle.com/pt-br/iaas/Content/API/Concepts/cliconcepts.htm)_ você irá se deparar com parâmetros que exigem valores _"complexos no formato [JSON](https://pt.wikipedia.org/wiki/JSON)"_. Estes podem ser vetores e objetos que exigem mais de um valor e devem ser especificados no formato _[JSON](https://pt.wikipedia.org/wiki/JSON)"_, através de uma string na linha de comando, ou utilizando um arquivo.
 
 Uma das formas para consultar os valores necessários para se criar um recurso, é através da documentação das APIs do OCI neste link _[aqui](https://docs.oracle.com/en-us/iaas/api/)_.
 
