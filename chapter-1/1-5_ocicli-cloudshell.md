@@ -82,6 +82,25 @@ darmbrust@hoodwink:~$ oci network service-gateway create \
 > --display-name "srgw_vcn-prd"
 ```
 
+Um outro parâmetro que você verá por aqui é _"--wait-for-state"_. Alguns recursos possuem um _"ciclo de vida"_. Isto quer dizer que quando solicitamos sua criação, por exemplo, o mesmo não será criado imediatamente. O OCI recebe a instrução de criação, esta instrução vai para um fila que será processada e se tudo der certo, o recurso será criado. Isto não necessáriamente se aplica somente a ação de _"criar"_. Ações de _"exclusão"_ ou _"atualização"_, também caem em uma fila para ser processado no futuro. 
+
+Dizemos então, que este tipo de operação, é uma operação _*assíncrona*_. Operações assíncronas estão presentes neste _"mundo de APIs"_. O que a ferramenta _[OCI CLI](https://docs.oracle.com/pt-br/iaas/Content/API/Concepts/cliconcepts.htm)_ faz é lidar, de uma forma fácil, com as _[APIs do OCI](https://docs.oracle.com/en-us/iaas/api/)_.
+
+O parâmetro _"--wait-for-state"_, é uma forma de "travar/bloquear a execução" do _[OCI CLI](https://docs.oracle.com/pt-br/iaas/Content/API/Concepts/cliconcepts.htm)_, e só me devolver devolta o shell, quando o recurso atingir determinado _"estado"_. 
+
+Por exemplo, ao criarmos uma _[VCN](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingVCNs_topic-Overview_of_VCNs_and_Subnets.htm)_, podemos bloquear a execução do _[OCI CLI](https://docs.oracle.com/pt-br/iaas/Content/API/Concepts/cliconcepts.htm)_ até que o recurso se torne disponível:
+
+```
+darmbrust@hoodwink:~$ oci network vcn create \
+> --compartment-id "ocid1.compartment.oc1..aaaaaaaauvqvbbx3oridcm5d2ztxkftwr362u2vl5zdsayzbehzwbjs56soq" \
+> --cidr-blocks '["10.0.0.0/16"]' \
+> --display-name "vcn-prd" \
+> --is-ipv6-enabled false \
+> --wait-for-state AVAILABLE
+```
+
+Usar o parâmetro _"--wait-for-state"_, pode ser útil quando você for programar a criação dos seus recursos no OCI. 
+
 ### __Cloud Shell__
 
 O _[Cloud Shell](https://docs.oracle.com/pt-br/iaas/Content/API/Concepts/devcloudshellintro.htm)_ é um terminal (shell Linux) acessível através da _[Web Console](https://docs.oracle.com/pt-br/iaas/Content/GSG/Tasks/signingin.htm#Signing_In_to_the_Console)_, gratuito e já com o _[OCI CLI](https://docs.oracle.com/pt-br/iaas/Content/API/Concepts/cliconcepts.htm)_ configurado e pronto pra uso. Há também outras ferramentas que já vem instaladas como o _[Ansible](https://docs.oracle.com/pt-br/iaas/Content/API/SDKDocs/ansible.htm)_.
