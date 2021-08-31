@@ -58,7 +58,7 @@ Ao começar a trabalhar com o _[OCI CLI](https://docs.oracle.com/pt-br/iaas/Cont
 
 Uma das formas para consultar os valores necessários para se criar um recurso, é através da documentação das APIs do OCI neste link _[aqui](https://docs.oracle.com/en-us/iaas/api/)_.
 
-Uma outra forma é através do parâmetro _"--generate-param-json-input"_ do _[OCI CLI](https://docs.oracle.com/pt-br/iaas/Content/API/Concepts/cliconcepts.htm)_. Este exibe qual é o documento _[JSON](https://pt.wikipedia.org/wiki/JSON)_ esperado de um determinado parâmetro. Veja o exemplo abaixo, onde necessito saber qual é o _[JSON](https://pt.wikipedia.org/wiki/JSON)_ esperado para criação de um _[Service Gateway](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/servicegateway.htm)_:
+Uma outra forma é através do parâmetro _"--generate-param-json-input"_ do _[OCI CLI](https://docs.oracle.com/pt-br/iaas/Content/API/Concepts/cliconcepts.htm)_. Este exibe qual é o documento _[JSON](https://pt.wikipedia.org/wiki/JSON)_ esperado de um determinado parâmetro. Veja o exemplo abaixo, onde necessito saber qual é o _[JSON](https://pt.wikipedia.org/wiki/JSON)_ para criação de um _[Service Gateway](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/servicegateway.htm)_:
 
 ```
 darmbrust@hoodwink:~$ oci network service-gateway create --generate-param-json-input services
