@@ -491,7 +491,7 @@ Action completed. Waiting until the resource has entered state: ('AVAILABLE',)
     "compartment-id": "ocid1.compartment.oc1..aaaaaaaauvqvbbx3oridcm5d2ztxkftwr362u2vl5zdsayzbehzwbjs56soq",
     "defined-tags": {
       "Oracle-Tags": {
-        "CreatedBy": "oracleidentitycloudservice/tispeketro@biyac.com",
+        "CreatedBy": "oracleidentitycloudservice/daniel.armbrust@algumdominio.com",
         "CreatedOn": "2021-08-31T14:22:46.542Z"
       }
     },
