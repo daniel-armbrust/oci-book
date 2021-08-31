@@ -424,4 +424,41 @@ darmbrust@hoodwink:~$ oci network service-gateway create \
 
 #### Tabela de Roteamento
 
-A _[tabela de roteamento](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingroutetables.htm)_, da subrede privada para banco de dados, só irá possuir uma regra. Esta irá direcionar o tráfego, dos recursos desta subrede, para o _[Service Gateway](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/servicegateway.htm)_ que possibilita uma comunicação segura até o _[Object Storage](https://docs.oracle.com/pt-br/iaas/Content/Object/Concepts/objectstorageoverview.htm)_. O intuíto desta regra é permitir que o banco de dados faça backups dos dados utilizando o serviço _[Object Storage](https://docs.oracle.com/pt-br/iaas/Content/Object/Concepts/objectstorageoverview.htm)_.
+A _[tabela de roteamento](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingroutetables.htm)_, da subrede privada para banco de dados, só irá possuir uma regra. Esta irá direcionar o tráfego, dos recursos desta subrede, para o _[Service Gateway](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/servicegateway.htm)_ que possibilita uma comunicação segura até o _[Object Storage](https://docs.oracle.com/pt-br/iaas/Content/Object/Concepts/objectstorageoverview.htm)_. 
+
+```
+darmbrust@hoodwink:~$  oci network route-table create \
+> --compartment-id "ocid1.compartment.oc1..aaaaaaaauvqvbbx3oridcm5d2ztxkftwr362u2vl5zdsayzbehzwbjs56soq" \
+> --route-rules '[{"destination":"oci-gru-objectstorage", "destinationType": "SERVICE_CIDR_BLOCK", "networkEntityId": "ocid1.servicegateway.oc1.sa-saopaulo-1.aaaaaaaaocdhz5mzk3pu3cmkn6gfggoqig4qvwrn5mbgbvrtbyz2t2n67rqa"}]' \
+> --vcn-id "ocid1.vcn.oc1.sa-saopaulo-1.amaaaaaahcglxkaabicl4jiikcavz2h2nvazibxp4rdiwziqsce4h5wksz2a" \
+> --display-name "rtb_subnprv-db_vcn-prd" \
+> --wait-for-state AVAILABLE
+Action completed. Waiting until the resource has entered state: ('AVAILABLE',)
+{
+  "data": {
+    "compartment-id": "ocid1.compartment.oc1..aaaaaaaauvqvbbx3oridcm5d2ztxkftwr362u2vl5zdsayzbehzwbjs56soq",
+    "defined-tags": {
+      "Oracle-Tags": {
+        "CreatedBy": "oracleidentitycloudservice/tispeketro@biyac.com",
+        "CreatedOn": "2021-08-31T11:16:15.966Z"
+      }
+    },
+    "display-name": "rtb_subnprv-db_vcn-prd",
+    "freeform-tags": {},
+    "id": "ocid1.routetable.oc1.sa-saopaulo-1.aaaaaaaalq2gf3mksa27rueidzfbq677ss2bxkkvlapekjs2tt4ske6ueyna",
+    "lifecycle-state": "AVAILABLE",
+    "route-rules": [
+      {
+        "cidr-block": null,
+        "description": null,
+        "destination": "oci-gru-objectstorage",
+        "destination-type": "SERVICE_CIDR_BLOCK",
+        "network-entity-id": "ocid1.servicegateway.oc1.sa-saopaulo-1.aaaaaaaaocdhz5mzk3pu3cmkn6gfggoqig4qvwrn5mbgbvrtbyz2t2n67rqa"
+      }
+    ],
+    "time-created": "2021-08-31T11:16:15.984000+00:00",
+    "vcn-id": "ocid1.vcn.oc1.sa-saopaulo-1.amaaaaaahcglxkaabicl4jiikcavz2h2nvazibxp4rdiwziqsce4h5wksz2a"
+  },
+  "etag": "e50a5079"
+}
+```
