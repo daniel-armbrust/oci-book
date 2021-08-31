@@ -38,7 +38,7 @@ Aprensento abaixo, alguns dos componentes existentes do serviço de _[Networking
 6. **VNIC (Virtual Network Interface Card)**
     - O termo vem de _[NIC (network interface card)](https://pt.wikipedia.org/wiki/Placa_de_rede)_. É uma interface de rede virtual ou VNIC.
     - Todo recurso que se comunica com outros recursos da rede, criam uma VNIC que está associada às NICs físicas do serviço de redes do OCI.
-    - Toda VNIC obrigatóriamente reside em uma VCN.
+    - Toda VNIC obrigatóriamente reside em uma subrede.
     - Uma VNIC pode ter até 31 endereços IPv4 privados, um endereço IPv4 público opcional para cada IP privado e até 32 endereços IPv6 opcionais.
 
 7. **Opções de DHCP (DHCP Options)**
