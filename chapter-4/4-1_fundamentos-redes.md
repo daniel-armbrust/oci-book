@@ -424,4 +424,4 @@ darmbrust@hoodwink:~$ oci network service-gateway create \
 
 #### Tabela de Roteamento
 
-
+A _[tabela de roteamento](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingroutetables.htm)_, da subrede privada para banco de dados, só irá possuir uma regra. Esta irá direcionar o tráfego, dos recursos desta subrede, para o _[Service Gateway](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/servicegateway.htm)_ que possibilita uma comunicação segura até o _[Object Storage](https://docs.oracle.com/pt-br/iaas/Content/Object/Concepts/objectstorageoverview.htm)_. O intuíto desta regra é permitir que o banco de dados faça backups dos dados utilizando o serviço _[Object Storage](https://docs.oracle.com/pt-br/iaas/Content/Object/Concepts/objectstorageoverview.htm)_.
