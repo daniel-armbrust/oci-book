@@ -549,3 +549,12 @@ De acordo com a documentação da API da _[Security List](https://docs.oracle.co
 - ICMPv6 ("58")
 
 #### Subrede
+
+```
+darmbrust@hoodwink:~$ oci network security-list list \
+> --compartment-id "ocid1.compartment.oc1..aaaaaaaauvqvbbx3oridcm5d2ztxkftwr362u2vl5zdsayzbehzwbjs56soq" \
+> --query "data [?contains(\"display-name\",'secl-1_subnprv-db_vcn-prd')].id"
+[
+  "ocid1.securitylist.oc1.sa-saopaulo-1.aaaaaaaal4rgkk7np7hoxt5cjr6topysdp4b4xrudlk4mbmvibf5knz72bgq"
+]
+```
