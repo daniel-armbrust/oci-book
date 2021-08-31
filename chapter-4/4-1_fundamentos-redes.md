@@ -23,19 +23,29 @@ Aprensento abaixo, alguns dos componentes existentes do serviço de _[Networking
     - Recursos criados dentro de uma subrede utilizam a mesma tabela de roteamento (route table), as mesmas listas de segurança (security lists), e mesmas opções de DHCP (dhcp options).
     - Você cria uma subrede como sendo pública ou privada. Uma subrede pública permite expor, através de IP público, um recurso na internet. A subrede privada, não.
 
-3. **Tabelas de Roteamento (route table)**
+3. **Tabelas de Roteamento (Route Table)**
     - Contém regras de roteamento que direcionam o tráfego da subrede “para fora” da VCN.
     - Subredes dentro da mesma VCN, não precisam de regras de roteamento para se comunicarem.
     
-4. **Regras de Segurança (security lists)** 
-    - É o firewall da subrede.
-    - É possível bloquear ou liberar o tráfego de rede por protocolos e portas.
+4. **Regras de Segurança (Security Lists)** 
+    - É o firewall virtual aplicado na "borda" de uma subrede.
+    - Todo o tráfego que entra e saí, de todos os recursos da subrede, é avaliado por este tipo de firewall.
+    - Tudo é bloqueado por padrão. É possível liberar o tráfego de rede por protocolos e portas.
 
-5. **Opções de DHCP (dhcp options)**
+5. **Grupos de segurança de rede (NSG - Network Security Groups)**
+    - É um outro tipo de firewall virtual, porém este é aplicado sobre uma ou várias VNICs.    
+
+6. **VNIC (Virtual Network Interface Card)**
+    - O termo vem de NIC (network interface card). É uma interface de rede virtual ou VNIC.
+    - Todo recurso que se comunica com outros recursos da rede, criam uma VNIC que está associada às NICs físicas do serviço de redes do OCI.
+    - Toda VNIC obrigatóriamente reside em uma VCN.
+    - Uma VNIC pode ter até 31 endereços IPv4 privados, um endereço IPv4 público opcional para cada IP privado e até 32 endereços IPv6 opcionais.
+
+7. **Opções de DHCP (DHCP Options)**
     - São configurações informadas pelo protocolo DHCP a todos os recursos criados dentro de uma subrede. 
     - É possível definir, por exemplo, quais servidores DNS serão utilizados pelos recursos da subrede.
 
-6. **Gateways de Comunicação**
+8. **Gateways de Comunicação**
     - Existem diferentes _"gateways de comunicação"_ que podem ser usados no OCI. Segue resumo: <br>
         - **Internet Gateway**
             - Possibilita comunicação direta vinda da internet. Para isto, é necessário que o recurso tenha um IP público. <br><br>
@@ -462,3 +472,5 @@ Action completed. Waiting until the resource has entered state: ('AVAILABLE',)
   "etag": "e50a5079"
 }
 ```
+
+#### Security List
