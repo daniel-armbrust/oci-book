@@ -54,30 +54,33 @@ Mantenha-se sempre atualizado! Além de corrigir bugs e acrescentar melhorias, a
 
 #### __Trabalhando com o OCI CLI__
 
-Ao começar a trabalhar com o _[OCI CLI](https://docs.oracle.com/pt-br/iaas/Content/API/Concepts/cliconcepts.htm)_, você irá se deparar com alguns parâmetros de alguns recursos, que exigem valores _"complexos em formato [JSON](https://pt.wikipedia.org/wiki/JSON)"_. Estes valores, como arrays e objetos com mais de um valor, são especificadas no formato _[JSON](https://pt.wikipedia.org/wiki/JSON)"_, através de uma string na linha de comando, ou utilizando os valores dentro de um arquivo.
+Ao começar a trabalhar com o _[OCI CLI](https://docs.oracle.com/pt-br/iaas/Content/API/Concepts/cliconcepts.htm)_ você irá se deparar com parâmetros de alguns recursos, que exigem valores _"complexos no formato [JSON](https://pt.wikipedia.org/wiki/JSON)"_. Estes são arrays e objetos que exigem mais de um valor e devem ser especificados no formato _[JSON](https://pt.wikipedia.org/wiki/JSON)"_, através de uma string na linha de comando, ou utilizando um arquivo.
 
-Podemos consultar os valores necessários para criar um recurso, através da documentação das APIs do OCI, neste link _[aqui](https://docs.oracle.com/en-us/iaas/api/)_. Ou, de uma maneira mais fácil, por recurso, através do comando abaixo:
+Uma das formas para consultar os valores necessários para se criar um recurso, é através da documentação das APIs do OCI neste link _[aqui](https://docs.oracle.com/en-us/iaas/api/)_.
+
+Uma outra forma é através do parâmetro _"--generate-param-json-input"_ do _[OCI CLI](https://docs.oracle.com/pt-br/iaas/Content/API/Concepts/cliconcepts.htm)_. Este exibe qual é o documento _[JSON](https://pt.wikipedia.org/wiki/JSON)_ esperado de para um determinado parâmetro, para a criação do recurso. Veja o exemplo abaixo, onde necessito saber qual é o _[JSON](https://pt.wikipedia.org/wiki/JSON)_ esperado para criação de um _[Service Gateway](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/servicegateway.htm)_:
 
 ```
-darmbrust@hoodwink:~$ oci network route-table create --generate-param-json-input route-rules
+darmbrust@hoodwink:~$ oci network service-gateway create --generate-param-json-input services
 [
   {
-    "cidrBlock": "string",
-    "description": "string",
-    "destination": "string",
-    "destinationType": "string",
-    "networkEntityId": "string"
+    "serviceId": "string"
   },
   {
-    "cidrBlock": "string",
-    "description": "string",
-    "destination": "string",
-    "destinationType": "string",
-    "networkEntityId": "string"
+    "serviceId": "string"
   }
 ]
 ```
 
+Neste caso, sabemos que o parâmetro _"--services"_ para a criação do _[Service Gateway](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/servicegateway.htm)_, pode ser especificado da seguinte forma:
+
+```
+darmbrust@hoodwink:~$ oci network service-gateway create \
+> --compartment-id "ocid1.compartment.oc1..aaaaaaaauvqvbbx3oridcm5d2ztxkftwr362u2vl5zdsayzbehzwbjs56soq" \
+> --services '[{"serviceId": "ocid1.service.oc1.sa-saopaulo-1.aaaaaaaalrthnhiysrsux6lnhougwb2wvq37bd2tpf2au4ieahtg57zw7ura"}]' \
+> --vcn-id "ocid1.vcn.oc1.sa-saopaulo-1.amaaaaaahcglxkaabicl4jiikcavz2h2nvazibxp4rdiwziqsce4h5wksz2a" \
+> --display-name "srgw_vcn-prd"
+```
 
 ### __Cloud Shell__
 
