@@ -537,5 +537,15 @@ Action completed. Waiting until the resource has entered state: ('AVAILABLE',)
   },
   "etag": "da35004c"
 }
-
 ```
+
+Nota-se que cada protocolo é identificado através do seu número. Na verdade, todo protocolo da pilha TCP/IP possui um número de identificação. Você pode consultar o número de cada protocolo, e sua respectiva especificação neste _[link](https://www.iana.org/assignments/protocol-numbers/protocol-numbers.xhtml)_. 
+
+De acordo com a documentação da API da _[Security List](https://docs.oracle.com/en-us/iaas/api/#/en/iaas/20160918/datatypes/IngressSecurityRule)_, os números para os protocolos suportados são:
+
+- ICMP ("1")
+- TCP ("6")
+- UDP ("17")
+- ICMPv6 ("58")
+
+#### Subrede
