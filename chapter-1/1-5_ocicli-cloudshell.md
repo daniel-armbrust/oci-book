@@ -84,7 +84,7 @@ darmbrust@hoodwink:~$ oci network service-gateway create \
 
 Um outro parâmetro que você verá por aqui é _"--wait-for-state"_. Alguns recursos possuem um _"ciclo de vida"_. Isto quer dizer que quando solicitamos sua criação, por exemplo, o mesmo não será criado imediatamente. O OCI recebe a instrução de criação, esta instrução vai para um fila que será processada e se tudo der certo, o recurso será criado. Isto não necessáriamente se aplica somente a ação de _"criar"_. Ações de _"exclusão"_ ou _"atualização"_, também caem em uma fila para ser processada no futuro. 
 
-Dizemos então, que este tipo de operação, é uma operação _**assíncrona**_. Operações assíncronas estão presentes neste _"mundo de APIs"_. O que a ferramenta _[OCI CLI](https://docs.oracle.com/pt-br/iaas/Content/API/Concepts/cliconcepts.htm)_ faz é lidar, de uma forma fácil, com as _[APIs do OCI](https://docs.oracle.com/en-us/iaas/api/)_.
+Dizemos então, que este tipo de operação, é uma operação _**assíncrona**_. Operações assíncronas estão presentes neste _"mundo de APIs"_. O que a ferramenta _[OCI CLI](https://docs.oracle.com/pt-br/iaas/Content/API/Concepts/cliconcepts.htm)_ faz, é lidar de uma forma fácil, com as _[APIs do OCI](https://docs.oracle.com/en-us/iaas/api/)_.
 
 O parâmetro _"--wait-for-state"_, é uma forma de "travar/bloquear a execução" do _[OCI CLI](https://docs.oracle.com/pt-br/iaas/Content/API/Concepts/cliconcepts.htm)_, e só me devolver devolta o shell, quando o recurso atingir determinado _"estado"_. 
 
