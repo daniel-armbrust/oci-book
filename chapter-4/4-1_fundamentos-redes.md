@@ -645,7 +645,7 @@ Um outro detalhe é referente a _[Security List](https://docs.oracle.com/en-us/i
 
 #### NAT Gateway
 
-O _[NAT Gateway](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/NATgateway.htm)_ permite que os recursos da subrede privada acessem a internet. Normalmente estes recursos, utilizam o _[NAT Gateway](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/NATgateway.htm)_ para executar atualizações (ex: yum / Windows Update).
+O _[NAT Gateway](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/NATgateway.htm)_ permite que os recursos da subrede privada acessem a internet. Normalmente estes recursos utilizam o _[NAT Gateway](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/NATgateway.htm)_ para executar atualizações (ex: yum / Windows Update).
 
 Para criarmos o _[NAT Gateway](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/NATgateway.htm)_ usamos o comando abaixo:
 
