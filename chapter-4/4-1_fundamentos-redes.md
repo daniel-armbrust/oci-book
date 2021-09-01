@@ -841,7 +841,7 @@ Action completed. Waiting until the resource has entered state: ('AVAILABLE',)
 }
 ```
 
->_**__NOTA:__** Permitir "tráfego total" não é uma boa prática de segurança. O intuíto aqui, é mostrar as possibilidades dos parâmetros do OCI CLI. Permita tráfego somente para as portas que são necessárias para o funcionamento da sua aplicação._
+>_**__NOTA:__** Permitir "tráfego total" não é uma boa prática de segurança. O intuíto aqui é mostrar as possibilidades dos parâmetros do OCI CLI. Permita tráfego somente para as portas que são necessárias para o funcionamento da sua aplicação._
 
 #### Subrede
 
