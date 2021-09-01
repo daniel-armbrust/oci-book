@@ -640,6 +640,7 @@ Alguns parâmetros que destaco serem importantes quando criamos uma subrede. O p
 
 Um outro detalhe é referente a _[Security List](https://docs.oracle.com/en-us/iaas/api/#/en/iaas/20160918/datatypes/IngressSecurityRule)_. Perceba que o tipo de dado do parâmetro _"--security-list-ids"_ é um vetor. Ou seja, é possível definir várias listas de segurança sendo que cada lista pode ter várias regras. Um pacote de dados será permitido se qualquer regra, em qualquer uma das listas possibilitar o tráfego. 
 
-#### Subrede Privada - Aplicação
---------------------------------
+#### Subrede Privada - Aplicação Wordpress
+------------------------------------------
 
+#### NAT Gateway
