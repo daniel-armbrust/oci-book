@@ -366,6 +366,7 @@ Action completed. Waiting until the resource has entered state: ('AVAILABLE',)
 ```
 
 #### Subrede Privada - Banco de Dados
+-------------------------------------
 
 #### Service Gateway
 
