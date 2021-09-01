@@ -585,7 +585,7 @@ darmbrust@hoodwink:~$ oci network security-list list \
 ]
 ```
 
-A partir do OCID de cada um dos recursos, criaremos a subrede:
+A partir do OCID de cada um dos recursos, criaremos a subrede com o comando abaixo:
 
 ```
 darmbrust@hoodwink:~$ oci network subnet create \
@@ -633,3 +633,5 @@ Action completed. Waiting until the resource has entered state: ('AVAILABLE',)
   "etag": "dc5d4c74"
 }
 ```
+
+Alguns parâmetros que destaco serem importantes quando criamos uma subrede. O parâmetro _"--prohibit-public-ip-on-vnic"_ define se uma subrede é pública ou privada. Se uma subrede permite endereço IP público em uma VNIC, ela é caracterizada como uma _"subrede pública"_ (aceita tráfego da internet). Neste caso, definimos o valor como _"true"_, que impede as VNICs da subrede de terem endereço IP público. Como efeito disto, a subrede se torna privada.
