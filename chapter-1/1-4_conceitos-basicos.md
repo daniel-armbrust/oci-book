@@ -174,3 +174,8 @@ Acesse o _[OCI Status](https://ocistatus.oraclecloud.com)_ através deste _[link
 No canto superior direito do _[OCI Status](https://ocistatus.oraclecloud.com)_, existe um botão _"Subscribe to updates"_. Este possibilita você a receber notificações por e-mail sempre que a infraestrutura do OCI apresentar um problema, atualização de um problema, ou quando um problema for resolvido.
 
 ![alt_text](./images/1-4_oci-status.jpg  "OCI Status")
+
+
+### __Oracle Architecture Center__
+
+O _[Oracle Architecture Center](https://www.oracle.com/cloud/architecture-center/)_ é um centro de recursos sobre o OCI que permite desenvolvedores e a equipe de TI, conhecerem sobre segurança, arquiteturas de referência, documentações, videos e boas práticas. De arquiteturas de referência a guias de início rápido, com o _[Oracle Architecture Center](https://www.oracle.com/cloud/architecture-center/)_ você pode visualizar uma determinada arquitetura, e implantar facilmente diretamente na sua conta. Este centro de recursos beneficia usuários Oracle experientes e aqueles que estão apenas começando sua jornada no OCI. 

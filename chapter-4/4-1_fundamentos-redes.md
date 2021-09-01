@@ -174,7 +174,7 @@ darmbrust@hoodwink:~$ oci iam compartment create \
 }
 ```
 
-Perceba que o pai do compartimento "projeto-wordpress" e "cmp-network", é o OCID que representa o nosso Tenant. Qualquer outro compartimento criado e que for filho do "projeto-wordpress", deve utilizar o seu OCID como valor do parâmetro "--compartment-id". Observe isto na criação dos próximos compartimentos:
+Perceba que o pai do compartimento "projeto-wordpress" e "cmp-network", é o OCID que representa o nosso Tenant. Qualquer outro compartimento criado e que for filho do "projeto-wordpress", deve utilizar o seu OCID como valor do parâmetro _"--compartment-id"_. Observe isto na criação dos próximos compartimentos:
 
 ```
 darmbrust@hoodwink:~$ oci iam compartment list --query "data[?name=='projeto-wordpress'].id"
@@ -639,3 +639,7 @@ Action completed. Waiting until the resource has entered state: ('AVAILABLE',)
 Alguns parâmetros que destaco serem importantes quando criamos uma subrede. O parâmetro _"--prohibit-public-ip-on-vnic"_ define se uma subrede é pública ou privada. Se uma subrede permite endereço IP público em uma VNIC, ela é caracterizada como sendo uma _"subrede pública"_ (aceita tráfego da internet). Neste caso, definimos o valor como _"true"_, que impede as VNICs da subrede de terem endereço IP público. Como efeito disto, a subrede se torna privada.
 
 Um outro detalhe é referente a _[Security List](https://docs.oracle.com/en-us/iaas/api/#/en/iaas/20160918/datatypes/IngressSecurityRule)_. Perceba que o tipo de dado do parâmetro _"--security-list-ids"_ é um vetor. Ou seja, é possível definir várias listas de segurança sendo que cada lista pode ter várias regras. Um pacote de dados será permitido se qualquer regra, em qualquer uma das listas possibilitar o tráfego. 
+
+#### Subrede Privada - Aplicação
+--------------------------------
+
