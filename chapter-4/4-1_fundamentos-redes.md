@@ -714,7 +714,7 @@ darmbrust@hoodwink:~$ oci network public-ip get \
 }
 ```
 
-O último recurso que iremos mostrar aqui, é a possibilidade de bloquear a passagem de tráfego pelo _[NAT Gateway](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/NATgateway.htm)_. Usa-se esta opção, quando queremos temporariamente impedir a comunicação dos recursos da subrede privada com a internet:
+A última opção que quero mostrar aqui, é a possibilidade de bloquear a passagem de tráfego pelo _[NAT Gateway](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/NATgateway.htm)_. Usa-se esta opção, quando queremos temporariamente impedir a comunicação dos recursos da subrede privada com a internet:
 
 ```
 darmbrust@hoodwink:~$ oci network nat-gateway update \
