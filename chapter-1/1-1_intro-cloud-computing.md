@@ -1,5 +1,7 @@
 # Capítulo 1: Conceitos e introdução a Computação em Nuvem no OCI
 
+_O ser humano não vive sem água, o conhecimento precisa da Internet, e hoje não há negócios sem a Computação em Nuvem._
+
 ## 1.1 - Introdução a Computação em Nuvem
 
 ### __Introdução__

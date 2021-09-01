@@ -312,7 +312,7 @@ Por padrão, uma _[VCN](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks
 
 Criaremos cada um desses recursos de forma separada. Você é livre para usar os recursos criados por padrão, se preferir.
 
-#### Opções de DHCP (dhcp options)
+#### Opções de DHCP (DHCP Options)
 
 Para se criar o recurso _[DHCP Options](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingDHCP.htm)_ é necessário informar o OCID da _[VCN](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingVCNs_topic-Overview_of_VCNs_and_Subnets.htm)_ no qual as opções de DHCP serão anexadas. Para isto, começaremos consultado qual OCID da _[VCN](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingVCNs_topic-Overview_of_VCNs_and_Subnets.htm)_ criada:
 
@@ -550,6 +550,32 @@ De acordo com a documentação da API da _[Security List](https://docs.oracle.co
 
 #### Subrede
 
+Agora que temos os recursos básicos já criados, vamos uni-los para criarmos a subrede. Primeiramente, vamos obter o OCID dos recursos necessários:
+
+- Opções de DHCP (DHCP Options)
+
+```
+darmbrust@hoodwink:~$ oci network dhcp-options list \
+> --compartment-id "ocid1.compartment.oc1..aaaaaaaauvqvbbx3oridcm5d2ztxkftwr362u2vl5zdsayzbehzwbjs56soq" \
+> --query "data [?contains(\"display-name\",'dhcp_vcn-prd')].id"
+[  
+  "ocid1.dhcpoptions.oc1.sa-saopaulo-1.aaaaaaaawaku2ug5htyapopgpgvtzt5amiyalrrq2bbmczpqif7d6llbmq5q"
+]
+```
+
+- Tabela de Roteamento
+
+```
+darmbrust@hoodwink:~$ oci network route-table list \
+> --compartment-id "ocid1.compartment.oc1..aaaaaaaauvqvbbx3oridcm5d2ztxkftwr362u2vl5zdsayzbehzwbjs56soq" \
+> --query "data [?contains(\"display-name\",'rtb_subnprv-db_vcn-prd')].id"
+[
+  "ocid1.routetable.oc1.sa-saopaulo-1.aaaaaaaalq2gf3mksa27rueidzfbq677ss2bxkkvlapekjs2tt4ske6ueyna"
+]
+```
+
+- Security List
+
 ```
 darmbrust@hoodwink:~$ oci network security-list list \
 > --compartment-id "ocid1.compartment.oc1..aaaaaaaauvqvbbx3oridcm5d2ztxkftwr362u2vl5zdsayzbehzwbjs56soq" \
@@ -557,4 +583,53 @@ darmbrust@hoodwink:~$ oci network security-list list \
 [
   "ocid1.securitylist.oc1.sa-saopaulo-1.aaaaaaaal4rgkk7np7hoxt5cjr6topysdp4b4xrudlk4mbmvibf5knz72bgq"
 ]
+```
+
+A partir do OCID de cada um dos recursos, criaremos a subrede:
+
+```
+darmbrust@hoodwink:~$ oci network subnet create \
+> --compartment-id "ocid1.compartment.oc1..aaaaaaaauvqvbbx3oridcm5d2ztxkftwr362u2vl5zdsayzbehzwbjs56soq" \
+> --vcn-id "ocid1.vcn.oc1.sa-saopaulo-1.amaaaaaahcglxkaabicl4jiikcavz2h2nvazibxp4rdiwziqsce4h5wksz2a" \
+> --dhcp-options-id "ocid1.dhcpoptions.oc1.sa-saopaulo-1.aaaaaaaawaku2ug5htyapopgpgvtzt5amiyalrrq2bbmczpqif7d6llbmq5q" \
+> --route-table-id "ocid1.routetable.oc1.sa-saopaulo-1.aaaaaaaalq2gf3mksa27rueidzfbq677ss2bxkkvlapekjs2tt4ske6ueyna" \
+> --security-list-ids '["ocid1.securitylist.oc1.sa-saopaulo-1.aaaaaaaal4rgkk7np7hoxt5cjr6topysdp4b4xrudlk4mbmvibf5knz72bgq"]' \
+> --display-name "subnprv-db_vcn-prd" \
+> --cidr-block "10.0.20.0/24" \
+> --prohibit-public-ip-on-vnic true \
+> --wait-for-state AVAILABLE
+Action completed. Waiting until the resource has entered state: ('AVAILABLE',)
+{
+  "data": {
+    "availability-domain": null,
+    "cidr-block": "10.0.20.0/24",
+    "compartment-id": "ocid1.compartment.oc1..aaaaaaaauvqvbbx3oridcm5d2ztxkftwr362u2vl5zdsayzbehzwbjs56soq",
+    "defined-tags": {
+      "Oracle-Tags": {
+        "CreatedBy": "oracleidentitycloudservice/daniel.armbrust@algumdominio.com",
+        "CreatedOn": "2021-09-01T11:28:03.526Z"
+      }
+    },
+    "dhcp-options-id": "ocid1.dhcpoptions.oc1.sa-saopaulo-1.aaaaaaaawaku2ug5htyapopgpgvtzt5amiyalrrq2bbmczpqif7d6llbmq5q",
+    "display-name": "subnprv-db_vcn-prd",
+    "dns-label": null,
+    "freeform-tags": {},
+    "id": "ocid1.subnet.oc1.sa-saopaulo-1.aaaaaaaagyg2sk2c4j46ky3lngceejohdzswlffsavqqybepekbean3gytba",
+    "ipv6-cidr-block": null,
+    "ipv6-virtual-router-ip": null,
+    "lifecycle-state": "AVAILABLE",
+    "prohibit-internet-ingress": true,
+    "prohibit-public-ip-on-vnic": true,
+    "route-table-id": "ocid1.routetable.oc1.sa-saopaulo-1.aaaaaaaalq2gf3mksa27rueidzfbq677ss2bxkkvlapekjs2tt4ske6ueyna",
+    "security-list-ids": [
+      "ocid1.securitylist.oc1.sa-saopaulo-1.aaaaaaaal4rgkk7np7hoxt5cjr6topysdp4b4xrudlk4mbmvibf5knz72bgq"
+    ],
+    "subnet-domain-name": null,
+    "time-created": "2021-09-01T11:28:03.776000+00:00",
+    "vcn-id": "ocid1.vcn.oc1.sa-saopaulo-1.amaaaaaahcglxkaabicl4jiikcavz2h2nvazibxp4rdiwziqsce4h5wksz2a",
+    "virtual-router-ip": "10.0.20.1",
+    "virtual-router-mac": "00:00:17:96:B4:D5"
+  },
+  "etag": "dc5d4c74"
+}
 ```
