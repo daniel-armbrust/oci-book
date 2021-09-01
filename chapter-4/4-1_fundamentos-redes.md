@@ -634,4 +634,4 @@ Action completed. Waiting until the resource has entered state: ('AVAILABLE',)
 }
 ```
 
-Alguns parâmetros que destaco serem importantes quando criamos uma subrede. O parâmetro _"--prohibit-public-ip-on-vnic"_ define se uma subrede é pública ou privada. Se uma subrede permite endereço IP público em uma VNIC, ela é caracterizada como uma _"subrede pública"_ (aceita tráfego da internet). Neste caso, definimos o valor como _"true"_, que impede as VNICs da subrede de terem endereço IP público. Como efeito disto, a subrede se torna privada.
+Alguns parâmetros que destaco serem importantes quando criamos uma subrede. O parâmetro _"--prohibit-public-ip-on-vnic"_ define se uma subrede é pública ou privada. Se uma subrede permite endereço IP público em uma VNIC, ela é caracterizada como sendo uma _"subrede pública"_ (aceita tráfego da internet). Neste caso, definimos o valor como _"true"_, que impede as VNICs da subrede de terem endereço IP público. Como efeito disto, a subrede se torna privada.
