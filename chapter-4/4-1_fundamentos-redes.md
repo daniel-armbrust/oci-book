@@ -782,5 +782,63 @@ Action completed. Waiting until the resource has entered state: ('AVAILABLE',)
   },
   "etag": "e6a27cac"
 }
+```
+
+#### Security List
+
+Para a subrede da aplicação _[Wordpress](https://pt.wikipedia.org/wiki/WordPress)_, iremos permitir _"tráfego total"_:
 
 ```
+darmbrust@hoodwink:~$ oci network security-list create \
+> --compartment-id "ocid1.compartment.oc1..aaaaaaaauvqvbbx3oridcm5d2ztxkftwr362u2vl5zdsayzbehzwbjs56soq" \
+> --egress-security-rules '[{"destination": "0.0.0.0/0", "protocol": "all", "isStateless": true}]' \
+> --ingress-security-rules '[{"source": "0.0.0.0/0", "protocol": "all", "isStateless": true}]' \
+> --vcn-id "ocid1.vcn.oc1.sa-saopaulo-1.amaaaaaahcglxkaabicl4jiikcavz2h2nvazibxp4rdiwziqsce4h5wksz2a" \
+> --display-name "secl-1_subnprv-app_vcn-prd" \
+> --wait-for-state AVAILABLE
+Action completed. Waiting until the resource has entered state: ('AVAILABLE',)
+{
+  "data": {
+    "compartment-id": "ocid1.compartment.oc1..aaaaaaaauvqvbbx3oridcm5d2ztxkftwr362u2vl5zdsayzbehzwbjs56soq",
+    "defined-tags": {
+      "Oracle-Tags": {
+        "CreatedBy": "oracleidentitycloudservice/daniel.armbrust@algumdominio.com",
+        "CreatedOn": "2021-09-01T19:27:24.352Z"
+      }
+    },
+    "display-name": "secl-1_subnprv-app_vcn-prd",
+    "egress-security-rules": [
+      {
+        "description": null,
+        "destination": "0.0.0.0/0",
+        "destination-type": "CIDR_BLOCK",
+        "icmp-options": null,
+        "is-stateless": true,
+        "protocol": "all",
+        "tcp-options": null,
+        "udp-options": null
+      }
+    ],
+    "freeform-tags": {},
+    "id": "ocid1.securitylist.oc1.sa-saopaulo-1.aaaaaaaacsbcnmseb2v7flq7guqmee4fuij3d4rhldftqyneingvmre6sqzq",
+    "ingress-security-rules": [
+      {
+        "description": null,
+        "icmp-options": null,
+        "is-stateless": true,
+        "protocol": "all",
+        "source": "0.0.0.0/0",
+        "source-type": "CIDR_BLOCK",
+        "tcp-options": null,
+        "udp-options": null
+      }
+    ],
+    "lifecycle-state": "AVAILABLE",
+    "time-created": "2021-09-01T19:27:24.533000+00:00",
+    "vcn-id": "ocid1.vcn.oc1.sa-saopaulo-1.amaaaaaahcglxkaabicl4jiikcavz2h2nvazibxp4rdiwziqsce4h5wksz2a"
+  },
+  "etag": "8f0077c4"
+}
+```
+
+>_**__NOTA:__** Permitir "tráfego total" não é uma boa prática de segurança. O intuíto aqui, é mostrar as possibilidades dos parâmetros do OCI CLI. Permita tráfego somente para as portas que são necessárias para o funcionamento da sua aplicação._
