@@ -713,3 +713,32 @@ darmbrust@hoodwink:~$ oci network public-ip get \
   "etag": "3a8d891"
 }
 ```
+
+O último recurso que iremos mostrar aqui, é a possibilidade de bloquear a passagem de tráfego pelo _[NAT Gateway](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/NATgateway.htm)_. Usa-se esta opção, quando queremos temporariamente impedir a comunicação dos recursos da subrede privada com a internet:
+
+```
+darmbrust@hoodwink:~$ oci network nat-gateway update \
+> --nat-gateway-id "ocid1.natgateway.oc1.sa-saopaulo-1.aaaaaaaazgfctgpxk76ofiernbtx66aiusmgal3c3gkbn2r6smqmorvyv4ea" \
+> --block-traffic true
+{
+  "data": {
+    "block-traffic": true,
+    "compartment-id": "ocid1.compartment.oc1..aaaaaaaaie4exnvj2ktkjlliahl2bxmdnteu2xmn27oc5cy5mdcmocl4vd7q",
+    "defined-tags": {
+      "Oracle-Tags": {
+        "CreatedBy": "oracleidentitycloudservice/daniel.armbrust@algumdominio.com",
+        "CreatedOn": "2021-09-01T14:35:28.931Z"
+      }
+    },
+    "display-name": "ntgw_vcn-prd",
+    "freeform-tags": {},
+    "id": "ocid1.natgateway.oc1.sa-saopaulo-1.aaaaaaaazgfctgpxk76ofiernbtx66aiusmgal3c3gkbn2r6smqmorvyv4ea",
+    "lifecycle-state": "AVAILABLE",
+    "nat-ip": "150.230.78.168",
+    "public-ip-id": "ocid1.publicip.oc1.sa-saopaulo-1.aaaaaaaaqahv2uzjlbb5ngwal2icgodzpsvx7nfbt4fxxkshz43cwkcpwx5a",
+    "time-created": "2021-09-01T14:35:29.328000+00:00",
+    "vcn-id": "ocid1.vcn.oc1.sa-saopaulo-1.amaaaaaahcglxkaabicl4jiikcavz2h2nvazibxp4rdiwziqsce4h5wksz2a"
+  },
+  "etag": "63069701"
+}
+```
