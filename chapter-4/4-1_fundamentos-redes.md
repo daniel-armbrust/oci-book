@@ -723,7 +723,7 @@ darmbrust@hoodwink:~$ oci network nat-gateway update \
 {
   "data": {
     "block-traffic": true,
-    "compartment-id": "ocid1.compartment.oc1..aaaaaaaaie4exnvj2ktkjlliahl2bxmdnteu2xmn27oc5cy5mdcmocl4vd7q",
+    "compartment-id": "ocid1.compartment.oc1..aaaaaaaauvqvbbx3oridcm5d2ztxkftwr362u2vl5zdsayzbehzwbjs56soq",
     "defined-tags": {
       "Oracle-Tags": {
         "CreatedBy": "oracleidentitycloudservice/daniel.armbrust@algumdominio.com",
@@ -741,4 +741,46 @@ darmbrust@hoodwink:~$ oci network nat-gateway update \
   },
   "etag": "63069701"
 }
+```
+
+#### Tabela de Roteamento
+
+A _[tabela de roteamento](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingroutetables.htm)_ da subrede privada para a aplicação _[Wordpress](https://pt.wikipedia.org/wiki/WordPress)_, também só irá possuir uma regra. Esta irá direcionar o tráfego para o _[NAT Gateway](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/NATgateway.htm)_ que criamos.
+
+```
+darmbrust@hoodwink:~$ oci network route-table create \
+> --compartment-id "ocid1.compartment.oc1..aaaaaaaauvqvbbx3oridcm5d2ztxkftwr362u2vl5zdsayzbehzwbjs56soq" \
+> --route-rules '[{"destination":"0.0.0.0/0", "destinationType": "CIDR_BLOCK", "networkEntityId": "ocid1.natgateway.oc1.sa-saopaulo-1.aaaaaaaazgfctgpxk76ofiernbtx66aiusmgal3c3gkbn2r6smqmorvyv4ea"}]' \
+> --vcn-id "ocid1.vcn.oc1.sa-saopaulo-1.amaaaaaahcglxkaabicl4jiikcavz2h2nvazibxp4rdiwziqsce4h5wksz2a" \
+> --display-name "rtb_subnprv-app_vcn-prd" \
+> --wait-for-state AVAILABLE
+Action completed. Waiting until the resource has entered state: ('AVAILABLE',)
+{
+  "data": {
+    "compartment-id": "ocid1.compartment.oc1..aaaaaaaaie4exnvj2ktkjlliahl2bxmdnteu2xmn27oc5cy5mdcmocl4vd7q",
+    "defined-tags": {
+      "Oracle-Tags": {
+        "CreatedBy": "oracleidentitycloudservice/daniel.armbrust@algumdominio.com",
+        "CreatedOn": "2021-09-01T17:58:14.413Z"
+      }
+    },
+    "display-name": "rtb_subnprv-app_vcn-prd",
+    "freeform-tags": {},
+    "id": "ocid1.routetable.oc1.sa-saopaulo-1.aaaaaaaaswshtzo7i2ad5bxj5ewqa6vfp2tziyrg7y7leudmxaerp3mihhka",
+    "lifecycle-state": "AVAILABLE",
+    "route-rules": [
+      {
+        "cidr-block": null,
+        "description": null,
+        "destination": "0.0.0.0/0",
+        "destination-type": "CIDR_BLOCK",
+        "network-entity-id": "ocid1.natgateway.oc1.sa-saopaulo-1.aaaaaaaazgfctgpxk76ofiernbtx66aiusmgal3c3gkbn2r6smqmorvyv4ea"
+      }
+    ],
+    "time-created": "2021-09-01T17:58:14.483000+00:00",
+    "vcn-id": "ocid1.vcn.oc1.sa-saopaulo-1.amaaaaaa6noke4qayteedpos5f43koooqrkmks6de2r44w7kn62uxlk6c2ka"
+  },
+  "etag": "e6a27cac"
+}
+
 ```
