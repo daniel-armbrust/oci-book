@@ -644,3 +644,72 @@ Um outro detalhe é referente a _[Security List](https://docs.oracle.com/en-us/i
 ------------------------------------------
 
 #### NAT Gateway
+
+O _[NAT Gateway](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/NATgateway.htm)_ permite que os recursos da subrede privada acessem a internet. Normalmente os recursos da subrede privada, utilizam o _[NAT Gateway](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/NATgateway.htm)_ para executar atualizações (ex: yum / Windows Update).
+
+Para criarmos o _[NAT Gateway](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/NATgateway.htm)_ usamos o comando abaixo:
+
+```
+darmbrust@hoodwink:~$ oci network nat-gateway create \
+> --compartment-id "ocid1.compartment.oc1..aaaaaaaauvqvbbx3oridcm5d2ztxkftwr362u2vl5zdsayzbehzwbjs56soq" \
+> --vcn-id "ocid1.vcn.oc1.sa-saopaulo-1.amaaaaaahcglxkaabicl4jiikcavz2h2nvazibxp4rdiwziqsce4h5wksz2a" \
+> --block-traffic false \
+> --display-name "ntgw_vcn-prd" \
+> --wait-for-state AVAILABLE
+Action completed. Waiting until the resource has entered state: ('AVAILABLE',)
+{
+  "data": {
+    "block-traffic": false,
+    "compartment-id": "ocid1.compartment.oc1..aaaaaaaauvqvbbx3oridcm5d2ztxkftwr362u2vl5zdsayzbehzwbjs56soq",
+    "defined-tags": {
+      "Oracle-Tags": {
+        "CreatedBy": "oracleidentitycloudservice/daniel.armbrust@algumdominio.com",
+        "CreatedOn": "2021-09-01T14:35:28.931Z"
+      }
+    },
+    "display-name": "ntgw_vcn-prd",
+    "freeform-tags": {},
+    "id": "ocid1.natgateway.oc1.sa-saopaulo-1.aaaaaaaazgfctgpxk76ofiernbtx66aiusmgal3c3gkbn2r6smqmorvyv4ea",
+    "lifecycle-state": "AVAILABLE",
+    "nat-ip": "150.230.78.168",
+    "public-ip-id": "ocid1.publicip.oc1.sa-saopaulo-1.aaaaaaaaqahv2uzjlbb5ngwal2icgodzpsvx7nfbt4fxxkshz43cwkcpwx5a",
+    "time-created": "2021-09-01T14:35:29.328000+00:00",
+    "vcn-id": "ocid1.vcn.oc1.sa-saopaulo-1.amaaaaaahcglxkaabicl4jiikcavz2h2nvazibxp4rdiwziqsce4h5wksz2a"
+  },
+  "etag": "63069701"
+}
+```
+
+Como os recursos, VNICs para ser mais específico, da subrede privada não possuem endereço IP público, eles utilizam o endereço IP do _[NAT Gateway](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/NATgateway.htm)_ para conectividade com a Internet. Esta conectividade é feita através de uma técnica chamada _[Network Address Translation](https://pt.wikipedia.org/wiki/Network_address_translation)_. 
+
+Perceba que na saída do comando que criou o _[NAT Gateway](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/NATgateway.htm)_, é possível ver o IP público que este irá usar em _"nat-ip"_. De qualquer forma, também é possível consultar as propriedades deste IP público pelo OCID contido em _"public-ip-id"_:
+
+```
+darmbrust@hoodwink:~$ oci network public-ip get \
+> --public-ip-id "ocid1.publicip.oc1.sa-saopaulo-1.aaaaaaaaqahv2uzjlbb5ngwal2icgodzpsvx7nfbt4fxxkshz43cwkcpwx5a"
+{
+  "data": {
+    "assigned-entity-id": "ocid1.natgateway.oc1.sa-saopaulo-1.aaaaaaaazgfctgpxk76ofiernbtx66aiusmgal3c3gkbn2r6smqmorvyv4ea",
+    "assigned-entity-type": "NAT_GATEWAY",
+    "availability-domain": null,
+    "compartment-id": "ocid1.compartment.oc1..aaaaaaaauvqvbbx3oridcm5d2ztxkftwr362u2vl5zdsayzbehzwbjs56soq",
+    "defined-tags": {
+      "Oracle-Tags": {
+        "CreatedBy": "oracleidentitycloudservice/daniel.armbrust@algumdominio.com",
+        "CreatedOn": "2021-09-01T14:35:30.314Z"
+      }
+    },
+    "display-name": "IP for NAT gateway: ocid1.natgateway.oc1.sa-saopaulo-1.aaaaaaaazgfctgpxk76ofiernbtx66aiusmgal3c3gkbn2r6smqmorvyv4ea",
+    "freeform-tags": {},
+    "id": "ocid1.publicip.oc1.sa-saopaulo-1.aaaaaaaaqahv2uzjlbb5ngwal2icgodzpsvx7nfbt4fxxkshz43cwkcpwx5a",
+    "ip-address": "150.230.78.168",
+    "lifecycle-state": "ASSIGNED",
+    "lifetime": "EPHEMERAL",
+    "private-ip-id": null,
+    "public-ip-pool-id": null,
+    "scope": "REGION",
+    "time-created": "2021-09-01T14:35:30.439000+00:00"
+  },
+  "etag": "3a8d891"
+}
+```
