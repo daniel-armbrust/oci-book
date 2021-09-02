@@ -897,7 +897,39 @@ Action completed. Waiting until the resource has entered state: ('AVAILABLE',)
 #### Subrede Pública
 --------------------
 
-#### NAT Gateway
+#### Internet Gateway
+
+O _[Internet Gateway](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingIGs.htm#Internet_Gateway)_ é um roteador virtual, usado exclusivamente pela subrede pública que você pode adicionar à sua VCN para permitir conectividade direta com a internet (tráfego de entrada e saída). Falando de conectividade, para que um recurso seja exposto na internet, ele obrigatóriamente deve ter um endereço IP público e residir em uma subrede pública com a tabela de roteamento devidamente configurada para utilizar o _[Internet Gateway](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingIGs.htm#Internet_Gateway)_.
+
+```
+darmbrust@hoodwink:~$ oci network internet-gateway create \
+> --compartment-id "ocid1.compartment.oc1..aaaaaaaauvqvbbx3oridcm5d2ztxkftwr362u2vl5zdsayzbehzwbjs56soq" \
+> --is-enabled true \
+> --vcn-id "ocid1.vcn.oc1.sa-saopaulo-1.amaaaaaahcglxkaabicl4jiikcavz2h2nvazibxp4rdiwziqsce4h5wksz2a" \
+> --display-name "igw_vcn-prd" \
+> --wait-for-state AVAILABLE
+Action completed. Waiting until the resource has entered state: ('AVAILABLE',)
+{
+  "data": {
+    "compartment-id": "ocid1.compartment.oc1..aaaaaaaauvqvbbx3oridcm5d2ztxkftwr362u2vl5zdsayzbehzwbjs56soq",
+    "defined-tags": {
+      "Oracle-Tags": {
+        "CreatedBy": "oracleidentitycloudservice/daniel.armbrust@algumdominio.com",
+        "CreatedOn": "2021-09-02T12:32:55.290Z"
+      }
+    },
+    "display-name": "igw_vcn-prd",
+    "freeform-tags": {},
+    "id": "ocid1.internetgateway.oc1.sa-saopaulo-1.aaaaaaaaivwrgb3iw5aupizbglwsymbluqvsc76ym7pqbjghqie32joemvoq",
+    "is-enabled": true,
+    "lifecycle-state": "AVAILABLE",
+    "time-created": "2021-09-02T12:32:55.331000+00:00",
+    "vcn-id": "ocid1.vcn.oc1.sa-saopaulo-1.amaaaaaahcglxkaabicl4jiikcavz2h2nvazibxp4rdiwziqsce4h5wksz2a"
+  },
+  "etag": "188b383d"
+}
+```
+
 
 #### Tabela de Roteamento
 
