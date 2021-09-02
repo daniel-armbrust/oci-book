@@ -846,3 +846,50 @@ Action completed. Waiting until the resource has entered state: ('AVAILABLE',)
 #### Subrede
 
 Recursos da subrede de aplicação _[Wordpress](https://pt.wikipedia.org/wiki/WordPress)_ criados. Agora é hora de uni-los e criarmos a subrede:
+
+```
+darmbrust@hoodwink:~$ oci network subnet create \
+> --compartment-id "ocid1.compartment.oc1..aaaaaaaauvqvbbx3oridcm5d2ztxkftwr362u2vl5zdsayzbehzwbjs56soq" \
+> --vcn-id "ocid1.vcn.oc1.sa-saopaulo-1.amaaaaaahcglxkaabicl4jiikcavz2h2nvazibxp4rdiwziqsce4h5wksz2a" \
+> --dhcp-options-id "ocid1.dhcpoptions.oc1.sa-saopaulo-1.aaaaaaaasmnmnum6hatkw5peobjbpxeemrjherqjbbyuzvr5p7anzkhixnjq" \
+> --route-table-id "ocid1.routetable.oc1.sa-saopaulo-1.aaaaaaaaswshtzo7i2ad5bxj5ewqa6vfp2tziyrg7y7leudmxaerp3mihhka" \
+> --security-list-ids '["ocid1.securitylist.oc1.sa-saopaulo-1.aaaaaaaacsbcnmseb2v7flq7guqmee4fuij3d4rhldftqyneingvmre6sqzq"]' \
+> --display-name "subnprv-app_vcn-prd" \
+> --cidr-block "10.0.10.0/24" \
+> --prohibit-public-ip-on-vnic true 
+> --wait-for-state AVAILABLE
+Action completed. Waiting until the resource has entered state: ('AVAILABLE',)
+{
+  "data": {
+    "availability-domain": null,
+    "cidr-block": "10.0.10.0/24",
+    "compartment-id": "ocid1.compartment.oc1..aaaaaaaauvqvbbx3oridcm5d2ztxkftwr362u2vl5zdsayzbehzwbjs56soq",
+    "defined-tags": {
+      "Oracle-Tags": {
+        "CreatedBy": "oracleidentitycloudservice/daniel.armbrust@algumdominio.com",
+        "CreatedOn": "2021-09-02T11:50:06.781Z"
+      }
+    },
+    "dhcp-options-id": "ocid1.dhcpoptions.oc1.sa-saopaulo-1.aaaaaaaasmnmnum6hatkw5peobjbpxeemrjherqjbbyuzvr5p7anzkhixnjq",
+    "display-name": "subnprv-app_vcn-prd",
+    "dns-label": null,
+    "freeform-tags": {},
+    "id": "ocid1.subnet.oc1.sa-saopaulo-1.aaaaaaaajb4wma763mz6uowun3pfeltobe4fmiegdeyma5ehvnf3kzy3jvxa",
+    "ipv6-cidr-block": null,
+    "ipv6-virtual-router-ip": null,
+    "lifecycle-state": "AVAILABLE",
+    "prohibit-internet-ingress": true,
+    "prohibit-public-ip-on-vnic": true,
+    "route-table-id": "ocid1.routetable.oc1.sa-saopaulo-1.aaaaaaaaswshtzo7i2ad5bxj5ewqa6vfp2tziyrg7y7leudmxaerp3mihhka",
+    "security-list-ids": [
+      "ocid1.securitylist.oc1.sa-saopaulo-1.aaaaaaaacsbcnmseb2v7flq7guqmee4fuij3d4rhldftqyneingvmre6sqzq"
+    ],
+    "subnet-domain-name": null,
+    "time-created": "2021-09-02T11:50:06.873000+00:00",
+    "vcn-id": "ocid1.vcn.oc1.sa-saopaulo-1.amaaaaaahcglxkaabicl4jiikcavz2h2nvazibxp4rdiwziqsce4h5wksz2a",
+    "virtual-router-ip": "10.0.10.1",
+    "virtual-router-mac": "00:00:17:96:B4:D5"
+  },
+  "etag": "fcb85179"
+}
+```
