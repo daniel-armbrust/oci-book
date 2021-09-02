@@ -1097,3 +1097,7 @@ Action completed. Waiting until the resource has entered state: ('AVAILABLE',)
 ```
 
 Como sabemos, esta subrede deve permitir recursos com endereço IP público. Para isto, foi especificado o parâmetro _"--prohibit-public-ip-on-vnic"_ com o valor _"false"_. Agora todo recurso com IP público criado dentro da subrede pública, está exposto e pronto para receber conexões da internet.
+
+### __Conclusão__
+
+Aqui concluímos este capítulo que apresenta a configuração básica de redes no OCI.
