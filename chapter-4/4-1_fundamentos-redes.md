@@ -936,7 +936,7 @@ Permitir ou não a passagem de tráfego pelo _[Internet Gateway](https://docs.or
 
 #### Tabela de Roteamento
 
-A _[tabela de roteamento](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingroutetables.htm)_ da subrede pública, só irá possuir uma regra que direciona o tráfego para o _[Internet Gateway](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingIGs.htm#Internet_Gateway)_ que foi criado.
+A _[tabela de roteamento](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingroutetables.htm)_ da subrede pública só irá possuir uma regra que direciona o tráfego para o _[Internet Gateway](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingIGs.htm#Internet_Gateway)_ que foi criado.
 
 ```
 darmbrust@hoodwink:~$ oci network route-table create \
