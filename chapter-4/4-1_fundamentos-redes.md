@@ -65,6 +65,8 @@ Um dos trabalhos do arquiteto ou engenheiro cloud, é saber utilizar esses recur
 
 ![alt_text](./images/fundamentos-de-redes-no-oci.jpeg "Fundamentos de Redes no OCI")
 
+>_**__NOTA:__** Este diagrama no formato Visio pode ser baixado neste [link aqui](https://github.com/daniel-armbrust/oci-book/blob/main/chapter-4/resources/fundamentos-de-redes-no-oci.vsdx)._
+
 ### __Decompondo o desenho em recursos Cloud__
 
 Na cloud podemos dizer que tudo é um recurso. Um recurso possui, além de um nome, funcionalidades específicas. Para a maioria dos recursos que você cria, você tem a opção de especificar um nome para exibição. Não há regras, porém vou sugerir uma terminologia na qual eu acho útil para identificação. 
