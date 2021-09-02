@@ -899,7 +899,9 @@ Action completed. Waiting until the resource has entered state: ('AVAILABLE',)
 
 #### Internet Gateway
 
-O _[Internet Gateway](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingIGs.htm#Internet_Gateway)_ é um roteador virtual, usado exclusivamente pela subrede pública que você pode adicionar à sua VCN para permitir conectividade direta com a internet (tráfego de entrada e saída). Falando de conectividade, para que um recurso seja exposto na internet, ele obrigatóriamente deve ter um endereço IP público e residir em uma subrede pública com a tabela de roteamento devidamente configurada para utilizar o _[Internet Gateway](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingIGs.htm#Internet_Gateway)_.
+O _[Internet Gateway](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingIGs.htm#Internet_Gateway)_ é um roteador virtual, usado exclusivamente pela subrede pública que você pode adicionar à sua VCN para permitir conectividade direta com a internet (tráfego de entrada e saída). Falando de conectividade, para que um recurso seja exposto na internet, ele obrigatóriamente deve ter um endereço IP público e residir em uma subrede pública, com sua tabela de roteamento devidamente configurada para utilizar o _[Internet Gateway](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingIGs.htm#Internet_Gateway)_.
+
+Para criar o _[Internet Gateway](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingIGs.htm#Internet_Gateway)_ usamos o comando abaixo:
 
 ```
 darmbrust@hoodwink:~$ oci network internet-gateway create \
