@@ -851,7 +851,7 @@ Recursos da subrede de aplicação _[Wordpress](https://pt.wikipedia.org/wiki/Wo
 darmbrust@hoodwink:~$ oci network subnet create \
 > --compartment-id "ocid1.compartment.oc1..aaaaaaaauvqvbbx3oridcm5d2ztxkftwr362u2vl5zdsayzbehzwbjs56soq" \
 > --vcn-id "ocid1.vcn.oc1.sa-saopaulo-1.amaaaaaahcglxkaabicl4jiikcavz2h2nvazibxp4rdiwziqsce4h5wksz2a" \
-> --dhcp-options-id "ocid1.dhcpoptions.oc1.sa-saopaulo-1.aaaaaaaasmnmnum6hatkw5peobjbpxeemrjherqjbbyuzvr5p7anzkhixnjq" \
+> --dhcp-options-id "ocid1.dhcpoptions.oc1.sa-saopaulo-1.aaaaaaaawaku2ug5htyapopgpgvtzt5amiyalrrq2bbmczpqif7d6llbmq5q" \
 > --route-table-id "ocid1.routetable.oc1.sa-saopaulo-1.aaaaaaaaswshtzo7i2ad5bxj5ewqa6vfp2tziyrg7y7leudmxaerp3mihhka" \
 > --security-list-ids '["ocid1.securitylist.oc1.sa-saopaulo-1.aaaaaaaacsbcnmseb2v7flq7guqmee4fuij3d4rhldftqyneingvmre6sqzq"]' \
 > --display-name "subnprv-app_vcn-prd" \
@@ -870,7 +870,7 @@ Action completed. Waiting until the resource has entered state: ('AVAILABLE',)
         "CreatedOn": "2021-09-02T11:50:06.781Z"
       }
     },
-    "dhcp-options-id": "ocid1.dhcpoptions.oc1.sa-saopaulo-1.aaaaaaaasmnmnum6hatkw5peobjbpxeemrjherqjbbyuzvr5p7anzkhixnjq",
+    "dhcp-options-id": "ocid1.dhcpoptions.oc1.sa-saopaulo-1.aaaaaaaawaku2ug5htyapopgpgvtzt5amiyalrrq2bbmczpqif7d6llbmq5q",
     "display-name": "subnprv-app_vcn-prd",
     "dns-label": null,
     "freeform-tags": {},
@@ -979,4 +979,121 @@ Action completed. Waiting until the resource has entered state: ('AVAILABLE',)
 
 #### Security List
 
+A subrede que fica com a "cara na internet", ou seja a subrede pública, como boa prática devemos permitir somente o tráfego necessário. Isto evita qualquer exposição que possa comprometer a infraestrutura. 
+
+Para o nosso exemplo, só estamos permitindo tráfego de entrada HTTPS, que é o equivalente a porta 443/TCP:
+
+```
+darmbrust@hoodwink:~$ oci network security-list create \
+> --compartment-id "ocid1.compartment.oc1..aaaaaaaauvqvbbx3oridcm5d2ztxkftwr362u2vl5zdsayzbehzwbjs56soq" \
+> --egress-security-rules '[{"destination": "0.0.0.0/0", "protocol": "all", "isStateless": true}]' \
+> --ingress-security-rules '[{"source": "0.0.0.0/0", "protocol": "6", "isStateless": true, "tcpOptions": {"destinationPortRange": {"min": 443, "max": 443}, "sourcePortRange": {"min": 1024, "max": 65535}}}]' \
+> --vcn-id "ocid1.vcn.oc1.sa-saopaulo-1.amaaaaaahcglxkaabicl4jiikcavz2h2nvazibxp4rdiwziqsce4h5wksz2a" \
+> --display-name "secl-1_subnpub_vcn-prd" \
+> --wait-for-state AVAILABLE
+Action completed. Waiting until the resource has entered state: ('AVAILABLE',)
+{
+  "data": {
+    "compartment-id": "ocid1.compartment.oc1..aaaaaaaauvqvbbx3oridcm5d2ztxkftwr362u2vl5zdsayzbehzwbjs56soq",
+    "defined-tags": {
+      "Oracle-Tags": {
+        "CreatedBy": "oracleidentitycloudservice/daniel.armbrust@algumdominio.com",
+        "CreatedOn": "2021-09-02T13:57:45.708Z"
+      }
+    },
+    "display-name": "secl-1_subnpub_vcn-prd",
+    "egress-security-rules": [
+      {
+        "description": null,
+        "destination": "0.0.0.0/0",
+        "destination-type": "CIDR_BLOCK",
+        "icmp-options": null,
+        "is-stateless": true,
+        "protocol": "all",
+        "tcp-options": null,
+        "udp-options": null
+      }
+    ],
+    "freeform-tags": {},
+    "id": "ocid1.securitylist.oc1.sa-saopaulo-1.aaaaaaaaggezvwdk66j5xq7fesq27z3xohmwsu4bluf7m2rrr7taa6fmdwxq",
+    "ingress-security-rules": [
+      {
+        "description": null,
+        "icmp-options": null,
+        "is-stateless": true,
+        "protocol": "6",
+        "source": "0.0.0.0/0",
+        "source-type": "CIDR_BLOCK",
+        "tcp-options": {
+          "destination-port-range": {
+            "max": 443,
+            "min": 443
+          },
+          "source-port-range": {
+            "max": 65535,
+            "min": 1024
+          }
+        },
+        "udp-options": null
+      }
+    ],
+    "lifecycle-state": "AVAILABLE",
+    "time-created": "2021-09-02T13:57:45.784000+00:00",
+    "vcn-id": "ocid1.vcn.oc1.sa-saopaulo-1.amaaaaaahcglxkaabicl4jiikcavz2h2nvazibxp4rdiwziqsce4h5wksz2a"
+  },
+  "etag": "b5caab71"
+}
+```
+
 #### Subrede
+
+Recursos criados é hora de uni-los na criação da subrede:
+
+```
+darmbrust@hoodwink:~$ oci network subnet create \
+> --compartment-id "ocid1.compartment.oc1..aaaaaaaauvqvbbx3oridcm5d2ztxkftwr362u2vl5zdsayzbehzwbjs56soq" \
+> --vcn-id "ocid1.vcn.oc1.sa-saopaulo-1.amaaaaaahcglxkaabicl4jiikcavz2h2nvazibxp4rdiwziqsce4h5wksz2a" \
+> --dhcp-options-id "ocid1.dhcpoptions.oc1.sa-saopaulo-1.aaaaaaaawaku2ug5htyapopgpgvtzt5amiyalrrq2bbmczpqif7d6llbmq5q" \
+> --route-table-id "ocid1.routetable.oc1.sa-saopaulo-1.aaaaaaaa3dmhfpagrvmj3pcararg7yir4vbmcs25inm44nmm37y7ozvdbi3q" \
+> --security-list-ids '["ocid1.securitylist.oc1.sa-saopaulo-1.aaaaaaaaggezvwdk66j5xq7fesq27z3xohmwsu4bluf7m2rrr7taa6fmdwxq"]' \
+> --display-name "subnpub_vcn-prd" \
+> --cidr-block "10.0.5.0/24" \
+> --prohibit-public-ip-on-vnic false \
+> --wait-for-state AVAILABLE
+Action completed. Waiting until the resource has entered state: ('AVAILABLE',)
+{
+  "data": {
+    "availability-domain": null,
+    "cidr-block": "10.0.5.0/24",
+    "compartment-id": "ocid1.compartment.oc1..aaaaaaaauvqvbbx3oridcm5d2ztxkftwr362u2vl5zdsayzbehzwbjs56soq",
+    "defined-tags": {
+      "Oracle-Tags": {
+        "CreatedBy": "oracleidentitycloudservice/daniel.armbrust@algumdominio.com",
+        "CreatedOn": "2021-09-02T14:29:24.664Z"
+      }
+    },
+    "dhcp-options-id": "ocid1.dhcpoptions.oc1.sa-saopaulo-1.aaaaaaaawaku2ug5htyapopgpgvtzt5amiyalrrq2bbmczpqif7d6llbmq5q",
+    "display-name": "subnpub_vcn-prd",
+    "dns-label": null,
+    "freeform-tags": {},
+    "id": "ocid1.subnet.oc1.sa-saopaulo-1.aaaaaaaax6arj6ccrzlm7fxb4pl4ggrsgig4bwnbvtqaayosdulsyoaliuka",
+    "ipv6-cidr-block": null,
+    "ipv6-virtual-router-ip": null,
+    "lifecycle-state": "AVAILABLE",
+    "prohibit-internet-ingress": false,
+    "prohibit-public-ip-on-vnic": false,
+    "route-table-id": "ocid1.routetable.oc1.sa-saopaulo-1.aaaaaaaa3dmhfpagrvmj3pcararg7yir4vbmcs25inm44nmm37y7ozvdbi3q",
+    "security-list-ids": [
+      "ocid1.securitylist.oc1.sa-saopaulo-1.aaaaaaaaggezvwdk66j5xq7fesq27z3xohmwsu4bluf7m2rrr7taa6fmdwxq"
+    ],
+    "subnet-domain-name": null,
+    "time-created": "2021-09-02T14:29:24.731000+00:00",
+    "vcn-id": "ocid1.vcn.oc1.sa-saopaulo-1.amaaaaaahcglxkaabicl4jiikcavz2h2nvazibxp4rdiwziqsce4h5wksz2a",
+    "virtual-router-ip": "10.0.5.1",
+    "virtual-router-mac": "00:00:17:96:B4:D5"
+  },
+  "etag": "4fa4369b"
+}
+```
+
+Como sabemos, esta subrede deve permitir recursos com endereço IP público. Para isto, foi especificado o parâmetro _"--prohibit-public-ip-on-vnic"_ com o valor _"false"_. Agora todo recurso com IP público criado dentro da subrede pública, está exposto e pronto para receber conexões da internet.
