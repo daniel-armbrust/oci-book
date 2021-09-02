@@ -932,8 +932,50 @@ Action completed. Waiting until the resource has entered state: ('AVAILABLE',)
 }
 ```
 
+Permitir ou não a passagem de tráfego pelo _[Internet Gateway](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingIGs.htm#Internet_Gateway)_, é controlado pelo parâmetro _"--is-enabled"_. 
 
 #### Tabela de Roteamento
+
+A _[tabela de roteamento](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingroutetables.htm)_ da subrede pública, só irá possuir uma regra que direciona o tráfego para o _[Internet Gateway](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingIGs.htm#Internet_Gateway)_ que foi criado.
+
+```
+darmbrust@hoodwink:~$ oci network route-table create \
+> --compartment-id "ocid1.compartment.oc1..aaaaaaaauvqvbbx3oridcm5d2ztxkftwr362u2vl5zdsayzbehzwbjs56soq" \
+> --route-rules '[{"destination":"0.0.0.0/0", "destinationType": "CIDR_BLOCK", "networkEntityId": "ocid1.internetgateway.oc1.sa-saopaulo-1.aaaaaaaaivwrgb3iw5aupizbglwsymbluqvsc76ym7pqbjghqie32joemvoq"}]' \
+> --vcn-id "ocid1.vcn.oc1.sa-saopaulo-1.amaaaaaahcglxkaabicl4jiikcavz2h2nvazibxp4rdiwziqsce4h5wksz2a" \
+> --display-name "rtb_subnpub_vcn-prd" \
+> --wait-for-state AVAILABLE
+Action completed. Waiting until the resource has entered state: ('AVAILABLE',)
+{
+  "data": {
+    "compartment-id": "ocid1.compartment.oc1..aaaaaaaauvqvbbx3oridcm5d2ztxkftwr362u2vl5zdsayzbehzwbjs56soq",
+    "defined-tags": {
+      "Oracle-Tags": {
+        "CreatedBy": "oracleidentitycloudservice/daniel.armbrust@algumdominio.com",
+        "CreatedOn": "2021-09-02T13:26:03.971Z"
+      }
+    },
+    "display-name": "rtb_subnpub_vcn-prd",
+    "freeform-tags": {},
+    "id": "ocid1.routetable.oc1.sa-saopaulo-1.aaaaaaaa3dmhfpagrvmj3pcararg7yir4vbmcs25inm44nmm37y7ozvdbi3q",
+    "lifecycle-state": "AVAILABLE",
+    "route-rules": [
+      {
+        "cidr-block": null,
+        "description": null,
+        "destination": "0.0.0.0/0",
+        "destination-type": "CIDR_BLOCK",
+        "network-entity-id": "ocid1.internetgateway.oc1.sa-saopaulo-1.aaaaaaaaivwrgb3iw5aupizbglwsymbluqvsc76ym7pqbjghqie32joemvoq"
+      }
+    ],
+    "time-created": "2021-09-02T13:26:03.995000+00:00",
+    "vcn-id": "ocid1.vcn.oc1.sa-saopaulo-1.amaaaaaahcglxkaabicl4jiikcavz2h2nvazibxp4rdiwziqsce4h5wksz2a"
+  },
+  "etag": "4263d87e"
+}
+```
+
+>_**__NOTA:__** O valor 0.0.0.0/0 corresponde a “Rota Padrão” (default route). Para maiores detalhes, consulte a definição [aqui](https://en.wikipedia.org/wiki/Default_route)._
 
 #### Security List
 
