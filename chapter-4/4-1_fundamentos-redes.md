@@ -63,7 +63,7 @@ Um dos trabalhos do arquiteto ou engenheiro cloud, é saber utilizar esses recur
 
 <br>
 
-![alt_text](./images/fundamentos-de-redes-no-oci.jpg  "Fundamentos de Redes no OCI")
+![alt_text](./images/fundamentos-de-redes-no-oci.jpeg "Fundamentos de Redes no OCI")
 
 ### __Decompondo o desenho em recursos Cloud__
 
