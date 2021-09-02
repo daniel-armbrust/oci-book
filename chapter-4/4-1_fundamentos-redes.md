@@ -1,8 +1,8 @@
 # Capítulo 4: Primeira aplicação no OCI
 
-## 4.1 - Fundamentos de Redes no OCI
+## 4.1 - Fundamentos do Serviço de Redes
 
-### __Visão Geral da Rede no OCI__
+### __Visão Geral__
 
 Uma das primeiras etapas ao começar a implementar seus recursos no OCI, é a configuração da sua rede. o serviço de _[Networking do OCI](https://docs.oracle.com/pt-br/iaas/Content/Network/Concepts/overview.htm)_ disponibiliza versões virtuais dos componentes de redes tradicionais no qual você pode usar. Configurar a rede de dados é um pré-requisito para que você possa criar seus recursos.
 
