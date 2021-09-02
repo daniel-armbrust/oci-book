@@ -8,6 +8,8 @@ O acesso a novas tecnologias permite que as empresas adotem e ampliem suas solu�
 
 https://www.oracle.com/cloud/data-regions/
 
+![alt_text](./images/ch1_1-6_resumo-servicos.jpg  "Resumo dos principais serviços")
+
 ### __Serviço IAM (Identity and Access Management)__
 
 A principal função do serviço _[IAM](https://docs.oracle.com/pt-br/iaas/Content/Identity/Concepts/overview.htm)_ é a _Gestão de Identidades e Acessos_. 
