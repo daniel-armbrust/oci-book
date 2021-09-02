@@ -893,3 +893,14 @@ Action completed. Waiting until the resource has entered state: ('AVAILABLE',)
   "etag": "fcb85179"
 }
 ```
+
+#### Subrede Pública
+--------------------
+
+#### NAT Gateway
+
+#### Tabela de Roteamento
+
+#### Security List
+
+#### Subrede
