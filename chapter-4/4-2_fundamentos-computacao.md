@@ -34,3 +34,5 @@ Um shape também especifica o tipo do processador, que pode ser _[Intel](https:/
 Além do tipo do processador, um shape pode ser _[flexível](https://docs.oracle.com/pt-br/iaas/Content/Compute/References/computeshapes.htm#flexible)_ ou _[padrão](https://docs.oracle.com/pt-br/iaas/Content/Compute/References/computeshapes.htm#vmshapes__vm-standard)_. 
 
 #### __Shape Flexível__
+
+O _[Shape Flexível](https://docs.oracle.com/pt-br/iaas/Content/Compute/References/computeshapes.htm#flexible)_ permite que você defina a quantidade de CPUs e memória. A largura de banda de rede e a quantidade de VNICs, é proporcional ao número de CPUs. Quanto mais CPUs, maior largura de banda sua instância terá. Lembrando que você pode redimensionar, a quantidade de CPU e memória, a qualquer momento após a criação da instância.
