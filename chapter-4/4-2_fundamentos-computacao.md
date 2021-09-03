@@ -25,7 +25,7 @@ Ao se cria uma instância, existem duas escolhas fundamentais a serem feitas. S�
 
 #### __Shape__
 
-Shape ou modelo, são características que determinam a quantidade de CPUs, quantidade de memória, banda máxima da rede, total de VNICs, e outros recursos que sua _instância de computação_ terá. Podemos dizer que o shape especifica um conjunto pré-definido de recursos, ou o perfil do hardware.
+Shape ou modelo, são características que determinam a quantidade de CPUs, quantidade de memória, banda máxima da rede, total de VNICs, e outros recursos que sua _instância de computação_ terá. Podemos dizer que o shape especifica um conjunto pré-definido de recursos. Ele especifica o perfil do hardware de computação.
 
 >_**__NOTA:__** A quantidade de VNICs que um determinado shape suporta, tem relação também com o sistema operacional. Seja Linux ou Windows, esta quantidade máxima é diferente. Consulta este [link](https://docs.oracle.com/pt-br/iaas/Content/Compute/References/computeshapes.htm#Compute_Shapes) para maiores detalhes._
 
