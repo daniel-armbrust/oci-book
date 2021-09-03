@@ -136,4 +136,3 @@ O _[Cloud Shell](https://docs.oracle.com/pt-br/iaas/Content/API/Concepts/devclou
 O _[Cloud Shell](https://docs.oracle.com/pt-br/iaas/Content/API/Concepts/devcloudshellintro.htm)_ pode ser uma maneira rápida e prática para utilização do _[OCI CLI](https://docs.oracle.com/pt-br/iaas/Content/API/Concepts/cliconcepts.htm)_, sem a necessidade de seguir o processo de instalação. Para iniciar o uso, basta clicar no botão localizado no topo da console:
 
 ![alt_text](./images/ch1_1-5_cloud-shell.jpg  "Cloud Shell")
-
