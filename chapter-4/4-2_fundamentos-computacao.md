@@ -20,8 +20,8 @@ Utilizar uma _Máquina Virtual_ ou _Bare Metal_, seja de forma direta ou para cr
 
 Ao se cria uma instância, existem duas escolhas fundamentais a serem feitas. São elas:
 
-- Shape
-- Software pré-instalado ou imagem
+- **Shape**
+- **Software pré-instalado ou imagem**
 
 #### __Shape__
 
