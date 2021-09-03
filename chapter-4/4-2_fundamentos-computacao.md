@@ -31,14 +31,35 @@ _[Shape](https://docs.oracle.com/pt-br/iaas/Content/Compute/Concepts/computeover
 
 Um shape também especifica o tipo do processador, que pode ser _[Intel](https://pt.wikipedia.org/wiki/Intel)_, _[AMD](https://pt.wikipedia.org/wiki/Advanced_Micro_Devices)_ ou processadores _[ARM](https://pt.wikipedia.org/wiki/Arquitetura_ARM)_.
 
-Além do tipo do processador, um shape pode ter recursos _[fixos](https://docs.oracle.com/pt-br/iaas/Content/Compute/References/computeshapes.htm#vmshapes__vm-standard)_ ou ser _[flexível](https://docs.oracle.com/pt-br/iaas/Content/Compute/References/computeshapes.htm#flexible)_.
+Além do tipo do processador, um shape pode ter recursos fixos e otimizados especificamente para determinadas cargas de trabalho, ser _[flexível](https://docs.oracle.com/pt-br/iaas/Content/Compute/References/computeshapes.htm#flexible)_.
 
 Vamos os detalhes ...
 
-#### __Shape Flexível__
+#### __Shapes Fixos e/ou Otimizados__
+
+Um shape pode ter recursos fixos, como quantidade de CPUs e memória, além de ser específico para executar cargas de trabalho específicas.
+
+Dependendo das necessidades da aplicação que será executada, é possível escolher um tipo de shape computacional específico. Sendo eles:
+
+- **Standard**
+    - Projetado para atender cargas de trabalho de propósito geral. Este tipo de shape está disponível com processadores _[Intel](https://pt.wikipedia.org/wiki/Intel)_, _[AMD](https://pt.wikipedia.org/wiki/Advanced_Micro_Devices)_ e _[ARM](https://pt.wikipedia.org/wiki/Arquitetura_ARM)_.
+    
+- **DenseIO**
+    - Projetado para bancos de dados de grande porte, big data e aplicações que exigem storage de alto desempenho (SSDs baseadas em NVMe).
+
+- **GPU Shapes**
+    - São shapes equipados com processadores gráficos (GPU) da NVIDIA e projetados para cargas de trabalho que necessitam de aceleração de hardware.
+
+- **High performance computing (HPC)**
+    - Projetado para atender computação de alto desempenho, que exigem processadores com núcleos de alta frequência, baixa latência, redes em cluster para processamento massivo e paralelo.
+
+- **Optimized Shapes**
+    - Projetado para atender computação de alto desempenho, que exigem processadores com núcleos de alta frequência. Também podem ser usados para cargas de trabalho HPC (High performance computing).
 
 #### __Shape Flexível__
 
-O _[Shape Flexível](https://docs.oracle.com/pt-br/iaas/Content/Compute/References/computeshapes.htm#flexible)_ permite definir a quantidade de CPUs e memória. A largura de banda de rede e a quantidade de VNICs, é proporcional ao número de CPUs. Quanto mais CPUs, maior é a largura de banda da rede. Lembrando que você pode modificar a quantidade de CPU e memória, a qualquer momento após a criação da instância. 
+O _[Shape Flexível](https://docs.oracle.com/pt-br/iaas/Content/Compute/References/computeshapes.htm#flexible)_ permite definir a quantidade de CPUs e memória alocados para uma instância. A largura de banda de rede e a quantidade de VNICs, é proporcional ao número de CPUs. Quanto mais CPUs, maior é a largura de banda da rede. 
+
+Lembrando que você pode modificar a quantidade de CPU e memória, a qualquer momento após a criação da instância. 
 
 _[Shapes Flexíveis](https://docs.oracle.com/pt-br/iaas/Content/Compute/References/computeshapes.htm#flexible)_ concedem respostas rápidas sobre necessidades de desempenho, de acordo com mudanças nas cargas de trabalho.
