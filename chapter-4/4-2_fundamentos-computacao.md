@@ -23,7 +23,7 @@ Ao se cria uma instância, existem duas escolhas fundamentais a serem feitas. S�
 - **Shape**
 - **Software pré-instalado ou imagem**
 
-#### __Shape__
+### __Shape__
 
 _[Shape](https://docs.oracle.com/pt-br/iaas/Content/Compute/Concepts/computeoverview.htm#instance-types__shapes)_ ou modelo, são características que determinam a quantidade de CPUs, quantidade de memória, banda máxima da rede, total de VNICs, tipo de armazenamento suportado (NVMe ou disco convencional) e outros recursos que sua _instância de computação_ terá. Podemos dizer que o shape especifica um conjunto pré-definido de recursos. Ele especifica o perfil do hardware de computação.
 
