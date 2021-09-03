@@ -48,7 +48,7 @@ Dependendo das necessidades da aplicação que será executada, é possível esc
     - Projetado para bancos de dados de grande porte, big data e aplicações que exigem storage de alto desempenho (SSDs baseadas em NVMe).
 
 - **GPU Shapes**
-    - São shapes equipados com processadores gráficos (GPU) da NVIDIA e projetados para cargas de trabalho que necessitam de aceleração de hardware.
+    - São shapes equipados com processadores gráficos (GPU) da NVIDIA e projetados para cargas de trabalho que necessitam de aceleração em hardware.
 
 - **High performance computing (HPC)**
     - Projetado para atender computação de alto desempenho, que exigem processadores com núcleos de alta frequência, baixa latência, redes em cluster para processamento massivo e paralelo.
