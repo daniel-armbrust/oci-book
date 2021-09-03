@@ -62,4 +62,4 @@ O _[Shape Flexível](https://docs.oracle.com/pt-br/iaas/Content/Compute/Referenc
 
 Lembrando que você pode modificar a quantidade de CPU e memória, a qualquer momento após a criação da instância. 
 
-_[Shapes Flexíveis](https://docs.oracle.com/pt-br/iaas/Content/Compute/References/computeshapes.htm#flexible)_ concedem respostas rápidas sobre necessidades de desempenho, de acordo com mudanças nas cargas de trabalho.
+_[Shapes Flexíveis](https://docs.oracle.com/pt-br/iaas/Content/Compute/References/computeshapes.htm#flexible)_ concedem respostas rápidas sobre necessidades diferentes de desempenho, de acordo com mudanças nas cargas de trabalho.
