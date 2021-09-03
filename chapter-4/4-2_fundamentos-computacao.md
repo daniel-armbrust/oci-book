@@ -31,7 +31,9 @@ _[Shape](https://docs.oracle.com/pt-br/iaas/Content/Compute/Concepts/computeover
 
 Um shape também especifica o tipo do processador, que pode ser _[Intel](https://pt.wikipedia.org/wiki/Intel)_, _[AMD](https://pt.wikipedia.org/wiki/Advanced_Micro_Devices)_ ou processadores _[ARM](https://pt.wikipedia.org/wiki/Arquitetura_ARM)_.
 
-Além do tipo do processador, um shape pode ser _[flexível](https://docs.oracle.com/pt-br/iaas/Content/Compute/References/computeshapes.htm#flexible)_ ou _[padrão](https://docs.oracle.com/pt-br/iaas/Content/Compute/References/computeshapes.htm#vmshapes__vm-standard)_. 
+Além do tipo do processador, um shape pode ter recursos _[fixos](https://docs.oracle.com/pt-br/iaas/Content/Compute/References/computeshapes.htm#vmshapes__vm-standard)_ ou ser _[flexível](https://docs.oracle.com/pt-br/iaas/Content/Compute/References/computeshapes.htm#flexible)_.
+
+Vamos os detalhes ...
 
 #### __Shape Flexível__
 
