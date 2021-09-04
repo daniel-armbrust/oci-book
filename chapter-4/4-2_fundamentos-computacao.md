@@ -81,9 +81,6 @@ Por exemplo:
 - **VM.Standard.E4**
     - É uma _máquina virtual (VM)_, equipada com processador _[AMD EPYC](https://pt.wikipedia.org/wiki/EPYC)_.
 
-- **VM.Standard.A1.Flex**
-    - É uma _máquina virtual (VM)_, equipada com processador _[ARM Ampere Altra](https://en.wikipedia.org/wiki/Ampere_Computing)_, flexível na definição da quantidade de CPUs e memória.
-
 - **BM.GPU3**
     - É um _bare metal (BM)_, equipado com processadores gráficos (GPU) da NVIDIA.
 
@@ -99,3 +96,14 @@ O _[Shape Flexível](https://docs.oracle.com/pt-br/iaas/Content/Compute/Referenc
 Lembrando que você pode modificar a quantidade de CPU e memória, a qualquer momento após a criação da instância. 
 
 _[Shapes Flexíveis](https://docs.oracle.com/pt-br/iaas/Content/Compute/References/computeshapes.htm#flexible)_ concedem respostas rápidas sobre necessidades diferentes de desempenho, de acordo com mudanças nas cargas de trabalho.
+
+Por exemplo:
+
+- **VM.Standard.E4.Flex**
+    - É uma _máquina virtual (VM)_, equipada com processador _[AMD EPYC](https://pt.wikipedia.org/wiki/EPYC)_, flexível na definição da quantidade de CPU e memória. 
+
+- **VM.Standard.A1.Flex**
+    - É uma _máquina virtual (VM)_, equipada com processador _[ARM Ampere Altra](https://en.wikipedia.org/wiki/Ampere_Computing)_, flexível na definição da quantidade de CPU e memória.
+
+ >_**__NOTA:__** A quantidade de memória permitida é baseada no número de CPU que foi selecionado. Esta proporção também depende do tipo do shape. Consulte detalhes na documentação oficial [aqui](https://docs.oracle.com/pt-br/iaas/Content/Compute/References/computeshapes.htm#flexible)._
+    
