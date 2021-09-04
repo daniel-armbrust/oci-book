@@ -106,4 +106,5 @@ Por exemplo:
     - É uma _máquina virtual (VM)_, equipada com processador _[ARM Ampere Altra](https://en.wikipedia.org/wiki/Ampere_Computing)_, flexível na definição da quantidade de CPU e memória.
 
  >_**__NOTA:__** A quantidade de memória permitida é baseada no número de CPU que foi selecionado. Esta proporção também depende do tipo do shape. Consulte detalhes na documentação oficial [aqui](https://docs.oracle.com/pt-br/iaas/Content/Compute/References/computeshapes.htm#flexible)._
-    
+
+### Software pré-instalado ou imagem
