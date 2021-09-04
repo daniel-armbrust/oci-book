@@ -22,6 +22,7 @@ Aprensento abaixo, alguns dos componentes existentes do serviço de _[Networking
     - Você pode criar uma subrede em um único _"domínio de disponibilidade"_ ou em uma região (subrede regional - _modo recomendado_).
     - Recursos criados dentro de uma subrede utilizam a mesma tabela de roteamento (route table), as mesmas listas de segurança (security lists), e mesmas opções de DHCP (dhcp options).
     - Você cria uma subrede como sendo pública ou privada. Uma subrede pública permite expor, através de IP público, um recurso na internet. A subrede privada, não.
+    - Ao criar uma subrede, três endereços IPs são utilizados por ela. São eles: endereço de rede, endereço de broadcast e um endereço destinado para o gateway padrão.
 
 3. **Tabelas de Roteamento (Route Table)**
     - Contém regras de roteamento que direcionam o tráfego da subrede “para fora” da VCN.
@@ -638,7 +639,17 @@ Action completed. Waiting until the resource has entered state: ('AVAILABLE',)
 }
 ```
 
-Alguns parâmetros que destaco serem importantes quando criamos uma subrede. O parâmetro _"--prohibit-public-ip-on-vnic"_ define se uma subrede é pública ou privada. Se uma subrede permite endereço IP público em uma VNIC, ela é caracterizada como sendo uma _"subrede pública"_ (aceita tráfego da internet). Neste caso, definimos o valor como _"true"_, que impede as VNICs da subrede de terem endereço IP público. Como efeito disto, a subrede se torna privada.
+Alguns pontos importantes que valem destaque ao se criar uma subrede. Em primeiro lugar, isto vale pra qualquer subrede criada, três endereços IPs são utilizados internamente. A partir do bloco CIDR "10.0.20.0/24" desta subrede, temos os endereços IPs reservados:
+
+- Endereço IP "10.0.20.0" que corresponde ao endereço da rede.
+- Endereço IP "10.0.20.255", é o endereço de broadcast da rede. Sempre o último IP, é destinado para esta finalidade.
+- Endereço IP "10.0.20.1", é usado como _["gateway padrão"](https://en.wikipedia.org/wiki/Default_route)_ da rede. Sempre o primeiro endereço é destinado para esta finalidade.
+
+Os demais endereços restantes, de "10.0.20.2" a "10.0.20.254", estão disponíveis para o seu uso.
+
+Voltando nos detalhes do OCI CLI, veja que o parâmetro _"--prohibit-public-ip-on-vnic"_ é que define se uma subrede é **pública** ou **privada**. 
+
+Se uma subrede permite endereço IP público em uma VNIC, ela é caracterizada como sendo uma _"subrede pública"_ (aceita tráfego da internet). Neste caso, definimos o valor como _"true"_, que impede as VNICs da subrede de terem endereço IP público. Como efeito disto, a subrede se torna privada.
 
 Um outro detalhe é referente a _[Security List](https://docs.oracle.com/en-us/iaas/api/#/en/iaas/20160918/datatypes/IngressSecurityRule)_. Perceba que o tipo de dado do parâmetro _"--security-list-ids"_ é um vetor. Ou seja, é possível definir várias listas de segurança sendo que cada lista pode ter várias regras. Um pacote de dados será permitido se qualquer regra, em qualquer uma das listas possibilitar o tráfego. 
 
