@@ -79,7 +79,7 @@ Por exemplo:
     - É uma _máquina virtual (VM)_ de segunda geração, equipada com processador _[Intel](https://pt.wikipedia.org/wiki/Intel)_, para cargas de trabalho de propósito geral (Standard), com duas CPUs.
 
 - **VM.Standard.E4**
-    - É uma _máquina virtual (VM)_, equipada com processador _[AMD](https://pt.wikipedia.org/wiki/Advanced_Micro_Devices)_.
+    - É uma _máquina virtual (VM)_, equipada com processador _[AMD EPYC](https://pt.wikipedia.org/wiki/EPYC)_.
 
 - **VM.Standard.A1.Flex**
     - É uma _máquina virtual (VM)_, equipada com processador _[ARM](https://pt.wikipedia.org/wiki/Arquitetura_ARM)_ e flexível na definição da quantidade de CPUs.
