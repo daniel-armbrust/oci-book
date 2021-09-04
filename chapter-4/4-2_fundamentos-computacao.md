@@ -58,7 +58,7 @@ Dependendo das necessidades da aplicação que será executada, é possível esc
 
 Um shape de recursos fixos, pode ser uma _máquina virtual_ ou _bare metal_, e pode estar equipado com processador _[Intel](https://pt.wikipedia.org/wiki/Intel)_, _[AMD](https://pt.wikipedia.org/wiki/Advanced_Micro_Devices)_ ou processadores do tipo _[ARM](https://pt.wikipedia.org/wiki/Arquitetura_ARM)_ (arquitetura RISC).
 
-Como há muitos diferentes tipos de shapes, novos são adicionados e antigos removidos, não convém colocar uma lista deles aqui. Sempre que precisar consultar quais os shapes disponíveis, verifique a lista neste _[link aqui](https://docs.oracle.com/pt-br/iaas/Content/Compute/References/computeshapes.htm). É o melhor caminho.
+Como há muitos diferentes tipos de shapes, novos são adicionados e antigos removidos, não convém colocar uma lista deles aqui. Sempre que precisar consultar quais os shapes disponíveis, verifique a lista neste _[link aqui](https://docs.oracle.com/pt-br/iaas/Content/Compute/References/computeshapes.htm)_. É o melhor caminho.
 
 O que vale documentar, é a forma como podemos ler a definição de um shape. Veja a sintaxe:
 
