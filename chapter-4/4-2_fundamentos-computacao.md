@@ -94,7 +94,7 @@ Por exemplo:
 
 #### __Shape Flexível__
 
-O _[Shape Flexível](https://docs.oracle.com/pt-br/iaas/Content/Compute/References/computeshapes.htm#flexible)_ permite definir a quantidade de CPUs e memória alocados para uma instância. A largura de banda da rede e a quantidade máxima de VNICs, é proporcional ao número de CPUs. Quanto mais CPUs, maior é a largura de banda da rede. 
+O _[Shape Flexível](https://docs.oracle.com/pt-br/iaas/Content/Compute/References/computeshapes.htm#flexible)_ permite definir qual é a quantidade de CPUs e memória alocados para a instância. A largura de banda da rede e a quantidade máxima de VNICs, é proporcional ao número de CPUs. Quanto mais CPUs, maior é a largura de banda da rede. 
 
 Lembrando que você pode modificar a quantidade de CPU e memória, a qualquer momento após a criação da instância. 
 
