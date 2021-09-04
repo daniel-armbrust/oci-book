@@ -42,7 +42,7 @@ Um shape pode ter recursos fixos, como quantidade de CPUs e memória, além de s
 Dependendo das necessidades da aplicação que será executada, é possível escolher um tipo de shape computacional específico. Sendo eles:
 
 - **Standard**
-    - Projetado para atender cargas de trabalho de propósito geral. Este tipo de shape está disponível com processadores _[Intel](https://pt.wikipedia.org/wiki/Intel)_, _[AMD](https://pt.wikipedia.org/wiki/Advanced_Micro_Devices)_ e _[ARM](https://pt.wikipedia.org/wiki/Arquitetura_ARM)_.
+    - Projetado para atender cargas de trabalho de propósito geral. 
     
 - **DenseIO**
     - Projetado para bancos de dados de grande porte, big data e aplicações que exigem storage de alto desempenho (SSDs baseadas em NVMe).
@@ -55,6 +55,28 @@ Dependendo das necessidades da aplicação que será executada, é possível esc
 
 - **Optimized Shapes**
     - Projetado para atender computação de alto desempenho, que exigem processadores com núcleos de alta frequência. Também podem ser usados para cargas de trabalho HPC (High performance computing).
+
+Um shape de recursos fixos, pode ser uma _máquina virtual_ ou _bare metal_, e pode estar equipado com processador _[Intel](https://pt.wikipedia.org/wiki/Intel)_, _[AMD](https://pt.wikipedia.org/wiki/Advanced_Micro_Devices)_ ou processadores do tipo _[ARM](https://pt.wikipedia.org/wiki/Arquitetura_ARM)_ (arquitetura RISC).
+
+Como há muitos diferentes tipos de shapes, novos são adicionados e antigos removidos, não convém colocar uma lista deles aqui. Sempre que precisar consultar quais os shapes disponíveis, verifique a lista neste _[link aqui](https://docs.oracle.com/pt-br/iaas/Content/Compute/References/computeshapes.htm). É o melhor caminho.
+
+O que vale documentar, é a forma como podemos ler a definição de um shape. Veja a sintaxe:
+
+```
+<BM|VM>.<Tipo do Shape>[Geração].[Tipo do Processador][.Qtde de CPU][.Flex|.Micro]
+```
+
+- **BM** especifica um shape como sendo _Bare Metal (BM)_, e **VM** especifica uma _Máquina Virtual (VM)_.
+- **Tipo do Shape** pode ser um dos valores: Standard, DenseIO, GPU, HPC ou Optimized.
+- **Geração** especifica a geração do processador. Alguns shapes que evoluíram de uma geração anterior, apresentam um número aqui (ex: Standard1 e Standard2).
+- **Tipo do Processador** pode ser _[Intel](https://pt.wikipedia.org/wiki/Intel)_, _[AMD](https://pt.wikipedia.org/wiki/Advanced_Micro_Devices)_ (E2, E3 ou E4) ou _[ARM](https://pt.wikipedia.org/wiki/Arquitetura_ARM)_ (A1). Processadores _[Intel](https://pt.wikipedia.org/wiki/Intel)_ não possuem identificação através de sigla.
+- **Qtde de CPU** especifica a quantidade de CPUs do shape. Shapes flexíveis não possuem este valor, pois sua quantidade de CPU não é fixa.
+- **Flex ou Micro** especifica se o shape possui características _flexíveis (Flex)_ de CPU, ou se ele é do tipo _micro_ que faz parte do programa _[Always Free](https://docs.oracle.com/pt-br/iaas/Content/FreeTier/freetier_topic-Always_Free_Resources.htm)_.
+
+Por exemplo:
+
+- 
+
 
 #### __Shape Flexível__
 
