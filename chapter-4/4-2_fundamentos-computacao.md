@@ -75,8 +75,22 @@ O que vale documentar, é a forma como podemos ler a definição de um shape. Ve
 
 Por exemplo:
 
-- 
+- **VM.Standard2.2**
+    - É uma _máquina virtual (VM)_ de segunda geração, equipada com processador _[Intel](https://pt.wikipedia.org/wiki/Intel)_, para cargas de trabalho de propósito geral (Standard), com duas CPUs.
 
+- **VM.Standard.E4**
+    - É uma _máquina virtual (VM)_, equipada com processador _[AMD](https://pt.wikipedia.org/wiki/Advanced_Micro_Devices)_.
+
+- **VM.Standard.A1.Flex**
+    - É uma _máquina virtual (VM)_, equipada com processador _[ARM](https://pt.wikipedia.org/wiki/Arquitetura_ARM)_ e flexível na definição da quantidade de CPUs.
+
+- **BM.GPU3**
+    - É um _bare metal (BM)_, equipado com processadores gráficos (GPU) da NVIDIA.
+
+- **BM.Optimized3.36**
+    - É um _bare metal (BM)_ de terceira geração, equipado com processador _[Intel](https://pt.wikipedia.org/wiki/Intel)_, para cargas de trabalho HPC e de alto desempenho, com 36 CPUs.
+
+>_**__NOTA:__** Shapes de computação mudam com frequência. Para saber sobre especificação exata do modelo dos processadores, frequência do clock, quantidade de memória disponível por shape e outras informações, consulte a documentação oficial neste _[link aqui](https://docs.oracle.com/pt-br/iaas/Content/Compute/References/computeshapes.htm)_.
 
 #### __Shape Flexível__
 
