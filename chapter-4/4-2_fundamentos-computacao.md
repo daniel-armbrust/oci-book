@@ -67,8 +67,8 @@ O que vale documentar, é a forma como podemos ler a definição de um shape. Ve
 ```
 
 - **BM** especifica um shape como sendo _Bare Metal (BM)_, e **VM** especifica uma _Máquina Virtual (VM)_.
-- **Tipo do Shape** pode ser um dos valores: Standard, DenseIO, GPU, HPC ou Optimized.
-- **Geração** especifica a geração do processador. Alguns shapes que evoluíram de uma geração anterior, apresentam um número aqui (ex: Standard1 e Standard2).
+- **Tipo do Shape** pode ser um dos valores: _Standard_, _DenseIO_, _GPU_, _HPC_ ou _Optimized_.
+- **Geração** do processador. Alguns shapes que evoluíram de uma geração anterior, apresentam um número aqui (ex: Standard1 e Standard2).
 - **Tipo do Processador** pode ser _[Intel](https://pt.wikipedia.org/wiki/Intel)_, _[AMD](https://pt.wikipedia.org/wiki/Advanced_Micro_Devices)_ (E2, E3 ou E4) ou _[ARM](https://pt.wikipedia.org/wiki/Arquitetura_ARM)_ (A1). Processadores _[Intel](https://pt.wikipedia.org/wiki/Intel)_ não possuem identificação através de sigla.
 - **Qtde de CPU** especifica a quantidade de CPUs do shape. Shapes flexíveis não possuem este valor, pois sua quantidade de CPU não é fixa.
 - **Flex ou Micro** especifica se o shape possui características _flexíveis (Flex)_ de CPU, ou se ele é do tipo _micro_ que faz parte do programa _[Always Free](https://docs.oracle.com/pt-br/iaas/Content/FreeTier/freetier_topic-Always_Free_Resources.htm)_.
