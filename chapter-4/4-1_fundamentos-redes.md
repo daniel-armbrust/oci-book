@@ -642,7 +642,7 @@ Action completed. Waiting until the resource has entered state: ('AVAILABLE',)
 Alguns pontos importantes que valem destaque ao se criar uma subrede. Em primeiro lugar, isto vale pra qualquer subrede criada, três endereços IPs são utilizados internamente. A partir do bloco CIDR "10.0.20.0/24" desta subrede, temos os endereços IPs reservados:
 
 - Endereço IP "10.0.20.0" que corresponde ao endereço da rede.
-- Endereço IP "10.0.20.255", é o endereço de broadcast da rede. Sempre o último IP, é destinado para esta finalidade.
+- Endereço IP "10.0.20.255", é o endereço de broadcast da rede. Sempre o último IP é destinado para esta finalidade.
 - Endereço IP "10.0.20.1", é usado como _["gateway padrão"](https://en.wikipedia.org/wiki/Default_route)_ da rede. Sempre o primeiro endereço é destinado para esta finalidade.
 
 Os demais endereços restantes, de "10.0.20.2" a "10.0.20.254", estão disponíveis para o seu uso.
