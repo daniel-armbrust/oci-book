@@ -82,7 +82,7 @@ Por exemplo:
     - É uma _máquina virtual (VM)_, equipada com processador _[AMD EPYC](https://pt.wikipedia.org/wiki/EPYC)_.
 
 - **VM.Standard.A1.Flex**
-    - É uma _máquina virtual (VM)_, equipada com processador _[ARM Ampere Altra](https://en.wikipedia.org/wiki/Ampere_Computing)_ e flexível na definição da quantidade de CPUs.
+    - É uma _máquina virtual (VM)_, equipada com processador _[ARM Ampere Altra](https://en.wikipedia.org/wiki/Ampere_Computing)_, flexível na definição da quantidade de CPUs e memória.
 
 - **BM.GPU3**
     - É um _bare metal (BM)_, equipado com processadores gráficos (GPU) da NVIDIA.
