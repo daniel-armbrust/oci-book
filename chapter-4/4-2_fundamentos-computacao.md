@@ -126,7 +126,7 @@ Quando criamos uma instância, podemos escolher de onde vem a _[imagem](https://
 - **BYOI (Bring Your Own Image)**
     - O recurso _[BYOI (Bring Your Own Image)](https://docs.oracle.com/pt-br/iaas/Content/Compute/References/bringyourownimage.htm)_ permite que você traga suas próprias versões de sistemas operacionais para o OCI.
     - Este tipo de recurso também é útil, quando se deseja trazer para a nuvem (lift-and-shift), um sistema operacional antigo e que não está mais disponível (legado).
-    - Neste modelo, esteja atento referente aos _"requisitos de licenciamento"_ no qual você deve cumprir, se aplicável. O OCI não absorve sua licença.
+    - Neste modelo, esteja atento referente aos _"requisitos de licenciamento"_ no qual você deve cumprir, se aplicável. Lembrando que o OCI não absorve sua licença.
 
 - **Marketplace**
     - O serviço _[Marketplace](https://cloudmarketplace.oracle.com/marketplace/oci)_ do OCI disponibiliza várias _[imagem](https://docs.oracle.com/pt-br/iaas/Content/Compute/References/images.htm#OracleProvided_Images)_ já prontas pro uso. 
