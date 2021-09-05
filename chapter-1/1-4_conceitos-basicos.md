@@ -179,3 +179,15 @@ No canto superior direito do _[OCI Status](https://ocistatus.oraclecloud.com)_, 
 ### __Oracle Architecture Center__
 
 O _[Oracle Architecture Center](https://www.oracle.com/cloud/architecture-center/)_ é um centro de recursos sobre o OCI que permite desenvolvedores e a equipe de TI, conhecerem sobre segurança, arquiteturas de referência, documentações, videos e boas práticas. De arquiteturas de referência a guias de início rápido, com o _[Oracle Architecture Center](https://www.oracle.com/cloud/architecture-center/)_ você pode visualizar uma determinada arquitetura, e implantar facilmente diretamente na sua conta. Este centro de recursos beneficia usuários Oracle experientes e aqueles que estão apenas começando sua jornada no OCI. 
+
+Alguns dos documentos que podem ser encontrados no _[Architecture Center](https://www.oracle.com/cloud/architecture-center/)_ e valem seu destaque são:
+
+- [Modern Application Development](https://www.oracle.com/cloud/architecture-center/modern-app-development/)
+- [Web/Mobile Development](https://docs.oracle.com/en/solutions/mad-web-mobile/index.html)
+- [Event-driven](https://docs.oracle.com/en/solutions/mad-event-driven/index.html)
+- [Messaging](https://docs.oracle.com/en/solutions/mad-messaging-pattern/index.html)
+- [Machine Learning and Artificial Intelligence](https://docs.oracle.com/en/solutions/maf-ml-al/index.html)
+- [Big Data and Analytics](https://docs.oracle.com/en/solutions/big-data-and-analytics/index.html)
+- [Low Code](https://docs.oracle.com/en/solutions/low-code-apps-maf/index.html)
+- [SaaS Extensions](https://docs.oracle.com/en/solutions/maf-saas/index.html)
+- [Data-Centric](https://docs.oracle.com/en/solutions/mad-data-centric/index.html)
