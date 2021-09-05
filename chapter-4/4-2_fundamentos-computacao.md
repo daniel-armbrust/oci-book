@@ -112,16 +112,25 @@ Por exemplo:
 
 O outro item necessário para se criar uma instância de computação está na escolha de uma _[imagem](https://docs.oracle.com/pt-br/iaas/Content/Compute/References/images.htm#OracleProvided_Images)_. Uma _[imagem](https://docs.oracle.com/pt-br/iaas/Content/Compute/References/images.htm#OracleProvided_Images)_ é um template que especifica o sistema operacional e qualquer outro software pré-instalado, que uma instância irá utilizar.
 
-Toda _[imagem](https://docs.oracle.com/pt-br/iaas/Content/Compute/References/images.htm#OracleProvided_Images)_ utiliza um pequeno disco chamado de  _[boot volume](https://docs.oracle.com/pt-br/iaas/Content/Block/Concepts/bootvolumes.htm)_ ou disco de inicialização. Este é criado e associado a instância no momento da sua criação. Ele abriga o sistema operacional que será utilizado.
+Toda _[imagem](https://docs.oracle.com/pt-br/iaas/Content/Compute/References/images.htm#OracleProvided_Images)_ utiliza um pequeno disco chamado de  _[boot volume](https://docs.oracle.com/pt-br/iaas/Content/Block/Concepts/bootvolumes.htm)_ ou disco de inicialização. Este é criado e associado a instância no momento da sua criação. Ele abriga o sistema operacional, além do _[boot loader](https://en.wikipedia.org/wiki/Bootloader) necessário para boot da instância.
 
 Quando criamos uma instância, podemos escolher de onde vem a _[imagem](https://docs.oracle.com/pt-br/iaas/Content/Compute/References/images.htm#OracleProvided_Images)_ que iremos utilizar. Temos:
 
-- **Imagens da Plataforma**
+- **Imagens de Plataforma**
     - O OCI disponibiliza diferentes _[imagem](https://docs.oracle.com/pt-br/iaas/Content/Compute/References/images.htm#OracleProvided_Images)_ de diferentes versões dos sistemas operacionais, Linux e Windows, mais conhecidos.
     - A extensa lista pode ser consultada neste _[link aqui](https://docs.oracle.com/en-us/iaas/images/)_.
+    
+- **Imagens Personalizadas**
+    - É uma _[imagem](https://docs.oracle.com/pt-br/iaas/Content/Compute/References/images.htm#OracleProvided_Images)_ que você criou, alterou e mantém guardada no OCI para iniciar outras intâncias. 
+    
+- **BYOI (Bring Your Own Image)**
+    - O recurso _[BYOI (Bring Your Own Image)](https://docs.oracle.com/pt-br/iaas/Content/Compute/References/bringyourownimage.htm)_ permite que você traga suas próprias versões de sistemas operacionais para o OCI.
+    - Este tipo de recurso é útil, quando se deseja trazer para a nuvem (lift-and-shift), um sistema operacional antigo e que não está mais disponível (legado).
+    - Esteja atento referente aos "requisitos de licenciamento" no qual você deve cumprir, se aplicável. O OCI não absorve sua licença.
 
-- **Imagens da Plataforma**
-
+- **Marketplace**
+    - O serviço _[Marketplace](https://cloudmarketplace.oracle.com/marketplace/oci)_ do OCI disponibiliza várias _[imagem](https://docs.oracle.com/pt-br/iaas/Content/Compute/References/images.htm#OracleProvided_Images)_ já prontas pro uso. 
+    - Estas _[imagens](https://docs.oracle.com/pt-br/iaas/Content/Compute/References/images.htm#OracleProvided_Images)_ incluem softwares pré-instalados da própria Oracle e de outros parceiros, como: Microsoft SQL Server, Oracle WebLogic, FortiGate Firewall, SUSE Linux, entre outros.
 
  >_**__NOTA:__** Tecnicamente falando, quando você cria uma instância usando uma [imagem de plataforma](https://docs.oracle.com/pt-br/iaas/Content/Compute/References/images.htm#OracleProvided_Images) ou uma [imagem personalizada](https://docs.oracle.com/pt-br/iaas/Content/Compute/Tasks/managingcustomimages.htm#Managing_Custom_Images), um [boot volume](https://docs.oracle.com/pt-br/iaas/Content/Block/Concepts/bootvolumes.htm) é criado para abrigar o sistema operacional da [imagem](https://docs.oracle.com/pt-br/iaas/Content/Compute/References/images.htm#OracleProvided_Images) no mesmo compartimento. Um [boot volume](https://docs.oracle.com/pt-br/iaas/Content/Block/Concepts/bootvolumes.htm) não está associado a uma [imagem](https://docs.oracle.com/pt-br/iaas/Content/Compute/References/images.htm#OracleProvided_Images). É a [imagem](https://docs.oracle.com/pt-br/iaas/Content/Compute/References/images.htm#OracleProvided_Images) que possui instruções para criar um [boot volume](https://docs.oracle.com/pt-br/iaas/Content/Block/Concepts/bootvolumes.htm) necessário para o sistema operacional dela._
 
