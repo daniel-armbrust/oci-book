@@ -87,7 +87,7 @@ Por exemplo:
 - **BM.Optimized3.36**
     - É um _bare metal (BM)_ de terceira geração, equipado com processador _[Intel](https://pt.wikipedia.org/wiki/Intel)_, para cargas de trabalho HPC e de alto desempenho, com 36 CPUs.
 
->_**__NOTA:__** Shapes de computação mudam com frequência. Para saber mais e quais shapes estão disponíveis hoje, consulte a documentação oficial neste [link aqui](https://docs.oracle.com/pt-br/iaas/Content/Compute/References/computeshapes.htm). Alguns shapes de [geração anterior](https://docs.oracle.com/pt-br/iaas/Content/Compute/References/computeshapes.htm#previous-generation-shapes) ainda estão disponíveis para uso, poém são mais caros e possuem desempenho inferior._
+>_**__NOTA:__** Shapes de computação mudam com frequência. Para saber mais e quais shapes estão disponíveis hoje, consulte a documentação oficial neste [link aqui](https://docs.oracle.com/pt-br/iaas/Content/Compute/References/computeshapes.htm). Alguns shapes de [geração anterior](https://docs.oracle.com/pt-br/iaas/Content/Compute/References/computeshapes.htm#previous-generation-shapes) ainda estão disponíveis para uso, poém são mais caros e possuem desempenho inferior. Shapes antigos podem ser consultados neste [link aqui](https://docs.oracle.com/pt-br/iaas/Content/Compute/References/computeshapes.htm#previous-generation-shapes)._
 
 
 #### __Shape Flexível__
