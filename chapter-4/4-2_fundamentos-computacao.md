@@ -110,3 +110,7 @@ Por exemplo:
 
 ### Imagem
 
+O outro item necessário para se criar uma instância de computação está na escolha de uma _[imagem](https://docs.oracle.com/pt-br/iaas/Content/Compute/References/images.htm#OracleProvided_Images)_. Uma _[imagem](https://docs.oracle.com/pt-br/iaas/Content/Compute/References/images.htm#OracleProvided_Images)_ é um template que especifica o sistema operacional e qualquer outro software pré-instalado, que uma instância de computação irá utilizar.
+
+
+https://docs.oracle.com/en-us/iaas/images/
