@@ -136,3 +136,6 @@ Quando criamos uma instância, podemos escolher de onde vem a _[imagem](https://
     - O serviço _[Marketplace](https://cloudmarketplace.oracle.com/marketplace/oci)_ do OCI disponibiliza várias _[imagem](https://docs.oracle.com/pt-br/iaas/Content/Compute/References/images.htm#OracleProvided_Images)_ já prontas pro uso. 
     - Estas _[imagens](https://docs.oracle.com/pt-br/iaas/Content/Compute/References/images.htm#OracleProvided_Images)_ incluem softwares pré-instalados da própria Oracle e de outros parceiros, como: Microsoft SQL Server, Oracle WebLogic, FortiGate Firewall, SUSE Linux, entre outros.
     - Podem haver situações em que utilizar uma imagem do _[marketplace](https://cloudmarketplace.oracle.com/marketplace/oci)_, pode ser necessário adquirir licenciamento extra, diretamente com o fabricante da imagem. 
+
+
+### __Criando uma Instância__
