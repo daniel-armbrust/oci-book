@@ -21,7 +21,7 @@ Utilizar uma _Máquina Virtual_ ou _Bare Metal_, seja de forma direta ou para cr
 Ao se cria uma instância, existem duas escolhas fundamentais a serem feitas. São elas:
 
 - **Shape**
-- **Software pré-instalado ou imagem**
+- **Imagem**
 
 ### __Shape__
 
@@ -87,7 +87,8 @@ Por exemplo:
 - **BM.Optimized3.36**
     - É um _bare metal (BM)_ de terceira geração, equipado com processador _[Intel](https://pt.wikipedia.org/wiki/Intel)_, para cargas de trabalho HPC e de alto desempenho, com 36 CPUs.
 
->_**__NOTA:__** Shapes de computação mudam com frequência. Para saber sobre especificação exata do modelo dos processadores, frequência do clock, geração, quantidade de memória disponível e outras informações, consulte a documentação oficial neste [link aqui](https://docs.oracle.com/pt-br/iaas/Content/Compute/References/computeshapes.htm)_.
+>_**__NOTA:__** Shapes de computação mudam com frequência. Para saber mais e quais shapes estão disponíveis hoje, consulte a documentação oficial neste [link aqui](https://docs.oracle.com/pt-br/iaas/Content/Compute/References/computeshapes.htm). Alguns shapes de [geração anterior](https://docs.oracle.com/pt-br/iaas/Content/Compute/References/computeshapes.htm#previous-generation-shapes) ainda estão disponíveis para uso, poém são mais caros e possuem desempenho inferior._
+
 
 #### __Shape Flexível__
 
@@ -107,4 +108,5 @@ Por exemplo:
 
  >_**__NOTA:__** A quantidade de memória permitida é baseada no número de CPU que foi selecionado. Esta proporção também depende do tipo do shape. Consulte detalhes na documentação oficial [aqui](https://docs.oracle.com/pt-br/iaas/Content/Compute/References/computeshapes.htm#flexible)._
 
-### Software pré-instalado ou imagem
+### Imagem
+
