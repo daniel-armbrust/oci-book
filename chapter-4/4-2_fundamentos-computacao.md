@@ -110,7 +110,10 @@ Por exemplo:
 
 ### Imagem
 
-O outro item necessário para se criar uma instância de computação está na escolha de uma _[imagem](https://docs.oracle.com/pt-br/iaas/Content/Compute/References/images.htm#OracleProvided_Images)_. Uma _[imagem](https://docs.oracle.com/pt-br/iaas/Content/Compute/References/images.htm#OracleProvided_Images)_ é um template que especifica o sistema operacional e qualquer outro software pré-instalado, que uma instância de computação irá utilizar.
+O outro item necessário para se criar uma instância de computação está na escolha de uma _[imagem](https://docs.oracle.com/pt-br/iaas/Content/Compute/References/images.htm#OracleProvided_Images)_. Uma _[imagem](https://docs.oracle.com/pt-br/iaas/Content/Compute/References/images.htm#OracleProvided_Images)_ é um template que especifica o sistema operacional e qualquer outro software pré-instalado, que uma instância irá utilizar.
 
+Toda _[imagem](https://docs.oracle.com/pt-br/iaas/Content/Compute/References/images.htm#OracleProvided_Images)_ utiliza um pequeno disco chamado de  _[boot volume](https://docs.oracle.com/pt-br/iaas/Content/Block/Concepts/bootvolumes.htm)_ ou disco de inicialização. Este é criado e associado no momento de criação de uma instância. Ele abriga o sistema operacional que será utilizado.
+
+ >_**__NOTA:__** Tecnicamente falando, quando você cria uma instância usando uma [imagem de plataforma](https://docs.oracle.com/pt-br/iaas/Content/Compute/References/images.htm#OracleProvided_Images) ou uma [imagem personalizada](https://docs.oracle.com/pt-br/iaas/Content/Compute/Tasks/managingcustomimages.htm#Managing_Custom_Images), um [boot volume](https://docs.oracle.com/pt-br/iaas/Content/Block/Concepts/bootvolumes.htm) é criado para abrigar o sistema operacional da [imagem](https://docs.oracle.com/pt-br/iaas/Content/Compute/References/images.htm#OracleProvided_Images) no mesmo compartimento.
 
 https://docs.oracle.com/en-us/iaas/images/
