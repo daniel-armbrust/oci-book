@@ -14,6 +14,8 @@ Já uma _Máquina Virtual (VM)_ é executada através de técnicas de _[virtuali
 
 ![alt_text](./images/ch4_4-2_bm-vs-vm.jpg  "Bare Metal vs. Virtual Machine")
 
+>_**__NOTA:__** Um software que pode ser usado para criar máquinas virtuais é o [VirtualBox](https://www.virtualbox.org/). Para saber mais, consulte este [link aqui](https://www.virtualbox.org/)._
+
 Um outro tipo de _instância de computação_ existente no OCI é o _[Dedicated Virtual Machine Host](https://docs.oracle.com/pt-br/iaas/Content/Compute/Concepts/dedicatedvmhosts.htm)_. Basicamente, este é um _Bare Metal_ dedicado ao seu uso, no qual você pode criar e executar máquinas virtuais (vm) sobre ele.
 
 Utilizar uma _Máquina Virtual_ ou _Bare Metal_, seja de forma direta ou para criar máquinas virtuais sobre, vai depender muito da sua necessidade. Normalmente, utilizamos hardware dedicado e que não sejam compartilhado com outros clientes (único tenant), quando há algum requisito de conformidade e isolamento a cumprir, que o impedem de usar uma infraestrutura compartilhada. Porém, o mais comum de ser visto, são as máquinas virtuais (multitenancy).
