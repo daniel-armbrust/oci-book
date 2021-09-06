@@ -92,7 +92,7 @@ Por exemplo:
 >_**__NOTA:__** Shapes de computação mudam com frequência. Para saber mais e quais shapes estão disponíveis hoje, consulte a documentação oficial neste [link aqui](https://docs.oracle.com/pt-br/iaas/Content/Compute/References/computeshapes.htm). Alguns shapes de [geração anterior](https://docs.oracle.com/pt-br/iaas/Content/Compute/References/computeshapes.htm#previous-generation-shapes) ainda estão disponíveis para uso, poém são mais caros e possuem desempenho inferior. Shapes antigos podem ser consultados neste [link aqui](https://docs.oracle.com/pt-br/iaas/Content/Compute/References/computeshapes.htm#previous-generation-shapes)._
 
 
-#### __Shape Flexível__
+#### __Shapes Flexíveis__
 
 O _[Shape Flexível](https://docs.oracle.com/pt-br/iaas/Content/Compute/References/computeshapes.htm#flexible)_ permite definir qual é a quantidade de CPUs e memória alocados para a instância. A largura de banda da rede e a quantidade máxima de VNICs, é proporcional ao número de CPUs. Quanto mais CPUs, maior é a largura de banda da rede. 
 
@@ -110,6 +110,47 @@ Por exemplo:
 
  >_**__NOTA:__** A quantidade de memória permitida é baseada no número de CPU que foi selecionado. Esta proporção também depende do tipo do shape. Consulte detalhes na documentação oficial [aqui](https://docs.oracle.com/pt-br/iaas/Content/Compute/References/computeshapes.htm#flexible)._
 
+#### __Listando Shapes Disponíveis__
+
+Para verificar a lista de shapes disponíveis para uso em determinada região, usamos o comando abaixo:
+
+```
+darmbrust@hoodwink:~$ oci compute shape list \
+> --region sa-saopaulo-1 \
+> --compartment-id "ocid1.tenancy.oc1..aaaaaaaavv2qh5asjdcoufmb6fzpnrfqgjxxdzlvjrgkrkytnyyz6zgvjnua" \
+> --query "data[].[shape,ocpus,\"memory-in-gbs\"]" \
+> --all \
+> --output table
++---------------------+---------+---------+
+| Column1             | Column2 | Column3 |
++---------------------+---------+---------+
+| BM.Standard.A1.160  | 160.0   | 1024.0  |
+| BM.Standard2.52     | 52.0    | 768.0   |
+| BM.Optimized3.36    | 36.0    | 512.0   |
+| BM.Standard.E4.128  | 128.0   | 2048.0  |
+| BM.Standard.E3.128  | 128.0   | 2048.0  |
+| BM.Standard.E2.64   | 64.0    | 512.0   |
+| BM.DenseIO2.52      | 52.0    | 768.0   |
+| VM.Optimized3.Flex  | 1.0     | 14.0    |
+| VM.Standard.E4.Flex | 1.0     | 16.0    |
+| VM.Standard.E3.Flex | 1.0     | 16.0    |
+| VM.Standard.A1.Flex | 1.0     | 6.0     |
+| VM.Standard2.1      | 1.0     | 15.0    |
+| VM.Standard2.2      | 2.0     | 30.0    |
+| VM.Standard2.4      | 4.0     | 60.0    |
+| VM.Standard2.8      | 8.0     | 120.0   |
+| VM.Standard2.16     | 16.0    | 240.0   |
+| VM.Standard2.24     | 24.0    | 320.0   |
+| VM.Standard.E2.1    | 1.0     | 8.0     |
+| VM.Standard.E2.2    | 2.0     | 16.0    |
+| VM.Standard.E2.4    | 4.0     | 32.0    |
+| VM.Standard.E2.8    | 8.0     | 64.0    |
+| VM.DenseIO2.8       | 8.0     | 120.0   |
+| VM.DenseIO2.16      | 16.0    | 240.0   |
+| VM.DenseIO2.24      | 24.0    | 320.0   |
++---------------------+---------+---------+
+```
+
 ### Imagem
 
 O outro item necessário para se criar uma instância de computação está na escolha de uma _[imagem](https://docs.oracle.com/pt-br/iaas/Content/Compute/References/images.htm#OracleProvided_Images)_. Uma _[imagem](https://docs.oracle.com/pt-br/iaas/Content/Compute/References/images.htm#OracleProvided_Images)_ é um template que especifica o sistema operacional e qualquer outro software pré-instalado, que uma instância irá utilizar.
@@ -118,7 +159,7 @@ Toda _[imagem](https://docs.oracle.com/pt-br/iaas/Content/Compute/References/ima
 
 >_**__NOTA:__** Tecnicamente falando, quando você cria uma instância usando uma [imagem de plataforma](https://docs.oracle.com/pt-br/iaas/Content/Compute/References/images.htm#OracleProvided_Images) ou uma [imagem personalizada](https://docs.oracle.com/pt-br/iaas/Content/Compute/Tasks/managingcustomimages.htm#Managing_Custom_Images), um [boot volume](https://docs.oracle.com/pt-br/iaas/Content/Block/Concepts/bootvolumes.htm) é criado para abrigar o sistema operacional da [imagem](https://docs.oracle.com/pt-br/iaas/Content/Compute/References/images.htm#OracleProvided_Images) no mesmo compartimento. Um [boot volume](https://docs.oracle.com/pt-br/iaas/Content/Block/Concepts/bootvolumes.htm) não está associado a uma [imagem](https://docs.oracle.com/pt-br/iaas/Content/Compute/References/images.htm#OracleProvided_Images). É a [imagem](https://docs.oracle.com/pt-br/iaas/Content/Compute/References/images.htm#OracleProvided_Images) que possui instruções para criar um [boot volume](https://docs.oracle.com/pt-br/iaas/Content/Block/Concepts/bootvolumes.htm) necessário para o sistema operacional dela._
 
-Quando criamos uma instância, podemos escolher de onde vem a _[imagem](https://docs.oracle.com/pt-br/iaas/Content/Compute/References/images.htm#OracleProvided_Images)_ que iremos utilizar. Temos:
+Quando criamos uma instância, podemos escolher uma entre as diversas categorias que diponibilizam uma _[imagem](https://docs.oracle.com/pt-br/iaas/Content/Compute/References/images.htm#OracleProvided_Images)_ para utilização:
 
 - **Imagens de Plataforma**
     - O OCI disponibiliza diferentes _[imagem](https://docs.oracle.com/pt-br/iaas/Content/Compute/References/images.htm#OracleProvided_Images)_ de diferentes versões dos sistemas operacionais, Linux e Windows, mais conhecidos.
@@ -137,5 +178,27 @@ Quando criamos uma instância, podemos escolher de onde vem a _[imagem](https://
     - Estas _[imagens](https://docs.oracle.com/pt-br/iaas/Content/Compute/References/images.htm#OracleProvided_Images)_ incluem softwares pré-instalados da própria Oracle e de outros parceiros, como: Microsoft SQL Server, Oracle WebLogic, FortiGate Firewall, SUSE Linux, entre outros.
     - Podem haver situações em que utilizar uma imagem do _[marketplace](https://cloudmarketplace.oracle.com/marketplace/oci)_, pode ser necessário adquirir licenciamento extra, diretamente com o fabricante da imagem. 
 
+Para listarmos todas as _imagens de plataforma_ da região _sa-saopaulo-1_ que temos disponíveis, usamos o comando abaixo:
+
+```
+darmbrust@hoodwink:~$ oci compute image list \
+> --region sa-saopaulo-1 \
+> --compartment-id "ocid1.tenancy.oc1..aaaaaaaavv2qh5asjdcoufmb6fzpnrfqgjxxdzlvjrgkrkytnyyz6zgvjnua" \
+> --query "data[].[\"display-name\",id]" \
+> --output table \
+> --sort-order ASC \
+> --all
++-----------------------------------------------+--------------------------------------------------------------------------------------------+
+| Column1                                       | Column2                                                                                    |
++-----------------------------------------------+--------------------------------------------------------------------------------------------+
+| Canonical-Ubuntu-18.04-2021.07.16-0           | ocid1.image.oc1.sa-saopaulo-1.aaaaaaaa74nz3eo5oqeaoqjiiwukncim6rjzgufwqarioewmusmra7tmq7qq |
+| Canonical-Ubuntu-18.04-2021.08.25-0           | ocid1.image.oc1.sa-saopaulo-1.aaaaaaaa22q64w6qge3imhnv3nwnnflf255mrpvhzv4dg7ztagk27hdqxtqa |
+| Canonical-Ubuntu-18.04-Minimal-2021.06.11-0   | ocid1.image.oc1.sa-saopaulo-1.aaaaaaaa45dvzfzast6nn5yhfh4scvwbaet2fjl4espgyfly4xgyxtuocngq |
+| Canonical-Ubuntu-18.04-Minimal-2021.07.16-0   | ocid1.image.oc1.sa-saopaulo-1.aaaaaaaaqiorzyhfzo62nxyzivlejudxrtjuahmcdnctfogr4sszukstilea |
+| Canonical-Ubuntu-18.04-Minimal-2021.08.27-0   | ocid1.image.oc1.sa-saopaulo-1.aaaaaaaaz6gbwjn2n5qolrrrnu3vslwsjo5bn2fkpphocr24fgetbgu4fljq |
+...
+```
+
+O resultado do comando foi truncado para não ocupar muito espaço de tela. 
 
 ### __Criando uma Instância__
