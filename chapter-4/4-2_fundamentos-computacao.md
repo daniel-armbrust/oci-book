@@ -118,37 +118,37 @@ Para verificar a lista de shapes disponíveis para uso em determinada região, u
 darmbrust@hoodwink:~$ oci compute shape list \
 > --region sa-saopaulo-1 \
 > --compartment-id "ocid1.tenancy.oc1..aaaaaaaavv2qh5asjdcoufmb6fzpnrfqgjxxdzlvjrgkrkytnyyz6zgvjnua" \
-> --query "data[].[shape,ocpus,\"memory-in-gbs\"]" \
+> --query "data[].{shape:shape,ocpus:ocpus,\"memory-in-gbs\":\"memory-in-gbs\"}" \
 > --all \
 > --output table
-+---------------------+---------+---------+
-| Column1             | Column2 | Column3 |
-+---------------------+---------+---------+
-| BM.Standard.A1.160  | 160.0   | 1024.0  |
-| BM.Standard2.52     | 52.0    | 768.0   |
-| BM.Optimized3.36    | 36.0    | 512.0   |
-| BM.Standard.E4.128  | 128.0   | 2048.0  |
-| BM.Standard.E3.128  | 128.0   | 2048.0  |
-| BM.Standard.E2.64   | 64.0    | 512.0   |
-| BM.DenseIO2.52      | 52.0    | 768.0   |
-| VM.Optimized3.Flex  | 1.0     | 14.0    |
-| VM.Standard.E4.Flex | 1.0     | 16.0    |
-| VM.Standard.E3.Flex | 1.0     | 16.0    |
-| VM.Standard.A1.Flex | 1.0     | 6.0     |
-| VM.Standard2.1      | 1.0     | 15.0    |
-| VM.Standard2.2      | 2.0     | 30.0    |
-| VM.Standard2.4      | 4.0     | 60.0    |
-| VM.Standard2.8      | 8.0     | 120.0   |
-| VM.Standard2.16     | 16.0    | 240.0   |
-| VM.Standard2.24     | 24.0    | 320.0   |
-| VM.Standard.E2.1    | 1.0     | 8.0     |
-| VM.Standard.E2.2    | 2.0     | 16.0    |
-| VM.Standard.E2.4    | 4.0     | 32.0    |
-| VM.Standard.E2.8    | 8.0     | 64.0    |
-| VM.DenseIO2.8       | 8.0     | 120.0   |
-| VM.DenseIO2.16      | 16.0    | 240.0   |
-| VM.DenseIO2.24      | 24.0    | 320.0   |
-+---------------------+---------+---------+
++---------------+-------+---------------------+
+| memory-in-gbs | ocpus | shape               |
++---------------+-------+---------------------+
+| 1024.0        | 160.0 | BM.Standard.A1.160  |
+| 768.0         | 52.0  | BM.Standard2.52     |
+| 512.0         | 36.0  | BM.Optimized3.36    |
+| 2048.0        | 128.0 | BM.Standard.E4.128  |
+| 2048.0        | 128.0 | BM.Standard.E3.128  |
+| 512.0         | 64.0  | BM.Standard.E2.64   |
+| 768.0         | 52.0  | BM.DenseIO2.52      |
+| 14.0          | 1.0   | VM.Optimized3.Flex  |
+| 16.0          | 1.0   | VM.Standard.E4.Flex |
+| 16.0          | 1.0   | VM.Standard.E3.Flex |
+| 6.0           | 1.0   | VM.Standard.A1.Flex |
+| 15.0          | 1.0   | VM.Standard2.1      |
+| 30.0          | 2.0   | VM.Standard2.2      |
+| 60.0          | 4.0   | VM.Standard2.4      |
+| 120.0         | 8.0   | VM.Standard2.8      |
+| 240.0         | 16.0  | VM.Standard2.16     |
+| 320.0         | 24.0  | VM.Standard2.24     |
+| 8.0           | 1.0   | VM.Standard.E2.1    |
+| 16.0          | 2.0   | VM.Standard.E2.2    |
+| 32.0          | 4.0   | VM.Standard.E2.4    |
+| 64.0          | 8.0   | VM.Standard.E2.8    |
+| 120.0         | 8.0   | VM.DenseIO2.8       |
+| 240.0         | 16.0  | VM.DenseIO2.16      |
+| 320.0         | 24.0  | VM.DenseIO2.24      |
++---------------+-------+---------------------+
 ```
 
 ### Imagem
@@ -184,12 +184,12 @@ Para listarmos todas as _imagens de plataforma_ da região _sa-saopaulo-1_ que t
 darmbrust@hoodwink:~$ oci compute image list \
 > --region sa-saopaulo-1 \
 > --compartment-id "ocid1.tenancy.oc1..aaaaaaaavv2qh5asjdcoufmb6fzpnrfqgjxxdzlvjrgkrkytnyyz6zgvjnua" \
-> --query "data[].[\"display-name\",id]" \
+> --query "data[].{Name:\"display-name\",OCID:id}" \
 > --output table \
 > --sort-order ASC \
 > --all
 +-----------------------------------------------+--------------------------------------------------------------------------------------------+
-| Column1                                       | Column2                                                                                    |
+| Name                                          | OCID                                                                                       |
 +-----------------------------------------------+--------------------------------------------------------------------------------------------+
 | Canonical-Ubuntu-18.04-2021.07.16-0           | ocid1.image.oc1.sa-saopaulo-1.aaaaaaaa74nz3eo5oqeaoqjiiwukncim6rjzgufwqarioewmusmra7tmq7qq |
 | Canonical-Ubuntu-18.04-2021.08.25-0           | ocid1.image.oc1.sa-saopaulo-1.aaaaaaaa22q64w6qge3imhnv3nwnnflf255mrpvhzv4dg7ztagk27hdqxtqa |
