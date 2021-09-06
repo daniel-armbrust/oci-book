@@ -269,7 +269,7 @@ Instâncias Linux, criadas a partir de imagens de plataforma, utilizam _[chaves 
 
 Para criarmos uma _[chave SSH](https://docs.oracle.com/pt-br/iaas/Content/Compute/Tasks/managingkeypairs.htm)_, usaremos o utilitário **[ssh-keygen](https://www.openssh.com/portable.html)** disponível na maioria das distribuições Linux. Caso esteja utilizando um sistema operacional Windows, você precisará do utilitário _[PuTTYgen](https://www.putty.org/)_.
 
->_**__NOTA:__** Por padrão, o utilitário [PuTTYgen](https://www.putty.org/) salva as chaves em um formato proprietário chamado "PPK (PuTTY Private Key)". Este funciona somente com o conjunto de ferramentas do [PuTTY](https://www.putty.org/). Porém, a ferramenta também permite salvar as chaves no formato entendido pelo [OpenSSH](https://www.openssh.com/). Lembre-se de usar a opção apropriada quando especificar a chave que será gravado na instância._
+>_**__NOTA:__** Por padrão, o utilitário [PuTTYgen](https://www.putty.org/) salva as chaves em um formato proprietário chamado "PPK (PuTTY Private Key)". Este funciona somente com o conjunto de ferramentas do [PuTTY](https://www.putty.org/). Porém, a ferramenta também permite salvar as chaves no formato entendido pelo [OpenSSH](https://www.openssh.com/). Lembre-se de usar a opção apropriada quando especificar a chave que será gravada na instância._
 
 
 #### __Criando a Instância__
