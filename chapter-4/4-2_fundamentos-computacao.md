@@ -267,7 +267,9 @@ Neste caso, usaremos a _[imagem](https://docs.oracle.com/pt-br/iaas/Content/Comp
 
 Instâncias Linux, criadas a partir de imagens de plataforma, utilizam _[chaves SSH](https://docs.oracle.com/pt-br/iaas/Content/Compute/Tasks/managingkeypairs.htm)_ em vez de senha para autenticação. Criamos um par de chaves que consiste em uma _chave privada_ e uma _chave pública_. Como o nome já sugere, a _chave privada_ é sua e não deve ser compartilhada. Já a _chave pública_ é gravada dentro da instância. Esta correlação, entre _chave privada_ e _chave pública_, é que permite a autenticação com sucesso.
 
-Para criarmos uma _[chave SSH](https://docs.oracle.com/pt-br/iaas/Content/Compute/Tasks/managingkeypairs.htm)_ usaremos o utilitário **[ssh-keygen](https://www.openssh.com/portable.html)**, disponível na maioria das distribuições Linux.
+Para criarmos uma _[chave SSH](https://docs.oracle.com/pt-br/iaas/Content/Compute/Tasks/managingkeypairs.htm)_, usaremos o utilitário **[ssh-keygen](https://www.openssh.com/portable.html)** disponível na maioria das distribuições Linux. Caso esteja utilizando um sistema operacional Windows, você precisará do utilitário _[PuTTYgen](https://www.putty.org/)_.
+
+>_**__NOTA:__** Por padrão, o utilitário [PuTTYgen](https://www.putty.org/) salva as chaves em um formato proprietário chamado "PPK (PuTTY Private Key)". Este funciona somente com o conjunto de ferramentas do [PuTTY](https://www.putty.org/). Porém, a ferramenta também permite salvar as chaves no formato entendido pelo [OpenSSH](https://www.openssh.com/). Lembre-se de usar a opção apropriada quando for usar a chave dentro de um Linux._
 
 
 #### __Criando a Instância__
