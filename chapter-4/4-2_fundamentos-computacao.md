@@ -237,7 +237,7 @@ darmbrust@hoodwink:~$ oci iam availability-domain list \
 
 #### __Shape e Imagem__
 
-Para o nosso exemplo, iremos utilizar o shape "VM.Standard2.2" com "Oracle Linux 7.9". A partir dessas informações, é possível obter quais _[imagens](https://docs.oracle.com/pt-br/iaas/Content/Compute/References/images.htm#OracleProvided_Images)_ são compatíveis com este shape, e estão disponíveis pra uso em nosso _[tenancy](https://docs.oracle.com/pt-br/iaas/Content/Identity/Tasks/managingtenancy.htm)_.
+Para o nosso exemplo, iremos utilizar o shape "VM.Standard2.2" com "Oracle Linux 7.9". A partir dessas informações, é possível obter quais _[imagens](https://docs.oracle.com/pt-br/iaas/Content/Compute/References/images.htm#OracleProvided_Images)_ são compatíveis com este shape, e que estão disponíveis pra uso em nosso _[tenancy](https://docs.oracle.com/pt-br/iaas/Content/Identity/Tasks/managingtenancy.htm)_.
 
 Com o comando abaixo, iremos obter o OCID da _[imagem](https://docs.oracle.com/pt-br/iaas/Content/Compute/References/images.htm#OracleProvided_Images)_ mais recente, como primeiro item da tabela.
 
@@ -260,6 +260,8 @@ darmbrust@hoodwink:~$ oci compute image list --region sa-saopaulo-1 \
 | Oracle-Linux-7.9-2021.06.20-0 | ocid1.image.oc1.sa-saopaulo-1.aaaaaaaa4vkhemdkmfe3icxzzdkgfnfijybzzhrz63icerlq7oyzdoe3mv6a |
 +-------------------------------+--------------------------------------------------------------------------------------------+
 ```
+
+Neste caso, usaremos a _[imagem](https://docs.oracle.com/pt-br/iaas/Content/Compute/References/images.htm#OracleProvided_Images)_ disponível no OCI (imagem de plataforma) do sistema operacional "Oracle Linux 7.9", construída na data de 27/08/2021.
 
 #### __Chave SSH__
 
