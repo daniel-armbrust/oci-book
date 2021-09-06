@@ -203,7 +203,7 @@ darmbrust@hoodwink:~$ oci compute image list \
 
 O resultado do comando foi truncado para não ocupar muito espaço de tela. 
 
-### __Criando uma Instância__
+### __Instância do Wordpress__
 
 Já estudamos o básico sobre shape e imagem. Agora é hora de criarmos nossa primeira instância para hospedar o _[Wordpress](https://pt.wikipedia.org/wiki/WordPress)_. Antes de mais nada, precisamos de algumas informações em mãos, para preencher alguns parâmetros obrigatórios do comando que irá criar a instância.
 
@@ -214,3 +214,5 @@ Já estudamos o básico sobre shape e imagem. Agora é hora de criarmos nossa pr
 #### __Shape e Imagem__
 
 #### __Chave SSH__
+
+#### __Criando a Instância__
