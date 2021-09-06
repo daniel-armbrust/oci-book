@@ -209,6 +209,15 @@ Já estudamos o básico sobre shape e imagem. Agora é hora de criarmos nossa pr
 
 #### __Compartimento__
 
+Sabemos que o compartimento criado para hospedar nossa instância possui o nome "cmp-app". Através do comando abaixo, é possível obter o valor do seu id:
+
+```
+darmbrust@hoodwink:~$ oci iam compartment list --compartment-id-in-subtree true --name "cmp-app" --query "data[].id"
+[
+  "ocid1.compartment.oc1..aaaaaaaamcff6exkhvp4aq3ubxib2wf74v7cx22b3yj56jnfkazoissdzefq"
+]
+```
+
 #### __Dominio de Disponibilidade (Availability Domains ou AD)__
 
 #### __Shape e Imagem__
