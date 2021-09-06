@@ -271,5 +271,35 @@ Para criarmos uma _[chave SSH](https://docs.oracle.com/pt-br/iaas/Content/Comput
 
 >_**__NOTA:__** Por padrão, o utilitário [PuTTYgen](https://www.putty.org/) salva as chaves em um formato proprietário chamado "PPK (PuTTY Private Key)". Este funciona somente com o conjunto de ferramentas do [PuTTY](https://www.putty.org/), que é incompatível com o formato entendido pelo [OpenSSH](https://www.openssh.com/). Porém, o [PuTTYgen](https://www.putty.org/) também permite salvar as chaves no formato do [OpenSSH](https://www.openssh.com/). Lembre-se de usar a opção apropriada quando for salvar suas chaves._
 
+Para criar uma chave sem _"frase-senha"_, usamos o comando abaixo:
+
+```
+darmbrust@hoodwink:~$ ssh-keygen -t rsa -N "" -b 2048 -f wordpress-key
+Generating public/private rsa key pair.
+Your identification has been saved in wordpress-key
+Your public key has been saved in wordpress-key.pub
+The key fingerprint is:
+SHA256:HALqKyhxjEvT/cFr3sxLhmH2d5e3YFxp1b4v+aUFVCc darmbrust@hoodwink
+The key's randomart image is:
++---[RSA 2048]----+
+|    .         E o|
+|   . .         oo|
+|  .   . .     . o|
+| +. . .o .   . .o|
+|oo+. . *S     .+.|
+|o+..  + *   . o.o|
+|= .    = + . = =+|
+|..    o * . o =o=|
+|       . =.   .+o|
++----[SHA256]-----+
+```
+
+Como resultado, dois arquivos foram criados que correspondem a _chave privada_ e _chave pública_ (extensão .pub):
+
+```
+darmbrust@hoodwink:~$ ls -1 wordpress-key*
+wordpress-key
+wordpress-key.pub
+```
 
 #### __Criando a Instância__
