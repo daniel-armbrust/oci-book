@@ -205,4 +205,4 @@ O resultado do comando foi truncado para não ocupar muito espaço de tela.
 
 ### __Criando uma Instância__
 
-Já estudamos o básico sobre Shape e Imagem. Agora é hora de criarmos nossa primeira instância para hospedar o _[Wordpress](https://pt.wikipedia.org/wiki/WordPress)_. Antes de mais nada, precisamos de algumas informações em mãos, para preencher alguns parâmetros obrigatórios do comando que irá criar a instância.
+Já estudamos o básico sobre shape e imagem. Agora é hora de criarmos nossa primeira instância para hospedar o _[Wordpress](https://pt.wikipedia.org/wiki/WordPress)_. Antes de mais nada, precisamos de algumas informações em mãos, para preencher alguns parâmetros obrigatórios do comando que irá criar a instância.
