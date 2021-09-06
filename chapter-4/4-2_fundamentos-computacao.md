@@ -209,7 +209,7 @@ Já estudamos o básico sobre shape e imagem. Agora é hora de criarmos nossa pr
 
 #### __Compartimento__
 
-Sabemos que o compartimento criado para hospedar nossa instância possui o nome "cmp-app". Através do comando abaixo, é possível obter o valor do seu id:
+Sabemos que o compartimento criado para hospedar nossa instância possui o nome _"cmp-app"_. Através do comando abaixo, é possível obter o valor do seu id:
 
 ```
 darmbrust@hoodwink:~$ oci iam compartment list --compartment-id-in-subtree true --name "cmp-app" --query "data[].id"
@@ -219,6 +219,21 @@ darmbrust@hoodwink:~$ oci iam compartment list --compartment-id-in-subtree true 
 ```
 
 #### __Dominio de Disponibilidade (Availability Domains ou AD)__
+
+Agora, precisamos saber qual é o nome do _"[Dominio de Disponibilidade](https://docs.oracle.com/pt-br/iaas/Content/General/Concepts/regions.htm#top)"_ da região que criaremos a instância. Lembrando que existem regiões que possuem mais de um _"[Dominio de Disponibilidade](https://docs.oracle.com/pt-br/iaas/Content/General/Concepts/regions.htm#top)"_.
+
+Para listarmos o nome de todos os _"[Dominios de Disponibilidade](https://docs.oracle.com/pt-br/iaas/Content/General/Concepts/regions.htm#top)"_ de uma região, disponíveis em nosso _[tenancy](https://docs.oracle.com/pt-br/iaas/Content/Identity/Tasks/managingtenancy.htm)_, usamos o comando abaixo:
+
+```
+darmbrust@hoodwink:~$ oci iam availability-domain list \
+> --region sa-saopaulo-1 \
+> --compartment-id "ocid1.tenancy.oc1..aaaaaaaavv2qh5asjdcoufmb6fzpnrfqgjxxdzlvjrgkrkytnyyz6zgvjnua" \
+> --all \
+> --query "data[].name"
+[
+  "ynrK:SA-SAOPAULO-1-AD-1"
+]
+```
 
 #### __Shape e Imagem__
 
