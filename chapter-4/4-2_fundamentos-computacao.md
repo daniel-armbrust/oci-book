@@ -237,6 +237,30 @@ darmbrust@hoodwink:~$ oci iam availability-domain list \
 
 #### __Shape e Imagem__
 
+Para o nosso exemplo, iremos utilizar um shape "VM.Standard2.2" com "Oracle Linux 7.9". A partir dessas informações, é possível obter quais _[imagens](https://docs.oracle.com/pt-br/iaas/Content/Compute/References/images.htm#OracleProvided_Images)_ são compatíveis com este shape, e estão disponíveis pra uso em nosso _[tenancy](https://docs.oracle.com/pt-br/iaas/Content/Identity/Tasks/managingtenancy.htm)_.
+
+Com o comando abaixo, iremos obter o OCID da _[imagem](https://docs.oracle.com/pt-br/iaas/Content/Compute/References/images.htm#OracleProvided_Images)_ mais recente, como primeiro item da tabela.
+
+```
+darmbrust@hoodwink:~$ oci compute image list --region sa-saopaulo-1 \
+> --compartment-id "ocid1.tenancy.oc1..aaaaaaaavv2qh5asjdcoufmb6fzpnrfqgjxxdzlvjrgkrkytnyyz6zgvjnua" \
+> --operating-system "Oracle Linux" \
+> --operating-system-version "7.9" \
+> --shape "VM.Standard2.2" \
+> --lifecycle-state "AVAILABLE" \
+> --sort-by TIMECREATED \
+> --all \
+> --query "data[].[\"display-name\",id]" \
+> --output table
++-------------------------------+--------------------------------------------------------------------------------------------+
+| Column1                       | Column2                                                                                    |
++-------------------------------+--------------------------------------------------------------------------------------------+
+| Oracle-Linux-7.9-2021.08.27-0 | ocid1.image.oc1.sa-saopaulo-1.aaaaaaaasahnls6nmev22raz7ecw6i64d65fu27pmqjn4pgz7zue56ojj7qq |
+| Oracle-Linux-7.9-2021.07.27-0 | ocid1.image.oc1.sa-saopaulo-1.aaaaaaaafi7s3mg6pobem2j3cb7tyvnibijb657fzjvmsdtodsg54mli4jfa |
+| Oracle-Linux-7.9-2021.06.20-0 | ocid1.image.oc1.sa-saopaulo-1.aaaaaaaa4vkhemdkmfe3icxzzdkgfnfijybzzhrz63icerlq7oyzdoe3mv6a |
++-------------------------------+--------------------------------------------------------------------------------------------+
+```
+
 #### __Chave SSH__
 
 #### __Criando a Instância__
