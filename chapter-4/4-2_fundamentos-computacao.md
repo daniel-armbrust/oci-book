@@ -294,6 +294,8 @@ The key's randomart image is:
 +----[SHA256]-----+
 ```
 
+>_**__NOTA:__** Caso queira especificar uma "frase-senha" para adicionar uma camada a mais de segurança, retire os argumentos _-N ""_ do comando [ssh-keygen](https://www.openssh.com/portable.html)._
+
 Como resultado, dois arquivos foram criados que correspondem a _chave privada_ e _chave pública_ (extensão .pub):
 
 ```
