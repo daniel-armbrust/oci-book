@@ -870,6 +870,7 @@ darmbrust@hoodwink:~$ oci network subnet create \
 > --route-table-id "ocid1.routetable.oc1.sa-saopaulo-1.aaaaaaaaswshtzo7i2ad5bxj5ewqa6vfp2tziyrg7y7leudmxaerp3mihhka" \
 > --security-list-ids '["ocid1.securitylist.oc1.sa-saopaulo-1.aaaaaaaacsbcnmseb2v7flq7guqmee4fuij3d4rhldftqyneingvmre6sqzq"]' \
 > --display-name "subnprv-app_vcn-prd" \
+> --dns-label "subnprvapp" \
 > --cidr-block "10.0.10.0/24" \
 > --prohibit-public-ip-on-vnic true 
 > --wait-for-state AVAILABLE
@@ -887,7 +888,7 @@ Action completed. Waiting until the resource has entered state: ('AVAILABLE',)
     },
     "dhcp-options-id": "ocid1.dhcpoptions.oc1.sa-saopaulo-1.aaaaaaaawaku2ug5htyapopgpgvtzt5amiyalrrq2bbmczpqif7d6llbmq5q",
     "display-name": "subnprv-app_vcn-prd",
-    "dns-label": null,
+    "dns-label": "subnprvapp",
     "freeform-tags": {},
     "id": "ocid1.subnet.oc1.sa-saopaulo-1.aaaaaaaajb4wma763mz6uowun3pfeltobe4fmiegdeyma5ehvnf3kzy3jvxa",
     "ipv6-cidr-block": null,
@@ -899,7 +900,7 @@ Action completed. Waiting until the resource has entered state: ('AVAILABLE',)
     "security-list-ids": [
       "ocid1.securitylist.oc1.sa-saopaulo-1.aaaaaaaacsbcnmseb2v7flq7guqmee4fuij3d4rhldftqyneingvmre6sqzq"
     ],
-    "subnet-domain-name": null,
+    "subnet-domain-name": "subnprvapp.vcnprd.oraclevcn.com",
     "time-created": "2021-09-02T11:50:06.873000+00:00",
     "vcn-id": "ocid1.vcn.oc1.sa-saopaulo-1.amaaaaaahcglxkaabicl4jiikcavz2h2nvazibxp4rdiwziqsce4h5wksz2a",
     "virtual-router-ip": "10.0.10.1",
@@ -1072,6 +1073,7 @@ darmbrust@hoodwink:~$ oci network subnet create \
 > --route-table-id "ocid1.routetable.oc1.sa-saopaulo-1.aaaaaaaa3dmhfpagrvmj3pcararg7yir4vbmcs25inm44nmm37y7ozvdbi3q" \
 > --security-list-ids '["ocid1.securitylist.oc1.sa-saopaulo-1.aaaaaaaaggezvwdk66j5xq7fesq27z3xohmwsu4bluf7m2rrr7taa6fmdwxq"]' \
 > --display-name "subnpub_vcn-prd" \
+> --dns-label "subnpub" \
 > --cidr-block "10.0.5.0/24" \
 > --prohibit-public-ip-on-vnic false \
 > --wait-for-state AVAILABLE
@@ -1089,7 +1091,7 @@ Action completed. Waiting until the resource has entered state: ('AVAILABLE',)
     },
     "dhcp-options-id": "ocid1.dhcpoptions.oc1.sa-saopaulo-1.aaaaaaaawaku2ug5htyapopgpgvtzt5amiyalrrq2bbmczpqif7d6llbmq5q",
     "display-name": "subnpub_vcn-prd",
-    "dns-label": null,
+    "dns-label": "subnpub",
     "freeform-tags": {},
     "id": "ocid1.subnet.oc1.sa-saopaulo-1.aaaaaaaax6arj6ccrzlm7fxb4pl4ggrsgig4bwnbvtqaayosdulsyoaliuka",
     "ipv6-cidr-block": null,
@@ -1101,7 +1103,7 @@ Action completed. Waiting until the resource has entered state: ('AVAILABLE',)
     "security-list-ids": [
       "ocid1.securitylist.oc1.sa-saopaulo-1.aaaaaaaaggezvwdk66j5xq7fesq27z3xohmwsu4bluf7m2rrr7taa6fmdwxq"
     ],
-    "subnet-domain-name": null,
+    "subnet-domain-name": "subnpub.vcnprd.oraclevcn.com",
     "time-created": "2021-09-02T14:29:24.731000+00:00",
     "vcn-id": "ocid1.vcn.oc1.sa-saopaulo-1.amaaaaaahcglxkaabicl4jiikcavz2h2nvazibxp4rdiwziqsce4h5wksz2a",
     "virtual-router-ip": "10.0.5.1",
