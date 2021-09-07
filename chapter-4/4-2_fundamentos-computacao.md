@@ -335,6 +335,94 @@ darmbrust@hoodwink:~$ oci iam compartment list --compartment-id-in-subtree true 
 ]
 ```
 
-```
+Juntando as informações, criaremos a instância com o comando abaixo:
 
+```
+darmbrust@hoodwink:~$ oci compute instance launch \
+> --compartment-id "ocid1.compartment.oc1..aaaaaaaamcff6exkhvp4aq3ubxib2wf74v7cx22b3yj56jnfkazoissdzefq" \
+> --availability-domain "ynrK:SA-SAOPAULO-1-AD-1" \
+> --shape "VM.Standard2.2" \
+> --subnet-id "ocid1.subnet.oc1.sa-saopaulo-1.aaaaaaaajb4wma763mz6uowun3pfeltobe4fmiegdeyma5ehvnf3kzy3jvxa" \
+> --boot-volume-size-in-gbs 100 \
+> --display-name "vm-wordpress_subnprv-app_vcn-prd" \
+> --fault-domain "FAULT-DOMAIN-3" \
+> --hostname-label "wordpress" \
+> --image-id "ocid1.image.oc1.sa-saopaulo-1.aaaaaaaasahnls6nmev22raz7ecw6i64d65fu27pmqjn4pgz7zue56ojj7qq" \
+> --ssh-authorized-keys-file ./wordpress-key.pub 
+> --wait-for-state "RUNNING"
+Action completed. Waiting until the resource has entered state: ('RUNNING',)
+{
+  "data": {
+    "agent-config": {
+      "are-all-plugins-disabled": false,
+      "is-management-disabled": false,
+      "is-monitoring-disabled": false,
+      "plugins-config": null
+    },
+    "availability-config": {
+      "is-live-migration-preferred": null,
+      "recovery-action": "RESTORE_INSTANCE"
+    },
+    "availability-domain": "ynrK:SA-SAOPAULO-1-AD-1",
+    "capacity-reservation-id": null,
+    "compartment-id": "ocid1.compartment.oc1..aaaaaaaamcff6exkhvp4aq3ubxib2wf74v7cx22b3yj56jnfkazoissdzefq",
+    "dedicated-vm-host-id": null,
+    "defined-tags": {
+      "Oracle-Tags": {
+        "CreatedBy": "oracleidentitycloudservice/daniel.armbrust@algumdominio.com",
+        "CreatedOn": "2021-09-07T22:29:56.823Z"
+      }
+    },
+    "display-name": "vm-wordpress_subnprv-app_vcn-prd",
+    "extended-metadata": {},
+    "fault-domain": "FAULT-DOMAIN-3",
+    "freeform-tags": {},
+    "id": "ocid1.instance.oc1.sa-saopaulo-1.antxeljr6noke4qcf4yilvaofwpt5aiavnsx7cfev3fhp2bpc3xfcxo5k6zq",
+    "image-id": "ocid1.image.oc1.sa-saopaulo-1.aaaaaaaasahnls6nmev22raz7ecw6i64d65fu27pmqjn4pgz7zue56ojj7qq",
+    "instance-options": {
+      "are-legacy-imds-endpoints-disabled": false
+    },
+    "ipxe-script": null,
+    "launch-mode": "PARAVIRTUALIZED",
+    "launch-options": {
+      "boot-volume-type": "PARAVIRTUALIZED",
+      "firmware": "UEFI_64",
+      "is-consistent-volume-naming-enabled": true,
+      "is-pv-encryption-in-transit-enabled": false,
+      "network-type": "PARAVIRTUALIZED",
+      "remote-data-volume-type": "PARAVIRTUALIZED"
+    },
+    "lifecycle-state": "RUNNING",
+    "metadata": {
+      "ssh_authorized_keys": "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDWUt3EgmmEZtWLOuAvwO/DEpddReosK4rmD1IU6Qm41fIq9lQ/qxm5yP9tSb8XzaJCDKzSxB2byOIqQ5vy21L8cQ59SLnU6uMql4Tf0qfdcM4mX3ZbAjDBu8+OTaJkGRIXnGjg1FdUi+eFO/Bg/X7qYMsIEpINpmhBBm3xIIYk89+Or7KqcWSnHIAHg701cLQBDVx5/biSGjoAjnHGESyg+CBlk1EaXc9IhXPGhtN1ErI+D+g7GGCz12+JHVoBPsn2+qTOgX1eiSr0B5eVtVNBOThrbC1BrtkucYtUUsOOO2jh5t4FdwixLdt+vWcSEaqOoFwD6fPJFBu4TN6E2lqt darmbrust@hoodwink\n"
+    },
+    "platform-config": null,
+    "preemptible-instance-config": null,
+    "region": "sa-saopaulo-1",
+    "shape": "VM.Standard2.2",
+    "shape-config": {
+      "baseline-ocpu-utilization": null,
+      "gpu-description": null,
+      "gpus": 0,
+      "local-disk-description": null,
+      "local-disks": 0,
+      "local-disks-total-size-in-gbs": null,
+      "max-vnic-attachments": 2,
+      "memory-in-gbs": 30.0,
+      "networking-bandwidth-in-gbps": 2.0,
+      "ocpus": 2.0,
+      "processor-description": "2.0 GHz Intel\u00ae Xeon\u00ae Platinum 8167M (Skylake)"
+    },
+    "source-details": {
+      "boot-volume-size-in-gbs": null,
+      "image-id": "ocid1.image.oc1.sa-saopaulo-1.aaaaaaaasahnls6nmev22raz7ecw6i64d65fu27pmqjn4pgz7zue56ojj7qq",
+      "kms-key-id": null,
+      "source-type": "image"
+    },
+    "system-tags": {},
+    "time-created": "2021-09-07T22:29:57.227000+00:00",
+    "time-maintenance-reboot-due": null
+  },
+  "etag": "148d71576982ca3bcb4a2e8e5486974f57d89ed69e7d22ca8242d52c9710c7d0"
+}
 ```
