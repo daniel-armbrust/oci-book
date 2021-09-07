@@ -305,3 +305,36 @@ wordpress-key.pub
 ```
 
 #### __Criando a Instância__
+
+Antes de criarmos a instância, precisamos obter o OCID da subrede que já foi criada. Primeiramente, precisamos do OCID do compartimento que a subrede foi criada:
+
+```
+darmbrust@hoodwink:~$ oci iam compartment list --compartment-id-in-subtree true --name "cmp-network" --query "data[].id"
+[
+  "ocid1.compartment.oc1..aaaaaaaauvqvbbx3oridcm5d2ztxkftwr362u2vl5zdsayzbehzwbjs56soq"
+]
+```
+
+Agora, podemos consultar o nome da subrede pelo OCID do compartimento que acabamos de obter:
+
+```
+darmbrust@hoodwink:~$ oci network subnet list \
+> --compartment-id "ocid1.compartment.oc1..aaaaaaaauvqvbbx3oridcm5d2ztxkftwr362u2vl5zdsayzbehzwbjs56soq" \
+> --query "data[?\"display-name\"=='subnprv-app_vcn-prd'].id"
+[
+  "ocid1.subnet.oc1.sa-saopaulo-1.aaaaaaaajb4wma763mz6uowun3pfeltobe4fmiegdeyma5ehvnf3kzy3jvxa"
+]
+```
+
+Lembrando que a instância será criada no compartimento "cmp-app". Precisamos do seu OCID também:
+
+```
+darmbrust@hoodwink:~$ oci iam compartment list --compartment-id-in-subtree true --name "cmp-app" --query "data[].id"
+[
+  "ocid1.compartment.oc1..aaaaaaaamcff6exkhvp4aq3ubxib2wf74v7cx22b3yj56jnfkazoissdzefq"
+]
+```
+
+```
+
+```

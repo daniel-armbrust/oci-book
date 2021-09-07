@@ -280,6 +280,7 @@ darmbrust@hoodwink:~$ oci network vcn create \
 > --compartment-id "ocid1.compartment.oc1..aaaaaaaauvqvbbx3oridcm5d2ztxkftwr362u2vl5zdsayzbehzwbjs56soq" \
 > --cidr-blocks '["10.0.0.0/16"]' \
 > --display-name "vcn-prd" \
+> --dns-label "vcnprd" \
 > --is-ipv6-enabled false \
 > --wait-for-state AVAILABLE
 Action completed. Waiting until the resource has entered state: ('AVAILABLE',)
@@ -300,7 +301,7 @@ Action completed. Waiting until the resource has entered state: ('AVAILABLE',)
       }
     },
     "display-name": "vcn-prd",
-    "dns-label": null,
+    "dns-label": "vcnprd",
     "freeform-tags": {},
     "id": "ocid1.vcn.oc1.sa-saopaulo-1.amaaaaaahcglxkaabicl4jiikcavz2h2nvazibxp4rdiwziqsce4h5wksz2a",
     "ipv6-cidr-blocks": null,
@@ -600,6 +601,7 @@ darmbrust@hoodwink:~$ oci network subnet create \
 > --route-table-id "ocid1.routetable.oc1.sa-saopaulo-1.aaaaaaaalq2gf3mksa27rueidzfbq677ss2bxkkvlapekjs2tt4ske6ueyna" \
 > --security-list-ids '["ocid1.securitylist.oc1.sa-saopaulo-1.aaaaaaaal4rgkk7np7hoxt5cjr6topysdp4b4xrudlk4mbmvibf5knz72bgq"]' \
 > --display-name "subnprv-db_vcn-prd" \
+> --dns-label "subnprvdb" \
 > --cidr-block "10.0.20.0/24" \
 > --prohibit-public-ip-on-vnic true \
 > --wait-for-state AVAILABLE
@@ -617,7 +619,7 @@ Action completed. Waiting until the resource has entered state: ('AVAILABLE',)
     },
     "dhcp-options-id": "ocid1.dhcpoptions.oc1.sa-saopaulo-1.aaaaaaaawaku2ug5htyapopgpgvtzt5amiyalrrq2bbmczpqif7d6llbmq5q",
     "display-name": "subnprv-db_vcn-prd",
-    "dns-label": null,
+    "dns-label": "subnprvdb",
     "freeform-tags": {},
     "id": "ocid1.subnet.oc1.sa-saopaulo-1.aaaaaaaagyg2sk2c4j46ky3lngceejohdzswlffsavqqybepekbean3gytba",
     "ipv6-cidr-block": null,
@@ -629,7 +631,7 @@ Action completed. Waiting until the resource has entered state: ('AVAILABLE',)
     "security-list-ids": [
       "ocid1.securitylist.oc1.sa-saopaulo-1.aaaaaaaal4rgkk7np7hoxt5cjr6topysdp4b4xrudlk4mbmvibf5knz72bgq"
     ],
-    "subnet-domain-name": null,
+    "subnet-domain-name": "subnprvdb.vcnprd.oraclevcn.com",
     "time-created": "2021-09-01T11:28:03.776000+00:00",
     "vcn-id": "ocid1.vcn.oc1.sa-saopaulo-1.amaaaaaahcglxkaabicl4jiikcavz2h2nvazibxp4rdiwziqsce4h5wksz2a",
     "virtual-router-ip": "10.0.20.1",
