@@ -267,7 +267,7 @@ Neste caso, usaremos a _[imagem](https://docs.oracle.com/pt-br/iaas/Content/Comp
 
 Instâncias Linux, criadas a partir de imagens de plataforma, utilizam _[chaves SSH](https://docs.oracle.com/pt-br/iaas/Content/Compute/Tasks/managingkeypairs.htm)_ em vez de senha para autenticação. Criamos um par de chaves que consiste em uma _chave privada_ e uma _chave pública_. Como o nome já sugere, a _chave privada_ é sua e não deve ser compartilhada. Já a _chave pública_ é gravada dentro da instância. Esta correlação, entre _chave privada_ e _chave pública_, é que permite uma autenticação com sucesso.
 
-Para criarmos uma _[chave SSH](https://docs.oracle.com/pt-br/iaas/Content/Compute/Tasks/managingkeypairs.htm)_, usaremos o utilitário **[ssh-keygen](https://www.openssh.com/portable.html)** disponível na maioria das distribuições Linux. Caso esteja utilizando um sistema operacional Windows, você precisará do utilitário _[PuTTYgen](https://www.putty.org/)_.
+Para criarmos uma _[chave SSH](https://docs.oracle.com/pt-br/iaas/Content/Compute/Tasks/managingkeypairs.htm)_, usaremos o utilitário **[ssh-keygen](https://www.openssh.com/portable.html)** disponível na maioria das distribuições Linux. Caso esteja utilizando um sistema operacional Windows para criar as chaves, você precisará do utilitário _[PuTTYgen](https://www.putty.org/)_. Lembrando que as chaves suportadas para _[imagens de plataforma](https://docs.oracle.com/pt-br/iaas/Content/Compute/References/images.htm#OracleProvided_Images)_ são: _RSA, DSA, DSS, ECDSA e Ed25519_. Para chaves _RSA, DSS e DSA_, recomenda-se um mínimo de **2048 bits**. Para chaves _ECDSA_, é recomendável no mínimo **256 bits**. Consulte este _[link](https://docs.oracle.com/pt-br/iaas/Content/Compute/Tasks/managingkeypairs.htm#public-key-format)_ para maiores detalhes.
 
 >_**__NOTA:__** Por padrão, o utilitário [PuTTYgen](https://www.putty.org/) salva as chaves em um formato proprietário chamado "PPK (PuTTY Private Key)". Este funciona somente com o conjunto de ferramentas do [PuTTY](https://www.putty.org/), que é incompatível com o formato entendido pelo [OpenSSH](https://www.openssh.com/). Porém, o [PuTTYgen](https://www.putty.org/) também permite salvar as chaves no formato do [OpenSSH](https://www.openssh.com/). Lembre-se de usar a opção apropriada quando for salvar suas chaves._
 
@@ -303,6 +303,8 @@ darmbrust@hoodwink:~$ ls -1 wordpress-key*
 wordpress-key
 wordpress-key.pub
 ```
+
+Você também pode criar sua _[chave SSH](https://docs.oracle.com/pt-br/iaas/Content/Compute/Tasks/managingkeypairs.htm)_ através da _[Web Console](https://docs.oracle.com/pt-br/iaas/Content/GSG/Tasks/signingin.htm#Signing_In_to_the_Console)_ quando cria uma instância. Porém, como tudo aqui é orientado a código, não entraremos nesses detalhes.
 
 #### __Criando a Instância__
 
@@ -426,3 +428,11 @@ Action completed. Waiting until the resource has entered state: ('RUNNING',)
   "etag": "148d71576982ca3bcb4a2e8e5486974f57d89ed69e7d22ca8242d52c9710c7d0"
 }
 ```
+
+Destaco alguns parâmetros que foram informados para customizar a criação da intância, e que não são obrigatórios. 
+
+A começar pelo parâmetro _"--boot-volume-size-in-gbs"_ que foi usado para especificar um tamanho de **100 GB** para o _[boot volume](https://docs.oracle.com/pt-br/iaas/Content/Block/Concepts/bootvolumes.htm)_, diferente do padrão para sistema operacional Linux que é **50 GB**. 
+
+O próximo parâmetro foi _"--fault-domain"_ no qual eu forcei a criação da instância no _"FAULT-DOMAIN-3"_. Se você não especificar um _"Fault Domain"_, o OCI irá escolher um para você de forma automática. As vezes, especificar este parâmetro, permite que se faça uma distribuição mais precisa das instâncias entre _"Fault Domains"_ diferentes. 
+
+O último é o parâmetro _"--ssh-authorized-keys-file"_ que especifica o caminho da _chave SSH pública_. As _chaves públicas SSH_, existentes no arquivo _./wordpress-key.pub_ que foi especificado, são adicionadas ao arquivo _/home/opc/.ssh/authorized_keys_ da instância.
