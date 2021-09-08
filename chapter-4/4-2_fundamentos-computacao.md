@@ -475,7 +475,7 @@ Os comandos disponíveis para enviarmos a uma instância, são:
 
 - **SENDDIAGNOSTICINTERRUPT**
     - Envia uma interrupção de diagnóstico ao sistema operacional para depurar uma instância que não está respondendo ou está inacessível.
-    - A instância deve ser configurada para gerar um _["crash dump"](https://pt.wikipedia.org/wiki/Despejo_de_mem%C3%B3ria)_ ao receber este comando.
+    - A instância deve ser configurada para gerar um _["crash dump"](https://pt.wikipedia.org/wiki/Despejo_de_mem%C3%B3ria)_ para que este comando funcione por completo.
     - Enviar este pedido de diagnóstico em uma instância on-line, pode corromper dados. Consulter este _[link](https://docs.oracle.com/pt-br/iaas/Content/Compute/Tasks/sendingdiagnosticinterrupt.htm)_ para maiores detalhes.
 
 
