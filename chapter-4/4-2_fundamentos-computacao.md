@@ -435,4 +435,4 @@ A começar pelo parâmetro _"--boot-volume-size-in-gbs"_ que foi usado para espe
 
 O próximo parâmetro foi _"--fault-domain"_ no qual eu forcei a criação da instância no _"FAULT-DOMAIN-3"_. Se você não especificar um _"Fault Domain"_, o OCI irá escolher um para você de forma automática. As vezes, especificar este parâmetro, permite que se faça uma distribuição mais precisa das instâncias entre _"Fault Domains"_ diferentes. 
 
-O último é o parâmetro _"--ssh-authorized-keys-file"_ que especifica o caminho da _chave SSH pública_. As _chaves públicas SSH_, existentes no arquivo _./wordpress-key.pub_ que foi especificado, são adicionadas ao arquivo _/home/opc/.ssh/authorized_keys_ da instância.
+O último é o parâmetro _"--ssh-authorized-keys-file"_ que especifica o caminho das _chaves SSH públicas_. As _chaves públicas_, existentes no arquivo _./wordpress-key.pub_, são adicionadas ao arquivo _/home/opc/.ssh/authorized_keys_ no momento da criação da instância. Isto irá permitir a autenticação por _[chave SSH](https://docs.oracle.com/pt-br/iaas/Content/Compute/Tasks/managingkeypairs.htm)_, dito anteriormente.
