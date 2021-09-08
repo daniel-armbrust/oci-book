@@ -433,7 +433,7 @@ Destaco alguns parâmetros que foram informados para customizar a criação da i
 
 A começar pelo parâmetro _"--boot-volume-size-in-gbs"_ que foi usado para especificar um tamanho de **100 GB** para o _[boot volume](https://docs.oracle.com/pt-br/iaas/Content/Block/Concepts/bootvolumes.htm)_, diferente do padrão para sistema operacional Linux que é **50 GB**. 
 
-O próximo parâmetro foi _"--fault-domain"_ no qual eu forcei a criação da instância no _"FAULT-DOMAIN-3"_. Se você não especificar um _"Fault Domain"_, o OCI irá escolher um para você de forma automática. As vezes, especificar este parâmetro, permite que se faça uma distribuição mais precisa das instâncias entre _"Fault Domains"_ diferentes, evitando o _"[ponto único de falha](https://pt.wikipedia.org/wiki/Ponto_%C3%BAnico_de_falha)"_.
+O próximo parâmetro foi _"--fault-domain"_ no qual eu forcei a criação da instância no _"FAULT-DOMAIN-3"_. Se você não especificar um _"Fault Domain"_, o OCI irá escolher um para você de forma automática. As vezes, especificar este parâmetro, permite que se faça uma distribuição melhor e mais precisa das instâncias entre _"Fault Domains"_ diferentes, evitando o _"[ponto único de falha](https://pt.wikipedia.org/wiki/Ponto_%C3%BAnico_de_falha)"_.
 
 Por último, o parâmetro _"--ssh-authorized-keys-file"_ que especifica o caminho das _chaves SSH públicas_. As _chaves públicas_, existentes no arquivo _"wordpress-key.pub"_, são adicionadas ao arquivo _/home/opc/.ssh/authorized_keys_ da instância no momento da sua criação. Isto irá permitir a autenticação por _[chave SSH](https://docs.oracle.com/pt-br/iaas/Content/Compute/Tasks/managingkeypairs.htm)_, já dito anteriormente.
 
