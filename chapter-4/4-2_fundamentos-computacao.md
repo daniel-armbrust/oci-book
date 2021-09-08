@@ -479,7 +479,7 @@ Os comandos disponíveis para enviarmos a uma instância, são:
     - Enviar este pedido de diagnóstico em uma instância on-line, pode corromper dados. Consulter este _[link](https://docs.oracle.com/pt-br/iaas/Content/Compute/Tasks/sendingdiagnosticinterrupt.htm)_ para maiores detalhes.
 
 
-Para critério de demostração, vamos reiniciar uma instância com o comando abaixo:
+Para critério de demostração, vamos reiniciar nossa instância com o comando abaixo:
 
 ```
 darmbrust@hoodwink:~$ oci compute instance action \
