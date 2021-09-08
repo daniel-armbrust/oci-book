@@ -439,6 +439,43 @@ Por último, o parâmetro _"--ssh-authorized-keys-file"_ que especifica o caminh
 
 Instâncias criadas com o uso de imagens _[Oracle Linux](https://www.oracle.com/linux/)_ e _[CentOS](https://pt.wikipedia.org/wiki/CentOS)_, são criadas com o usuário **_opc_**. O usuário **_opc_** tem privilégios ilimitados através de _[sudo](https://pt.wikipedia.org/wiki/Sudo)_. Lembrando que o login através do usuário **_root_** é desabilitado por padrão.
 
+#### __Interrompendo, Iniciando e demais ações__
+
+Antes de finalizarmos este capítulo, quero apresentar alguns comandos que você pode usar para iniciar, reiniciar e parar uma instância. Estas ações podem ser necessárias caso o sistema operacional exija uma reinicialização por conta de uma atualização, ou você pode parar uma instância para interromper a cobrança, por exemplo.
+
+Para enviarmos esses comandos, precisamos do OCID da instância que criamos:
+
+```
+darmbrust@hoodwink:~$ oci compute instance list \
+> --compartment-id "ocid1.compartment.oc1..aaaaaaaamcff6exkhvp4aq3ubxib2wf74v7cx22b3yj56jnfkazoissdzefq" \
+> --query "data[?\"display-name\"=='vm-wordpress_subnprv-app_vcn-prd'].id"
+[
+  "ocid1.instance.oc1.sa-saopaulo-1.antxeljr6noke4qcf4yilvaofwpt5aiavnsx7cfev3fhp2bpc3xfcxo5k6zq"
+]
+```
+
+Os comandos disponíveis para enviarmos a uma instância, são:
+
+- **START**
+    - Liga uma instância.
+    
+- **STOP**
+    - Desliga uma insância.
+    
+- **RESET**
+    - Desliga e liga uma instância.
+    
+- **SOFTSTOP**
+    - Envia um _"shutdown"_ ao sistema operacional da intância. Depois de esperar 15 minutos, a instância será desligada.
+    - Este é um modo _"seguro"_ de desligar uma instância e evitar perda de dados, onde você pede _"gentilmente"_ a ação de _"desligar"_ ao sistema operacional. 
+    
+- **SOFTRESET**
+    - Envia o comando de _"reboot"_ ao sistema operacional. Depois de esperar 15 minutos, a instância será desligada e religada novamente.
+    - Este também é um modo _"gentil"_ de pedir uma reinicialização ao sistema operacional.
+
+- **SENDDIAGNOSTICINTERRUPT**
+- 
+
 ### __Conclusão__
 
 Aqui concluímos este capítulo que apresenta o básico sobre computação no OCI.
