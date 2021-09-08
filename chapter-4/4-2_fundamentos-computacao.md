@@ -438,3 +438,7 @@ O próximo parâmetro foi _"--fault-domain"_ no qual eu forcei a criação da in
 Por último, o parâmetro _"--ssh-authorized-keys-file"_ que especifica o caminho das _chaves SSH públicas_. As _chaves públicas_, existentes no arquivo _"wordpress-key.pub"_, são adicionadas ao arquivo _/home/opc/.ssh/authorized_keys_ da instância no momento da sua criação. Isto irá permitir a autenticação por _[chave SSH](https://docs.oracle.com/pt-br/iaas/Content/Compute/Tasks/managingkeypairs.htm)_, já dito anteriormente.
 
 Instâncias criadas com o uso de imagens _[Oracle Linux](https://www.oracle.com/linux/)_ e _[CentOS](https://pt.wikipedia.org/wiki/CentOS)_, são criadas com o usuário **_opc_**. O usuário **_opc_** tem privilégios ilimitados através de _[sudo](https://pt.wikipedia.org/wiki/Sudo)_. Lembrando que o login através do usuário **_root_** é desabilitado por padrão.
+
+### __Conclusão__
+
+Aqui concluímos este capítulo que apresenta o básico sobre computação no OCI.
