@@ -474,7 +474,20 @@ Os comandos disponíveis para enviarmos a uma instância, são:
     - Este também é um modo _"gentil"_ de pedir uma reinicialização ao sistema operacional.
 
 - **SENDDIAGNOSTICINTERRUPT**
-- 
+    - Envia uma interrupção de diagnóstico ao sistema operacional para depurar uma instância que não está respondendo ou está inacessível.
+    - A instância deve ser configurada para gerar um _["crash dump"](https://pt.wikipedia.org/wiki/Despejo_de_mem%C3%B3ria)_ ao receber este comando.
+    - Enviar este pedido de diagnóstico em uma instância on-line, pode corromper dados. Consulter este _[link](https://docs.oracle.com/pt-br/iaas/Content/Compute/Tasks/sendingdiagnosticinterrupt.htm)_ para maiores detalhes.
+
+
+Para critério de demostração, vamos reiniciar uma instância com o comando abaixo:
+
+```
+darmbrust@hoodwink:~$ oci compute instance action \
+> --instance-id "ocid1.instance.oc1.sa-saopaulo-1.antxeljr6noke4qcf4yilvaofwpt5aiavnsx7cfev3fhp2bpc3xfcxo5k6zq" 
+> --action "SOFTRESET"
+```
+
+Sempre que possível, utilize _SOFTSTOP_ ou _SOFTRESET_ ao invés de _STOP_ ou _RESET_. Fazer um pedido _"soft"_ ao sistema operacional, garante que as aplicações serão fechadas em ordem, evitando qualquer perda de dados. Há casos em que o sistema operacional poderá "travar" por qualquer motivo, forçando você a usar comandos como _STOP_, _RESET_ ou _SENDDIAGNOSTICINTERRUPT_.
 
 ### __Conclusão__
 
