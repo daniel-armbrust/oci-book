@@ -191,3 +191,12 @@ Alguns dos documentos que podem ser encontrados no _[Architecture Center](https:
 - [Low Code](https://docs.oracle.com/en/solutions/low-code-apps-maf/index.html)
 - [SaaS Extensions](https://docs.oracle.com/en/solutions/maf-saas/index.html)
 - [Data-Centric](https://docs.oracle.com/en/solutions/mad-data-centric/index.html)
+
+### __Oracle Learning Explorer__
+
+O programa _[Oracle Learning Explorer](https://education.oracle.com/learning-explorer)_ oferece cursos de treinamento de nível básico e certificados para todo o portfólio de produtos da Oracle. Ele foi criado para capacitar profissionais do mundo inteiro para que possam começar a desenvolver habilidades valiosas de TI. Acesse o site neste _[link aqui](https://education.oracle.com/learning-explorer)_. 
+
+Dentro do programa, destaco dois treinamentos importantes e gratuito para complementar seu aprendizado sobre o OCI:
+
+- [Oracle Cloud Overview](https://learn.oracle.com/ols/learning-path/oracle-cloud-overview/45640/89873)
+- [OCI Explorer](https://learn.oracle.com/ols/learning-path/oci-explorer/35644/79348)
