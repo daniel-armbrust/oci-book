@@ -487,7 +487,7 @@ darmbrust@hoodwink:~$ oci compute instance action \
 > --action "SOFTRESET"
 ```
 
-Sempre que possível, utilize _SOFTSTOP_ ou _SOFTRESET_ ao invés de _STOP_ ou _RESET_. Fazer um pedido _"soft"_ ao sistema operacional, garante que as aplicações serão fechadas em ordem, evitando qualquer perda de dados. Há casos em que o sistema operacional poderá "travar" por qualquer motivo, forçando você a usar comandos como _STOP_, _RESET_ ou _SENDDIAGNOSTICINTERRUPT_.
+Sempre que possível, utilize _SOFTSTOP_ ou _SOFTRESET_ ao invés de _STOP_ ou _RESET_. Fazer um pedido _"soft"_ ao sistema operacional, garante que as aplicações serão "fechadas" em ordem, evitando qualquer perda de dados. Há casos em que o sistema operacional poderá "travar" por qualquer motivo, forçando você a usar comandos como _STOP_, _RESET_ ou _SENDDIAGNOSTICINTERRUPT_.
 
 ### __Conclusão__
 
