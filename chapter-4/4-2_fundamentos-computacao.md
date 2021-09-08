@@ -441,7 +441,7 @@ Instâncias criadas com o uso de imagens _[Oracle Linux](https://www.oracle.com/
 
 #### __Interrompendo, Iniciando e demais ações__
 
-Antes de finalizarmos este capítulo, quero apresentar alguns comandos que você pode usar para iniciar, reiniciar e parar uma instância. Estas ações podem ser necessárias caso o sistema operacional exija uma reinicialização por conta de uma atualização, ou você pode parar uma instância para interromper a cobrança, por exemplo.
+Antes de finalizarmos este capítulo, quero apresentar alguns comandos que você pode usar para iniciar, reiniciar e parar uma instância. Estas ações podem ser necessárias caso o sistema operacional exija uma reinicialização por conta de uma atualização, ou você pode parar uma instância para interromper sua cobrança (billing), por exemplo.
 
 Para enviarmos esses comandos, precisamos do OCID da instância que criamos:
 
