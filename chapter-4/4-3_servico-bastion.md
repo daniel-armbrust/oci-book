@@ -83,3 +83,48 @@ darmbrust@hoodwink:~$ oci instance-agent plugin list \
 
 
 ### __Criando um Bastion__
+
+```
+darmbrust@hoodwink:~$ curl icanhazip.com
+201.33.196.77
+```
+
+```
+darmbrust@hoodwink:~$ oci network subnet list \
+> --compartment-id "ocid1.compartment.oc1..aaaaaaaauvqvbbx3oridcm5d2ztxkftwr362u2vl5zdsayzbehzwbjs56soq" \
+> --query "data[?\"display-name\"=='subnprv-app_vcn-prd'].id"
+[
+  "ocid1.subnet.oc1.sa-saopaulo-1.aaaaaaaajb4wma763mz6uowun3pfeltobe4fmiegdeyma5ehvnf3kzy3jvxa"
+]
+```
+
+```
+darmbrust@hoodwink:~$ oci bastion bastion create \
+> --compartment-id "ocid1.compartment.oc1..aaaaaaaauvqvbbx3oridcm5d2ztxkftwr362u2vl5zdsayzbehzwbjs56soq" \
+> --bastion-type "standard" \
+> --target-subnet-id "ocid1.subnet.oc1.sa-saopaulo-1.aaaaaaaajb4wma763mz6uowun3pfeltobe4fmiegdeyma5ehvnf3kzy3jvxa" \
+> --client-cidr-list '["201.33.196.77/32"]' \
+> --name "BastionSubnprvAppVcnPrd" \
+> --wait-for-state "SUCCEEDED"
+Action completed. Waiting until the work request has entered state: ('SUCCEEDED',)
+{
+  "data": {
+    "compartment-id": "ocid1.compartment.oc1..aaaaaaaauvqvbbx3oridcm5d2ztxkftwr362u2vl5zdsayzbehzwbjs56soq",
+    "id": "ocid1.bastionworkrequest.oc1.sa-saopaulo-1.amaaaaaa6noke4qavrtnbcuoycdjrmpm2su4j6zqoapftx6ikuvhhdxxdzua",
+    "operation-type": "CREATE_BASTION",
+    "percent-complete": 100.0,
+    "resources": [
+      {
+        "action-type": "CREATED",
+        "entity-type": "BastionsResource",
+        "entity-uri": "/bastions/ocid1.bastion.oc1.sa-saopaulo-1.amaaaaaa6noke4qa6bh45omx4mgtcrvs5tan5zoepknyj5bz37h3gs6whxbq",
+        "identifier": "ocid1.bastion.oc1.sa-saopaulo-1.amaaaaaa6noke4qa6bh45omx4mgtcrvs5tan5zoepknyj5bz37h3gs6whxbq"
+      }
+    ],
+    "status": "SUCCEEDED",
+    "time-accepted": "2021-09-09T23:43:33.234000+00:00",
+    "time-finished": "2021-09-09T23:44:16.380000+00:00",
+    "time-started": "2021-09-09T23:43:42.172000+00:00"
+  }
+}
+```
