@@ -10,6 +10,11 @@ Através do _[Bastion](https://docs.oracle.com/pt-br/iaas/Content/Bastion/Concep
 
 _[OCI Bastion](https://docs.oracle.com/pt-br/iaas/Content/Bastion/Concepts/bastionoverview.htm)_ se integra ao _[IAM (Identity and Access Management)](https://docs.oracle.com/pt-br/iaas/Content/Identity/Concepts/overview.htm)_ e permite que você controle quem pode acessar o serviço ou uma sessão, e o que pode ser feito com esses recursos. 
 
+Iremos utilizar o _[Serviço Bastion](https://docs.oracle.com/pt-br/iaas/Content/Bastion/Concepts/bastionoverview.htm)_, para concluír algumas tarefas necessárias diretamente no servidor que irá hospedar nossa aplicação _[Wordpress](https://pt.wikipedia.org/wiki/WordPress)_. Utilizaremos este cenário de exemplo para demonstrar o serviço em ação.
+
+![alt_text](./images/servico-bastion-wordpress.jpg  "Serviço Bastion + Wordpress")
+
+
 ```
 darmbrust@hoodwink:~$ oci instance-agent plugin list \
 > --compartment-id "ocid1.compartment.oc1..aaaaaaaamcff6exkhvp4aq3ubxib2wf74v7cx22b3yj56jnfkazoissdzefq" \
