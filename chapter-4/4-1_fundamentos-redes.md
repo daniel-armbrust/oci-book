@@ -486,8 +486,8 @@ Para a subrede de banco de dados, iremos permitir somente tráfego de entrada na
 ```
 darmbrust@hoodwink:~$ oci network security-list create \
 > --compartment-id "ocid1.compartment.oc1..aaaaaaaauvqvbbx3oridcm5d2ztxkftwr362u2vl5zdsayzbehzwbjs56soq" \
-> --egress-security-rules '[{"destination": "0.0.0.0/0", "protocol": "all", "isStateless": true}]' \
-> --ingress-security-rules '[{"source": "0.0.0.0/0", "protocol": "6", "isStateless": true, "tcpOptions": {"destinationPortRange": {"min": 3306, "max": 3306}, "sourcePortRange": {"min": 1024, "max": 65535}}}]' \
+> --egress-security-rules '[{"destination": "0.0.0.0/0", "protocol": "all", "isStateless": false}]' \
+> --ingress-security-rules '[{"source": "0.0.0.0/0", "protocol": "6", "isStateless": false, "tcpOptions": {"destinationPortRange": {"min": 3306, "max": 3306}, "sourcePortRange": {"min": 1024, "max": 65535}}}]' \
 > --vcn-id "ocid1.vcn.oc1.sa-saopaulo-1.amaaaaaahcglxkaabicl4jiikcavz2h2nvazibxp4rdiwziqsce4h5wksz2a" \
 > --display-name "secl-1_subnprv-db_vcn-prd" \
 > --wait-for-state AVAILABLE
@@ -508,7 +508,7 @@ Action completed. Waiting until the resource has entered state: ('AVAILABLE',)
         "destination": "0.0.0.0/0",
         "destination-type": "CIDR_BLOCK",
         "icmp-options": null,
-        "is-stateless": true,
+        "is-stateless": false,
         "protocol": "all",
         "tcp-options": null,
         "udp-options": null
@@ -520,7 +520,7 @@ Action completed. Waiting until the resource has entered state: ('AVAILABLE',)
       {
         "description": null,
         "icmp-options": null,
-        "is-stateless": true,
+        "is-stateless": false,
         "protocol": "6",
         "source": "0.0.0.0/0",
         "source-type": "CIDR_BLOCK",
@@ -806,8 +806,8 @@ Para a subrede da aplicação _[Wordpress](https://pt.wikipedia.org/wiki/WordPre
 ```
 darmbrust@hoodwink:~$ oci network security-list create \
 > --compartment-id "ocid1.compartment.oc1..aaaaaaaauvqvbbx3oridcm5d2ztxkftwr362u2vl5zdsayzbehzwbjs56soq" \
-> --egress-security-rules '[{"destination": "0.0.0.0/0", "protocol": "all", "isStateless": true}]' \
-> --ingress-security-rules '[{"source": "0.0.0.0/0", "protocol": "all", "isStateless": true}]' \
+> --egress-security-rules '[{"destination": "0.0.0.0/0", "protocol": "all", "isStateless": false}]' \
+> --ingress-security-rules '[{"source": "0.0.0.0/0", "protocol": "all", "isStateless": false}]' \
 > --vcn-id "ocid1.vcn.oc1.sa-saopaulo-1.amaaaaaahcglxkaabicl4jiikcavz2h2nvazibxp4rdiwziqsce4h5wksz2a" \
 > --display-name "secl-1_subnprv-app_vcn-prd" \
 > --wait-for-state AVAILABLE
@@ -828,7 +828,7 @@ Action completed. Waiting until the resource has entered state: ('AVAILABLE',)
         "destination": "0.0.0.0/0",
         "destination-type": "CIDR_BLOCK",
         "icmp-options": null,
-        "is-stateless": true,
+        "is-stateless": false,
         "protocol": "all",
         "tcp-options": null,
         "udp-options": null
@@ -840,7 +840,7 @@ Action completed. Waiting until the resource has entered state: ('AVAILABLE',)
       {
         "description": null,
         "icmp-options": null,
-        "is-stateless": true,
+        "is-stateless": false,
         "protocol": "all",
         "source": "0.0.0.0/0",
         "source-type": "CIDR_BLOCK",
@@ -1002,8 +1002,8 @@ Para o nosso exemplo, só estamos permitindo tráfego de entrada HTTPS, que é o
 ```
 darmbrust@hoodwink:~$ oci network security-list create \
 > --compartment-id "ocid1.compartment.oc1..aaaaaaaauvqvbbx3oridcm5d2ztxkftwr362u2vl5zdsayzbehzwbjs56soq" \
-> --egress-security-rules '[{"destination": "0.0.0.0/0", "protocol": "all", "isStateless": true}]' \
-> --ingress-security-rules '[{"source": "0.0.0.0/0", "protocol": "6", "isStateless": true, "tcpOptions": {"destinationPortRange": {"min": 443, "max": 443}, "sourcePortRange": {"min": 1024, "max": 65535}}}]' \
+> --egress-security-rules '[{"destination": "0.0.0.0/0", "protocol": "all", "isStateless": false}]' \
+> --ingress-security-rules '[{"source": "0.0.0.0/0", "protocol": "6", "isStateless": false, "tcpOptions": {"destinationPortRange": {"min": 443, "max": 443}, "sourcePortRange": {"min": 1024, "max": 65535}}}]' \
 > --vcn-id "ocid1.vcn.oc1.sa-saopaulo-1.amaaaaaahcglxkaabicl4jiikcavz2h2nvazibxp4rdiwziqsce4h5wksz2a" \
 > --display-name "secl-1_subnpub_vcn-prd" \
 > --wait-for-state AVAILABLE
