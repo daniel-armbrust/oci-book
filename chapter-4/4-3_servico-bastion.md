@@ -61,31 +61,22 @@ darmbrust@hoodwink:~$ oci compute instance update \
 WARNING: Updates to defined-tags and freeform-tags and agent-config and metadata and extended-metadata and shape-config and instance-options and launch-options and availability-config will replace any existing values. Are you sure you want to continue? [y/N]: y
 ```
 
+Depois de alguns minutos e após confirmarmos as alteração no OCA da instância, podemos ver que o _[plugin](https://docs.oracle.com/pt-br/iaas/Content/Compute/Tasks/manage-plugins.htm#available-plugins)_ _**Bastion**_ está ativo e em execução:
+
 ```
-darmbrust@hoodwink:~$ oci instance-agent plugin list \
+darmbrust@hoodwink:~$  oci instance-agent plugin list \
 > --compartment-id "ocid1.compartment.oc1..aaaaaaaamcff6exkhvp4aq3ubxib2wf74v7cx22b3yj56jnfkazoissdzefq" \
-> --instanceagent-id "ocid1.instance.oc1.sa-saopaulo-1.antxeljr6noke4qcf4yilvaofwpt5aiavnsx7cfev3fhp2bpc3xfcxo5k6zq" \
+> --instanceagent-id "ocid1.instance.oc1.sa-saopaulo-1.antxeljr6noke4qc7l2kyzru2c4ii7h63if4yq6idamh67eojix4vbpfv5qq" \
 > --name "Bastion"
 {
   "data": [
     {
       "name": "Bastion",
-      "status": "STOPPED",
-      "time-last-updated-utc": "2021-09-08T13:55:39.250000+00:00"
-    }`
+      "status": "RUNNING",
+      "time-last-updated-utc": "2021-09-09T18:26:14.737000+00:00"
+    }
   ]
 }
 ```
 
-
-
-```
-darmbrust@hoodwink:~$ oci network subnet list \
-> --compartment-id "ocid1.compartment.oc1..aaaaaaaauvqvbbx3oridcm5d2ztxkftwr362u2vl5zdsayzbehzwbjs56soq" \
-> --query "data[?\"display-name\"=='subnpub_vcn-prd'].id"
-[
-  "ocid1.subnet.oc1.sa-saopaulo-1.aaaaaaaax6arj6ccrzlm7fxb4pl4ggrsgig4bwnbvtqaayosdulsyoaliuka"
-]
-```
-
-
+>_**__NOTA:__** O _[Oracle Cloud Agent (OCA)](https://docs.oracle.com/pt-br/iaas/Content/Compute/Tasks/manage-plugins.htm)_ é um processo "auto gerênciável". Você informa um "estado desejado para o plugin" e ele se encarrega de ativar o [plugin](https://docs.oracle.com/pt-br/iaas/Content/Compute/Tasks/manage-plugins.htm#available-plugins). Além disto, se sua instância puder acessar a internet, ele verifica periodicamente se há versões mais recentes e atualiza o software. 
