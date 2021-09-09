@@ -23,7 +23,7 @@ Para termos êxito no acesso a instância privada da aplicação _[Wordpress](ht
 - Criar uma Sessão SSH.
 - Estabelecer a comunicação SSH usando o Bastion até a instância _[Wordpress](https://pt.wikipedia.org/wiki/WordPress)_.
 
-### __Plug-in Bastion__
+### __Plug-in Bastion do Oracle Cloud Agent__
 
 ```
 darmbrust@hoodwink:~$ oci instance-agent plugin list \
