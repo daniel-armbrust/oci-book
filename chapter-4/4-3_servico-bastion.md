@@ -66,7 +66,7 @@ Depois de alguns minutos e após confirmarmos as alteração no _[OCA](https://d
 ```
 darmbrust@hoodwink:~$  oci instance-agent plugin list \
 > --compartment-id "ocid1.compartment.oc1..aaaaaaaamcff6exkhvp4aq3ubxib2wf74v7cx22b3yj56jnfkazoissdzefq" \
-> --instanceagent-id "ocid1.instance.oc1.sa-saopaulo-1.antxeljr6noke4qc7l2kyzru2c4ii7h63if4yq6idamh67eojix4vbpfv5qq" \
+> --instanceagent-id "ocid1.instance.oc1.sa-saopaulo-1.antxeljr6noke4qcf4yilvaofwpt5aiavnsx7cfev3fhp2bpc3xfcxo5k6zq" \
 > --name "Bastion"
 {
   "data": [
