@@ -23,7 +23,7 @@ Para termos êxito no acesso a instância privada da aplicação _[Wordpress](ht
 - Criar uma _[Sessão SSH](https://docs.oracle.com/pt-br/iaas/Content/Bastion/Concepts/bastionoverview.htm#session_types)_.
 - Estabelecer a comunicação SSH usando o _[Bastion](https://docs.oracle.com/pt-br/iaas/Content/Bastion/Concepts/bastionoverview.htm)_ até a instância _[Wordpress](https://pt.wikipedia.org/wiki/WordPress)_.
 
-### __Plug-in Bastion do Oracle Cloud Agent (OCA)__
+### __Plugin Bastion do Oracle Cloud Agent (OCA)__
 
 O _[Oracle Cloud Agent (OCA)](https://docs.oracle.com/pt-br/iaas/Content/Compute/Tasks/manage-plugins.htm)_ é um processo que vem instalado nas _[imagens de plataforma](https://docs.oracle.com/pt-br/iaas/Content/Compute/References/images.htm#OracleProvided_Images)_ e sua principal função está no gerenciamento de diversos _[plugins](https://docs.oracle.com/pt-br/iaas/Content/Compute/Tasks/manage-plugins.htm#available-plugins)_. Estes coletam métricas de desempenho, instalam atualizações do sistema operacional, verificam vulnerabilidades de segurança, entre outras tarefas na instância de computação.
 
