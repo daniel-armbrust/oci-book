@@ -10,10 +10,20 @@ Através do _[Bastion](https://docs.oracle.com/pt-br/iaas/Content/Bastion/Concep
 
 _[OCI Bastion](https://docs.oracle.com/pt-br/iaas/Content/Bastion/Concepts/bastionoverview.htm)_ se integra ao _[IAM (Identity and Access Management)](https://docs.oracle.com/pt-br/iaas/Content/Identity/Concepts/overview.htm)_ e permite que você controle quem pode acessar o serviço ou uma sessão, e o que pode ser feito com esses recursos. 
 
-Iremos utilizar o _[Serviço Bastion](https://docs.oracle.com/pt-br/iaas/Content/Bastion/Concepts/bastionoverview.htm)_, para concluír algumas tarefas necessárias diretamente no servidor que irá hospedar nossa aplicação _[Wordpress](https://pt.wikipedia.org/wiki/WordPress)_. Utilizaremos este cenário de exemplo para demonstrar o serviço em ação.
+Iremos utilizar o _[Serviço Bastion](https://docs.oracle.com/pt-br/iaas/Content/Bastion/Concepts/bastionoverview.htm)_, para concluír algumas tarefas necessárias diretamente no servidor que irá hospedar a aplicação _[Wordpress](https://pt.wikipedia.org/wiki/WordPress)_.
+
+Veja abaixo a atualização:
 
 ![alt_text](./images/servico-bastion-wordpress.jpg  "Serviço Bastion + Wordpress")
 
+Para termos êxito no acesso a instância privada da aplicação _[Wordpress](https://pt.wikipedia.org/wiki/WordPress)_, precisamos concluír o "passo a passo" abaixo:
+
+- Habilitar o _[plug-in](https://docs.oracle.com/pt-br/iaas/Content/Compute/Tasks/manage-plugins.htm)_ Bation pelo _[Oracle Cloud Agent](https://docs.oracle.com/pt-br/iaas/Content/Compute/Tasks/manage-plugins.htm)_ da instância _[Wordpress](https://pt.wikipedia.org/wiki/WordPress)_.
+- Criar um _[Bastion]((https://docs.oracle.com/pt-br/iaas/Content/Bastion/Concepts/bastionoverview.htm)_ na infraestrutura.
+- Criar uma Sessão SSH.
+- Estabelecer a comunicação SSH usando o Bastion até a instância _[Wordpress](https://pt.wikipedia.org/wiki/WordPress)_.
+
+### __Plug-in Bastion__
 
 ```
 darmbrust@hoodwink:~$ oci instance-agent plugin list \
