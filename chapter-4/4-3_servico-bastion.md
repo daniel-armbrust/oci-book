@@ -141,11 +141,11 @@ Action completed. Waiting until the work request has entered state: ('SUCCEEDED'
 }
 ```
 
-Destaco alguns parâmetros importantes na criação do serviço. 
+Destaco alguns parâmetros importantes usados na criação do serviço. 
 
 Começamos pelo parâmetro obrigatório _"--bastion-type"_ que deve possuir o valor _"standard"_. O próximo é o parâmetro _"--target-subnet-id"_ que necessita do valor OCID da subrede no qual permite _[sessões SSH](https://docs.oracle.com/pt-br/iaas/Content/Bastion/Concepts/bastionoverview.htm#session_types)_ vindas do _[Bastion](https://docs.oracle.com/pt-br/iaas/Content/Bastion/Concepts/bastionoverview.htm)_.
 
-Por último, o parâmetro _"--client-cidr-list"_ no qual se especifica em notação _[CIDR](https://pt.wikipedia.org/wiki/Roteamento_entre_dom%C3%ADnios_sem_classes)_, quais redes IP podem utilizar o serviço _[Bastion](https://docs.oracle.com/pt-br/iaas/Content/Bastion/Concepts/bastionoverview.htm)_. É um tipo de firewall, que possibilita liberar até 20 redes diferentes. Em nosso caso, estamos especificando somente conexões vinda do endereço IP **201.33.196.77/32**, que é o meu host na internet.
+Por último, o parâmetro _"--client-cidr-list"_ no qual se especifica em notação _[CIDR](https://pt.wikipedia.org/wiki/Roteamento_entre_dom%C3%ADnios_sem_classes)_, quais redes IP podem utilizar o serviço _[Bastion](https://docs.oracle.com/pt-br/iaas/Content/Bastion/Concepts/bastionoverview.htm)_. É um tipo de firewall. Em nosso caso, estamos especificando somente conexões vinda do endereço IP **201.33.196.77/32**, que é o meu host na internet.
 
 >_**__NOTA:__** O parâmetro "--client-cidr-list" aceita como valor um vetor. Ou seja, é possível informar uma lista de redes IPs dentro dos colchetes desta forma: '["192.168.1.0/24", "172.16.100.57/32"]'_
 
@@ -197,3 +197,9 @@ darmbrust@hoodwink:~$ oci bastion bastion get \
   "etag": "355e77dbd3bd9cb4429edc0658df5cf652990242874c1d4ba985bc4d7c7c4dae--gzip"
 }
 ```
+
+Perceba que o serviço após criado, consumiu um endereço IP da subrede. Este pode ser visto pela propriedade _"private-endpoint-ip-address"_ que possui o valor _"10.0.10.112"_.
+
+Por fim, o a propriedade _"max-session-ttl-in-seconds"_ especifica um tempo limite máximo que uma _[sessões SSH](https://docs.oracle.com/pt-br/iaas/Content/Bastion/Concepts/bastionoverview.htm#session_types)_ pode ter. Neste caso, não alteramos o valor padrão que é 10800 segundos ou 3 horas. Você pode especificar um valor menor, mas não maior que 3 horas, através do parâmetro _"--max-session-ttl"_. Este valor fará mais sentido quando criarmos as sessões.
+
+### __Gerenciando Sessões SSH__
