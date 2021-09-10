@@ -95,7 +95,7 @@ darmbrust@hoodwink:~$ curl icanhazip.com
 
 >_**__NOTA:__** Existem outros sites no qual você pode usar como o [ifconfig.me](https://ifconfig.me/), [api.ipify.org](https://api.ipify.org/) ou [ipinfo.io/ip](https://ipinfo.io/ip) que exibem qual é o seu endereço IP público. Consulte este [link](https://linuxconfig.org/how-to-use-curl-to-get-public-ip-address) para mais detalhes._
 
-A próxima informação é saber qual é o OCID da subrede que o _[Serviço Bastion](https://docs.oracle.com/pt-br/iaas/Content/Bastion/Concepts/bastionoverview.htm)_ permitirá _[sessões SSH](https://docs.oracle.com/pt-br/iaas/Content/Bastion/Tasks/managingsessions.htm)_ através ele. Em nosso caso, iremos "anexar" o _[Bastion](https://docs.oracle.com/pt-br/iaas/Content/Bastion/Concepts/bastionoverview.htm)_ na subrede privada que hospeda a instância da aplicação _[Wordpress](https://pt.wikipedia.org/wiki/WordPress)_.
+A próxima informação é saber qual é o OCID da subrede que o _[Serviço Bastion](https://docs.oracle.com/pt-br/iaas/Content/Bastion/Concepts/bastionoverview.htm)_ permitirá _[sessões SSH](https://docs.oracle.com/pt-br/iaas/Content/Bastion/Tasks/managingsessions.htm)_ através dele. Em nosso caso, iremos "anexar" o _[Bastion](https://docs.oracle.com/pt-br/iaas/Content/Bastion/Concepts/bastionoverview.htm)_ na subrede privada que hospeda a instância da aplicação _[Wordpress](https://pt.wikipedia.org/wiki/WordPress)_.
 
 Vamos obter o OCID da subrede com o comando abaixo:
 
@@ -129,8 +129,8 @@ Action completed. Waiting until the work request has entered state: ('SUCCEEDED'
       {
         "action-type": "CREATED",
         "entity-type": "BastionsResource",
-        "entity-uri": "/bastions/ocid1.bastion.oc1.sa-saopaulo-1.amaaaaaa6noke4qa6bh45omx4mgtcrvs5tan5zoepknyj5bz37h3gs6whxbq",
-        "identifier": "ocid1.bastion.oc1.sa-saopaulo-1.amaaaaaa6noke4qa6bh45omx4mgtcrvs5tan5zoepknyj5bz37h3gs6whxbq"
+        "entity-uri": "/bastions/ocid1.bastion.oc1.sa-saopaulo-1.amaaaaaa6noke4qavfjoxi4kunt3sdo7ps46lbkfq3loxgqqomhmizoxhf4q",
+        "identifier": "ocid1.bastion.oc1.sa-saopaulo-1.amaaaaaa6noke4qavfjoxi4kunt3sdo7ps46lbkfq3loxgqqomhmizoxhf4q"
       }
     ],
     "status": "SUCCEEDED",
@@ -147,4 +147,53 @@ Começamos pelo parâmetro obrigatório _"--bastion-type"_ que deve possuir o va
 
 Por último, o parâmetro _"--client-cidr-list"_ no qual se especifica em notação _[CIDR](https://pt.wikipedia.org/wiki/Roteamento_entre_dom%C3%ADnios_sem_classes)_, quais redes IP podem utilizar o serviço _[Bastion](https://docs.oracle.com/pt-br/iaas/Content/Bastion/Concepts/bastionoverview.htm)_. É um tipo de firewall, que possibilita liberar até 20 redes diferentes. Em nosso caso, estamos especificando somente conexões vinda do endereço IP **201.33.196.77/32**, que é o meu host na internet.
 
->_**__NOTA:__** O parâmetro "--client-cidr-list" aceita como valor um vetor. Ou seja, é possível informar uma lista de IPs dentro dos colchetes desta forma: '["192.168.1.0/24", "172.16.100.57/32"]'_
+>_**__NOTA:__** O parâmetro "--client-cidr-list" aceita como valor um vetor. Ou seja, é possível informar uma lista de redes IPs dentro dos colchetes desta forma: '["192.168.1.0/24", "172.16.100.57/32"]'_
+
+_[Bastion](https://docs.oracle.com/pt-br/iaas/Content/Bastion/Concepts/bastionoverview.htm)_ criado, vamos consultar algumas informações. Primeiramente, vamos obter o seu OCID: 
+
+```
+darmbrust@hoodwink:~$ oci bastion bastion list \
+> --compartment-id "ocid1.compartment.oc1..aaaaaaaauvqvbbx3oridcm5d2ztxkftwr362u2vl5zdsayzbehzwbjs56soq" \
+> --query "data[?name=='BastionSubnprvAppVcnPrd'].id"
+[
+  "ocid1.bastion.oc1.sa-saopaulo-1.amaaaaaa6noke4qavfjoxi4kunt3sdo7ps46lbkfq3loxgqqomhmizoxhf4q"  
+]
+```
+
+A partir do OCID, iremos consultar todas as suas propriedades com o comando abaixo:
+
+```
+darmbrust@hoodwink:~$ oci bastion bastion get \
+> --bastion-id "ocid1.bastion.oc1.sa-saopaulo-1.amaaaaaa6noke4qavfjoxi4kunt3sdo7ps46lbkfq3loxgqqomhmizoxhf4q"
+{
+  "data": {
+    "bastion-type": "STANDARD",
+    "client-cidr-block-allow-list": [
+      "201.33.196.77/32"
+    ],
+    "compartment-id": "ocid1.compartment.oc1..aaaaaaaauvqvbbx3oridcm5d2ztxkftwr362u2vl5zdsayzbehzwbjs56soq",
+    "defined-tags": {
+      "Oracle-Tags": {
+        "CreatedBy": "oracleidentitycloudservice/daniel.armbrust@algumdominio.com",
+        "CreatedOn": "2021-09-09T23:43:29.409Z"
+      }
+    },
+    "freeform-tags": {},
+    "id": "ocid1.bastion.oc1.sa-saopaulo-1.amaaaaaa6noke4qavfjoxi4kunt3sdo7ps46lbkfq3loxgqqomhmizoxhf4q",
+    "lifecycle-details": null,
+    "lifecycle-state": "ACTIVE",
+    "max-session-ttl-in-seconds": 10800,
+    "max-sessions-allowed": 20,
+    "name": "BastionSubnprvAppVcnPrd",
+    "phone-book-entry": null,
+    "private-endpoint-ip-address": "10.0.10.112",
+    "static-jump-host-ip-addresses": null,
+    "system-tags": {},
+    "target-subnet-id": "ocid1.subnet.oc1.sa-saopaulo-1.aaaaaaaajb4wma763mz6uowun3pfeltobe4fmiegdeyma5ehvnf3kzy3jvxa",
+    "target-vcn-id": "ocid1.vcn.oc1.sa-saopaulo-1.amaaaaaahcglxkaabicl4jiikcavz2h2nvazibxp4rdiwziqsce4h5wksz2a",
+    "time-created": "2021-09-09T23:43:33.233000+00:00",
+    "time-updated": "2021-09-09T23:44:16.380000+00:00"
+  },
+  "etag": "355e77dbd3bd9cb4429edc0658df5cf652990242874c1d4ba985bc4d7c7c4dae--gzip"
+}
+```
