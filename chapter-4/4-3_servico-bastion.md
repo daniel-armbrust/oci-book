@@ -200,6 +200,6 @@ darmbrust@hoodwink:~$ oci bastion bastion get \
 
 Perceba que o serviço após criado, consumiu um endereço IP da subrede. Este pode ser visto pela propriedade _"private-endpoint-ip-address"_ que possui o valor _"10.0.10.112"_.
 
-Por fim, o a propriedade _"max-session-ttl-in-seconds"_ especifica um tempo limite máximo que uma _[sessões SSH](https://docs.oracle.com/pt-br/iaas/Content/Bastion/Concepts/bastionoverview.htm#session_types)_ pode ter. Neste caso, não alteramos o valor padrão que é 10800 segundos ou 3 horas. Você pode especificar um valor menor, mas não maior que 3 horas, através do parâmetro _"--max-session-ttl"_. Este valor fará mais sentido quando criarmos as sessões.
+Por fim, a propriedade _"max-session-ttl-in-seconds"_ especifica um tempo limite máximo que uma _[sessões SSH](https://docs.oracle.com/pt-br/iaas/Content/Bastion/Concepts/bastionoverview.htm#session_types)_ pode ter. Neste caso, não alteramos o valor padrão que é 10800 segundos ou 3 horas. Você pode especificar um valor menor, mas não maior que 3 horas, através do parâmetro _"--max-session-ttl"_. Este valor fará mais sentido quando criarmos as sessões.
 
 ### __Gerenciando Sessões SSH__
