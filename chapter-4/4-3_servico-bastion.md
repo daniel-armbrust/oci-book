@@ -224,5 +224,121 @@ Toda sessão, independente do seu tipo, deve ter um tempo limite configurado no 
 
 #### Criando uma Sessão SSH gerenciada
 
+```
+darmbrust@hoodwink:~$ ssh-keygen -t rsa -N "" -b 2048 -f sessao-temp
+Generating public/private rsa key pair.
+Your identification has been saved in sessao-temp
+Your public key has been saved in sessao-temp.pub
+The key fingerprint is:
+SHA256:dJ8XAfgQKRObPfH5hHPxNp429USkkkn09MR3D2pxuLI darmbrust@hoodwink
+The key's randomart image is:
++---[RSA 2048]----+
+|        ..o=+o+o+|
+|        o+++oBoO+|
+|        +o+oO=*oX|
+|       . ..o=B.+*|
+|        S  +o o=.|
+|          E  .. .|
+|                 |
+|                 |
+|                 |
++----[SHA256]-----+
+```
+
+```
+darmbrust@hoodwink:~$ oci compute vnic-attachment list \
+> --compartment-id "ocid1.compartment.oc1..aaaaaaaamcff6exkhvp4aq3ubxib2wf74v7cx22b3yj56jnfkazoissdzefq" \
+> --instance-id "ocid1.instance.oc1.sa-saopaulo-1.antxeljr6noke4qcf4yilvaofwpt5aiavnsx7cfev3fhp2bpc3xfcxo5k6zq" \
+> --query "data[].\"vnic-id\""
+[
+  "ocid1.vnic.oc1.sa-saopaulo-1.abtxeljrxckhpgqp27r55nl4nbhd3ruawu33zenc2mwhavi3h2rqtzvg2ica"
+]
+```
+
+```
+darmbrust@hoodwink:~$ oci network vnic get \
+> --vnic-id "ocid1.vnic.oc1.sa-saopaulo-1.abtxeljrxckhpgqp27r55nl4nbhd3ruawu33zenc2mwhavi3h2rqtzvg2ica"
+{
+  "data": {
+    "availability-domain": "ynrK:SA-SAOPAULO-1-AD-1",
+    "compartment-id": "ocid1.compartment.oc1..aaaaaaaamcff6exkhvp4aq3ubxib2wf74v7cx22b3yj56jnfkazoissdzefq",
+    "defined-tags": {
+      "Oracle-Tags": {
+        "CreatedBy": "oracleidentitycloudservice/daniel.armbrust@algumdominio.com",
+        "CreatedOn": "2021-09-09T18:14:58.697Z"
+      }
+    },
+    "display-name": "vm-wordpress_subnprv-app_vcn-prd",
+    "freeform-tags": {},
+    "hostname-label": "wordpress",
+    "id": "ocid1.vnic.oc1.sa-saopaulo-1.abtxeljrxckhpgqp27r55nl4nbhd3ruawu33zenc2mwhavi3h2rqtzvg2ica",
+    "is-primary": true,
+    "lifecycle-state": "AVAILABLE",
+    "mac-address": "02:00:17:02:F4:E7",
+    "nsg-ids": [],
+    "private-ip": "10.0.10.240",
+    "public-ip": null,
+    "skip-source-dest-check": false,
+    "subnet-id": "ocid1.subnet.oc1.sa-saopaulo-1.aaaaaaaajb4wma763mz6uowun3pfeltobe4fmiegdeyma5ehvnf3kzy3jvxa",
+    "time-created": "2021-09-09T18:15:04.023000+00:00",
+    "vlan-id": null
+  },
+  "etag": "c6159ff4"
+}
+```
+
+```
+darmbrust@hoodwink:~$ oci bastion session create-managed-ssh \
+> --bastion-id "ocid1.bastion.oc1.sa-saopaulo-1.amaaaaaa6noke4qa6bh45omx4mgtcrvs5tan5zoepknyj5bz37h3gs6whxbq" \
+> --display-name "wordpress_session" \
+> --session-ttl "7200" \
+> --ssh-public-key-file "./sessao-temp.pub" \
+> --target-resource-id "ocid1.instance.oc1.sa-saopaulo-1.antxeljr6noke4qcf4yilvaofwpt5aiavnsx7cfev3fhp2bpc3xfcxo5k6zq" \
+> --target-os-username "opc" 
+> --target-private-ip "10.0.10.240" \
+> --target-port "22" \
+> --wait-for-state "SUCCEEDED"
+Action completed. Waiting until the work request has entered state: ('SUCCEEDED',)
+{
+  "data": {
+    "compartment-id": "ocid1.compartment.oc1..aaaaaaaamcff6exkhvp4aq3ubxib2wf74v7cx22b3yj56jnfkazoissdzefq",
+    "id": "ocid1.bastionworkrequest.oc1.sa-saopaulo-1.amaaaaaa6noke4qaumcgkdkhzfpoftxu47fiyiyztlssrihccbags57oekha",
+    "operation-type": "CREATE_SESSION",
+    "percent-complete": 100.0,
+    "resources": [
+      {
+        "action-type": "CREATED",
+        "entity-type": "SessionResource",
+        "entity-uri": "/sessions/ocid1.bastionsession.oc1.sa-saopaulo-1.amaaaaaa6noke4qar76rq6xg4llxhfssk2zfqmb6f6l4nr6l2uwrqpwb6e6a",
+        "identifier": "ocid1.bastionsession.oc1.sa-saopaulo-1.amaaaaaa6noke4qar76rq6xg4llxhfssk2zfqmb6f6l4nr6l2uwrqpwb6e6a"
+      }
+    ],
+    "status": "SUCCEEDED",
+    "time-accepted": "2021-09-10T19:32:33.978000+00:00",
+    "time-finished": "2021-09-10T19:33:24.991000+00:00",
+    "time-started": "2021-09-10T19:32:44.285000+00:00"
+  }
+}
+```
+
+```
+darmbrust@hoodwink:~$ oci bastion session get \
+> --session-id "ocid1.bastionsession.oc1.sa-saopaulo-1.amaaaaaa6noke4qar76rq6xg4llxhfssk2zfqmb6f6l4nr6l2uwrqpwb6e6a" \
+> --query "data.\"ssh-metadata\".command" \
+> --raw-output
+ssh -i <privateKey> -o ProxyCommand="ssh -i <privateKey> -W %h:%p -p 22 ocid1.bastionsession.oc1.sa-saopaulo-1.amaaaaaa6noke4qar76rq6xg4llxhfssk2zfqmb6f6l4nr6l2uwrqpwb6e6a@host.bastion.sa-saopaulo-1.oci.oraclecloud.com" -p 22 opc@10.0.10.240
+```
+
+```
+darmbrust@hoodwink:~$ ssh -i ./sessao-temp -o \
+> ProxyCommand="ssh -i ./sessao-temp -W %h:%p -p 22 ocid1.bastionsession.oc1.sa-saopaulo-1.amaaaaaa6noke4qar76rq6xg4llxhfssk2zfqmb6f6l4nr6l2uwrqpwb6e6a@host.bastion.sa-saopaulo-1.oci.oraclecloud.com" \
+> -p 22 opc@10.0.10.240
+The authenticity of host '10.0.10.240 (<no hostip for proxy command>)' can't be established.
+ECDSA key fingerprint is SHA256:uPLOqOTGKYusbMpBQdPvO9oNRIJnHWsYq8RjPxhWDSg.
+Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
+Warning: Permanently added '10.0.10.240' (ECDSA) to the list of known hosts.
+[opc@wordpress ~]$ hostname
+wordpress
+```
 
 https://www.oracle.com/security/cloud-security/bastion/faq/
