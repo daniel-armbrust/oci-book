@@ -4,7 +4,7 @@
 
 ### __Visão Geral__
 
-O _[Serviço Bastion](https://docs.oracle.com/pt-br/iaas/Content/Bastion/Concepts/bastionoverview.htm)_ do OCI permite você acessar de forma segura, através de sessões _[SSH](https://pt.wikipedia.org/wiki/Secure_Shell)_ e por tempo limitado, os recursos da sua infraestrutura que não possuem endereço IP público. Ele é um meio rápido e simples de implementar um acesso seguro, até seus recursos privados. Um Bastion é uma entidade lógica, gerenciada pela Oracle que ao ser provisionado, ele cria a infraestrutura de rede necessária para se conectar aos recursos existentes em uma subrede.
+O _[Serviço Bastion](https://docs.oracle.com/pt-br/iaas/Content/Bastion/Concepts/bastionoverview.htm)_ do OCI permite você acessar de forma segura, através de sessões _[SSH](https://pt.wikipedia.org/wiki/Secure_Shell)_ e por tempo limitado, os recursos da sua infraestrutura que não possuem endereço IP público. Ele é um meio rápido e simples de implementar um acesso seguro, gerencial, até seus recursos privados. Um Bastion é uma entidade lógica, gerenciada pela Oracle que ao ser provisionado, ele cria a infraestrutura de rede necessária para se conectar aos recursos existentes em uma subrede.
 
 Através do _[Bastion](https://docs.oracle.com/pt-br/iaas/Content/Bastion/Concepts/bastionoverview.htm)_ você pode acessar seus recursos sem a necessidade de ter um _["jump server"](https://pt.wikipedia.org/wiki/Jump_server)_ na rede. Este pode ser usado a vontade, de acordo com os _[limites](https://docs.oracle.com/pt-br/iaas/Content/General/Concepts/servicelimits.htm)_ disponíveis no seu _[tenancy](https://docs.oracle.com/pt-br/iaas/Content/Identity/Tasks/managingtenancy.htm)_, além de não gerar custos extras. É um serviço gratuito.
 
@@ -108,7 +108,7 @@ darmbrust@hoodwink:~$ oci network subnet list \
 ]
 ```
 
-
+Juntando as informações, criaremos nosso _[Bastion](https://docs.oracle.com/pt-br/iaas/Content/Bastion/Concepts/bastionoverview.htm)_ com o comando abaixo:
 
 ```
 darmbrust@hoodwink:~$ oci bastion bastion create \
@@ -140,3 +140,9 @@ Action completed. Waiting until the work request has entered state: ('SUCCEEDED'
   }
 }
 ```
+
+Destaco alguns parâmetros importantes na criação do serviço. 
+
+Começamos pelo parâmetro obrigatório _"--bastion-type"_ que deve possuir o valor _"standard"_. O próximo é o parâmetro _"--target-subnet-id"_ que necessita do valor OCID da subrede no qual permite _[sessões SSH](https://docs.oracle.com/pt-br/iaas/Content/Bastion/Concepts/bastionoverview.htm#session_types)_ vindas do _[Bastion](https://docs.oracle.com/pt-br/iaas/Content/Bastion/Concepts/bastionoverview.htm)_.
+
+Por último, o parâmetro _"--client-cidr-list"_ no qual se especifica em notação _[CIDR](https://pt.wikipedia.org/wiki/Roteamento_entre_dom%C3%ADnios_sem_classes)_, quais redes IP podem utilizar o serviço _[Bastion](https://docs.oracle.com/pt-br/iaas/Content/Bastion/Concepts/bastionoverview.htm)_. É um tipo de firewall, que possibilita liberar até 20 redes diferentes. Em nosso caso, estamos especificando somente conexões vinda do endereço IP **201.33.196.77/32**, que é o meu host na internet.
