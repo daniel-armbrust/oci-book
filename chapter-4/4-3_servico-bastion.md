@@ -14,6 +14,8 @@ Por hora, iremos utilizar o _[Serviço Bastion](https://docs.oracle.com/pt-br/ia
 
 ![alt_text](./images/bastion-wordpress-mysql.jpg  "Serviço Bastion + Wordpress + MySQL")
 
+>_**__NOTA:__** Como você verá, um Bastion deve ser criado e "atrelado" a uma única subrede privada. A partir disto, ele só consegue prover acesso aos recursos desta subrede em específico. Para acesso através de um Bastion ao MySQL do desenho acima, um segundo Bastion deve ser criado e atrelado a sua subrede. 
+
 Para termos êxito no acesso a instância privada da aplicação _[Wordpress](https://pt.wikipedia.org/wiki/WordPress)_, precisamos concluír o "passo a passo" abaixo:
 
 - Habilitar o _[plugin Bastion](https://docs.oracle.com/pt-br/iaas/Content/Compute/Tasks/manage-plugins.htm)_ através do _[Oracle Cloud Agent (OCA)](https://docs.oracle.com/pt-br/iaas/Content/Compute/Tasks/manage-plugins.htm)_ em execução na instância _[Wordpress](https://pt.wikipedia.org/wiki/WordPress)_.
