@@ -84,10 +84,20 @@ darmbrust@hoodwink:~$ oci instance-agent plugin list \
 
 ### __Criando um Bastion__
 
+Antes de criarmos nosso _[Bastion](https://docs.oracle.com/pt-br/iaas/Content/Bastion/Concepts/bastionoverview.htm)_ precisamos de algumas informações. A primeira delas é o endereço IP público da máquina onde estou. Existem inumeras maneiras de se obter esta informação. Porém, como tudo aqui é via linha de comando, estou usando um site externo cuja finalidade é retornar o seu endereço IP público.
+
+Basta eu enviar um _[GET](https://pt.wikipedia.org/wiki/Hypertext_Transfer_Protocol#GET)_ através do comando _[curl](https://pt.wikipedia.org/wiki/CURL)_, que eu consigo saber meu endereço IP público:
+
 ```
 darmbrust@hoodwink:~$ curl icanhazip.com
 201.33.196.77
 ```
+
+>_**__NOTA:__** Existem outros sites no qual você pode usar como o [ifconfig.me](https://ifconfig.me/), [api.ipify.org](https://api.ipify.org/) ou [ipinfo.io/ip](https://ipinfo.io/ip) que exibem qual é o seu endereço IP público. Consulte este [link](https://linuxconfig.org/how-to-use-curl-to-get-public-ip-address) para mais detalhes._
+
+A próxima informação é saber qual é o OCID da subrede que o _[Serviço Bastion](https://docs.oracle.com/pt-br/iaas/Content/Bastion/Concepts/bastionoverview.htm)_ permitirá _[sessões SSH](https://docs.oracle.com/pt-br/iaas/Content/Bastion/Tasks/managingsessions.htm)_ através ele. Em nosso caso, iremos "anexar" o _[Bastion](https://docs.oracle.com/pt-br/iaas/Content/Bastion/Concepts/bastionoverview.htm)_ na subrede privada que hospeda nossa instância da aplicação _[Wordpress](https://pt.wikipedia.org/wiki/WordPress)_.
+
+Para obter o OCID desta subrede, usamos o comando abaixo:
 
 ```
 darmbrust@hoodwink:~$ oci network subnet list \
@@ -97,6 +107,8 @@ darmbrust@hoodwink:~$ oci network subnet list \
   "ocid1.subnet.oc1.sa-saopaulo-1.aaaaaaaajb4wma763mz6uowun3pfeltobe4fmiegdeyma5ehvnf3kzy3jvxa"
 ]
 ```
+
+
 
 ```
 darmbrust@hoodwink:~$ oci bastion bastion create \

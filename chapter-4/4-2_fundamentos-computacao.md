@@ -429,6 +429,8 @@ Action completed. Waiting until the resource has entered state: ('RUNNING',)
 }
 ```
 
+>_**__NOTA:__** O parâmetro "--wait-for-state" com o valor "RUNNING" informados no comando acima, bloqueia o retorno do shell, aguardando até que a instância seja criada e esteja pronta para uso. Não estranhe se o resultado do comando demorar um pouco para aparescer._
+
 Destaco alguns parâmetros que foram informados para customizar a criação da intância, e que não são obrigatórios. 
 
 A começar pelo parâmetro _"--boot-volume-size-in-gbs"_ que foi usado para especificar um tamanho de **100 GB** para o _[boot volume](https://docs.oracle.com/pt-br/iaas/Content/Block/Concepts/bootvolumes.htm)_, diferente do padrão para sistema operacional Linux que é **50 GB**. 
