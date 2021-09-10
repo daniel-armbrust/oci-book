@@ -216,12 +216,13 @@ Existem dois tipos de sessões que podem ser criadas:
 - **Sessão de encaminhamento de porta SSH**
     - Esta sessão cria um _[túnel SSH](https://en.wikipedia.org/wiki/Tunneling_protocol#Secure_Shell_tunneling)_ para uma porta de rede específica no recurso de destino.
     - O único pré-requisito aqui, é ter a porta "aberta" no recurso de destino.
+    - Normalmente, usamos este tipo de sessão, para conectividade segura com outros protocolos como o _[RDP](https://en.wikipedia.org/wiki/Remote_Desktop_Protocol)_ do Windows (porta 3389/TCP).
 
 Toda sessão, independente do seu tipo, deve ter um tempo limite configurado no qual controla sua existência. Se este tempo não for informado, o tempo limite máximo que foi especificado na criação do serviço, será usado. Ao expirar este tempo, a sessão é automaticamente removida. Lembrando que o propósito de acesso através do _[Bastion](https://docs.oracle.com/pt-br/iaas/Content/Bastion/Concepts/bastionoverview.htm)_, é para execução de tarefas gerenciais e que não exigem conexões persistentes de longa duração.
 
 >_**__NOTA:__** É possível ter até 20 sessões ativas por [Bastion](https://docs.oracle.com/pt-br/iaas/Content/Bastion/Concepts/bastionoverview.htm)_.
 
-
+#### Criando uma Sessão SSH gerenciada
 
 
 https://www.oracle.com/security/cloud-security/bastion/faq/
