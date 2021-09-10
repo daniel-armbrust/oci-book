@@ -14,7 +14,7 @@ Iremos utilizar o _[Serviço Bastion](https://docs.oracle.com/pt-br/iaas/Content
 
 Veja abaixo a atualização:
 
-![alt_text](./images/servico-bastion-wordpress.jpg  "Serviço Bastion + Wordpress")
+![alt_text](./images/bastion-wordpress-mysql.jpg  "Serviço Bastion + Wordpress + MySQL")
 
 Para termos êxito no acesso a instância privada da aplicação _[Wordpress](https://pt.wikipedia.org/wiki/WordPress)_, precisamos concluír o "passo a passo" abaixo:
 
