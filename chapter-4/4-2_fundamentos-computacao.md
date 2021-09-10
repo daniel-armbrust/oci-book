@@ -429,7 +429,7 @@ Action completed. Waiting until the resource has entered state: ('RUNNING',)
 }
 ```
 
->_**__NOTA:__** O parâmetro "--wait-for-state" com o valor "RUNNING" informados no comando acima, bloqueia o retorno do shell, aguardando até que a instância seja criada e esteja pronta para uso. Não estranhe se o resultado do comando demorar um pouco para aparescer._
+>_**__NOTA:__** O parâmetro "--wait-for-state" com o valor "RUNNING" informados no comando acima, bloqueia o retorno do shell, aguardando até que a instância seja criada e esteja pronta para uso. É normal demorar um pouco._
 
 Destaco alguns parâmetros que foram informados para customizar a criação da intância, e que não são obrigatórios. 
 
