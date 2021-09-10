@@ -149,7 +149,7 @@ Por último, o parâmetro _"--client-cidr-list"_ no qual se especifica em notaç
 
 >_**__NOTA:__** O parâmetro "--client-cidr-list" aceita como valor um vetor. Ou seja, é possível informar uma lista de redes IPs dentro dos colchetes desta forma: '["192.168.1.0/24", "172.16.100.57/32"]'_
 
-_[Bastion](https://docs.oracle.com/pt-br/iaas/Content/Bastion/Concepts/bastionoverview.htm)_ criado, vamos consultar algumas informações. Primeiramente, vamos obter o seu OCID: 
+_[Bastion](https://docs.oracle.com/pt-br/iaas/Content/Bastion/Concepts/bastionoverview.htm)_ criado, vamos consultar algumas informações começando por seu OCID: 
 
 ```
 darmbrust@hoodwink:~$ oci bastion bastion list \
