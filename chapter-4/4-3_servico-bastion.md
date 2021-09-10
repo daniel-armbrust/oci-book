@@ -21,6 +21,7 @@ Para termos êxito no acesso a instância privada da aplicação _[Wordpress](ht
 - Habilitar o _[plugin Bastion](https://docs.oracle.com/pt-br/iaas/Content/Compute/Tasks/manage-plugins.htm)_ através do _[Oracle Cloud Agent (OCA)](https://docs.oracle.com/pt-br/iaas/Content/Compute/Tasks/manage-plugins.htm)_ em execução na instância _[Wordpress](https://pt.wikipedia.org/wiki/WordPress)_.
 - Criar um _[Bastion](https://docs.oracle.com/pt-br/iaas/Content/Bastion/Concepts/bastionoverview.htm)_ em nosso _[tenancy](https://docs.oracle.com/pt-br/iaas/Content/Identity/Tasks/managingtenancy.htm)_ que será usado exclusivamente pela subrede privada que hospeda a instância do _[Wordpress](https://pt.wikipedia.org/wiki/WordPress)_.
 - Criar uma _[Sessão SSH](https://docs.oracle.com/pt-br/iaas/Content/Bastion/Concepts/bastionoverview.htm#session_types)_ que possibilita conectividade _[SSH](https://pt.wikipedia.org/wiki/Secure_Shell)_ a partir da _máquina cliente (201.33.196.77)_ a instância _[Wordpress](https://pt.wikipedia.org/wiki/WordPress)_.
+- Estabelecer uma conexão SSH a partir do host cliente, usando o _[Bastion](https://docs.oracle.com/pt-br/iaas/Content/Bastion/Concepts/bastionoverview.htm)_ criado e atingindo a instância de destino do _[Wordpress](https://pt.wikipedia.org/wiki/WordPress)_.
 
 ### __Plugin Bastion do Oracle Cloud Agent (OCA)__
 
