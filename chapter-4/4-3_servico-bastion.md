@@ -202,4 +202,26 @@ Perceba que o serviço após criado, consumiu um endereço IP da subrede. Este p
 
 Por fim, a propriedade _"max-session-ttl-in-seconds"_ especifica um tempo limite máximo que uma _[sessões SSH](https://docs.oracle.com/pt-br/iaas/Content/Bastion/Concepts/bastionoverview.htm#session_types)_ pode ter. Neste caso, não alteramos o valor padrão que é 10800 segundos ou 3 horas. Você pode especificar um valor menor, mas não maior que 3 horas, através do parâmetro _"--max-session-ttl"_. Este valor fará mais sentido quando criarmos as sessões.
 
-### __Gerenciando Sessões SSH__
+### __Gerenciando Sessões__
+
+Uma _Sessão_ ou _"Sessão pelo Bastion"_, é o meio pelo qual se possibilita a conectividade, a partir de uma origem (ex: host na internet), até um recurso de destino localizado no OCI que não recebe conexão direta vinda da internet. Este recurso de destino pode ser uma instância, um serviço gerenciado pelo OCI (PaaS) ou até mesmo uma porta TCP qualquer. A criação de uma sessão no _[serviço bastion](https://docs.oracle.com/pt-br/iaas/Content/Bastion/Concepts/bastionoverview.htm)_ é o que possibilita "ponte" entre o mundo externo e o interno.
+
+Existem dois tipos de sessões que podem ser criadas:
+
+- **Sessão SSH gerenciada**
+    - Requer a execução do _[OpenSSH](https://en.wikipedia.org/wiki/OpenSSH)_ no recurso de destino, e também do plugin _Bastion_ habilitado e em execução no _[Oracle Cloud Agent (OCA)](https://docs.oracle.com/pt-br/iaas/Content/Compute/Tasks/manage-plugins.htm)_.
+    - Este tipo de sessão possibilita abertura de shell interativo via SSH.
+    - Necessário um nome de usuário (login) válido no sistema operacional.
+    
+- **Sessão de encaminhamento de porta SSH**
+    - Esta sessão cria um _[túnel SSH](https://en.wikipedia.org/wiki/Tunneling_protocol#Secure_Shell_tunneling)_ para uma porta de rede específica no recurso de destino.
+    - O único pré-requisito aqui, é ter a porta "aberta" no recurso de destino.
+
+Toda sessão, independente do seu tipo, deve ter um tempo limite configurado no qual controla sua existência. Se este tempo não for informado, o tempo limite máximo que foi especificado na criação do serviço, será usado. Ao expirar este tempo, a sessão é automaticamente removida. Lembrando que o propósito de acesso através do _[Bastion](https://docs.oracle.com/pt-br/iaas/Content/Bastion/Concepts/bastionoverview.htm)_, é para execução de tarefas gerenciais e que não exigem conexões persistentes de longa duração.
+
+>_**__NOTA:__** É possível ter até 20 sessões ativas por [Bastion](https://docs.oracle.com/pt-br/iaas/Content/Bastion/Concepts/bastionoverview.htm)_.
+
+
+
+
+https://www.oracle.com/security/cloud-security/bastion/faq/
