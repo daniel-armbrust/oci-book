@@ -352,7 +352,7 @@ darmbrust@hoodwink:~$ oci bastion session get \
 ssh -i <privateKey> -o ProxyCommand="ssh -i <privateKey> -W %h:%p -p 22 ocid1.bastionsession.oc1.sa-saopaulo-1.amaaaaaa6noke4qar76rq6xg4llxhfssk2zfqmb6f6l4nr6l2uwrqpwb6e6a@host.bastion.sa-saopaulo-1.oci.oraclecloud.com" -p 22 opc@10.0.10.240
 ```
 
-Perceba que o comando SSH possui _duas posições_ nomeados como _**<privateKey>**_ que devemos preencher com o caminho da nossa chave privada, criada anteriormente. Ao ajustarmos isto, é possível realizar a conexão:
+Perceba que o comando SSH possui _duas posições_ nomeados como _**\<privateKey\>**_ que devemos preencher com o caminho da nossa chave privada, criada anteriormente. Ao ajustarmos isto, é possível realizar a conexão:
 
 ```
 darmbrust@hoodwink:~$ ssh -i ./sessao-temp -o \
@@ -368,6 +368,6 @@ wordpress
 
 Depois de confirmar o prompt do SSH, estamos dentro!
 
->_**__NOTA:__** São dois lugares que devemos informar a chave privada através da opção -i do comando ssh. Perceba que a segunda opção, está dentro da variável ProxyCommand. Caso a chave não seja especificada nos dois lugares, a conexão não irá funcionar._ 
+>_**__NOTA:__** São dois lugares que devemos informar a chave privada através da opção -i do comando ssh. Perceba que a segunda opção, está dentro da variável ProxyCommand. Caso a chave não seja especificada nos dois lugares, a conexão com a instância não irá funcionar._ 
 
 https://www.oracle.com/security/cloud-security/bastion/faq/
