@@ -366,8 +366,12 @@ Warning: Permanently added '10.0.10.240' (ECDSA) to the list of known hosts.
 wordpress
 ```
 
-Depois de confirmar o prompt do SSH, estamos dentro!
+Depois da confirmação pelo prompt do SSH, estamos dentro!
 
 >_**__NOTA:__** São dois lugares que devemos informar a chave privada através da opção -i do comando ssh. Perceba que a segunda opção, está dentro da variável ProxyCommand. Caso a chave não seja especificada nos dois lugares, a conexão com a instância não irá funcionar._ 
 
-https://www.oracle.com/security/cloud-security/bastion/faq/
+### __Conclusão__
+
+Aqui concluímos este capítulo que apresenta o serviço _[Bastion](https://docs.oracle.com/pt-br/iaas/Content/Bastion/Concepts/bastionoverview.htm)_. Por hora, não entraremos nos detalhes para criar uma sessão de encaminhamento de porta. Deixaremos isto para um momento mais oportuno.
+
+Deixo aqui também, o link do _[FAQ](https://www.oracle.com/security/cloud-security/bastion/faq/)_ do serviço que pode ajudar em outras informações, caso precise.
