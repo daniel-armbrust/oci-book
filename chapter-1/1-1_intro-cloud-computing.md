@@ -49,6 +49,25 @@ Um provedor de Computação em Nuvem, deve possuir algumas características que 
     - É a habilidade que um provedor de serviços cloud tem em relação ao acompanhamento da utilização dos recursos de TI pelos seus consumidores.
     - O provedor de serviços em cloud automaticamente controla, monitora e otimiza o uso dos recursos pelos clientes. Isto também é reportado, provendo transparência tanto para o provedor de serviços quanto para os clientes que utilizam os serviços.
 
+### Modelo de responsabilidade compartilhada
+
+Ao utilizar a Computação em Nuvem para hospedar os seus recursos, existe um limite de atuação entre o fornecedor de cloud e você cliente (suas obrigações). Isto independe de qualquer provedor de nuvem. Todo fornecedor impõe limites como este. Contratar qualquer serviço na cloud não significa dispor de backup e proteção de dados "inclusos" no pacote. O cliente deve fazer a sua parte pela proteção e disponibilidade.
+
+A Oracle possui responsabilidades que vão até o hardware físico, a virtualização, cabeamento, energia elétrica, até a segurança física das instalações em que o serviço opera. O limite do cliente começa a partir do momendo em que ele provisiona um sistema operacional, por exemplo. Quero dizer que é de responsabilidade do cliente a gestão do sistema operacional, atualizações, patches de segurança, firewall e as cópias de segurança (backups) dos dados. O OCI fornece todo um conjunto de ferramentas que auxilia a reduzir tais encargos operacionais, APIs e aplicativos para facilitar as tarefas do cliente. 
+
+Os clientes devem examinar cuidadosamente os serviços que escolhem, pois suas respectivas responsabilidades variam dependendo se o serviço está hospedado em modelo SaaS (software como serviço), PaaS (plataforma como serviço), IaaS (infraestrutura como serviço) ou em um datacenter local.
+
+Independentemente, algumas responsabilidades sempre são retidas por você:
+
+- Seus dados.
+- Pontos de extremidade que fazem acesso ao OCI.
+- Segurança da sua conta.
+- Gerenciamento de acesso.
+
+De nada adianta, termos backup gerenciado, serviços que ajudam a rastrear vulnerabilidades, se você permite tráfego irrestrito e de qualquer lugar, as suas instâncias de computação, e ainda por cima, disponibiliza por engano a chave SSH em um repositório público no GitHub.  
+
+Vou expor as melhores práticas aqui. Porém, segui-las e manter-se atualizado, é de sua responsabilidade.
+
 ### __Lift-and-Shift__
 
 Lift-and-Shift é o termo que representa a migração de um aplicativo(s) do seu ambiente existente (on-premises) para um novo ambiente baseado em nuvem, sem alterar a lógica ou o modo como o aplicativo funciona. A maioria dos sistemas tem algumas dependências com outros sistemas internos ou externos, e qualquer mudança, sem mencionar mudança em código-fonte, requer mais testes, o que pode levar tempo e recursos humanos. O maior obstáculo que você irá enfrentar é a relutância das pessoas diante das mudanças.
