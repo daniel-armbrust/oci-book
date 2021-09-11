@@ -297,12 +297,11 @@ darmbrust@hoodwink:~$ oci network vnic get \
 
 Pronto! Como pode ver, o endereço IP _"10.0.10.240"_ é exibido pela propriedade _"private-ip"_ da _[VNIC](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingVNICs.htm)_.
 
-
 Juntando as informações, iremos criar a sessão pelo _[Bastion](https://docs.oracle.com/pt-br/iaas/Content/Bastion/Concepts/bastionoverview.htm)_ através do comando abaixo:
 
 ```
 darmbrust@hoodwink:~$ oci bastion session create-managed-ssh \
-> --bastion-id "ocid1.bastion.oc1.sa-saopaulo-1.amaaaaaa6noke4qa6bh45omx4mgtcrvs5tan5zoepknyj5bz37h3gs6whxbq" \
+> --bastion-id "ocid1.bastion.oc1.sa-saopaulo-1.amaaaaaa6noke4qavfjoxi4kunt3sdo7ps46lbkfq3loxgqqomhmizoxhf4q" \
 > --display-name "wordpress_session" \
 > --session-ttl "7200" \
 > --ssh-public-key-file "./sessao-temp.pub" \
@@ -369,6 +368,81 @@ wordpress
 Depois da confirmação pelo prompt do SSH, estamos dentro!
 
 >_**__NOTA:__** São dois lugares que devemos informar a chave privada através da opção -i do comando ssh. Perceba que a segunda opção, está dentro da variável ProxyCommand. Caso a chave não seja especificada nos dois lugares, a conexão com a instância não irá funcionar._ 
+
+#### Excluíndo uma Sessão ativa
+
+Você pode a qualquer momento, excluír uma sessão ativa _(ACTIVE)_ ou que esteja em criação _(CREATING)_ do seu _[Bastion](https://docs.oracle.com/pt-br/iaas/Content/Bastion/Concepts/bastionoverview.htm)_. Isto pode ser útil, para interromper um acesso qualquer que não seja mais necessário.
+
+Vamos listar as sessões ativas _(ACTIVE)_ e demonstrar uma exclusão na prática:
+
+```
+darmbrust@hoodwink:~$ oci bastion session list \
+> --bastion-id  "ocid1.bastion.oc1.sa-saopaulo-1.amaaaaaa6noke4qavfjoxi4kunt3sdo7ps46lbkfq3loxgqqomhmizoxhf4q" \
+> --all \
+> --session-lifecycle-state "ACTIVE"
+{
+  "data": [
+    {
+      "bastion-id": "ocid1.bastion.oc1.sa-saopaulo-1.amaaaaaa6noke4qavfjoxi4kunt3sdo7ps46lbkfq3loxgqqomhmizoxhf4q",
+      "bastion-name": "BastionSubnprvAppVcnPrd",
+      "display-name": "wordpress_session",
+      "id": "ocid1.bastionsession.oc1.sa-saopaulo-1.amaaaaaa6noke4qar76rq6xg4llxhfssk2zfqmb6f6l4nr6l2uwrqpwb6e6a",
+      "lifecycle-details": null,
+      "lifecycle-state": "ACTIVE",
+      "session-ttl-in-seconds": 7200,
+      "target-resource-details": {
+        "session-type": "MANAGED_SSH",
+        "target-resource-display-name": "vm-wordpress_subnprv-app_vcn-prd",
+        "target-resource-id": "ocid1.instance.oc1.sa-saopaulo-1.antxeljr6noke4qcf4yilvaofwpt5aiavnsx7cfev3fhp2bpc3xfcxo5k6zq",
+        "target-resource-operating-system-user-name": "opc",
+        "target-resource-port": 22,
+        "target-resource-private-ip-address": "10.0.10.240"
+      },
+      "time-created": "2021-09-11T13:30:52.875000+00:00",
+      "time-updated": "2021-09-11T13:31:08.301000+00:00"
+    }
+  ]
+}
+```
+
+Para excluírmos esta sessão, usamos o comando abaixo:
+
+``` 
+darmbrust@hoodwink:~$ oci bastion session delete \
+> --session-id "ocid1.bastionsession.oc1.sa-saopaulo-1.amaaaaaa6noke4qar76rq6xg4llxhfssk2zfqmb6f6l4nr6l2uwrqpwb6e6a" \
+> --wait-for-state "SUCCEEDED"
+Are you sure you want to delete this resource? [y/N]: y
+Action completed. Waiting until the work request has entered state: ('SUCCEEDED',)
+{
+  "data": {
+    "compartment-id": "ocid1.compartment.oc1..aaaaaaaamcff6exkhvp4aq3ubxib2wf74v7cx22b3yj56jnfkazoissdzefq",
+    "id": "ocid1.bastionworkrequest.oc1.sa-saopaulo-1.amaaaaaa6noke4qamhaia6wkzobjik5sjnzobb5g3e4obxovujah7vbzptsq",
+    "operation-type": "DELETE_SESSION",
+    "percent-complete": 100.0,
+    "resources": [
+      {
+        "action-type": "DELETED",
+        "entity-type": "SessionResource",
+        "entity-uri": "/sessions/ocid1.bastionsession.oc1.sa-saopaulo-1.amaaaaaa6noke4qar76rq6xg4llxhfssk2zfqmb6f6l4nr6l2uwrqpwb6e6a",
+        "identifier": "ocid1.bastionsession.oc1.sa-saopaulo-1.amaaaaaa6noke4qar76rq6xg4llxhfssk2zfqmb6f6l4nr6l2uwrqpwb6e6a"
+      }
+    ],
+    "status": "SUCCEEDED",
+    "time-accepted": "2021-09-11T13:23:21.513000+00:00",
+    "time-finished": "2021-09-11T13:24:06.576000+00:00",
+    "time-started": "2021-09-11T13:23:29.128000+00:00"
+  }
+}
+```
+
+Após a confirmação da exclusão, se houver alguma conexão SSH presente na instância, a mesma será desconectada:
+
+```
+Last login: Sat Sep 11 12:06:17 2021 from 10.0.10.112
+[opc@wordpress ~]$ Connection to host.bastion.sa-saopaulo-1.oci.oraclecloud.com closed by remote host.
+Connection to 10.0.10.240 closed by remote host.
+Connection to 10.0.10.240 closed.
+```
 
 ### __Conclusão__
 
