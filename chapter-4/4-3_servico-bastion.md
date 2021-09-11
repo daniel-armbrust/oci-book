@@ -342,6 +342,7 @@ O parâmetro _"--ssh-public-key-file"_ especifica o caminho da chave pública qu
 
 A duração da sessão é especificada pelo parâmetro _"--session-ttl"_. Neste caso, estamos criado uma sessão de duração máxima de 2 horas (7200 segundos). Após este tempo, a sessão será automaticamente excluída. Este parâmetro não é obrigatório. Caso ele não seja informado, o tempo limite máximo da sessão vem do parâmetro _"max-session-ttl-in-seconds"_ especificado na criação do _[Bastion](https://docs.oracle.com/pt-br/iaas/Content/Bastion/Concepts/bastionoverview.htm)_.
 
+Sessão criada, vamos obter o comando SSH que irá possibilitar nossa conectividade com a instância.
 
 ```
 darmbrust@hoodwink:~$ oci bastion session get \
@@ -350,6 +351,8 @@ darmbrust@hoodwink:~$ oci bastion session get \
 > --raw-output
 ssh -i <privateKey> -o ProxyCommand="ssh -i <privateKey> -W %h:%p -p 22 ocid1.bastionsession.oc1.sa-saopaulo-1.amaaaaaa6noke4qar76rq6xg4llxhfssk2zfqmb6f6l4nr6l2uwrqpwb6e6a@host.bastion.sa-saopaulo-1.oci.oraclecloud.com" -p 22 opc@10.0.10.240
 ```
+
+Perceba que o comando SSH possui _duas posições_ nomeados como _**<privateKey>**_ que devemos preencher com o caminho da nossa chave privada, criada anteriormente. Ao ajustarmos isto, é possível realizar a conexão:
 
 ```
 darmbrust@hoodwink:~$ ssh -i ./sessao-temp -o \
@@ -362,5 +365,9 @@ Warning: Permanently added '10.0.10.240' (ECDSA) to the list of known hosts.
 [opc@wordpress ~]$ hostname
 wordpress
 ```
+
+Depois de confirmar o prompt do SSH, estamos dentro!
+
+>_**__NOTA:__** São dois lugares que devemos informar a chave privada através da opção -i do comando ssh. Perceba que a segunda opção, está dentro da variável ProxyCommand. Caso a chave não seja especificada nos dois lugares, a conexão não irá funcionar._ 
 
 https://www.oracle.com/security/cloud-security/bastion/faq/
