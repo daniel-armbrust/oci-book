@@ -1,8 +1,9 @@
-# OCI Book
+# Conhecendo o OCI (Oracle Cloud Infraestructure)
 
-Esse livro apresenta o OCI (Oracle Cloud Infraestructure).
+Esse livro apresenta o **OCI (Oracle Cloud Infraestructure)** e por quê você deve considerá-lo como mais uma opção de nuvem disponível.
 
 > Autor: **[Daniel Armbrust](https://github.com/daniel-armbrust)**
+> 
 
 ## Sumário
 

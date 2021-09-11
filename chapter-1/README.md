@@ -1,4 +1,4 @@
-# OCI Book
+# Conhecendo o OCI (Oracle Cloud Infraestructure)
 
 - [Capítulo 1: Conceitos e introdução a Computação em Nuvem no OCI](https://github.com/daniel-armbrust/oci-book/blob/main/chapter-1/README.md) <br>
     [1.1 - Introdução a Computação em Nuvem](https://github.com/daniel-armbrust/oci-book/blob/main/chapter-1/1-1_intro-cloud-computing.md)<br>

@@ -1,4 +1,4 @@
-# OCI Book
+# Conhecendo o OCI (Oracle Cloud Infraestructure)
 
 - Capítulo 2: Automação, Arquitetura e DevOps
     2.1 - O surgimento do DevOps <br>
