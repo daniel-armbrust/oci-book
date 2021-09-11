@@ -448,4 +448,4 @@ Connection to 10.0.10.240 closed.
 
 Aqui concluímos este capítulo que apresenta o serviço _[Bastion](https://docs.oracle.com/pt-br/iaas/Content/Bastion/Concepts/bastionoverview.htm)_. Por hora, não entraremos nos detalhes para criar uma sessão de encaminhamento de porta. Deixaremos isto para um momento mais oportuno.
 
-Deixo aqui também, o link do _[FAQ](https://www.oracle.com/security/cloud-security/bastion/faq/)_ do serviço que pode ajudar em outras informações, caso precise.
+Deixo aqui também o link do _[FAQ](https://www.oracle.com/security/cloud-security/bastion/faq/)_ do serviço que pode ajudar em outras informações, caso precise.
