@@ -224,6 +224,10 @@ Toda sessão, independente do seu tipo, deve ter um tempo limite configurado no 
 
 #### Criando uma Sessão SSH gerenciada
 
+A partir do _[Serviço Bastion](https://docs.oracle.com/pt-br/iaas/Content/Bastion/Concepts/bastionoverview.htm)_ criado, vamos agora criar uma _[sessão SSH](https://docs.oracle.com/pt-br/iaas/Content/Bastion/Concepts/bastionoverview.htm#session_types)_ que irá permitir acesso a instância da aplicação _[Wordpress](https://pt.wikipedia.org/wiki/WordPress)_.
+
+Antes de criarmos a sessão, é necessário criarmos uma _[chave SSH](https://docs.oracle.com/pt-br/iaas/Content/Compute/Tasks/managingkeypairs.htm)_ para autenticação. É recomendado criar uma chave diferente para este acesso gerencial e pontual. Assim que a _[sessão SSH](https://docs.oracle.com/pt-br/iaas/Content/Bastion/Concepts/bastionoverview.htm#session_types)_ expirar, esta chave será removida.
+
 ```
 darmbrust@hoodwink:~$ ssh-keygen -t rsa -N "" -b 2048 -f sessao-temp
 Generating public/private rsa key pair.
@@ -245,6 +249,8 @@ The key's randomart image is:
 +----[SHA256]-----+
 ```
 
+Agora, vou obter o endereço IP privado que a instância _[Wordpress](https://pt.wikipedia.org/wiki/WordPress)_ consumiu. Para isto, primeiramente tenho que obter a lista de _[VNICs](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingVNICs.htm)_ desta instância:
+
 ```
 darmbrust@hoodwink:~$ oci compute vnic-attachment list \
 > --compartment-id "ocid1.compartment.oc1..aaaaaaaamcff6exkhvp4aq3ubxib2wf74v7cx22b3yj56jnfkazoissdzefq" \
@@ -254,6 +260,8 @@ darmbrust@hoodwink:~$ oci compute vnic-attachment list \
   "ocid1.vnic.oc1.sa-saopaulo-1.abtxeljrxckhpgqp27r55nl4nbhd3ruawu33zenc2mwhavi3h2rqtzvg2ica"
 ]
 ```
+
+Neste caso, a instância da aplicação _[Wordpress](https://pt.wikipedia.org/wiki/WordPress)_ possui somente uma _[VNIC](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingVNICs.htm)_. Com o comando abaixo, irei exibir os detalhes desta _[VNIC](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingVNICs.htm)_, que incluem o endereço IP privado atribuído a ela:
 
 ```
 darmbrust@hoodwink:~$ oci network vnic get \
@@ -286,6 +294,11 @@ darmbrust@hoodwink:~$ oci network vnic get \
   "etag": "c6159ff4"
 }
 ```
+
+Pronto! Como pode ver, o endereço IP _"10.0.10.240"_ é exibido pela propriedade _"private-ip"_ da _[VNIC](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingVNICs.htm)_.
+
+
+Juntando as informações, iremos criar a sessão pelo _[Bastion](https://docs.oracle.com/pt-br/iaas/Content/Bastion/Concepts/bastionoverview.htm)_ através do comando abaixo:
 
 ```
 darmbrust@hoodwink:~$ oci bastion session create-managed-ssh \
@@ -320,6 +333,15 @@ Action completed. Waiting until the work request has entered state: ('SUCCEEDED'
   }
 }
 ```
+
+Na verdade, especificar uma sessão SSH através do Bastion usando um endereço IP privado como destino _(--target-private-ip)_, não é algo obrigatório. Você pode criar uma sessão SSH que aponta somente para o OCID da instância _(--target-resource-id)_ que tudo irá funcionar. Porém, eu entrei neste detalhe, pois você pode enfrentar situações no qual uma instância pode ter mais de uma _[VNIC](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingVNICs.htm)_, e você precisa de acesso somente em um dos seus endereços IP. 
+
+Alguns parâmetros que destaco na criação da sessão. Começando pelo parâmetro _"-target-os-username"_ que deve especificar um usuário existente no sistema operacional de destino. Se este não existir, a sessão não será criada. Sabemos que as _[imagens de plataforma](https://docs.oracle.com/pt-br/iaas/Content/Compute/References/images.htm#OracleProvided_Images)_ possuem o usuário **_opc_** criado por padrão.
+
+O parâmetro _"--ssh-public-key-file"_ especifica o caminho da chave pública que criamos. Esta chave será "injetada" nesta sessão para autenticação.
+
+A duração da sessão é especificada pelo parâmetro _"--session-ttl"_. Neste caso, estamos criado uma sessão de duração máxima de 2 horas (7200 segundos). Após este tempo, a sessão será automaticamente excluída. Este parâmetro não é obrigatório. Caso ele não seja informado, o tempo limite máximo da sessão vem do parâmetro _"max-session-ttl-in-seconds"_ especificado na criação do _[Bastion](https://docs.oracle.com/pt-br/iaas/Content/Bastion/Concepts/bastionoverview.htm)_.
+
 
 ```
 darmbrust@hoodwink:~$ oci bastion session get \
