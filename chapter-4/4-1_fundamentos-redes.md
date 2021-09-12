@@ -15,7 +15,7 @@ Aprensento abaixo, alguns dos componentes existentes do serviço de _[Networking
         - 10.0.0.0/8
         - 172.16.0.0/12
         - 192.168.0.0/16
-    - Alguns blocos de endereços são reservados para uso do _[OCI](https://www.oracle.com/cloud/)_ e não podem ser usados.
+    - Alguns blocos de endereços são reservados e não podem ser usados:
         - 169.254.0.0/16 (usados para conexões iSCSI dentro do _[OCI](https://www.oracle.com/cloud/)_)
         - 224.0.0.0 a 239.255.255.255 (Classe D - multicast)
         - 240.0.0.0 a 255.255.255.255 (Classe E - reservados para uso futuro)        
