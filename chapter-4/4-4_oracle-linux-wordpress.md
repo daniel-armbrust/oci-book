@@ -19,7 +19,7 @@ Este não é um capítulo que documenta o _[Oracle Linux](https://www.oracle.com
 - [Oracle Linux 7](https://docs.oracle.com/en/operating-systems/oracle-linux/7/)
 - [Oracle Linux 6](https://docs.oracle.com/en/operating-systems/oracle-linux/6/)
 
-Porém, vou destacar pontos importantes. Começando por alguma de suas vantagens, ao se utilizar o _[Oracle Linux](https://www.oracle.com/linux/)_ no _[OCI](https://www.oracle.com/cloud/)_:
+Porém, vou destacar pontos importantes. Começando algumas vantagens de utilização no _[OCI](https://www.oracle.com/cloud/)_:
 
 - Contas criadas no _[OCI](https://www.oracle.com/cloud/)_ já incluem o _[Oracle Linux Premier Support](https://www.oracle.com/linux/support.html)_ sem custo adicional.
 - Gerenciamento de pacotes e patches automatizados através do _[Serviço OS Management](https://docs.oracle.com/pt-br/iaas/os-management/osms/index.htm)_, que mantêm seus sistemas seguros e confiáveis. 
