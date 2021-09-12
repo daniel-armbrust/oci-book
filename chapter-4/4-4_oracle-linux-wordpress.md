@@ -19,9 +19,23 @@ Este não é um capítulo que documenta o _[Oracle Linux](https://www.oracle.com
 - [Oracle Linux 7](https://docs.oracle.com/en/operating-systems/oracle-linux/7/)
 - [Oracle Linux 6](https://docs.oracle.com/en/operating-systems/oracle-linux/6/)
 
+Algumas vantagens de se utilizar o _[Oracle Linux](https://www.oracle.com/linux/)_ no _[OCI](https://www.oracle.com/cloud/)_ incluem:
+- Contas no _[OCI](https://www.oracle.com/cloud/)_ já incluem o _[Oracle Linux Premier Support](https://www.oracle.com/linux/support.html)_ sem custo adicional.
+- Gerenciamento de pacotes e patches automatizados através do _[Serviço OS Management](https://docs.oracle.com/pt-br/iaas/os-management/osms/index.htm)_, que mantêm seus sistemas seguros e confiáveis. 
+- Acesso a atualizações, últimas correções de bugs, erratas de segurança, etc.
+- Ferramenta _[Ksplice](https://docs.oracle.com/pt-br/iaas/Content/Compute/Tasks/installingconfiguringksplice.htm)_ pré-instalada em imagens do _[OCI](https://www.oracle.com/cloud/)_, no qual possibilita aplicar atualizações de segurança importantes e críticas do kernel sem a necessidade de reboot (zero-downtime).
+
+
+>_**__NOTA:__** O documento que descreve essas vantagens e outras em mais detalhes, pode ser consultado neste [link aqui](https://www.oracle.com/a/ocom/docs/linux-for-cloud-infrastructure-4024517.pdf)._
+
+
+
 Regras Essenciais do Firewall
 
 Resiliência do Sistema
 
 Serviço NTP
+
+Atualização YUM (data da compilação da imagem no OCI)
+
 
