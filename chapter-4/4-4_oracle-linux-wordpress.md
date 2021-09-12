@@ -25,9 +25,12 @@ Porém, vou destacar pontos importantes. Começando por suas vantagens de utiliz
 - Gerenciamento de pacotes e patches automatizados através do _[Serviço OS Management](https://docs.oracle.com/pt-br/iaas/os-management/osms/index.htm)_, que mantêm seus sistemas seguros e confiáveis. 
 - Acesso a atualizações, últimas correções de bugs, erratas de segurança, etc.
 - Ferramenta _[Ksplice](https://docs.oracle.com/pt-br/iaas/Content/Compute/Tasks/installingconfiguringksplice.htm)_ pré-instalada em imagens do _[OCI](https://www.oracle.com/cloud/)_, no qual possibilita aplicar atualizações de segurança importantes e críticas do kernel sem a necessidade de reboot (zero-downtime).
+- 100% binário compatível com Red Hat Enterprise Linux.
 
 >_**__NOTA:__** O documento que descreve todas essas vantagens e outras em mais detalhes, pode ser consultado neste [link aqui](https://www.oracle.com/a/ocom/docs/linux-for-cloud-infrastructure-4024517.pdf)._
 
+
+![alt_text](./images/ch4-4_oci-firewalls.jpg "OCI Firewalls")
 
 
 Regras Essenciais do Firewall
