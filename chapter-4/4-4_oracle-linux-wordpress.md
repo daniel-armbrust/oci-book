@@ -85,3 +85,6 @@ darmbrust@hoodwink:~$ oci network vnic get \
 
 Isto quer dizer que o _[OCI](https://www.oracle.com/cloud/)_ sempre faz um _[NAT 1:1](https://en.wikipedia.org/wiki/Network_address_translation)_ do IP público da _[VNIC](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingVNICs.htm)_ para o IP privado da _[VNIC](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingVNICs.htm)_, que por fim atinge a instância. O contrário (saída do tráfego de rede) segue o mesmo processo.
 
+No meio do caminho, entre _[VNIC](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingVNICs.htm)_ e a interface de rede do _[Oracle Linux](https://www.oracle.com/linux/)_, existe o primeiro firewall. O _[firewalld](https://firewalld.org/)_.
+
+>_**__NOTA:__** Para instâncias com o sistema operacional [Ubuntu](https://pt.wikipedia.org/wiki/Ubuntu), você encontra o [UFW (Uncomplicated Firewall)](https://help.ubuntu.com/community/UFW)._
