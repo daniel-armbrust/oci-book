@@ -98,7 +98,7 @@ Somente as portas para os servi√ßos SSH e cliente DHCP vem _"abertas"_ por padr√
 dhcpv6-client ssh
 ```
 
-Por exemplo, para "abrirmos" as portas HTTP (80/TCP) e HTTPS (443/TCP) de forma permanente, executamos os comandos abaixo:
+Por exemplo, para _"abrirmos"_ as portas HTTP (80/TCP) e HTTPS (443/TCP) de forma permanente, executamos os comandos abaixo:
 
 ```
 [opc@instance-20210912-1218 ~]$ sudo firewall-cmd --add-service=http --permanent
