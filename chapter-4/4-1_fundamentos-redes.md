@@ -15,6 +15,7 @@ Aprensento abaixo, alguns dos componentes existentes do serviço de _[Networking
         - 10.0.0.0/8
         - 172.16.0.0/12
         - 192.168.0.0/16
+    - Alguns blocos de endereços são reservados para uso do _[OCI](https://www.oracle.com/cloud/)_ e não podem ser usados.
 
 2. **Subredes**
     - É a divisão de uma VCN em partes menores (subdivisões).
