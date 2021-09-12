@@ -115,3 +115,4 @@ Esta ação pode ser confirmada com o comando abaixo:
 [opc@instance-20210912-1218 ~]$ sudo firewall-cmd --list-services
 dhcpv6-client http https ssh
 ```
+
