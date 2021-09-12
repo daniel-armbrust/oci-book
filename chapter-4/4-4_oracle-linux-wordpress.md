@@ -89,7 +89,7 @@ No meio do caminho, entre _[VNIC](https://docs.oracle.com/pt-br/iaas/Content/Net
 
 Este vem habilitado por padrão nas _[imagens de plataforma](https://docs.oracle.com/pt-br/iaas/Content/Compute/References/images.htm#OracleProvided_Images)_ equipadas com _[Oracle Linux](https://www.oracle.com/linux/)_.
 
->_**__NOTA:__** Para instâncias com o sistema operacional [Ubuntu](https://pt.wikipedia.org/wiki/Ubuntu), você encontra o [UFW (Uncomplicated Firewall)](https://help.ubuntu.com/community/UFW)._
+>_**__NOTA:__** Para instâncias com o sistema operacional [Ubuntu](https://pt.wikipedia.org/wiki/Ubuntu) você encontra o [UFW (Uncomplicated Firewall)](https://help.ubuntu.com/community/UFW)._
 
 Somente as portas para os serviços SSH e cliente DHCP vem _"abertas"_ por padrão:
 
