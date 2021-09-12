@@ -127,7 +127,7 @@ Removed symlink /etc/systemd/system/dbus-org.fedoraproject.FirewallD1.service.
 [opc@instance-20210912-1218 ~]$
 ```
 
-Estes comandos desabilitam de forma persistente as regras de firewall impostas pelo _[firewalld](https://firewalld.org/)_, inclusive entre reinicializações da instância.
+Estes comandos desabilitam de forma persistente as regras de firewall impostas pelo _[firewalld](https://firewalld.org/)_, inclusive entre as reinicializações da instância.
 
 ```
 [opc@instance-20210912-1218 ~]$ sudo iptables -L -n -v
