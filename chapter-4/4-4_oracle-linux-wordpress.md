@@ -49,7 +49,7 @@ Aqui entra um ponto importante. O mesmo endereço IP privado que você vê nas p
        valid_lft forever preferred_lft forever
 ```
 
-Porém, o IP público só pode ser visualizado pelas propriedades da _[VNIC](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingVNICs.htm)_. Observe _"private-ip"_, _"public-ip"_ e seus respectivos valores que correspondem aos IPs do comando abaixo:
+Porém, o IP público só pode ser visualizado pelas propriedades da _[VNIC](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingVNICs.htm)_. Observe _"private-ip"_, _"public-ip"_ e seus respectivos valores que correspondem aos seus IPs com o comando abaixo:
 
 ```
 darmbrust@hoodwink:~$ oci network vnic get \
@@ -57,7 +57,7 @@ darmbrust@hoodwink:~$ oci network vnic get \
 {
   "data": {
     "availability-domain": "ynrK:SA-SAOPAULO-1-AD-1",
-    "compartment-id": "ocid1.compartment.oc1..aaaaaaaaie4exnvj2ktkjlliahl2bxmdnteu2xmn27oc5cy5mdcmocl4vd7q",
+    "compartment-id": "ocid1.compartment.oc1..aaaaaaaauvqvbbx3oridcm5d2ztxkftwr362u2vl5zdsayzbehzwbjs56soq",
     "defined-tags": {
       "Oracle-Tags": {
         "CreatedBy": "oracleidentitycloudservice/daniel.armbrust@algumdominio.com",
