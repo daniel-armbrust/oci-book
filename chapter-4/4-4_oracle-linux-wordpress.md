@@ -37,7 +37,7 @@ Veja abaixo a representação desta instância:
 
 Sabemos que toda instância possui uma ou mais _[VNICs](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingVNICs.htm)_. Cada _[VNIC](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingVNICs.htm)_ reside em uma subrede e é ela quem permite entrada e saída do tráfego da rede. Toda _[VNIC](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingVNICs.htm)_ possui um endereço IPv4 privado principal e um endereço IPv4 público opcional para cada IP privado.
 
-Aqui entra um ponto importante. O mesmo endereço IP privado que você vê nas propriedades da _[VNIC](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingVNICs.htm)_, você vê na interface lógica da instância (ens3). Porém, o IP público só pode ser visualizado pelas propriedades da VNIC
+Aqui entra um ponto importante. O mesmo endereço IP privado que você vê nas propriedades da _[VNIC](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingVNICs.htm)_, você vê na interface lógica da instância (ens3):
 
 ```
 [opc@instance-20210912-1218 ~]$ ip addr sh ens3
@@ -47,5 +47,39 @@ Aqui entra um ponto importante. O mesmo endereço IP privado que você vê nas p
        valid_lft 86179sec preferred_lft 86179sec
     inet6 fe80::17ff:fe01:e0b1/64 scope link
        valid_lft forever preferred_lft forever
+```
+
+Porém, o IP público só pode ser visualizado pelas propriedades da _[VNIC](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingVNICs.htm)_:
+
+```
+darmbrust@hoodwink:~$ oci network vnic get \
+> --vnic-id "ocid1.vnic.oc1.sa-saopaulo-1.abtxeljrdbajg6ruoyrmbp53uxf26z3sp32655fj6tmu3snn5gqufybartwa"
+{
+  "data": {
+    "availability-domain": "ynrK:SA-SAOPAULO-1-AD-1",
+    "compartment-id": "ocid1.compartment.oc1..aaaaaaaaie4exnvj2ktkjlliahl2bxmdnteu2xmn27oc5cy5mdcmocl4vd7q",
+    "defined-tags": {
+      "Oracle-Tags": {
+        "CreatedBy": "oracleidentitycloudservice/daniel.armbrust@algumdominio.com",
+        "CreatedOn": "2021-09-12T15:19:48.000Z"
+      }
+    },
+    "display-name": "instance-20210912-1218",
+    "freeform-tags": {},
+    "hostname-label": "instance-20210912-1218",
+    "id": "ocid1.vnic.oc1.sa-saopaulo-1.abtxeljrdbajg6ruoyrmbp53uxf26z3sp32655fj6tmu3snn5gqufybartwa",
+    "is-primary": true,
+    "lifecycle-state": "AVAILABLE",
+    "mac-address": "02:00:17:01:E0:B1",
+    "nsg-ids": [],
+    "private-ip": "10.0.5.73",
+    "public-ip": "168.138.146.213",
+    "skip-source-dest-check": false,
+    "subnet-id": "ocid1.subnet.oc1.sa-saopaulo-1.aaaaaaaa25wf2dt55g5bobvbf6b6dx2edfuoajmazr3ikkgmedrpangmnlmq",
+    "time-created": "2021-09-12T15:19:55.109000+00:00",
+    "vlan-id": null
+  },
+  "etag": "7a55f0e0"
+}
 ```
 
