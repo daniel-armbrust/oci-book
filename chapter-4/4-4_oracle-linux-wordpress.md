@@ -116,3 +116,13 @@ Esta ação pode ser confirmada com o comando abaixo:
 dhcpv6-client http https ssh
 ```
 
+Caso deseje desabilitar por completo o _[firewalld](https://firewalld.org/)_ e administrar o _"filtro de pacotes"_ somente por recursos do _[OCI](https://www.oracle.com/cloud/)_, execute os comandos abaixo:
+
+```
+[opc@instance-20210912-1218 ~]$ sudo systemctl disable firewalld
+Removed symlink /etc/systemd/system/multi-user.target.wants/firewalld.service.
+Removed symlink /etc/systemd/system/dbus-org.fedoraproject.FirewallD1.service.
+
+[opc@instance-20210912-1218 ~]$ sudo systemctl stop firewalld
+[opc@instance-20210912-1218 ~]$
+```
