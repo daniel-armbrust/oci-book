@@ -35,13 +35,17 @@ Veja abaixo a representação desta instância:
 
 ![alt_text](./images/ch4-4_oci-firewalls.jpg "OCI Firewalls")
 
+Sabemos que toda instância possui uma ou mais _[VNICs](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingVNICs.htm)_. Cada _[VNIC](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingVNICs.htm)_ reside em uma subrede e é ela quem permite entrada e saída do tráfego da rede. Toda _[VNIC](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingVNICs.htm)_ possui um endereço IPv4 privado principal e um endereço IPv4 público opcional para cada IP privado.
 
-Regras Essenciais do Firewall
+Aqui entra um ponto importante. O mesmo endereço IP privado que você vê nas propriedades da _[VNIC](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingVNICs.htm)_, você vê na interface lógica da instância (ens3). Porém, o IP público só pode ser visualizado pelas propriedades da VNIC
 
-Resiliência do Sistema
-
-Serviço NTP
-
-Atualização YUM (data da compilação da imagem no OCI)
-
+```
+[opc@wordpress ~]$ ip addr show ens3
+2: ens3: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 9000 qdisc pfifo_fast state UP group default qlen 1000
+    link/ether 02:00:17:02:f4:e7 brd ff:ff:ff:ff:ff:ff
+    inet 10.0.5.8/24 brd 10.0.5.255 scope global dynamic ens3
+       valid_lft 80603sec preferred_lft 80603sec
+    inet6 fe80::17ff:fe02:f4e7/64 scope link
+       valid_lft forever preferred_lft forever
+```
 
