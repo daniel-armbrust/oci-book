@@ -205,4 +205,4 @@ Dentro do programa, destaco dois treinamentos importantes e gratuito para comple
 
 A maioria dos desenhos de topologias e gráficos demonstrados neste livro, tiveram como base os símbolos oficiais que representam os diversos recursos cloud presentes no _[OCI](https://www.oracle.com/cloud/)_. 
 
-Caso você queira compor seus próprios desenhos, visite este _[link](https://docs.oracle.com/pt-br/iaas/Content/General/Reference/graphicsfordiagrams.htm)_ para baixar os símbolos oficiais.
+Caso você queira compor seus próprios desenhos, visite este _[link aqui](https://docs.oracle.com/pt-br/iaas/Content/General/Reference/graphicsfordiagrams.htm)_ para baixar os símbolos oficiais disponíveis em diferentes formatos, para diferentes ferramentas também.
