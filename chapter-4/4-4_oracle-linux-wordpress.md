@@ -29,7 +29,7 @@ Porém, vou destacar pontos importantes. Começando por suas vantagens de utiliz
 
 >_**__NOTA:__** O documento que descreve todas essas vantagens e outras em mais detalhes, pode ser consultado neste [link aqui](https://www.oracle.com/a/ocom/docs/linux-for-cloud-infrastructure-4024517.pdf)._
 
-Vamos seguir agora para o entendimento sobre os **firewalls** que temos até que o tráfego chegue em uma instância de computação. Por um momento, vamos tomar outro exemplo. Imagine que criamos uma nova instância em nossa subrede pública (10.0.5.0/24), também com _[Oracle Linux](https://www.oracle.com/linux/)_. Esta instância, além do seu endereço IP privado 10.0.5.8, atribuímos um IP público 129.159.60.44.
+Vamos seguir agora para o entendimento sobre os **firewalls** que temos até que o tráfego chegue em uma instância de computação. Por um momento, vamos tomar outro exemplo. Imagine que criamos uma nova instância em nossa subrede pública (10.0.5.0/24), também com _[Oracle Linux](https://www.oracle.com/linux/)_. Esta instância, além do seu endereço IP privado 10.0.5.73, atribuímos um IP público 168.138.146.213.
 
 Veja abaixo a representação desta instância:
 
@@ -40,12 +40,12 @@ Sabemos que toda instância possui uma ou mais _[VNICs](https://docs.oracle.com/
 Aqui entra um ponto importante. O mesmo endereço IP privado que você vê nas propriedades da _[VNIC](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingVNICs.htm)_, você vê na interface lógica da instância (ens3). Porém, o IP público só pode ser visualizado pelas propriedades da VNIC
 
 ```
-[opc@wordpress ~]$ ip addr show ens3
+[opc@instance-20210912-1218 ~]$ ip addr sh ens3
 2: ens3: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 9000 qdisc pfifo_fast state UP group default qlen 1000
-    link/ether 02:00:17:02:f4:e7 brd ff:ff:ff:ff:ff:ff
-    inet 10.0.5.8/24 brd 10.0.5.255 scope global dynamic ens3
-       valid_lft 80603sec preferred_lft 80603sec
-    inet6 fe80::17ff:fe02:f4e7/64 scope link
+    link/ether 02:00:17:01:e0:b1 brd ff:ff:ff:ff:ff:ff
+    inet 10.0.5.73/24 brd 10.0.5.255 scope global dynamic ens3
+       valid_lft 86179sec preferred_lft 86179sec
+    inet6 fe80::17ff:fe01:e0b1/64 scope link
        valid_lft forever preferred_lft forever
 ```
 
