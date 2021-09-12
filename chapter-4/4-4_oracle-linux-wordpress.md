@@ -109,7 +109,7 @@ success
 success
 ```
 
-Podemos confirmar com o comando abaixo:
+Esta ação pode ser confirmada com o comando abaixo:
 
 ```
 [opc@instance-20210912-1218 ~]$ sudo firewall-cmd --list-services
