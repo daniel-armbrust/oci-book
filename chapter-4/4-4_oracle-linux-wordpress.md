@@ -83,5 +83,5 @@ darmbrust@hoodwink:~$ oci network vnic get \
 }
 ```
 
-Isto quer dizer que o OCI sempre faz um _[NAT 1:1](https://en.wikipedia.org/wiki/Network_address_translation)_, do IP público da _[VNIC](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingVNICs.htm)_ para o IP privado da _[VNIC](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingVNICs.htm)_, que atinge a instância.
+Isto quer dizer que o _[OCI](https://www.oracle.com/cloud/)_ sempre faz um _[NAT 1:1](https://en.wikipedia.org/wiki/Network_address_translation)_, do IP público da _[VNIC](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingVNICs.htm)_ para o IP privado da _[VNIC](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingVNICs.htm)_, que atinge a instância.
 
