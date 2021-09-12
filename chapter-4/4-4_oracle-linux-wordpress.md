@@ -141,4 +141,4 @@ Chain OUTPUT (policy ACCEPT 0 packets, 0 bytes)
  pkts bytes target     prot opt in     out     source               destination
 ```
 
-
+>_**__NOTA:__** Apesar do [firewalld](https://firewalld.org/) ser mais uma camada extra de segurança, ter muitas camadas podem dificultar o troubleshoot em caso de problemas. O fato é que "vem habilitado por padrão". Remova, se você sabe o que faz e se for realmente necessário. Como aqui é um cenário de exemplo, estamos removendo como forma de demonstração._
