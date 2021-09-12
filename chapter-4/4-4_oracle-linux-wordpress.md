@@ -13,7 +13,7 @@ Embora você tenha _"controle total"_ da sua instância, recomendamos uma varied
 
 ### __Oracle Linux__
 
-Este não é um capítulo que documenta o _[Oracle Linux](https://www.oracle.com/linux/)_. Até por que, existem diversos livros sobre o tema e uma extensa documentação disponível na internet pela própria Oracle. Vou deixar o link de cada versão mais usada hoje em dia. Consulte quando precisar saber de detalhes mais específicos do sistema operacional.
+Este não é um capítulo que documenta o _[Oracle Linux](https://www.oracle.com/linux/)_. Até por que, existem diversos livros sobre o tema e uma extensa documentação disponível na internet pela própria Oracle. Vou deixar o link de cada versão mais usada hoje em dia. Consulte quando precisar saber de detalhes mais específicos sobre a versão do sistema operacional que está usando.
 
 - [Oracle Linux 8](https://docs.oracle.com/en/operating-systems/oracle-linux/8/)
 - [Oracle Linux 7](https://docs.oracle.com/en/operating-systems/oracle-linux/7/)
