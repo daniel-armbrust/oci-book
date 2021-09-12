@@ -29,7 +29,7 @@ Porém, vou destacar pontos importantes. Começando por suas vantagens de utiliz
 
 >_**__NOTA:__** O documento que descreve todas essas vantagens e outras em mais detalhes, pode ser consultado neste [link aqui](https://www.oracle.com/a/ocom/docs/linux-for-cloud-infrastructure-4024517.pdf)._
 
-Vamos seguir agora para o entendimento sobre os **firewalls** que temos até que o tráfego chegue em uma instância de computação. Por um momento, vamos tomar outro exemplo. Imagine que criamos uma nova instância em nossa subrede pública (10.0.5.0/24), também com _[Oracle Linux](https://www.oracle.com/linux/)_. Esta instância, além do seu endereço IP privado 10.0.5.73, atribuímos um IP público 168.138.146.213.
+Vamos seguir agora para o entendimento sobre os **firewalls** que temos até que o tráfego chegue em uma instância de computação. Por um momento, vamos tomar outro exemplo. Imagine que criamos uma nova instância temporária em nossa subrede pública (10.0.5.0/24), também com _[Oracle Linux](https://www.oracle.com/linux/)_. Esta instância, além do seu endereço IP privado 10.0.5.73, atribuímos um IP público 168.138.146.213.
 
 Veja abaixo a representação desta instância:
 
@@ -37,7 +37,7 @@ Veja abaixo a representação desta instância:
 
 Sabemos que toda instância possui uma ou mais _[VNICs](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingVNICs.htm)_. Cada _[VNIC](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingVNICs.htm)_ reside em uma subrede e é ela quem permite entrada e saída do tráfego da rede. Toda _[VNIC](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingVNICs.htm)_ possui um endereço IPv4 privado principal e um endereço IPv4 público opcional para cada IP privado.
 
-Aqui entra um ponto importante. O mesmo endereço IP privado que você vê nas propriedades da _[VNIC](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingVNICs.htm)_, você vê na interface lógica da instância (ens3):
+Aqui entra o primeiro conceito importante. O mesmo endereço IP privado que você vê nas propriedades da _[VNIC](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingVNICs.htm)_, você vê na interface lógica da instância (ens3):
 
 ```
 [opc@instance-20210912-1218 ~]$ ip addr sh ens3
@@ -89,7 +89,7 @@ No meio do caminho, entre _[VNIC](https://docs.oracle.com/pt-br/iaas/Content/Net
 
 >_**__NOTA:__** Para instâncias com o sistema operacional [Ubuntu](https://pt.wikipedia.org/wiki/Ubuntu), você encontra o [UFW (Uncomplicated Firewall)](https://help.ubuntu.com/community/UFW)._
 
-Somente as portas para os serviços SSH (22/TCP) e cliente DHCP vem "abertas" por padrão:
+Somente as portas para os serviços SSH e cliente DHCP vem _"abertas"_ por padrão:
 
 ```
 [opc@instance-20210912-1218 ~]$ sudo firewall-cmd --list-services
