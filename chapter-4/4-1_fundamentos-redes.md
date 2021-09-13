@@ -32,12 +32,12 @@ Aprensento abaixo, alguns dos componentes existentes do serviço de _[Networking
     - Contém regras de roteamento que direcionam o tráfego da subrede “para fora” da VCN.
     - Subredes dentro da mesma VCN, não precisam de regras de roteamento para se comunicarem.
     
-4. **Regras de Segurança (Security Lists)** 
+4. **Security Lists** 
     - É o firewall virtual aplicado na "borda" de uma subrede.
     - Todo o tráfego que entra e saí, de todos os recursos da subrede, é avaliado por este tipo de firewall.
     - Tudo é bloqueado por padrão. É possível liberar o tráfego de rede por protocolos e portas, IPv4 ou IPv6.
 
-5. **Grupos de segurança de rede (NSG - Network Security Groups)**
+5. **Network Security Groups (NSG)**
     - É um outro tipo de firewall virtual, porém este é aplicado sobre uma ou várias VNICs.
     - Quando você cria um NSG, ele inicialmente está vazio, sem regras de segurança ou VNICs.  
 
@@ -47,7 +47,7 @@ Aprensento abaixo, alguns dos componentes existentes do serviço de _[Networking
     - Toda _[VNIC](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingVNICs.htm)_ obrigatóriamente reside em uma subrede.
     - Uma _[VNIC](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingVNICs.htm)_ pode ter até 31 endereços IPv4 privados, um endereço IPv4 público opcional para cada IP privado e até 32 endereços IPv6 opcionais.
 
-7. **Opções de DHCP (DHCP Options)**
+7. **DHCP Options**
     - São configurações informadas pelo protocolo DHCP a todos os recursos criados dentro de uma subrede. 
     - É possível definir, por exemplo, quais servidores DNS serão utilizados pelos recursos da subrede.
 
@@ -82,20 +82,20 @@ Seguindo o desenho, temos:
 <br><br>
 - **subnpub_vcn-prd**: Subrede pública 10.0.5.0/24 da VCN de produção.
 - **rtb_subnpub_vcn-prd**: Tabela de roteamento da subrede pública da VCN de produção.
-- **secl-1_subnpub_vcn-prd**: Regras de segurança da subrede pública da VCN de produção.
+- **secl-1_subnpub_vcn-prd**: Security List da subrede pública da VCN de produção.
 - **igw_vcn-prd**: Internet Gateway da VCN de produção.
 - **lb_subnpub_vcn-prd**: Load Balancer da subrede pública da VCN de produção.
 <br><br>
 - **subnprv-app_vcn-prd**: Subrede privada 10.0.10.0/24 para aplicação da VCN de produção.
 - **rtb_subnprv-app_vcn-prd**: Tabela de roteamento da subrede privada para aplicação.
-- **secl-1_subnprv-db_vcn-prd**: Regras de segurança da subrede privada para aplicação.
+- **secl-1_subnprv-db_vcn-prd**: Security List da subrede privada para aplicação.
 - **ngw_vcn-prd**: NAT Gateway da VCN de produção.
 - **vm-wordpress_subnprv-app_vcn-prd**: Máquina virtual da aplicação Wordpress.
 - **blk1_vm-wordpress_subnprv-app_vcn-prd**: Bloco de Disco #1 da máquina virtual da aplicação Wordpress.
 <br><br> 
 - **subnprv-db_vcn-prd**: Subrede privada 10.0.20.0/24 para banco de dados da VCN de produção.
 - **rtb_subnprv-db_vcn-prd**: Tabela de roteamento da subrede privada para banco de dados.
-- **secl-1_subnprv-db_vcn-prd**: Regras de segurança da subrede privada para banco de dados.
+- **secl-1_subnprv-db_vcn-prd**: Security List da subrede privada para banco de dados.
 - **sgw_vcn-prd**: Service Gateway da VCN de produção.
 - **mysql_subnprv-db_vcn-prd**: Instância MySQL da subrede privada para banco de dados.
 <br><br> 
@@ -321,7 +321,7 @@ Por padrão, uma _[VCN](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks
 
 Criaremos cada um desses recursos de forma separada. Você é livre para usar os recursos criados por padrão, se preferir.
 
-#### Opções de DHCP (DHCP Options)
+#### DHCP Options
 
 Para se criar o recurso _[DHCP Options](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingDHCP.htm)_ é necessário informar o OCID da _[VCN](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingVCNs_topic-Overview_of_VCNs_and_Subnets.htm)_ no qual as opções de DHCP serão anexadas. Para isto, começaremos consultado qual OCID da _[VCN](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingVCNs_topic-Overview_of_VCNs_and_Subnets.htm)_ criada:
 
