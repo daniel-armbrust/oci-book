@@ -114,12 +114,6 @@ Esta ação pode ser confirmada com o comando abaixo:
 dhcpv6-client http https ssh
 ```
 
-#### __Network Security Groups (NSG)__
-
-Seguindo para o próximo firewall, do lado esquerdo da _[VNIC](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingVNICs.htm)_, temos o _[Network Security Groups (NSG)](https://docs.oracle.com/pt-br/iaas/Content/Network/Concepts/networksecuritygroups.htm)_. 
-
-Um _[(NSG)](https://docs.oracle.com/pt-br/iaas/Content/Network/Concepts/networksecuritygroups.htm)_ consiste em um conjunto de regras de segurança de entrada e saída que se aplicam somente a um conjunto de VNICs em uma VCN. Por exemplo, você pode criar um NSG e aplicar a todos os seus servidores Web.
-
 #### __Regras Essenciais de Firewall__
 
 Todas as _[imagens de plataforma](https://docs.oracle.com/pt-br/iaas/Content/Compute/References/images.htm#OracleProvided_Images)_ incluem regras de firewall que só permitem o usuário _"root"_ ou _"Administrators"_ em instâncias Windows, para estabelecer conexões com a rede _[iSCSI](https://pt.wikipedia.org/wiki/ISCSI)_ (169.254.0.2:3260, 169.254.2.0/24:3260), que se conecta ao serviço de storage do OCI.
@@ -130,4 +124,10 @@ Todas as _[imagens de plataforma](https://docs.oracle.com/pt-br/iaas/Content/Com
 
 >_**__NOTA:__** A excessão é por conta de imagens [Ubuntu](https://pt.wikipedia.org/wiki/Ubuntu), que ao habilitar o [UFW (Uncomplicated Firewall)](https://help.ubuntu.com/community/UFW) pode causar problemas com essas regras. Recomendamos que você não ative o [UFW](https://help.ubuntu.com/community/UFW) em suas instâncias._
 
-#### __Melhores práticas__
+#### __A rede reservada 169.254.0.0/16__
+
+### __Network Security Groups (NSG)__
+
+Seguindo para o próximo firewall, do lado esquerdo da _[VNIC](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingVNICs.htm)_, temos o _[Network Security Groups (NSG)](https://docs.oracle.com/pt-br/iaas/Content/Network/Concepts/networksecuritygroups.htm)_. 
+
+Um _[(NSG)](https://docs.oracle.com/pt-br/iaas/Content/Network/Concepts/networksecuritygroups.htm)_ consiste em um conjunto de regras de firewall aplicadas na entrada e saída de pacotes, que podem ser aplicadas sobre uma ou um conjunto de _[VNICs](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingVNICs.htm)_ dentro de uma _[VCN](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingVCNs_topic-Overview_of_VCNs_and_Subnets.htm)_. Por exemplo, você pode criar um NSG e aplicar a todos os seus servidores Web.
