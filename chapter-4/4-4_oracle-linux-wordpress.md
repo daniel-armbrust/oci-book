@@ -89,8 +89,6 @@ No meio do caminho, entre _[VNIC](https://docs.oracle.com/pt-br/iaas/Content/Net
 
 Este vem habilitado por padrão nas _[imagens de plataforma](https://docs.oracle.com/pt-br/iaas/Content/Compute/References/images.htm#OracleProvided_Images)_ equipadas com _[Oracle Linux](https://www.oracle.com/linux/)_.
 
->_**__NOTA:__** Para instâncias com o sistema operacional [Ubuntu](https://pt.wikipedia.org/wiki/Ubuntu) você encontra o [UFW (Uncomplicated Firewall)](https://help.ubuntu.com/community/UFW)._
-
 Somente as portas para os serviços SSH e cliente DHCP vem _"abertas"_ por padrão:
 
 ```
@@ -116,29 +114,12 @@ Esta ação pode ser confirmada com o comando abaixo:
 dhcpv6-client http https ssh
 ```
 
-Caso deseje desabilitar por completo o _[firewalld](https://firewalld.org/)_ e administrar o _"filtro de pacotes"_ somente por recursos do _[OCI](https://www.oracle.com/cloud/)_, execute os comandos abaixo:
+#### __Regras Essenciais de Firewall__
 
-```
-[opc@instance-20210912-1218 ~]$ sudo systemctl disable firewalld
-Removed symlink /etc/systemd/system/multi-user.target.wants/firewalld.service.
-Removed symlink /etc/systemd/system/dbus-org.fedoraproject.FirewallD1.service.
+Todas as _[imagens de plataforma](https://docs.oracle.com/pt-br/iaas/Content/Compute/References/images.htm#OracleProvided_Images)_ incluem regras de firewall que só permitem o usuário _"root"_ ou _"Administrators"_ em instâncias Windows, para estabelecer conexões com a rede _[iSCSI](https://pt.wikipedia.org/wiki/ISCSI)_ (169.254.0.2:3260, 169.254.2.0/24:3260), que se conecta ao serviço de storage do OCI.
 
-[opc@instance-20210912-1218 ~]$ sudo systemctl stop firewalld
-[opc@instance-20210912-1218 ~]$
-```
+>_**__NOTA:__** Maiores detalhes sobre volumes de disco, conexões _[iSCSI](https://pt.wikipedia.org/wiki/ISCSI)_, você encontra mais adiante. Por hora, siga a recomendação exposta aqui._
 
-Estes comandos desabilitam de forma persistente as regras de firewall impostas pelo _[firewalld](https://firewalld.org/)_, inclusive entre as reinicializações da instância.
+É importante _**NÃO REMOVER**_ essas regras através do _[firewalld](https://firewalld.org/)_ ou diretamente pelo _[iptables](https://pt.wikipedia.org/wiki/Iptables)_. A remoção dessas regras irá permitir que usuários não administradores, acessem o volumes de disco de boot da instância. É recomendado também, que não se crie imagens personalizadas sem essas regras de firewall.
 
-```
-[opc@instance-20210912-1218 ~]$ sudo iptables -L -n -v
-Chain INPUT (policy ACCEPT 0 packets, 0 bytes)
- pkts bytes target     prot opt in     out     source               destination
-
-Chain FORWARD (policy ACCEPT 0 packets, 0 bytes)
- pkts bytes target     prot opt in     out     source               destination
-
-Chain OUTPUT (policy ACCEPT 0 packets, 0 bytes)
- pkts bytes target     prot opt in     out     source               destination
-```
-
->_**__NOTA:__** Apesar do [firewalld](https://firewalld.org/) ser mais uma camada extra de segurança, ter muitas camadas podem dificultar o troubleshoot em caso de problemas. O fato é que "vem habilitado por padrão". Desabilite o firewall da instância, se você sabe o que está fazendo e se for realmente necessário. Como aqui é um cenário de exemplo, estamos removendo como forma de demonstração._
+>_**__NOTA:__** A excessão é por conta de imagens [Ubuntu](https://pt.wikipedia.org/wiki/Ubuntu), que ao habilitar o [UFW (Uncomplicated Firewall)](https://help.ubuntu.com/community/UFW) pode causar problemas com essas regras. Recomendamos que você não ative o [UFW](https://help.ubuntu.com/community/UFW) em suas instâncias._
