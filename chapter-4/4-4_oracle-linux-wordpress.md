@@ -116,7 +116,9 @@ dhcpv6-client http https ssh
 
 #### __Network Security Groups (NSG)__
 
-Um NSG consiste em um conjunto de regras de segurança de entrada e saída que se aplicam somente a um conjunto de VNICs em uma VCN. Por exemplo, você pode criar um NSG e aplicar a todos os seus servidores Web.
+Seguindo para o próximo firewall, do lado esquerdo da _[VNIC](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingVNICs.htm)_, temos o _[Network Security Groups (NSG)](https://docs.oracle.com/pt-br/iaas/Content/Network/Concepts/networksecuritygroups.htm)_. 
+
+Um _[(NSG)](https://docs.oracle.com/pt-br/iaas/Content/Network/Concepts/networksecuritygroups.htm)_ consiste em um conjunto de regras de segurança de entrada e saída que se aplicam somente a um conjunto de VNICs em uma VCN. Por exemplo, você pode criar um NSG e aplicar a todos os seus servidores Web.
 
 #### __Regras Essenciais de Firewall__
 
