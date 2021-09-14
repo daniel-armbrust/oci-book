@@ -130,4 +130,24 @@ Todas as _[imagens de plataforma](https://docs.oracle.com/pt-br/iaas/Content/Com
 
 Seguindo para o próximo firewall, do lado esquerdo da _[VNIC](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingVNICs.htm)_, temos o _[Network Security Groups (NSG)](https://docs.oracle.com/pt-br/iaas/Content/Network/Concepts/networksecuritygroups.htm)_. 
 
-Um _[NSG](https://docs.oracle.com/pt-br/iaas/Content/Network/Concepts/networksecuritygroups.htm)_ consiste em um conjunto de regras de firewall que inspeciona entrada e saída de pacotes, que podem ser aplicadas sobre uma ou um conjunto de _[VNICs](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingVNICs.htm)_ dentro de uma _[VCN](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingVCNs_topic-Overview_of_VCNs_and_Subnets.htm)_. Por exemplo, você pode criar um NSG e aplicar a todos os seus servidores Web.
+Um _[NSG](https://docs.oracle.com/pt-br/iaas/Content/Network/Concepts/networksecuritygroups.htm)_ atua como um firewall virtual. Ou seja, é um conjunto de regras de firewall que pode ser aplicado na entrada (ingress) ou saída (egress) de tráfego, especificamente em uma _[VNIC](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingVNICs.htm)_. Na verdade, você pode criar um _[NSG](https://docs.oracle.com/pt-br/iaas/Content/Network/Concepts/networksecuritygroups.htm)_ e aplicar suas regras em um conjunto de _[VNICs](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingVNICs.htm)_ diferentes.
+
+
+
+
+
+
+
+ aplicamos a todas as VNICs destes servidores Web, permitindo tráfego do protocolo SSH 22/TCP somente 
+
+Podemos dizer que o filtro do NSG é mais granular.
+
+que inspeciona a entrada e saída dos pacotes de uma _[VNIC](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingVNICs.htm)_. Você pode 
+
+Um _[NSG](https://docs.oracle.com/pt-br/iaas/Content/Network/Concepts/networksecuritygroups.htm)_ consiste em um conjunto de regras de firewall
+
+
+
+ aplicadas na entrada e saída de pacotes, em uma ou em um conjunto de _[VNICs](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingVNICs.htm)_ dentro de uma _[VCN](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingVCNs_topic-Overview_of_VCNs_and_Subnets.htm)_.
+
+que podem ser aplicadas sobre uma ou um . Por exemplo, você pode criar um NSG e aplicar a todos os seus servidores Web.
