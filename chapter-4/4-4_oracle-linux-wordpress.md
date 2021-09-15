@@ -41,6 +41,8 @@ Sabemos que toda instância possui uma ou mais _[VNICs](https://docs.oracle.com/
 
 O primeiro detalhe importante aqui a se notar, é que o tráfego da rede sempre é avaliado primeiramente no _[Network Security Group (NSG)](https://docs.oracle.com/pt-br/iaas/Content/Network/Concepts/networksecuritygroups.htm)_ associado a _[VNIC](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingVNICs.htm)_ da instância. Caso o _[NSG](https://docs.oracle.com/pt-br/iaas/Content/Network/Concepts/networksecuritygroups.htm)_ permita o tráfego (allow), este vai diretamente para a _[VNIC](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingVNICs.htm)_ que consequentemente atinge a instância. Se não há _[NSG](https://docs.oracle.com/pt-br/iaas/Content/Network/Concepts/networksecuritygroups.htm)_, as regras existentes na _[Security List](https://docs.oracle.com/pt-br/iaas/Content/Network/Concepts/securitylists.htm#Security_Lists)_  da subrede serão avaliadas antes de atingir a instância.
 
+>_**__NOTA:__** Lembre-se que ao criar uma [Security List](https://docs.oracle.com/pt-br/iaas/Content/Network/Concepts/securitylists.htm#Security_Lists) ou [NSG](https://docs.oracle.com/pt-br/iaas/Content/Network/Concepts/networksecuritygroups.htm), tudo vem "bloqueado por padrão". Você deve criar regras que permitam (allow) o tráfego de rede._
+
 O mesmo endereço IP privado que você vê nas propriedades da _[VNIC](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingVNICs.htm)_, você vê na interface lógica da instância (ens3):
 
 ```
