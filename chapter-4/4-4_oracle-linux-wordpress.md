@@ -128,7 +128,7 @@ Todas as _[imagens de plataforma](https://docs.oracle.com/pt-br/iaas/Content/Com
 
 #### __A rede reservada 169.254.0.0/16__
 
-### __Network Security Groups (NSG) e Security Lists__
+### __Security Lists e Network Security Groups (NSG)__
 
 O próximo conjunto de firewalls que temos são as _[Network Security Groups (NSG)](https://docs.oracle.com/pt-br/iaas/Content/Network/Concepts/networksecuritygroups.htm)_ e _[Security Lists](https://docs.oracle.com/pt-br/iaas/Content/Network/Concepts/securitylists.htm#Security_Lists)_, que já conhecemos. Ambas utilizam regras de segurança para controlar o tráfego de rede em nível de pacote e estão a frente da _[VNIC](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingVNICs.htm)_. 
 
