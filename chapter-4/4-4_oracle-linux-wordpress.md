@@ -146,4 +146,8 @@ Vamos desmistificar a aplicabilidade através do cenário abaixo:
 
 ![alt_text](./images/ch4-4_oci-firewalls-2.jpg "OCI Firewalls")
 
-Cenário tipico em cloud. Duas subredes, uma pública e outra privada. Na subrede pública temos um conjunto de instâncias web equipadas com _[Nginx](https://pt.wikipedia.org/wiki/Nginx)_. Nesta subrede, estamos permitindo (allow) tráfego de qualquer origem vindo da internet, para as instâncias nas portas 80/TCP e 443/TCP. 
+Cenário tipico em cloud. Duas subredes, uma pública e outra privada. Na subrede pública temos um conjunto de instâncias web equipadas com _[Nginx](https://pt.wikipedia.org/wiki/Nginx)_. Nesta subrede, estamos permitindo (allow) através da sua _[security list](https://docs.oracle.com/pt-br/iaas/Content/Network/Concepts/securitylists.htm#Security_Lists)_, tráfego de qualquer origem vindo da internet para as instâncias nas portas 80/TCP e 443/TCP. O egress da subrede pública, possui tráfego total liberado.
+
+Na subrede privada, a 
+
+
