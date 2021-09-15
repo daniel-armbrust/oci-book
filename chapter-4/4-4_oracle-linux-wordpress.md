@@ -176,7 +176,7 @@ darmbrust@hoodwink:~$ oci network security-list update \
 > --force
 {
   "data": {
-    "compartment-id": "ocid1.compartment.oc1..aaaaaaaaie4exnvj2ktkjlliahl2bxmdnteu2xmn27oc5cy5mdcmocl4vd7q",
+    "compartment-id": "ocid1.compartment.oc1..aaaaaaaauvqvbbx3oridcm5d2ztxkftwr362u2vl5zdsayzbehzwbjs56soq",
     "defined-tags": {
       "Oracle-Tags": {
         "CreatedBy": "oracleidentitycloudservice/daniel.armbrust@algumdominio.com",
@@ -193,5 +193,32 @@ darmbrust@hoodwink:~$ oci network security-list update \
     "vcn-id": "ocid1.vcn.oc1.sa-saopaulo-1.amaaaaaahcglxkaabicl4jiikcavz2h2nvazibxp4rdiwziqsce4h5wksz2a"
   },
   "etag": "3bc38baf"
+}
+```
+
+```
+darmbrust@hoodwink:~$ oci network nsg create \
+> --compartment-id "ocid1.compartment.oc1..aaaaaaaauvqvbbx3oridcm5d2ztxkftwr362u2vl5zdsayzbehzwbjs56soq" \
+> --vcn-id "ocid1.vcn.oc1.sa-saopaulo-1.amaaaaaahcglxkaabicl4jiikcavz2h2nvazibxp4rdiwziqsce4h5wksz2a" \
+> --display-name "nsg_wordpress" \
+> --wait-for-state "AVAILABLE"
+Action completed. Waiting until the resource has entered state: ('AVAILABLE',)
+{
+  "data": {
+    "compartment-id": "ocid1.compartment.oc1..aaaaaaaauvqvbbx3oridcm5d2ztxkftwr362u2vl5zdsayzbehzwbjs56soq",
+    "defined-tags": {
+      "Oracle-Tags": {
+        "CreatedBy": "oracleidentitycloudservice/daniel.armbrust@algumdominio.com",
+        "CreatedOn": "2021-09-15T22:26:23.290Z"
+      }
+    },
+    "display-name": "nsg_wordpress",
+    "freeform-tags": {},
+    "id": "ocid1.networksecuritygroup.oc1.sa-saopaulo-1.aaaaaaaa6jz4tjisvsnk4u7xaxkwmywx72jrkxeyjdpmdwgstt5nw4yzskpa",
+    "lifecycle-state": "AVAILABLE",
+    "time-created": "2021-09-15T22:26:23.521000+00:00",
+    "vcn-id": "ocid1.vcn.oc1.sa-saopaulo-1.amaaaaaahcglxkaabicl4jiikcavz2h2nvazibxp4rdiwziqsce4h5wksz2a"
+  },
+  "etag": "2823fb9"
 }
 ```
