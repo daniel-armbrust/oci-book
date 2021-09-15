@@ -146,8 +146,9 @@ Vamos desmistificar a aplicabilidade através do cenário abaixo:
 
 ![alt_text](./images/ch4-4_oci-firewalls-2.jpg "OCI Firewalls")
 
-Cenário tipico em cloud. Duas subredes, uma pública e outra privada. Na subrede pública temos um conjunto de instâncias web equipadas com _[Nginx](https://pt.wikipedia.org/wiki/Nginx)_. Nesta subrede, estamos permitindo (allow) através da sua _[security list](https://docs.oracle.com/pt-br/iaas/Content/Network/Concepts/securitylists.htm#Security_Lists)_, tráfego de qualquer origem vindo da internet para as instâncias nas portas 80/TCP e 443/TCP. O egress da subrede pública, possui tráfego total liberado.
+Cenário tipico em cloud. Duas subredes, uma pública e outra privada. Na subrede pública temos um conjunto de instâncias web equipadas com _[Nginx](https://pt.wikipedia.org/wiki/Nginx)_. Nesta subrede, estamos permitindo (allow) através da sua _[security list](https://docs.oracle.com/pt-br/iaas/Content/Network/Concepts/securitylists.htm#Security_Lists)_, tráfego de qualquer origem vindo da internet para as instâncias nas portas 80/TCP e 443/TCP. O egress da subrede pública possui tráfego total liberado.
 
-Na subrede privada, a 
+Na subrede privada, foi criado uma _[security list](https://docs.oracle.com/pt-br/iaas/Content/Network/Concepts/securitylists.htm#Security_Lists)_ sem nenhuma regra. Ou seja, tudo está _bloqueado_. Aqui temos duas instâncias e cada uma delas com seu _[Weblogic](https://pt.wikipedia.org/wiki/BEA_Weblogic_Server)_ em execução. Foi criado também, um 
+_[NSG](https://docs.oracle.com/pt-br/iaas/Content/Network/Concepts/networksecuritygroups.htm)_ para cada uma das _[VNICs](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingVNICs.htm)_. O _[NSG](https://docs.oracle.com/pt-br/iaas/Content/Network/Concepts/networksecuritygroups.htm)_ só permite tráfego na porta 8080/TCP do seu respectivo _[Nginx](https://pt.wikipedia.org/wiki/Nginx)_ superior. Ou seja, o _[Weblogic](https://pt.wikipedia.org/wiki/BEA_Weblogic_Server)_ _10.0.10.55_, através do seu _[NSG](https://docs.oracle.com/pt-br/iaas/Content/Network/Concepts/networksecuritygroups.htm)_, só permite requisição vinda do _[Nginx](https://pt.wikipedia.org/wiki/Nginx)_ _10.0.5.86_.
 
 
