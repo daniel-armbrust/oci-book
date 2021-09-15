@@ -160,11 +160,13 @@ Vamos voltar para a nossa instância da aplicação _[Wordpress](https://pt.wiki
 ```
 darmbrust@hoodwink:~$ oci network security-list list \
 > --compartment-id "ocid1.compartment.oc1..aaaaaaaauvqvbbx3oridcm5d2ztxkftwr362u2vl5zdsayzbehzwbjs56soq" \
-> --query  "data[?\"display-name\"=='secl-1_subnprv-app_vcn-prd'].id"
+> --query "data[?\"display-name\"=='secl-1_subnprv-app_vcn-prd'].id"
 [
   "ocid1.securitylist.oc1.sa-saopaulo-1.aaaaaaaacsbcnmseb2v7flq7guqmee4fuij3d4rhldftqyneingvmre6sqzq"
 ]
 ```
+
+Irei utilizar o parâmetro _--force_ que executa a atualização sem solicitar confirmação:
 
 ```
 darmbrust@hoodwink:~$ oci network security-list update \
