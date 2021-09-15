@@ -166,7 +166,7 @@ darmbrust@hoodwink:~$ oci network security-list list \
 ]
 ```
 
-Irei utilizar o parâmetro _--force_ que executa a atualização sem solicitar confirmação:
+Irei utilizar o parâmetro _--force_ que irá executar a atualização sem solicitar confirmação:
 
 ```
 darmbrust@hoodwink:~$ oci network security-list update \
