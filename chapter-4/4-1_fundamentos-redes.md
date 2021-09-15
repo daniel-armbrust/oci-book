@@ -29,7 +29,7 @@ Aprensento abaixo, alguns dos componentes existentes do serviço de _[Networking
     - Ao criar uma subrede, três endereços IPs são utilizados por ela. São eles: endereço de rede, endereço de broadcast e um endereço destinado para o gateway padrão.
 
 3. **Tabelas de Roteamento (Route Table)**
-    - Contém regras de roteamento que direcionam o tráfego da subrede “para fora” da VCN.
+    - Contém regras de roteamento que direcionam o tráfego da subrede _"para fora"_ da _[VCN](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingVCNs_topic-Overview_of_VCNs_and_Subnets.htm)_.
     - Subredes dentro da mesma VCN, não precisam de regras de roteamento para se comunicarem.
     
 4. **Security Lists** 

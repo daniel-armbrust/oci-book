@@ -37,9 +37,9 @@ Veja abaixo a representação desta instância:
 
 ![alt_text](./images/ch4-4_oci-firewalls.jpg "OCI Firewalls")
 
-Sabemos que toda instância possui uma ou mais _[VNICs](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingVNICs.htm)_. Cada _[VNIC](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingVNICs.htm)_ reside em uma subrede e é ela quem permite entrada e saída do tráfego da rede. Toda _[VNIC](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingVNICs.htm)_ possui um endereço IPv4 privado principal e um endereço IPv4 público opcional para cada IP privado.
+Sabemos que toda instância possui uma ou mais _[VNICs](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingVNICs.htm)_. Cada _[VNIC](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingVNICs.htm)_ reside em uma subrede e é ela quem possibilita a instância se comunicar com os recursos de toda _[VCN](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingVCNs_topic-Overview_of_VCNs_and_Subnets.htm)_. Sabemos também que toda _[VNIC](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingVNICs.htm)_ possui um endereço IPv4 privado principal e um endereço IPv4 público opcional para cada IP privado.
 
-Aqui entra o primeiro conceito importante. O mesmo endereço IP privado que você vê nas propriedades da _[VNIC](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingVNICs.htm)_, você vê na interface lógica da instância (ens3):
+O mesmo endereço IP privado que você vê nas propriedades da _[VNIC](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingVNICs.htm)_, você vê na interface lógica da instância (ens3):
 
 ```
 [opc@instance-20210912-1218 ~]$ ip addr sh ens3
@@ -51,7 +51,7 @@ Aqui entra o primeiro conceito importante. O mesmo endereço IP privado que voc�
        valid_lft forever preferred_lft forever
 ```
 
-Porém, o IP público só pode ser visualizado pelas propriedades da _[VNIC](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingVNICs.htm)_. Observe _"private-ip"_, _"public-ip"_ e seus respectivos valores que correspondem aos seus IPs com o comando abaixo:
+Porém, o IP público só pode ser visualizado pelas propriedades da _[VNIC](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingVNICs.htm)_. Ele está na _[VNIC](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingVNICs.htm)_ e não na instância. Observe _"private-ip"_, _"public-ip"_ e seus respectivos valores com o comando abaixo:
 
 ```
 darmbrust@hoodwink:~$ oci network vnic get \
@@ -85,9 +85,9 @@ darmbrust@hoodwink:~$ oci network vnic get \
 }
 ```
 
-Isto quer dizer que o _[OCI](https://www.oracle.com/cloud/)_ sempre faz um _[NAT 1:1](https://en.wikipedia.org/wiki/Network_address_translation)_ do IP público da _[VNIC](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingVNICs.htm)_ para o IP privado da _[VNIC](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingVNICs.htm)_, que por fim atinge a instância. O contrário (saída do tráfego de rede) segue o mesmo processo.
+Isto quer dizer que o _[OCI](https://www.oracle.com/cloud/)_ sempre faz um _[NAT 1:1](https://en.wikipedia.org/wiki/Network_address_translation)_ do IP público da _[VNIC](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingVNICs.htm)_ até a instância. O contrário (saída do tráfego de rede) segue o mesmo processo.
 
-No meio do caminho, entre _[VNIC](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingVNICs.htm)_ e a interface de rede do _[Oracle Linux](https://www.oracle.com/linux/)_, existe o primeiro firewall. O _[firewalld](https://firewalld.org/)_. 
+No meio do caminho, entre _[VNIC](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingVNICs.htm)_ e a interface de rede do _[Oracle Linux](https://www.oracle.com/linux/)_, existe o primeiro _[firewall virtual](https://en.wikipedia.org/wiki/Virtual_firewall)_. O _[firewalld](https://firewalld.org/)_. 
 
 Este vem habilitado por padrão nas _[imagens de plataforma](https://docs.oracle.com/pt-br/iaas/Content/Compute/References/images.htm#OracleProvided_Images)_ equipadas com _[Oracle Linux](https://www.oracle.com/linux/)_.
 
@@ -128,28 +128,10 @@ Todas as _[imagens de plataforma](https://docs.oracle.com/pt-br/iaas/Content/Com
 
 #### __A rede reservada 169.254.0.0/16__
 
-### __Network Security Groups (NSG)__
+### __Network Security Groups (NSG) e Security Lists__
 
-Seguindo para o próximo firewall, do lado esquerdo da _[VNIC](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingVNICs.htm)_, temos o _[Network Security Groups (NSG)](https://docs.oracle.com/pt-br/iaas/Content/Network/Concepts/networksecuritygroups.htm)_. 
+O próximo conjunto de firewalls que temos são as _[Network Security Groups (NSG)](https://docs.oracle.com/pt-br/iaas/Content/Network/Concepts/networksecuritygroups.htm)_ e _[Security Lists](https://docs.oracle.com/pt-br/iaas/Content/Network/Concepts/securitylists.htm#Security_Lists)_, que já conhecemos. Ambas utilizam regras de segurança para controlar o tráfego de rede em nível de pacote e estão a frente da _[VNIC](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingVNICs.htm)_. 
 
-Um _[NSG](https://docs.oracle.com/pt-br/iaas/Content/Network/Concepts/networksecuritygroups.htm)_ atua como um firewall virtual. Ou seja, é um conjunto de regras de firewall que pode ser aplicado na entrada (ingress) ou saída (egress) de tráfego, especificamente em uma _[VNIC](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingVNICs.htm)_. Na verdade, você pode criar um _[NSG](https://docs.oracle.com/pt-br/iaas/Content/Network/Concepts/networksecuritygroups.htm)_ e aplicar suas regras em um conjunto de _[VNICs](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingVNICs.htm)_ diferentes.
+Porém, temos diferenças entre elas. 
 
-
-
-
-
-
-
- aplicamos a todas as VNICs destes servidores Web, permitindo tráfego do protocolo SSH 22/TCP somente 
-
-Podemos dizer que o filtro do NSG é mais granular.
-
-que inspeciona a entrada e saída dos pacotes de uma _[VNIC](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingVNICs.htm)_. Você pode 
-
-Um _[NSG](https://docs.oracle.com/pt-br/iaas/Content/Network/Concepts/networksecuritygroups.htm)_ consiste em um conjunto de regras de firewall
-
-
-
- aplicadas na entrada e saída de pacotes, em uma ou em um conjunto de _[VNICs](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingVNICs.htm)_ dentro de uma _[VCN](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingVCNs_topic-Overview_of_VCNs_and_Subnets.htm)_.
-
-que podem ser aplicadas sobre uma ou um . Por exemplo, você pode criar um NSG e aplicar a todos os seus servidores Web.
+Começando pela _[Security Lists](https://docs.oracle.com/pt-br/iaas/Content/Network/Concepts/securitylists.htm#Security_Lists)_ que como sabemos, tudo é bloqueado por padrão. Definimos regras de segurança que permitem tráfego (allow), e que se aplicam a todas as _[VNICs](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingVNICs.htm)_ existentes em uma subrede inteira.
