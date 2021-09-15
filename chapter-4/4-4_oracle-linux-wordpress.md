@@ -145,3 +145,5 @@ Já o _[Network Security Groups (NSG)](https://docs.oracle.com/pt-br/iaas/Conten
 Vamos desmistificar a aplicabilidade através do cenário abaixo:
 
 ![alt_text](./images/ch4-4_oci-firewalls-2.jpg "OCI Firewalls")
+
+Cenário tipico em cloud. Duas subredes, uma pública e outra privada. Na subrede pública temos um conjunto de instâncias web equipadas com _[Nginx](https://pt.wikipedia.org/wiki/Nginx)_. Nesta subrede, estamos permitindo (allow) tráfego de qualquer origem vindo da internet, para as instâncias nas portas 80/TCP e 443/TCP. 
