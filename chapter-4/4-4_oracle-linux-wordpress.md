@@ -280,6 +280,60 @@ darmbrust@hoodwink:~$ oci network nsg rules add \
 }
 ```
 
-A criação das regras seguem parecidas com a criação das regras da _[security list](https://docs.oracle.com/en-us/iaas/api/#/en/iaas/20160918/datatypes/IngressSecurityRule)_, porém temos mais parâmetros a disposição. Lembrando que você pode informar as regras especificando um arquivo _[JSON](https://pt.wikipedia.org/wiki/JSON)_ via _file://regras-nsg.json_, por exemplo.
+A criação das regras seguem parecidas com a criação das regras da _[security list](https://docs.oracle.com/en-us/iaas/api/#/en/iaas/20160918/datatypes/IngressSecurityRule)_, porém temos mais parâmetros a disposição. Lembrando que você pode informar as regras através de um arquivo _[JSON](https://pt.wikipedia.org/wiki/JSON)_ via _file://regras-nsg.json_, por exemplo.
 
 >_**__NOTA:__** Todos os parâmetros para criação das regras de firewall das [NSGs](https://docs.oracle.com/pt-br/iaas/Content/Network/Concepts/networksecuritygroups.htm) podem ser consultados diretamente na documentação da API neste [link aqui](https://docs.oracle.com/en-us/iaas/api/#/en/iaas/20160918/datatypes/AddSecurityRuleDetails)._ 
+
+Antes de aplicarmos as regras, quero verificar como está a _[VNIC](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingVNICs.htm)_ da instância _[Wordpress](https://pt.wikipedia.org/wiki/WordPress)_:
+
+```
+darmbrust@hoodwink:~$ oci compute instance list-vnics \
+> --instance-id "ocid1.instance.oc1.sa-saopaulo-1.antxeljr6noke4qcf4yilvaofwpt5aiavnsx7cfev3fhp2bpc3xfcxo5k6zq" \
+> --query "data[].{id:id,\"nsg-ids\":\"nsg-ids\"}"
+[
+  {
+    "id": "ocid1.vnic.oc1.sa-saopaulo-1.abtxeljrxckhpgqp27r55nl4nbhd3ruawu33zenc2mwhavi3h2rqtzvg2ica",
+    "nsg-ids": []
+  }
+]
+```
+
+Perceba que não há nenhum _[NSG](https://docs.oracle.com/pt-br/iaas/Content/Network/Concepts/networksecuritygroups.htm)_ aplicado, visto pela propriedade _"nsg-ids"_ que apresenta um vetor vazio _[]_.
+
+Para aplicarmos a _[NSG](https://docs.oracle.com/pt-br/iaas/Content/Network/Concepts/networksecuritygroups.htm)_ que criamos, usamos o comando abaixo:
+
+```
+darmbrust@hoodwink:~$ oci network vnic update \
+> --vnic-id "ocid1.vnic.oc1.sa-saopaulo-1.abtxeljrxckhpgqp27r55nl4nbhd3ruawu33zenc2mwhavi3h2rqtzvg2ica" \
+> --nsg-ids '["ocid1.networksecuritygroup.oc1.sa-saopaulo-1.aaaaaaaa6jz4tjisvsnk4u7xaxkwmywx72jrkxeyjdpmdwgstt5nw4yzskpa"]' \
+> --force
+{
+  "data": {
+    "availability-domain": "ynrK:SA-SAOPAULO-1-AD-1",
+    "compartment-id": "ocid1.compartment.oc1..aaaaaaaauvqvbbx3oridcm5d2ztxkftwr362u2vl5zdsayzbehzwbjs56soq",
+    "defined-tags": {
+      "Oracle-Tags": {
+        "CreatedBy": "oracleidentitycloudservice/daniel.armbrust@algumdominio.com",
+        "CreatedOn": "2021-09-09T18:14:58.697Z"
+      }
+    },
+    "display-name": "vm-wordpress_subnprv-app_vcn-prd",
+    "freeform-tags": {},
+    "hostname-label": "wordpress",
+    "id": "ocid1.vnic.oc1.sa-saopaulo-1.abtxeljrxckhpgqp27r55nl4nbhd3ruawu33zenc2mwhavi3h2rqtzvg2ica",
+    "is-primary": true,
+    "lifecycle-state": "AVAILABLE",
+    "mac-address": "02:00:17:02:F4:E7",
+    "nsg-ids": [
+      "ocid1.networksecuritygroup.oc1.sa-saopaulo-1.aaaaaaaa6jz4tjisvsnk4u7xaxkwmywx72jrkxeyjdpmdwgstt5nw4yzskpa"
+    ],
+    "private-ip": "10.0.10.240",
+    "public-ip": null,
+    "skip-source-dest-check": false,
+    "subnet-id": "ocid1.subnet.oc1.sa-saopaulo-1.aaaaaaaajb4wma763mz6uowun3pfeltobe4fmiegdeyma5ehvnf3kzy3jvxa",
+    "time-created": "2021-09-09T18:15:04.023000+00:00",
+    "vlan-id": null
+  },
+  "etag": "de919384"
+}
+```
