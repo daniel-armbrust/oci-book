@@ -155,7 +155,7 @@ Esta é a principal diferença. Neste caso, pelo fato do _[NSG](https://docs.ora
 
 >_**__NOTA:__** Como boa prática, mantenha a [security list](https://docs.oracle.com/pt-br/iaas/Content/Network/Concepts/securitylists.htm#Security_Lists) sem regras e permita tráfego através do [NSG](https://docs.oracle.com/pt-br/iaas/Content/Network/Concepts/networksecuritygroups.htm). Ou, libere o tráfego que abrange toda a subrede através da [security list](https://docs.oracle.com/pt-br/iaas/Content/Network/Concepts/securitylists.htm#Security_Lists), e libere tráfego mais específico através do [NSG](https://docs.oracle.com/pt-br/iaas/Content/Network/Concepts/networksecuritygroups.htm). Isto pode facilitar a administração das suas regras e evitar "buracos" de acesso._
 
-Vamos voltar para a nossa instância da aplicação _[Wordpress](https://pt.wikipedia.org/wiki/WordPress)_. Primeiramente iremos atualizar a subrede privada, removendo todas as suas regras.
+Vamos voltar para a nossa instância da aplicação _[Wordpress](https://pt.wikipedia.org/wiki/WordPress)_. Primeiramente iremos atualizar a subrede privada, removendo as regras de entrada (ingress).
 
 ```
 darmbrust@hoodwink:~$ oci network security-list list \
@@ -172,7 +172,6 @@ Irei utilizar o parâmetro _--force_ que irá remover as regras sem solicitar co
 darmbrust@hoodwink:~$ oci network security-list update \
 > --security-list-id "ocid1.securitylist.oc1.sa-saopaulo-1.aaaaaaaacsbcnmseb2v7flq7guqmee4fuij3d4rhldftqyneingvmre6sqzq" \
 > --ingress-security-rules '[]' \
-> --egress-security-rules '[]' \
 > --force
 {
   "data": {
@@ -184,7 +183,18 @@ darmbrust@hoodwink:~$ oci network security-list update \
       }
     },
     "display-name": "secl-1_subnprv-app_vcn-prd",
-    "egress-security-rules": [],
+    "egress-security-rules": [
+      {
+        "description": null,
+        "destination": "0.0.0.0/0",
+        "destination-type": "CIDR_BLOCK",
+        "icmp-options": null,
+        "is-stateless": false,
+        "protocol": "all",
+        "tcp-options": null,
+        "udp-options": null
+      }
+    ],
     "freeform-tags": {},
     "id": "ocid1.securitylist.oc1.sa-saopaulo-1.aaaaaaaacsbcnmseb2v7flq7guqmee4fuij3d4rhldftqyneingvmre6sqzq",
     "ingress-security-rules": [],
@@ -192,7 +202,7 @@ darmbrust@hoodwink:~$ oci network security-list update \
     "time-created": "2021-09-07T22:18:13.023000+00:00",
     "vcn-id": "ocid1.vcn.oc1.sa-saopaulo-1.amaaaaaahcglxkaabicl4jiikcavz2h2nvazibxp4rdiwziqsce4h5wksz2a"
   },
-  "etag": "3bc38baf"
+  "etag": "7107baa3"
 }
 ```
 
@@ -337,3 +347,5 @@ darmbrust@hoodwink:~$ oci network vnic update \
   "etag": "de919384"
 }
 ```
+
+Pronto! O _[NSG](https://docs.oracle.com/pt-br/iaas/Content/Network/Concepts/networksecuritygroups.htm)_ foi aplicado.
