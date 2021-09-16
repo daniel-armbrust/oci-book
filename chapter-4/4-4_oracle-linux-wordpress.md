@@ -225,7 +225,7 @@ Action completed. Waiting until the resource has entered state: ('AVAILABLE',)
 }
 ```
 
-A regra que irei criar abaixo, permite conexões vindas do _[Bastion](https://docs.oracle.com/pt-br/iaas/Content/Bastion/Concepts/bastionoverview.htm)_ criado e que possui origem _10.0.10.112_, na porta SSH (22/TCP) da instância do _[Wordpress](https://pt.wikipedia.org/wiki/WordPress)_. Uma outra regra que permite saída total também será criada.
+A regra que irei criar abaixo, permite conexões vindas do _[Bastion](https://docs.oracle.com/pt-br/iaas/Content/Bastion/Concepts/bastionoverview.htm)_ criado e que possui origem _10.0.10.112_, na porta do protocolo SSH (22/TCP). Uma outra regra que permite saída total também será criada.
 
 ```
 darmbrust@hoodwink:~$ oci network nsg rules add \
