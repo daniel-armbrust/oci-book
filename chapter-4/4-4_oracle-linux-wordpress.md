@@ -132,6 +132,82 @@ Todas as _[imagens de plataforma](https://docs.oracle.com/pt-br/iaas/Content/Com
 
 #### __A rede reservada 169.254.0.0/16__
 
+Esta é uma rede especial e reservada para conexões iSCSI utilizado por _[volumes de inicialização](https://docs.oracle.com/pt-br/iaas/Content/Block/Concepts/bootvolumes.htm)_ e _[volumes em blocos](https://docs.oracle.com/pt-br/iaas/Content/Block/Concepts/overview.htm)_ da instância. 
+
+Um outro serviço presente nesta rede é _[serviço de metadados da instância (IMDS)](https://docs.oracle.com/pt-br/iaas/Content/Compute/Tasks/gettingmetadata.htm)_. Este está em execução através de um endpoint HTTP no endereço _169.254.169.254_, e fornece diversas informações sobre a instância em execução.
+
+Veja abaixo a consulta dos metadados da instância:
+
+```
+[opc@instance-20210912-1218 ~]$ curl -H "Authorization: Bearer Oracle" -L http://169.254.169.254/opc/v2/instance/
+{
+  "availabilityDomain" : "ynrK:SA-SAOPAULO-1-AD-1",
+  "faultDomain" : "FAULT-DOMAIN-2",
+  "compartmentId" : "ocid1.compartment.oc1..aaaaaaaauvqvbbx3oridcm5d2ztxkftwr362u2vl5zdsayzbehzwbjs56soq",
+  "displayName" : "instance-20210912-1218",
+  "hostname" : "instance-20210912-1218",
+  "id" : "ocid1.instance.oc1.sa-saopaulo-1.antxeljr6noke4qctlg477aoiweyytsovsxxvhraujot27wsin5axqiqfwqq",
+  "image" : "ocid1.image.oc1.sa-saopaulo-1.aaaaaaaasahnls6nmev22raz7ecw6i64d65fu27pmqjn4pgz7zue56ojj7qq",
+  "metadata" : {
+    "ssh_authorized_keys" : "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCVW1S8GjxpV37PCd+2HK4/nEhgwjn5S2flcV8E+y05dvS2YyMHPIsJr9BylgVtYMH7Coe1Q/tAW2Oo7TewUE4c/Y8GssTPJR0r15R/ccsMmY/04Tg2V9S8eBN2MemqDbJL4Vm5GMCIG8JZ7miaRzCpvXDAWPf+OJ/gn3VQHPygNiZp2E6HHmmBiL3JMKQz/43Lj65tDPpI0NZtCtJShV/1bS2houwaU2cG2MedacdjqvF/IPk9CSouxTFJ1BYb9t3czBULq7Hl79iqXAW2dfPl17dckKzfwQDHbBbYXgOdV4Ap3nK6VU70j6kHzdbt2uxUq3IgtMlOyTGyKsJyIzwR darmbrust@hoodwink"
+  },
+  "region" : "sa-saopaulo-1",
+  "canonicalRegionName" : "sa-saopaulo-1",
+  "ociAdName" : "sa-saopaulo-1-ad-1",
+  "regionInfo" : {
+    "realmKey" : "oc1",
+    "realmDomainComponent" : "oraclecloud.com",
+    "regionKey" : "GRU",
+    "regionIdentifier" : "sa-saopaulo-1"
+  },
+  "shape" : "VM.Standard.E2.1",
+  "shapeConfig" : {
+    "ocpus" : 1.0,
+    "memoryInGBs" : 8.0,
+    "networkingBandwidthInGbps" : 0.7,
+    "maxVnicAttachments" : 2
+  },
+  "state" : "Running",
+  "timeCreated" : 1631459988266,
+  "agentConfig" : {
+    "monitoringDisabled" : false,
+    "managementDisabled" : false,
+    "allPluginsDisabled" : false,
+    "pluginsConfig" : [ {
+      "name" : "Vulnerability Scanning",
+      "desiredState" : "DISABLED"
+    }, {
+      "name" : "OS Management Service Agent",
+      "desiredState" : "ENABLED"
+    }, {
+      "name" : "Management Agent",
+      "desiredState" : "DISABLED"
+    }, {
+      "name" : "Custom Logs Monitoring",
+      "desiredState" : "ENABLED"
+    }, {
+      "name" : "Compute Instance Run Command",
+      "desiredState" : "ENABLED"
+    }, {
+      "name" : "Compute Instance Monitoring",
+      "desiredState" : "ENABLED"
+    }, {
+      "name" : "Block Volume Management",
+      "desiredState" : "DISABLED"
+    }, {
+      "name" : "Bastion",
+      "desiredState" : "DISABLED"
+    } ]
+  },
+  "definedTags" : {
+    "Oracle-Tags" : {
+      "CreatedBy": "oracleidentitycloudservice/daniel.armbrust@algumdominio.com",
+      "CreatedOn" : "2021-09-12T15:19:47.830Z"
+    }
+  }
+}
+```
+
 ### __Security Lists e Network Security Groups (NSG)__
 
 Vamos entrar um pouco mais nos detalhes das _[Security Lists](https://docs.oracle.com/pt-br/iaas/Content/Network/Concepts/securitylists.htm#Security_Lists)_ e _[Network Security Groups (NSG)](https://docs.oracle.com/pt-br/iaas/Content/Network/Concepts/networksecuritygroups.htm)_, exibindo diferenças e aplicabilidades.
