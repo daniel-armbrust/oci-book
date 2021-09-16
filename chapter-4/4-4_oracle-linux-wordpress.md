@@ -438,7 +438,7 @@ Como já criamos parte da infraestrutura no _[OCI](https://www.oracle.com/cloud/
 
 Pelo fato do _[OCI](https://www.oracle.com/cloud/)_ dispor de uma infraestrutura global, ele deve utilizar um _[fuso horário](https://pt.wikipedia.org/wiki/Fuso_hor%C3%A1rio)_ consistente em todas as suas regiões do globo. Por conta disto, por padrão, o _[fuso horário](https://pt.wikipedia.org/wiki/Fuso_hor%C3%A1rio)_ de uso por todos os recursos é o _[UTC (Coordinated Universal Time) ou Tempo Universal Coordenado](https://pt.wikipedia.org/wiki/Tempo_Universal_Coordenado)_. Ele é a referência a partir do qual se calculam todas as outras zonas horárias do mundo, além de não estar sujeito ao _[horário de verão](https://pt.wikipedia.org/wiki/Hor%C3%A1rio_de_ver%C3%A3o)_ (e ao risco associado de bugs). 
 
-Podemos ver pelo comando abaixo que a instância que criamos está com seu  _[fuso horário](https://pt.wikipedia.org/wiki/Fuso_hor%C3%A1rio)_ definido em _[UTC](https://pt.wikipedia.org/wiki/Tempo_Universal_Coordenado)_:
+Podemos ver pelo comando abaixo que a instância que criamos está com seu  _[fuso horário](https://pt.wikipedia.org/wiki/Fuso_hor%C3%A1rio)_ definido em _[UTC+0](https://pt.wikipedia.org/wiki/UTC%2B0)_:
 
 ```
 [opc@wordpress ~]$ timedatectl
@@ -460,6 +460,8 @@ Como critério de demonstração, para alterarmos o _[fuso horário](https://pt.
 
 >_**__NOTA:__** Ajustes no [fuso horário](https://pt.wikipedia.org/wiki/Fuso_hor%C3%A1rio) pode ser algo complicado. Como já foi dito, tudo no [OCI](https://www.oracle.com/cloud/) utiliza [UTC+0](https://pt.wikipedia.org/wiki/UTC%2B0). Fique atento quando for correlacionar tempo sobre qualquer evento, agora gerado em [UTC-3](https://pt.wikipedia.org/wiki/UTC%E2%88%923) a partir desta instância, com outro evento do [OCI](https://www.oracle.com/cloud/), por exemplo._
 
+
+#### __Instalação e configuração do Apache HTTP e PHP__
 
 
 ```
