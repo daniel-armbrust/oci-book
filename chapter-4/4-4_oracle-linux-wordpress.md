@@ -228,7 +228,8 @@ darmbrust@hoodwink:~$ oci network nsg rules add \
 > --nsg-id "ocid1.networksecuritygroup.oc1.sa-saopaulo-1.aaaaaaaa6jz4tjisvsnk4u7xaxkwmywx72jrkxeyjdpmdwgstt5nw4yzskpa" \
 > --security-rules '[
 > {"isStateless": false, "protocol": "6", "direction": "INGRESS", "sourceType": "CIDR_BLOCK", "source": "10.0.10.112/32",  "tcpOptions": {"destinationPortRange": {"min": 22, "max": 22}}},
-> {"isStateless": false, "protocol": "all", "direction": "EGRESS", "destinationType": "CIDR_BLOCK", "destination": "0.0.0.0/0"}]'
+> {"isStateless": false, "protocol": "all", "direction": "EGRESS", "destinationType": "CIDR_BLOCK", "destination": "0.0.0.0/0"}
+> ]'
 {
   "data": {
     "security-rules": [
