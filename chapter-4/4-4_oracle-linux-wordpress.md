@@ -424,4 +424,4 @@ darmbrust@hoodwink:~$ oci network vnic update \
 }
 ```
 
-Pronto! O _[NSG](https://docs.oracle.com/pt-br/iaas/Content/Network/Concepts/networksecuritygroups.htm)_ foi aplicado.
+Pronto! O _[NSG](https://docs.oracle.com/pt-br/iaas/Content/Network/Concepts/networksecuritygroups.htm)_ que permite acesso somente do _[Bastion](https://docs.oracle.com/pt-br/iaas/Content/Bastion/Concepts/bastionoverview.htm)_ foi aplicado.
