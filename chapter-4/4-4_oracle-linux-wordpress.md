@@ -428,7 +428,7 @@ Pronto! O _[NSG](https://docs.oracle.com/pt-br/iaas/Content/Network/Concepts/net
 
 ### __Instalação do Wordpress__
 
- _[Wordpress](https://pt.wikipedia.org/wiki/WordPress)_ é um dos sistemas de _[gerenciamento de conteúdo (CMS)](https://pt.wikipedia.org/wiki/Sistema_de_gerenciamento_de_conte%C3%BAdo)_ mais populares. Este _[CMS](https://pt.wikipedia.org/wiki/Sistema_de_gerenciamento_de_conte%C3%BAdo)_ é comumente usado no gerenciamento de blogs. Mas há muitos complementos e módulos para expandir seus recursos. 
+ _[Wordpress](https://pt.wikipedia.org/wiki/WordPress)_ é um dos sistemas de _[gerenciamento de conteúdo (CMS)](https://pt.wikipedia.org/wiki/Sistema_de_gerenciamento_de_conte%C3%BAdo)_ mais populares. Este _[CMS](https://pt.wikipedia.org/wiki/Sistema_de_gerenciamento_de_conte%C3%BAdo)_ é comumente usado no gerenciamento de blogs, mas há muitos complementos e módulos para expandir seus recursos. 
 
 Como já criamos parte da infraestrutura no _[OCI](https://www.oracle.com/cloud/)_, aqui iremos atuar diretamente no shell da instância.
 
