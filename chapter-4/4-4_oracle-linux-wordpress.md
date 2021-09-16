@@ -222,3 +222,55 @@ Action completed. Waiting until the resource has entered state: ('AVAILABLE',)
   "etag": "2823fb9"
 }
 ```
+
+```
+darmbrust@hoodwink:~$ oci network nsg rules add \
+> --nsg-id "ocid1.networksecuritygroup.oc1.sa-saopaulo-1.aaaaaaaa6jz4tjisvsnk4u7xaxkwmywx72jrkxeyjdpmdwgstt5nw4yzskpa" \
+> --security-rules '[
+> {"isStateless": false, "protocol": "6", "direction": "INGRESS", "sourceType": "CIDR_BLOCK", "source": "10.0.10.112/32",  "tcpOptions": {"destinationPortRange": {"min": 22, "max": 22}}},
+> {"isStateless": false, "protocol": "all", "direction": "EGRESS", "destinationType": "CIDR_BLOCK", "destination": "0.0.0.0/0"}]'
+{
+  "data": {
+    "security-rules": [
+      {
+        "description": null,
+        "destination": "0.0.0.0/0",
+        "destination-type": "CIDR_BLOCK",
+        "direction": "EGRESS",
+        "icmp-options": null,
+        "id": "B2834E",
+        "is-stateless": false,
+        "is-valid": true,
+        "protocol": "all",
+        "source": null,
+        "source-type": null,
+        "tcp-options": null,
+        "time-created": "2021-09-16T11:26:11.650000+00:00",
+        "udp-options": null
+      },
+      {
+        "description": null,
+        "destination": null,
+        "destination-type": null,
+        "direction": "INGRESS",
+        "icmp-options": null,
+        "id": "4DF2CB",
+        "is-stateless": false,
+        "is-valid": true,
+        "protocol": "6",
+        "source": "10.0.10.112/32",
+        "source-type": "CIDR_BLOCK",
+        "tcp-options": {
+          "destination-port-range": {
+            "max": 22,
+            "min": 22
+          },
+          "source-port-range": null
+        },
+        "time-created": "2021-09-16T11:26:11.650000+00:00",
+        "udp-options": null
+      }
+    ]
+  }
+}
+```
