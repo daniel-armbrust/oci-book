@@ -463,33 +463,36 @@ Como critério de demonstração, para alterarmos o _[fuso horário](https://pt.
 
 #### __Instalação e configuração do Apache HTTP e PHP__
 
+A partir de uma sessão do _[Bastion](https://docs.oracle.com/pt-br/iaas/Content/Bastion/Concepts/bastionoverview.htm)_, vamos acessar a instância do _[Wordpress](https://pt.wikipedia.org/wiki/WordPress)_ e seguir com o passo a passo de sua instalação.
 
-Primeira atividade será desabilitar o SELinux da instância:
+1. Primeira atividade será desabilitar o _[SELinux](https://pt.wikipedia.org/wiki/SELinux)_ da instância:
 
 ```
 [opc@wordpress ~]$ sudo setenforce 0
 [opc@wordpress ~]$ sudo sed -i 's/SELINUX=enforcing/SELINUX=permissive/' /etc/selinux/config
 ```
 
-Vamos instalar o último pacote _oracle-php-release-el7_ que irá permitir a instalação do _[PHP](https://pt.wikipedia.org/wiki/PHP)_ versão 7.4:
+>_**__NOTA:__** [SELinux](https://pt.wikipedia.org/wiki/SELinux) é um componente de segurança muito importante do sistema operacional e já vem habilitado por padrão. Porém, sua configuração e troubleshoot pode ser um pouco mais complexo. Meu intuíto aqui é demonstrar uma instalação básica do [Wordpress](https://pt.wikipedia.org/wiki/WordPress) no [OCI](https://www.oracle.com/cloud/). Se a sua necessidade é ter um [Wordpress](https://pt.wikipedia.org/wiki/WordPress) produtivo, recomendo não desativar o [SELinux](https://pt.wikipedia.org/wiki/SELinux)._
+
+2. É necessário instalar o último pacote _oracle-php-release-el7_ que irá permitir a instalação do _[PHP](https://pt.wikipedia.org/wiki/PHP)_ versão _7.4_:
 
 ```
 [opc@wordpress ~]$ sudo yum -y install oracle-php-release-el7
 ```
 
-Agora, iremos instalar o servidor _[HTTP Apache](https://pt.wikipedia.org/wiki/Servidor_Apache)_ e o _[PHP](https://pt.wikipedia.org/wiki/PHP)_:
+3. Agora, iremos instalar o servidor _[HTTP Apache](https://pt.wikipedia.org/wiki/Servidor_Apache)_ e o _[PHP](https://pt.wikipedia.org/wiki/PHP)_:
 
 ```
 [opc@wordpress ~]$ sudo yum install -y httpd php
 ```
 
-Instalação das extensões do _[PHP](https://pt.wikipedia.org/wiki/PHP)_ necessárias para o funcionamento do _[Wordpress](https://pt.wikipedia.org/wiki/WordPress)_:
+4. Instalação das extensões do _[PHP](https://pt.wikipedia.org/wiki/PHP)_ necessárias para o funcionamento do _[Wordpress](https://pt.wikipedia.org/wiki/WordPress)_:
 
 ```
 [opc@wordpress ~]$ sudo yum install -y php-mysqlnd php-zip php-gd php-mcrypt php-mbstring php-xml php-json
 ```
 
-Irei permitir tráfego na porta 80/TCP através do _[firewalld](https://firewalld.org/)_:
+5. Irei permitir tráfego na porta 80/TCP da instância através do _[firewalld](https://firewalld.org/)_:
 
 ```
 [opc@wordpress ~]$ sudo firewall-cmd --permanent --add-port=80/tcp
@@ -498,20 +501,26 @@ success
 success
 ```
 
-Vamos habilitar e iniciar o servidor _[HTTP Apache](https://pt.wikipedia.org/wiki/Servidor_Apache)_:
+6. Habilitar e iniciar o servidor _[HTTP Apache](https://pt.wikipedia.org/wiki/Servidor_Apache)_:
 
 ```
 [opc@wordpress ~]$ sudo systemctl enable httpd --now
 [opc@wordpress ~]$ sudo systemctl start httpd --now
 ```
 
-O procedimento de instalação do _[Wordpress](https://pt.wikipedia.org/wiki/WordPress)_ e ajustes necessários para seu funcionamento, estão nos comandos abaixo:
+7. Download da última versão do _[Wordpress](https://pt.wikipedia.org/wiki/WordPress)_:
 
 ```
 [opc@wordpress ~]$ curl -O https://wordpress.org/latest.tar.gz
+```
+
+8. Instalação e ajustes nas permissões:
+
+```
 [opc@wordpress ~]$ sudo tar zxf latest.tar.gz -C /var/www/html/ --strip 1
 [opc@wordpress ~]$ sudo chown apache. -R /var/www/html/
 [opc@wordpress ~]$ sudo mkdir /var/www/html/wp-content/uploads
 [opc@wordpress ~]$ sudo chown apache:apache /var/www/html/wp-content/uploads
 ```
 
+9. Pronto! _[Wordpress](https://pt.wikipedia.org/wiki/WordPress)_ instalado.
