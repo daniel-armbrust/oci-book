@@ -464,7 +464,54 @@ Como critério de demonstração, para alterarmos o _[fuso horário](https://pt.
 #### __Instalação e configuração do Apache HTTP e PHP__
 
 
+Primeira atividade será desabilitar o SELinux da instância:
+
 ```
-[opc@wordpress ~]$ sudo yum install -y httpd
+[opc@wordpress ~]$ sudo setenforce 0
+[opc@wordpress ~]$ sudo sed -i 's/SELINUX=enforcing/SELINUX=permissive/' /etc/selinux/config
+```
+
+Vamos instalar o último pacote _oracle-php-release-el7_ que irá permitir a instalação do _[PHP](https://pt.wikipedia.org/wiki/PHP)_ versão 7.4:
+
+```
+[opc@wordpress ~]$ sudo yum -y install oracle-php-release-el7
+```
+
+Agora, iremos instalar o servidor _[HTTP Apache](https://pt.wikipedia.org/wiki/Servidor_Apache)_ e o _[PHP](https://pt.wikipedia.org/wiki/PHP)_:
+
+```
+[opc@wordpress ~]$ sudo yum install -y httpd php
+```
+
+Instalação das extensões do _[PHP](https://pt.wikipedia.org/wiki/PHP)_ necessárias para o funcionamento do _[Wordpress](https://pt.wikipedia.org/wiki/WordPress)_:
+
+```
+[opc@wordpress ~]$ sudo yum install -y php-mysqlnd php-zip php-gd php-mcrypt php-mbstring php-xml php-json
+```
+
+Irei permitir tráfego na porta 80/TCP através do _[firewalld](https://firewalld.org/)_:
+
+```
+[opc@wordpress ~]$ sudo firewall-cmd --permanent --add-port=80/tcp
+success
+[opc@wordpress ~]$ sudo firewall-cmd --reload
+success
+```
+
+Vamos habilitar e iniciar o servidor _[HTTP Apache](https://pt.wikipedia.org/wiki/Servidor_Apache)_:
+
+```
 [opc@wordpress ~]$ sudo systemctl enable httpd --now
+[opc@wordpress ~]$ sudo systemctl start httpd --now
 ```
+
+O procedimento de instalação do _[Wordpress](https://pt.wikipedia.org/wiki/WordPress)_ e ajustes necessários para seu funcionamento, estão nos comandos abaixo:
+
+```
+[opc@wordpress ~]$ curl -O https://wordpress.org/latest.tar.gz
+[opc@wordpress ~]$ sudo tar zxf latest.tar.gz -C /var/www/html/ --strip 1
+[opc@wordpress ~]$ sudo chown apache. -R /var/www/html/
+[opc@wordpress ~]$ sudo mkdir /var/www/html/wp-content/uploads
+[opc@wordpress ~]$ sudo chown apache:apache /var/www/html/wp-content/uploads
+```
+
