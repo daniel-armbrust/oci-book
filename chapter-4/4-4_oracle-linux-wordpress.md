@@ -132,7 +132,7 @@ Todas as _[imagens de plataforma](https://docs.oracle.com/pt-br/iaas/Content/Com
 
 #### __A rede reservada 169.254.0.0/16__
 
-Esta é uma rede especial e reservada para conexões iSCSI utilizado por _[volumes de inicialização](https://docs.oracle.com/pt-br/iaas/Content/Block/Concepts/bootvolumes.htm)_ e _[volumes em blocos](https://docs.oracle.com/pt-br/iaas/Content/Block/Concepts/overview.htm)_ da instância. 
+Esta é uma rede especial e reservada para conexões _[iSCSI](https://pt.wikipedia.org/wiki/ISCSI)_ utilizado por _[volumes de inicialização](https://docs.oracle.com/pt-br/iaas/Content/Block/Concepts/bootvolumes.htm)_ e _[volumes em blocos](https://docs.oracle.com/pt-br/iaas/Content/Block/Concepts/overview.htm)_ da instância. 
 
 Um outro serviço presente nesta rede é _[serviço de metadados da instância (IMDS)](https://docs.oracle.com/pt-br/iaas/Content/Compute/Tasks/gettingmetadata.htm)_. Este está em execução através de um endpoint HTTP no endereço _169.254.169.254_, e fornece diversas informações sobre a instância em execução.
 
