@@ -465,7 +465,7 @@ Como critério de demonstração, para alterarmos o _[fuso horário](https://pt.
 
 A partir de uma sessão do _[Bastion](https://docs.oracle.com/pt-br/iaas/Content/Bastion/Concepts/bastionoverview.htm)_, vamos acessar a instância do _[Wordpress](https://pt.wikipedia.org/wiki/WordPress)_ e seguir com o passo a passo de sua instalação.
 
-**1.** Primeira atividade será desabilitar o _[SELinux](https://pt.wikipedia.org/wiki/SELinux)_ da instância:
+1. Primeira atividade será desabilitar o _[SELinux](https://pt.wikipedia.org/wiki/SELinux)_ da instância:
 
 ```
 [opc@wordpress ~]$ sudo setenforce 0
