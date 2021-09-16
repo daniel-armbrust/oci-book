@@ -247,6 +247,8 @@ The key's randomart image is:
 |                 |
 |                 |
 +----[SHA256]-----+
+
+darmbrust@hoodwink:~$ chmod 0400 ./sessao-temp
 ```
 
 Agora, vou obter o endereço IP privado que a instância _[Wordpress](https://pt.wikipedia.org/wiki/WordPress)_ consumiu. Para isto, primeiramente tenho que obter a lista de _[VNICs](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingVNICs.htm)_ desta instância:

@@ -292,6 +292,8 @@ The key's randomart image is:
 |..    o * . o =o=|
 |       . =.   .+o|
 +----[SHA256]-----+
+
+darmbrust@hoodwink:~$ chmod 0400 ./wordpress-key
 ```
 
 >_**__NOTA:__** Caso queira especificar uma "frase-senha" e adicionar uma camada extra de segurança, retire os argumentos _-N ""_ do comando acima._
