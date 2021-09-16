@@ -166,7 +166,7 @@ darmbrust@hoodwink:~$ oci network security-list list \
 ]
 ```
 
-Irei utilizar o parâmetro _--force_ que irá executar a atualização sem solicitar confirmação:
+Irei utilizar o parâmetro _--force_ que irá remover as regras sem solicitar confirmação:
 
 ```
 darmbrust@hoodwink:~$ oci network security-list update \
@@ -196,6 +196,8 @@ darmbrust@hoodwink:~$ oci network security-list update \
 }
 ```
 
+Feito isto, criaremos o _[NSG](https://docs.oracle.com/pt-br/iaas/Content/Network/Concepts/networksecuritygroups.htm)_ para a instância do _[Wordpress](https://pt.wikipedia.org/wiki/WordPress)_:
+
 ```
 darmbrust@hoodwink:~$ oci network nsg create \
 > --compartment-id "ocid1.compartment.oc1..aaaaaaaauvqvbbx3oridcm5d2ztxkftwr362u2vl5zdsayzbehzwbjs56soq" \
@@ -222,6 +224,8 @@ Action completed. Waiting until the resource has entered state: ('AVAILABLE',)
   "etag": "2823fb9"
 }
 ```
+
+A regra que irei criar abaixo, permite conexões vindas do _[Bastion](https://docs.oracle.com/pt-br/iaas/Content/Bastion/Concepts/bastionoverview.htm)_ criado e que possui origem _10.0.10.112_, na porta SSH (22/TCP) da instância do _[Wordpress](https://pt.wikipedia.org/wiki/WordPress)_. Uma outra regra que permite saída total também será criada.
 
 ```
 darmbrust@hoodwink:~$ oci network nsg rules add \
@@ -275,3 +279,7 @@ darmbrust@hoodwink:~$ oci network nsg rules add \
   }
 }
 ```
+
+A criação das regras seguem parecidas com a criação das regras da _[security list](https://docs.oracle.com/en-us/iaas/api/#/en/iaas/20160918/datatypes/IngressSecurityRule)_, porém temos mais parâmetros a disposição. Lembrando que você pode informar as regras especificando um arquivo _[JSON](https://pt.wikipedia.org/wiki/JSON)_ via _file://regras-nsg.json_, por exemplo.
+
+>_**__NOTA:__** Todos os parâmetros para criação das regras de firewall das [NSGs](https://docs.oracle.com/pt-br/iaas/Content/Network/Concepts/networksecuritygroups.htm) podem ser consultados diretamente na documentação da API neste [link aqui](https://docs.oracle.com/en-us/iaas/api/#/en/iaas/20160918/datatypes/AddSecurityRuleDetails)._ 
