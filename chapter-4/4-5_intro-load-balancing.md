@@ -44,7 +44,6 @@ Abaixo iremos listar algumas propriedades e características do serviço que ser
         3. **Least connections (Menos conexões)**
             - Esta política irá encaminhar tráfego para a instância de  _backend_ com menos conexões ativas.
 
-
-
-
-
+- **Gerenciamento de Certificados SSL**
+    - O _[Serviço de Load Balancing](https://docs.oracle.com/pt-br/iaas/Content/Balance/Concepts/balanceoverview.htm)_ permite tratar conexões seguras através do protocolo _[HTTPS](https://pt.wikipedia.org/wiki/Hyper_Text_Transfer_Protocol_Secure)_. Para isto, você deve fazer upload do seu certificado público, chave privada correspondente e quaisquer outros certificados da cadeia de validação. 
+    - Tratar conexões _[HTTPS](https://pt.wikipedia.org/wiki/Hyper_Text_Transfer_Protocol_Secure)_ diretamente no _[Load Balancer](https://docs.oracle.com/pt-br/iaas/Content/Balance/Concepts/balanceoverview.htm)_, elimina sobrecarga e qualquer outra configuração nos servidores de aplicação.
