@@ -11,7 +11,7 @@ Sua principal função é realizar a distribuição do tráfego de um ponto de e
 Abaixo iremos listar algumas propriedades e características do serviço que serão úteis quando formos criar o nosso:
 
 - **Público ou Privado**
-    - Um balanceador de carga _**público**_ é criado em uma subrede pública com endereço IP público e acessível pela internet. Este pode ser criado em uma subrede regional no qual irá consumir dois endereços IP privados, ou pode ser criado em duas subredes públicas sobre dois _[ADs](https://docs.oracle.com/pt-br/iaas/Content/General/Concepts/regions.htm#About)_ diferentes, consumindo dois endereços IP privados por _[ADs](https://docs.oracle.com/pt-br/iaas/Content/General/Concepts/regions.htm#About)_.
+    - Um balanceador de carga _**público**_ é criado em uma subrede pública com endereço IP público e acessível pela internet. Este pode ser criado em uma subrede regional no qual irá consumir dois endereços IPs privados, ou pode ser criado em duas subredes públicas sobre dois _[ADs](https://docs.oracle.com/pt-br/iaas/Content/General/Concepts/regions.htm#About)_ diferentes, consumindo dois endereços IPs privados por _[ADs](https://docs.oracle.com/pt-br/iaas/Content/General/Concepts/regions.htm#About)_.
    - Já um balancedor de carga _**privado**_ é criado em uma subrede privada com o intuito de não receber requisições pela internet, e fazer _"frente"_ somente com recursos internos. Neste caso será consumido três endereços IPs privados da subrede.
     - Em ambos, há um endereço IP principal que possui a característica de ser _"flutuante"_. Ou seja, ele se alternará para o balanceador de carga secundário (standby) em caso de falha no principal.
 
