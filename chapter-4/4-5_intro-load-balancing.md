@@ -19,10 +19,10 @@ Abaixo iremos listar algumas propriedades e características do serviço que ser
     - Você configura um _**listener**_ para tratar conexões através dos protocolos de _[Camada 7](https://pt.wikipedia.org/wiki/Camada_de_aplica%C3%A7%C3%A3o)_ (_[HTTP](https://pt.wikipedia.org/wiki/Hypertext_Transfer_Protocol)_, _[HTTPS](https://pt.wikipedia.org/wiki/Hyper_Text_Transfer_Protocol_Secure)_ ou _[HTTP/2](https://pt.wikipedia.org/wiki/HTTP/2)_) ou _[Camada 4](https://pt.wikipedia.org/wiki/Camada_de_transporte)_ (_[TCP](https://pt.wikipedia.org/wiki/Transmission_Control_Protocol)_) em portas específicas.
     - Você pode definir vários _**listener**_ que tratam um determinado protocolo em portas diferentes.
 
-- **Backends**
-    - Um _"conjunto de backend"_ é uma entidade lógica que permite você agrupar suas instâncias de computação, que receberão o tráfego da rede.
-    - No _backend_ é onde residem suas aplicações que são responsáveis por gerar conteúdo em resposta ao tráfego TCP ou HTTP recebido.
-    - A ideia é sempre ter mais de uma instância (cópia) da sua aplicação dentro de uma configuração de backend empregando assim a _["alta disponibilidade"](https://en.wikipedia.org/wiki/High_availability)_.
+- **Backend**    
+    - Um _"conjunto de backend"_ é uma entidade lógica onde é possível agrupar suas instâncias de aplicação que são responsáveis por gerar conteúdo em resposta ao tráfego TCP ou HTTP recebido.        
+    - A ideia é sempre ter mais de uma instância (cópia) da sua aplicação dentro de uma configuração de _backend_, empregando assim a _["alta disponibilidade"](https://en.wikipedia.org/wiki/High_availability)_.
     - É possível escolher instâncias de diferentes compartimentos para compor o seu _"conjunto de backend"_.
-     
+
+
 
