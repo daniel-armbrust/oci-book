@@ -514,7 +514,7 @@ success
 [opc@wordpress ~]$ curl -O https://wordpress.org/latest.tar.gz
 ```
 
-8. Instalação e ajustes nas permissões:
+8. Instalação e ajustes finais:
 
 ```
 [opc@wordpress ~]$ sudo tar zxf latest.tar.gz -C /var/www/html/ --strip 1

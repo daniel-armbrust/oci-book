@@ -39,6 +39,7 @@ Esse livro apresenta o **OCI (Oracle Cloud Infraestructure)** e por quê você d
     [4.2 - Fundamentos do Serviço de Computação](https://github.com/daniel-armbrust/oci-book/blob/main/chapter-4/4-2_fundamentos-computacao.md) <br>
     [4.3 - Apresentando o Serviço Bastion](https://github.com/daniel-armbrust/oci-book/blob/main/chapter-4/4-3_servico-bastion.md) <br>
     [4.4 - Oracle Linux com WordPress na nuvem](https://github.com/daniel-armbrust/oci-book/blob/main/chapter-4/4-4_oracle-linux-wordpress.md) <br>
+    [4.5 - Introdução ao Serviço de Load Balancer](https://github.com/daniel-armbrust/oci-book/blob/main/chapter-4/4-5_intro-load-balancer.md) <br>
 
 - Capítulo 5: Criando um site sem servidor.
 
