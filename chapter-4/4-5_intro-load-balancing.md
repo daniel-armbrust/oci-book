@@ -29,5 +29,21 @@ Abaixo iremos listar algumas propriedades e características do serviço que ser
     - _"Health Check"_ ou verificação de integridade, é um teste realizado pelo _[Load Balancer](https://docs.oracle.com/pt-br/iaas/Content/Balance/Concepts/balanceoverview.htm)_ para confirmar a disponibilidade das suas instâncias contidas no _"conjunto de backend"_ (monitorar). Caso uma instância não responda com sucesso ao teste, o _[Load Balancer](https://docs.oracle.com/pt-br/iaas/Content/Balance/Concepts/balanceoverview.htm)_ retira temporariamente esta instância do _"conjunto de backend"_. O teste continua e caso futuramente a instância volte a operar, ela é colocada novamente ao _"conjunto de backend"_.
     - Os testes podem ser feitos em nível _[TCP](https://pt.wikipedia.org/wiki/Transmission_Control_Protocol)_ (abertura de _[socket](https://pt.wikipedia.org/wiki/Soquete_de_rede)_) ou consultando diretamente a aplicação, por uma _[URI](https://pt.wikipedia.org/wiki/URI)_ que você especifica.
 
-- **Load Balancing Policy**
-    - 
+- **Política de Balanceamento**
+    - A política de balanceamento informa como distribuir o tráfego de entrada para o _"conjunto de backend"_.
+    - Atualmente temos três diferentes políticas. São elas:
+        1. **Weighted Round Robin (Revezamento)**
+            - É um algoritmo de balanceamento simples que distribui o tráfego de forma sequencial para cada instância contida no _"conjunto de backend"_.
+            - Esta é uma política que funciona melhor quando todas as instâncias do _backend_  possuem capacidade computacional semelhante.
+
+        2. **IP hash**
+            - Esta política calcula um _[Hash](https://pt.wikipedia.org/wiki/Fun%C3%A7%C3%A3o_hash)_ sobre o IP de origem de uma solicitação recebida, com a finalidade de enviar o tráfego para a mesma instância do _backend_.
+            - Garante que as solicitações de um cliente específico sejam sempre direcionadas para o mesmo servidor no _backend_.
+        
+        3. **Least connections (Menos conexões)**
+            - Esta política irá encaminhar tráfego para a instância de  _backend_ com menos conexões ativas.
+
+
+
+
+
