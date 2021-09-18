@@ -47,7 +47,7 @@ Como aqui estamos falando de uma aplicação Web, o _[Wordpress](https://pt.wiki
     - Existente somente no _[Load Balancing (LB)](https://docs.oracle.com/pt-br/iaas/Content/Balance/Concepts/balanceoverview.htm)_ de _[camada 7](https://pt.wikipedia.org/wiki/Camada_de_aplica%C3%A7%C3%A3o)_, a política de balanceamento informa como distribuir o tráfego de entrada para o _"conjunto de backend"_.
     - Atualmente temos três diferentes políticas. São elas:
         1. **Weighted Round Robin (Revezamento)**
-            - É um algoritmo de balanceamento simples que distribui o tráfego de forma sequencial para cada instância contida no _"conjunto de backend"_.
+            - É um algoritmo de balanceamento simples que distribui o tráfego de forma sequencial para cada instância contida no _"conjunto de backend"_.            
             - Esta é uma política que funciona melhor quando todas as instâncias do _backend_  possuem capacidade computacional semelhante.
 
         2. **IP hash**
