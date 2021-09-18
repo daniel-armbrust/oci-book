@@ -686,7 +686,7 @@ darmbrust@hoodwink:~$ oci compute instance launch \
 }
 ```
 
-Após conclusão do provisionamento e a partir de uma nova sessão do _[Bastion](https://docs.oracle.com/pt-br/iaas/Content/Bastion/Concepts/bastionoverview.htm)_, iremos verificar a instância criada:
+Após conclusão do provisionamento e a partir de uma nova sessão do _[Bastion](https://docs.oracle.com/pt-br/iaas/Content/Bastion/Concepts/bastionoverview.htm)_, iremos verificar a instância:
 
 1. Fuso horário
 
