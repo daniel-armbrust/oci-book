@@ -111,6 +111,8 @@ success
 success
 [opc@instance-20210912-1218 ~]$ sudo firewall-cmd --reload
 success
+[opc@wordpress ~]$ sudo firewall-cmd --runtime-to-permanent
+success
 ```
 
 Esta ação pode ser confirmada com o comando abaixo:
@@ -583,3 +585,168 @@ Action completed. Waiting until the resource has entered state: ('AVAILABLE',)
 >_**__NOTA:__** Gerar uma imagem gera uma cópia do estado atual da instância. Se você alterar o [boot volume](https://docs.oracle.com/pt-br/iaas/Content/Block/Concepts/bootvolumes.htm), você deve gerar uma nova [custom image](https://docs.oracle.com/pt-br/iaas/Content/Compute/Tasks/managingcustomimages.htm) que contenha tais alterações._
 
 #### __Replicando o Wordpress__
+
+Para provisionarmos uma nova instância com base na _[custom image](https://docs.oracle.com/pt-br/iaas/Content/Compute/Tasks/managingcustomimages.htm)_ que criamos, precisamos primeiramente obter o OCID da imagem.
+
+```
+darmbrust@hoodwink:~$ oci compute image list \
+> --compartment-id "ocid1.compartment.oc1..aaaaaaaamcff6exkhvp4aq3ubxib2wf74v7cx22b3yj56jnfkazoissdzefq" \
+> --all \
+> --query "data[?\"display-name\"=='ol7-wordpress_img'].id"
+[
+  "ocid1.image.oc1.sa-saopaulo-1.aaaaaaaaj4qhvufskm2m4qwn6zpyau6yxekvymvrpt2pokdcxmpokje3tcoq"
+]
+```
+
+A criação da instância obedece o mesmo padrão que já conhecemos. Porém, iremos especificar somente alguns parâmetros diferentes como o _"FAULT-DOMAIN-2"_, hostname, e a _[custom image](https://docs.oracle.com/pt-br/iaas/Content/Compute/Tasks/managingcustomimages.htm)_ que criamos. Utilizaremos o mesmo _[NSG](https://docs.oracle.com/pt-br/iaas/Content/Network/Concepts/networksecuritygroups.htm)_ também.
+
+```
+darmbrust@hoodwink:~$ oci compute instance launch \
+> --compartment-id "ocid1.compartment.oc1..aaaaaaaamcff6exkhvp4aq3ubxib2wf74v7cx22b3yj56jnfkazoissdzefq" \
+> --availability-domain "ynrK:SA-SAOPAULO-1-AD-1" \
+> --shape "VM.Standard2.2" \
+> --subnet-id "ocid1.subnet.oc1.sa-saopaulo-1.aaaaaaaans5d7xtvurugjpyecws4kazd23lfmcdzyoj2jpqg4cyi56sy6nzq" \
+> --display-name "vm-wordpress-bkp_subnprv-app_vcn-prd" \
+> --fault-domain "FAULT-DOMAIN-2" \
+> --hostname-label "wordpress-bkp" \
+> --image-id "ocid1.image.oc1.sa-saopaulo-1.aaaaaaaaj4qhvufskm2m4qwn6zpyau6yxekvymvrpt2pokdcxmpokje3tcoq" \
+> --nsg-ids '["ocid1.networksecuritygroup.oc1.sa-saopaulo-1.aaaaaaaa6jz4tjisvsnk4u7xaxkwmywx72jrkxeyjdpmdwgstt5nw4yzskpa"]'
+{
+  "data": {
+    "agent-config": {
+      "are-all-plugins-disabled": false,
+      "is-management-disabled": false,
+      "is-monitoring-disabled": false,
+      "plugins-config": null
+    },
+    "availability-config": {
+      "is-live-migration-preferred": null,
+      "recovery-action": "RESTORE_INSTANCE"
+    },
+    "availability-domain": "ynrK:SA-SAOPAULO-1-AD-1",
+    "capacity-reservation-id": null,
+    "compartment-id": "ocid1.compartment.oc1..aaaaaaaamcff6exkhvp4aq3ubxib2wf74v7cx22b3yj56jnfkazoissdzefq",
+    "dedicated-vm-host-id": null,
+    "defined-tags": {
+      "Oracle-Tags": {
+        "CreatedBy": "oracleidentitycloudservice/daniel.armbrust@algumdominio.com",
+        "CreatedOn": "2021-09-18T22:17:46.840Z"
+      }
+    },
+    "display-name": "vm-wordpress-bkp_subnprv-app_vcn-prd",
+    "extended-metadata": {},
+    "fault-domain": "FAULT-DOMAIN-2",
+    "freeform-tags": {},
+    "id": "ocid1.instance.oc1.sa-saopaulo-1.antxeljr6noke4qcqvfo5wgs4ikrzyicjx7erqzg5oqkqlctpfliw6z7kuyq",
+    "image-id": "ocid1.image.oc1.sa-saopaulo-1.aaaaaaaaj4qhvufskm2m4qwn6zpyau6yxekvymvrpt2pokdcxmpokje3tcoq",
+    "instance-options": {
+      "are-legacy-imds-endpoints-disabled": false
+    },
+    "ipxe-script": null,
+    "launch-mode": "PARAVIRTUALIZED",
+    "launch-options": {
+      "boot-volume-type": "PARAVIRTUALIZED",
+      "firmware": "UEFI_64",
+      "is-consistent-volume-naming-enabled": true,
+      "is-pv-encryption-in-transit-enabled": false,
+      "network-type": "PARAVIRTUALIZED",
+      "remote-data-volume-type": "PARAVIRTUALIZED"
+    },
+    "lifecycle-state": "PROVISIONING",
+    "metadata": {},
+    "platform-config": null,
+    "preemptible-instance-config": null,
+    "region": "sa-saopaulo-1",
+    "shape": "VM.Standard2.2",
+    "shape-config": {
+      "baseline-ocpu-utilization": null,
+      "gpu-description": null,
+      "gpus": 0,
+      "local-disk-description": null,
+      "local-disks": 0,
+      "local-disks-total-size-in-gbs": null,
+      "max-vnic-attachments": 2,
+      "memory-in-gbs": 30.0,
+      "networking-bandwidth-in-gbps": 2.0,
+      "ocpus": 2.0,
+      "processor-description": "2.0 GHz Intel\u00ae Xeon\u00ae Platinum 8167M (Skylake)"
+    },
+    "source-details": {
+      "boot-volume-size-in-gbs": null,
+      "image-id": "ocid1.image.oc1.sa-saopaulo-1.aaaaaaaaj4qhvufskm2m4qwn6zpyau6yxekvymvrpt2pokdcxmpokje3tcoq",
+      "kms-key-id": null,
+      "source-type": "image"
+    },
+    "system-tags": {},
+    "time-created": "2021-09-18T22:17:47.477000+00:00",
+    "time-maintenance-reboot-due": null
+  },
+  "etag": "487b708d73fd95c1f2a57e5ea6d5bfbb1b45dfca04b2457b2c9a1c5300ed4f42",
+  "opc-work-request-id": "ocid1.coreservicesworkrequest.oc1.sa-saopaulo-1.abtxeljrhnp7nngny7qpuyrk7qhc6nalusipd6e2twxndam3fi63wldt5tgq"
+}
+```
+
+Após conclusão do provisionamento e a partir de uma nova sessão do _[Bastion](https://docs.oracle.com/pt-br/iaas/Content/Bastion/Concepts/bastionoverview.htm)_, iremos verificar a instância criada:
+
+1. Fuso horário
+
+```
+[opc@wordpress-bkp ~]$ timedatectl
+      Local time: Sat 2021-09-18 19:23:23 -03
+  Universal time: Sat 2021-09-18 22:23:23 UTC
+        RTC time: Sat 2021-09-18 22:23:24
+       Time zone: America/Sao_Paulo (-03, -0300)
+     NTP enabled: yes
+NTP synchronized: yes
+ RTC in local TZ: no
+      DST active: n/a
+```
+
+2. SELinux
+
+```
+[opc@wordpress-bkp ~]$ getenforce
+Permissive
+```
+
+3. Firewalld
+
+```
+[opc@wordpress-bkp ~]$ sudo firewall-cmd --list-services
+dhcpv6-client http ssh
+```
+
+4. Apache HTTP
+
+```
+[opc@wordpress-bkp ~]$ systemctl status httpd
+● httpd.service - The Apache HTTP Server
+   Loaded: loaded (/usr/lib/systemd/system/httpd.service; enabled; vendor preset: disabled)
+   Active: active (running) since Sat 2021-09-18 19:19:00 -03; 7min ago
+     Docs: man:httpd(8)
+           man:apachectl(8)
+ Main PID: 2192 (httpd)
+   Status: "Total requests: 0; Current requests/sec: 0; Current traffic:   0 B/sec"
+   Memory: 29.6M
+   CGroup: /system.slice/httpd.service
+           ├─2192 /usr/sbin/httpd -DFOREGROUND
+           ├─2384 /usr/sbin/httpd -DFOREGROUND
+           ├─2391 /usr/sbin/httpd -DFOREGROUND
+           ├─2392 /usr/sbin/httpd -DFOREGROUND
+           ├─2393 /usr/sbin/httpd -DFOREGROUND
+           └─2394 /usr/sbin/httpd -DFOREGROUND
+
+Sep 18 19:18:59 wordpress-bkp systemd[1]: Starting The Apache HTTP Server...
+Sep 18 19:19:00 wordpress-bkp systemd[1]: Started The Apache HTTP Server.
+```
+
+5. PHP
+
+```
+[opc@wordpress-bkp ~]$ php -v
+PHP 7.4.23 (cli) (built: Aug 26 2021 21:07:39) ( NTS )
+Copyright (c) The PHP Group
+Zend Engine v3.4.0, Copyright (c) Zend Technologies
+```
+
+Com o resultado acima podemos confirmar que a instância criada a partir da _[custom image](https://docs.oracle.com/pt-br/iaas/Content/Compute/Tasks/managingcustomimages.htm)_ é igual a instância principal.
