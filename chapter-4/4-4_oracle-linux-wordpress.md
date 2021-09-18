@@ -535,7 +535,7 @@ Em certas literaturas, essa imagem que foi salva e pode ser reutilizada, recebe 
 
 Esta é uma prática que iremos usar para promover a _["alta disponibilidade"](https://en.wikipedia.org/wiki/High_availability)_. Se eu tenho o _"estado atual"_ do _[Wordpress](https://pt.wikipedia.org/wiki/WordPress)_ salvo, criar novas instâncias a partir desta imagem, em caso de problemas, é rápido e fácil.
 
-Para gerar uma _[imagem personalizada](https://docs.oracle.com/pt-br/iaas/Content/Compute/Tasks/managingcustomimages.htm)_ da instância do _[Wordpress](https://pt.wikipedia.org/wiki/WordPress)_, usamos o comando abaixo:
+Para gerar uma _[custom image](https://docs.oracle.com/pt-br/iaas/Content/Compute/Tasks/managingcustomimages.htm)_ da instância do _[Wordpress](https://pt.wikipedia.org/wiki/WordPress)_, usamos o comando abaixo:
 
 ```
 darmbrust@hoodwink:~$ oci compute image create \
