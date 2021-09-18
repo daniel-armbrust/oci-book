@@ -43,9 +43,9 @@ Como aqui estamos falando de uma aplicação Web, o _[Wordpress](https://pt.wiki
     - Os testes podem ser feitos em nível _[TCP](https://pt.wikipedia.org/wiki/Transmission_Control_Protocol)_ (abertura de _[socket](https://pt.wikipedia.org/wiki/Soquete_de_rede)_) ou consultando diretamente a aplicação, por uma _[URI](https://pt.wikipedia.org/wiki/URI)_ que você especifica.
     - Não há comunicação com a instância, caso o _"Health Check"_ falhe.
 
-- **Política de Balanceamento**
-    - Existente somente no _[Load Balancing (LB)](https://docs.oracle.com/pt-br/iaas/Content/Balance/Concepts/balanceoverview.htm)_ de _[camada 7](https://pt.wikipedia.org/wiki/Camada_de_aplica%C3%A7%C3%A3o)_, a política de balanceamento informa como distribuir o tráfego de entrada para o _"conjunto de backend"_.
-    - Atualmente temos três diferentes políticas. São elas:
+- **Política de Balanceamento**    
+    - A política de balanceamento informa como distribuir o tráfego de entrada para o _"conjunto de backend"_.
+    - Atualmente temos três diferentes políticas para o _[Load Balancing (LB)](https://docs.oracle.com/pt-br/iaas/Content/Balance/Concepts/balanceoverview.htm)_ de _[camada 7](https://pt.wikipedia.org/wiki/Camada_de_aplica%C3%A7%C3%A3o)_:
         1. **Weighted Round Robin (Revezamento)**
             - É um algoritmo de balanceamento simples que distribui o tráfego de forma sequencial para cada instância contida no _"conjunto de backend"_.            
             - Esta é uma política que funciona melhor quando todas as instâncias do _backend_  possuem capacidade computacional semelhante.
@@ -57,8 +57,14 @@ Como aqui estamos falando de uma aplicação Web, o _[Wordpress](https://pt.wiki
         3. **Least connections (Menos conexões)**
             - Esta política irá encaminhar tráfego para a instância de  _backend_ com menos conexões ativas.
 
+    - Para o _[Network Load Balancing (NLB)](https://docs.oracle.com/pt-br/iaas/Content/NetworkLoadBalancer/overview.htm)_, existem políticas diferentes que atuam em informações providas sobre o endereço IP de origem/destino, portas e protocolos (_[TCP](https://pt.wikipedia.org/wiki/Transmission_Control_Protocol)_, _[UDP](https://pt.wikipedia.org/wiki/User_Datagram_Protocol)_ ou ambos).
+
+
 - **HTTPS e certificados SSL**
     - O _[Serviço de Load Balancing](https://docs.oracle.com/pt-br/iaas/Content/Balance/Concepts/balanceoverview.htm)_ permite tratar conexões seguras através da configuração de um _listener_ que utiliza o protocolo _[HTTPS](https://pt.wikipedia.org/wiki/Hyper_Text_Transfer_Protocol_Secure)_. Este requer que você faça o upload do seu certificado público, chave privada correspondente e quaisquer outros certificados associados. 
     - _[Gerenciar certificados SSL](https://docs.oracle.com/pt-br/iaas/Content/Balance/Tasks/managingcertificates.htm)_ no _[Load Balancer](https://docs.oracle.com/pt-br/iaas/Content/Balance/Concepts/balanceoverview.htm)_ facilita a administração, evita configuração e sobrecarga computacional ao tratar conexões criptografadas nos servidores de aplicação.
     - Ao configurar seus certificados SSL, é possível especificar diferentes _[suítes de cifragem](https://docs.oracle.com/pt-br/iaas/Content/Balance/Tasks/managingciphersuites.htm)_ _TLS 1.0_, _1.1_ ou _1.2_, que ajudam a manter compatibilidade com sistemas antigos (legado).
 
+- **Shape**
+    - 
+    
