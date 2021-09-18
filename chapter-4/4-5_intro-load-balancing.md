@@ -66,5 +66,12 @@ Como aqui estamos falando de uma aplicação Web, o _[Wordpress](https://pt.wiki
     - Ao configurar seus certificados SSL, é possível especificar diferentes _[suítes de cifragem](https://docs.oracle.com/pt-br/iaas/Content/Balance/Tasks/managingciphersuites.htm)_ _TLS 1.0_, _1.1_ ou _1.2_, que ajudam a manter compatibilidade com sistemas antigos (legado).
 
 - **Shape**
-    - 
-    
+    - Você especifica qual é a largura de banda da rede disponível para o serviço de _[Load Balancing (LB)](https://docs.oracle.com/pt-br/iaas/Content/Balance/Concepts/balanceoverview.htm)_. 
+    - Existem dois tipos de shapes disponíveis:
+        1. **Flexible Shapes**
+            - Nesta configuração você especifica um range de valores, minímo e máximo em Mbps.
+        
+        1. **Dynamic Shapes**
+            - São valores fixos entre: 10 Mbps (Micro), 100 Mbps (Small), 400 Mbps (Medium) e 8000 Mbps (Large).
+            
+    - Você não define _shape_ no _[Network Load Balancing (NLB)](https://docs.oracle.com/pt-br/iaas/Content/NetworkLoadBalancer/overview.htm)_. Este é um serviço que escala de modo automático, de acordo com as necessidades de largura de banda da rede.
