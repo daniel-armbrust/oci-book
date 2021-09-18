@@ -69,7 +69,7 @@ Como aqui estamos falando de uma aplicação Web, o _[Wordpress](https://pt.wiki
     - Você especifica qual é a largura de banda da rede disponível para o serviço de _[Load Balancing (LB)](https://docs.oracle.com/pt-br/iaas/Content/Balance/Concepts/balanceoverview.htm)_. 
     - Existem dois tipos de shapes disponíveis:
         1. **Flexible Shapes**
-            - Nesta configuração você especifica um range de valores, minímo e máximo em Mbps.
+            - Nesta configuração você especifica um range de valores, minímo que comecá em 10 Mbps, e máximo até 8000 Mbps.
         
         1. **Dynamic Shapes**
             - São valores fixos entre: 10 Mbps (Micro), 100 Mbps (Small), 400 Mbps (Medium) e 8000 Mbps (Large).
