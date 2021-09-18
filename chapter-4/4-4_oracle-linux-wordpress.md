@@ -525,7 +525,7 @@ success
 
 9. Pronto! _[Wordpress](https://pt.wikipedia.org/wiki/WordPress)_ instalado.
 
-### __Criando uma Imagem__
+### __Criando uma Custom Image_
 
 Já sabemos que toda _[imagem](https://docs.oracle.com/pt-br/iaas/Content/Compute/References/images.htm#OracleProvided_Images)_ possui um pequeno _"pedaço"_ de disco especial chamado _[boot volume](https://docs.oracle.com/pt-br/iaas/Content/Block/Concepts/bootvolumes.htm)_. É a partir do _[boot volume](https://docs.oracle.com/pt-br/iaas/Content/Block/Concepts/bootvolumes.htm)_ é que podemos ter um sistema operacional inicializável.
 
