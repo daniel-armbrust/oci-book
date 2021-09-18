@@ -6,8 +6,19 @@
 
 _Load Balancer_, _Balanceador de Carga_ ou _LBaaS_ são alguns nomes que identificam o _[Serviço de Load Balancing](https://docs.oracle.com/pt-br/iaas/Content/Balance/Concepts/balanceoverview.htm)_ disponível no _[OCI](https://www.oracle.com/cloud/)_.
 
-Sua principal função é realizar a distribuição do tráfego de um ponto de entrada, para vários servidores existentes em sua _[VCN](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingVCNs_topic-Overview_of_VCNs_and_Subnets.htm)_. Além de distribuir a _"carga de trabalho"_ entre duas ou mais intâncias de computação, temos uma melhor utilização dos recursos, possibilidade de escalonamento e alta disponibilidade.
+Sua principal função é realizar a distribuição do tráfego de um ponto de entrada para vários servidores existentes em sua _[VCN](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingVCNs_topic-Overview_of_VCNs_and_Subnets.htm)_. Além de distribuir a _"carga de trabalho"_ entre duas ou mais intâncias de computação, há uma melhor utilização dos seus recursos, possibilidade de escalonamento e através da utilização de múltiplas instâncias da sua aplicação, você promove a _["alta disponibilidade"](https://en.wikipedia.org/wiki/High_availability)_.
 
+Existem dois tipos de balanceadores disponíveis no _[OCI](https://www.oracle.com/cloud/)_. São eles:
+
+- **Load Balancing (LB)**
+    - Este é um balanceador de carga que opera em _[Camada 7](https://pt.wikipedia.org/wiki/Camada_de_aplica%C3%A7%C3%A3o)_ sobre os protocolos _[HTTP](https://pt.wikipedia.org/wiki/Hypertext_Transfer_Protocol)_, _[HTTPS](https://pt.wikipedia.org/wiki/Hyper_Text_Transfer_Protocol_Secure)_ ou _[HTTP/2](https://pt.wikipedia.org/wiki/HTTP/2)_.
+    - Por entender aspectos da aplicação, seu uso é ideal para negociar solicitações _[HTTP](https://pt.wikipedia.org/wiki/Hypertext_Transfer_Protocol)_.
+
+- **Network Load Balancing (NLB)**
+    - Este é um balanceador de carga que opera em _[Camada 4](https://pt.wikipedia.org/wiki/Camada_de_transporte)_ diretamente sobre os protocolos _[TCP](https://pt.wikipedia.org/wiki/Transmission_Control_Protocol)_ ou _[UDP](https://pt.wikipedia.org/wiki/User_Datagram_Protocol)_.
+    - Ele não se importa com a aplicação que pode ser conexão SSH, banco de dados, ou uma conexão Web que usa o protocolo _[HTTP](https://pt.wikipedia.org/wiki/Hypertext_Transfer_Protocol)_. Este balanceador se preocupa somente com conexões de rede que usam _[TCP](https://pt.wikipedia.org/wiki/Transmission_Control_Protocol)_ ou _[UDP](https://pt.wikipedia.org/wiki/User_Datagram_Protocol)_.
+    - O fluxo de rede sempre encaminhado para o mesmo backend durante a vida útil da conexão. 
+ 
 Abaixo iremos listar algumas propriedades e características do serviço que serão úteis quando formos criar o nosso:
 
 - **Público ou Privado**
@@ -47,3 +58,4 @@ Abaixo iremos listar algumas propriedades e características do serviço que ser
 - **HTTPS e certificados SSL**
     - O _[Serviço de Load Balancing](https://docs.oracle.com/pt-br/iaas/Content/Balance/Concepts/balanceoverview.htm)_ permite tratar conexões seguras através da configuração de um _listener_ que utiliza o protocolo _[HTTPS](https://pt.wikipedia.org/wiki/Hyper_Text_Transfer_Protocol_Secure)_. Este requer que você faça o upload do seu certificado público, chave privada correspondente e quaisquer outros certificados associados. 
     - Gerenciar certificados SSL no _[Load Balancer](https://docs.oracle.com/pt-br/iaas/Content/Balance/Concepts/balanceoverview.htm)_ facilita a administração, evita configuração e sobrecarga computacional ao tratar conexões criptografadas nos servidores de aplicação.   
+
