@@ -576,4 +576,4 @@ Action completed. Waiting until the resource has entered state: ('AVAILABLE',)
 }
 ```
 
->_**__NOTA:__** Gerar uma imagem gera uma cópia do estado atual da instância. Se você alterar a "imagem master", você deve gerar uma nova _[custom image](https://docs.oracle.com/pt-br/iaas/Content/Compute/Tasks/managingcustomimages.htm) que contenha tais alterações._
+>_**__NOTA:__** Gerar uma imagem gera uma cópia do estado atual da instância. Se você alterar a "imagem master", você deve gerar uma nova [custom image](https://docs.oracle.com/pt-br/iaas/Content/Compute/Tasks/managingcustomimages.htm) que contenha tais alterações._
