@@ -598,7 +598,7 @@ darmbrust@hoodwink:~$ oci compute image list \
 ]
 ```
 
-A criação da instância obedece o mesmo padrão que já conhecemos. Porém, iremos especificar somente alguns parâmetros diferentes como o _"FAULT-DOMAIN-2"_, hostname, e a _[custom image](https://docs.oracle.com/pt-br/iaas/Content/Compute/Tasks/managingcustomimages.htm)_ que criamos. Utilizaremos o mesmo _[NSG](https://docs.oracle.com/pt-br/iaas/Content/Network/Concepts/networksecuritygroups.htm)_ também.
+A criação da instância obedece o mesmo padrão que já conhecemos. Porém, iremos especificar somente alguns parâmetros diferentes como o _"FAULT-DOMAIN-2"_, hostname, e a _[custom image](https://docs.oracle.com/pt-br/iaas/Content/Compute/Tasks/managingcustomimages.htm)_ criada. Utilizaremos o mesmo _[NSG](https://docs.oracle.com/pt-br/iaas/Content/Network/Concepts/networksecuritygroups.htm)_ também.
 
 ```
 darmbrust@hoodwink:~$ oci compute instance launch \
