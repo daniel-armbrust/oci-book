@@ -529,7 +529,7 @@ success
 
 Já sabemos que toda _[imagem](https://docs.oracle.com/pt-br/iaas/Content/Compute/References/images.htm#OracleProvided_Images)_ possui um pequeno _"pedaço"_ de disco especial chamado _[boot volume](https://docs.oracle.com/pt-br/iaas/Content/Block/Concepts/bootvolumes.htm)_. É a partir do _[boot volume](https://docs.oracle.com/pt-br/iaas/Content/Block/Concepts/bootvolumes.htm)_ é que podemos ter um sistema operacional inicializável.
 
-Todos as atividades que envolveram a instalação e configuração do nosso _[Wordpress](https://pt.wikipedia.org/wiki/WordPress)_ foram salvas diretamente no _[boot volume](https://docs.oracle.com/pt-br/iaas/Content/Block/Concepts/bootvolumes.htm)_ da instância. A partir dessas customizações, podemos _"congelar"_ este _"estado atual"_ e gerar uma imagem própria, para que posteriormente seja possível criar cópias deste _[Wordpress](https://pt.wikipedia.org/wiki/WordPress)_. 
+Todos as atividades que envolveram a instalação e configuração do nosso _[Wordpress](https://pt.wikipedia.org/wiki/WordPress)_ foram salvas diretamente no _[boot volume](https://docs.oracle.com/pt-br/iaas/Content/Block/Concepts/bootvolumes.htm)_ da instância. A partir dessas customizações, podemos _"congelar"_ este _"estado atual"_ e gerar uma imagem própria, para que posteriormente seja possível criar cópias deste _[Wordpress](https://pt.wikipedia.org/wiki/WordPress)_. Chamamos esta imagem principal de **Golden Image**.
 
 Esta é uma prática que iremos usar para promover a _["alta disponibilidade"](https://en.wikipedia.org/wiki/High_availability)_. Se eu tenho o _"estado atual"_ do _[Wordpress](https://pt.wikipedia.org/wiki/WordPress)_ salvo, criar novas instâncias a partir desta imagem, em caso de problemas, é rápido e fácil.
 
@@ -578,6 +578,6 @@ Action completed. Waiting until the resource has entered state: ('AVAILABLE',)
 }
 ```
 
->_**__NOTA:__** Gerar uma imagem gera uma cópia do estado atual da instância. Se você alterar a "golden image" (termo usado para designar a imagem principal), você deve gerar uma nova [custom image](https://docs.oracle.com/pt-br/iaas/Content/Compute/Tasks/managingcustomimages.htm) que contenha tais alterações._
+>_**__NOTA:__** Gerar uma imagem gera uma cópia do estado atual da instância. Se você alterar a golden image, você deve gerar uma nova [custom image](https://docs.oracle.com/pt-br/iaas/Content/Compute/Tasks/managingcustomimages.htm) que contenha tais alterações._
 
 Pronto! O _"estado atual"_ salvo e pronto pra replicação.
