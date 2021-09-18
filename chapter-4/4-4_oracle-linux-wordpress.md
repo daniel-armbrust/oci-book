@@ -524,3 +524,47 @@ success
 ```
 
 9. Pronto! _[Wordpress](https://pt.wikipedia.org/wiki/WordPress)_ instalado.
+
+### __Criando uma Imagem__
+
+```
+darmbrust@hoodwink:~$ oci compute image create \
+> --compartment-id "ocid1.compartment.oc1..aaaaaaaamcff6exkhvp4aq3ubxib2wf74v7cx22b3yj56jnfkazoissdzefq" \
+> --instance-id "ocid1.instance.oc1.sa-saopaulo-1.antxeljr6noke4qcf4yilvaofwpt5aiavnsx7cfev3fhp2bpc3xfcxo5k6zq" \
+> --display-name "ol7-wordpress_img"
+{
+  "data": {
+    "agent-features": null,
+    "base-image-id": "ocid1.image.oc1.sa-saopaulo-1.aaaaaaaasahnls6nmev22raz7ecw6i64d65fu27pmqjn4pgz7zue56ojj7qq",
+    "billable-size-in-gbs": null,
+    "compartment-id": "ocid1.compartment.oc1..aaaaaaaamcff6exkhvp4aq3ubxib2wf74v7cx22b3yj56jnfkazoissdzefq",
+    "create-image-allowed": true,
+    "defined-tags": {
+      "Oracle-Tags": {
+        "CreatedBy": "oracleidentitycloudservice/daniel.armbrust@algumdominio.com",
+        "CreatedOn": "2021-09-18T19:06:41.851Z"
+      }
+    },
+    "display-name": "ol7-wordpress_img",
+    "freeform-tags": {},
+    "id": "ocid1.image.oc1.sa-saopaulo-1.aaaaaaaadnnjuov6rpjrygbandru4aad62dvmgkbmv2x33p6ynrylp3mdfva",
+    "launch-mode": "PARAVIRTUALIZED",
+    "launch-options": {
+      "boot-volume-type": "PARAVIRTUALIZED",
+      "firmware": "UEFI_64",
+      "is-consistent-volume-naming-enabled": true,
+      "is-pv-encryption-in-transit-enabled": false,
+      "network-type": "PARAVIRTUALIZED",
+      "remote-data-volume-type": "PARAVIRTUALIZED"
+    },
+    "lifecycle-state": "PROVISIONING",
+    "listing-type": null,
+    "operating-system": "Oracle Linux",
+    "operating-system-version": "7.9",
+    "size-in-mbs": null,
+    "time-created": "2021-09-18T19:06:42.310000+00:00"
+  },
+  "etag": "330d9b898f2765f2c8a1914aa6061134a3faa00230a922887382a88470279789",
+  "opc-work-request-id": "ocid1.coreservicesworkrequest.oc1.sa-saopaulo-1.abtxeljrcdwvncv7emsfdx3ovsf6zesenbgbmh22hfxozrx7qalztankcd4a"
+}
+```
