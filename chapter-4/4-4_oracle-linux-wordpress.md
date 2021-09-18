@@ -531,23 +531,25 @@ success
 darmbrust@hoodwink:~$ oci compute image create \
 > --compartment-id "ocid1.compartment.oc1..aaaaaaaamcff6exkhvp4aq3ubxib2wf74v7cx22b3yj56jnfkazoissdzefq" \
 > --instance-id "ocid1.instance.oc1.sa-saopaulo-1.antxeljr6noke4qcf4yilvaofwpt5aiavnsx7cfev3fhp2bpc3xfcxo5k6zq" \
-> --display-name "ol7-wordpress_img"
+> --display-name "ol7-wordpress_img" \
+> --wait-for-state "AVAILABLE"
+Action completed. Waiting until the resource has entered state: ('AVAILABLE',)
 {
   "data": {
     "agent-features": null,
     "base-image-id": "ocid1.image.oc1.sa-saopaulo-1.aaaaaaaasahnls6nmev22raz7ecw6i64d65fu27pmqjn4pgz7zue56ojj7qq",
-    "billable-size-in-gbs": null,
+    "billable-size-in-gbs": 5,
     "compartment-id": "ocid1.compartment.oc1..aaaaaaaamcff6exkhvp4aq3ubxib2wf74v7cx22b3yj56jnfkazoissdzefq",
     "create-image-allowed": true,
     "defined-tags": {
       "Oracle-Tags": {
         "CreatedBy": "oracleidentitycloudservice/daniel.armbrust@algumdominio.com",
-        "CreatedOn": "2021-09-18T19:06:41.851Z"
+        "CreatedOn": "2021-09-18T19:17:04.841Z"
       }
     },
     "display-name": "ol7-wordpress_img",
     "freeform-tags": {},
-    "id": "ocid1.image.oc1.sa-saopaulo-1.aaaaaaaadnnjuov6rpjrygbandru4aad62dvmgkbmv2x33p6ynrylp3mdfva",
+    "id": "ocid1.image.oc1.sa-saopaulo-1.aaaaaaaaj4qhvufskm2m4qwn6zpyau6yxekvymvrpt2pokdcxmpokje3tcoq",
     "launch-mode": "PARAVIRTUALIZED",
     "launch-options": {
       "boot-volume-type": "PARAVIRTUALIZED",
@@ -557,14 +559,13 @@ darmbrust@hoodwink:~$ oci compute image create \
       "network-type": "PARAVIRTUALIZED",
       "remote-data-volume-type": "PARAVIRTUALIZED"
     },
-    "lifecycle-state": "PROVISIONING",
+    "lifecycle-state": "AVAILABLE",
     "listing-type": null,
     "operating-system": "Oracle Linux",
     "operating-system-version": "7.9",
-    "size-in-mbs": null,
-    "time-created": "2021-09-18T19:06:42.310000+00:00"
+    "size-in-mbs": 102400,
+    "time-created": "2021-09-18T19:17:05.301000+00:00"
   },
-  "etag": "330d9b898f2765f2c8a1914aa6061134a3faa00230a922887382a88470279789",
-  "opc-work-request-id": "ocid1.coreservicesworkrequest.oc1.sa-saopaulo-1.abtxeljrcdwvncv7emsfdx3ovsf6zesenbgbmh22hfxozrx7qalztankcd4a"
+  "etag": "448349d0c998c83981bef15be66591756e1712dd1e93a633f71697a266656585"
 }
 ```
