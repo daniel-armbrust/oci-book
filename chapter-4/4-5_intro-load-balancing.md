@@ -19,7 +19,9 @@ Existem dois tipos de balanceadores disponíveis no _[OCI](https://www.oracle.co
     - Ele não se importa com a aplicação que pode ser conexões SSH, conexões a um conjunto de bancos de dados, ou conexões Web que utilizam o protocolo _[HTTP](https://pt.wikipedia.org/wiki/Hypertext_Transfer_Protocol)_. Este balanceador se preocupa somente com conexões de rede que usam _[TCP](https://pt.wikipedia.org/wiki/Transmission_Control_Protocol)_ ou _[UDP](https://pt.wikipedia.org/wiki/User_Datagram_Protocol)_.
     - O fluxo de rede sempre encaminhado para o mesmo backend durante a vida útil da conexão. 
  
-Abaixo iremos listar algumas propriedades e características do serviço que serão úteis quando formos criar o nosso:
+Pelo fato do _[Network Load Balancing (NLB)](https://docs.oracle.com/pt-br/iaas/Content/NetworkLoadBalancer/overview.htm)_ não _"entender"_ da aplicação, ele é mais simples em termos de configuração. Já o _[Load Balancing](https://docs.oracle.com/pt-br/iaas/Content/Balance/Concepts/balanceoverview.htm)_ possibilita você configurar aspectos que envolvem o protocolo _[HTTP](https://pt.wikipedia.org/wiki/Hypertext_Transfer_Protocol)_. Há mais opções de configuração.
+
+Como aqui estamos falando de uma aplicação Web, o _[Wordpress](https://pt.wikipedia.org/wiki/WordPress)_, iremos nos atentar aos detalhes que envolvem o _[Load Balancing](https://docs.oracle.com/pt-br/iaas/Content/Balance/Concepts/balanceoverview.htm)_ de _[camada 7](https://pt.wikipedia.org/wiki/Camada_de_aplica%C3%A7%C3%A3o)_.
 
 - **Público ou Privado**
     - Um balanceador de carga _**público**_ é criado em uma subrede pública com um endereço IP público e acessível pela internet. Este pode ser criado em uma subrede regional no qual irá consumir dois endereços IPs privados, ou pode ser criado em duas subredes públicas sobre dois _[ADs](https://docs.oracle.com/pt-br/iaas/Content/General/Concepts/regions.htm#About)_ diferentes, consumindo dois endereços IPs privados por _[ADs](https://docs.oracle.com/pt-br/iaas/Content/General/Concepts/regions.htm#About)_.
