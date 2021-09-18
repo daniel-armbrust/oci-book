@@ -16,7 +16,7 @@ Existem dois tipos de balanceadores disponíveis no _[OCI](https://www.oracle.co
 
 - **Network Load Balancing (NLB)**
     - Este é um balanceador de carga que opera em _[Camada 4](https://pt.wikipedia.org/wiki/Camada_de_transporte)_ diretamente sobre os protocolos _[TCP](https://pt.wikipedia.org/wiki/Transmission_Control_Protocol)_ ou _[UDP](https://pt.wikipedia.org/wiki/User_Datagram_Protocol)_.
-    - Ele não se importa com a aplicação que pode ser conexão SSH, banco de dados, ou uma conexão Web que usa o protocolo _[HTTP](https://pt.wikipedia.org/wiki/Hypertext_Transfer_Protocol)_. Este balanceador se preocupa somente com conexões de rede que usam _[TCP](https://pt.wikipedia.org/wiki/Transmission_Control_Protocol)_ ou _[UDP](https://pt.wikipedia.org/wiki/User_Datagram_Protocol)_.
+    - Ele não se importa com a aplicação que pode ser conexões SSH, conexões a um conjunto de bancos de dados, ou conexões Web que utiliza o protocolo _[HTTP](https://pt.wikipedia.org/wiki/Hypertext_Transfer_Protocol)_. Este balanceador se preocupa somente com conexões de rede que usam _[TCP](https://pt.wikipedia.org/wiki/Transmission_Control_Protocol)_ ou _[UDP](https://pt.wikipedia.org/wiki/User_Datagram_Protocol)_.
     - O fluxo de rede sempre encaminhado para o mesmo backend durante a vida útil da conexão. 
  
 Abaixo iremos listar algumas propriedades e características do serviço que serão úteis quando formos criar o nosso:
