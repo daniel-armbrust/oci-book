@@ -342,3 +342,58 @@ darmbrust@hoodwink:~$ oci lb backend create \
 > --offline false \
 > --wait-for-state "SUCCEEDED"
 ```
+
+Depois de alguns minutos, é possível verificar a saúde geral do _[Load Balancer](https://docs.oracle.com/pt-br/iaas/Content/Balance/Concepts/balanceoverview.htm)_ com o comando abaixo:
+
+```
+darmbrust@hoodwink:~$ oci lb backend-set-health get \
+> --load-balancer-id "ocid1.loadbalancer.oc1.sa-saopaulo-1.aaaaaaaa5ledgzqveh3o73m3mnv42pkxcm5y64hjmkwl7tnhvsee2zv7gbga" \
+> --backend-set-name "lb-pub_wordpress_backend"
+{
+  "data": {
+    "critical-state-backend-names": [],
+    "status": "OK",
+    "total-backend-count": 2,
+    "unknown-state-backend-names": [],
+    "warning-state-backend-names": []
+  }
+}
+```
+
+Por último, a criação do _listener_ que usa o protocolo _[HTTP](https://pt.wikipedia.org/wiki/Hypertext_Transfer_Protocol)_ também na porta _80/TCP_:
+
+```
+darmbrust@hoodwink:~$ oci lb listener create \
+> --load-balancer-id "ocid1.loadbalancer.oc1.sa-saopaulo-1.aaaaaaaa6ciautk2hpj3lixy2vwnkzkbq5626rs5punot65pkqr4xw7kh7ma" \
+> --default-backend-set-name "lb-pub_wordpress_backend" \
+> --name "lb-pub_lst_wordpress" \
+> --port 80 \
+> --protocol "HTTP" \
+> --wait-for-state "SUCCEEDED"
+```
+
+Pronto! Após alguns minutos já é possível ver a aplicação _[Wordpress](https://pt.wikipedia.org/wiki/WordPress)_ respondendo através do _[Load Balancer](https://docs.oracle.com/pt-br/iaas/Content/Balance/Concepts/balanceoverview.htm)_ criado:
+
+```
+darmbrust@hoodwink:~$ curl -v http://152.70.221.188
+*   Trying 152.70.221.188:80...
+* TCP_NODELAY set
+* Connected to 152.70.221.188 (152.70.221.188) port 80 (#0)
+> GET / HTTP/1.1
+> Host: 152.70.221.188
+> User-Agent: curl/7.68.0
+> Accept: */*
+>
+* Mark bundle as not supporting multiuse
+< HTTP/1.1 302 Found
+< Date: Sun, 19 Sep 2021 22:10:49 GMT
+< Content-Type: text/html; charset=UTF-8
+< Content-Length: 0
+< Connection: keep-alive
+< X-Powered-By: PHP/7.4.23
+< Location: http://152.70.221.188/wp-admin/setup-config.php
+<
+* Connection #0 to host 152.70.221.188 left intact
+```
+
+>_**__NOTA:__** Caso não obtenha resposta, confirme se a [Security List](https://docs.oracle.com/en-us/iaas/api/#/en/iaas/20160918/datatypes/IngressSecurityRule) da subrede pública onde foi criado o [Load Balancer](https://docs.oracle.com/pt-br/iaas/Content/Balance/Concepts/balanceoverview.htm) possui as corretas regras que permitam o acesso._
