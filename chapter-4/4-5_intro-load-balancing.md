@@ -271,21 +271,21 @@ Por hora, iremos utilizar a política _ROUND\_ROBIN_.
 
 É necessário criar o _"conjunto de backend"_ que irá abrigar as instâncias de computação do _[Wordpress](https://pt.wikipedia.org/wiki/WordPress)_. Nesta configuração, iremos informar também os parâmetros do _"Health Check"_ que são:
 
-- --health-checker-protocol
+- --health-checker-protocol "TCP"
     - Teste simples via protocolo _[TCP](https://pt.wikipedia.org/wiki/Transmission_Control_Protocol)_.
 
 - --health-checker-port 80
     - Porta _[TCP](https://pt.wikipedia.org/wiki/Transmission_Control_Protocol)_ que será testada. Como sabemos, será a porta do _[HTTP Apache](https://pt.wikipedia.org/wiki/Servidor_Apache)_ em estado _"OPEN"_ nas instâncias.
 
-- --health-checker-interval-in-ms
+- --health-checker-interval-in-ms 120000
     - Intervalo de tempo em milissegundos no qual serão realizadas as verificações. 
     - Em nosso caso a porta _80/TCP_ será veficada a cada _2 minutos (120000 milisegundos)_.
 
-- --health-checker-timeout-in-ms
+- --health-checker-timeout-in-ms 60000
     - Tempo _TIMEOUT_ em milissegundos das verificações. 
     - Em nosso caso, o teste irá aguardar uma resposta em até no máximo _1 minuto (60000 milisegundos)_ antes de considerar uma falha.
 
-- --health-checker-retries
+- --health-checker-retries 2
     - Número de tentativas antes de considerar _"em falha"_ uma instância do _backend_.
 
 Juntando tudo, criaremos o _backend_:
