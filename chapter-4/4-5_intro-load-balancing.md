@@ -97,4 +97,5 @@ Esta é uma parte bem importante de todo o processo para expor uma aplicação p
 
 Após a reserva, o _[endereço IP público](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingpublicIPs.htm#Public_IP_Addresses)_ passa a ser de _posse_ do seu _[tenancy](https://docs.oracle.com/pt-br/iaas/Content/Identity/Tasks/managingtenancy.htm)_ e você pode usá-lo em qualquer recurso que queira, um de cada vez.
 
-Como já dito, isto é importante quando estamos projetando uma aplicação pública e disponível por toda internet. Precisamos de pelo menos um endereço IP público e reservado, quando formos configurar o _[DNS](https://docs.oracle.com/pt-br/iaas/Content/DNS/Concepts/dnszonemanagement.htm)_.
+Como já dito, isto é importante quando estamos projetando uma aplicação pública e disponível por toda internet. Como você vai ver, é necessário pelo menos um endereço IP público e reservado, quando formos configurar o _[DNS](https://docs.oracle.com/pt-br/iaas/Content/DNS/Concepts/dnszonemanagement.htm)_.
+
