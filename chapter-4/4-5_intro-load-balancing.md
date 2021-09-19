@@ -79,7 +79,7 @@ Estes são os principais conceitos que envolvem os balanceadores de carga a disp
 
 ### __Criando um Load Balancer__
 
-Ao final deste capítulo, nosso propósito será termos uma infraestrutura para a aplicação do _[Wordpress](https://pt.wikipedia.org/wiki/WordPress)_ igual a demonstrada no desenho abaixo:
+Ao final deste capítulo, nosso propósito será termos a infraestrutura para a aplicação do _[Wordpress](https://pt.wikipedia.org/wiki/WordPress)_ com um _[Load Balancer](https://docs.oracle.com/pt-br/iaas/Content/Balance/Concepts/balanceoverview.htm)_ público (frontend), e os servidores de aplicação protegidos na subrede privada (backend).
 
 ![alt_text](./images/ch4-5_lb1-wordpress.jpg "Load Balancer - Wordpress")
 
