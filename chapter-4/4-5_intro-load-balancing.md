@@ -2,7 +2,7 @@
 
 ## 4.5 - Introdução ao Serviço de Load Balancer
 
-### __Introdução__
+### __Visão Geral__
 
 _Load Balancer_, _Balanceador de Carga_ ou _LBaaS_ são alguns nomes que identificam o serviço para _balanceamento de carga_ disponível no _[OCI](https://www.oracle.com/cloud/)_.
 
@@ -75,3 +75,7 @@ Como aqui estamos falando de uma aplicação Web, o _[Wordpress](https://pt.wiki
             - São valores fixos entre: _10 Mbps (Micro)_, _100 Mbps (Small)_, _400 Mbps (Medium)_ e _8000 Mbps (Large)_.
             
     - Você não define _shape_ no _[Network Load Balancing (NLB)](https://docs.oracle.com/pt-br/iaas/Content/NetworkLoadBalancer/overview.htm)_. Este é um serviço que escala de modo automático, de acordo com as necessidades de largura de banda da rede.
+
+### __Criando um Load Balancer__
+
+![alt_text](./images/ch4-5_lb1-wordpress.jpg "Load Balancer - Wordpress")

@@ -533,7 +533,7 @@ Já sabemos que toda _[imagem](https://docs.oracle.com/pt-br/iaas/Content/Comput
 
 Todos as atividades que envolveram a instalação e configuração do nosso _[Wordpress](https://pt.wikipedia.org/wiki/WordPress)_ foram salvas diretamente no _[boot volume](https://docs.oracle.com/pt-br/iaas/Content/Block/Concepts/bootvolumes.htm)_ da instância. A partir dessas customizações, podemos _"congelar"_ este _"estado atual"_ e gerar uma imagem própria, para que posteriormente seja possível criar cópias deste _[Wordpress](https://pt.wikipedia.org/wiki/WordPress)_. 
 
-Em certas literaturas, essa imagem que foi salva e pode ser reutilizada, recebe o nome de **Golden Image**. Aqui no OCI ela recebe o nome de _[Custom Image](https://docs.oracle.com/pt-br/iaas/Content/Compute/Tasks/managingcustomimages.htm)_.
+Em certas literaturas, essa imagem que foi salva e pode ser reutilizada, recebe o nome de **Golden Image**. Aqui no _[OCI](https://www.oracle.com/cloud/)_ ela recebe o nome de _[Custom Image](https://docs.oracle.com/pt-br/iaas/Content/Compute/Tasks/managingcustomimages.htm)_.
 
 Esta é uma prática que iremos usar para promover a _["alta disponibilidade"](https://en.wikipedia.org/wiki/High_availability)_. Se eu tenho o _"estado atual"_ do _[Wordpress](https://pt.wikipedia.org/wiki/WordPress)_ salvo, criar novas instâncias a partir desta imagem, em caso de problemas, é rápido e fácil.
 
