@@ -97,5 +97,42 @@ Esta é uma parte bem importante de todo o processo para expor uma aplicação p
 
 Após a reserva, o _[endereço IP público](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingpublicIPs.htm#Public_IP_Addresses)_ passa a ser de _posse_ do seu _[tenancy](https://docs.oracle.com/pt-br/iaas/Content/Identity/Tasks/managingtenancy.htm)_ e você pode usá-lo em qualquer recurso que queira, um de cada vez.
 
-Como já dito, esta é uma ação importante quando estamos projetando uma aplicação pública e disponível por toda internet. Como você vai ver, é necessário pelo menos um endereço IP público e reservado, quando formos configurar o _[DNS](https://docs.oracle.com/pt-br/iaas/Content/DNS/Concepts/dnszonemanagement.htm)_.
+Como já dito, esta é uma ação importante quando estamos projetando uma aplicação pública e disponível por toda internet. Como você vai ver, é necessário pelo menos um endereço IP público e reservado, quando formos configurar o nome _[DNS](https://docs.oracle.com/pt-br/iaas/Content/DNS/Concepts/dnszonemanagement.htm)_ que faz referência a aplicação.
 
+Para reservarmos o IP no compartimento dos recursos de rede, usamos o comando abaixo:
+
+```
+darmbrust@hoodwink:~$ oci network public-ip create \
+> --compartment-id "ocid1.compartment.oc1..aaaaaaaaie4exnvj2ktkjlliahl2bxmdnteu2xmn27oc5cy5mdcmocl4vd7q" \
+> --lifetime "RESERVED" \
+> --display-name "lb_pubip" \
+> --wait-for-state "AVAILABLE"
+Action completed. Waiting until the resource has entered state: ('AVAILABLE',)
+{
+  "data": {
+    "assigned-entity-id": null,
+    "assigned-entity-type": null,
+    "availability-domain": null,
+    "compartment-id": "ocid1.compartment.oc1..aaaaaaaaie4exnvj2ktkjlliahl2bxmdnteu2xmn27oc5cy5mdcmocl4vd7q",
+    "defined-tags": {
+      "Oracle-Tags": {
+        "CreatedBy": "oracleidentitycloudservice/daniel.armbrust@algumdominio.com",
+        "CreatedOn": "2021-09-19T15:09:19.145Z"
+      }
+    },
+    "display-name": "lb_pubip",
+    "freeform-tags": {},
+    "id": "ocid1.publicip.oc1.sa-saopaulo-1.amaaaaaa6noke4qahrilu4jlhckrdwjsnpvcjvmbdxnpcbcx75xj5wzin22a",
+    "ip-address": "152.70.221.188",
+    "lifecycle-state": "AVAILABLE",
+    "lifetime": "RESERVED",
+    "private-ip-id": null,
+    "public-ip-pool-id": null,
+    "scope": "REGION",
+    "time-created": "2021-09-19T15:09:19.306000+00:00"
+  },
+  "etag": "f6d71ff3"
+}
+```
+
+Agora temos o _[endereço IP público](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingpublicIPs.htm#Public_IP_Addresses)_ reservado _152.70.221.188_ exibido pelo valor da propriedade _"ip-address"_ do comando acima.
