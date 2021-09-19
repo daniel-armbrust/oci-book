@@ -288,7 +288,7 @@ Por hora, iremos utilizar a política _ROUND\_ROBIN_.
 - --health-checker-retries 2
     - Número de tentativas antes de considerar _"em falha"_ uma instância do _backend_.
 
-Juntando tudo, criaremos o _backend_:
+Juntando tudo, criaremos o _backend-set_:
 
 ```
 darmbrust@hoodwink:~$ oci lb backend-set create \
