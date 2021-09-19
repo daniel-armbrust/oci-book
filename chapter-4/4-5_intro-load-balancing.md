@@ -317,7 +317,7 @@ Action completed. Waiting until the work request has entered state: ('SUCCEEDED'
 }
 ```
 
-Irei inserir as duas instâncias que temos no _"conjunto de backend"_ que foi criado. A primeira é a instância principal e recebe o parâmetro _--backup false_:
+Irei inserir as duas instâncias que temos no _"conjunto de backend"_ que foi criado. A primeira é a instância principal e recebe o parâmetro _"--backup false"_:
 
 ```
 darmbrust@hoodwink:~$ oci lb backend create \
@@ -330,7 +330,7 @@ darmbrust@hoodwink:~$ oci lb backend create \
 > --wait-for-state "SUCCEEDED"
 ```
 
-Já a segunda instância irá receber o parâmetro _--backup true_:
+Já a segunda instância irá receber o parâmetro _"--backup true"_:
 
 ```
 darmbrust@hoodwink:~$ oci lb backend create \
