@@ -95,6 +95,6 @@ Esta é uma parte bem importante de todo o processo para expor uma aplicação p
     - Persistênte e não está vinculado ao tempo de vida de qualquer recurso.
     - Se você excluír o recurso, este não excluí o IP público.
 
-A diferença entre ambos é que você passa a tratar um _[endereço IP público](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingpublicIPs.htm#Public_IP_Addresses)_ reservado como um recurso a parte, no qual você se _apossa_. Por também ser um recurso, você pode reutilizar ele em outros recursos.
+A diferença entre ambos é que você passa a tratar um _[endereço IP público](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingpublicIPs.htm#Public_IP_Addresses)_ reservado como um recurso a parte, no qual você se _apossa_. Após a reserva, o _[endereço IP público](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingpublicIPs.htm#Public_IP_Addresses)_ passa a ser de posse do seu _[tenancy](https://docs.oracle.com/pt-br/iaas/Content/Identity/Tasks/managingtenancy.htm)_ e você pode usá-lo em qualquer outro recurso que queira, um de cada vez.
 
  Como já dito, isto é importante quando estamos projetando uma aplicação pública e disponível por toda internet. Precisamos de pelo menos um endereço IP público e reservado, quando formos configurar o _[DNS](https://docs.oracle.com/pt-br/iaas/Content/DNS/Concepts/dnszonemanagement.htm)_.
