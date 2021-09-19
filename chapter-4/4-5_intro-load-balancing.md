@@ -59,7 +59,6 @@ Como aqui estamos falando de uma aplicação Web, o _[Wordpress](https://pt.wiki
 
     - Para o _[Network Load Balancing (NLB)](https://docs.oracle.com/pt-br/iaas/Content/NetworkLoadBalancer/overview.htm)_, existem políticas diferentes que atuam em informações providas sobre o endereço IP de origem/destino, portas e protocolos (_[TCP](https://pt.wikipedia.org/wiki/Transmission_Control_Protocol)_, _[UDP](https://pt.wikipedia.org/wiki/User_Datagram_Protocol)_ ou ambos).
 
-
 - **HTTPS e certificados SSL**
     - O _[Serviço de Load Balancing](https://docs.oracle.com/pt-br/iaas/Content/Balance/Concepts/balanceoverview.htm)_ permite tratar conexões seguras através da configuração de um _listener_ que utiliza o protocolo _[HTTPS](https://pt.wikipedia.org/wiki/Hyper_Text_Transfer_Protocol_Secure)_. Este requer que você faça o upload do seu certificado público, chave privada correspondente e quaisquer outros certificados associados. 
     - _[Gerenciar certificados SSL](https://docs.oracle.com/pt-br/iaas/Content/Balance/Tasks/managingcertificates.htm)_ no _[Load Balancer](https://docs.oracle.com/pt-br/iaas/Content/Balance/Concepts/balanceoverview.htm)_ facilita a administração, evita configuração e sobrecarga computacional ao tratar conexões criptografadas nos servidores de aplicação.
@@ -75,6 +74,8 @@ Como aqui estamos falando de uma aplicação Web, o _[Wordpress](https://pt.wiki
             - São valores fixos entre: _10 Mbps (Micro)_, _100 Mbps (Small)_, _400 Mbps (Medium)_ e _8000 Mbps (Large)_.
             
     - Você não define _shape_ no _[Network Load Balancing (NLB)](https://docs.oracle.com/pt-br/iaas/Content/NetworkLoadBalancer/overview.htm)_. Este é um serviço que escala de modo automático, de acordo com as necessidades de largura de banda da rede.
+
+Estes são os principais conceitos que envolvem os balanceadores de carga a disposição no _[OCI](https://www.oracle.com/cloud/)_. O _[Load Balancing](https://docs.oracle.com/pt-br/iaas/Content/Balance/Concepts/balanceoverview.htm)_ de _[camada 7](https://pt.wikipedia.org/wiki/Camada_de_aplica%C3%A7%C3%A3o)_ possui ainda mais configurações que serão exploradas em momento oportuno. Estas demais configurações estão ligadas ao protocolo _[HTTP](https://pt.wikipedia.org/wiki/Hypertext_Transfer_Protocol)_ como: _[Persistência de Sessão](https://docs.oracle.com/pt-br/iaas/Content/Balance/Reference/sessionpersistence.htm)_ através de _[cookies persistentes](https://docs.oracle.com/pt-br/iaas/Content/Balance/Reference/sessionpersistence.htm#cook)_, definições de _[Keep-Alive](https://docs.oracle.com/pt-br/iaas/Content/Balance/Reference/connectionreuse.htm#KeepAliveSettings)_, _[Hosts Virtuais](https://docs.oracle.com/pt-br/iaas/Content/Balance/Tasks/managingrequest.htm)_ entre outras.
 
 ### __Criando um Load Balancer__
 
