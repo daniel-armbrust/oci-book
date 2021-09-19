@@ -139,7 +139,7 @@ Action completed. Waiting until the resource has entered state: ('AVAILABLE',)
 
 Agora temos o _[endereço IP público](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingpublicIPs.htm#Public_IP_Addresses)_ reservado _152.70.221.188_ exibido pelo valor da propriedade _"ip-address"_ do comando acima. Este é nosso!
 
-#### __Criando o Load Balancer__
+#### __Load Balancer__
 
 Irei detalhar o passo a passo da criação do _[Load Balancer](https://docs.oracle.com/pt-br/iaas/Content/Balance/Concepts/balanceoverview.htm)_ começando pela lista de shapes que temos a disposição:
 
