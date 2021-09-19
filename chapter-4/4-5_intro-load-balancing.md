@@ -79,4 +79,7 @@ Estes são os principais conceitos que envolvem os balanceadores de carga a disp
 
 ### __Criando um Load Balancer__
 
+Ao final deste capítulo, nosso propósito será termos uma infraestrutura para a aplicação do _[Wordpress](https://pt.wikipedia.org/wiki/WordPress)_ igual a demonstrada no desenho abaixo:
+
 ![alt_text](./images/ch4-5_lb1-wordpress.jpg "Load Balancer - Wordpress")
+
