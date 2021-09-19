@@ -97,7 +97,7 @@ Esta é uma parte bem importante de todo o processo para expor uma aplicação p
 
 Após a reserva, o _[endereço IP público](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingpublicIPs.htm#Public_IP_Addresses)_ passa a ser de _posse_ do seu _[tenancy](https://docs.oracle.com/pt-br/iaas/Content/Identity/Tasks/managingtenancy.htm)_ e você pode usá-lo em qualquer recurso que queira, um de cada vez.
 
-Como já dito, esta é uma ação importante quando estamos projetando uma aplicação pública e disponível por toda internet. Como você vai ver, é necessário pelo menos um endereço IP público e reservado, quando formos configurar o nome _[DNS](https://docs.oracle.com/pt-br/iaas/Content/DNS/Concepts/dnszonemanagement.htm)_ que faz referência a aplicação.
+Como já dito, esta é uma ação importante quando estamos projetando uma aplicação pública e disponível por toda internet. Como você vai ver, é necessário pelo menos um endereço IP público e reservado, quando formos configurar o nome _[DNS](https://docs.oracle.com/pt-br/iaas/Content/DNS/Concepts/dnszonemanagement.htm)_ público usado pela aplicação.
 
 Para reservarmos o IP no compartimento dos recursos de rede, usamos o comando abaixo:
 
@@ -136,3 +136,4 @@ Action completed. Waiting until the resource has entered state: ('AVAILABLE',)
 ```
 
 Agora temos o _[endereço IP público](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingpublicIPs.htm#Public_IP_Addresses)_ reservado _152.70.221.188_ exibido pelo valor da propriedade _"ip-address"_ do comando acima. Este é nosso!
+
