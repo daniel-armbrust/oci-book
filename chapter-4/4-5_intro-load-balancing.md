@@ -83,3 +83,16 @@ Ao final deste capítulo, nosso propósito será termos a infraestrutura para a 
 
 ![alt_text](./images/ch4-5_lb1-wordpress.jpg "Load Balancer - Wordpress")
 
+#### __Reservando um Endereço IP Público__
+
+Esta é uma parte bem importante de todo o processo para expor uma aplicação pública. Qualquer recurso criado e que utiliza um _[endereço IP público](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingpublicIPs.htm#Public_IP_Addresses)_ no _[OCI](https://www.oracle.com/cloud/)_ está sujeito a estes dois tipos:
+
+- **IP Público Efêmero**
+    - Temporário e existente durante o tempo de vida do recurso. 
+    - Se você excluír o recurso você também excluí o IP público e não há como reutilizá-lo.
+
+- **IP Público Reservado**
+    - Persistênte e não está vinculado ao tempo de vida de qualquer recurso.
+    - Se você excluír o recurso, este não excluí o IP público.
+
+A diferença entre ambos é que você passa a tratar um _[endereço IP público](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingpublicIPs.htm#Public_IP_Addresses)_ reservado como um recurso a parte, no qual você pode se _apossar_. Como já dito, isto é importante quando estamos projetando uma aplicação pública e disponível por toda internet. Precisamos de pelo menos um endereço IP público e reservado, quando formos configurar o _[DNS](https://docs.oracle.com/pt-br/iaas/Content/DNS/Concepts/dnszonemanagement.htm)_.
