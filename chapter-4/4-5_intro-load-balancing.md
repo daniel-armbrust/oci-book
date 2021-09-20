@@ -159,6 +159,8 @@ darmbrust@hoodwink:~/oci-book$ oci lb shape list \
 +--------------+
 ```
 
+>_**__NOTA:__** O shape 10Mbps-Micro faz parte do programa [Always Free](https://www.oracle.com/cloud/free/#always-free)._
+
 Para a aplicação _[Wordpress](https://pt.wikipedia.org/wiki/WordPress)_ utilizaremos o shape de _10Mbps_. Além do shape, temos que informar o OCID da subrede pública _(--subnet-ids)_ e o OCID do _[endereço IP público](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingpublicIPs.htm#Public_IP_Addresses)_ que reservamos _(--reserved-ips)_:
 
 ```
