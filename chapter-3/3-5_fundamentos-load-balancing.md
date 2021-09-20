@@ -1,6 +1,6 @@
-# Capítulo 4: Primeira aplicação no OCI
+# Capítulo 3: Primeira aplicação no OCI
 
-## 4.5 - Introdução ao Serviço de Load Balancer
+## 3.5 - Fundamentos do Serviço de Load Balancing
 
 ### __Visão Geral__
 
@@ -81,7 +81,7 @@ Estes são os principais conceitos que envolvem os balanceadores de carga a disp
 
 Ao final deste capítulo, nosso propósito será termos a infraestrutura para a aplicação do _[Wordpress](https://pt.wikipedia.org/wiki/WordPress)_ com um _[Load Balancer](https://docs.oracle.com/pt-br/iaas/Content/Balance/Concepts/balanceoverview.htm)_ público (frontend) e os servidores de aplicação protegidos na subrede privada (backend).
 
-![alt_text](./images/ch4-5_lb1-wordpress.jpg "Load Balancer - Wordpress")
+![alt_text](./images/ch3-5_lb1-wordpress.jpg "Load Balancer - Wordpress")
 
 #### __Reservando um Endereço IP Público__
 

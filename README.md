@@ -27,6 +27,22 @@ Esse livro apresenta o **OCI (Oracle Cloud Infraestructure)** e por quê você d
     [2.7 - Git é o seu amigo](https://github.com/daniel-armbrust/oci-book/blob/main/chapter-2/2-7_git-amigo.md) <br>
     2.8 - Modelos de arquitetura (3 camadas, Microsserviços, Cloud Native) <br>
 
+- [Capítulo 3: Primeira aplicação no OCI](https://github.com/daniel-armbrust/oci-book/blob/main/chapter-3/README.md) <br>
+    [3.1 - Fundamentos do Serviço de Redes](https://github.com/daniel-armbrust/oci-book/blob/main/chapter-3/3-1_fundamentos-redes.md) <br>
+    [3.2 - Fundamentos do Serviço de Computação](https://github.com/daniel-armbrust/oci-book/blob/main/chapter-3/3-2_fundamentos-computacao.md) <br>
+    [3.3 - Apresentando o Serviço Bastion](https://github.com/daniel-armbrust/oci-book/blob/main/chapter-3/3-3_servico-bastion.md) <br>
+    [3.4 - Oracle Linux com WordPress na nuvem](https://github.com/daniel-armbrust/oci-book/blob/main/chapter-3/3-4_oracle-linux-wordpress.md) <br>
+    [3.5 - Fundamentos do Serviço de Load Balancing](https://github.com/daniel-armbrust/oci-book/blob/main/chapter-3/3-5_fundamentos-load-balancing.md) <br>
+    [3.6 - Banco de Dados do Wordpress: MySQL](https://github.com/daniel-armbrust/oci-book/blob/main/chapter-3/3-6_fundamentos-mysql-database.md) <br>
+    [3.7 - Concluindo a instalação do Wordpress](https://github.com/daniel-armbrust/oci-book/blob/main/chapter-3/3-7_concluindo-wordpress.md) <br>
+    [3.8 - Quanto custa tudo isto?](https://github.com/daniel-armbrust/oci-book/blob/main/chapter-3/3-8_quanto-custa-wordpress.md) <br>
+
+- [Capítulo 4: Melhorando a primeira aplicação no OCI](https://github.com/daniel-armbrust/oci-book/blob/main/chapter-4/README.md) <br>
+    4.X - Lets Encrypt no Load Balancer
+    4.X - Adicionando segurança extra através do WAF 
+
+- C
+
 - Capítulo 3: Banco de Dados <br>
     [3.1 - MySQL](https://github.com/daniel-armbrust/oci-book/blob/main/chapter-3/3-1_mysql.md) <br>
     3.2 - Banco de Dados Oracle <br>
@@ -34,16 +50,9 @@ Esse livro apresenta o **OCI (Oracle Cloud Infraestructure)** e por quê você d
     3.4 - Autonomous DB <br>
     3.5 - Oracle NoSQL <br>
 
-- [Capítulo 4: Primeira aplicação no OCI](https://github.com/daniel-armbrust/oci-book/blob/main/chapter-4/README.md) <br>
-    [4.1 - Fundamentos do Serviço de Redes](https://github.com/daniel-armbrust/oci-book/blob/main/chapter-4/4-1_fundamentos-redes.md) <br>
-    [4.2 - Fundamentos do Serviço de Computação](https://github.com/daniel-armbrust/oci-book/blob/main/chapter-4/4-2_fundamentos-computacao.md) <br>
-    [4.3 - Apresentando o Serviço Bastion](https://github.com/daniel-armbrust/oci-book/blob/main/chapter-4/4-3_servico-bastion.md) <br>
-    [4.4 - Oracle Linux com WordPress na nuvem](https://github.com/daniel-armbrust/oci-book/blob/main/chapter-4/4-4_oracle-linux-wordpress.md) <br>
-    [4.5 - Introdução ao Serviço de Load Balancer](https://github.com/daniel-armbrust/oci-book/blob/main/chapter-4/4-5_intro-load-balancing.md) <br>
-    4.X - Quanto custa tudo isto?
 
-- Capítulo 5: Melhorias <br>
-    5.1 - Adicionando segurança extra através do WAF 
+
+
 
 - Capítulo 6: Criando um site sem servidor.
 

@@ -1,6 +1,6 @@
-# Capítulo 4: Primeira aplicação no OCI
+# Capítulo 3: Primeira aplicação no OCI
 
-## 4.1 - Fundamentos do Serviço de Redes
+## 3.1 - Fundamentos do Serviço de Redes
 
 ### __Introdução__
 

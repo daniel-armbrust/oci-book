@@ -1,6 +1,6 @@
-# Capítulo 4: Primeira aplicação no OCI
+# Capítulo 3: Primeira aplicação no OCI
 
-## 4.3 - Apresentando o Serviço Bastion
+## 3.3 - Apresentando o Serviço Bastion
 
 ### __Introdução__
 

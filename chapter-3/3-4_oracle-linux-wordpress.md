@@ -1,6 +1,6 @@
-# Capítulo 4: Primeira aplicação no OCI
+# Capítulo 3: Primeira aplicação no OCI
 
-## 4.4 - Oracle Linux com WordPress na nuvem
+## 3.4 - Oracle Linux com WordPress na nuvem
 
 ### __Introdução__
 
@@ -35,7 +35,7 @@ Imagine que criamos uma nova instância temporária em nossa subrede pública (1
 
 Veja abaixo a representação desta instância:
 
-![alt_text](./images/ch4-4_oci-firewalls.jpg "OCI Firewalls")
+![alt_text](./images/ch3-4_oci-firewalls.jpg "OCI Firewalls")
 
 Sabemos que toda instância possui uma ou mais _[VNICs](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingVNICs.htm)_. Cada _[VNIC](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingVNICs.htm)_ reside em uma subrede e é ela quem possibilita a instância se comunicar com os recursos de toda _[VCN](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingVCNs_topic-Overview_of_VCNs_and_Subnets.htm)_. Sabemos também que toda _[VNIC](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingVNICs.htm)_ possui um endereço IPv4 privado principal e um endereço IPv4 público opcional para cada IP privado.
 

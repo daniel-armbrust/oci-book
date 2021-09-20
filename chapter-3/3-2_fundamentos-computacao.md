@@ -1,6 +1,6 @@
-# Capítulo 4: Primeira aplicação no OCI
+# Capítulo 3: Primeira aplicação no OCI
 
-## 4.2 - Fundamentos do Serviço de Computação
+## 3.2 - Fundamentos do Serviço de Computação
 
 ### __Visão Geral__
 
@@ -12,7 +12,7 @@ Uma instância _Bare Metal (BM)_ concede acesso a um servidor físico e dedicado
 
 Já uma _Máquina Virtual (VM)_ é executada através de técnicas de _[virtualização](https://pt.wikipedia.org/wiki/Virtualiza%C3%A7%C3%A3o)_, que possibilita diferentes máquinas coexistirem, de forma isolada, sobre um hardware físico (um computador maior).
 
-![alt_text](./images/ch4_4-2_bm-vs-vm.jpg  "Bare Metal vs. Virtual Machine")
+![alt_text](./images/ch3_4-2_bm-vs-vm.jpg  "Bare Metal vs. Virtual Machine")
 
 >_**__NOTA:__** Um software que pode ser usado para criar máquinas virtuais é o [VirtualBox](https://www.virtualbox.org/). Para saber mais, consulte este [link aqui](https://www.virtualbox.org/)._
 
