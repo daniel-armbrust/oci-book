@@ -1,6 +1,6 @@
 # Capítulo 3: Primeira aplicação no OCI
 
-## 3.5 - Banco de Dados do Wordpress: MySQL
+## 3.5 - MySQL: Banco de Dados do Wordpress
 
 ### __Visão Geral__
 
