@@ -99,7 +99,7 @@ Após a reserva, o _[endereço IP público](https://docs.oracle.com/pt-br/iaas/C
 
 Como já dito, esta é uma ação importante quando estamos projetando uma aplicação pública e disponível por toda internet. Como você vai ver, é necessário pelo menos um endereço IP público e reservado, quando formos configurar o nome _[DNS](https://docs.oracle.com/pt-br/iaas/Content/DNS/Concepts/dnszonemanagement.htm)_ público usado pela aplicação.
 
->_**__NOTA:__** Após criar um IP público, você não poderá não poderá converter de reservado para efêmero e vice versa._
+>_**__NOTA:__** Após criar um IP público, você não poderá converter seu tipo de reservado para efêmero e vice versa._
 
 Para reservarmos o IP no compartimento dos recursos de rede, usamos o comando abaixo:
 
@@ -342,6 +342,8 @@ darmbrust@hoodwink:~$ oci lb backend create \
 > --offline false \
 > --wait-for-state "SUCCEEDED"
 ```
+
+>_**__NOTA:__** Você não pode utilizar uma instância de backend com a opcão "--backup true" caso utilize a [políticas de balanceamento](https://docs.oracle.com/pt-br/iaas/Content/Balance/Concepts/balanceoverview.htm#Policies) IP\_HASH._
 
 Depois de alguns minutos, é possível verificar a saúde geral do _[Load Balancer](https://docs.oracle.com/pt-br/iaas/Content/Balance/Concepts/balanceoverview.htm)_ com o comando abaixo:
 
