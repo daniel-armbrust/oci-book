@@ -497,4 +497,4 @@ Sempre que possível, utilize _SOFTSTOP_ ou _SOFTRESET_ ao invés de _STOP_ ou _
 
 Aqui concluímos este capítulo que apresenta o básico sobre computação no _[OCI](https://www.oracle.com/cloud/)_.
 
-Deixo aqui também o link do _[FAQ](https://www.oracle.com/cloud/compute/faq.html)_ do serviço que pode ajudar em outras questões.
+Deixo também o link do _[FAQ](https://www.oracle.com/cloud/compute/faq.html)_ do serviço que pode ajudar em outras questões.
