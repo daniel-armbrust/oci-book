@@ -1121,4 +1121,6 @@ Como sabemos, esta subrede deve permitir recursos com endereço IP público. Par
 
 ### __Conclusão__
 
-Aqui concluímos este capítulo que apresenta a configuração básica de redes no OCI.
+Aqui concluímos este capítulo que apresenta a configuração básica de redes no _[OCI](https://www.oracle.com/cloud/)_.
+
+Deixo aqui também o link do _[FAQ](https://www.oracle.com/in/cloud/networking/virtual-cloud-network-faq.html)_ do serviço para ajudar em outras questões.
