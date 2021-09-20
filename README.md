@@ -38,17 +38,17 @@ Esse livro apresenta o **OCI (Oracle Cloud Infraestructure)** e por quê você d
     [3.8 - Quanto custa tudo isto?](https://github.com/daniel-armbrust/oci-book/blob/main/chapter-3/3-8_quanto-custa-wordpress.md) <br>
 
 - [Capítulo 4: Melhorando a primeira aplicação no OCI](https://github.com/daniel-armbrust/oci-book/blob/main/chapter-4/README.md) <br>
-    4.X - Lets Encrypt no Load Balancer
-    4.X - Adicionando segurança extra através do WAF 
+    4.X - Lets Encrypt no Load Balancer <br>
+    4.X - Adicionando segurança extra através do WAF <br>
 
-- C
+- [Capítulo 5: Storage no OCI](https://github.com/daniel-armbrust/oci-book/blob/main/chapter-5/README.md) <br>
 
-- Capítulo 3: Banco de Dados <br>
-    [3.1 - MySQL](https://github.com/daniel-armbrust/oci-book/blob/main/chapter-3/3-1_mysql.md) <br>
-    3.2 - Banco de Dados Oracle <br>
-    3.3 - Exadata <br>
-    3.4 - Autonomous DB <br>
-    3.5 - Oracle NoSQL <br>
+- [Capítulo 6: Banco de Dados](https://github.com/daniel-armbrust/oci-book/blob/main/chapter-6/README.md) <br>
+    [6.1 - MySQL](https://github.com/daniel-armbrust/oci-book/blob/main/chapter-6/6-1_mysql.md) <br>
+    6.2 - Banco de Dados Oracle <br>
+    6.3 - Exadata <br>
+    6.4 - Autonomous DB <br>
+    6.5 - Oracle NoSQL <br>
 
 
 
