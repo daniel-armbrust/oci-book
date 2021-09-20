@@ -750,3 +750,7 @@ Zend Engine v3.4.0, Copyright (c) Zend Technologies
 ```
 
 Com o resultado acima podemos confirmar que a instância criada a partir da _[custom image](https://docs.oracle.com/pt-br/iaas/Content/Compute/Tasks/managingcustomimages.htm)_ é igual a instância principal.
+
+### __Conclusão__
+
+Aqui concluímos este capítulo que apresenta algumas noções que envolvem _[Oracle Linux](https://www.oracle.com/linux/)_ no _[OCI](https://www.oracle.com/cloud/)_.
