@@ -16,7 +16,7 @@ Existem diversas vantagens ao se utilizar o _[MySQL](https://docs.oracle.com/pt-
 
 Vamos ao passo a passo ...
 
-#### __Listando os Shapes disponíveis__
+#### __Listando os shapes disponíveis__
 
 O comando abaixo lista quais os _[shapes](https://docs.oracle.com/pt-br/iaas/mysql-database/doc/db-systems.html#GUID-E2A83218-9700-4A49-B55D-987867D81871)_ disponíveis para criarmos o _[MySQL](https://docs.oracle.com/pt-br/iaas/mysql-database/index.html)_:
 
