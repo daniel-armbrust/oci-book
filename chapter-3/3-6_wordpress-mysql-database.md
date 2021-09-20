@@ -49,7 +49,7 @@ darmbrust@hoodwink:~$ oci mysql shape list \
 
 Por hora, vamos escolher o _[shape](https://docs.oracle.com/pt-br/iaas/mysql-database/doc/db-systems.html#GUID-E2A83218-9700-4A49-B55D-987867D81871)_ _VM.Standard.E2._.
 
-#### __Listando versões disponíveis__
+#### __Listando as versões disponíveis__
 
 ```
 darmbrust@hoodwink:~$ oci mysql version list \
