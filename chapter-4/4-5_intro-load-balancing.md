@@ -406,4 +406,4 @@ darmbrust@hoodwink:~$ curl -v http://152.70.221.188
 
 Aqui concluímos este capítulo que apresenta o básico sobre o _[Serviço de Load Balancing](https://docs.oracle.com/pt-br/iaas/Content/Balance/Concepts/balanceoverview.htm)_ no _[OCI](https://www.oracle.com/cloud/)_.
 
-Deixo aqui também o link do _[FAQ](https://www.oracle.com/cloud/networking/load-balancing-faq.html)_ do serviço para ajudar em outras questões não vistas por aqui.
+Deixo também o link do _[FAQ](https://www.oracle.com/cloud/networking/load-balancing-faq.html)_ do serviço para ajudar em outras questões não vistas por aqui.
