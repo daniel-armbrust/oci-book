@@ -6,6 +6,6 @@
     [3.3 - Apresentando o Serviço Bastion](https://github.com/daniel-armbrust/oci-book/blob/main/chapter-3/3-3_servico-bastion.md) <br>
     [3.4 - Oracle Linux com WordPress na nuvem](https://github.com/daniel-armbrust/oci-book/blob/main/chapter-3/3-4_oracle-linux-wordpress.md) <br>
     [3.5 - Fundamentos do Serviço de Load Balancing](https://github.com/daniel-armbrust/oci-book/blob/main/chapter-3/3-5_fundamentos-load-balancing.md) <br>
-    [3.6 - Banco de Dados do Wordpress: MySQL](https://github.com/daniel-armbrust/oci-book/blob/main/chapter-3/3-6_fundamentos-mysql-database.md) <br>
+    [3.6 - Banco de Dados do Wordpress: MySQL](https://github.com/daniel-armbrust/oci-book/blob/main/chapter-3/3-6_wordpress-mysql-database.md) <br>
     [3.7 - Concluindo a instalação do Wordpress](https://github.com/daniel-armbrust/oci-book/blob/main/chapter-3/3-7_concluindo-wordpress.md) <br>
     [3.8 - Quanto custa tudo isto?](https://github.com/daniel-armbrust/oci-book/blob/main/chapter-3/3-8_quanto-custa-wordpress.md) <br>
