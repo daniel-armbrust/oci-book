@@ -10,7 +10,7 @@ Aprensento abaixo, alguns dos componentes existentes do serviço de _[Networking
 
 1. **VCN (Virtual Cloud Network)**
     - É uma rede virtual privada configurada nos data centers da Oracle e que reside em uma única região.
-    - A partir de uma VCN criada e configurada, podemos criar subredes, máquinas virtuais, banco de dados, etc. É o nosso “tapete” para acomodarmos os móveis, a mesa, o sofá e a televisão.
+    - A partir de uma _[VCN](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingVCNs_topic-Overview_of_VCNs_and_Subnets.htm)_ criada e configurada, podemos criar subredes, máquinas virtuais, banco de dados, etc. É o nosso “tapete” para acomodarmos os móveis, a mesa, o sofá e a televisão.
     - Para criar uma VCN, você deve escolher um bloco de endereços IPv4 válido. A Oracle recomenda escolher um dos blocos documentados pela _[RFC1918](https://tools.ietf.org/html/rfc1918)_:
         - 10.0.0.0/8
         - 172.16.0.0/12
