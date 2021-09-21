@@ -1,6 +1,6 @@
-# Capítulo 3: Banco de Dados
+# Capítulo 7: Banco de Dados
 
-## 3.1 - MySQL
+## 7.1 - MySQL
 
 ### __Introdução__
 

@@ -37,18 +37,26 @@ Esse livro apresenta o **OCI (Oracle Cloud Infraestructure)** e por quê você d
     [3.7 - Concluindo a instalação do Wordpress](https://github.com/daniel-armbrust/oci-book/blob/main/chapter-3/3-7_concluindo-wordpress.md) <br>
     [3.8 - Quanto custa tudo isto?](https://github.com/daniel-armbrust/oci-book/blob/main/chapter-3/3-8_quanto-custa-wordpress.md) <br>
 
-- [Capítulo 4: Melhorando a primeira aplicação no OCI](https://github.com/daniel-armbrust/oci-book/blob/main/chapter-4/README.md) <br>
+- [Capítulo 4: Melhoramentos da aplicação](https://github.com/daniel-armbrust/oci-book/blob/main/chapter-4/README.md) <br>
     4.X - Lets Encrypt no Load Balancer <br>
     4.X - Adicionando segurança extra através do WAF <br>
 
-- [Capítulo 5: Storage no OCI](https://github.com/daniel-armbrust/oci-book/blob/main/chapter-5/README.md) <br>
+- [Capítulo 5: Mais sobre Redes no OCI](https://github.com/daniel-armbrust/oci-book/blob/main/chapter-5/README.md) <br>
+    [5.1 - Introdução](https://github.com/daniel-armbrust/oci-book/blob/main/chapter-5/5-1_mais-sobre-redes-introducao.md) <br>
+    [5.2 - VPN](https://github.com/daniel-armbrust/oci-book/blob/main/chapter-5/5-2_mais-sobre-redes-vpn.md) <br>
+    [5.3 - Conectando múltiplas VCNs através do DRG](https://github.com/daniel-armbrust/oci-book/blob/main/chapter-5/5-3_mais-sobre-redes-multiplas-vcn-drg.md) <br>
+    [5.4 - Roteamento de Trânsito](https://github.com/daniel-armbrust/oci-book/blob/main/chapter-5/5-4_mais-sobre-redes-roteamento-transito.md) <br>    
+    [5.6 - Ambiente DR (Disaster Recovery)](https://github.com/daniel-armbrust/oci-book/blob/main/chapter-5/5-6_mais-sobre-redes-ambiente-dr.md) <br>    
+    [5.7 - Múltiplos DRGs e múltiplas VCNs](https://github.com/daniel-armbrust/oci-book/blob/main/chapter-5/5-7_mais-sobre-redes-multiplos-drgs-multiplos-vcns.md) <br>    
 
-- [Capítulo 6: Banco de Dados](https://github.com/daniel-armbrust/oci-book/blob/main/chapter-6/README.md) <br>
-    [6.1 - MySQL](https://github.com/daniel-armbrust/oci-book/blob/main/chapter-6/6-1_mysql.md) <br>
-    6.2 - Banco de Dados Oracle <br>
-    6.3 - Exadata <br>
-    6.4 - Autonomous DB <br>
-    6.5 - Oracle NoSQL <br>
+- [Capítulo 6: Storage no OCI](https://github.com/daniel-armbrust/oci-book/blob/main/chapter-6/README.md) <br>
+
+- [Capítulo 7: Banco de Dados](https://github.com/daniel-armbrust/oci-book/blob/main/chapter-7/README.md) <br>
+    [7.1 - MySQL](https://github.com/daniel-armbrust/oci-book/blob/main/chapter-7/7-1_mysql.md) <br>
+    7.2 - Banco de Dados Oracle <br>
+    7.3 - Exadata <br>
+    7.4 - Autonomous DB <br>
+    7.5 - Oracle NoSQL <br>
 
 
 
