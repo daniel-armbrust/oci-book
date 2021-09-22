@@ -354,4 +354,4 @@ darmbrust@hoodwink:~$ oci network local-peering-gateway get \
 }
 ```
 
-É possível confirmar a conectividade pela propriedade _"peering-status"_ com valor _"PEERED"_, além do anúncio do bloco _[CIDR](https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing)_ vindo da _[VCN](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingVCNs_topic-Overview_of_VCNs_and_Subnets.htm)_ de banco de dados (vcn-db) através da propriedade _"peer-advertised-cidr"_ com valor _"172.16.30.0/24"_.
+É possível confirmar a conectividade pela propriedade _"peering-status"_ com valor _"PEERED"_, além do anúncio do bloco _[CIDR](https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing)_ vindo da _[VCN](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingVCNs_topic-Overview_of_VCNs_and_Subnets.htm)_ de banco de dados (vcn-db) através da propriedade _"peer-advertised-cidr"_ contendo o valor _"172.16.30.0/24"_.
