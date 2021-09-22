@@ -2,7 +2,7 @@
 
 ## 5.1 - Conectando múltiplas VCNs na mesma região
 
-### __Local Peering Gateway (LGP)__
+### __Visão Geral__
 
 _[Local Peering Gateway (LPG)](https://docs.oracle.com/en-us/iaas/Content/Network/Tasks/localVCNpeering.htm#Local_VCN_Peering_Within_Region)_ é um recurso que permite conectar duas _[VCNs](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingVCNs_topic-Overview_of_VCNs_and_Subnets.htm)_ na mesma região possiblitando comunicação via endereços IP privados e sem rotear o tráfego pela internet. As _[VCNs](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingVCNs_topic-Overview_of_VCNs_and_Subnets.htm)_ podem estar no mesmo _[tenancy](https://docs.oracle.com/pt-br/iaas/Content/Identity/Tasks/managingtenancy.htm)_ ou em _[tenancies](https://docs.oracle.com/pt-br/iaas/Content/Identity/Tasks/managingtenancy.htm)_ distintos. 
 
@@ -34,7 +34,7 @@ Action completed. Waiting until the resource has entered state: ('AVAILABLE',)
     "cidr-blocks": [
       "10.0.0.0/16"
     ],
-    "compartment-id": "ocid1.compartment.oc1..aaaaaaaaie4exnvj2ktkjlliahl2bxmdnteu2xmn27oc5cy5mdcmocl4vd7q",
+    "compartment-id": "ocid1.compartment.oc1..aaaaaaaauvqvbbx3oridcm5d2ztxkftwr362u2vl5zdsayzbehzwbjs56soq",
     "default-dhcp-options-id": "ocid1.dhcpoptions.oc1.sa-saopaulo-1.aaaaaaaaobne6utiqo6ri6mbajytx2o2gibdtlxir5oujcedlwtwghjmhq3q",
     "default-route-table-id": "ocid1.routetable.oc1.sa-saopaulo-1.aaaaaaaazkbucct2vc522pcye6jcldcrrqjm7kdcjlsvkyvosaopbmlywr7q",
     "default-security-list-id": "ocid1.securitylist.oc1.sa-saopaulo-1.aaaaaaaacczjrwz7gftbl46vhm5a3b3rd2ntuu7dvwawc3zc5zc6pn4gav7a",
@@ -61,7 +61,7 @@ Para a subrede pública de produção, usaremos os recursos _[dhcp options](http
 
 ```
 darmbrust@hoodwink:~$ oci network subnet create \
-> --compartment-id "ocid1.compartment.oc1..aaaaaaaaie4exnvj2ktkjlliahl2bxmdnteu2xmn27oc5cy5mdcmocl4vd7q" \
+> --compartment-id "ocid1.compartment.oc1..aaaaaaaauvqvbbx3oridcm5d2ztxkftwr362u2vl5zdsayzbehzwbjs56soq" \
 > --vcn-id "ocid1.vcn.oc1.sa-saopaulo-1.amaaaaaa6noke4qapu7nhvarjqmxzj4323rvn55flsj2salguah54hjuipva" \
 > --dhcp-options-id "ocid1.dhcpoptions.oc1.sa-saopaulo-1.aaaaaaaaobne6utiqo6ri6mbajytx2o2gibdtlxir5oujcedlwtwghjmhq3q" \
 > --route-table-id "ocid1.routetable.oc1.sa-saopaulo-1.aaaaaaaazkbucct2vc522pcye6jcldcrrqjm7kdcjlsvkyvosaopbmlywr7q" \
@@ -76,7 +76,7 @@ Action completed. Waiting until the resource has entered state: ('AVAILABLE',)
   "data": {
     "availability-domain": null,
     "cidr-block": "10.0.50.0/24",
-    "compartment-id": "ocid1.compartment.oc1..aaaaaaaaie4exnvj2ktkjlliahl2bxmdnteu2xmn27oc5cy5mdcmocl4vd7q",
+    "compartment-id": "ocid1.compartment.oc1..aaaaaaaauvqvbbx3oridcm5d2ztxkftwr362u2vl5zdsayzbehzwbjs56soq",
     "defined-tags": {
       "Oracle-Tags": {
         "CreatedBy": "oracleidentitycloudservice/daniel.armbrust@algumdominio.com",
@@ -194,5 +194,113 @@ Action completed. Waiting until the resource has entered state: ('AVAILABLE',)
     "virtual-router-mac": "00:00:17:C1:12:B0"
   },
   "etag": "7a9ef2e5"
+}
+```
+
+#### VCN de Banco de Dados (vcn-db)
+
+```
+darmbrust@hoodwink:~$ oci network local-peering-gateway create \
+> --compartment-id "ocid1.compartment.oc1..aaaaaaaauvqvbbx3oridcm5d2ztxkftwr362u2vl5zdsayzbehzwbjs56soq" \
+> --vcn-id "ocid1.vcn.oc1.sa-saopaulo-1.amaaaaaa6noke4qapu7nhvarjqmxzj4323rvn55flsj2salguah54hjuipva" \
+> --display-name "lpg_vcn-prd" \
+> --wait-for-state AVAILABLE
+Action completed. Waiting until the resource has entered state: ('AVAILABLE',)
+{
+  "data": {
+    "compartment-id": "ocid1.compartment.oc1..aaaaaaaauvqvbbx3oridcm5d2ztxkftwr362u2vl5zdsayzbehzwbjs56soq",
+    "defined-tags": {
+      "Oracle-Tags": {
+        "CreatedBy": "oracleidentitycloudservice/daniel.armbrust@algumdominio.com",
+        "CreatedOn": "2021-09-22T19:48:15.835Z"
+      }
+    },
+    "display-name": "lpg_vcn-prd",
+    "freeform-tags": {},
+    "id": "ocid1.localpeeringgateway.oc1.sa-saopaulo-1.aaaaaaaajtpagmjpddmhrqfvp6w6jsqvdhx3nmijhmblq3sgbnrkmefuaaza",
+    "is-cross-tenancy-peering": false,
+    "lifecycle-state": "AVAILABLE",
+    "peer-advertised-cidr": null,
+    "peer-advertised-cidr-details": null,
+    "peer-id": null,
+    "peering-status": "NEW",
+    "peering-status-details": "Not connected to a peer.",
+    "route-table-id": null,
+    "time-created": "2021-09-22T19:48:15.875000+00:00",
+    "vcn-id": "ocid1.vcn.oc1.sa-saopaulo-1.amaaaaaa6noke4qapu7nhvarjqmxzj4323rvn55flsj2salguah54hjuipva"
+  },
+  "etag": "d316556c"
+}
+```
+
+#### Local Peering Gateway (LPG)
+
+É necessário criar um _[LPG](https://docs.oracle.com/en-us/iaas/Content/Network/Tasks/localVCNpeering.htm#Local_VCN_Peering_Within_Region)_ do lado de cada _[VCN](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingVCNs_topic-Overview_of_VCNs_and_Subnets.htm)_ conforme mostrado abaixo:
+
+```
+darmbrust@hoodwink:~$ oci network local-peering-gateway create \
+> --compartment-id "ocid1.compartment.oc1..aaaaaaaauvqvbbx3oridcm5d2ztxkftwr362u2vl5zdsayzbehzwbjs56soq" \
+> --vcn-id "ocid1.vcn.oc1.sa-saopaulo-1.amaaaaaa6noke4qapu7nhvarjqmxzj4323rvn55flsj2salguah54hjuipva" \
+> --display-name "lpg_vcn-prd" \
+> --wait-for-state AVAILABLE
+Action completed. Waiting until the resource has entered state: ('AVAILABLE',)
+{
+  "data": {
+    "compartment-id": "ocid1.compartment.oc1..aaaaaaaauvqvbbx3oridcm5d2ztxkftwr362u2vl5zdsayzbehzwbjs56soq",
+    "defined-tags": {
+      "Oracle-Tags": {
+        "CreatedBy": "oracleidentitycloudservice/daniel.armbrust@algumdominio.com",
+        "CreatedOn": "2021-09-22T19:48:15.835Z"
+      }
+    },
+    "display-name": "lpg_vcn-prd",
+    "freeform-tags": {},
+    "id": "ocid1.localpeeringgateway.oc1.sa-saopaulo-1.aaaaaaaajtpagmjpddmhrqfvp6w6jsqvdhx3nmijhmblq3sgbnrkmefuaaza",
+    "is-cross-tenancy-peering": false,
+    "lifecycle-state": "AVAILABLE",
+    "peer-advertised-cidr": null,
+    "peer-advertised-cidr-details": null,
+    "peer-id": null,
+    "peering-status": "NEW",
+    "peering-status-details": "Not connected to a peer.",
+    "route-table-id": null,
+    "time-created": "2021-09-22T19:48:15.875000+00:00",
+    "vcn-id": "ocid1.vcn.oc1.sa-saopaulo-1.amaaaaaa6noke4qapu7nhvarjqmxzj4323rvn55flsj2salguah54hjuipva"
+  },
+  "etag": "d316556c"
+}
+```
+
+```
+darmbrust@hoodwink:~$ oci network local-peering-gateway create \
+> --compartment-id "ocid1.compartment.oc1..aaaaaaaauvqvbbx3oridcm5d2ztxkftwr362u2vl5zdsayzbehzwbjs56soq" \
+> --vcn-id "ocid1.vcn.oc1.sa-saopaulo-1.amaaaaaa6noke4qahidmpliuijfn6mum4maic3nhtgqlofvfdsl6hpfg3d3q" \
+> --display-name "lpg_vcn-db" \
+> --wait-for-state AVAILABLE
+Action completed. Waiting until the resource has entered state: ('AVAILABLE',)
+{
+  "data": {
+    "compartment-id": "ocid1.compartment.oc1..aaaaaaaauvqvbbx3oridcm5d2ztxkftwr362u2vl5zdsayzbehzwbjs56soq",
+    "defined-tags": {
+      "Oracle-Tags": {
+        "CreatedBy": "oracleidentitycloudservice/daniel.armbrust@algumdominio.com",
+        "CreatedOn": "2021-09-22T19:52:02.559Z"
+      }
+    },
+    "display-name": "lpg_vcn-db",
+    "freeform-tags": {},
+    "id": "ocid1.localpeeringgateway.oc1.sa-saopaulo-1.aaaaaaaa7ntl6vzave2qrlmmpx5ynbmjnnn7xsmh76zzg4ihdwsq5mzqxaoa",
+    "is-cross-tenancy-peering": false,
+    "lifecycle-state": "AVAILABLE",
+    "peer-advertised-cidr": null,
+    "peer-advertised-cidr-details": null,
+    "peer-id": null,
+    "peering-status": "NEW",
+    "peering-status-details": "Not connected to a peer.",
+    "route-table-id": null,
+    "time-created": "2021-09-22T19:52:02.598000+00:00",
+    "vcn-id": "ocid1.vcn.oc1.sa-saopaulo-1.amaaaaaa6noke4qahidmpliuijfn6mum4maic3nhtgqlofvfdsl6hpfg3d3q"
+  },
+  "etag": "2f1e88ec"
 }
 ```
