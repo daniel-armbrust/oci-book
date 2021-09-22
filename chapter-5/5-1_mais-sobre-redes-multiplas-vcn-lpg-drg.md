@@ -308,3 +308,14 @@ Action completed. Waiting until the resource has entered state: ('AVAILABLE',)
   "etag": "2f1e88ec"
 }
 ```
+
+A conexão das duas _[VCNs](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingVCNs_topic-Overview_of_VCNs_and_Subnets.htm)_ é feita pelo _[LPG](https://docs.oracle.com/en-us/iaas/Content/Network/Tasks/localVCNpeering.htm#Local_VCN_Peering_Within_Region)_  _solicitante (--local-peering-gateway-id)_ com o _aceitador (--peer-id)_:
+
+```
+darmbrust@hoodwink:~$ oci network local-peering-gateway connect \
+> --local-peering-gateway-id "ocid1.localpeeringgateway.oc1.sa-saopaulo-1.aaaaaaaajtpagmjpddmhrqfvp6w6jsqvdhx3nmijhmblq3sgbnrkmefuaaza" \
+> --peer-id "ocid1.localpeeringgateway.oc1.sa-saopaulo-1.aaaaaaaa7ntl6vzave2qrlmmpx5ynbmjnnn7xsmh76zzg4ihdwsq5mzqxaoa"
+{
+  "etag": "48472ecc"
+}
+```
