@@ -235,7 +235,9 @@ Action completed. Waiting until the resource has entered state: ('AVAILABLE',)
 
 #### Conexão através do Local Peering Gateway (LPG)
 
-É necessário criar um _[LPG](https://docs.oracle.com/en-us/iaas/Content/Network/Tasks/localVCNpeering.htm#Local_VCN_Peering_Within_Region)_ do lado de cada _[VCN](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingVCNs_topic-Overview_of_VCNs_and_Subnets.htm)_ conforme mostrado abaixo:
+É necessário criar um _[LPG](https://docs.oracle.com/en-us/iaas/Content/Network/Tasks/localVCNpeering.htm#Local_VCN_Peering_Within_Region)_ do lado de cada _[VCN](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingVCNs_topic-Overview_of_VCNs_and_Subnets.htm)_:
+
+- **VCN-PRD**
 
 ```
 darmbrust@hoodwink:~$ oci network local-peering-gateway create \
@@ -270,6 +272,8 @@ Action completed. Waiting until the resource has entered state: ('AVAILABLE',)
   "etag": "d316556c"
 }
 ```
+
+- **VCN-DB**
 
 ```
 darmbrust@hoodwink:~$ oci network local-peering-gateway create \
