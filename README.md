@@ -42,7 +42,7 @@ Esse livro apresenta o **OCI (Oracle Cloud Infraestructure)** e por quê você d
     4.X - Adicionando segurança extra através do WAF <br>
 
 - [Capítulo 5: Mais sobre Redes no OCI](https://github.com/daniel-armbrust/oci-book/blob/main/chapter-5/README.md) <br>
-    [5.1 - Conectando múltiplas VCNs através do DRG](https://github.com/daniel-armbrust/oci-book/blob/main/chapter-5/5-1_mais-sobre-redes-multiplas-vcn-drg.md) <br>
+    [5.1 - Conectando múltiplas VCNs na mesma região](https://github.com/daniel-armbrust/oci-book/blob/main/chapter-5/5-1_mais-sobre-redes-multiplas-vcn-lpg-drg.md) <br>
     [5.2 - VPN](https://github.com/daniel-armbrust/oci-book/blob/main/chapter-5/5-2_mais-sobre-redes-vpn.md) <br>
     [5.3 - FastConnect](https://github.com/daniel-armbrust/oci-book/blob/main/chapter-5/5-3_mais-sobre-redes-fastconnect.md) <br>
     [5.4 - Acesso ao Microsoft Azure](https://github.com/daniel-armbrust/oci-book/blob/main/chapter-5/5-4_mais-sobre-redes-msazure.md) <br>
