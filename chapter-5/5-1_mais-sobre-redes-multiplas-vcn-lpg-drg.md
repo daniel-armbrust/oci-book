@@ -1,22 +1,9 @@
 # Capítulo 5: Mais sobre Redes no OCI
 
-## 5.1 - Conectando múltiplas VCNs
+## 5.1 - Conectando múltiplas VCNs na mesma região
 
-### __Visão Geral__
+### __Local Peering Gateway (LGP)__
 
+_[Local Peering Gateway (LGP)](https://docs.oracle.com/en-us/iaas/Content/Network/Tasks/localVCNpeering.htm#Local_VCN_Peering_Within_Region)_ é um recurso que permite conectar duas _[VCNs](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingVCNs_topic-Overview_of_VCNs_and_Subnets.htm)_ na mesma região, possiblitando comunicação via endereços IP privados e sem rotear o tráfego pela internet. As _[VCNs](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingVCNs_topic-Overview_of_VCNs_and_Subnets.htm)_ podem estar no mesmo _[tenancy](https://docs.oracle.com/pt-br/iaas/Content/Identity/Tasks/managingtenancy.htm)_ ou em _[tenancies](https://docs.oracle.com/pt-br/iaas/Content/Identity/Tasks/managingtenancy.htm)_ distintos. 
 
-Você pode conectar a sua VCN a outra VCN por meio de uma conexão privada que não requer que o tráfego passe pela internet. Em geral, esse tipo de conexão é chamado de pareamento de VCNs.
-
-DYNAMIC ROUTING GATEWAY (DRG) é um roteador virtual 
-fornece um caminho para tráfego de rede privada entre a sua VCN e a rede local.
-conexão por meio de VPN Site-to-Site ou Oracle Cloud Infrastructure FastConnect.
-Ele também pode fornecer um caminho para tráfego de rede privada entre a sua VCN e uma VCN em outra região.
-
-
-Os blocos CIDR da VCN não devem se sobrepor uns com os outros, com CIDRs na sua rede local ou com os CIDRs da outra VCN com que você parou. Não deve haver sobreposição entre as sub-redes de determinada VCN
-
-Originalmente, as sub-redes foram projetadas para abranger somente um domínio de disponibilidade (AD) em uma região. Elas eram todas específicas do AD
-
-Agora as sub-redes podem ser específicas ou regionais do AD
-
-A Oracle recomenda o uso de sub-redes regionais
+Lembrando que se não houver pareamento via _[LGP](https://docs.oracle.com/en-us/iaas/Content/Network/Tasks/localVCNpeering.htm#Local_VCN_Peering_Within_Region)_ entre duas _[VCNs](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingVCNs_topic-Overview_of_VCNs_and_Subnets.htm)_, é necessário a utilização de um _[Internet Gateway](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingIGs.htm#Internet_Gateway)_ e endereços IP públicos. Porém, isto acaba expondo a comunicação dos seus recursos de forma indevia pela internet.
