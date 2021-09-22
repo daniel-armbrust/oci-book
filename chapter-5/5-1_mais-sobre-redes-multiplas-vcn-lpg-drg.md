@@ -319,3 +319,39 @@ darmbrust@hoodwink:~$ oci network local-peering-gateway connect \
   "etag": "48472ecc"
 }
 ```
+
+Para verificar o status da conexão, usamos o comando abaixo:
+
+```
+darmbrust@hoodwink:~$ oci network local-peering-gateway get \
+> --local-peering-gateway-id "ocid1.localpeeringgateway.oc1.sa-saopaulo-1.aaaaaaaajtpagmjpddmhrqfvp6w6jsqvdhx3nmijhmblq3sgbnrkmefuaaza"
+{
+  "data": {
+    "compartment-id": "ocid1.compartment.oc1..aaaaaaaauvqvbbx3oridcm5d2ztxkftwr362u2vl5zdsayzbehzwbjs56soq",
+    "defined-tags": {
+      "Oracle-Tags": {
+        "CreatedBy": "oracleidentitycloudservice/daniel.armbrust@algumdominio.com",
+        "CreatedOn": "2021-09-22T19:48:15.835Z"
+      }
+    },
+    "display-name": "lpg_vcn-prd",
+    "freeform-tags": {},
+    "id": "ocid1.localpeeringgateway.oc1.sa-saopaulo-1.aaaaaaaajtpagmjpddmhrqfvp6w6jsqvdhx3nmijhmblq3sgbnrkmefuaaza",
+    "is-cross-tenancy-peering": false,
+    "lifecycle-state": "AVAILABLE",
+    "peer-advertised-cidr": "172.16.30.0/24",
+    "peer-advertised-cidr-details": [
+      "172.16.30.0/24"
+    ],
+    "peer-id": "ocid1.localpeeringgateway.oc1.sa-saopaulo-1.aaaaaaaa7ntl6vzave2qrlmmpx5ynbmjnnn7xsmh76zzg4ihdwsq5mzqxaoa",
+    "peering-status": "PEERED",
+    "peering-status-details": "Connected to a peer.",
+    "route-table-id": null,
+    "time-created": "2021-09-22T19:48:15.875000+00:00",
+    "vcn-id": "ocid1.vcn.oc1.sa-saopaulo-1.amaaaaaa6noke4qapu7nhvarjqmxzj4323rvn55flsj2salguah54hjuipva"
+  },
+  "etag": "48472ecc"
+}
+```
+
+É possível confirmar a conectividade pela propriedade _"peering-status"_ com valor _"PEERED"_, além do anúncio do bloco _[CIDR](https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing)_ vindo da _[VCN](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingVCNs_topic-Overview_of_VCNs_and_Subnets.htm)_ de banco de dados (vcn-db) através da propriedade _"peer-advertised-cidr"_ com valor _"172.16.30.0/24"_.
