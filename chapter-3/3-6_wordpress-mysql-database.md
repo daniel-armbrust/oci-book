@@ -104,7 +104,7 @@ Para os _[backup automático](https://docs.oracle.com/pt-br/iaas/mysql-database/
 
 ### __Criando um Banco de Dados MySQL__
 
-Juntando as informações, iremos criar nosso _[MySQL](https://docs.oracle.com/pt-br/iaas/mysql-database/index.html)_ inicialmente com _100 GB_ disponível para armazenamento de dados _(--data-storage-size-in-gbs)_. Iremos definir também o nome do _usuário administrador (--admin-username)_ e uma senha inicial _(--admin-password)_, necessário para acesso ao banco de dados.
+Juntando as informações, iremos criar nosso _[MySQL](https://docs.oracle.com/pt-br/iaas/mysql-database/index.html)_ inicialmente com _100 GB_ disponível para armazenamento de dados _(--data-storage-size-in-gbs)_. Iremos definir também o nome do _usuário administrador (--admin-username)_ e uma senha inicial _(--admin-password)_, necessários para acesso ao banco de dados.
 
 ```
 darmbrust@hoodwink:~$ oci mysql db-system create \
