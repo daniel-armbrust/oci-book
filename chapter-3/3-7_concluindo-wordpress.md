@@ -260,7 +260,7 @@ darmbrust@hoodwink:~$ oci compute instance launch \
 }
 ```
 
-Após o provisionamento da instância, vamos consultar o seu endereço IP privado:
+Após o provisionamento da instância, vamos consultar o seu _endereço IP privado_:
 
 ```
 darmbrust@hoodwink:~$ oci compute instance list-vnics \
