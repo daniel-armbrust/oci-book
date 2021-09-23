@@ -171,3 +171,138 @@ darmbrust@hoodwink:~$ oci compute image delete \
 > --image-id "ocid1.image.oc1.sa-saopaulo-1.aaaaaaaamfroj67f7odaqosqnyid3ic3eh5lbovdm6ko5xkdqsexlpyatlda"
 Are you sure you want to delete this resource? [y/N]: y
 ```
+
+Criaremos uma nova instância do _[Wordpress](https://pt.wikipedia.org/wiki/WordPress)_ no mesmo padrão da anterior, porém a partir da nova _[custom image](https://docs.oracle.com/pt-br/iaas/Content/Compute/Tasks/managingcustomimages.htm)_:
+
+```
+darmbrust@hoodwink:~$ oci compute instance launch \
+> --compartment-id "ocid1.compartment.oc1..aaaaaaaamcff6exkhvp4aq3ubxib2wf74v7cx22b3yj56jnfkazoissdzefq" \
+> --availability-domain "ynrK:SA-SAOPAULO-1-AD-1" \
+> --shape "VM.Standard2.2" \
+> --subnet-id "ocid1.subnet.oc1.sa-saopaulo-1.aaaaaaaans5d7xtvurugjpyecws4kazd23lfmcdzyoj2jpqg4cyi56sy6nzq" \
+> --display-name "vm-wordpress-bkp-v2_subnprv-app_vcn-prd" \
+> --fault-domain "FAULT-DOMAIN-3" \
+> --hostname-label "wordpress-bkp-v2" \
+> --image-id "ocid1.image.oc1.sa-saopaulo-1.aaaaaaaahao4ljsu2eynh2b233peu3un2xrz23pltqkwh5emmznimwhmfzza" \
+> --nsg-ids '["ocid1.networksecuritygroup.oc1.sa-saopaulo-1.aaaaaaaa6jz4tjisvsnk4u7xaxkwmywx72jrkxeyjdpmdwgstt5nw4yzskpa"]'
+{
+  "data": {
+    "agent-config": {
+      "are-all-plugins-disabled": false,
+      "is-management-disabled": false,
+      "is-monitoring-disabled": false,
+      "plugins-config": null
+    },
+    "availability-config": {
+      "is-live-migration-preferred": null,
+      "recovery-action": "RESTORE_INSTANCE"
+    },
+    "availability-domain": "ynrK:SA-SAOPAULO-1-AD-1",
+    "capacity-reservation-id": null,
+    "compartment-id": "ocid1.compartment.oc1..aaaaaaaainfhxkeoowoms6xmt4mowqhsbbzshhbam72zsqj2l5mi73dfpaba",
+    "dedicated-vm-host-id": null,
+    "defined-tags": {
+      "Oracle-Tags": {
+        "CreatedBy": "oracleidentitycloudservice/guilherme.rocha@oracle.com",
+        "CreatedOn": "2021-09-23T15:54:09.819Z"
+      }
+    },
+    "display-name": "vm-wordpress-bkp-v2_subnprv-app_vcn-prd",
+    "extended-metadata": {},
+    "fault-domain": "FAULT-DOMAIN-3",
+    "freeform-tags": {},
+    "id": "ocid1.instance.oc1.sa-saopaulo-1.antxeljr6noke4qcvtljgtosiuk2tj36pi42kkc4ekum3o2dndzub7swtilq",
+    "image-id": "ocid1.image.oc1.sa-saopaulo-1.aaaaaaaahao4ljsu2eynh2b233peu3un2xrz23pltqkwh5emmznimwhmfzza",
+    "instance-options": {
+      "are-legacy-imds-endpoints-disabled": false
+    },
+    "ipxe-script": null,
+    "launch-mode": "PARAVIRTUALIZED",
+    "launch-options": {
+      "boot-volume-type": "PARAVIRTUALIZED",
+      "firmware": "UEFI_64",
+      "is-consistent-volume-naming-enabled": true,
+      "is-pv-encryption-in-transit-enabled": false,
+      "network-type": "PARAVIRTUALIZED",
+      "remote-data-volume-type": "PARAVIRTUALIZED"
+    },
+    "lifecycle-state": "PROVISIONING",
+    "metadata": {},
+    "platform-config": null,
+    "preemptible-instance-config": null,
+    "region": "sa-saopaulo-1",
+    "shape": "VM.Standard2.2",
+    "shape-config": {
+      "baseline-ocpu-utilization": null,
+      "gpu-description": null,
+      "gpus": 0,
+      "local-disk-description": null,
+      "local-disks": 0,
+      "local-disks-total-size-in-gbs": null,
+      "max-vnic-attachments": 2,
+      "memory-in-gbs": 30.0,
+      "networking-bandwidth-in-gbps": 2.0,
+      "ocpus": 2.0,
+      "processor-description": "2.0 GHz Intel\u00ae Xeon\u00ae Platinum 8167M (Skylake)"
+    },
+    "source-details": {
+      "boot-volume-size-in-gbs": null,
+      "image-id": "ocid1.image.oc1.sa-saopaulo-1.aaaaaaaahao4ljsu2eynh2b233peu3un2xrz23pltqkwh5emmznimwhmfzza",
+      "kms-key-id": null,
+      "source-type": "image"
+    },
+    "system-tags": {},
+    "time-created": "2021-09-23T15:54:10.469000+00:00",
+    "time-maintenance-reboot-due": null
+  },
+  "etag": "01593c870f6d9dbe0a6a08600b62a8945679567cfbfe601c5828a62ebe5ebc63",
+  "opc-work-request-id": "ocid1.coreservicesworkrequest.oc1.sa-saopaulo-1.abtxeljrnqumn2zosq65pv2u6de6l357rabl7cwfmbh7ixe6mjv3onvrtj6q"
+}
+```
+
+Após o provisionamento da instância, vamos consultar o seu endereço IP privado:
+
+```
+darmbrust@hoodwink:~$ oci compute instance list-vnics \
+> --instance-id "ocid1.instance.oc1.sa-saopaulo-1.antxeljr6noke4qcvtljgtosiuk2tj36pi42kkc4ekum3o2dndzub7swtilq" \
+> --query "data[].\"private-ip\""
+[
+  "10.0.10.87"
+]
+```
+
+### __Atualizando o Backend-Set do Load Balancer__
+
+```
+darmbrust@hoodwink:~$ oci lb backend create \
+> --load-balancer-id "ocid1.loadbalancer.oc1.sa-saopaulo-1.aaaaaaaa5ledgzqveh3o73m3mnv42pkxcm5y64hjmkwl7tnhvsee2zv7gbga" \
+> --backend-set-name "lb-pub_wordpress_backend" \
+> --ip-address 10.0.10.87 \
+> --port 80 \
+> --backup true \
+> --offline false \
+> --wait-for-state "SUCCEEDED"
+```
+
+```
+darmbrust@hoodwink:~$ oci lb backend list \
+> --load-balancer-id "ocid1.loadbalancer.oc1.sa-saopaulo-1.aaaaaaaa5ledgzqveh3o73m3mnv42pkxcm5y64hjmkwl7tnhvsee2zv7gbga" \
+> --backend-set-name "lb-pub_wordpress_backend" \
+> --output table
++--------+-------+-------------+----------------+---------+------+--------+
+| backup | drain | ip-address  | name           | offline | port | weight |
++--------+-------+-------------+----------------+---------+------+--------+
+| True   | False | 10.0.10.103 | 10.0.10.103:80 | False   | 80   | 1      |
+| True   | False | 10.0.10.87  | 10.0.10.87:80  | False   | 80   | 1      |
+| False  | False | 10.0.10.240 | 10.0.10.240:80 | False   | 80   | 1      |
++--------+-------+-------------+----------------+---------+------+--------+
+```
+
+```
+darmbrust@hoodwink:~$ oci lb backend update --load-balancer-id "ocid1.loadbalancer.oc1.sa-saopaulo-1.aaaaaaaa5ledgzqveh3o73m3mnv42pkxcm5y64hjmkwl7tnhvsee2zv7gbga" --backend-set-name "lb-pub_wordpress_backend" --offline true --backend-name "10.0.10.103:80" --weight 1 --backup true --drain false
+```
+
+```
+darmbrust@hoodwink:~$ oci lb backend delete --load-balancer-id "ocid1.loadbalancer.oc1.sa-saopaulo-1.aaaaaaaa5ledgzqveh3o73m3mnv42pkxcm5y64hjmkwl7tnhvsee2zv7gbga" --backend-set-name "lb-pub_wordpress_backend" --backend-name "10.0.10.103:80"
+Are you sure you want to delete this resource? [y/N]: y
+```
