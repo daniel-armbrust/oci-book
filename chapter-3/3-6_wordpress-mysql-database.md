@@ -88,14 +88,17 @@ Essas manutenções são realizadas raramente e somente quando for absolutamente
 
 Quando a manutenção é executada, o status do serviço _[MySQL](https://docs.oracle.com/pt-br/iaas/mysql-database/index.html)_ muda para _UPDATING_ e o banco de dados pode ficar indisponível por um curto período de tempo, até que a manutenção seja concluída.
 
-Para a _"janela de manutenção"_, irei especificar _DOMINGO (SUNDAY)_ com início as _04:30 AM_ horário de Brasília _(07:30 UTC)_.
+Para a _"janela de manutenção"_, irei especificar _DOMINGO (SUNDAY)_ com início as _04:30 AM_ _[horário de Brasília](https://pt.wikipedia.org/wiki/Fusos_hor%C3%A1rios_no_Brasil#Hor%C3%A1rio_de_Bras%C3%ADlia)_ _(07:30 UTC)_.
 
 #### Backup
 
 O serviço _[MySQL](https://docs.oracle.com/pt-br/iaas/mysql-database/index.html)_ suporta a execução de _[Backups Automáticos](https://docs.oracle.com/pt-br/iaas/mysql-database/doc/backing-db-system.html)_. Se você não especificar um horário de início para os backups automáticos, deverá gerenciá-los manualmente. É altamente recomendável ativar os _[backups automáticos](https://docs.oracle.com/pt-br/iaas/mysql-database/doc/backing-db-system.html)_.  
 
-O _[backup automático](https://docs.oracle.com/pt-br/iaas/mysql-database/doc/backing-db-system.html)_ é definido através de um _horário de início_ e um _período de retenção_ em dias. O padrão é sete dias. Seu backup começa a ser processado nos 30 minutos seguintes à hora inicial definida. 
+O _[backup automático](https://docs.oracle.com/pt-br/iaas/mysql-database/doc/backing-db-system.html)_ é definido através de um _horário de início_ e um _período de retenção_ em dias. O padrão é sete dias e uma vez definido, não é possível editar este _período de retenção_. Seu backup começa a ser processado nos 30 minutos seguintes à hora inicial definida. 
 
+Além do _[backup automático](https://docs.oracle.com/pt-br/iaas/mysql-database/doc/backing-db-system.html)_, você pode iniciar uma ação de _backup_ a qualquer momento.
+
+Para os _[backup automático](https://docs.oracle.com/pt-br/iaas/mysql-database/doc/backing-db-system.html)_ do nosso exemplo, iremos especificar o horário de início as _05:50 AM_ _[horário de Brasília](https://pt.wikipedia.org/wiki/Fusos_hor%C3%A1rios_no_Brasil#Hor%C3%A1rio_de_Bras%C3%ADlia)_ _(08:50 UTC)_.
 
 >_**__NOTA:__** Como já foi dito, todo horário no [OCI](https://www.oracle.com/cloud/) deve ser especificado em [UTC+0](https://pt.wikipedia.org/wiki/UTC%2B0)_.
 
