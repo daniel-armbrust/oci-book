@@ -325,7 +325,7 @@ darmbrust@hoodwink:~$ oci lb backend delete \
 Are you sure you want to delete this resource? [y/N]: y
 ```
 
-Como não precisamos mais da instância, deixar ela _"ligada"_ gera custos desnecessários. 
+Como não precisamos mais da antiga instância de backup, deixar ela _"ligada"_ gera custos desnecessários. 
 
 A ação de _terminate_ remove por completo a instância do nosso _[tenancy](https://docs.oracle.com/pt-br/iaas/Content/Identity/Tasks/managingtenancy.htm)_. Lembrando que estamos removendo também o _[boot volume](https://docs.oracle.com/pt-br/iaas/Content/Block/Concepts/bootvolumes.htm)_ através do parâmetro _--preserve-boot-volume_ com valor _false_:
 
