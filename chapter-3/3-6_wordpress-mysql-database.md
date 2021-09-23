@@ -6,19 +6,19 @@
 
 O _[Banco de Dados MySQL](https://docs.oracle.com/pt-br/iaas/mysql-database/index.html)_ é um serviço presente no _[OCI](https://www.oracle.com/cloud/)_ totalmente gerenciado, e suportado pela equipe _[MySQL da Oracle](https://www.oracle.com/mysql/)_.
 
-Neste capítulo, irei apresentar o básico sobre o _[MySQL](https://docs.oracle.com/pt-br/iaas/mysql-database/index.html)_ para que a aplicação _[Wordpress](https://pt.wikipedia.org/wiki/WordPress)_ funcione. Existe um capítulo mais completo sobre o tema que contém questões mais detalhadas e completas. Sugiro a consulta caso necessite conhecer mais detalhes.
+Neste capítulo, irei apresentar o básico sobre o _[MySQL](https://docs.oracle.com/pt-br/iaas/mysql-database/index.html)_ para que a aplicação _[Wordpress](https://pt.wikipedia.org/wiki/WordPress)_ funcione. Existe um capítulo mais completo sobre o tema que contém questões mais detalhadas e completas. Sugiro sua consulta caso necessite conhecer mais detalhes.
 
 Vamos ao básico.
 
-### __Provisionamento básico do MySQL__
+### __Criando um Banco de Dados MySQL__
 
-Existem diversas vantagens ao se utilizar o _[MySQL](https://docs.oracle.com/pt-br/iaas/mysql-database/index.html)_ como serviço. Começando pelo provisionamento automático das instâncias, aplicação de patches e atualizações, facilidade para realizar backups e restaurações, escalabilidade e monitoração incluída.
+Existem diversas vantagens ao se utilizar o _[MySQL](https://docs.oracle.com/pt-br/iaas/mysql-database/index.html)_ como serviço, começando pelo provisionamento automático das instâncias, aplicação de patches, atualizações, facilidade para realizar backups e restaurações, fácil escalabilidade e monitoração incluída.
 
 Vamos ao passo a passo ...
 
 #### __Listando os shapes disponíveis__
 
-O comando abaixo lista quais os _[shapes](https://docs.oracle.com/pt-br/iaas/mysql-database/doc/db-systems.html#GUID-E2A83218-9700-4A49-B55D-987867D81871)_ disponíveis para criarmos o _[MySQL](https://docs.oracle.com/pt-br/iaas/mysql-database/index.html)_:
+Começaremos listando quais os _[shapes](https://docs.oracle.com/pt-br/iaas/mysql-database/doc/db-systems.html#GUID-E2A83218-9700-4A49-B55D-987867D81871)_ que temos disponíveis para criar o _[MySQL](https://docs.oracle.com/pt-br/iaas/mysql-database/index.html)_.
 
 ```
 darmbrust@hoodwink:~$ oci mysql shape list \
@@ -47,7 +47,7 @@ darmbrust@hoodwink:~$ oci mysql shape list \
 +----------------+-----------------------------------------------------+--------------------+--------------------------------+
 ```
 
-Por hora, vamos escolher o _[shape](https://docs.oracle.com/pt-br/iaas/mysql-database/doc/db-systems.html#GUID-E2A83218-9700-4A49-B55D-987867D81871)_ _VM.Standard.E2._.
+Por hora, ficaremos com o _[shape](https://docs.oracle.com/pt-br/iaas/mysql-database/doc/db-systems.html#GUID-E2A83218-9700-4A49-B55D-987867D81871)_ _VM.Standard.E2.2_.
 
 #### __Listando as versões disponíveis__
 
@@ -61,4 +61,29 @@ darmbrust@hoodwink:~$ oci mysql version list \
 +----------------+--------------------------------------------------+
 | 8.0            | [{'version': '8.0.26', 'description': '8.0.26'}] |
 +----------------+--------------------------------------------------+
+```
+
+#### __Listando as configurações disponíveis__
+
+As configurações são coleções de variáveis e valores que definem a operação do _[MySQL](https://docs.oracle.com/pt-br/iaas/mysql-database/index.html)_. São análogos aos arquivos _my.ini_ ou _my.cnf_ usados em instalações locais. Para cada tipo de _[shape](https://docs.oracle.com/pt-br/iaas/mysql-database/doc/db-systems.html#GUID-E2A83218-9700-4A49-B55D-987867D81871)_ há uma _"configuração"_ disponível para uso aplicado ao sistema como um todo e aos usuários que fazem conexão e usam o serviço.
+
+```
+darmbrust@hoodwink:~$ oci mysql configuration list \
+> --compartment-id "ocid1.tenancy.oc1..aaaaaaaavv2qh5asjdcoufmb6fzpnrfqgjxxdzlvjrgkrkytnyyz6zgvjnua" \
+> --query "data[?\"shape-name\"=='VM.Standard.E2.2']"
+[
+  {
+    "compartment-id": null,
+    "defined-tags": null,
+    "description": "Default Standalone configuration for the VM.Standard.E2.2 MySQL Shape",
+    "display-name": "VM.Standard.E2.2.Standalone",
+    "freeform-tags": null,
+    "id": "ocid1.mysqlconfiguration.oc1..aaaaaaaah6o6qu3gdbxnqg6aw56amnosmnaycusttaa7abyq2tdgpgubvsgj",
+    "lifecycle-state": "ACTIVE",
+    "shape-name": "VM.Standard.E2.2",
+    "time-created": "2018-09-21T10:00:00+00:00",
+    "time-updated": null,
+    "type": "DEFAULT"
+  }
+]
 ```
