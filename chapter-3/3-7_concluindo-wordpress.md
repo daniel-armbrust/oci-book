@@ -20,7 +20,7 @@ Após conexão, iremos instalar o _MySQL Shell_ com o comando abaixo:
 
 A instalação do _MySQL Shell_ é necessária para que possamos criar o banco de dados do _[Wordpress](https://pt.wikipedia.org/wiki/WordPress)_, seu usuário e senha.
 
-Antes de realizarmos a conexão com o serviço, precisamos das informações referente ao _endpoint_ (hostname e porta):
+Antes de realizarmos a conexão com o serviço, precisamos das informações referente ao _endpoint_ _(hostname e porta)_:
 
 ```
 darmbrust@hoodwink:~$ oci mysql db-system list \
