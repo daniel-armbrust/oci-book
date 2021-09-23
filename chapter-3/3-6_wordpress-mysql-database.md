@@ -8,15 +8,11 @@ O _[Banco de Dados MySQL](https://docs.oracle.com/pt-br/iaas/mysql-database/inde
 
 Neste capítulo, irei apresentar o básico sobre o _[MySQL](https://docs.oracle.com/pt-br/iaas/mysql-database/index.html)_ para que a aplicação _[Wordpress](https://pt.wikipedia.org/wiki/WordPress)_ funcione. Existe um capítulo mais completo sobre o tema que contém questões mais detalhadas e completas. Sugiro sua consulta caso necessite conhecer mais detalhes.
 
-Vamos ao básico.
-
-### __Criando um Banco de Dados MySQL__
-
 Existem diversas vantagens ao se utilizar o _[MySQL](https://docs.oracle.com/pt-br/iaas/mysql-database/index.html)_ como serviço, começando pelo provisionamento automático das instâncias, aplicação de patches, atualizações, facilidade para realizar backups e restaurações, fácil escalabilidade e monitoração incluída.
 
-Vamos ao passo a passo ...
+Antes de disparar a criação do _[MySQL](https://docs.oracle.com/pt-br/iaas/mysql-database/index.html)_, irei exibir e explicar sobre algumas informações básicas necessárias para compor o comando de criação do serviço.
 
-#### __Listando os shapes disponíveis__
+### __Listando os shapes disponíveis__
 
 Começaremos listando quais os _[shapes](https://docs.oracle.com/pt-br/iaas/mysql-database/doc/db-systems.html#GUID-E2A83218-9700-4A49-B55D-987867D81871)_ que temos disponíveis para criar o _[MySQL](https://docs.oracle.com/pt-br/iaas/mysql-database/index.html)_.
 
@@ -49,21 +45,7 @@ darmbrust@hoodwink:~$ oci mysql shape list \
 
 Por hora, ficaremos com o _[shape](https://docs.oracle.com/pt-br/iaas/mysql-database/doc/db-systems.html#GUID-E2A83218-9700-4A49-B55D-987867D81871)_ _VM.Standard.E2.2_.
 
-#### __Listando as versões disponíveis__
-
-```
-darmbrust@hoodwink:~$ oci mysql version list \
-> --compartment-id "ocid1.tenancy.oc1..aaaaaaaavv2qh5asjdcoufmb6fzpnrfqgjxxdzlvjrgkrkytnyyz6zgvjnua" \
-> --all \
-> --output table
-+----------------+--------------------------------------------------+
-| version-family | versions                                         |
-+----------------+--------------------------------------------------+
-| 8.0            | [{'version': '8.0.26', 'description': '8.0.26'}] |
-+----------------+--------------------------------------------------+
-```
-
-#### __Listando as configurações disponíveis__
+### __Listando as configurações disponíveis__
 
 As configurações são coleções de variáveis e valores que definem a operação do _[MySQL](https://docs.oracle.com/pt-br/iaas/mysql-database/index.html)_. 
 
@@ -93,3 +75,5 @@ darmbrust@hoodwink:~$ oci mysql configuration list \
   }
 ]
 ```
+
+### __Criando um Banco de Dados MySQL__
