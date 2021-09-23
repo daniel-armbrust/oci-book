@@ -337,3 +337,9 @@ darmbrust@hoodwink:~$ oci compute instance terminate \
 Are you sure you want to delete this resource? [y/N]: y
 Action completed. Waiting until the resource has entered state: ('TERMINATED',)
 ```
+
+### __Conclusão__
+
+Aqui concluímos toda a instalação da aplicação _[Wordpress](https://pt.wikipedia.org/wiki/WordPress)_ no _[OCI](https://www.oracle.com/cloud/)_. Você pode testar a _alta disponibilidade_ da aplicação oferecida pelo _[Load Balancer](https://docs.oracle.com/pt-br/iaas/Content/Balance/Concepts/balanceoverview.htm)_, editando uma postagem qualquer no _[Wordpress](https://pt.wikipedia.org/wiki/WordPress)_ enquanto envia um _STOP_ para a instância principal.
+
+Entre outras melhorias que iremos abordar, há um capítulo específico que trata a _alta disponibilidade_ da camada de banco de dados. Este é um ponto de falha que será corrigido.
