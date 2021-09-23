@@ -85,9 +85,11 @@ Após escolha do idioma de instalação, inserimos os parâmetros de conexão ao
 
 ![alt_text](./images/wordpress-finish-install-2.jpg "Wordpress - Database values")
 
-Instalação concluída!
+Basta clicar no botão abaixo para concluir a instalação:
 
 ![alt_text](./images/wordpress-finish-install-3.jpg "Wordpress - Database values")
+
+Instalação concluída!
 
 Podemos conferir as tabelas criadas no _[MySQL](https://docs.oracle.com/pt-br/iaas/mysql-database/index.html)_ pelo comando abaixo:
 
