@@ -85,7 +85,7 @@ Após escolha do idioma de instalação, inserimos os parâmetros de conexão ao
 
 ![alt_text](./images/wordpress-finish-install-2.jpg "Wordpress - Database values")
 
-Basta clicar no botão abaixo para concluir a instalação:
+Basta clicar no botão _"Instalar"_ para concluir a instalação:
 
 ![alt_text](./images/wordpress-finish-install-3.jpg "Wordpress - Database values")
 
