@@ -176,3 +176,76 @@ darmbrust@hoodwink:~$ oci mysql db-system create \
   "opc-work-request-id": "ocid1.mysqlworkrequest.oc1.sa-saopaulo-1.0671994e-7391-449f-8bc5-3b2ec520133d.aaaaaaaacpjqndjcyrzu6qsmp73s4nkyn3gg4y7rhysskxitcci3gay2kgaa"
 }
 ```
+
+Após alguns minutos, podemos ver que o serviço foi corretamente provisionado:
+
+```
+darmbrust@hoodwink:~$ oci mysql db-system get \
+> --db-system-id "ocid1.mysqldbsystem.oc1.sa-saopaulo-1.aaaaaaaanvgvchfiecm6oyrz5fs3lhtnas3bmpmpcdualz52ad4gekfyspma"
+{
+  "data": {
+    "analytics-cluster": null,
+    "availability-domain": "ynrK:SA-SAOPAULO-1-AD-1",
+    "backup-policy": {
+      "defined-tags": null,
+      "freeform-tags": null,
+      "is-enabled": true,
+      "retention-in-days": 10,
+      "window-start-time": "08:50"
+    },
+    "channels": [],
+    "compartment-id": "ocid1.compartment.oc1..aaaaaaaaiwlvnw4uht5b3c5rodcjyseefmdvnssfmgf7dlbp4yiepv3oquoa",
+    "configuration-id": "ocid1.mysqlconfiguration.oc1..aaaaaaaah6o6qu3gdbxnqg6aw56amnosmnaycusttaa7abyq2tdgpgubvsgj",
+    "current-placement": {
+      "availability-domain": "ynrK:SA-SAOPAULO-1-AD-1",
+      "fault-domain": "FAULT-DOMAIN-1"
+    },
+    "data-storage-size-in-gbs": 100,
+    "defined-tags": {
+      "Oracle-Tags": {
+        "CreatedBy": "oracleidentitycloudservice/daniel.armbrust@algumdominio.com",
+        "CreatedOn": "2021-09-23T11:18:08.492Z"
+      }
+    },
+    "description": "MySQL para o Wordpress",
+    "display-name": "mysql_subnprv-db_vcn-prd",
+    "endpoints": [
+      {
+        "hostname": "mysql-wordpress.subnprvdb.vcnprd.oraclevcn.com",
+        "ip-address": "10.0.20.185",
+        "modes": [
+          "READ",
+          "WRITE"
+        ],
+        "port": 3306,
+        "port-x": 33060,
+        "status": "ACTIVE",
+        "status-details": null
+      }
+    ],
+    "fault-domain": "FAULT-DOMAIN-1",
+    "freeform-tags": {},
+    "heat-wave-cluster": null,
+    "hostname-label": "mysql-wordpress",
+    "id": "ocid1.mysqldbsystem.oc1.sa-saopaulo-1.aaaaaaaanvgvchfiecm6oyrz5fs3lhtnas3bmpmpcdualz52ad4gekfyspma",
+    "ip-address": "10.0.20.185",
+    "is-analytics-cluster-attached": false,
+    "is-heat-wave-cluster-attached": false,
+    "is-highly-available": false,
+    "lifecycle-details": null,
+    "lifecycle-state": "ACTIVE",
+    "maintenance": {
+      "window-start-time": "SUNDAY 07:30"
+    },
+    "mysql-version": "8.0.26-u2-cloud",
+    "port": 3306,
+    "port-x": 33060,
+    "shape-name": "VM.Standard.E2.2",
+    "source": null,
+    "subnet-id": "ocid1.subnet.oc1.sa-saopaulo-1.aaaaaaaaucjocmapsp3azvvzfnqlvp3j4qlzyv2hmtj5fliystr6u4wlpmma",
+    "time-created": "2021-09-23T11:18:09.610000+00:00",
+    "time-updated": "2021-09-23T11:26:05.218000+00:00"
+  },
+  "etag": "9433f42f00a22dc838cc6898e344e943de136c786f352c264cd9f8c161e5c8a3--gzip"
+}
+```
