@@ -10,7 +10,7 @@ Este capítulo será a _base_ que irá possibilitar você a fazer um melhor uso 
 
 Aproveite a sua jornada...
 
-- [Capítulo 3: Primeira aplicação no OCI](https://github.com/daniel-armbrust/oci-book/blob/main/chapter-3/README.md) <br>
+- Capítulo 3: Primeira aplicação no OCI <br>
     [3.1 - Fundamentos do Serviço de Redes](https://github.com/daniel-armbrust/oci-book/blob/main/chapter-3/3-1_fundamentos-redes.md) <br>
     [3.2 - Fundamentos do Serviço de Computação](https://github.com/daniel-armbrust/oci-book/blob/main/chapter-3/3-2_fundamentos-computacao.md) <br>
     [3.3 - Apresentando o Serviço Bastion](https://github.com/daniel-armbrust/oci-book/blob/main/chapter-3/3-3_servico-bastion.md) <br>
