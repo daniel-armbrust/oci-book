@@ -194,7 +194,7 @@ darmbrust@hoodwink:~$ oci mysql db-system get \
       "window-start-time": "08:50"
     },
     "channels": [],
-    "compartment-id": "ocid1.compartment.oc1..aaaaaaaaiwlvnw4uht5b3c5rodcjyseefmdvnssfmgf7dlbp4yiepv3oquoa",
+    "compartment-id": "ocid1.compartment.oc1..aaaaaaaa6d2s5sgmxmyxu2vca3pn46y56xisijjyhdjwgqg3f6goh3obj4qq",
     "configuration-id": "ocid1.mysqlconfiguration.oc1..aaaaaaaah6o6qu3gdbxnqg6aw56amnosmnaycusttaa7abyq2tdgpgubvsgj",
     "current-placement": {
       "availability-domain": "ynrK:SA-SAOPAULO-1-AD-1",
@@ -249,3 +249,7 @@ darmbrust@hoodwink:~$ oci mysql db-system get \
   "etag": "9433f42f00a22dc838cc6898e344e943de136c786f352c264cd9f8c161e5c8a3--gzip"
 }
 ```
+
+### __Conclusão__
+
+Aqui concluímos o provisionamento do primeiro _[MySQL](https://docs.oracle.com/pt-br/iaas/mysql-database/index.html)_. Simples e rápido.
