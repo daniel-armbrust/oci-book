@@ -164,7 +164,7 @@ Action completed. Waiting until the resource has entered state: ('AVAILABLE',)
 }
 ```
 
-Após criarmos a nova _[custom image](https://docs.oracle.com/pt-br/iaas/Content/Compute/Tasks/managingcustomimages.htm)_ podemos excluír a antiga:
+Assim que a criarmos a nova _[custom image](https://docs.oracle.com/pt-br/iaas/Content/Compute/Tasks/managingcustomimages.htm)_, podemos excluír a antiga:
 
 ```
 darmbrust@hoodwink:~$ oci compute image delete \
