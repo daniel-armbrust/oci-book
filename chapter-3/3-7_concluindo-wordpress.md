@@ -116,3 +116,58 @@ Fetching table and column names from `wordpress` for auto-completion... Press ^C
 +-----------------------+
 12 rows in set (0.0016 sec)
 ```
+
+### __Atualizando a Custom Image do Wordpress__
+
+Como houveram alterações na instância principal do _[Wordpress](https://pt.wikipedia.org/wiki/WordPress)_, é prudente criarmos uma nova _[custom image](https://docs.oracle.com/pt-br/iaas/Content/Compute/Tasks/managingcustomimages.htm)_:
+
+```
+darmbrust@hoodwink:~$ oci compute image create \
+> --compartment-id "ocid1.compartment.oc1..aaaaaaaamcff6exkhvp4aq3ubxib2wf74v7cx22b3yj56jnfkazoissdzefq" \
+> --instance-id "ocid1.instance.oc1.sa-saopaulo-1.antxeljr6noke4qcf4yilvaofwpt5aiavnsx7cfev3fhp2bpc3xfcxo5k6zq" \
+> --display-name "ol7-wordpress-v2_img" \
+> --wait-for-state "AVAILABLE"
+Action completed. Waiting until the resource has entered state: ('AVAILABLE',)
+{
+  "data": {
+    "agent-features": null,
+    "base-image-id": "ocid1.image.oc1.sa-saopaulo-1.aaaaaaaasahnls6nmev22raz7ecw6i64d65fu27pmqjn4pgz7zue56ojj7qq",
+    "billable-size-in-gbs": 5,
+    "compartment-id": "ocid1.compartment.oc1..aaaaaaaamcff6exkhvp4aq3ubxib2wf74v7cx22b3yj56jnfkazoissdzefq",
+    "create-image-allowed": true,
+    "defined-tags": {
+      "Oracle-Tags": {
+        "CreatedBy": "oracleidentitycloudservice/daniel.armbrust@algumdominio.com",
+        "CreatedOn": "2021-09-23T13:56:05.745Z"
+      }
+    },
+    "display-name": "ol7-wordpress-v2_img",
+    "freeform-tags": {},
+    "id": "ocid1.image.oc1.sa-saopaulo-1.aaaaaaaahao4ljsu2eynh2b233peu3un2xrz23pltqkwh5emmznimwhmfzza",
+    "launch-mode": "PARAVIRTUALIZED",
+    "launch-options": {
+      "boot-volume-type": "PARAVIRTUALIZED",
+      "firmware": "UEFI_64",
+      "is-consistent-volume-naming-enabled": true,
+      "is-pv-encryption-in-transit-enabled": false,
+      "network-type": "PARAVIRTUALIZED",
+      "remote-data-volume-type": "PARAVIRTUALIZED"
+    },
+    "lifecycle-state": "AVAILABLE",
+    "listing-type": null,
+    "operating-system": "Oracle Linux",
+    "operating-system-version": "7.9",
+    "size-in-mbs": 102400,
+    "time-created": "2021-09-23T13:56:06.464000+00:00"
+  },
+  "etag": "ce0a2251c26cf854f8d58b272c27815340fb4f51c6f0eac980675791b93c43ef"
+}
+```
+
+Após criarmos a nova _[custom image](https://docs.oracle.com/pt-br/iaas/Content/Compute/Tasks/managingcustomimages.htm)_ podemos excluír a antiga:
+
+```
+darmbrust@hoodwink:~$ oci compute image delete \
+> --image-id "ocid1.image.oc1.sa-saopaulo-1.aaaaaaaamfroj67f7odaqosqnyid3ic3eh5lbovdm6ko5xkdqsexlpyatlda"
+Are you sure you want to delete this resource? [y/N]: y
+```
