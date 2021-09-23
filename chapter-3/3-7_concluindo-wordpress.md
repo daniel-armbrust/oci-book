@@ -273,6 +273,8 @@ darmbrust@hoodwink:~$ oci compute instance list-vnics \
 
 ### __Atualizando o Backend-Set do Load Balancer__
 
+Com a nova instância criada, iremos adicioná-la ao _"conjunto de backend"_ existente:
+
 ```
 darmbrust@hoodwink:~$ oci lb backend create \
 > --load-balancer-id "ocid1.loadbalancer.oc1.sa-saopaulo-1.aaaaaaaa5ledgzqveh3o73m3mnv42pkxcm5y64hjmkwl7tnhvsee2zv7gbga" \
@@ -283,6 +285,8 @@ darmbrust@hoodwink:~$ oci lb backend create \
 > --offline false \
 > --wait-for-state "SUCCEEDED"
 ```
+
+Podemos ver agora que temos três instâncias do _[Wordpress](https://pt.wikipedia.org/wiki/WordPress)_ em execução, sendo duas de _backup_:
 
 ```
 darmbrust@hoodwink:~$ oci lb backend list \
@@ -298,6 +302,8 @@ darmbrust@hoodwink:~$ oci lb backend list \
 +--------+-------+-------------+----------------+---------+------+--------+
 ```
 
+Vamos remover a instância de _backup_ antiga do _"conjunto de backend"_. Para isto, temos que definir a propriedade _offline_ primeiro, para que a instância não receba novas conexões:
+
 ```
 darmbrust@hoodwink:~$ oci lb backend update \
 > --load-balancer-id "ocid1.loadbalancer.oc1.sa-saopaulo-1.aaaaaaaa5ledgzqveh3o73m3mnv42pkxcm5y64hjmkwl7tnhvsee2zv7gbga" \
@@ -309,6 +315,8 @@ darmbrust@hoodwink:~$ oci lb backend update \
 > --drain false
 ```
 
+Feito isto, podemos remover a instância por definitivo:
+
 ```
 darmbrust@hoodwink:~$ oci lb backend delete \
 > --load-balancer-id "ocid1.loadbalancer.oc1.sa-saopaulo-1.aaaaaaaa5ledgzqveh3o73m3mnv42pkxcm5y64hjmkwl7tnhvsee2zv7gbga" \
@@ -316,6 +324,10 @@ darmbrust@hoodwink:~$ oci lb backend delete \
 > --backend-name "10.0.10.103:80"
 Are you sure you want to delete this resource? [y/N]: y
 ```
+
+Como não precisamos mais da instância, deixar ela _"ligada"_ gera custos desnecessários. 
+
+A ação de _terminate_ remove por completo a instância do nosso _[tenancy](https://docs.oracle.com/pt-br/iaas/Content/Identity/Tasks/managingtenancy.htm)_. Lembrando que estamos removendo também o _[boot volume](https://docs.oracle.com/pt-br/iaas/Content/Block/Concepts/bootvolumes.htm)_ através do parâmetro _--preserve-boot-volume_ com valor _false_:
 
 ```
 darmbrust@hoodwink:~$ oci compute instance terminate \
