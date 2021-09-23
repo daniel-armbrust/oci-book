@@ -6,7 +6,7 @@ Neste capítulo iremos apresentar todo o passo a passo para a construção de um
 
 Escolhi a aplicação _[Wordpress](https://pt.wikipedia.org/wiki/WordPress)_ por ser uma aplicação bastante popular. Porém, através dos conceitos demonstrados, você pode escolher qualquer outra aplicação que quiser.
 
-Este capítulo, será a _base_ que irá possibilitar você a fazer um melhor uso do _[OCI](https://www.oracle.com/cloud/)_, enquanto mostra conceitos que envolvem a _computação em nuvem_. Ao final dele, teremos um capítulo que mostra qual é o _custo_ de tudo isto. Este também irá explicar como os recursos são cobrados.
+Este capítulo será a _base_ que irá possibilitar você a fazer um melhor uso do _[OCI](https://www.oracle.com/cloud/)_, enquanto mostra conceitos que envolvem a _computação em nuvem_. Ao final dele, teremos um capítulo que mostra qual é o _custo_ de tudo isto. Este também irá explicar como os recursos são cobrados.
 
 Aproveite a sua jornada...
 
