@@ -71,7 +71,7 @@ São análogos aos arquivos _my.ini_ ou _my.cnf_ usados em instalações locais.
 
 Para cada tipo de _[shape](https://docs.oracle.com/pt-br/iaas/mysql-database/doc/db-systems.html#GUID-E2A83218-9700-4A49-B55D-987867D81871)_ há uma _"configuração"_ disponível para uso que é aplicado ao sistema como um todo e aos usuários que fazem conexão e usam o serviço.
 
-Abaixo, irei listar a _"configuração"_ disponível para o [shape](https://docs.oracle.com/pt-br/iaas/mysql-database/doc/db-systems.html#GUID-E2A83218-9700-4A49-B55D-987867D81871)_ _VM.Standard.E2.2_. escolhido:
+Abaixo, irei listar a _"configuração"_ disponível para o _[shape](https://docs.oracle.com/pt-br/iaas/mysql-database/doc/db-systems.html#GUID-E2A83218-9700-4A49-B55D-987867D81871)_ _VM.Standard.E2.2_. escolhido:
 
 ```
 darmbrust@hoodwink:~$ oci mysql configuration list \
