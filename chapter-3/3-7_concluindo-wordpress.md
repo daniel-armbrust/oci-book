@@ -10,7 +10,7 @@ Vamos aos detalhes finais.
 
 ### __Detalhes finais__
 
-A partir de uma sessão do _[Bastion](https://docs.oracle.com/pt-br/iaas/Content/Bastion/Concepts/bastionoverview.htm)_ iremos se conectar na instância principal do _[Wordpress](https://pt.wikipedia.org/wiki/WordPress)_.
+A partir de uma sessão do _[Bastion](https://docs.oracle.com/pt-br/iaas/Content/Bastion/Concepts/bastionoverview.htm)_ vamos se conectar na instância principal do _[Wordpress](https://pt.wikipedia.org/wiki/WordPress)_.
 
 Após conexão, iremos instalar o _MySQL Shell_ com o comando abaixo:
 
