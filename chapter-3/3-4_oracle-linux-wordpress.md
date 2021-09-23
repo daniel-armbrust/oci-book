@@ -501,6 +501,8 @@ A partir de uma sessão do _[Bastion](https://docs.oracle.com/pt-br/iaas/Content
 success
 [opc@wordpress ~]$ sudo firewall-cmd --reload
 success
+[opc@wordpress ~]$ sudo firewall-cmd --runtime-to-permanent
+success
 ```
 
 6. Habilitar e iniciar o servidor _[HTTP Apache](https://pt.wikipedia.org/wiki/Servidor_Apache)_:
