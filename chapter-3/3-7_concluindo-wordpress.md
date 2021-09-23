@@ -203,7 +203,7 @@ darmbrust@hoodwink:~$ oci compute instance launch \
     "dedicated-vm-host-id": null,
     "defined-tags": {
       "Oracle-Tags": {
-        "CreatedBy": "oracleidentitycloudservice/guilherme.rocha@oracle.com",
+        "CreatedBy": "oracleidentitycloudservice/daniel.armbrust@algumdominio.com",
         "CreatedOn": "2021-09-23T15:54:09.819Z"
       }
     },
