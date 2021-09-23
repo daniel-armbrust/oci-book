@@ -43,7 +43,7 @@ darmbrust@hoodwink:~$ oci mysql shape list \
 +----------------+-----------------------------------------------------+--------------------+--------------------------------+
 ```
 
-Por hora, ficaremos com o _[shape](https://docs.oracle.com/pt-br/iaas/mysql-database/doc/db-systems.html#GUID-E2A83218-9700-4A49-B55D-987867D81871)_ _VM.Standard.E2.2_.
+Por hora, ficaremos com o _[shape](https://docs.oracle.com/pt-br/iaas/mysql-database/doc/db-systems.html#GUID-E2A83218-9700-4A49-B55D-987867D81871)_ _VM.Standard.E2.2_ que é equipado com _2 vCPUs_ e _16 GB de RAM_.
 
 ### __Listando as configurações disponíveis__
 
@@ -103,3 +103,76 @@ Para os _[backup automático](https://docs.oracle.com/pt-br/iaas/mysql-database/
 >_**__NOTA:__** Como já foi dito, todo horário no [OCI](https://www.oracle.com/cloud/) deve ser especificado em [UTC+0](https://pt.wikipedia.org/wiki/UTC%2B0)_.
 
 ### __Criando um Banco de Dados MySQL__
+
+Juntando as informações, iremos criar nosso _[MySQL](https://docs.oracle.com/pt-br/iaas/mysql-database/index.html)_.
+
+```
+darmbrust@hoodwink:~$ oci mysql db-system create \
+> --compartment-id "ocid1.compartment.oc1..aaaaaaaa6d2s5sgmxmyxu2vca3pn46y56xisijjyhdjwgqg3f6goh3obj4qq" \
+> --availability-domain "ynrK:SA-SAOPAULO-1-AD-1" \
+> --subnet-id "ocid1.subnet.oc1.sa-saopaulo-1.aaaaaaaagyg2sk2c4j46ky3lngceejohdzswlffsavqqybepekbean3gytba" \
+> --shape-name "VM.Standard.E2.2" \
+> --configuration-id "ocid1.mysqlconfiguration.oc1..aaaaaaaah6o6qu3gdbxnqg6aw56amnosmnaycusttaa7abyq2tdgpgubvsgj" \
+> --hostname-label "mysql-wordpress" \
+> --admin-username admin \
+> --admin-password Sup3rS3cr3t0# \
+> --data-storage-size-in-gbs 100 \
+> --display-name "mysql_subnprv-db_vcn-prd" \
+> --description "MySQL para o Wordpress" \
+> --backup-policy '{"isEnabled": true, "retentionInDays": 10, "windowStartTime": "08:50"}' \
+> --maintenance '{"window-start-time": "SUNDAY 07:30"}' 
+{
+  "data": {
+    "analytics-cluster": null,
+    "availability-domain": "ynrK:SA-SAOPAULO-1-AD-1",
+    "backup-policy": {
+      "defined-tags": null,
+      "freeform-tags": null,
+      "is-enabled": true,
+      "retention-in-days": 10,
+      "window-start-time": "08:50"
+    },
+    "channels": [],
+    "compartment-id": "ocid1.compartment.oc1..aaaaaaaa6d2s5sgmxmyxu2vca3pn46y56xisijjyhdjwgqg3f6goh3obj4qq",
+    "configuration-id": "ocid1.mysqlconfiguration.oc1..aaaaaaaah6o6qu3gdbxnqg6aw56amnosmnaycusttaa7abyq2tdgpgubvsgj",
+    "current-placement": {
+      "availability-domain": null,
+      "fault-domain": null
+    },
+    "data-storage-size-in-gbs": 100,
+    "defined-tags": {
+      "Oracle-Tags": {
+        "CreatedBy": "oracleidentitycloudservice/daniel.armbrust@algumdominio.com",
+        "CreatedOn": "2021-09-23T11:18:08.492Z"
+      }
+    },
+    "description": "MySQL para o Wordpress",
+    "display-name": "mysql_subnprv-db_vcn-prd",
+    "endpoints": [],
+    "fault-domain": null,
+    "freeform-tags": {},
+    "heat-wave-cluster": null,
+    "hostname-label": "mysql-wordpress",
+    "id": "ocid1.mysqldbsystem.oc1.sa-saopaulo-1.aaaaaaaanvgvchfiecm6oyrz5fs3lhtnas3bmpmpcdualz52ad4gekfyspma",
+    "ip-address": null,
+    "is-analytics-cluster-attached": false,
+    "is-heat-wave-cluster-attached": false,
+    "is-highly-available": false,
+    "lifecycle-details": null,
+    "lifecycle-state": "CREATING",
+    "maintenance": {
+      "window-start-time": "SUNDAY 07:30"
+    },
+    "mysql-version": null,
+    "port": null,
+    "port-x": null,
+    "shape-name": "VM.Standard.E2.2",
+    "source": null,
+    "subnet-id": "ocid1.subnet.oc1.sa-saopaulo-1.aaaaaaaagyg2sk2c4j46ky3lngceejohdzswlffsavqqybepekbean3gytba",
+    "time-created": "2021-09-23T11:18:09.610000+00:00",
+    "time-updated": "2021-09-23T11:18:09.610000+00:00"
+  },
+  "etag": "7abd67ec35e86cf3abb537f40cf884ed0174fc0abea260a02d85ba9c4e0d9bbb",
+  "opc-work-request-id": "ocid1.mysqlworkrequest.oc1.sa-saopaulo-1.0671994e-7391-449f-8bc5-3b2ec520133d.aaaaaaaacpjqndjcyrzu6qsmp73s4nkyn3gg4y7rhysskxitcci3gay2kgaa"
+}
+```
