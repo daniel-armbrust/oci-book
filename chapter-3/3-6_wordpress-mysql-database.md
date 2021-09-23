@@ -65,7 +65,11 @@ darmbrust@hoodwink:~$ oci mysql version list \
 
 #### __Listando as configurações disponíveis__
 
-As configurações são coleções de variáveis e valores que definem a operação do _[MySQL](https://docs.oracle.com/pt-br/iaas/mysql-database/index.html)_. São análogos aos arquivos _my.ini_ ou _my.cnf_ usados em instalações locais. Para cada tipo de _[shape](https://docs.oracle.com/pt-br/iaas/mysql-database/doc/db-systems.html#GUID-E2A83218-9700-4A49-B55D-987867D81871)_ há uma _"configuração"_ disponível para uso aplicado ao sistema como um todo e aos usuários que fazem conexão e usam o serviço.
+As configurações são coleções de variáveis e valores que definem a operação do _[MySQL](https://docs.oracle.com/pt-br/iaas/mysql-database/index.html)_. 
+
+São análogos aos arquivos _my.ini_ ou _my.cnf_ usados em instalações locais. 
+
+Para cada tipo de _[shape](https://docs.oracle.com/pt-br/iaas/mysql-database/doc/db-systems.html#GUID-E2A83218-9700-4A49-B55D-987867D81871)_ há uma _"configuração"_ disponível para uso aplicado ao sistema como um todo e aos usuários que fazem conexão e usam o serviço.
 
 ```
 darmbrust@hoodwink:~$ oci mysql configuration list \
