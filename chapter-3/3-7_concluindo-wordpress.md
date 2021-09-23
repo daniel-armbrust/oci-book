@@ -299,10 +299,29 @@ darmbrust@hoodwink:~$ oci lb backend list \
 ```
 
 ```
-darmbrust@hoodwink:~$ oci lb backend update --load-balancer-id "ocid1.loadbalancer.oc1.sa-saopaulo-1.aaaaaaaa5ledgzqveh3o73m3mnv42pkxcm5y64hjmkwl7tnhvsee2zv7gbga" --backend-set-name "lb-pub_wordpress_backend" --offline true --backend-name "10.0.10.103:80" --weight 1 --backup true --drain false
+darmbrust@hoodwink:~$ oci lb backend update \
+> --load-balancer-id "ocid1.loadbalancer.oc1.sa-saopaulo-1.aaaaaaaa5ledgzqveh3o73m3mnv42pkxcm5y64hjmkwl7tnhvsee2zv7gbga" \
+> --backend-set-name "lb-pub_wordpress_backend" \
+> --backend-name "10.0.10.103:80" \
+> --offline true \
+> --weight 1 \
+> --backup true \
+> --drain false
 ```
 
 ```
-darmbrust@hoodwink:~$ oci lb backend delete --load-balancer-id "ocid1.loadbalancer.oc1.sa-saopaulo-1.aaaaaaaa5ledgzqveh3o73m3mnv42pkxcm5y64hjmkwl7tnhvsee2zv7gbga" --backend-set-name "lb-pub_wordpress_backend" --backend-name "10.0.10.103:80"
+darmbrust@hoodwink:~$ oci lb backend delete \
+> --load-balancer-id "ocid1.loadbalancer.oc1.sa-saopaulo-1.aaaaaaaa5ledgzqveh3o73m3mnv42pkxcm5y64hjmkwl7tnhvsee2zv7gbga" \
+> --backend-set-name "lb-pub_wordpress_backend" \
+> --backend-name "10.0.10.103:80"
 Are you sure you want to delete this resource? [y/N]: y
+```
+
+```
+darmbrust@hoodwink:~$ oci compute instance terminate \
+> --instance-id "ocid1.instance.oc1.sa-saopaulo-1.antxeljr6noke4qcqvfo5wgs4ikrzyicjx7erqzg5oqkqlctpfliw6z7kuyq" \
+> --preserve-boot-volume false \
+> --wait-for-state "TERMINATED"
+Are you sure you want to delete this resource? [y/N]: y
+Action completed. Waiting until the resource has entered state: ('TERMINATED',)
 ```
