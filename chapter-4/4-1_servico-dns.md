@@ -44,6 +44,16 @@ Vejamos nosso exemplo:
 
 Lembra da _árvore invertida?_ Pois bem … cada nó da árvore contém um rótulo _(ex: ocibook)_ que representa uma nova subárvore. Podemos dizer que _"ocibook"_ é um subdomínio do domínio _"com"_, e _"com"_ é um subdomínio do domínio _"br"_. No caso do nome _"wordpress"_, este representa o recurso acessível pelo IP _152.70.221.188_, que em nosso caso é o _[Load Balancer](https://docs.oracle.com/pt-br/iaas/Content/Balance/Concepts/balanceoverview.htm)_.
 
-Aqui no Brasil, o _[registro.br](https://registro.br/quem-somos/)_ é o responsável pelas atividades de registro e manutenção dos nomes do domínio ._[br](https://pt.wikipedia.org/wiki/.br)_. Toda pessoa física ou jurídica que queira ter seu próprio nome na Internet, primeiramente deve _[registrar](https://registro.br/)_ ele.
+Aqui no Brasil, o _[registro.br](https://registro.br/quem-somos/)_ é o responsável pelas atividades de registro e manutenção dos nomes do domínio ._[br](https://pt.wikipedia.org/wiki/.br)_. Toda pessoa física ou jurídica que queira ter seu próprio nome na internet, primeiramente deve _[registrar](https://registro.br/)_ ele.
 
-Para registrarmos um nome, como primeiro passo, é verificar sua disponibilidade através deste _[link aqui](https://registro.br/busca-dominio/)_. Basta seguir as orientações apresentadas pelo _[site](https://registro.br/quem-somos/)_ e pronto! Você agora é responsável por um domínio na Internet.
+Para registrarmos um nome, como primeiro passo, é verificar sua disponibilidade através deste _[link aqui](https://registro.br/busca-dominio/)_. Basta seguir as orientações apresentadas pelo _[site](https://registro.br/quem-somos/)_ e pronto! Você agora é responsável por um domínio na internet.
+
+### __Zona DNS e Registro de Recursos (RR)__
+
+Uma Zona DNS nada mais é do que um conjunto de configurações que armazenam diferentes registros DNS. Esses registros são chamados de _[Registros de Recursos](https://en.wikipedia.org/wiki/List_of_DNS_record_types)_ ou _[Resource Records (RR)](https://en.wikipedia.org/wiki/List_of_DNS_record_types)_.
+
+Lembre-se que o DNS é um tipo de banco de dados no qual contém registros e valores (chave e valor) referente aos _[host](https://pt.wikipedia.org/wiki/Host)_ da internet. Todo o conjunto registro e valor, são armazenados em uma **_Zona DNS_**.  
+
+Cada **_Zona DNS_** é administrada de forma independente. A partir do momento que você registra um nome, você se torna responsável pela administração dele. Além dos registros que você pode inserir em sua **_Zona DNS_**, você também pode criar novos subdomínios e delegar a administração à alguém. 
+
+![alt_text](./images/zonas-dns-1.jpg "Zona DNS")
