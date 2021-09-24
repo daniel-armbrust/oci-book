@@ -38,7 +38,7 @@ Esse livro apresenta o **OCI (Oracle Cloud Infraestructure)** e por quê você d
     [3.8 - Quanto custa tudo isto?](https://github.com/daniel-armbrust/oci-book/blob/main/chapter-3/3-8_quanto-custa-wordpress.md) <br>
 
 - [Capítulo 4: Melhorias na aplicação Wordpress](https://github.com/daniel-armbrust/oci-book/blob/main/chapter-4/README.md) <br>
-    [4.1 - Utilizando o Serviço de DNS](https://github.com/daniel-armbrust/oci-book/blob/main/chapter-4/4-1_servico-dns.md)
+    [4.1 - Utilizando o Serviço de DNS](https://github.com/daniel-armbrust/oci-book/blob/main/chapter-4/4-1_servico-dns.md) <br>
     4.X - Lets Encrypt no Load Balancer <br>
     4.X - Adicionando segurança extra através do WAF <br>
     4.X - FSS <br>
