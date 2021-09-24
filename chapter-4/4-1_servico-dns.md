@@ -68,3 +68,7 @@ Sobre os _[Registros de Recursos (RR)](https://en.wikipedia.org/wiki/List_of_DNS
 | CNAME        |  Canonical Name - Define um _"apelido"_ para um nome existente.                                                                                 |
 | MX           |  Mail Exchanger - Define um _[host](https://pt.wikipedia.org/wiki/Host)_ que será responsável por processar mensagens de e-mail para o domínio. |
 
+### __Adicionando uma Zona DNS__
+
+Vou demonstrar de forma prática todo o processo de _"levar"_ um domínio para o _[OCI](https://www.oracle.com/cloud/)_, com a finalidade de centralizar a administração da infraestrutura, obter proteção contra _[ataques DDoS](https://pt.wikipedia.org/wiki/Ataque_de_nega%C3%A7%C3%A3o_de_servi%C3%A7o)_ e ter _alta disponibilidade_. Todos estes recursos estão presentes no _[Serviço de DNS](https://docs.oracle.com/pt-br/iaas/Content/DNS/Concepts/dnszonemanagement.htm)_.
+
