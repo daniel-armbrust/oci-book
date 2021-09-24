@@ -57,3 +57,15 @@ Lembre-se que o DNS é um tipo de banco de dados no qual contém registros e val
 Cada **_Zona DNS_** é administrada de forma independente. A partir do momento que você registra um nome, você se torna responsável pela administração dele. Além dos registros que você pode inserir em sua **_Zona DNS_**, você também pode criar novos subdomínios e delegar a administração à alguém. 
 
 ![alt_text](./images/zonas-dns-1.jpg "Zona DNS")
+
+Sobre os _[Registros de Recursos (RR)](https://en.wikipedia.org/wiki/List_of_DNS_record_types)_ disponíveis no _[Serviço de DNS](https://docs.oracle.com/pt-br/iaas/Content/DNS/Concepts/dnszonemanagement.htm)_ do _[OCI](https://www.oracle.com/cloud/)_, os mais utilizados são:
+
++----------+---------------------------------------------------------------------------------------------------------+
+| A        |  Mapeia um nome de host a um endereço IPv4.                                                             |
++----------+---------------------------------------------------------------------------------------------------------+
+| AAAA     |  Mapeia um nome de host a um endereço IPv6.                                                             |
++----------+---------------------------------------------------------------------------------------------------------+
+| CNAME    |  Canonical Name - Define um _"apelido"_ para um nome existente.                                         |
++----------+---------------------------------------------------------------------------------------------------------+
+| MX       |  Mail Exchanger - Define um _[host](https://pt.wikipedia.org/wiki/Host)_ que será responsável por processar mensagens de e-mail para o domínio. |
++----------+---------------------------------------------------------------------------------------------------------+
