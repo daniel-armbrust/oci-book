@@ -67,4 +67,4 @@ Sobre os _[Registros de Recursos (RR)](https://en.wikipedia.org/wiki/List_of_DNS
 | AAAA     |  Mapeia um nome de host a um endereço IPv6.                                                             |
 | CNAME    |  Canonical Name - Define um _"apelido"_ para um nome existente.                                         |
 | MX       |  Mail Exchanger - Define um _[host](https://pt.wikipedia.org/wiki/Host)_ que será responsável por processar mensagens de e-mail para o domínio. |
-
+|----------|-----------|
