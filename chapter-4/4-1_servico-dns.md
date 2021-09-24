@@ -61,7 +61,7 @@ Cada **_Zona DNS_** é administrada de forma independente. A partir do momento q
 Sobre os _[Registros de Recursos (RR)](https://en.wikipedia.org/wiki/List_of_DNS_record_types)_ disponíveis no _[Serviço de DNS](https://docs.oracle.com/pt-br/iaas/Content/DNS/Concepts/dnszonemanagement.htm)_ do _[OCI](https://www.oracle.com/cloud/)_, os mais utilizados são:
 
 
-|   Registro   | Descrição                                                                                                                                       |
+|Registro|Descrição                                                                                                                                       |
 |--------------|-------------------------------------------------------------------------------------------------------------------------------------------------|
 | A            |  Mapeia um nome de host a um endereço IPv4.                                                                                                     |
 | AAAA         |  Mapeia um nome de host a um endereço IPv6.                                                                                                     |
