@@ -62,7 +62,7 @@ Sobre os _[Registros de Recursos (RR)](https://en.wikipedia.org/wiki/List_of_DNS
 
 
 |Registro|Descrição                                                                                                                                       |
-|--------------|-------------------------------------------------------------------------------------------------------------------------------------------------:
+|--------------|:------------------------------------------------------------------------------------------------------------------------------------------------|
 | A            |  Mapeia um nome de host a um endereço IPv4.                                                                                                     |
 | AAAA         |  Mapeia um nome de host a um endereço IPv6.                                                                                                     |
 | CNAME        |  Canonical Name - Define um _"apelido"_ para um nome existente.                                                                                 |
