@@ -39,3 +39,11 @@ Podemos dizer que domínio é o seu _“espaço na internet”_. Ou seja, é um 
 Vejamos nosso exemplo:
 
 ![alt_text](./images/o-que-e-um-dominio-1.jpg "O que é um domínio?")
+
+>_**__NOTA:__** Estamos falando de nomes que terminam em “.br”. Por tanto, para saber das categorias disponíveis no [registro.br](https://registro.br/quem-somos/) acesse este [link](https://registro.br/dominio/categorias/)._
+
+Lembra da _árvore invertida?_ Pois bem … cada nó da árvore contém um rótulo _(ex: ocibook)_ que representa uma nova subárvore. Podemos dizer que _ocibook_ é um subdomínio do domínio _com_, e _com_ é um subdomínio do domínio _br_. No caso do nome _wordpress_, este representa o recurso acessível pelo IP _152.70.221.188_, que em nosso caso é o _[Load Balancer](https://docs.oracle.com/pt-br/iaas/Content/Balance/Concepts/balanceoverview.htm)_.
+
+Aqui no Brasil, o _[registro.br](https://registro.br/quem-somos/)_ é o responsável pelas atividades de registro e manutenção dos nomes do domínio ._[br](https://pt.wikipedia.org/wiki/.br)_. Toda pessoa física ou jurídica que queira ter seu próprio nome na Internet, primeiramente deve _[registrar](https://registro.br/)_ ele.
+
+Para registrarmos um nome, como primeiro passo, é verificar sua disponibilidade através deste _[link aqui](https://registro.br/busca-dominio/)_. Basta seguir as orientações apresentadas pelo _[site](https://registro.br/quem-somos/)_ e pronto! Você agora é responsável por um domínio na Internet.
