@@ -42,7 +42,7 @@ Vejamos nosso exemplo:
 
 >_**__NOTA:__** Estamos falando de nomes que terminam em “.br”. Por tanto, para saber das categorias disponíveis no [registro.br](https://registro.br/quem-somos/) acesse este [link](https://registro.br/dominio/categorias/)._
 
-Lembra da _árvore invertida?_ Pois bem … cada nó da árvore contém um rótulo _(ex: ocibook)_ que representa uma nova subárvore. Podemos dizer que _"ocibook"_ é um subdomínio do domínio _"com"_, e _"com"_ é um subdomínio do domínio _"br"_. No caso do nome _wordpress_, este representa o recurso acessível pelo IP _152.70.221.188_, que em nosso caso é o _[Load Balancer](https://docs.oracle.com/pt-br/iaas/Content/Balance/Concepts/balanceoverview.htm)_.
+Lembra da _árvore invertida?_ Pois bem … cada nó da árvore contém um rótulo _(ex: ocibook)_ que representa uma nova subárvore. Podemos dizer que _"ocibook"_ é um subdomínio do domínio _"com"_, e _"com"_ é um subdomínio do domínio _"br"_. No caso do nome _"wordpress"_, este representa o recurso acessível pelo IP _152.70.221.188_, que em nosso caso é o _[Load Balancer](https://docs.oracle.com/pt-br/iaas/Content/Balance/Concepts/balanceoverview.htm)_.
 
 Aqui no Brasil, o _[registro.br](https://registro.br/quem-somos/)_ é o responsável pelas atividades de registro e manutenção dos nomes do domínio ._[br](https://pt.wikipedia.org/wiki/.br)_. Toda pessoa física ou jurídica que queira ter seu próprio nome na Internet, primeiramente deve _[registrar](https://registro.br/)_ ele.
 
