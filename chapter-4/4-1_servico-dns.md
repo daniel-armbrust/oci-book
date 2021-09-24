@@ -23,3 +23,11 @@ Lembrando que a comunicação entre máquinas na Internet, ocorre através de _[
 Este banco de dados de hosts, que forma o _[serviço DNS](https://docs.oracle.com/pt-br/iaas/Content/DNS/Concepts/dnszonemanagement.htm)_, é representado por uma **_árvore invertida_** no qual possui uma única raiz (root) no topo:
 
 ![alt_text](./images/o-que-e-dns-1.jpg "O que é DNS?")
+
+No desenho acima temos os servidores DNS denominados _ROOT_ (também representados por um ponto “.”). Estes servidores sabem como direcionar uma requisição aos demais servidores _gTLDs (Generic Top Level Domains - Domínios de Primeiro Nível Genéricos)_ ou _ccTLDs (Country Code Top Level Domains - Domínios de Primeiro Nível de Código de País)_.
+
+>_**__NOTA:__** Os ccTLDs seguiram a norma internacional ISO 3166 no qual estabelece uma abreviação de duas letras para todos os países do mundo._
+
+Essa é a parte simples: _“Resolver um nome, por exemplo **cloud.oracle.com** em seu endereço IP **104.125.126.150**”_. Agora, imagine ficar sem este serviço. Esse é o lado crítico!
+    
+Por conta desta criticidade, o _[Serviço de DNS](https://docs.oracle.com/pt-br/iaas/Content/DNS/Concepts/dnszonemanagement.htm)_ do _[OCI](https://www.oracle.com/cloud/)_ é distribuído através de uma _[Rede Anycast](https://pt.wikipedia.org/wiki/Anycast)_ por todo o globo terrestre. Isto garante baixa latência ao resolver um nome pela proximidade ao usuário, alto desempenho e alta disponibilidade pela distribuição do serviço entre vários _[PoPs (Point of presence)](https://pt.wikipedia.org/wiki/Point_of_presence)_.
