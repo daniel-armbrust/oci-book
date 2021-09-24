@@ -31,3 +31,11 @@ No desenho acima temos os servidores DNS denominados _ROOT_ (também representad
 Essa é a parte simples: _“Resolver um nome, por exemplo **cloud.oracle.com** em seu endereço IP **104.125.126.150**”_. Agora, imagine ficar sem este serviço. Esse é o lado crítico!
     
 Por conta desta criticidade, o _[Serviço de DNS](https://docs.oracle.com/pt-br/iaas/Content/DNS/Concepts/dnszonemanagement.htm)_ do _[OCI](https://www.oracle.com/cloud/)_ é distribuído através de uma _[Rede Anycast](https://pt.wikipedia.org/wiki/Anycast)_ por todo o globo terrestre. Isto garante baixa latência ao resolver um nome pela proximidade ao usuário, alto desempenho e alta disponibilidade pela distribuição do serviço entre vários _[PoPs (Point of presence)](https://pt.wikipedia.org/wiki/Point_of_presence)_.
+
+### __O que é um domínio?__
+
+Podemos dizer que domínio é o seu _“espaço na internet”_. Ou seja, é um nome que serve para localizar e identificar _você_ ou _sua empresa_ na internet. É o nome do seu site, é um símbolo de identificação.
+
+Vejamos nosso exemplo:
+
+![alt_text](./images/o-que-e-um-dominio-1.jpg "O que é um domínio?")
