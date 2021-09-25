@@ -187,7 +187,7 @@ darmbrust@hoodwink:~$ oci dns record domain patch \
 }
 ```
 
-### __Informando o Registro.BR__
+### __Configurações no Registro.BR__
 
 Para finalizar, devemos informar ao _[Registro.BR](https://registro.br/)_ que a partir de agora, os servidores DNS que são responsáveis pelo nosso domínio estão localizados no _[OCI](https://www.oracle.com/cloud/)_.
 
@@ -229,4 +229,6 @@ Caso você encontre a mensagem abaixo:
 
 Significa que os servidores do _[registro.br](https://registro.br/)_ entram em _"transição"_. Isto acontece quando você retira a responsabilidade do _[registro.br](https://registro.br/)_, em resolver os nomes do seu domínio, e passa esta responsabilidade para um _servidor externo_. Em nosso caso este _servidor externo_ são os servidores do _[OCI](https://www.oracle.com/cloud/)_.
 
-Esse _período de transição_ é bem curto e não deve legar mais que uma hora para sua conclusão.
+Esse _período de transição_ é bem curto e não deve legar mais que uma hora para concluir.
+
+### __Testando o Domínio__
