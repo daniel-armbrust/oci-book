@@ -215,4 +215,4 @@ Na tela que se abre, perceba que estamos usando os DNS do próprio _[registro.br
 
 ![alt_text](./images/registro-br-3.jpg "registro.br - ALTERAR SERVIDORES DNS")
 
-![alt_text](./images/registro-br-3.jpg "registro.br - ALTERAR SERVIDORES DNS")
+![alt_text](./images/registro-br-4.jpg "registro.br - ALTERAR SERVIDORES DNS")
