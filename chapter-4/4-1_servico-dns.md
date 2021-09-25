@@ -265,7 +265,14 @@ Address: 152.70.221.188
 - Exemplo de uso do _[nslookup](https://pt.wikipedia.org/wiki/Nslookup)_ em _modo batch_:
 
 ```
+darmbrust@hoodwink:~$ nslookup wordpress.ocibook.com.br
+Server:         192.168.88.1
+Address:        192.168.88.1#53
 
+Non-authoritative answer:
+wordpress.ocibook.com.br        canonical name = lb-1.ocibook.com.br.
+Name:   lb-1.ocibook.com.br
+Address: 152.70.221.188
 ```
 
 Já a ferramenta _[dig](https://pt.wikipedia.org/wiki/Domain_Information_Groper)_ usa as bibliotecas para resolver nomes diretamente do sistema operacional. Não há _modo interativo_, e é a mais indicada para uso por conta dos detalhes que ela provê. Porém, necessita ser compilada para ser utilizada em _[Windows](https://pt.wikipedia.org/wiki/Microsoft_Windows)_. Maiores informações sobre a ferramenta dig podem ser encontrados _[aqui](https://www.isc.org/download/)_.
@@ -299,6 +306,34 @@ lb-1.ocibook.com.br.    3600    IN      A       152.70.221.188
 ```
 
 No site das documentações do _[OCI](https://www.oracle.com/cloud/)_ você também encontra informações sobre a ferramenta _[dig](https://pt.wikipedia.org/wiki/Domain_Information_Groper)_ usando este _[link aqui](https://docs.cloud.oracle.com/pt-br/iaas/Content/DNS/Tasks/testingdnsusingdig.htm)_.
+
+Como o domínio já está publicado, é possível fazer o acesso pelo nome _"wordpress.ocibook.com.br"_:
+
+```
+darmbrust@hoodwink:~$ curl -L -v -s -o /dev/null http://wordpress.ocibook.com.br
+*   Trying 152.70.221.188:80...
+* TCP_NODELAY set
+* Connected to wordpress.ocibook.com.br (152.70.221.188) port 80 (#0)
+> GET / HTTP/1.1
+> Host: wordpress.ocibook.com.br
+> User-Agent: curl/7.68.0
+> Accept: */*
+>
+* Mark bundle as not supporting multiuse
+< HTTP/1.1 200 OK
+< Date: Sat, 25 Sep 2021 14:28:35 GMT
+< Content-Type: text/html; charset=UTF-8
+< Transfer-Encoding: chunked
+< Connection: keep-alive
+< X-Powered-By: PHP/7.4.23
+< Link: <http://152.70.221.188/index.php?rest_route=/>; rel="https://api.w.org/"
+<
+{ [1174 bytes data]
+* Connection #0 to host wordpress.ocibook.com.br left intact
+```
+
+>_**__NOTA:__** O comando [curl](https://pt.wikipedia.org/wiki/CURL) acima foi configurado para exibir somente os [cabeçalhos](https://pt.wikipedia.org/wiki/Lista_de_campos_de_cabe%C3%A7alho_HTTP) [HTTP](https://pt.wikipedia.org/wiki/Hypertext_Transfer_Protocol) da conexão._
+
 
 ### __Conclusão__
 
