@@ -307,7 +307,11 @@ lb-1.ocibook.com.br.    3600    IN      A       152.70.221.188
 
 No site das documentações do _[OCI](https://www.oracle.com/cloud/)_ você também encontra informações sobre a ferramenta _[dig](https://pt.wikipedia.org/wiki/Domain_Information_Groper)_ usando este _[link aqui](https://docs.cloud.oracle.com/pt-br/iaas/Content/DNS/Tasks/testingdnsusingdig.htm)_.
 
-Como o domínio já está publicado, é possível fazer o acesso pelo nome _"wordpress.ocibook.com.br"_:
+Como o domínio já está publicado, é possível fazer o acesso pelo seu nome _"wordpress.ocibook.com.br"_. Mas antes, é preciso configurar este detalhe nas configurações do _[Wordpress](https://pt.wikipedia.org/wiki/WordPress)_ _(http://152.70.221.188/wp-login.php)_:
+
+![alt_text](./images/wordpress-finish-install-4.jpg "Wordpress Configurações")
+
+Após salvar as alterações, veja o resultado do teste:
 
 ```
 darmbrust@hoodwink:~$ curl -L -v -s -o /dev/null http://wordpress.ocibook.com.br
@@ -321,14 +325,14 @@ darmbrust@hoodwink:~$ curl -L -v -s -o /dev/null http://wordpress.ocibook.com.br
 >
 * Mark bundle as not supporting multiuse
 < HTTP/1.1 200 OK
-< Date: Sat, 25 Sep 2021 14:28:35 GMT
+< Date: Sat, 25 Sep 2021 14:37:26 GMT
 < Content-Type: text/html; charset=UTF-8
 < Transfer-Encoding: chunked
 < Connection: keep-alive
 < X-Powered-By: PHP/7.4.23
-< Link: <http://152.70.221.188/index.php?rest_route=/>; rel="https://api.w.org/"
+< Link: <http://wordpress.ocibook.com.br/index.php?rest_route=/>; rel="https://api.w.org/"
 <
-{ [1174 bytes data]
+{ [1164 bytes data]
 * Connection #0 to host wordpress.ocibook.com.br left intact
 ```
 
