@@ -227,6 +227,6 @@ Caso você encontre a mensagem abaixo:
 
 ![alt_text](./images/registro-br-5.jpg "registro.br - Servidores em Transição")
 
-Significa que os servidores do _[registro.br](https://registro.br/)_ entram em _"transição"_. Isto acontece quando você retira a responsabilidade do _[registro.br](https://registro.br/)_, em resolver os nomes do seu domínio, e passa esta responsabilidade para um servidor externo. Em nosso caso este servidor externo são os servidores do _[OCI](https://www.oracle.com/cloud/)_.
+Significa que os servidores do _[registro.br](https://registro.br/)_ entram em _"transição"_. Isto acontece quando você retira a responsabilidade do _[registro.br](https://registro.br/)_, em resolver os nomes do seu domínio, e passa esta responsabilidade para um _servidor externo_. Em nosso caso este _servidor externo_ são os servidores do _[OCI](https://www.oracle.com/cloud/)_.
 
-Esse período de transição é bem curto e não deve legar mais que uma hora para sua conclusão.
+Esse _período de transição_ é bem curto e não deve legar mais que uma hora para sua conclusão.
