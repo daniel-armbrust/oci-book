@@ -220,3 +220,9 @@ Para centralizarmos e termos controle sobre a administração deste domínio no 
 Nesta tela devemos informar os servidores responsáveis pelo nosso domínio no _[OCI](https://www.oracle.com/cloud/)_:
 
 ![alt_text](./images/registro-br-4.jpg "registro.br - ALTERAR SERVIDORES DNS")
+
+Pronto! Alterações salvas.
+
+Caso você encontre a mensagem abaixo:
+
+![alt_text](./images/registro-br-5.jpg "registro.br - Servidores em Transição")
