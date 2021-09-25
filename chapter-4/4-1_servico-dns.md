@@ -186,3 +186,23 @@ darmbrust@hoodwink:~$ oci dns record domain patch \
   "opc-total-items": "1"
 }
 ```
+
+### __Informando o Registro.BR__
+
+Para finalizar, devemos informar ao _[Registro.BR](https://registro.br/)_ que a partir de agora, os servidores DNS que são responsáveis pelo nosso domínio estão localizados no _[OCI](https://www.oracle.com/cloud/)_.
+
+Se você reparou, quando a _Zona DNS_ foi criada, o _[OCI](https://www.oracle.com/cloud/)_ disponibilizou um conjunto de _servidores DNS_ responsáveis por realizar a resolução de nomes referentes ao nosso domínio.
+
+Podemos obter esta lista de servidores com o comando abaixo:
+
+```
+darmbrust@hoodwink:~$ oci dns zone get --zone-name-or-id "ocibook.com.br" | grep "hostname" | tr -d '"' | awk '{print $2}'
+ns1.p68.dns.oraclecloud.net
+ns2.p68.dns.oraclecloud.net
+ns3.p68.dns.oraclecloud.net
+ns4.p68.dns.oraclecloud.net
+```
+
+Como eu registrei o domínio _"ocibook.com.br"_, basta eu acessar a minha conta no _[registro.br](https://registro.br/)_ para completar as informações de registro.
+
+![alt_text](./images/registro-br-1.jpg "registro.br - Acessando a conta")
