@@ -229,7 +229,11 @@ Caso você encontre a mensagem abaixo:
 
 Significa que os servidores do _[registro.br](https://registro.br/)_ entram em _"transição"_. Isto acontece quando você retira a responsabilidade do _[registro.br](https://registro.br/)_, em resolver os nomes do seu domínio, e passa esta responsabilidade para um _servidor externo_. Em nosso caso este _servidor externo_ são os servidores do _[OCI](https://www.oracle.com/cloud/)_.
 
-Esse _período de transição_ é bem curto e não deve legar mais que uma hora para concluir.
+Esse _período de transição_ é bem curto e não deve levar mais que uma hora para concluir.
+
+Após este período, é possível ver os servidores DNS do _[OCI](https://www.oracle.com/cloud/)_ respondendo pelo domínio.
+
+![alt_text](./images/registro-br-6.jpg "registro.br - DNS Pronto")
 
 ### __Testando o Domínio__
 
