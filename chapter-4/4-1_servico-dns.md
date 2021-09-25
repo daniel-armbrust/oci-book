@@ -160,4 +160,29 @@ O valor _3600 segundos (1 hora)_ contido em _"ttl" (Time to live ou "Tempo de Vi
 
 Se seus dados não mudam muito, você pode usar um valor _TTL_ de vários dias. Em nosso caso, estamos deixar um valor menor para evitar um _cache_ muito longo, pois iremos mudar esta definição em breve.
 
-Por fim, irei adicionar um registro do tipo _CNAME_ que nada mais é do que um _"apelido"_ para o nome que foi criado.
+Por fim, irei adicionar um registro do tipo _CNAME_ que nada mais é do que um _apelido_ _"wordpress"_ para o nome _"lb-1.ocibook.com.br"_ que foi criado.
+
+```
+darmbrust@hoodwink:~$ oci dns record domain patch \
+> --zone-name-or-id "ocibook.com.br" \
+> --domain "wordpress.ocibook.com.br" \
+> --scope "GLOBAL" \
+> --items '[{"domain":"wordpress.ocibook.com.br", "rdata": "lb-1.ocibook.com.br", "rtype": "CNAME", "ttl": 3600}]'
+{
+  "data": {
+    "items": [
+      {
+        "domain": "wordpress.ocibook.com.br",
+        "is-protected": false,
+        "rdata": "lb-1.ocibook.com.br.",
+        "record-hash": "9f1c7a488c404ebe3f549d56c76d563f",
+        "rrset-version": "5",
+        "rtype": "CNAME",
+        "ttl": 3600
+      }
+    ]
+  },
+  "etag": "\"5ocid1.dns-zone.oc1..3b872f6da34a452ebd1c36678002acc3#application/json\"",
+  "opc-total-items": "1"
+}
+```
