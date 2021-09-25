@@ -214,3 +214,5 @@ No painel de administração dos seus domínios, clique no domínio _"ocibook.co
 Na tela que se abre, perceba que estamos usando os DNS do próprio _[registro.br](https://registro.br/)_. Para centralizarmos e termos controle sobre a administração deste domínio no _[OCI](https://www.oracle.com/cloud/)_, devemos alterá-los clicando no link _"ALTERAR SERVIDORES DNS"_:
 
 ![alt_text](./images/registro-br-3.jpg "registro.br - ALTERAR SERVIDORES DNS")
+
+![alt_text](./images/registro-br-3.jpg "registro.br - ALTERAR SERVIDORES DNS")
