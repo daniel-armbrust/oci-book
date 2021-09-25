@@ -127,7 +127,7 @@ Action completed. Waiting until the resource has entered state: ('ACTIVE',)
 
 ### __Gerenciando registros DNS__
 
-Após nossa _Zona DNS_ estar devidamente criada, iremos criar dois registros que farão parte da aplicação _[Wordpress](https://pt.wikipedia.org/wiki/WordPress)_.
+Após a _Zona DNS_ estar devidamente criada, irei criar dois _registros_ que serão usados pela aplicação _[Wordpress](https://pt.wikipedia.org/wiki/WordPress)_. O primeiro irá apontar o nome _"lb-1.ocibook.com.br"_ para o endereço IP _"152.70.221.188"_ do _[Load Balancer](https://docs.oracle.com/pt-br/iaas/Content/Balance/Concepts/balanceoverview.htm)_ que foi criado: 
 
 ```
 darmbrust@hoodwink:~$ oci dns record domain patch \
@@ -153,3 +153,11 @@ darmbrust@hoodwink:~$ oci dns record domain patch \
   "opc-total-items": "1"
 }
 ```
+
+Perceba que o tipo do registro definido em _"rtype"_ é do tipo _"A"_. Este tipo indica a resolução do nome _"lb-1.ocibook.com.br"_ contido em _"domain"_, para o endereço IPv4 _"152.70.221.188"_.
+
+O valor _3600 segundos (1 hora)_ contido em _"ttl" (Time to live ou "Tempo de Vida")_, diz sobre a _duração em cache_ do registro por outros servidores ou resolvedores DNS. Ou seja, quando houver uma resolução do nome _"lb-1.ocibook.com.br"_ para o seu respectivo endereço IP, esta resposta será válida por _1 hora"_. Após este tempo, qualquer resposta contida em _cache_ sobre este nome, deve ser invalidada pelo resolvedor que a tem, obrigando uma nova consulta ao DNS do _[OCI](https://www.oracle.com/cloud/)_.
+
+Se seus dados não mudam muito, você pode usar um valor _TTL_ de vários dias. Em nosso caso, estamos deixar um valor menor para evitar um _cache_ muito longo, pois iremos mudar esta definição em breve.
+
+Por fim, irei adicionar um registro do tipo _CNAME_ que nada mais é do que um _"apelido"_ para o nome que foi criado.
