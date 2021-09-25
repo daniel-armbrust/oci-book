@@ -50,9 +50,9 @@ Para registrarmos um nome, como primeiro passo, é verificar sua disponibilidade
 
 ### __Zona DNS e Registro de Recursos (RR)__
 
-Uma Zona DNS nada mais é do que um conjunto de configurações que armazenam diferentes registros DNS. Esses registros são chamados de _[Registros de Recursos](https://en.wikipedia.org/wiki/List_of_DNS_record_types)_ ou _[Resource Records (RR)](https://en.wikipedia.org/wiki/List_of_DNS_record_types)_.
+Uma **_Zona DNS_** nada mais é do que um conjunto de configurações que armazenam diferentes registros DNS. Esses registros são chamados de _[Registros de Recursos](https://en.wikipedia.org/wiki/List_of_DNS_record_types)_ ou _[Resource Records (RR)](https://en.wikipedia.org/wiki/List_of_DNS_record_types)_.
 
-Lembre-se que o DNS é um tipo de banco de dados no qual contém registros e valores (chave e valor) referente aos _[host](https://pt.wikipedia.org/wiki/Host)_ da internet. Todo o conjunto registro e valor, são armazenados em uma **_Zona DNS_**.  
+Lembre-se que o DNS é um tipo especial de banco de dados no qual contém _registros e valores (chave e valor)_ referente aos _[host](https://pt.wikipedia.org/wiki/Host)_ da internet. Estes _registros_ e seus _valores_, são armazenados em uma **_Zona DNS_**.  
 
 Cada **_Zona DNS_** é administrada de forma independente. A partir do momento que você registra um nome, você se torna responsável pela administração dele. Além dos registros que você pode inserir em sua **_Zona DNS_**, você também pode criar novos subdomínios e delegar a administração à alguém. 
 
@@ -68,7 +68,88 @@ Sobre os _[Registros de Recursos (RR)](https://en.wikipedia.org/wiki/List_of_DNS
 | CNAME        |  Canonical Name - Define um _"apelido"_ para um nome existente.                                                                                 |
 | MX           |  Mail Exchanger - Define um _[host](https://pt.wikipedia.org/wiki/Host)_ que será responsável por processar mensagens de e-mail para o domínio. |
 
+>_**__NOTA:__** Para verificar a lista de [Registros de Recursos (RR)](https://docs.oracle.com/pt-br/iaas/Content/DNS/Reference/supporteddnsresource.htm) disponíveis pelo serviço, consulte este [link aqui](https://docs.oracle.com/pt-br/iaas/Content/DNS/Reference/supporteddnsresource.htm)._
+
 ### __Adicionando uma Zona DNS__
 
 Vou demonstrar de forma prática todo o processo de _"levar"_ um domínio para o _[OCI](https://www.oracle.com/cloud/)_, com a finalidade de centralizar a administração da infraestrutura, obter proteção contra _[ataques DDoS](https://pt.wikipedia.org/wiki/Ataque_de_nega%C3%A7%C3%A3o_de_servi%C3%A7o)_ e ter _alta disponibilidade_. Todos estes recursos estão presentes no _[Serviço de DNS](https://docs.oracle.com/pt-br/iaas/Content/DNS/Concepts/dnszonemanagement.htm)_.
 
+Criarei uma nova _Zona DNS_ de nome _"ocibook.com.br"_ que irá armazenar todos os _registros DNS_ deste livro. Como o intuíto é a administração centralizada dos _registros_ aqui no _[OCI](https://www.oracle.com/cloud/)_, esta _Zona DNS_ deve obrigatóriamente ser do tipo primária _(PRIMARY)_.
+
+```
+darmbrust@hoodwink:~$ oci dns zone create \
+> --compartment-id "ocid1.compartment.oc1..aaaaaaaauvqvbbx3oridcm5d2ztxkftwr362u2vl5zdsayzbehzwbjs56soq" \
+> --name "ocibook.com.br" \
+> --zone-type "PRIMARY" \
+> --wait-for-state "ACTIVE"
+Action completed. Waiting until the resource has entered state: ('ACTIVE',)
+{
+  "data": {
+    "compartment-id": "ocid1.compartment.oc1..aaaaaaaauvqvbbx3oridcm5d2ztxkftwr362u2vl5zdsayzbehzwbjs56soq",
+    "defined-tags": {
+      "Oracle-Tags": {
+        "CreatedBy": "oracleidentitycloudservice/daniel.armbrust@algumdominio.com",
+        "CreatedOn": "2021-09-24T22:24:03.868Z"
+      }
+    },
+    "external-masters": [],
+    "freeform-tags": null,
+    "id": "ocid1.dns-zone.oc1..3b872f6da34a452ebd1c36678002acc3",
+    "is-protected": false,
+    "lifecycle-state": "ACTIVE",
+    "name": "ocibook.com.br",
+    "nameservers": [
+      {
+        "hostname": "ns1.p68.dns.oraclecloud.net"
+      },
+      {
+        "hostname": "ns2.p68.dns.oraclecloud.net"
+      },
+      {
+        "hostname": "ns3.p68.dns.oraclecloud.net"
+      },
+      {
+        "hostname": "ns4.p68.dns.oraclecloud.net"
+      }
+    ],
+    "scope": "GLOBAL",
+    "self-uri": "https://dns.sa-saopaulo-1.oraclecloud.com/20180115/zones/ocibook.com.br",
+    "serial": 1,
+    "time-created": "2021-09-24T22:24:07+00:00",
+    "version": "1",
+    "view-id": null,
+    "zone-transfer-servers": null,
+    "zone-type": "PRIMARY"
+  },
+  "etag": "\"1ocid1.dns-zone.oc1..3b872f6da34a452ebd1c36678002acc3ocid1.compartment.oc1..aaaaaaaaie4exnvj2ktkjlliahl2bxmdnteu2xmn27oc5cy5mdcmocl4vd7q0a9dc2d7eb6346d49ffdc1dd03a3c143a2b29d10#application/json--gzip\""
+}
+```
+
+### __Gerenciando registros DNS__
+
+Após nossa _Zona DNS_ estar devidamente criada, iremos criar dois registros que farão parte da aplicação _[Wordpress](https://pt.wikipedia.org/wiki/WordPress)_.
+
+```
+darmbrust@hoodwink:~$ oci dns record domain patch \
+> --zone-name-or-id "ocibook.com.br" \
+> --domain "lb-1.ocibook.com.br" \
+> --scope "GLOBAL" \
+> --items '[{"domain": "lb-1.ocibook.com.br", "rdata": "152.70.221.188", "rtype": "A", "ttl": 3600}]'
+{
+  "data": {
+    "items": [
+      {
+        "domain": "lb-1.ocibook.com.br",
+        "is-protected": false,
+        "rdata": "152.70.221.188",
+        "record-hash": "bfc2039a0e88412c8203627f84f2ba13",
+        "rrset-version": "4",
+        "rtype": "A",
+        "ttl": 3600
+      }
+    ]
+  },
+  "etag": "\"4ocid1.dns-zone.oc1..3b872f6da34a452ebd1c36678002acc3#application/json\"",
+  "opc-total-items": "1"
+}
+```
