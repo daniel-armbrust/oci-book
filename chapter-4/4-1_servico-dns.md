@@ -232,3 +232,72 @@ Significa que os servidores do _[registro.br](https://registro.br/)_ entram em _
 Esse _período de transição_ é bem curto e não deve legar mais que uma hora para concluir.
 
 ### __Testando o Domínio__
+
+Existem duas ferramentas muito úteis para nos auxiliar nos testes dos servidores de nomes: _[nslookup](https://pt.wikipedia.org/wiki/Nslookup)_ e _[dig](https://pt.wikipedia.org/wiki/Domain_Information_Groper)_.
+
+A ferramenta _[nslookup](https://pt.wikipedia.org/wiki/Nslookup)_ é mais antiga e possui rotinas próprias para consultar os servidores de nomes. Por conta disto, você irá encontrar ela já instalada na maioria dos sistemas operacionais.
+
+O _[nslookup](https://pt.wikipedia.org/wiki/Nslookup)_ pode ser executado em _modo interativo_, indicado quando se deseja realizar várias consultas, ou se deseja executar de uma forma mais extensiva como mudar opções, ativar depuração ou alternar entre outros servidores de nomes, etc. Ou em _modo batch_, que é mais simples e direto, quando se deseja realizar consultas únicas e pontuais.
+
+- Exemplo de uso do _[nslookup](https://pt.wikipedia.org/wiki/Nslookup)_ em _modo interativo_:
+
+```
+darmbrust@hoodwink:~$ nslookup
+> server ns3.p68.dns.oraclecloud.net
+Default server: ns3.p68.dns.oraclecloud.net
+Address: 162.88.34.6#53
+Default server: ns3.p68.dns.oraclecloud.net
+Address: 2600:2000:2020::6#53
+> wordpress.ocibook.com.br
+Server:         ns3.p68.dns.oraclecloud.net
+Address:        162.88.34.6#53
+
+wordpress.ocibook.com.br        canonical name = lb-1.ocibook.com.br.
+Name:   lb-1.ocibook.com.br
+Address: 152.70.221.188
+>
+```
+
+- Exemplo de uso do _[nslookup](https://pt.wikipedia.org/wiki/Nslookup)_ em _modo batch_:
+
+```
+
+```
+
+Já a ferramenta _[dig](https://pt.wikipedia.org/wiki/Domain_Information_Groper)_ usa as bibliotecas para resolver nomes diretamente do sistema operacional. Não há _modo interativo_, e é a mais indicada para uso por conta dos detalhes que ela provê. Porém, necessita ser compilada para ser utilizada em _[Windows](https://pt.wikipedia.org/wiki/Microsoft_Windows)_. Maiores informações sobre a ferramenta dig podem ser encontrados _[aqui](https://www.isc.org/download/)_.
+
+```
+darmbrust@hoodwink:~$ dig @ns4.p68.dns.oraclecloud.net wordpress.ocibook.com.br
+
+; <<>> DiG 9.16.1-Ubuntu <<>> @ns4.p68.dns.oraclecloud.net wordpress.ocibook.com.br
+; (2 servers found)
+;; global options: +cmd
+;; Got answer:
+;; ->>HEADER<<- opcode: QUERY, status: NOERROR, id: 23271
+;; flags: qr aa rd; QUERY: 1, ANSWER: 2, AUTHORITY: 0, ADDITIONAL: 1
+;; WARNING: recursion requested but not available
+
+;; OPT PSEUDOSECTION:
+; EDNS: version: 0, flags:; udp: 1232
+; COOKIE: bf7667ce5d2beaef5630e38e614f1eb92600abe2b70226fe (good)
+;; QUESTION SECTION:
+;wordpress.ocibook.com.br.      IN      A
+
+;; ANSWER SECTION:
+wordpress.ocibook.com.br. 3600  IN      CNAME   lb-1.ocibook.com.br.
+lb-1.ocibook.com.br.    3600    IN      A       152.70.221.188
+
+;; Query time: 147 msec
+;; SERVER: 162.88.50.6#53(162.88.50.6)
+;; WHEN: Sat Sep 25 13:06:01 UTC 2021
+;; MSG SIZE  rcvd: 116
+
+```
+
+No site das documentações do _[OCI](https://www.oracle.com/cloud/)_ você também encontra informações sobre a ferramenta _[dig](https://pt.wikipedia.org/wiki/Domain_Information_Groper)_ usando este _[link aqui](https://docs.cloud.oracle.com/pt-br/iaas/Content/DNS/Tasks/testingdnsusingdig.htm)_.
+
+### __Conclusão__
+
+O _[Serviço de DNS](https://docs.oracle.com/pt-br/iaas/Content/DNS/Concepts/dnszonemanagement.htm)_ de qualquer infraestrutura é extremamente crítico! Por conta disso, além de centralizar e facilitar a administração, migrar sua _Zona DNS_ para o _[OCI](https://www.oracle.com/cloud/)_ agrega alta disponibilidade, baixa latência e alto desempenho para seus usuários.
+
+A partir de agora, a aplicação do _[Wordpress](https://pt.wikipedia.org/wiki/WordPress)_ pode ser acessada através do nome _"wordpress.ocibook.com.br"_, o que é bem mais conveniente do que acessar através do seu IP.
