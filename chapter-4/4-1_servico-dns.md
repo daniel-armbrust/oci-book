@@ -209,10 +209,14 @@ Como eu registrei o domínio _"ocibook.com.br"_, basta eu acessar a minha conta 
 
 No painel de administração dos seus domínios, clique no domínio _"ocibook.com.br"_ para acessar as configurações:
 
-![alt_text](./images/registro-br-2.jpg "registro.br - Acessando a conta")
+![alt_text](./images/registro-br-2.jpg "registro.br - Acessando o dominio")
 
-Na tela que se abre, perceba que estamos usando os DNS do próprio _[registro.br](https://registro.br/)_. Para centralizarmos e termos controle sobre a administração deste domínio no _[OCI](https://www.oracle.com/cloud/)_, devemos alterá-los clicando no link _"ALTERAR SERVIDORES DNS"_:
+Na tela que se abre, perceba que estamos usando os DNS do próprio _[registro.br](https://registro.br/)_.
+
+Para centralizarmos e termos controle sobre a administração deste domínio no _[OCI](https://www.oracle.com/cloud/)_, devemos alterá-los clicando no link _"ALTERAR SERVIDORES DNS"_:
 
 ![alt_text](./images/registro-br-3.jpg "registro.br - ALTERAR SERVIDORES DNS")
+
+Nesta tela devemos informar os servidores responsáveis pelo nosso domínio no _[OCI](https://www.oracle.com/cloud/)_:
 
 ![alt_text](./images/registro-br-4.jpg "registro.br - ALTERAR SERVIDORES DNS")
