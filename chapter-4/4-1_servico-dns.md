@@ -206,3 +206,7 @@ ns4.p68.dns.oraclecloud.net
 Como eu registrei o domínio _"ocibook.com.br"_, basta eu acessar a minha conta no _[registro.br](https://registro.br/)_ para completar as informações de registro.
 
 ![alt_text](./images/registro-br-1.jpg "registro.br - Acessando a conta")
+
+No painel de administração dos seus domínios, clique no domínio _"ocibook.com.br"_ para acessar as configurações:
+
+![alt_text](./images/registro-br-2.jpg "registro.br - Acessando a conta")
