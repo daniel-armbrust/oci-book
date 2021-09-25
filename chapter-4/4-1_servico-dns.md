@@ -231,7 +231,7 @@ Significa que os servidores do _[registro.br](https://registro.br/)_ entram em _
 
 Esse _período de transição_ é bem curto e não deve levar mais que uma hora para concluir.
 
-Após este período, é possível ver os servidores DNS do _[OCI](https://www.oracle.com/cloud/)_ respondendo pelo domínio.
+Após este período, é possível ver os servidores DNS do _[OCI](https://www.oracle.com/cloud/)_ inseridos no _[registro.br](https://registro.br/)_.
 
 ![alt_text](./images/registro-br-6.jpg "registro.br - DNS Pronto")
 
