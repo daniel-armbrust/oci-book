@@ -38,7 +38,6 @@ darmbrust@hoodwink:~$ oci waas waas-policy create \
   "etag": "W/\"2021-09-27T16:41:24.513Z\"",
   "opc-work-request-id": "ocid1.waasworkrequest.oc1..aaaaaaaafglvy67fvrsgl6hhsot4pma6vyxj2vp57ulp6tgn5vt6bp5622qq"
 }
-
 ```
 
 >_**__NOTA:__** O progresso de criação (work request) do [WAF](https://docs.oracle.com/pt-br/iaas/Content/WAF/Concepts/overview.htm) pode ser consultado pelo comando "oci waas work-request get --work-request-id \<id\>"._
