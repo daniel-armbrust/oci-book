@@ -86,3 +86,39 @@ Irei utilizar este _nome (CNAME)_ que foi disponibilizado pelo _[WAF](https://do
 Até agora, toda vez que um usuário for acessar a aplicação, o nome _"wordpress.ocibook.com.br"_ é _[resolvido](https://en.wikipedia.org/wiki/Domain_Name_System#DNS_resolvers)_ pelo DNS para o nome _"lb-1.ocibook.com.br"_, que por sua vez _[resolve](https://en.wikipedia.org/wiki/Domain_Name_System#DNS_resolvers)_ para o endereço IP do _[balancedor de carga](https://docs.oracle.com/pt-br/iaas/Content/Balance/Concepts/balanceoverview.htm)_ _152.70.221.188_.
 
 A ideia é que o nome _"wordpress.ocibook.com.br"_ _[resolva](https://en.wikipedia.org/wiki/Domain_Name_System#DNS_resolvers)_ para _CNAME "ocibook-com-br.o.waas.oci.oraclecloud.net"_ que foi disponibilizado pelo _[WAF](https://docs.oracle.com/pt-br/iaas/Content/WAF/Concepts/overview.htm)_.
+
+Primeiramente, irei excluir o registro para o nome _"wordpress.ocibook.com.br"_:
+
+```
+darmbrust@hoodwink:~$ oci dns record domain delete \
+> --zone-name-or-id "ocibook.com.br" \
+> --domain "wordpress.ocibook.com.br"
+Are you sure you want to delete this resource? [y/N]: y
+```
+
+Feito isto, irei inserir um novo _CNAME_ para que o tráfego dos usuários possam passar pelo _[WAF](https://docs.oracle.com/pt-br/iaas/Content/WAF/Concepts/overview.htm)_:
+
+```
+darmbrust@hoodwink:~$ oci dns record domain patch \
+> --zone-name-or-id "ocibook.com.br" \
+> --domain "wordpress.ocibook.com.br" \
+> --scope "GLOBAL" \
+> --items '[{"domain":"wordpress.ocibook.com.br", "rdata": "ocibook-com-br.o.waas.oci.oraclecloud.net", "rtype": "CNAME", "ttl": 3600}]'
+{
+  "data": {
+    "items": [
+      {
+        "domain": "wordpress.ocibook.com.br",
+        "is-protected": false,
+        "rdata": "ocibook-com-br.o.waas.oci.oraclecloud.net.",
+        "record-hash": "bf36492cdef44548e5548a5c03e2dd92",
+        "rrset-version": "10",
+        "rtype": "CNAME",
+        "ttl": 3600
+      }
+    ]
+  },
+  "etag": "\"10ocid1.dns-zone.oc1..3b872f6da34a452ebd1c36678002acc3#application/json\"",
+  "opc-total-items": "1"
+}
+```
