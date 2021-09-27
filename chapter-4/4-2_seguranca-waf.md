@@ -68,3 +68,17 @@ darmbrust@hoodwink:~$ oci waas waas-policy list \
   ]
 }
 ```
+
+### __Utilizando o WAF na aplicação Wordpress__
+
+Há pelo menos três etapas a cumprir antes de aplicarmos _proteção_ ao _[Wordpress](https://pt.wikipedia.org/wiki/WordPress)_.
+
+Após a _[política WAF](https://docs.oracle.com/pt-br/iaas/Content/WAF/Tasks/managingwaf.htm)_ ser criada, ela disponibiliza um _CNAME_:
+
+```
+darmbrust@hoodwink:~$ oci waas waas-policy get \
+> --waas-policy-id "ocid1.waaspolicy.oc1..aaaaaaaa7wiktkcmtupkhosmngsmqums6i2whpwl5oq4634ofeul5nvit7sq" | grep cname | cut -f2 -d':' | tr -d '", '
+ocibook-com-br.o.waas.oci.oraclecloud.net
+```
+
+Irei utilizar este _nome (CNAME)_ que foi disponibilizado pelo _[WAF](https://docs.oracle.com/pt-br/iaas/Content/WAF/Concepts/overview.htm)_ como valor para o nome _"wordpress.ocibook.com.br"_ que criamos no capítulo passado. Toda vez que há uma _[resolução](https://en.wikipedia.org/wiki/Domain_Name_System#DNS_resolvers)_
