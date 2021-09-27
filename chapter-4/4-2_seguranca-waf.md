@@ -29,15 +29,16 @@ Vamos começar criando uma _[política](https://docs.oracle.com/pt-br/iaas/Conte
 ```
 darmbrust@hoodwink:~$ oci waas waas-policy create \
 > --compartment-id "ocid1.compartment.oc1..aaaaaaaauvqvbbx3oridcm5d2ztxkftwr362u2vl5zdsayzbehzwbjs56soq" \
-> --display-name "waf-policy_wordpress" \
+> --display-name "waf-policy_ocibook-com-br" \
 > --domain "ocibook.com.br" \
 > --additional-domains '["wordpress.ocibook.com.br"]' \
-> --origins '{"wordpress_origin": {"uri": "lb-1.ocibook.com.br", "httpPort":80}}' \
+> --origins '{"wordpress_origin":{"uri": "lb-1.ocibook.com.br", "httpPort":80}}' \
 > --waf-config '{"origin": "wordpress_origin"}'
 {
-  "etag": "W/\"2021-09-27T14:31:43.679Z\"",
-  "opc-work-request-id": "ocid1.waasworkrequest.oc1..aaaaaaaar6kvv42towtcnys5twrs3hssvszx5wbead2fqux2xmhqkygeexqa"
+  "etag": "W/\"2021-09-27T16:41:24.513Z\"",
+  "opc-work-request-id": "ocid1.waasworkrequest.oc1..aaaaaaaafglvy67fvrsgl6hhsot4pma6vyxj2vp57ulp6tgn5vt6bp5622qq"
 }
+
 ```
 
 >_**__NOTA:__** O progresso de criação (work request) do [WAF](https://docs.oracle.com/pt-br/iaas/Content/WAF/Concepts/overview.htm) pode ser consultado pelo comando "oci waas work-request get --work-request-id \<id\>"._
