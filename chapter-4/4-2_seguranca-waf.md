@@ -85,4 +85,4 @@ Irei utilizar este _nome (CNAME)_ que foi disponibilizado pelo _[WAF](https://do
 
 Até agora, toda vez que um usuário for acessar a aplicação, o nome _"wordpress.ocibook.com.br"_ é _[resolvido](https://en.wikipedia.org/wiki/Domain_Name_System#DNS_resolvers)_ pelo DNS para o nome _"lb-1.ocibook.com.br"_, que por sua vez _[resolve](https://en.wikipedia.org/wiki/Domain_Name_System#DNS_resolvers)_ para o endereço IP do _[balancedor de carga](https://docs.oracle.com/pt-br/iaas/Content/Balance/Concepts/balanceoverview.htm)_ _152.70.221.188_.
 
-A ideia é que o nome _"wordpress.ocibook.com.br"_ _[resolva](https://en.wikipedia.org/wiki/Domain_Name_System#DNS_resolvers)_ para _CNAME "ocibook-com-br.o.waas.oci.oraclecloud.net"_ que foi disponibilizado pelo [WAF](https://docs.oracle.com/pt-br/iaas/Content/WAF/Concepts/overview.htm)_.
+A ideia é que o nome _"wordpress.ocibook.com.br"_ _[resolva](https://en.wikipedia.org/wiki/Domain_Name_System#DNS_resolvers)_ para _CNAME "ocibook-com-br.o.waas.oci.oraclecloud.net"_ que foi disponibilizado pelo _[WAF](https://docs.oracle.com/pt-br/iaas/Content/WAF/Concepts/overview.htm)_.
