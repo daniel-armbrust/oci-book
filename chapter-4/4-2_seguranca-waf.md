@@ -122,3 +122,22 @@ darmbrust@hoodwink:~$ oci dns record domain patch \
   "opc-total-items": "1"
 }
 ```
+
+Após esta alteração, é possível verificar que o nome _"wordpress.ocibook.com.br"_ já resolve para o _CNAME_ do _[WAF](https://docs.oracle.com/pt-br/iaas/Content/WAF/Concepts/overview.htm)_:
+
+```
+darmbrust@hoodwink:~$ nslookup wordpress.ocibook.com.br
+Server:         192.168.88.1
+Address:        192.168.88.1#53
+
+Non-authoritative answer:
+wordpress.ocibook.com.br        canonical name = ocibook-com-br.o.waas.oci.oraclecloud.net.
+ocibook-com-br.o.waas.oci.oraclecloud.net       canonical name = tm.inregion.waas.oci.oraclecloud.net.
+tm.inregion.waas.oci.oraclecloud.net    canonical name = sa-brazil.inregion.waas.oci.oraclecloud.net.
+Name:   sa-brazil.inregion.waas.oci.oraclecloud.net
+Address: 192.29.143.64
+Name:   sa-brazil.inregion.waas.oci.oraclecloud.net
+Address: 192.29.139.253
+Name:   sa-brazil.inregion.waas.oci.oraclecloud.net
+Address: 192.29.139.68
+```
