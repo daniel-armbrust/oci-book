@@ -18,6 +18,68 @@ Há também o _[OWASP Top 10](https://owasp.org/www-project-top-ten/)_ que é um
 
 ### __Criando uma Política WAF__
 
-O _[Serviço WAF](https://docs.oracle.com/pt-br/iaas/Content/WAF/Concepts/overview.htm)_ é um serviço já existente e disponível globalmente, sem a necessidade de provisionamento. Para começar a usar criamos primeiramente uma _[Política WAF](https://docs.oracle.com/pt-br/iaas/Content/WAF/Tasks/managingwaf.htm)_. Basicamente, esta incluí o nome do seu _[domínio DNS](https://pt.wikipedia.org/wiki/Sistema_de_Nomes_de_Dom%C3%ADnio)_ principal e o _[servidor de origem](https://docs.oracle.com/pt-br/iaas/Content/WAF/Tasks/originmanagement.htm)_ no qual você quer proteger contra _[ciberataques](https://pt.wikipedia.org/wiki/Ciberataque)_. 
+O _[Serviço WAF](https://docs.oracle.com/pt-br/iaas/Content/WAF/Concepts/overview.htm)_ é um serviço já existente e disponível globalmente, sem a necessidade de provisionamento. Para começar a usar, criamos primeiramente uma _[Política WAF](https://docs.oracle.com/pt-br/iaas/Content/WAF/Tasks/managingwaf.htm)_. Basicamente, esta incluí o nome do seu _[domínio DNS](https://pt.wikipedia.org/wiki/Sistema_de_Nomes_de_Dom%C3%ADnio) principal_ e o _[servidor de origem](https://docs.oracle.com/pt-br/iaas/Content/WAF/Tasks/originmanagement.htm)_ no qual reside sua aplicação e você quer proteger contra _[ciberataques](https://pt.wikipedia.org/wiki/Ciberataque)_. 
 
-O serviço WAF é limitado a 50 políticas por tenant. 
+A partir de um _[domínio DNS](https://pt.wikipedia.org/wiki/Sistema_de_Nomes_de_Dom%C3%ADnio) principal_, pode-se definir um ou mais _subdomínios_ deste _[domínio](https://pt.wikipedia.org/wiki/Sistema_de_Nomes_de_Dom%C3%ADnio)_ para _proteção_. O nome do _[domínio](https://pt.wikipedia.org/wiki/Sistema_de_Nomes_de_Dom%C3%ADnio)_ deve ser diferente das _[origens](https://docs.oracle.com/pt-br/iaas/Content/WAF/Tasks/originmanagement.htm)_ especificadas.
+
+Lembrando que o _[Serviço WAF](https://docs.oracle.com/pt-br/iaas/Content/WAF/Concepts/overview.htm)_ só consegue _proteger_ aplicações que utilizem os protocolos _[HTTP](https://pt.wikipedia.org/wiki/Hypertext_Transfer_Protocol)_ e/ou _[HTTPS](https://pt.wikipedia.org/wiki/Hyper_Text_Transfer_Protocol_Secure)_, e é limitado por padrão a _50 políticas_ por tenant. É possível solicitar _[aumento](https://docs.oracle.com/pt-br/iaas/Content/General/Concepts/servicelimits.htm#Requesti)_ destes limites, caso necessário.
+
+
+```
+darmbrust@hoodwink:~$ oci waas waas-policy create \
+> --compartment-id "ocid1.compartment.oc1..aaaaaaaauvqvbbx3oridcm5d2ztxkftwr362u2vl5zdsayzbehzwbjs56soq" \
+> --display-name "waf-policy_wordpress" \
+> --domain "ocibook.com.br" \
+> --additional-domains '["wordpress.ocibook.com.br"]' \
+> --origins '{"wordpress_origin": {"uri": "lb-1.ocibook.com.br", "httpPort":80}}' \
+> --wait-for-state "SUCCEEDED"
+Action completed. Waiting until the work request has entered state: ('SUCCEEDED',)
+{
+  "data": {
+    "compartment-id": "ocid1.compartment.oc1..aaaaaaaauvqvbbx3oridcm5d2ztxkftwr362u2vl5zdsayzbehzwbjs56soq",
+    "errors": [],
+    "id": "ocid1.waasworkrequest.oc1..aaaaaaaafxs3mdownv3htrics6lyetskhk54lfswsb36nxpjsq3fxw7yjkya",
+    "logs": [
+      {
+        "message": "Work request complete",
+        "timestamp": "2021-09-27T13:41:02.508000+00:00"
+      },
+      {
+        "message": "FinishCreateWaasPolicyOp: start",
+        "timestamp": "2021-09-27T13:41:02.499000+00:00"
+      },
+      {
+        "message": "FinishCreateWaasPolicyOp: finished (100% of request completed)",
+        "timestamp": "2021-09-27T13:41:02.499000+00:00"
+      },
+      {
+        "message": "GetOrCreateTenantOp: start",
+        "timestamp": "2021-09-27T13:41:02.473000+00:00"
+      },
+      {
+        "message": "GetOrCreateTenantOp: finished (50% of request completed)",
+        "timestamp": "2021-09-27T13:41:02.473000+00:00"
+      },
+      {
+        "message": "Starting Work Request",
+        "timestamp": "2021-09-27T13:41:02.409000+00:00"
+      }
+    ],
+    "operation-type": "CREATE_WAAS_POLICY",
+    "percent-complete": 100,
+    "resources": [
+      {
+        "action-type": "CREATED",
+        "entity-type": "waas",
+        "entity-uri": "/20181116/waasPolicies/ocid1.waaspolicy.oc1..aaaaaaaammvt67mdwbbaohs6smikws2j33zlypt354gj37y3zwng3h7uv6mq",
+        "identifier": "ocid1.waaspolicy.oc1..aaaaaaaammvt67mdwbbaohs6smikws2j33zlypt354gj37y3zwng3h7uv6mq"
+      }
+    ],
+    "status": "SUCCEEDED",
+    "time-accepted": "2021-09-27T13:40:58.544000+00:00",
+    "time-finished": "2021-09-27T13:41:02+00:00",
+    "time-started": "2021-09-27T13:41:02+00:00"
+  },
+  "etag": "W/\"2021-09-27T13:40:58.521Z\""
+}
+```
