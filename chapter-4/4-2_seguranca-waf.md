@@ -165,7 +165,9 @@ WARNING: This operation supports pagination and not all resources were returned.
 
 >_**__NOTA:__** Utilize a opção --all ao comando acima para exibir todas as redes. Foi poupado espaço por aqui._
 
-Irei permitir somente tráfego dessas redes, inserindo uma a uma, na _[Security List](https://docs.oracle.com/pt-br/iaas/Content/Network/Concepts/securitylists.htm)_ que controla o acesso ao _[balancedor de carga](https://docs.oracle.com/pt-br/iaas/Content/Balance/Concepts/balanceoverview.htm)_ do _[Wordpress](https://pt.wikipedia.org/wiki/WordPress)_.
+Irei permitir somente tráfego dessas redes, inserindo uma a uma, na _[Security List](https://docs.oracle.com/pt-br/iaas/Content/Network/Concepts/securitylists.htm)_ do _[balancedor de carga](https://docs.oracle.com/pt-br/iaas/Content/Balance/Concepts/balanceoverview.htm)_ do _[Wordpress](https://pt.wikipedia.org/wiki/WordPress)_.
+
+Primeiro, irei obter o correto OCID da _[Security List](https://docs.oracle.com/pt-br/iaas/Content/Network/Concepts/securitylists.htm)_:
 
 ```
 darmbrust@hoodwink:~$ oci network security-list list \
@@ -176,6 +178,8 @@ darmbrust@hoodwink:~$ oci network security-list list \
   "ocid1.securitylist.oc1.sa-saopaulo-1.aaaaaaaaggezvwdk66j5xq7fesq27z3xohmwsu4bluf7m2rrr7taa6fmdwxq"
 ]
 ```
+
+Logo após, vou remover toda regra existente de _entrada (INGRESS)_:
 
 ```
 darmbrust@hoodwink:~$ oci network security-list update \
