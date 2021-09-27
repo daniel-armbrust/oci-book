@@ -40,4 +40,4 @@ darmbrust@hoodwink:~$ oci waas waas-policy create \
 }
 ```
 
->_**__NOTA:__** O progresso de criação (work request) do [WAF](https://docs.oracle.com/pt-br/iaas/Content/WAF/Concepts/overview.htm) pode ser consultada com o comando "oci waas work-request get --work-request-id \<id\>"._
+>_**__NOTA:__** O progresso de criação (work request) do [WAF](https://docs.oracle.com/pt-br/iaas/Content/WAF/Concepts/overview.htm) pode ser consultado pelo comando "oci waas work-request get --work-request-id \<id\>"._
