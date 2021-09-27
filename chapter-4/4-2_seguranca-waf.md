@@ -142,3 +142,75 @@ Name:   sa-brazil.inregion.waas.oci.oraclecloud.net
 Address: 192.29.139.68
 ```
 
+O outro detalhe importante, é permitir tráfego de rede ao _[balancedor de carga](https://docs.oracle.com/pt-br/iaas/Content/Balance/Concepts/balanceoverview.htm)_ do _[Wordpress](https://pt.wikipedia.org/wiki/WordPress)_, somente das redes que fazem parte do _[Serviço WAF](https://docs.oracle.com/pt-br/iaas/Content/WAF/Concepts/overview.htm)_.
+
+Para exibir as redes do _[Serviço WAF](https://docs.oracle.com/pt-br/iaas/Content/WAF/Concepts/overview.htm)_, usamos o comando abaixo:
+
+```
+darmbrust@hoodwink:~$ oci waas edge-subnet list --query 'data[].cidr'
+[
+  "138.1.112.0/20",
+  "192.29.140.0/22",
+  "130.35.228.0/22",
+  "129.148.156.0/22",
+  "192.157.18.0/24",
+  "192.157.19.0/24",
+  "205.147.88.0/21",
+  "192.69.118.0/23",
+  "198.181.48.0/21",
+  "199.195.6.0/23"
+]
+WARNING: This operation supports pagination and not all resources were returned.  Re-run using the --all option to auto paginate and list all resources.
+```
+
+>_**__NOTA:__** Utilize a opção --all ao comando acima para exibir todas as redes. Foi poupado espaço por aqui._
+
+Irei permitir somente tráfego dessas redes, inserindo uma a uma, na _[Security List](https://docs.oracle.com/pt-br/iaas/Content/Network/Concepts/securitylists.htm)_ que controla o acesso ao _[balancedor de carga](https://docs.oracle.com/pt-br/iaas/Content/Balance/Concepts/balanceoverview.htm)_ do _[Wordpress](https://pt.wikipedia.org/wiki/WordPress)_.
+
+```
+darmbrust@hoodwink:~$ oci network security-list list \
+> --compartment-id "ocid1.compartment.oc1..aaaaaaaauvqvbbx3oridcm5d2ztxkftwr362u2vl5zdsayzbehzwbjs56soq" \
+> --display-name "secl-1_subnpub_vcn-prd" \
+> --query 'data[].id'
+[
+  "ocid1.securitylist.oc1.sa-saopaulo-1.aaaaaaaaggezvwdk66j5xq7fesq27z3xohmwsu4bluf7m2rrr7taa6fmdwxq"
+]
+```
+
+```
+darmbrust@hoodwink:~$ oci network security-list update \
+> --security-list-id "ocid1.securitylist.oc1.sa-saopaulo-1.aaaaaaaaggezvwdk66j5xq7fesq27z3xohmwsu4bluf7m2rrr7taa6fmdwxq" \
+> --ingress-security-rules '[]' \
+> --force
+{
+  "data": {
+    "compartment-id": "ocid1.compartment.oc1..aaaaaaaauvqvbbx3oridcm5d2ztxkftwr362u2vl5zdsayzbehzwbjs56soq",
+    "defined-tags": {
+      "Oracle-Tags": {
+        "CreatedBy": "oracleidentitycloudservice/daniel.armbrust@algumdominio.com",
+        "CreatedOn": "2021-09-07T22:23:53.782Z"
+      }
+    },
+    "display-name": "secl-1_subnpub_vcn-prd",
+    "egress-security-rules": [
+      {
+        "description": null,
+        "destination": "0.0.0.0/0",
+        "destination-type": "CIDR_BLOCK",
+        "icmp-options": null,
+        "is-stateless": false,
+        "protocol": "all",
+        "tcp-options": null,
+        "udp-options": null
+      }
+    ],
+    "freeform-tags": {},
+    "id": "ocid1.securitylist.oc1.sa-saopaulo-1.aaaaaaaaggezvwdk66j5xq7fesq27z3xohmwsu4bluf7m2rrr7taa6fmdwxq",
+    "ingress-security-rules": [],
+    "lifecycle-state": "AVAILABLE",
+    "time-created": "2021-09-07T22:23:53.875000+00:00",
+    "vcn-id": "ocid1.vcn.oc1.sa-saopaulo-1.amaaaaaahcglxkaabicl4jiikcavz2h2nvazibxp4rdiwziqsce4h5wksz2a"
+  },
+  "etag": "bcf611f5"
+}
+```
