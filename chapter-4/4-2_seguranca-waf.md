@@ -16,3 +16,8 @@ O _[OWASP (Open Web Application Security Project)](https://pt.wikipedia.org/wik
 
 Há também o _[OWASP Top 10](https://owasp.org/www-project-top-ten/)_ que é um documento online que fornece classificação e orientação de remediação, para os dez principais riscos de segurança em aplicações Web. Seu objetivo é oferecer aos desenvolvedores e profissionais de segurança, uma visão dos riscos de segurança mais prevalentes.
 
+### __Criando uma Política WAF__
+
+O _[WAF](https://docs.oracle.com/pt-br/iaas/Content/WAF/Concepts/overview.htm)_ é um serviço já existente e disponível globalmente, sem a necessidade de provisionamento. Para começar a usar este serviço, criamos primeiramente uma _[Política WAF](https://docs.oracle.com/pt-br/iaas/Content/WAF/Tasks/managingwaf.htm)_. Basicamente, esta incluí o nome do seu _[domínio DNS](https://pt.wikipedia.org/wiki/Sistema_de_Nomes_de_Dom%C3%ADnio)_ principal e o _[servidor de origem](https://docs.oracle.com/pt-br/iaas/Content/WAF/Tasks/originmanagement.htm)_ no qual você quer proteger contra _[ciberataques](https://pt.wikipedia.org/wiki/Ciberataque)_. 
+
+O serviço WAF é limitado a 50 políticas por tenant. 
