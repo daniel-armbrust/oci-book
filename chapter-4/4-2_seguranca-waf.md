@@ -33,54 +33,11 @@ darmbrust@hoodwink:~$ oci waas waas-policy create \
 > --domain "ocibook.com.br" \
 > --additional-domains '["wordpress.ocibook.com.br"]' \
 > --origins '{"wordpress_origin": {"uri": "lb-1.ocibook.com.br", "httpPort":80}}' \
-> --wait-for-state "SUCCEEDED"
-Action completed. Waiting until the work request has entered state: ('SUCCEEDED',)
+> --waf-config '{"origin": "wordpress_origin"}'
 {
-  "data": {
-    "compartment-id": "ocid1.compartment.oc1..aaaaaaaauvqvbbx3oridcm5d2ztxkftwr362u2vl5zdsayzbehzwbjs56soq",
-    "errors": [],
-    "id": "ocid1.waasworkrequest.oc1..aaaaaaaafxs3mdownv3htrics6lyetskhk54lfswsb36nxpjsq3fxw7yjkya",
-    "logs": [
-      {
-        "message": "Work request complete",
-        "timestamp": "2021-09-27T13:41:02.508000+00:00"
-      },
-      {
-        "message": "FinishCreateWaasPolicyOp: start",
-        "timestamp": "2021-09-27T13:41:02.499000+00:00"
-      },
-      {
-        "message": "FinishCreateWaasPolicyOp: finished (100% of request completed)",
-        "timestamp": "2021-09-27T13:41:02.499000+00:00"
-      },
-      {
-        "message": "GetOrCreateTenantOp: start",
-        "timestamp": "2021-09-27T13:41:02.473000+00:00"
-      },
-      {
-        "message": "GetOrCreateTenantOp: finished (50% of request completed)",
-        "timestamp": "2021-09-27T13:41:02.473000+00:00"
-      },
-      {
-        "message": "Starting Work Request",
-        "timestamp": "2021-09-27T13:41:02.409000+00:00"
-      }
-    ],
-    "operation-type": "CREATE_WAAS_POLICY",
-    "percent-complete": 100,
-    "resources": [
-      {
-        "action-type": "CREATED",
-        "entity-type": "waas",
-        "entity-uri": "/20181116/waasPolicies/ocid1.waaspolicy.oc1..aaaaaaaammvt67mdwbbaohs6smikws2j33zlypt354gj37y3zwng3h7uv6mq",
-        "identifier": "ocid1.waaspolicy.oc1..aaaaaaaammvt67mdwbbaohs6smikws2j33zlypt354gj37y3zwng3h7uv6mq"
-      }
-    ],
-    "status": "SUCCEEDED",
-    "time-accepted": "2021-09-27T13:40:58.544000+00:00",
-    "time-finished": "2021-09-27T13:41:02+00:00",
-    "time-started": "2021-09-27T13:41:02+00:00"
-  },
-  "etag": "W/\"2021-09-27T13:40:58.521Z\""
+  "etag": "W/\"2021-09-27T14:31:43.679Z\"",
+  "opc-work-request-id": "ocid1.waasworkrequest.oc1..aaaaaaaar6kvv42towtcnys5twrs3hssvszx5wbead2fqux2xmhqkygeexqa"
 }
 ```
+
+>_**__NOTA:__** O progresso de criação (work request) do [WAF](https://docs.oracle.com/pt-br/iaas/Content/WAF/Concepts/overview.htm) pode ser consultada com o comando "oci waas work-request get --work-request-id \<id\>"._
