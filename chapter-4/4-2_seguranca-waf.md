@@ -41,3 +41,30 @@ darmbrust@hoodwink:~$ oci waas waas-policy create \
 ```
 
 >_**__NOTA:__** O progresso de criação (work request) do [WAF](https://docs.oracle.com/pt-br/iaas/Content/WAF/Concepts/overview.htm) pode ser consultado pelo comando "oci waas work-request get --work-request-id \<id\>"._
+
+Depois de alguns minutos, já é possível ver a _[política](https://docs.oracle.com/pt-br/iaas/Content/WAF/Tasks/managingwaf.htm)_ criada:
+
+```
+darmbrust@hoodwink:~$ oci waas waas-policy list \
+> --compartment-id "ocid1.compartment.oc1..aaaaaaaauvqvbbx3oridcm5d2ztxkftwr362u2vl5zdsayzbehzwbjs56soq" \
+> --display-name "waf-policy_ocibook-com-br"
+{
+  "data": [
+    {
+      "compartment-id": "ocid1.compartment.oc1..aaaaaaaauvqvbbx3oridcm5d2ztxkftwr362u2vl5zdsayzbehzwbjs56soq",
+      "defined-tags": {
+        "Oracle-Tags": {
+          "CreatedBy": "oracleidentitycloudservice/daniel.armbrust@algumdominio.com",
+          "CreatedOn": "2021-09-27T16:41:23.621Z"
+        }
+      },
+      "display-name": "waf-policy_ocibook-com-br",
+      "domain": "ocibook.com.br",
+      "freeform-tags": null,
+      "id": "ocid1.waaspolicy.oc1..aaaaaaaa7wiktkcmtupkhosmngsmqums6i2whpwl5oq4634ofeul5nvit7sq",
+      "lifecycle-state": "ACTIVE",
+      "time-created": "2021-09-27T16:41:24.514000+00:00"
+    }
+  ]
+}
+```

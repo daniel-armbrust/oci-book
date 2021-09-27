@@ -66,6 +66,8 @@ Independentemente, algumas responsabilidades sempre são retidas por você:
 
 De nada adianta, termos backup gerenciado, serviços que ajudam a rastrear vulnerabilidades, se você permite tráfego irrestrito e de qualquer lugar, as suas instâncias de computação, e ainda por cima, disponibiliza por engano a chave SSH em um repositório público no GitHub.  
 
+![alt_text](./images/oracle-customer-controlled.jpg "Oracle vs. Customer Controlled")
+
 Vou expor as melhores práticas aqui. Porém, segui-las e manter-se atualizado, é de sua responsabilidade.
 
 ### __Lift-and-Shift__
