@@ -26,4 +26,13 @@ Vamos começar pela instalação da ferramenta _[Certbot](https://certbot.eff.or
 
 ### __A ferramenta Certbot__
 
-Para obter um _[certificado digital](https://pt.wikipedia.org/wiki/Certificado_digital)_ válido, você precisa demonstrar _controle_ sobre o _[domínio DNS](https://pt.wikipedia.org/wiki/Sistema_de_Nomes_de_Dom%C3%ADnio)_. Este _controle_ será verificado através de _"desafios"_ e caso sejam superados, o certificado será emitido e pronto pra uso.
+O _[Certbot](https://certbot.eff.org/)_ é uma ferramenta cliente usada para obter _[certificado digital](https://pt.wikipedia.org/wiki/Certificado_digital)_ do _[Let’s Encrypt](https://letsencrypt.org/pt-br/)_.
+
+Existem diversas formas de instalar a ferramenta. Sugiro consultar a _[página oficial](https://certbot.eff.org/instructions)_ neste _[link](https://certbot.eff.org/instructions)_ que apresenta um guia passo a passo, dependendo da configuração que você deseja. 
+
+
+```
+darmbrust@hoodwink:~$ python3 -m venv certbot-venv
+```
+
+Para obter um _[certificado digital](https://pt.wikipedia.org/wiki/Certificado_digital)_ válido e emitido pelo _[Let’s Encrypt](https://letsencrypt.org/pt-br/)_, você precisa demonstrar _controle_ sobre o seu _[domínio DNS](https://pt.wikipedia.org/wiki/Sistema_de_Nomes_de_Dom%C3%ADnio)_. Este _controle_ é verificado através de alguns _"desafios"_ e caso sejam superados, o certificado será emitido.
