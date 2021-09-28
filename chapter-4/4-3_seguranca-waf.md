@@ -1,6 +1,6 @@
 # Capítulo 4: Melhorias na aplicação Wordpress
 
-## 4.3 - Adicionando segurança. Seja bem-vindo WAF!
+## 4.3 - Adicionando segurança extra. Seja bem-vindo WAF!
 
 ### __Visão Geral__
 
