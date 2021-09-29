@@ -164,3 +164,16 @@ If you like Certbot, please consider supporting our work by:
 ```
 
 O certificado foi salvo em _/etc/letsencrypt/live/wordpress.ocibook.com.br/fullchain.pem_ e a chave privada correspondende em _/etc/letsencrypt/live/wordpress.ocibook.com.br/privkey.pem_, conforme mostrado pela saída do comando.
+
+Como o registro _DNS TXT_ foi usado somente para mostrar _"controle"_ ao _[Let’s Encrypt](https://letsencrypt.org/pt-br/)_, este pode ser excluído após a emissão do certificado.
+
+```
+darmbrust@hoodwink:~$ oci dns record domain delete \
+> --zone-name-or-id "ocibook.com.br" \
+> --domain "_acme-challenge.wordpress.ocibook.com.br." \
+> --force
+```
+
+### __Adicionando o certificado no Load Balancing__
+
+Antes de seguir, quero mover os arquivos disponibilizados pela ferramenta _[Certbot](https://certbot.eff.org/)_ para um diretório de mais fácil acesso. Por padrão, o diretório que armazena o _[certificado](https://pt.wikipedia.org/wiki/Certificado_digital)_ e a _[chave privada](https://pt.wikipedia.org/wiki/Criptografia_de_chave_p%C3%BAblica)_, são salvos em um diretório onde somente o usuário _root_ tem acesso. Isto é útil e protege os arquivos, pricipamente a _[chave privada](https://pt.wikipedia.org/wiki/Criptografia_de_chave_p%C3%BAblica)_. Qualquer um que tiver sua _[chave privada](https://pt.wikipedia.org/wiki/Criptografia_de_chave_p%C3%BAblica)_, pode ler o tréfego que foi criptografado através do _[HTTPS](https://pt.wikipedia.org/wiki/Hyper_Text_Transfer_Protocol_Secure)_, o que não é uma boa ideia.
