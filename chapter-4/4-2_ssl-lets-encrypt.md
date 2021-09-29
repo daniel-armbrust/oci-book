@@ -61,6 +61,8 @@ Uma das formas de se obter um _[certificado digital](https://pt.wikipedia.org/wi
 
 Para isto você precisa demonstrar _controle_ sobre o seu _[domínio DNS](https://pt.wikipedia.org/wiki/Sistema_de_Nomes_de_Dom%C3%ADnio)_. Esta é uma das formas exigidas pelo _[Let’s Encrypt](https://letsencrypt.org/pt-br/)_ para que seja possível emitir seu certificado.
 
+>_**__NOTA:__** Existe um outro tipo de "desafio" que é via "http". Consulte a [documentação](https://certbot.eff.org/docs/using.html#getting-certificates-and-choosing-plugins) do [Certbot](https://certbot.eff.org/) neste [link aqui](https://certbot.eff.org/docs/using.html#getting-certificates-and-choosing-plugins) para saber mais sobre._
+
 Abaixo, o comando que especifica o _"desafio DNS"_ para o domínio _"wordpress.ocibook.com.br"_ no qual o certificado está sendo solicitado:
 
 ```
@@ -142,7 +144,9 @@ darmbrust@hoodwink:~$ oci dns record domain patch \
 }
 ```
 
+Após inserção com sucesso, podemos continuar a execução do _[Certbot](https://certbot.eff.org/)_. Ele irá aferir se o registro solicitado foi inserido corretamente. Tudo estando certo, o certificado é emitido:
 
+```
 Successfully received certificate.
 Certificate is saved at: /etc/letsencrypt/live/wordpress.ocibook.com.br/fullchain.pem
 Key is saved at:         /etc/letsencrypt/live/wordpress.ocibook.com.br/privkey.pem
@@ -159,5 +163,4 @@ If you like Certbot, please consider supporting our work by:
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 ```
 
->_**__NOTA:__** Existe um outro tipo de "desafio" que é via "http". Consulte a [documentação](https://certbot.eff.org/docs/using.html#getting-certificates-and-choosing-plugins) do [Certbot](https://certbot.eff.org/) neste [link aqui](https://certbot.eff.org/docs/using.html#getting-certificates-and-choosing-plugins) para saber mais sobre._
-
+O certificado foi salvo em _/etc/letsencrypt/live/wordpress.ocibook.com.br/fullchain.pem_ e a chave privada correspondende em _/etc/letsencrypt/live/wordpress.ocibook.com.br/privkey.pem_, conforme mostrado pela saída do comando.
