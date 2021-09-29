@@ -255,13 +255,13 @@ Action completed. Waiting until the work request has entered state: ('SUCCEEDED'
 
 Após isto, como boa prática, quero evitar qualquer tráfego inseguro na aplicação. Ou seja, irei instruir o _[Load Balancer](https://docs.oracle.com/pt-br/iaas/Content/Balance/Concepts/balanceoverview.htm)_ para _redicionar_ todo o tráfego _[HTTP](https://pt.wikipedia.org/wiki/Hypertext_Transfer_Protocol)_ para _[HTTPS](https://pt.wikipedia.org/wiki/Hyper_Text_Transfer_Protocol_Secure)_. Isto é feito através de _[regras de redirecionamento](https://docs.oracle.com/pt-br/iaas/Content/Balance/Tasks/managingrulesets.htm#URLRedirectRules)_ aplicadas diretamente no _listener_.
 
-O comando abaixo cria uma _[regras de redirecionamento](https://docs.oracle.com/pt-br/iaas/Content/Balance/Tasks/managingrulesets.htm#URLRedirectRules)_:
+O comando abaixo cria uma _[regra de redirecionamento](https://docs.oracle.com/pt-br/iaas/Content/Balance/Tasks/managingrulesets.htm#URLRedirectRules)_:
 
 ```
 darmbrust@hoodwink:~$ oci lb rule-set create \
 > --load-balancer-id "ocid1.loadbalancer.oc1.sa-saopaulo-1.aaaaaaaa5ledgzqveh3o73m3mnv42pkxcm5y64hjmkwl7tnhvsee2zv7gbga" \
 > --name "http_redirect_https" \
-> --items '[{"action": "REDIRECT", "conditions": [{"attributeName": "PATH", "attributeValue": "/", "operator": "FORCE_LONGEST_PREFIX_MATCH"}], "redirectUri": {"host": "{host}", "path": "{path}", "port": 443, "protocol": "HTTPS", "query": "{query}"}, "responseCode": 302}]' \
+> --items '[{"action": "REDIRECT", "conditions": [{"attributeName": "PATH", "attributeValue": "/", "operator": "FORCE_LONGEST_PREFIX_MATCH"}], "redirectUri": {"host": "{host}", "path": "{path}", "port": 443, "protocol": "HTTPS", "query": "{query}"}, "responseCode": 301}]' \
 > --wait-for-state "SUCCEEDED"
 Action completed. Waiting until the work request has entered state: ('SUCCEEDED',)
 {
@@ -278,6 +278,8 @@ Action completed. Waiting until the work request has entered state: ('SUCCEEDED'
   }
 }
 ```
+
+Basicamente, o valor contido no parâmetro _"--items"_ especifica uma ação de _redirecionamento (REDIRECT)_, que esteja de acordo com as condições contidas em _"conditions"_. Esta condição afirma que qualquer conteúdo após o "/", seja redirecionado para o mesmo _host ({host})_, usando a mesma _query ({query})_, porém na porta _443/TCP_. O código de resposta _[301](https://pt.wikipedia.org/wiki/HTTP_301)_ significa _["movido permanentemente"](https://pt.wikipedia.org/wiki/HTTP_301)_.
 
 >_**__NOTA:__**  As [regras de redirecionamento](https://docs.oracle.com/pt-br/iaas/Content/Balance/Tasks/managingrulesets.htm#URLRedirectRules) de URL só se aplicam a listeners [HTTP](https://pt.wikipedia.org/wiki/Hypertext_Transfer_Protocol)._
 
