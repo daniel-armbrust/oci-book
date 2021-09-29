@@ -179,3 +179,10 @@ darmbrust@hoodwink:~$ oci dns record domain delete \
 Antes de seguir, quero mover os arquivos disponibilizados pela ferramenta _[Certbot](https://certbot.eff.org/)_ para um diretório de mais fácil acesso, sem a necessidade de usar _[sudo](https://pt.wikipedia.org/wiki/Sudo)_ pra lá e pra cá.
 
 Por padrão, o diretório que armazena o _[certificado](https://pt.wikipedia.org/wiki/Certificado_digital)_ e a _[chave privada](https://pt.wikipedia.org/wiki/Criptografia_de_chave_p%C3%BAblica)_, são salvos em um diretório onde somente o usuário _root_ tem acesso. Isto é útil e protege os arquivos, pricipamente a _[chave privada](https://pt.wikipedia.org/wiki/Criptografia_de_chave_p%C3%BAblica)_. Qualquer um que tiver sua _[chave privada](https://pt.wikipedia.org/wiki/Criptografia_de_chave_p%C3%BAblica)_, pode ler o tréfego que foi criptografado através do _[HTTPS](https://pt.wikipedia.org/wiki/Hyper_Text_Transfer_Protocol_Secure)_, o que não é uma boa ideia.
+
+```
+darmbrust@hoodwink:~$ mkdir wordpress-crt
+darmbrust@hoodwink:~$ sudo cp /etc/letsencrypt/live/wordpress.ocibook.com.br/fullchain.pem wordpress-crt/
+darmbrust@hoodwink:~$ sudo cp /etc/letsencrypt/live/wordpress.ocibook.com.br/privkey.pem wordpress-crt/
+darmbrust@hoodwink:~$ sudo chown -R darmbrust: wordpress-crt/
+```
