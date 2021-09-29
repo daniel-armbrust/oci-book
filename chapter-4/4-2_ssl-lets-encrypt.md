@@ -57,13 +57,106 @@ Como é possível ver, o _[Certbot](https://certbot.eff.org/)_ foi corretamente 
 
 ### __Adquirindo um certificado via DNS challenge__
 
-Uma das formas de se obter um _[certificado digital](https://pt.wikipedia.org/wiki/Certificado_digital)_ válido emitido pelo _[Let’s Encrypt](https://letsencrypt.org/pt-br/)_, é através do chamado _"desafio DNS" (dns challenge)_. 
+Uma das formas de se obter um _[certificado digital](https://pt.wikipedia.org/wiki/Certificado_digital)_ válido, emitido pelo _[Let’s Encrypt](https://letsencrypt.org/pt-br/)_, é através do chamado _"desafio DNS" (dns challenge)_. 
 
-Para que o certificado seja emitido, você precisa demonstrar _controle_ sobre o seu _[domínio DNS](https://pt.wikipedia.org/wiki/Sistema_de_Nomes_de_Dom%C3%ADnio)_. Esta é uma das formas exigidas pelo _[Let’s Encrypt](https://letsencrypt.org/pt-br/)_, para que seja possível emitir um certificado.
+Para isto você precisa demonstrar _controle_ sobre o seu _[domínio DNS](https://pt.wikipedia.org/wiki/Sistema_de_Nomes_de_Dom%C3%ADnio)_. Esta é uma das formas exigidas pelo _[Let’s Encrypt](https://letsencrypt.org/pt-br/)_ para que seja possível emitir seu certificado.
 
+Abaixo, o comando que especifica o _"desafio DNS"_ para o domínio _"wordpress.ocibook.com.br"_ no qual o certificado está sendo solicitado:
 
 ```
+darmbrust@hoodwink:~$ sudo certbot certonly --manual --preferred-challenges dns -d wordpress.ocibook.com.br
+Saving debug log to /var/log/letsencrypt/letsencrypt.log
+Enter email address (used for urgent renewal and security notices)
+ (Enter 'c' to cancel): daniel.armbrust@algumdominio.com
 
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+Please read the Terms of Service at
+https://letsencrypt.org/documents/LE-SA-v1.2-November-15-2017.pdf. You must
+agree in order to register with the ACME server. Do you agree?
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+(Y)es/(N)o: Y
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+Would you be willing, once your first certificate is successfully issued, to
+share your email address with the Electronic Frontier Foundation, a founding
+partner of the Let's Encrypt project and the non-profit organization that
+develops Certbot? We'd like to send you email about our work encrypting the web,
+EFF news, campaigns, and ways to support digital freedom.
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+(Y)es/(N)o: n
+Account registered.
+Requesting a certificate for wordpress.ocibook.com.br
+```
+
+A ferramenta _[Certbot](https://certbot.eff.org/)_ irá solicitar o seu e-mail e alguns prompts de confirmação. É importante inserir um endereço de e-mail válido para você saber sobre a data de expiração do certificado e qualquer outra notícia que envolve segurança.
+
+No decorrer, a parte mais importante é quando for solicitado o registro _DNS TXT_:
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+Please deploy a DNS TXT record under the name:
+
+_acme-challenge.wordpress.ocibook.com.br.
+
+with the following value:
+
+prXuZGl7-O7ipqhjV0EiDe-87aFz8jTpWwO-FT9w62Q
+
+Before continuing, verify the TXT record has been deployed. Depending on the DNS
+provider, this may take some time, from a few seconds to multiple minutes. You can
+check if it has finished deploying with aid of online tools, such as the Google
+Admin Toolbox: https://toolbox.googleapps.com/apps/dig/#TXT/_acme-challenge.wordpress.ocibook.com.br.
+Look for one or more bolded line(s) below the line ';ANSWER'. It should show the
+value(s) you've just added.
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+Press Enter to Continue
+```
+
+Aqui devemos inserir o registro _acme-challenge.wordpress.ocibook.com.br._  com o valor _prXuZGl7-O7ipqhjV0EiDe-87aFz8jTpWwO-FT9w62Q_, em nosso domínio. Só siga em frente _(Press Enter to Continue)_ após adição deste registro, caso contrário a emissão do certificado irá falhar. 
+
+Para inserir este registro, usei o comando abaixo:
+
+```
+darmbrust@hoodwink:~$ oci dns record domain patch \
+> --zone-name-or-id "ocibook.com.br" \
+> --domain "_acme-challenge.wordpress.ocibook.com.br." \
+> --scope "GLOBAL" \
+> --items '[{"domain":"_acme-challenge.wordpress.ocibook.com.br.", "rdata": "prXuZGl7-O7ipqhjV0EiDe-87aFz8jTpWwO-FT9w62Q", "rtype": "TXT", "ttl": 300}]'
+{
+  "data": {
+    "items": [
+      {
+        "domain": "_acme-challenge.wordpress.ocibook.com.br",
+        "is-protected": false,
+        "rdata": "\"prXuZGl7-O7ipqhjV0EiDe-87aFz8jTpWwO-FT9w62Q\"",
+        "record-hash": "80bd8cd206cdbec5630e6dfb6c46df55",
+        "rrset-version": "11",
+        "rtype": "TXT",
+        "ttl": 300
+      }
+    ]
+  },
+  "etag": "\"11ocid1.dns-zone.oc1..3b872f6da34a452ebd1c36678002acc3#application/json\"",
+  "opc-total-items": "1"
+}
+```
+
+
+Successfully received certificate.
+Certificate is saved at: /etc/letsencrypt/live/wordpress.ocibook.com.br/fullchain.pem
+Key is saved at:         /etc/letsencrypt/live/wordpress.ocibook.com.br/privkey.pem
+This certificate expires on 2021-12-28.
+These files will be updated when the certificate renews.
+
+NEXT STEPS:
+- This certificate will not be renewed automatically. Autorenewal of --manual certificates requires the use of an authentication hook script (--manual-auth-hook) but one was not provided. To renew this certificate, repeat this same certbot command before the certificate's expiry date.
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+If you like Certbot, please consider supporting our work by:
+ * Donating to ISRG / Let's Encrypt:   https://letsencrypt.org/donate
+ * Donating to EFF:                    https://eff.org/donate-le
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 ```
 
 >_**__NOTA:__** Existe um outro tipo de "desafio" que é via "http". Consulte a [documentação](https://certbot.eff.org/docs/using.html#getting-certificates-and-choosing-plugins) do [Certbot](https://certbot.eff.org/) neste [link aqui](https://certbot.eff.org/docs/using.html#getting-certificates-and-choosing-plugins) para saber mais sobre._
+
