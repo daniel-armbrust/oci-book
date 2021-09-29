@@ -354,3 +354,17 @@ darmbrust@hoodwink:~$ curl -v http://wordpress.ocibook.com.br
 </html>
 * Connection #0 to host wordpress.ocibook.com.br left intact
 ```
+
+### __Conclusão__
+
+Vimos aqui que o _[Let’s Encrypt](https://letsencrypt.org/pt-br/)_ é uma forma rápida, fácil e gratuita para se obter um _[certificado digital](https://pt.wikipedia.org/wiki/Certificado_digital)_ váido. Agora, nossa aplicação permite conexão via _[HTTPS](https://pt.wikipedia.org/wiki/Hyper_Text_Transfer_Protocol_Secure)_.
+
+Devo lembrar que todo _[certificado](https://pt.wikipedia.org/wiki/Certificado_digital)_ emitido pelo _[Let’s Encrypt](https://letsencrypt.org/pt-br/)_ possui uma validade de _[90 dias](https://letsencrypt.org/2015/11/09/why-90-days.html)_, como é possiver ver pelo comando abaixo:
+
+```
+darmbrust@hoodwink:~$ echo | openssl s_client -servername wordpress.ocibook.com.br -connect wordpress.ocibook.com.br:443 2>/dev/null | openssl x509 -noout -dates
+notBefore=Sep 29 11:28:46 2021 GMT
+notAfter=Dec 28 11:28:45 2021 GMT
+```
+
+Perto da data de expiração, através do e-mail que foi especificado, será emitido um aviso para renovação. O _[Certbot](https://certbot.eff.org/)_ é usado também para renovar o _[certificado](https://pt.wikipedia.org/wiki/Certificado_digital)_. Iremos rever isto mais adiante.
