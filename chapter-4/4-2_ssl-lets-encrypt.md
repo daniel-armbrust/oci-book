@@ -283,6 +283,8 @@ Basicamente, o valor contido no parâmetro _"--items"_ especifica uma ação de 
 
 >_**__NOTA:__**  As [regras de redirecionamento](https://docs.oracle.com/pt-br/iaas/Content/Balance/Tasks/managingrulesets.htm#URLRedirectRules) de URL só se aplicam a listeners [HTTP](https://pt.wikipedia.org/wiki/Hypertext_Transfer_Protocol)._
 
+Após a regra ser criada, aplicamos ela ao _listener_ _[HTTP](https://pt.wikipedia.org/wiki/Hypertext_Transfer_Protocol)_:
+
 ```
 darmbrust@hoodwink:~$ oci lb listener update \
 > --load-balancer-id "ocid1.loadbalancer.oc1.sa-saopaulo-1.aaaaaaaa5ledgzqveh3o73m3mnv42pkxcm5y64hjmkwl7tnhvsee2zv7gbga" \
