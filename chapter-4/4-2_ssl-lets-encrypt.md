@@ -26,13 +26,42 @@ Vamos começar pela instalação da ferramenta _[Certbot](https://certbot.eff.or
 
 ### __A ferramenta Certbot__
 
-O _[Certbot](https://certbot.eff.org/)_ é uma ferramenta cliente usada para obter _[certificado digital](https://pt.wikipedia.org/wiki/Certificado_digital)_ do _[Let’s Encrypt](https://letsencrypt.org/pt-br/)_.
+O _[Certbot](https://certbot.eff.org/)_ é uma ferramenta modo cliente usada para obter _[certificado digital](https://pt.wikipedia.org/wiki/Certificado_digital)_ do _[Let’s Encrypt](https://letsencrypt.org/pt-br/)_.
 
-Existem diversas formas de instalar a ferramenta. Sugiro consultar a _[página oficial](https://certbot.eff.org/instructions)_ neste _[link](https://certbot.eff.org/instructions)_ que apresenta um guia passo a passo, dependendo da configuração que você deseja. 
+Existem diversas formas de instalar o _[Certbot](https://certbot.eff.org/)_. Sugiro consultar a _[página oficial](https://certbot.eff.org/instructions)_ neste _[link](https://certbot.eff.org/instructions)_ para um guia passo a passo, dependendo da configuração que você possui. O requisito principal, é possuir o _[python](https://pt.wikipedia.org/wiki/Python)_ e seu _gerenciador de pacotes_ _[pip](https://pt.wikipedia.org/wiki/Pip_(gerenciador_de_pacotes))_ instalados em seu sistema operacional.
 
+No meu caso, irei realizar a instalação do _[Certbot](https://certbot.eff.org/)_ dentro de um _[ambiente virtual python (venv)](https://virtualenv.pypa.io/en/latest/)_ através do _[pip](https://pt.wikipedia.org/wiki/Pip_(gerenciador_de_pacotes))_.
 
 ```
 darmbrust@hoodwink:~$ python3 -m venv certbot-venv
+darmbrust@hoodwink:~$ source certbot-venv/bin/activate
 ```
 
-Para obter um _[certificado digital](https://pt.wikipedia.org/wiki/Certificado_digital)_ válido e emitido pelo _[Let’s Encrypt](https://letsencrypt.org/pt-br/)_, você precisa demonstrar _controle_ sobre o seu _[domínio DNS](https://pt.wikipedia.org/wiki/Sistema_de_Nomes_de_Dom%C3%ADnio)_. Este _controle_ é verificado através de alguns _"desafios"_ e caso sejam superados, o certificado será emitido.
+Uma vez dentro deste _[ambiente virtual](https://virtualenv.pypa.io/en/latest/)_, é possível instalar o _[Certbot](https://certbot.eff.org/)_:
+
+```
+(certbot-venv) darmbrust@hoodwink:~$ pip install --upgrade pip
+(certbot-venv) darmbrust@hoodwink:~$ pip install --no-build-isolation certbot
+```
+
+>_**__NOTA:__** A ferramenta [Certbot](https://certbot.eff.org/) exige que algumas dependências referentes as bibliotecas do sistema operacional sejam satisfeitas antes da sua instalação. No meu caso, tive que instalar os pacotes libffi-dev, python3-dev e openssl-dev para que tudo ocorresse bem. Consulte a [página oficial](https://certbot.eff.org/docs/install.html#system-requirements) para saber detalhes referente ao seu sistema operacional._
+
+```
+(certbot-venv) darmbrust@hoodwink:~$ deactivate
+darmbrust@hoodwink:~$ sudo ln -sf ~/certbot-venv/bin/certbot /usr/bin/certbot
+darmbrust@hoodwink:~$ sudo certbot --version
+certbot 1.19.0
+```
+
+### __Adquirindo um certificado via DNS challenge__
+
+Uma das formas de se obter um _[certificado digital](https://pt.wikipedia.org/wiki/Certificado_digital)_ válido emitido pelo _[Let’s Encrypt](https://letsencrypt.org/pt-br/)_, é através do chamado _"desafio DNS" (dns challenge)_. 
+
+Para que o certificado seja emitido, você precisa demonstrar _controle_ sobre o seu _[domínio DNS](https://pt.wikipedia.org/wiki/Sistema_de_Nomes_de_Dom%C3%ADnio)_. Esta é uma das formas exigidas pelo _[Let’s Encrypt](https://letsencrypt.org/pt-br/)_, para que seja possível emitir um certificado.
+
+
+```
+
+```
+
+>_**__NOTA:__** Existe um outro tipo de "desafio" que é via http. Consulte a [documentação](https://certbot.eff.org/docs/using.html#getting-certificates-and-choosing-plugins) do [Certbot](https://certbot.eff.org/) neste [link aqui](https://certbot.eff.org/docs/using.html#getting-certificates-and-choosing-plugins) para saber mais sobre._
