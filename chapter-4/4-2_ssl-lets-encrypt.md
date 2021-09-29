@@ -291,6 +291,8 @@ Eu tive que instalar o _[plugin](https://docs.oracle.com/pt-br/iaas/Content/Comp
 
 ![alt_text](./images/wordpress-finish-install-6.jpg "Wordpress SSL Configuration")
 
+Depois que o _[plugin](https://docs.oracle.com/pt-br/iaas/Content/Compute/Tasks/manage-plugins.htm#available-plugins)_ foi ativado, ele automaticamente alterou as configurações de _[HTTPS](https://pt.wikipedia.org/wiki/Hyper_Text_Transfer_Protocol_Secure)_ do _[Wordpress](https://pt.wikipedia.org/wiki/WordPress)_.
+
 ![alt_text](./images/wordpress-finish-install-7.jpg "Wordpress SSL Configuration")
 
 >_**__NOTA:__** A instalação deste [plugin](https://docs.oracle.com/pt-br/iaas/Content/Compute/Tasks/manage-plugins.htm#available-plugins) adicionou alguns arquivos ao [Wordpress](https://pt.wikipedia.org/wiki/WordPress). Por conta disto, é necessário criar uma nova [custom image](https://docs.oracle.com/pt-br/iaas/Content/Compute/Tasks/managingcustomimages.htm) que contenha essas informações atualizadas. Verifique o capítulo ["3.4 - Oracle Linux com WordPress na nuvem"](https://github.com/daniel-armbrust/oci-book/blob/main/chapter-3/3-4_oracle-linux-wordpress.md) no qual contém essas intruções._
