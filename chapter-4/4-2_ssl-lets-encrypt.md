@@ -287,9 +287,9 @@ Antes de aplicarmos a _[regra de redirecionamento](https://docs.oracle.com/pt-br
 
 ![alt_text](./images/wordpress-finish-install-5.jpg "Wordpress SSL Configuration")
 
-![alt_text](./images/wordpress-finish-install-5.jpg "Wordpress SSL Configuration")
+![alt_text](./images/wordpress-finish-install-6.jpg "Wordpress SSL Configuration")
 
-![alt_text](./images/wordpress-finish-install-5.jpg "Wordpress SSL Configuration")
+![alt_text](./images/wordpress-finish-install-7.jpg "Wordpress SSL Configuration")
 
 Pronto! Agora é possível aplicar ela ao _listener_ com o comando abaixo:
 
