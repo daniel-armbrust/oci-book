@@ -28,7 +28,7 @@ Vamos começar pela instalação da ferramenta _[Certbot](https://certbot.eff.or
 
 O _[Certbot](https://certbot.eff.org/)_ é uma ferramenta executada em _modo cliente_ e usada para obter _[certificado digital](https://pt.wikipedia.org/wiki/Certificado_digital)_ do _[Let’s Encrypt](https://letsencrypt.org/pt-br/)_.
 
-Existem diversas formas para se instalar o _[Certbot](https://certbot.eff.org/)_. Sugiro consultar a _[página oficial](https://certbot.eff.org/instructions)_ neste _[link](https://certbot.eff.org/instructions)_ para um guia passo a passo, dependendo da configuração que você possui. O requisito principal é possuir o _[python](https://pt.wikipedia.org/wiki/Python)_ e seu _gerenciador de pacotes_ _[pip](https://pt.wikipedia.org/wiki/Pip_(gerenciador_de_pacotes))_ instalados em seu sistema operacional.
+Existem diversas formas para se instalar o _[Certbot](https://certbot.eff.org/)_. Sugiro consultar a _[página oficial](https://certbot.eff.org/instructions)_ neste _[link](https://certbot.eff.org/instructions)_ para um guia passo a passo, dependendo da configuração que você possui. O requisito principal é possuir o _[python](https://pt.wikipedia.org/wiki/Python)_ e seu _gerenciador de pacotes_ _[pip](https://pt.wikipedia.org/wiki/Pip_(gerenciador_de_pacotes))_, instalados em seu sistema operacional.
 
 No meu caso, irei realizar a instalação do _[Certbot](https://certbot.eff.org/)_ dentro de um _[ambiente virtual python (venv)](https://virtualenv.pypa.io/en/latest/)_ através do _[pip](https://pt.wikipedia.org/wiki/Pip_(gerenciador_de_pacotes))_.
 
