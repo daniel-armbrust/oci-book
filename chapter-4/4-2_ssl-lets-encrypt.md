@@ -283,6 +283,9 @@ Basicamente, o valor contido no parâmetro _"--items"_ especifica uma ação de 
 
 >_**__NOTA:__**  As [regras de redirecionamento](https://docs.oracle.com/pt-br/iaas/Content/Balance/Tasks/managingrulesets.htm#URLRedirectRules) de URL só se aplicam a listeners [HTTP](https://pt.wikipedia.org/wiki/Hypertext_Transfer_Protocol)._
 
+![alt_text](./images/wordpress-finish-install-5.jpg "Wordpress Configuration")
+
+
 Após a regra ser criada, aplicamos ela ao _listener_ _[HTTP](https://pt.wikipedia.org/wiki/Hypertext_Transfer_Protocol)_:
 
 ```
