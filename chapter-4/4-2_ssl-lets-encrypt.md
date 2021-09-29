@@ -187,7 +187,7 @@ darmbrust@hoodwink:~$ sudo cp /etc/letsencrypt/live/wordpress.ocibook.com.br/pri
 darmbrust@hoodwink:~$ sudo chown -R darmbrust: wordpress-crt/
 ```
 
-Tendo os arquivos em um diretório de fácil acesso, podemos enviar os arquivos ao _[Load Balancer](https://docs.oracle.com/pt-br/iaas/Content/Balance/Concepts/balanceoverview.htm)_ do _[Wordpress](https://pt.wikipedia.org/wiki/WordPress)_ pelo comando abaixo:
+Tendo os arquivos em um diretório de fácil acesso, podemos fazer _[upload](https://en.wikipedia.org/wiki/Upload)_ dos arquivos ao _[Load Balancer](https://docs.oracle.com/pt-br/iaas/Content/Balance/Concepts/balanceoverview.htm)_ do _[Wordpress](https://pt.wikipedia.org/wiki/WordPress)_ pelo comando abaixo:
 
 ```
 darmbrust@hoodwink:~$ oci lb certificate create \
