@@ -88,7 +88,7 @@ Account registered.
 Requesting a certificate for wordpress.ocibook.com.br
 ```
 
-A ferramenta _[Certbot](https://certbot.eff.org/)_ irá solicitar o seu e-mail e alguns prompts de confirmação. É importante inserir um endereço de e-mail válido para você saber sobre a data de expiração do certificado e qualquer outra notícia que envolve segurança.
+A ferramenta _[Certbot](https://certbot.eff.org/)_ irá solicitar o seu e-mail e alguns prompts de confirmação. É importante inserir um endereço de e-mail válido para você saber sobre quando irá _expirar o seu certificado_ e qualquer outra notícia que envolve segurança.
 
 No decorrer, a parte mais importante é quando for solicitado o registro _DNS TXT_:
 
