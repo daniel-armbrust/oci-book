@@ -244,11 +244,33 @@ Action completed. Waiting until the work request has entered state: ('SUCCEEDED'
     "error-details": [],
     "id": "ocid1.loadbalancerworkrequest.oc1.sa-saopaulo-1.aaaaaaaaefy5i2cbug4qjsvnjh4omrvbxzq2sjg5h2yjx5sahfyjgpeack2a",
     "lifecycle-state": "SUCCEEDED",
-    "load-balancer-id": "ocid1.loadbalancer.oc1.sa-saopaulo-1.aaaaaaaa6ciautk2hpj3lixy2vwnkzkbq5626rs5punot65pkqr4xw7kh7ma",
-    "message": "{\n  \"eventId\" : \"f7a59f4c-c564-42d3-992c-ad42c92898de\",\n  \"loadBalancerId\" : \"ocid1.loadbalancer.oc1.sa-saopaulo-1.aaaaaaaa6ciautk2hpj3lixy2vwnkzkbq5626rs5punot65pkqr4xw7kh7ma\",\n  \"workflowName\" : \"AddListenerWorkflow\",\n  \"type\" : \"SUCCESS\",\n  \"message\" : \"OK\",\n  \"workRequestId\" : \"ocid1.loadbalancerworkrequest.oc1.sa-saopaulo-1.aaaaaaaaefy5i2cbug4qjsvnjh4omrvbxzq2sjg5h2yjx5sahfyjgpeack2a\"\n}",
+    "load-balancer-id": "ocid1.loadbalancer.oc1.sa-saopaulo-1.aaaaaaaa5ledgzqveh3o73m3mnv42pkxcm5y64hjmkwl7tnhvsee2zv7gbga",
+    "message": "{\n  \"eventId\" : \"f7a59f4c-c564-42d3-992c-ad42c92898de\",\n  \"loadBalancerId\" : \"ocid1.loadbalancer.oc1.sa-saopaulo-1.aaaaaaaa5ledgzqveh3o73m3mnv42pkxcm5y64hjmkwl7tnhvsee2zv7gbga\",\n  \"workflowName\" : \"AddListenerWorkflow\",\n  \"type\" : \"SUCCESS\",\n  \"message\" : \"OK\",\n  \"workRequestId\" : \"ocid1.loadbalancerworkrequest.oc1.sa-saopaulo-1.aaaaaaaaefy5i2cbug4qjsvnjh4omrvbxzq2sjg5h2yjx5sahfyjgpeack2a\"\n}",
     "time-accepted": "2021-09-29T15:32:50.888000+00:00",
     "time-finished": "2021-09-29T15:33:07.611000+00:00",
     "type": "CreateListener"
+  }
+}
+```
+
+```
+darmbrust@hoodwink:~$ oci lb rule-set create \
+> --load-balancer-id "ocid1.loadbalancer.oc1.sa-saopaulo-1.aaaaaaaa5ledgzqveh3o73m3mnv42pkxcm5y64hjmkwl7tnhvsee2zv7gbga" \
+> --name "http_redirect_https" \
+> --items '[{"action": "REDIRECT", "conditions": [{"attributeName": "PATH", "attributeValue": "/", "operator": "FORCE_LONGEST_PREFIX_MATCH"}],"redirectUri": {"host": "{host}","path": "{path}","port": 443,"protocol":"HTTPS","query": "{query}"},"responseCode": 302}]' \
+> --wait-for-state "SUCCEEDED"
+Action completed. Waiting until the work request has entered state: ('SUCCEEDED',)
+{
+  "data": {
+    "compartment-id": "ocid1.compartment.oc1..aaaaaaaauvqvbbx3oridcm5d2ztxkftwr362u2vl5zdsayzbehzwbjs56soq",
+    "error-details": [],
+    "id": "ocid1.loadbalancerworkrequest.oc1.sa-saopaulo-1.aaaaaaaaxek7gombqos7dthumgw7qdrrmzkyd7fsiqcnyq4dw64oeud2kopq",
+    "lifecycle-state": "SUCCEEDED",
+    "load-balancer-id": "ocid1.loadbalancer.oc1.sa-saopaulo-1.aaaaaaaa5ledgzqveh3o73m3mnv42pkxcm5y64hjmkwl7tnhvsee2zv7gbga",
+    "message": "{\n\"eventId\" : \"c55c284d-045b-4a66-a528-7af6e9d4e64c\",\n\"loadBalancerId\" : \"ocid1.loadbalancer.oc1.sa-saopaulo-1.aaaaaaaa5ledgzqveh3o73m3mnv42pkxcm5y64hjmkwl7tnhvsee2zv7gbga\",\n\"workflowName\" : \"AddRuleSetWorkflow\",\n\"type\" : \"SUCCESS\",\n\"message\" : \"OK\",\n\"workRequestId\" : \"ocid1.loadbalancerworkrequest.oc1.sa-saopaulo-1.aaaaaaaaxek7gombqos7dthumgw7qdrrmzkyd7fsiqcnyq4dw64oeud2kopq\"\n}",
+    "time-accepted": "2021-09-29T18:10:15.396000+00:00",
+    "time-finished": "2021-09-29T18:10:28.655000+00:00",
+    "type": "CreateRuleSet"
   }
 }
 ```
