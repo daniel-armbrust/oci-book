@@ -163,7 +163,16 @@ If you like Certbot, please consider supporting our work by:
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 ```
 
-O certificado foi salvo em _/etc/letsencrypt/live/wordpress.ocibook.com.br/fullchain.pem_ e a chave privada correspondende em _/etc/letsencrypt/live/wordpress.ocibook.com.br/privkey.pem_, conforme mostrado pela saída do comando.
+Todos os arquivos referentes ao certificado criado, foram salvos no diretório _/etc/letsencrypt/live/wordpress.ocibook.com.br_:
+
+```
+darmbrust@hoodwink:~$ sudo ls -1 /etc/letsencrypt/live/wordpress.ocibook.com.br/
+cert.pem
+chain.pem
+fullchain.pem
+privkey.pem
+README
+```
 
 Como o registro _DNS TXT_ foi usado somente para mostrar _"controle"_ ao _[Let’s Encrypt](https://letsencrypt.org/pt-br/)_, este pode ser excluído após a emissão do certificado.
 
@@ -178,10 +187,11 @@ darmbrust@hoodwink:~$ oci dns record domain delete \
 
 Antes de seguir, quero mover os arquivos disponibilizados pela ferramenta _[Certbot](https://certbot.eff.org/)_ para um diretório de mais fácil acesso, sem a necessidade de usar _[sudo](https://pt.wikipedia.org/wiki/Sudo)_ pra lá e pra cá.
 
-Por padrão, o diretório que armazena o _[certificado](https://pt.wikipedia.org/wiki/Certificado_digital)_ e a _[chave privada](https://pt.wikipedia.org/wiki/Criptografia_de_chave_p%C3%BAblica)_, são salvos em um diretório onde somente o usuário _root_ tem acesso. Isto é útil e protege os arquivos, pricipamente a _[chave privada](https://pt.wikipedia.org/wiki/Criptografia_de_chave_p%C3%BAblica)_. Lembrando que caso um terceiro consiga acesso a sua _[chave privada](https://pt.wikipedia.org/wiki/Criptografia_de_chave_p%C3%BAblica)_, ele pode ler o tréfego que foi criptografado através do _[HTTPS](https://pt.wikipedia.org/wiki/Hyper_Text_Transfer_Protocol_Secure)_, o que não é uma boa ideia.
+Por padrão, o diretório que armazena os _[certificados](https://pt.wikipedia.org/wiki/Certificado_digital)_ e a _[chave privada](https://pt.wikipedia.org/wiki/Criptografia_de_chave_p%C3%BAblica)_, são salvos em um diretório onde somente o usuário _root_ tem acesso. Isto é útil e protege os arquivos, pricipamente a _[chave privada](https://pt.wikipedia.org/wiki/Criptografia_de_chave_p%C3%BAblica)_. Lembrando que caso um terceiro consiga acesso a sua _[chave privada](https://pt.wikipedia.org/wiki/Criptografia_de_chave_p%C3%BAblica)_, ele pode ler o tréfego que foi criptografado através do _[HTTPS](https://pt.wikipedia.org/wiki/Hyper_Text_Transfer_Protocol_Secure)_, o que não é uma boa ideia.
 
 ```
 darmbrust@hoodwink:~$ mkdir wordpress-crt
+darmbrust@hoodwink:~$ sudo cp /etc/letsencrypt/live/wordpress.ocibook.com.br/cert.pem wordpress-crt/
 darmbrust@hoodwink:~$ sudo cp /etc/letsencrypt/live/wordpress.ocibook.com.br/fullchain.pem wordpress-crt/
 darmbrust@hoodwink:~$ sudo cp /etc/letsencrypt/live/wordpress.ocibook.com.br/privkey.pem wordpress-crt/
 darmbrust@hoodwink:~$ sudo chown -R darmbrust: wordpress-crt/
@@ -191,9 +201,10 @@ Tendo os arquivos em um diretório de fácil acesso, podemos fazer _[upload](htt
 
 ```
 darmbrust@hoodwink:~$ oci lb certificate create \
-> --certificate-name "wordpress_cert" \
 > --load-balancer-id "ocid1.loadbalancer.oc1.sa-saopaulo-1.aaaaaaaa5ledgzqveh3o73m3mnv42pkxcm5y64hjmkwl7tnhvsee2zv7gbga" \
+> --certificate-name "wordpress_cert" \
 > --ca-certificate-file ./wordpress-crt/fullchain.pem \
+> --public-certificate-file ./wordpress-crt/cert.pem \
 > --private-key-file ./wordpress-crt/privkey.pem \
 > --wait-for-state "SUCCEEDED"
 Action completed. Waiting until the work request has entered state: ('SUCCEEDED',)
@@ -211,3 +222,6 @@ Action completed. Waiting until the work request has entered state: ('SUCCEEDED'
   }
 }
 ```
+
+### __Criando um Listener HTTPS__
+
