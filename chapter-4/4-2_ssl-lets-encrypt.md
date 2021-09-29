@@ -253,11 +253,15 @@ Action completed. Waiting until the work request has entered state: ('SUCCEEDED'
 }
 ```
 
+Após isto, como boa prática, quero evitar qualquer tráfego inseguro na aplicação. Ou seja, irei instruir o _[Load Balancer](https://docs.oracle.com/pt-br/iaas/Content/Balance/Concepts/balanceoverview.htm)_ para _redicionar_ todo o tráfego _[HTTP](https://pt.wikipedia.org/wiki/Hypertext_Transfer_Protocol)_ para _[HTTPS](https://pt.wikipedia.org/wiki/Hyper_Text_Transfer_Protocol_Secure)_. Isto é feito através de _[regras de redirecionamento](https://docs.oracle.com/pt-br/iaas/Content/Balance/Tasks/managingrulesets.htm#URLRedirectRules)_ aplicadas diretamente no _listener_.
+
+O comando abaixo cria uma _[regras de redirecionamento](https://docs.oracle.com/pt-br/iaas/Content/Balance/Tasks/managingrulesets.htm#URLRedirectRules)_:
+
 ```
 darmbrust@hoodwink:~$ oci lb rule-set create \
 > --load-balancer-id "ocid1.loadbalancer.oc1.sa-saopaulo-1.aaaaaaaa5ledgzqveh3o73m3mnv42pkxcm5y64hjmkwl7tnhvsee2zv7gbga" \
 > --name "http_redirect_https" \
-> --items '[{"action": "REDIRECT", "conditions": [{"attributeName": "PATH", "attributeValue": "/", "operator": "FORCE_LONGEST_PREFIX_MATCH"}],"redirectUri": {"host": "{host}","path": "{path}","port": 443,"protocol":"HTTPS","query": "{query}"},"responseCode": 302}]' \
+> --items '[{"action": "REDIRECT", "conditions": [{"attributeName": "PATH", "attributeValue": "/", "operator": "FORCE_LONGEST_PREFIX_MATCH"}], "redirectUri": {"host": "{host}", "path": "{path}", "port": 443, "protocol": "HTTPS", "query": "{query}"}, "responseCode": 302}]' \
 > --wait-for-state "SUCCEEDED"
 Action completed. Waiting until the work request has entered state: ('SUCCEEDED',)
 {
@@ -271,6 +275,34 @@ Action completed. Waiting until the work request has entered state: ('SUCCEEDED'
     "time-accepted": "2021-09-29T18:10:15.396000+00:00",
     "time-finished": "2021-09-29T18:10:28.655000+00:00",
     "type": "CreateRuleSet"
+  }
+}
+```
+
+>_**__NOTA:__**  As [regras de redirecionamento](https://docs.oracle.com/pt-br/iaas/Content/Balance/Tasks/managingrulesets.htm#URLRedirectRules) de URL só se aplicam a listeners [HTTP](https://pt.wikipedia.org/wiki/Hypertext_Transfer_Protocol)._
+
+```
+darmbrust@hoodwink:~$ oci lb listener update \
+> --load-balancer-id "ocid1.loadbalancer.oc1.sa-saopaulo-1.aaaaaaaa5ledgzqveh3o73m3mnv42pkxcm5y64hjmkwl7tnhvsee2zv7gbga" \
+> --default-backend-set-name "lb-pub_wordpress_backend" \
+> --port 80 \
+> --protocol "HTTP" \
+> --listener-name "lb-pub_lst_wordpress" \
+> --rule-set-names '["http_redirect_https"]' \
+> --force \
+> --wait-for-state "SUCCEEDED"
+Action completed. Waiting until the work request has entered state: ('SUCCEEDED',)
+{
+  "data": {
+    "compartment-id": "ocid1.compartment.oc1..aaaaaaaauvqvbbx3oridcm5d2ztxkftwr362u2vl5zdsayzbehzwbjs56soq",
+    "error-details": [],
+    "id": "ocid1.loadbalancerworkrequest.oc1.sa-saopaulo-1.aaaaaaaayykqiu4cpim52ggk42b6dxa7owruwevv2ulqhrarahjpl6tbtmpa",
+    "lifecycle-state": "SUCCEEDED",
+    "load-balancer-id": "ocid1.loadbalancer.oc1.sa-saopaulo-1.aaaaaaaa5ledgzqveh3o73m3mnv42pkxcm5y64hjmkwl7tnhvsee2zv7gbga",
+    "message": "{\n\"eventId\" : \"36e897dc-2920-4ee9-b227-aa4025a9a73a\",\n\"loadBalancerId\" : \"ocid1.loadbalancer.oc1.sa-saopaulo-1.aaaaaaaa5ledgzqveh3o73m3mnv42pkxcm5y64hjmkwl7tnhvsee2zv7gbga\",\n\"workflowName\" : \"PutListenerWorkflow\",\n\"type\" : \"SUCCESS\",\n\"message\" : \"OK\",\n\"workRequestId\" : \"ocid1.loadbalancerworkrequest.oc1.sa-saopaulo-1.aaaaaaaayykqiu4cpim52ggk42b6dxa7owruwevv2ulqhrarahjpl6tbtmpa\"\n}",
+    "time-accepted": "2021-09-29T18:22:55.727000+00:00",
+    "time-finished": "2021-09-29T18:23:12.292000+00:00",
+    "type": "UpdateListener"
   }
 }
 ```
