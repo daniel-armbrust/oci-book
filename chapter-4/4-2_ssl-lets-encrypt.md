@@ -53,6 +53,8 @@ darmbrust@hoodwink:~$ sudo certbot --version
 certbot 1.19.0
 ```
 
+Como é possível ver, o _[Certbot](https://certbot.eff.org/)_ foi corretamente instalado.
+
 ### __Adquirindo um certificado via DNS challenge__
 
 Uma das formas de se obter um _[certificado digital](https://pt.wikipedia.org/wiki/Certificado_digital)_ válido emitido pelo _[Let’s Encrypt](https://letsencrypt.org/pt-br/)_, é através do chamado _"desafio DNS" (dns challenge)_. 
