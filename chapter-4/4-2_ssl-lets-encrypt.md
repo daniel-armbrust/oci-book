@@ -285,13 +285,15 @@ Basicamente, o valor contido no parâmetro _"--items"_ especifica uma ação de 
 
 Antes de aplicarmos a _[regra de redirecionamento](https://docs.oracle.com/pt-br/iaas/Content/Balance/Tasks/managingrulesets.htm#URLRedirectRules)_ que foi criada, vamos atualizar a configuração do _[Wordpress](https://pt.wikipedia.org/wiki/WordPress)_ para habilitar o _[HTTPS](https://pt.wikipedia.org/wiki/Hyper_Text_Transfer_Protocol_Secure)_.
 
-Eu tive que instalar o plug-ing _Really Simple SSL_ diretamente pelo menu _Plugins_ do _[Wordpress](https://pt.wikipedia.org/wiki/WordPress)_ para que tudo pudesse funcionar.
+Eu tive que instalar o _[plugin](https://docs.oracle.com/pt-br/iaas/Content/Compute/Tasks/manage-plugins.htm#available-plugins)_ _"Really Simple SSL"_ diretamente pelo menu _Plugins_ do _[Wordpress](https://pt.wikipedia.org/wiki/WordPress)_ para que tudo pudesse funcionar. 
 
 ![alt_text](./images/wordpress-finish-install-5.jpg "Wordpress SSL Configuration")
 
 ![alt_text](./images/wordpress-finish-install-6.jpg "Wordpress SSL Configuration")
 
 ![alt_text](./images/wordpress-finish-install-7.jpg "Wordpress SSL Configuration")
+
+>_**__NOTA:__** A instalação deste [plugin](https://docs.oracle.com/pt-br/iaas/Content/Compute/Tasks/manage-plugins.htm#available-plugins) adicionou alguns arquivos ao [Wordpress](https://pt.wikipedia.org/wiki/WordPress). Por conta disto, é necessário criar uma nova [custom image](https://docs.oracle.com/pt-br/iaas/Content/Compute/Tasks/managingcustomimages.htm) que contenha essas informações atualizadas. Verifique o capítulo ["3.4 - Oracle Linux com WordPress na nuvem"](https://github.com/daniel-armbrust/oci-book/blob/main/chapter-3/3-4_oracle-linux-wordpress.md) no qual contém essas intruções._
 
 Pronto! Agora é possível aplicar a _[regra de redirecionamento](https://docs.oracle.com/pt-br/iaas/Content/Balance/Tasks/managingrulesets.htm#URLRedirectRules)_ ao _listener_ com o comando abaixo:
 
