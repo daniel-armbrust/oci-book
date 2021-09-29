@@ -226,7 +226,7 @@ Action completed. Waiting until the work request has entered state: ('SUCCEEDED'
 
 ### __Criando um Listener HTTPS__
 
-Criaremos um _listener_ na porta _443/TCP_ que faça uso da configuração dos certificados _(wordpress_cert)_ que foi criado:
+Criaremos um _listener_ na porta _443/TCP_ que faça uso da configuração dos certificados _(wordpress_cert)_:
 
 ```
 darmbrust@hoodwink:~$ oci lb listener create \
