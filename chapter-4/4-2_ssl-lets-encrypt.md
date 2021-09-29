@@ -186,3 +186,28 @@ darmbrust@hoodwink:~$ sudo cp /etc/letsencrypt/live/wordpress.ocibook.com.br/ful
 darmbrust@hoodwink:~$ sudo cp /etc/letsencrypt/live/wordpress.ocibook.com.br/privkey.pem wordpress-crt/
 darmbrust@hoodwink:~$ sudo chown -R darmbrust: wordpress-crt/
 ```
+
+Tendo os arquivos em um diretório de fácil acesso, podemos enviar os arquivos ao _[Load Balancer](https://docs.oracle.com/pt-br/iaas/Content/Balance/Concepts/balanceoverview.htm)_ do _[Wordpress](https://pt.wikipedia.org/wiki/WordPress)_ pelo comando abaixo:
+
+```
+darmbrust@hoodwink:~$ oci lb certificate create \
+> --certificate-name "wordpress_cert" \
+> --load-balancer-id "ocid1.loadbalancer.oc1.sa-saopaulo-1.aaaaaaaa5ledgzqveh3o73m3mnv42pkxcm5y64hjmkwl7tnhvsee2zv7gbga" \
+> --ca-certificate-file ./wordpress-crt/fullchain.pem \
+> --private-key-file ./wordpress-crt/privkey.pem \
+> --wait-for-state "SUCCEEDED"
+Action completed. Waiting until the work request has entered state: ('SUCCEEDED',)
+{
+  "data": {
+    "compartment-id": "ocid1.compartment.oc1..aaaaaaaauvqvbbx3oridcm5d2ztxkftwr362u2vl5zdsayzbehzwbjs56soq",
+    "error-details": [],
+    "id": "ocid1.loadbalancerworkrequest.oc1.sa-saopaulo-1.aaaaaaaaesyaaacgrawf4wo4jdfdwy5msjd4eeu2jef753xoa6b7ph57zwsa",
+    "lifecycle-state": "SUCCEEDED",
+    "load-balancer-id": "ocid1.loadbalancer.oc1.sa-saopaulo-1.aaaaaaaa5ledgzqveh3o73m3mnv42pkxcm5y64hjmkwl7tnhvsee2zv7gbga",
+    "message": "{\n  \"eventId\" : \"1442cec6-a134-40c7-9724-430bc7b9b8d4\",\n  \"loadBalancerId\" : \"ocid1.loadbalancer.oc1.sa-saopaulo-1.aaaaaaaa5ledgzqveh3o73m3mnv42pkxcm5y64hjmkwl7tnhvsee2zv7gbga\",\n  \"workflowName\" : \"AddCertificateWorkflow\",\n  \"type\" : \"SUCCESS\",\n  \"message\" : \"OK\",\n  \"workRequestId\" : \"ocid1.loadbalancerworkrequest.oc1.sa-saopaulo-1.aaaaaaaaesyaaacgrawf4wo4jdfdwy5msjd4eeu2jef753xoa6b7ph57zwsa\"\n}",
+    "time-accepted": "2021-09-29T13:42:04.148000+00:00",
+    "time-finished": "2021-09-29T13:42:23.966000+00:00",
+    "type": "CreateCertificate"
+  }
+}
+```
