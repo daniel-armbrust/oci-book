@@ -297,7 +297,7 @@ Depois que o _[plugin](https://docs.oracle.com/pt-br/iaas/Content/Compute/Tasks/
 
 >_**__NOTA:__** A instalação deste [plugin](https://docs.oracle.com/pt-br/iaas/Content/Compute/Tasks/manage-plugins.htm#available-plugins) adicionou alguns arquivos ao [Wordpress](https://pt.wikipedia.org/wiki/WordPress). Por conta disto, é necessário criar uma nova [custom image](https://docs.oracle.com/pt-br/iaas/Content/Compute/Tasks/managingcustomimages.htm) que contenha essas informações atualizadas, além da atualização do backend-set no _[Load Balancer](https://docs.oracle.com/pt-br/iaas/Content/Balance/Concepts/balanceoverview.htm)_. Verifique o capítulo ["3.7 - Concluindo a instalação do Wordpress"](https://github.com/daniel-armbrust/oci-book/blob/main/chapter-3/3-7_concluindo-wordpress.md) no qual contém essas intruções._
 
-Pronto! Agora é possível aplicar a _[regra de redirecionamento](https://docs.oracle.com/pt-br/iaas/Content/Balance/Tasks/managingrulesets.htm#URLRedirectRules)_ ao _listener_ com o comando abaixo:
+Após as configurações, é possível aplicar a _[regra de redirecionamento](https://docs.oracle.com/pt-br/iaas/Content/Balance/Tasks/managingrulesets.htm#URLRedirectRules)_ ao _listener_ com o comando abaixo:
 
 ```
 darmbrust@hoodwink:~$ oci lb listener update \
@@ -325,3 +325,32 @@ Action completed. Waiting until the work request has entered state: ('SUCCEEDED'
 }
 ```
 
+Pronto! Basta testar o acesso a aplicação e é possível ver o redirecionamento para _[HTTPS](https://pt.wikipedia.org/wiki/Hyper_Text_Transfer_Protocol_Secure)_:
+
+```
+darmbrust@hoodwink:~$ curl -v http://wordpress.ocibook.com.br
+*   Trying 152.70.221.188:80...
+* TCP_NODELAY set
+* Connected to wordpress.ocibook.com.br (152.70.221.188) port 80 (#0)
+> GET / HTTP/1.1
+> Host: wordpress.ocibook.com.br
+> User-Agent: curl/7.68.0
+> Accept: */*
+>
+* Mark bundle as not supporting multiuse
+< HTTP/1.1 301 Moved Permanently
+< Date: Wed, 29 Sep 2021 22:46:08 GMT
+< Content-Type: text/html
+< Content-Length: 157
+< Connection: keep-alive
+< Location: HTTPS://wordpress.ocibook.com.br:443/
+<
+<html>
+<head><title>301 Moved Permanently</title></head>
+<body>
+<center><h1>301 Moved Permanently</h1></center>
+<hr><center></center>
+</body>
+</html>
+* Connection #0 to host wordpress.ocibook.com.br left intact
+```
