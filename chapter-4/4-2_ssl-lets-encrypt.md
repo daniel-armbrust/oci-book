@@ -287,7 +287,7 @@ Antes de aplicarmos a _[regra de redirecionamento](https://docs.oracle.com/pt-br
 
 ![alt_text](./images/wordpress-finish-install-5.jpg "Wordpress Configuration")
 
-Após a regra ser criada, aplicamos ela ao _listener_ _[HTTP](https://pt.wikipedia.org/wiki/Hypertext_Transfer_Protocol)_:
+Pronto! Agora é possível aplicar ela ao _listener_ com o comando abaixo:
 
 ```
 darmbrust@hoodwink:~$ oci lb listener update \
