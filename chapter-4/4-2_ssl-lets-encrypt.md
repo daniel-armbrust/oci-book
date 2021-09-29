@@ -83,7 +83,7 @@ partner of the Let's Encrypt project and the non-profit organization that
 develops Certbot? We'd like to send you email about our work encrypting the web,
 EFF news, campaigns, and ways to support digital freedom.
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-(Y)es/(N)o: n
+(Y)es/(N)o: N
 Account registered.
 Requesting a certificate for wordpress.ocibook.com.br
 ```
@@ -92,6 +92,7 @@ A ferramenta _[Certbot](https://certbot.eff.org/)_ irá solicitar o seu e-mail e
 
 No decorrer, a parte mais importante é quando for solicitado o registro _DNS TXT_:
 
+```
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 Please deploy a DNS TXT record under the name:
 
