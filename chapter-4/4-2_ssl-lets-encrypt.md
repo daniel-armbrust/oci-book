@@ -285,13 +285,15 @@ Basicamente, o valor contido no parâmetro _"--items"_ especifica uma ação de 
 
 Antes de aplicarmos a _[regra de redirecionamento](https://docs.oracle.com/pt-br/iaas/Content/Balance/Tasks/managingrulesets.htm#URLRedirectRules)_ que foi criada, vamos atualizar a configuração do _[Wordpress](https://pt.wikipedia.org/wiki/WordPress)_ para habilitar o _[HTTPS](https://pt.wikipedia.org/wiki/Hyper_Text_Transfer_Protocol_Secure)_.
 
+Eu tive que instalar o plug-ing _Really Simple SSL_ diretamente pelo menu _Plugins_ do _[Wordpress](https://pt.wikipedia.org/wiki/WordPress)_ para que tudo pudesse funcionar.
+
 ![alt_text](./images/wordpress-finish-install-5.jpg "Wordpress SSL Configuration")
 
 ![alt_text](./images/wordpress-finish-install-6.jpg "Wordpress SSL Configuration")
 
 ![alt_text](./images/wordpress-finish-install-7.jpg "Wordpress SSL Configuration")
 
-Pronto! Agora é possível aplicar ela ao _listener_ com o comando abaixo:
+Pronto! Agora é possível aplicar a _[regra de redirecionamento](https://docs.oracle.com/pt-br/iaas/Content/Balance/Tasks/managingrulesets.htm#URLRedirectRules)_ ao _listener_ com o comando abaixo:
 
 ```
 darmbrust@hoodwink:~$ oci lb listener update \
