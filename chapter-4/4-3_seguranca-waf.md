@@ -34,6 +34,15 @@ O nosso cenário para o _[Wordpress](https://pt.wikipedia.org/wiki/WordPress)_ s
 
 ![alt_text](./images/wordpress-waf-1.jpg "Wordpress + WAF")
 
+### __Adicionando o certificado no WAF__
+
+Como o _[WAF](https://docs.oracle.com/pt-br/iaas/Content/WAF/Concepts/overview.htm)_ que iremos criar deve tratar conexões 
+
+```
+darmbrust@hoodwink:~$ cat ./wordpress-crt/cert.pem ./wordpress-crt/fullchain.pem > ./wordpress-crt/waas-cert.pem
+```
+
+
 Irei começar criando uma _[política](https://docs.oracle.com/pt-br/iaas/Content/WAF/Tasks/managingwaf.htm)_ para proteger o _[domínio](https://pt.wikipedia.org/wiki/Sistema_de_Nomes_de_Dom%C3%ADnio)_ _"ocibook.com.br"_. 
 
 Por enquanto, temos somente a aplicação _[Wordpress](https://pt.wikipedia.org/wiki/WordPress)_ disponível e publicada em _"wordpress.ocibook.com.br"_.
