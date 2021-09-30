@@ -16,7 +16,7 @@ O _[OWASP (Open Web Application Security Project)](https://pt.wikipedia.org/wik
 
 Há também o _[OWASP Top 10](https://owasp.org/www-project-top-ten/)_ que é um documento online que fornece classificação e orientação de remediação, para os dez principais riscos de segurança em aplicações Web. Seu objetivo é oferecer aos desenvolvedores e profissionais de segurança, uma visão dos riscos de segurança mais prevalentes.
 
-Vamos configurar um _[WAF](https://docs.oracle.com/pt-br/iaas/Content/WAF/Concepts/overview.htm)_ para o _[Wordpress](https://pt.wikipedia.org/wiki/WordPress)_.
+Vamos configurar o _[WAF](https://docs.oracle.com/pt-br/iaas/Content/WAF/Concepts/overview.htm)_ para o _[Wordpress](https://pt.wikipedia.org/wiki/WordPress)_.
 
 ### __Criando uma Política WAF__
 
