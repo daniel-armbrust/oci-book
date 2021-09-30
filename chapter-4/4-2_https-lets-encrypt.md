@@ -369,4 +369,4 @@ notAfter=Dec 28 11:28:45 2021 GMT
 
 Perto da data de expiração, através do e-mail que foi especificado, será emitido um aviso para renovação.
 
-O _[Certbot](https://certbot.eff.org/)_ é usado também para renovar o _[certificado](https://pt.wikipedia.org/wiki/Certificado_digital)_. Iremos rever isto mais adiante.
+O _[Certbot](https://certbot.eff.org/)_ é usado também para renovar o _[certificado](https://pt.wikipedia.org/wiki/Certificado_digital)_. Iremos ver isto mais adiante.
