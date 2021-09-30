@@ -44,7 +44,7 @@ Irei concatenar o arquivo que contém o _[certificado digital](https://pt.wikipe
 darmbrust@hoodwink:~$ cat ./wordpress-crt/cert.pem ./wordpress-crt/fullchain.pem > ./wordpress-crt/waas-cert.pem
 ```
 
-O comando que cria uma entrada de certificado no _[WAF](https://docs.oracle.com/pt-br/iaas/Content/WAF/Concepts/overview.htm)_ espera receber o conteúdo em si do _[certificado](https://pt.wikipedia.org/wiki/Certificado_digital)_ ou _[chave privada](https://pt.wikipedia.org/wiki/Criptografia_de_chave_p%C3%BAblica)_. Não há como indicar o caminho de um arquivo para que a ferramenta faça _[upload](https://en.wikipedia.org/wiki/Upload)_ ao serviço. De qualquer forma, uma simples _"manobra"_ no _[shell](https://pt.wikipedia.org/wiki/Shell_do_Unix)_ garante a sintaxe esperada:
+O comando que cria uma entrada de certificado no _[WAF](https://docs.oracle.com/pt-br/iaas/Content/WAF/Concepts/overview.htm)_ espera receber o conteúdo em si do _[certificado](https://pt.wikipedia.org/wiki/Certificado_digital)_ ou _[chave privada](https://pt.wikipedia.org/wiki/Criptografia_de_chave_p%C3%BAblica)_. Não há como indicar o caminho de um arquivo para que a ferramenta faça _[upload](https://en.wikipedia.org/wiki/Upload)_ até o serviço. De qualquer forma, uma simples _"manobra"_ no _[shell](https://pt.wikipedia.org/wiki/Shell_do_Unix)_ garante a sintaxe esperada:
 
 ```
 darmbrust@hoodwink:~$ oci waas certificate create \
