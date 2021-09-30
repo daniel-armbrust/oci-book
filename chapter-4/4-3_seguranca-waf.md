@@ -36,12 +36,25 @@ O nosso cenário para o _[Wordpress](https://pt.wikipedia.org/wiki/WordPress)_ s
 
 ### __Adicionando o certificado no WAF__
 
-Como o _[WAF](https://docs.oracle.com/pt-br/iaas/Content/WAF/Concepts/overview.htm)_ que iremos criar deve tratar conexões 
+Como o _[WAF](https://docs.oracle.com/pt-br/iaas/Content/WAF/Concepts/overview.htm)_ que iremos criar irá tratar conexões _[HTTPS](https://pt.wikipedia.org/wiki/Hyper_Text_Transfer_Protocol_Secure)_, aqui também é necessário fazer _[upload](https://en.wikipedia.org/wiki/Upload)_ dos arquivos de _[certificado](https://pt.wikipedia.org/wiki/Certificado_digital)_ e a _[chave privada](https://pt.wikipedia.org/wiki/Criptografia_de_chave_p%C3%BAblica)_.
+
+Irei concatenar o arquivo que contém o _[certificado digital](https://pt.wikipedia.org/wiki/Certificado_digital)_ do domínio _"wordpress.ocibook.com.br"_ e os demais certificados intermediários, gerando um único arquivo: 
 
 ```
 darmbrust@hoodwink:~$ cat ./wordpress-crt/cert.pem ./wordpress-crt/fullchain.pem > ./wordpress-crt/waas-cert.pem
 ```
 
+O comando que cria um certificado no _[WAF](https://docs.oracle.com/pt-br/iaas/Content/WAF/Concepts/overview.htm)_ espera receber o seu conteúdo. Não há como indicar o caminho de um arquivo para que a ferramenta faça _[upload](https://en.wikipedia.org/wiki/Upload)_ ao serviço. De qualquer forma, uma simples _"manobra"_ no _[shell](https://pt.wikipedia.org/wiki/Shell_do_Unix)_ garante a sintaxe esperada:
+
+```
+darmbrust@hoodwink:~$ oci waas certificate create \
+> --compartment-id "ocid1.compartment.oc1..aaaaaaaaie4exnvj2ktkjlliahl2bxmdnteu2xmn27oc5cy5mdcmocl4vd7q" \
+> --certificate-data "$(cat ./wordpress-crt/waas-cert.pem)" \
+> --private-key-data "$(cat ./wordpress-crt/privkey.pem)" \
+> --display-name "wordpress_waf_cert"
+```
+
+### __Criando uma Política no WAF__
 
 Irei começar criando uma _[política](https://docs.oracle.com/pt-br/iaas/Content/WAF/Tasks/managingwaf.htm)_ para proteger o _[domínio](https://pt.wikipedia.org/wiki/Sistema_de_Nomes_de_Dom%C3%ADnio)_ _"ocibook.com.br"_. 
 
