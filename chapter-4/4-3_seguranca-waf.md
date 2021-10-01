@@ -48,17 +48,30 @@ O comando que cria uma entrada de certificado no _[WAF](https://docs.oracle.com/
 
 ```
 darmbrust@hoodwink:~$ oci waas certificate create \
-> --compartment-id "ocid1.compartment.oc1..aaaaaaaaie4exnvj2ktkjlliahl2bxmdnteu2xmn27oc5cy5mdcmocl4vd7q" \
+> --compartment-id "ocid1.compartment.oc1..aaaaaaaauvqvbbx3oridcm5d2ztxkftwr362u2vl5zdsayzbehzwbjs56soq" \
 > --certificate-data "$(cat ./wordpress-crt/waas-cert.pem)" \
 > --private-key-data "$(cat ./wordpress-crt/privkey.pem)" \
 > --display-name "wordpress_waf_cert"
 ```
 
+Após criado, irei obter o seu OCID pois será necessário na criação da _[política](https://docs.oracle.com/pt-br/iaas/Content/WAF/Tasks/managingwaf.htm)_:
+
+```
+darmbrust@hoodwink:~$ oci waas certificate list \
+> --compartment-id "ocid1.compartment.oc1..aaaaaaaauvqvbbx3oridcm5d2ztxkftwr362u2vl5zdsayzbehzwbjs56soq" \
+> --all \
+> --display-name "wordpress_waf_cert" \
+> --query "data[].id"
+[
+  "ocid1.waascertificate.oc1..aaaaaaaadd3raczao5v2y7fyrbqa5fqnsaai3gpieaeo6hb6omtc2ksp4sda"
+]
+```
+
 ### __Criando uma Política no WAF__
 
-Irei começar criando uma _[política](https://docs.oracle.com/pt-br/iaas/Content/WAF/Tasks/managingwaf.htm)_ para proteger o _[domínio](https://pt.wikipedia.org/wiki/Sistema_de_Nomes_de_Dom%C3%ADnio)_ _"ocibook.com.br"_. 
+Por enquanto, temos somente a aplicação _[Wordpress](https://pt.wikipedia.org/wiki/WordPress)_ disponível e publicada pelo nome _"wordpress.ocibook.com.br"_. Irei criar uma _[política](https://docs.oracle.com/pt-br/iaas/Content/WAF/Tasks/managingwaf.htm)_ para proteger especificamente este nome por enquanto. 
 
-Por enquanto, temos somente a aplicação _[Wordpress](https://pt.wikipedia.org/wiki/WordPress)_ disponível e publicada em _"wordpress.ocibook.com.br"_.
+O comando abaixo também anexa o _[certificado](https://pt.wikipedia.org/wiki/Certificado_digital)_ através do seu OCID, além de ser instruído a redirecionar o tráfego _[HTTP](https://pt.wikipedia.org/wiki/Hypertext_Transfer_Protocol)_ para _[HTTPS](https://pt.wikipedia.org/wiki/Hyper_Text_Transfer_Protocol_Secure)_, através da opção _"isHttpsForced"_:
 
 ```
 darmbrust@hoodwink:~$ oci waas waas-policy create \
@@ -66,11 +79,12 @@ darmbrust@hoodwink:~$ oci waas waas-policy create \
 > --display-name "waf-policy_ocibook-com-br" \
 > --domain "ocibook.com.br" \
 > --additional-domains '["wordpress.ocibook.com.br"]' \
-> --origins '{"wordpress_origin":{"uri": "lb-1.ocibook.com.br", "httpPort":80}}' \
-> --waf-config '{"origin": "wordpress_origin"}'
+> --origins '{"wordpress_origin":{"uri": "lb-1.ocibook.com.br", "httpPort": 80, "httpsPort": 443}}' \
+> --waf-config '{"origin": "wordpress_origin"}' \
+> --policy-config '{"certificateId": "ocid1.waascertificate.oc1..aaaaaaaadd3raczao5v2y7fyrbqa5fqnsaai3gpieaeo6hb6omtc2ksp4sda", "isHttpsEnabled": true, "isHttpsForced": true}'
 {
-  "etag": "W/\"2021-09-27T16:41:24.513Z\"",
-  "opc-work-request-id": "ocid1.waasworkrequest.oc1..aaaaaaaafglvy67fvrsgl6hhsot4pma6vyxj2vp57ulp6tgn5vt6bp5622qq"
+  "etag": "W/\"2021-10-01T00:05:29.706Z\"",
+  "opc-work-request-id": "ocid1.waasworkrequest.oc1..aaaaaaaay3qbg6a6wgl6rutw366vbcxbazjxk7dqdvgnuduafte6x46ozrva"
 }
 ```
 
