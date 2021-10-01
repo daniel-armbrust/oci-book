@@ -121,7 +121,7 @@ darmbrust@hoodwink:~$ oci waas waas-policy list \
 
 Há algumas etapas a cumprir antes de aplicarmos _proteção_ ao _[Wordpress](https://pt.wikipedia.org/wiki/WordPress)_.
 
-Após a _[política WAF](https://docs.oracle.com/pt-br/iaas/Content/WAF/Tasks/managingwaf.htm)_ ser criada, ela disponibiliza um _CNAME_. Veja:
+Após a _[política WAF](https://docs.oracle.com/pt-br/iaas/Content/WAF/Tasks/managingwaf.htm)_ ser criada, será disponibilizado um _CNAME_. Veja:
 
 ```
 darmbrust@hoodwink:~$ oci waas waas-policy get \
