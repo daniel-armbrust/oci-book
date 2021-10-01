@@ -228,7 +228,7 @@ Este é um detalhe importante. Como o _[WAF](https://docs.oracle.com/pt-br/iaas/
 
 O outro detalhe importante, é permitir tráfego de rede ao _[balancedor de carga](https://docs.oracle.com/pt-br/iaas/Content/Balance/Concepts/balanceoverview.htm)_ do _[Wordpress](https://pt.wikipedia.org/wiki/WordPress)_, somente das redes que fazem parte do _[Serviço WAF](https://docs.oracle.com/pt-br/iaas/Content/WAF/Concepts/overview.htm)_.
 
-Para exibir as redes do _[Serviço WAF](https://docs.oracle.com/pt-br/iaas/Content/WAF/Concepts/overview.htm)_, usamos o comando abaixo:
+Para exibir essas redes, usamos o comando abaixo:
 
 ```
 darmbrust@hoodwink:~$ oci waas edge-subnet list --query 'data[].cidr'
