@@ -109,7 +109,7 @@ darmbrust@hoodwink:~$ oci waas waas-policy list \
       "display-name": "waf-policy_ocibook-com-br",
       "domain": "ocibook.com.br",
       "freeform-tags": null,
-      "id": "ocid1.waaspolicy.oc1..aaaaaaaa7wiktkcmtupkhosmngsmqums6i2whpwl5oq4634ofeul5nvit7sq",
+      "id": "ocid1.waaspolicy.oc1..aaaaaaaayymwxrhoqps3zpp4paiwjd7hyza2w7oyjzoyehndp34oa2cdwq6a",
       "lifecycle-state": "ACTIVE",
       "time-created": "2021-09-27T16:41:24.514000+00:00"
     }
@@ -117,25 +117,55 @@ darmbrust@hoodwink:~$ oci waas waas-policy list \
 }
 ```
 
-### __Utilizando o WAF na aplicação Wordpress__
+### __Aplicando o WAF no Wordpress__
 
 Há algumas etapas a cumprir antes de aplicarmos _proteção_ ao _[Wordpress](https://pt.wikipedia.org/wiki/WordPress)_.
 
-Após a _[política WAF](https://docs.oracle.com/pt-br/iaas/Content/WAF/Tasks/managingwaf.htm)_ ser criada, ela disponibiliza um _CNAME_:
+Após a _[política WAF](https://docs.oracle.com/pt-br/iaas/Content/WAF/Tasks/managingwaf.htm)_ ser criada, ela disponibiliza um _CNAME_. Veja:
 
 ```
 darmbrust@hoodwink:~$ oci waas waas-policy get \
-> --waas-policy-id "ocid1.waaspolicy.oc1..aaaaaaaa7wiktkcmtupkhosmngsmqums6i2whpwl5oq4634ofeul5nvit7sq" | grep cname | cut -f2 -d':' | tr -d '", '
+> --waas-policy-id "ocid1.waaspolicy.oc1..aaaaaaaayymwxrhoqps3zpp4paiwjd7hyza2w7oyjzoyehndp34oa2cdwq6a" | grep cname | cut -f2 -d':' | tr -d '", '
 ocibook-com-br.o.waas.oci.oraclecloud.net
 ```
 
-Irei utilizar este _nome (CNAME)_ que foi disponibilizado pelo _[WAF](https://docs.oracle.com/pt-br/iaas/Content/WAF/Concepts/overview.htm)_ como valor para o nome _"wordpress.ocibook.com.br"_, que criamos no capítulo passado. 
+Devo utilizar este _CNAME_ como valor para a _[resolução](https://en.wikipedia.org/wiki/Domain_Name_System#DNS_resolvers)_ do nome _"wordpress.ocibook.com.br"_, que criamos no capítulo passado. 
 
-Sabemos que até agora, toda vez que um usuário for acessar a aplicação, o nome _"wordpress.ocibook.com.br"_ é _[resolvido](https://en.wikipedia.org/wiki/Domain_Name_System#DNS_resolvers)_ pelo DNS para o nome _"lb-1.ocibook.com.br"_, que por sua vez _[resolve](https://en.wikipedia.org/wiki/Domain_Name_System#DNS_resolvers)_ para o endereço IP do _[balancedor de carga](https://docs.oracle.com/pt-br/iaas/Content/Balance/Concepts/balanceoverview.htm)_ _152.70.221.188_.
+Sabemos que até agora, toda vez que um usuário for acessar a aplicação, o nome _"wordpress.ocibook.com.br"_ é _[resolvido](https://en.wikipedia.org/wiki/Domain_Name_System#DNS_resolvers)_ pelo _[DNS](https://pt.wikipedia.org/wiki/Sistema_de_Nomes_de_Dom%C3%ADnio)_ para o nome _"lb-1.ocibook.com.br"_, que por sua vez _[resolve](https://en.wikipedia.org/wiki/Domain_Name_System#DNS_resolvers)_ para o endereço IP do _[balancedor de carga](https://docs.oracle.com/pt-br/iaas/Content/Balance/Concepts/balanceoverview.htm)_ _152.70.221.188_.
 
-A ideia é que o nome _"wordpress.ocibook.com.br"_ _[resolva](https://en.wikipedia.org/wiki/Domain_Name_System#DNS_resolvers)_ para _CNAME "ocibook-com-br.o.waas.oci.oraclecloud.net"_ que foi disponibilizado pelo _[WAF](https://docs.oracle.com/pt-br/iaas/Content/WAF/Concepts/overview.htm)_.
+Para aplicarmos _proteção_ através do _[WAF](https://docs.oracle.com/pt-br/iaas/Content/WAF/Concepts/overview.htm)_, o nome _"wordpress.ocibook.com.br"_ deve _[resolver](https://en.wikipedia.org/wiki/Domain_Name_System#DNS_resolvers)_ para o _CNAME "ocibook-com-br.o.waas.oci.oraclecloud.net"_ que foi disponibilizado. Assim, garantimos que o tráfego da aplicação, passe pela infraestrutura do _[WAF](https://docs.oracle.com/pt-br/iaas/Content/WAF/Concepts/overview.htm)_.
 
-Primeiramente, irei excluir o registro para o nome _"wordpress.ocibook.com.br"_:
+Começarei ajustando o parâmetro _[keep-alive](https://en.wikipedia.org/wiki/Keepalive)_ do _[Load Balancer](https://docs.oracle.com/pt-br/iaas/Content/Balance/Concepts/balanceoverview.htm)_. O _[WAF](https://docs.oracle.com/pt-br/iaas/Content/WAF/Concepts/overview.htm)_ requer que os timeouts de _[keep-alive](https://en.wikipedia.org/wiki/Keepalive)_ da sua origem (balanceador de carga) sejam mantidos por _301 segundos_ ou mais. Existe o valor interno de _100 segundos de timeout (que não é alterável)_ no _[WAF](https://docs.oracle.com/pt-br/iaas/Content/WAF/Concepts/overview.htm)_ que elimina a conexão se a origem não enviar nenhum  _[keep-alive](https://en.wikipedia.org/wiki/Keepalive)_, afirmando que a origem ainda está trabalhando em uma resposta.
+
+Os comandos abaixo irão alterar o _[keep-alive](https://en.wikipedia.org/wiki/Keepalive)_ de ambos os _listeners_ que temos no _[Load Balancer](https://docs.oracle.com/pt-br/iaas/Content/Balance/Concepts/balanceoverview.htm)_:
+
+- _Listener HTTP_
+
+```
+darmbrust@hoodwink:~$ oci lb listener update \
+> --load-balancer-id "ocid1.loadbalancer.oc1.sa-saopaulo-1.aaaaaaaa5ledgzqveh3o73m3mnv42pkxcm5y64hjmkwl7tnhvsee2zv7gbga" \
+> --default-backend-set-name "lb-pub_wordpress_backend" \
+> --port 80 \
+> --protocol "HTTP" \
+> --listener-name "lb-pub_lst_wordpress" \
+> --connection-configuration-idle-timeout 305 \
+> --force
+```
+
+- _Listener HTTPS_
+
+```
+darmbrust@hoodwink:~$ oci lb listener update \
+> --load-balancer-id "ocid1.loadbalancer.oc1.sa-saopaulo-1.aaaaaaaa5ledgzqveh3o73m3mnv42pkxcm5y64hjmkwl7tnhvsee2zv7gbga" \
+> --default-backend-set-name "lb-pub_wordpress_backend" \
+> --port 443 \
+> --protocol "HTTP" \
+> --listener-name "lb-pub_https-lst_wordpress" \
+> --connection-configuration-idle-timeout 305 \
+> --force
+```
+
+Começarei primeiramente pela exclusão do registro _"wordpress.ocibook.com.br"_:
 
 ```
 darmbrust@hoodwink:~$ oci dns record domain delete \
