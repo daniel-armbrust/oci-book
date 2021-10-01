@@ -167,7 +167,7 @@ darmbrust@hoodwink:~$ oci lb listener update \
 > --force
 ```
 
-Começarei primeiramente pela exclusão do registro _"wordpress.ocibook.com.br"_:
+Logo após, irei excluír o registro _"wordpress.ocibook.com.br"_ que temos:
 
 ```
 darmbrust@hoodwink:~$ oci dns record domain delete \
@@ -176,7 +176,7 @@ darmbrust@hoodwink:~$ oci dns record domain delete \
 Are you sure you want to delete this resource? [y/N]: y
 ```
 
-Feito isto, irei inserir um novo _CNAME_ para que o tráfego dos usuários possam passar pelo _[WAF](https://docs.oracle.com/pt-br/iaas/Content/WAF/Concepts/overview.htm)_:
+Feito isto, irei inserir um novo registro apontando para o _CNAME_ que foi disponibilizado pelo _[WAF](https://docs.oracle.com/pt-br/iaas/Content/WAF/Concepts/overview.htm)_:
 
 ```
 darmbrust@hoodwink:~$ oci dns record domain patch \
@@ -221,6 +221,10 @@ Address: 192.29.139.253
 Name:   sa-brazil.inregion.waas.oci.oraclecloud.net
 Address: 192.29.139.68
 ```
+
+### __Restringindo acesso a Origem__
+
+Este é um detalhe importante. Como o _[WAF](https://docs.oracle.com/pt-br/iaas/Content/WAF/Concepts/overview.htm)_ está em uma infraestrutura externa do _[Load Balancer](https://docs.oracle.com/pt-br/iaas/Content/Balance/Concepts/balanceoverview.htm)_, ou seja, em uma camada acima, é necessário permitir tráfego de rede ao _[Load Balancer](https://docs.oracle.com/pt-br/iaas/Content/Balance/Concepts/balanceoverview.htm)_ somente das redes são partes do _[Serviço WAF](https://docs.oracle.com/pt-br/iaas/Content/WAF/Concepts/overview.htm)_.
 
 O outro detalhe importante, é permitir tráfego de rede ao _[balancedor de carga](https://docs.oracle.com/pt-br/iaas/Content/Balance/Concepts/balanceoverview.htm)_ do _[Wordpress](https://pt.wikipedia.org/wiki/WordPress)_, somente das redes que fazem parte do _[Serviço WAF](https://docs.oracle.com/pt-br/iaas/Content/WAF/Concepts/overview.htm)_.
 
