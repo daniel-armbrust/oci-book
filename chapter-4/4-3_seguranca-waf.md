@@ -67,7 +67,7 @@ darmbrust@hoodwink:~$ oci waas certificate list \
 ]
 ```
 
-### __Criando uma Política no WAF__
+### __Criando uma Política WAF__
 
 Por enquanto, temos somente a aplicação _[Wordpress](https://pt.wikipedia.org/wiki/WordPress)_ disponível e publicada pelo nome _"wordpress.ocibook.com.br"_. Irei criar uma _[política](https://docs.oracle.com/pt-br/iaas/Content/WAF/Tasks/managingwaf.htm)_ para proteger especificamente este nome. 
 
