@@ -150,6 +150,7 @@ darmbrust@hoodwink:~$ oci lb listener update \
 > --port 80 \
 > --protocol "HTTP" \
 > --listener-name "lb-pub_lst_wordpress" \
+>  --rule-set-names '["http_redirect_https"]' \
 > --connection-configuration-idle-timeout 305 \
 > --force
 ```
@@ -162,12 +163,13 @@ darmbrust@hoodwink:~$ oci lb listener update \
 > --default-backend-set-name "lb-pub_wordpress_backend" \
 > --port 443 \
 > --protocol "HTTP" \
+> --ssl-certificate-name "wordpress_cert" \
 > --listener-name "lb-pub_https-lst_wordpress" \
 > --connection-configuration-idle-timeout 305 \
 > --force
 ```
 
-Logo após, irei excluír o registro _"wordpress.ocibook.com.br"_ que temos:
+Logo após, irei excluír o registro _"wordpress.ocibook.com.br"_ do _DNS_:
 
 ```
 darmbrust@hoodwink:~$ oci dns record domain delete \
@@ -222,7 +224,7 @@ Name:   sa-brazil.inregion.waas.oci.oraclecloud.net
 Address: 192.29.139.68
 ```
 
-### __Restringindo acesso a Origem__
+### __Restringindo o acesso somente pelas redes do WAF__
 
 Este é um detalhe importante. Como o _[WAF](https://docs.oracle.com/pt-br/iaas/Content/WAF/Concepts/overview.htm)_ está em uma infraestrutura externa do _[Load Balancer](https://docs.oracle.com/pt-br/iaas/Content/Balance/Concepts/balanceoverview.htm)_, ou seja, em uma camada acima, é necessário permitir tráfego de rede ao _[Load Balancer](https://docs.oracle.com/pt-br/iaas/Content/Balance/Concepts/balanceoverview.htm)_ somente das redes do _[Serviço WAF](https://docs.oracle.com/pt-br/iaas/Content/WAF/Concepts/overview.htm)_.
 
@@ -249,9 +251,9 @@ WARNING: This operation supports pagination and not all resources were returned.
 
 >_**__NOTA:__** Utilize a opção --all ao comando acima para exibir todas as redes. Foi poupado espaço por aqui._
 
-Irei permitir somente tráfego dessas redes, inserindo uma a uma, na _[Security List](https://docs.oracle.com/pt-br/iaas/Content/Network/Concepts/securitylists.htm)_ do _[balancedor de carga](https://docs.oracle.com/pt-br/iaas/Content/Balance/Concepts/balanceoverview.htm)_ do _[Wordpress](https://pt.wikipedia.org/wiki/WordPress)_.
+Para liberarmos este tráfego de forma assertiva, primeiramente irei excluír todas as regras que temos na _[security list](https://docs.oracle.com/en-us/iaas/api/#/en/iaas/20160918/datatypes/IngressSecurityRule)_ pública que reside o _[Load Balancer](https://docs.oracle.com/pt-br/iaas/Content/Balance/Concepts/balanceoverview.htm)_.
 
-Primeiro, irei obter o correto OCID da _[Security List](https://docs.oracle.com/pt-br/iaas/Content/Network/Concepts/securitylists.htm)_:
+Antes, irei obter o correto OCID desta _[Security List](https://docs.oracle.com/pt-br/iaas/Content/Network/Concepts/securitylists.htm)_:
 
 ```
 darmbrust@hoodwink:~$ oci network security-list list \
@@ -263,42 +265,77 @@ darmbrust@hoodwink:~$ oci network security-list list \
 ]
 ```
 
-Logo após, vou remover toda regra existente de _entrada (INGRESS)_:
+Agora irei excluír todos as regras do _INGRESS_:
 
 ```
 darmbrust@hoodwink:~$ oci network security-list update \
 > --security-list-id "ocid1.securitylist.oc1.sa-saopaulo-1.aaaaaaaaggezvwdk66j5xq7fesq27z3xohmwsu4bluf7m2rrr7taa6fmdwxq" \
 > --ingress-security-rules '[]' \
 > --force
+```
+
+As redes do _[WAF](https://docs.oracle.com/pt-br/iaas/Content/WAF/Concepts/overview.htm)_ ficarão todas em uma _[NSG](https://docs.oracle.com/pt-br/iaas/Content/Network/Concepts/networksecuritygroups.htm)_ específica. Para isto, criarei uma com o comando abaixo:
+
+```
+darmbrust@hoodwink:~$ oci network nsg create \
+> --compartment-id "ocid1.compartment.oc1..aaaaaaaauvqvbbx3oridcm5d2ztxkftwr362u2vl5zdsayzbehzwbjs56soq" \
+> --vcn-id "ocid1.vcn.oc1.sa-saopaulo-1.amaaaaaahcglxkaabicl4jiikcavz2h2nvazibxp4rdiwziqsce4h5wksz2a" \
+> --display-name "nsg_waf-1_lb-pub_wordpress" \
+> --wait-for-state "AVAILABLE"
+Action completed. Waiting until the resource has entered state: ('AVAILABLE',)
 {
   "data": {
     "compartment-id": "ocid1.compartment.oc1..aaaaaaaauvqvbbx3oridcm5d2ztxkftwr362u2vl5zdsayzbehzwbjs56soq",
     "defined-tags": {
       "Oracle-Tags": {
         "CreatedBy": "oracleidentitycloudservice/daniel.armbrust@algumdominio.com",
-        "CreatedOn": "2021-09-07T22:23:53.782Z"
+        "CreatedOn": "2021-10-01T23:47:26.899Z"
       }
     },
-    "display-name": "secl-1_subnpub_vcn-prd",
-    "egress-security-rules": [
-      {
-        "description": null,
-        "destination": "0.0.0.0/0",
-        "destination-type": "CIDR_BLOCK",
-        "icmp-options": null,
-        "is-stateless": false,
-        "protocol": "all",
-        "tcp-options": null,
-        "udp-options": null
-      }
-    ],
+    "display-name": "nsg_waf-1_lb-pub_wordpress",
     "freeform-tags": {},
-    "id": "ocid1.securitylist.oc1.sa-saopaulo-1.aaaaaaaaggezvwdk66j5xq7fesq27z3xohmwsu4bluf7m2rrr7taa6fmdwxq",
-    "ingress-security-rules": [],
+    "id": "ocid1.networksecuritygroup.oc1.sa-saopaulo-1.aaaaaaaas4r3j6pxxxvc3locdp7zff7l5tlbvtbdlijkbxqdpcq4pqpbkvra",
     "lifecycle-state": "AVAILABLE",
-    "time-created": "2021-09-07T22:23:53.875000+00:00",
+    "time-created": "2021-10-01T23:47:27.006000+00:00",
     "vcn-id": "ocid1.vcn.oc1.sa-saopaulo-1.amaaaaaahcglxkaabicl4jiikcavz2h2nvazibxp4rdiwziqsce4h5wksz2a"
   },
-  "etag": "bcf611f5"
+  "etag": "6c0c7a00"
 }
 ```
+
+Através de uma pequena automação no shell, será adicionado no _[NSG](https://docs.oracle.com/pt-br/iaas/Content/Network/Concepts/networksecuritygroups.htm)_ as redes do _[WAF](https://docs.oracle.com/pt-br/iaas/Content/WAF/Concepts/overview.htm)_ através do comando abaixo:
+
+```
+darmbrust@hoodwink:~$ oci waas edge-subnet list --all --query 'data[].cidr | join(`\n`,@)' --raw-output | while read waf_cidr; do
+> oci network nsg rules add \
+>    --nsg-id "ocid1.networksecuritygroup.oc1.sa-saopaulo-1.aaaaaaaap3vor4bdetltlvovsscr5c56z2zn3kffq45ug73gghc3ixlg63va" \
+>    --security-rules "[{\"isStateless\": false, \"protocol\": \"6\", \"direction\": \"INGRESS\", \"sourceType\": \"CIDR_BLOCK\", \"source\": \"$waf_cidr\"}]"
+> done
+```
+
+Para finalizar, irei aplicar a _[NSG](https://docs.oracle.com/pt-br/iaas/Content/Network/Concepts/networksecuritygroups.htm)_ ao _[Load Balancer](https://docs.oracle.com/pt-br/iaas/Content/Balance/Concepts/balanceoverview.htm)_:
+
+```
+darmbrust@hoodwink:~$ oci lb nsg update \
+> --load-balancer-id "ocid1.loadbalancer.oc1.sa-saopaulo-1.aaaaaaaa5ledgzqveh3o73m3mnv42pkxcm5y64hjmkwl7tnhvsee2zv7gbga" \
+> --nsg-ids '["ocid1.networksecuritygroup.oc1.sa-saopaulo-1.aaaaaaaas4r3j6pxxxvc3locdp7zff7l5tlbvtbdlijkbxqdpcq4pqpbkvra"]' \
+> --force \
+> --wait-for-state "SUCCEEDED"
+```
+
+Isto garante novamente o acesso ao _[Wordpress](https://pt.wikipedia.org/wiki/WordPress)_ porém, agora através do _[WAF](https://docs.oracle.com/pt-br/iaas/Content/WAF/Concepts/overview.htm)_:
+
+```
+darmbrust@hoodwink:~$ curl -s -D - -o /dev/null https://wordpress.ocibook.com.br
+HTTP/2 200
+content-type: text/html; charset=UTF-8
+server: ZENEDGE
+link: <https://wordpress.ocibook.com.br/index.php?rest_route=/>; rel="https://api.w.org/"
+date: Sat, 02 Oct 2021 16:13:56 GMT
+x-cache-status: NOTCACHED
+x-powered-by: PHP/7.4.23
+x-zen-fury: 845507b40742a0d56f1580416ae0c53f25d40678
+x-cdn: Served-By-Zenedge
+```
+
+>_**__NOTA:__** Perceba que o cabeçalho "server" possui o valor [ZENEDGE](https://www.oracle.com/corporate/acquisitions/zenedge/). Esta é uma empresa que possui soluções voltadas a segurança, incluindo soluções de [WAF](https://www.oracle.com/security/cloud-security/web-application-firewall/). Digo isto, pois este cabeçalho comprova que o trafego agora passa pela infraestrutura do [WAF](https://docs.oracle.com/pt-br/iaas/Content/WAF/Concepts/overview.htm). Para mais informações, consulte o [link](https://www.oracle.com/corporate/acquisitions/zenedge/)._
