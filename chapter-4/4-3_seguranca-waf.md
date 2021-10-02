@@ -349,7 +349,7 @@ Além das _[regras de proteção](https://docs.oracle.com/pt-br/iaas/Content/WAF
 Uma _[regra de proteção](https://docs.oracle.com/pt-br/iaas/Content/WAF/Tasks/wafprotectionrules.htm)_, caso combine com os dados contidos no HTTP/S, pode ser configurada para tomar uma das ações abaixo:
 
 - Permitir (off): 
-    - A regra está inativa. e não há ação a tomar.
+    - A regra está inativa e não há ação a tomar.
         
 - Bloquear (block)
     - O tráfego será bloqueado e não irá para a aplicação.
