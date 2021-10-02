@@ -303,7 +303,7 @@ Action completed. Waiting until the resource has entered state: ('AVAILABLE',)
 }
 ```
 
-Através de uma pequena automação no shell, será adicionado no _[NSG](https://docs.oracle.com/pt-br/iaas/Content/Network/Concepts/networksecuritygroups.htm)_ as redes do _[WAF](https://docs.oracle.com/pt-br/iaas/Content/WAF/Concepts/overview.htm)_ através do comando abaixo:
+Através de uma pequena automação no shell, será adicionado no _[NSG](https://docs.oracle.com/pt-br/iaas/Content/Network/Concepts/networksecuritygroups.htm)_ as redes do _[WAF](https://docs.oracle.com/pt-br/iaas/Content/WAF/Concepts/overview.htm)_:
 
 ```
 darmbrust@hoodwink:~$ oci waas edge-subnet list --all --query 'data[].cidr | join(`\n`,@)' --raw-output | while read waf_cidr; do
