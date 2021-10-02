@@ -363,5 +363,5 @@ Apesar de já existirem _[diferentes regras](https://docs.oracle.com/pt-br/iaas/
 
 Lembre-se, o protocolo _[HTTP](https://pt.wikipedia.org/wiki/Hypertext_Transfer_Protocol)_ é um protocolo que faz troca de mensagens, que nada mais são do que _[strings](https://pt.wikipedia.org/wiki/Cadeia_de_caracteres)_. Operar sobre essas _[strings](https://pt.wikipedia.org/wiki/Cadeia_de_caracteres)_ é complexo e pode levar ao chamado _["falso positivo"](https://pt.wikipedia.org/wiki/Falso_positivo)_. Por isso, teste antes!
 
-O intuíto aqui é mostrar como habilitar as regras no _[WAF](https://docs.oracle.com/pt-br/iaas/Content/WAF/Concepts/overview.htm)_. Como já foi dito, há um grande número de regras já disponíveis.
+O intuíto aqui é mostrar como habilitar as regras no _[WAF](https://docs.oracle.com/pt-br/iaas/Content/WAF/Concepts/overview.htm)_. Como já foi dito, há um grande número de regras já disponíveis que pode ser consultado neste _[link aqui](https://docs.oracle.com/pt-br/iaas/Content/WAF/Reference/protectionruleids.htm)_.
 
