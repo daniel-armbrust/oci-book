@@ -150,7 +150,7 @@ darmbrust@hoodwink:~$ oci lb listener update \
 > --port 80 \
 > --protocol "HTTP" \
 > --listener-name "lb-pub_lst_wordpress" \
->  --rule-set-names '["http_redirect_https"]' \
+> --rule-set-names '["http_redirect_https"]' \
 > --connection-configuration-idle-timeout 305 \
 > --force
 ```
