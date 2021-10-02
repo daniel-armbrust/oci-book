@@ -346,7 +346,7 @@ O _[Serviço WAF](https://docs.oracle.com/pt-br/iaas/Content/WAF/Concepts/overvi
 
 Além das _[regras de proteção](https://docs.oracle.com/pt-br/iaas/Content/WAF/Tasks/wafprotectionrules.htm)_ que o serviço possui, você pode criar suas próprias _[regras personalizadas](https://docs.oracle.com/pt-br/iaas/Content/WAF/Tasks/customprotectionrules.htm)_.
 
-Uma _[regra de proteção](https://docs.oracle.com/pt-br/iaas/Content/WAF/Tasks/wafprotectionrules.htm)_, caso combine com os dados contidos no HTTP/S, pode ser configurada para tomar uma das ações abaixo:
+Uma _[regra de proteção](https://docs.oracle.com/pt-br/iaas/Content/WAF/Tasks/wafprotectionrules.htm)_, caso combine com os dados contidos no _HTTP/S_, pode ser configurada para tomar uma das ações abaixo:
 
 - __Permitir (off)__: 
     - A regra está inativa e não há ação a tomar.
@@ -357,7 +357,7 @@ Uma _[regra de proteção](https://docs.oracle.com/pt-br/iaas/Content/WAF/Tasks/
 - __Detectar (detect)__: 
     - Será registrado em log apenas.
 
-Você deve sempre optar primeiramente pela ação de _detectar_ antes de _bloquear_. Isto evita _bloquear indevidamente_ qualquer tráfego legítimo. 
+É recomendado sempre optar primeiramente pela ação de _detectar_ antes de _bloquear_. Isto evita _bloquear indevidamente_ qualquer tráfego legítimo. 
 
 Apesar de já existirem _[diferentes regras](https://docs.oracle.com/pt-br/iaas/Content/WAF/Reference/protectionruleids.htm)_ testadas contra diferentes _tipos de ataques_, uma determinada aplicação pode gerar determinado tipo de conteúdo no qual o _[WAF](https://docs.oracle.com/pt-br/iaas/Content/WAF/Concepts/overview.htm)_ pode entender como um _padrão de ataque_. Isto depende da aplicação. 
 
