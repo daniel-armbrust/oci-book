@@ -344,6 +344,6 @@ x-cdn: Served-By-Zenedge
 
 O _[Serviço WAF](https://docs.oracle.com/pt-br/iaas/Content/WAF/Concepts/overview.htm)_ vem equipado com várias _[regras de proteção](https://docs.oracle.com/pt-br/iaas/Content/WAF/Tasks/wafprotectionrules.htm)_. Estas protegem sua aplicação Web contra diferentes _tipos de ataques_.
 
-Além das _[regras de proteção](https://docs.oracle.com/pt-br/iaas/Content/WAF/Tasks/wafprotectionrules.htm)_ que o _[Serviço WAF](https://docs.oracle.com/pt-br/iaas/Content/WAF/Concepts/overview.htm)_ possui, você pode criar suas próprias _[regras personalizadas](https://docs.oracle.com/pt-br/iaas/Content/WAF/Tasks/customprotectionrules.htm)_.
+Além das _[regras de proteção](https://docs.oracle.com/pt-br/iaas/Content/WAF/Tasks/wafprotectionrules.htm)_ que o serviço possui, você pode criar suas próprias _[regras personalizadas](https://docs.oracle.com/pt-br/iaas/Content/WAF/Tasks/customprotectionrules.htm)_.
 
 Uma _[regra de proteção](https://docs.oracle.com/pt-br/iaas/Content/WAF/Tasks/wafprotectionrules.htm)_, caso combine com os dados da Web, pode ser configurada para _permitir_ sua passagem, _bloquear_ ou somente _detectar_ (registrar a informação em log).
