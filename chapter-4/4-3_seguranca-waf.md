@@ -265,7 +265,7 @@ darmbrust@hoodwink:~$ oci network security-list list \
 ]
 ```
 
-Agora irei excluír todos as regras do _INGRESS_:
+Agora irei excluír todas as regras do _INGRESS_:
 
 ```
 darmbrust@hoodwink:~$ oci network security-list update \
