@@ -354,5 +354,5 @@ Uma _[regra de proteção](https://docs.oracle.com/pt-br/iaas/Content/WAF/Tasks/
 - Bloquear (block)
     - O tráfego será bloqueado e não irá para a aplicação.
     
-- Detectar: 
+- Detectar (detect): 
     - O tráfego será registrado em log apenas.
