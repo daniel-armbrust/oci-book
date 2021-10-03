@@ -408,4 +408,4 @@ darmbrust@hoodwink:~$ oci waas protection-rule update \
 > --protection-rules '[{"action": "BLOCK", "key": "941140"}]'
 ```
 
-Após alterarmos a ação o serviço entra em modo de atualização para publicar a alteração solicitada. Isto pode demorar um pouco, mas não há em momento algum, nenhuma indisponibilidade na aplicação.
+Após alterarmos a ação o serviço entra em _modo de atualização (Updating)_ para publicar a alteração solicitada. Isto pode demorar um pouco, mas não há em momento algum, nenhuma indisponibilidade na aplicação.
