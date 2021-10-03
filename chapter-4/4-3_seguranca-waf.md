@@ -400,7 +400,7 @@ darmbrust@hoodwink:~$ oci waas protection-rule list \
 
 >_**__NOTA:__** O valor "941140" que identifica a regra foi obtido deste [site aqui](https://docs.oracle.com/pt-br/iaas/Content/WAF/Reference/protectionruleids.htm)_.
 
-Para aplicarmos a regra, deve-se mudar a ação de _OFF_ para _BLOCK_ ou _DETECT_. Neste caso, irei _BLOCK_ com o comando abaixo:
+Para que a regra entre em vigor, deve-se mudar a ação de _OFF_ para _BLOCK_ ou _DETECT_. Neste caso, irei _BLOCK_ com o comando abaixo:
 
 ```
 darmbrust@hoodwink:~$ oci waas protection-rule update \
