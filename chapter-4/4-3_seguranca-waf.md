@@ -426,7 +426,7 @@ darmbrust@hoodwink:~$ curl -o /dev/null -s -w "%{http_code}\n" 'https://wordpres
 403
 ```
 
-Agora é o _[WAF](https://docs.oracle.com/pt-br/iaas/Content/WAF/Concepts/overview.htm)_ quem retorna o código _[HTTP 403](https://pt.wikipedia.org/wiki/Lista_de_c%C3%B3digos_de_estado_HTTP#403_Proibido)_ que indica _Proibido (Forbidden)_. A requisição foi reconhecida porém o servidor recusa-se a executá-lo.
+Agora é o _[WAF](https://docs.oracle.com/pt-br/iaas/Content/WAF/Concepts/overview.htm)_ quem retorna o código _[HTTP 403](https://pt.wikipedia.org/wiki/Lista_de_c%C3%B3digos_de_estado_HTTP#403_Proibido)_ que indica _Proibido (Forbidden)_. A requisição foi reconhecida porém o servidor recusa-se a executá-lo. Ou seja, foi bloqueado no _[WAF](https://docs.oracle.com/pt-br/iaas/Content/WAF/Concepts/overview.htm)_.
 
 >_**__NOTA:__** A lista dos códigos de resposta usados pelo HTTP pode ser consultado neste [link aqui](https://pt.wikipedia.org/wiki/Lista_de_c%C3%B3digos_de_estado_HTTP)._
 
