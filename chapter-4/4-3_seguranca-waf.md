@@ -348,13 +348,13 @@ Além das _[regras de proteção](https://docs.oracle.com/pt-br/iaas/Content/WAF
 
 Uma _[regra de proteção](https://docs.oracle.com/pt-br/iaas/Content/WAF/Tasks/wafprotectionrules.htm)_, caso combine com os dados contidos no _HTTP/S_, pode ser configurada para tomar uma das ações abaixo:
 
-- __Permitir (off)__: 
+- __Permitir (OFF)__: 
     - A regra está inativa e não há ação a tomar.
         
-- __Bloquear (block)__
+- __Bloquear (BLOCK)__
     - O tráfego será bloqueado e não irá para a aplicação.
     
-- __Detectar (detect)__: 
+- __Detectar (DETECT)__: 
     - Será registrado em log apenas.
 
 É recomendado sempre optar primeiramente pela ação de _detectar_ antes de _bloquear_. Isto evita _bloquear indevidamente_ qualquer tráfego legítimo. 
@@ -363,5 +363,49 @@ Apesar de já existirem _[diferentes regras](https://docs.oracle.com/pt-br/iaas/
 
 Lembre-se, o protocolo _[HTTP](https://pt.wikipedia.org/wiki/Hypertext_Transfer_Protocol)_ é um protocolo que faz troca de mensagens, que nada mais são do que _[strings](https://pt.wikipedia.org/wiki/Cadeia_de_caracteres)_. Operar sobre essas _[strings](https://pt.wikipedia.org/wiki/Cadeia_de_caracteres)_ é complexo e pode levar ao chamado _["falso positivo"](https://pt.wikipedia.org/wiki/Falso_positivo)_. Por isso, teste antes!
 
-O intuíto aqui é mostrar como habilitar as regras no _[WAF](https://docs.oracle.com/pt-br/iaas/Content/WAF/Concepts/overview.htm)_. Como já foi dito, há um grande número de regras já disponíveis que pode ser consultado neste _[link aqui](https://docs.oracle.com/pt-br/iaas/Content/WAF/Reference/protectionruleids.htm)_.
+O intuíto aqui é mostrar como habilitar as regras no _[WAF](https://docs.oracle.com/pt-br/iaas/Content/WAF/Concepts/overview.htm)_. Como já foi dito, há um grande número de regras já disponíveis e que podem ser consultadas neste _[link aqui](https://docs.oracle.com/pt-br/iaas/Content/WAF/Reference/protectionruleids.htm)_. 
 
+A partir das regras que temos a disposição, irei escolher uma e demonstrar sua ação na prática. Veja o comando abaixo que exibe uma determinada regra que protege contra ataques do tipo _[Cross-site Scripting (XSS)](https://pt.wikipedia.org/wiki/Cross-site_scripting)_:
+
+```
+darmbrust@hoodwink:~$ oci waas protection-rule list \
+> --all \
+> --waas-policy-id "ocid1.waaspolicy.oc1..aaaaaaaayymwxrhoqps3zpp4paiwjd7hyza2w7oyjzoyehndp34oa2cdwq6a" \
+> --query "data[?key=='941140']"
+[
+  {
+    "action": "OFF",
+    "description": "Cross-Site Scripting (XSS) Attempt: XSS Filters - Category 4. XSS vectors making use of javascript URI and tags, e.g., <p style=\"background:url(javascript:alert(1))\">",
+    "exclusions": [],
+    "key": "941140",
+    "labels": [
+      "OWASP",
+      "OWASP-2017",
+      "CRS3",
+      "WASCTC",
+      "PCI",
+      "HTTP",
+      "A3",
+      "A3-2017",
+      "XSS",
+      "Cross-Site Scripting"
+    ],
+    "mod-security-rule-ids": [
+      "941140"
+    ],
+    "name": "Cross-Site Scripting (XSS) Attempt: XSS Filters - Category 4"
+  }
+]
+```
+
+>_**__NOTA:__** O valor "941140" que identifica a regra foi obtido deste [site aqui](https://docs.oracle.com/pt-br/iaas/Content/WAF/Reference/protectionruleids.htm)_.
+
+Para aplicarmos a regra, deve-se mudar a ação de _OFF_ para _BLOCK_ ou _DETECT_. Neste caso, irei _BLOCK_ com o comando abaixo:
+
+```
+darmbrust@hoodwink:~$ oci waas protection-rule update \
+> --waas-policy-id "ocid1.waaspolicy.oc1..aaaaaaaayymwxrhoqps3zpp4paiwjd7hyza2w7oyjzoyehndp34oa2cdwq6a" \
+> --protection-rules '[{"action": "BLOCK", "key": "941140"}]'
+```
+
+Após alterarmos a ação o serviço entra em modo de atualização para publicar a alteração solicitada. Isto pode demorar um pouco, mas não há em momento algum, nenhuma indisponibilidade na aplicação.
