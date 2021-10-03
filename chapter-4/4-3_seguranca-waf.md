@@ -369,15 +369,15 @@ A partir das regras que temos a disposição, irei escolher uma e demonstrar sua
 
 ```
 darmbrust@hoodwink:~$ oci waas protection-rule list \
-> --all \
 > --waas-policy-id "ocid1.waaspolicy.oc1..aaaaaaaayymwxrhoqps3zpp4paiwjd7hyza2w7oyjzoyehndp34oa2cdwq6a" \
-> --query "data[?key=='941140']"
+> --all \
+> --query "data[?key=='941110']"
 [
   {
     "action": "OFF",
-    "description": "Cross-Site Scripting (XSS) Attempt: XSS Filters - Category 4. XSS vectors making use of javascript URI and tags, e.g., <p style=\"background:url(javascript:alert(1))\">",
+    "description": "Cross-Site Scripting (XSS) Attempt: XSS Filters - Category 1. Script tag based XSS vectors, e.g., <script> alert(1)</script>",
     "exclusions": [],
-    "key": "941140",
+    "key": "941110",
     "labels": [
       "OWASP",
       "OWASP-2017",
@@ -391,21 +391,42 @@ darmbrust@hoodwink:~$ oci waas protection-rule list \
       "Cross-Site Scripting"
     ],
     "mod-security-rule-ids": [
-      "941140"
+      "941110"
     ],
-    "name": "Cross-Site Scripting (XSS) Attempt: XSS Filters - Category 4"
+    "name": "Cross-Site Scripting (XSS) Attempt: XSS Filters - Category 1"
   }
 ]
 ```
 
 >_**__NOTA:__** O valor "941140" que identifica a regra foi obtido deste [site aqui](https://docs.oracle.com/pt-br/iaas/Content/WAF/Reference/protectionruleids.htm)_.
 
+Irei inserir um treço de código _[JavaScript](https://pt.wikipedia.org/wiki/JavaScript)_ em uma requisição feita ao _[Wordpress](https://pt.wikipedia.org/wiki/WordPress)_ pelo comando abaixo:
+
+```
+darmbrust@hoodwink:~$ curl -o /dev/null -s -w "%{http_code}\n" 'https://wordpress.ocibook.com.br/?id=<script>alert("TESTE");</script>'
+200
+```
+
+Perceba que a aplicação retornou o código _[HTTP 200](https://pt.wikipedia.org/wiki/Lista_de_c%C3%B3digos_de_estado_HTTP#2xx_Sucesso)_ que indica _Sucesso_. Ou seja, a requisição foi recebida, compreendida, aceita e processada com êxito.
+
 Para que a regra entre em vigor, deve-se mudar a ação de _OFF_ para _BLOCK_ ou _DETECT_. Para o nosso exemplo, irei de _BLOCK_:
 
 ```
 darmbrust@hoodwink:~$ oci waas protection-rule update \
 > --waas-policy-id "ocid1.waaspolicy.oc1..aaaaaaaayymwxrhoqps3zpp4paiwjd7hyza2w7oyjzoyehndp34oa2cdwq6a" \
-> --protection-rules '[{"action": "BLOCK", "key": "941140"}]'
+> --protection-rules '[{"action": "BLOCK", "key": "941110"}]'
 ```
 
-Após alterarmos a ação o serviço entra em _modo de atualização (Updating)_ para publicar a alteração solicitada. Isto pode demorar um pouco, mas não há em momento algum, nenhuma indisponibilidade na aplicação.
+Após alterarmos a ação o serviço entra em _modo de atualização (Updating)_ para publicar a alteração solicitada. Isto pode demorar um pouco, mas não há em momento algum nenhuma indisponibilidade na aplicação.
+
+Ao habilitar a regra de número _"941110"_ no qual protege contra ataques deste tipo, o _[WAF](https://docs.oracle.com/pt-br/iaas/Content/WAF/Concepts/overview.htm)_ agora irá bloquear este tipo de requisição:
+
+```
+darmbrust@hoodwink:~$ curl -o /dev/null -s -w "%{http_code}\n" 'https://wordpress.ocibook.com.br?id=<script>alert("TESTE");</script>'
+403
+```
+
+Agora é o _[WAF](https://docs.oracle.com/pt-br/iaas/Content/WAF/Concepts/overview.htm)_ quem retorna o código _[HTTP 403](https://pt.wikipedia.org/wiki/Lista_de_c%C3%B3digos_de_estado_HTTP#403_Proibido)_ que indica _Proibido (Forbidden)_. A requisição foi reconhecida porém o servidor recusa-se a executá-lo.
+
+>_**__NOTA:__** A lista dos códigos de resposta usados pelo HTTP pode ser consultado neste [link aqui](https://pt.wikipedia.org/wiki/Lista_de_c%C3%B3digos_de_estado_HTTP)._
+
