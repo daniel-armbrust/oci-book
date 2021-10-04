@@ -428,6 +428,53 @@ darmbrust@hoodwink:~$ curl -o /dev/null -s -w "%{http_code}\n" 'https://wordpres
 
 Agora é o _[WAF](https://docs.oracle.com/pt-br/iaas/Content/WAF/Concepts/overview.htm)_ quem retorna o código _[HTTP 403](https://pt.wikipedia.org/wiki/Lista_de_c%C3%B3digos_de_estado_HTTP#403_Proibido)_ que indica _Proibido (Forbidden)_. A requisição foi reconhecida porém o servidor recusa-se a executá-lo. Ou seja, foi bloqueado no _[WAF](https://docs.oracle.com/pt-br/iaas/Content/WAF/Concepts/overview.htm)_.
 
+A definição de qual _[código HTTP](https://pt.wikipedia.org/wiki/Lista_de_c%C3%B3digos_de_estado_HTTP)_ retornar sobre uma ação de bloqueio e outras configurações, podem ser visualizadas com o comando abaixo:
+
+```
+darmbrust@hoodwink:~$ oci waas protection-settings get --waas-policy-id "ocid1.waaspolicy.oc1..aaaaaaaayymwxrhoqps3zpp4paiwjd7hyza2w7oyjzoyehndp34oa2cdwq6a"
+{
+  "data": {
+    "allowed-http-methods": [
+      "GET",
+      "POST",
+      "HEAD",
+      "OPTIONS"
+    ],
+    "block-action": "SET_RESPONSE_CODE",
+    "block-error-page-code": "403",
+    "block-error-page-description": "Access blocked by website owner. Please contact support.",
+    "block-error-page-message": "Access to the website is blocked.",
+    "block-response-code": 403,
+    "is-response-inspected": false,
+    "max-argument-count": 255,
+    "max-name-length-per-argument": 400,
+    "max-response-size-in-ki-b": 1024,
+    "max-total-name-length-of-arguments": 64000,
+    "media-types": [
+      "text/html",
+      "text/plain"
+    ],
+    "recommendations-period-in-days": 10
+  },
+  "etag": "W/\"2021-10-04T13:41:45.327Z\""
+}
+```
+
+Para critérios de demonstração, irei alterar o valor do _[código de retorno](https://pt.wikipedia.org/wiki/Lista_de_c%C3%B3digos_de_estado_HTTP)_ para as requisições que são bloqueadas para o código _[400 (Bad Request)](https://pt.wikipedia.org/wiki/Lista_de_c%C3%B3digos_de_estado_HTTP#400_Requisi%C3%A7%C3%A3o_inv%C3%A1lida)_:
+
+```
+darmbrust@hoodwink:~$ oci waas protection-settings update \
+> --waas-policy-id "ocid1.waaspolicy.oc1..aaaaaaaayymwxrhoqps3zpp4paiwjd7hyza2w7oyjzoyehndp34oa2cdwq6a" \
+> --block-error-page-code 400 \
+> --block-error-page-description "Bad Request" \
+> --block-error-page-message "The request cannot be understood." \
+> --block-response-code 400 \
+> --force
+{
+  "opc-work-request-id": "ocid1.waasworkrequest.oc1..aaaaaaaa5bd2r6qkveqd3mhtudbgff4jnehh55o2o5gqgye4qtlv2bk4psaq"
+}
+```
+
 >_**__NOTA:__** A lista dos códigos de resposta usados pelo HTTP pode ser consultado neste [link aqui](https://pt.wikipedia.org/wiki/Lista_de_c%C3%B3digos_de_estado_HTTP)._
 
 É possível verificar nos _[logs](https://docs.oracle.com/pt-br/iaas/Content/WAF/Tasks/logs.htm)_ do _[WAF](https://docs.oracle.com/pt-br/iaas/Content/WAF/Concepts/overview.htm)_ se houve bloqueio ou não de determinada regra. Pelo comando abaixo, estou exibindo somente as requisições no qual houve correspondência com a regra _"941110"_ que foi aplicada como _BLOCK_:
