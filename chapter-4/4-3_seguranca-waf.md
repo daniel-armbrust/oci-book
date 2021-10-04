@@ -486,3 +486,67 @@ darmbrust@hoodwink:~$ oci waas waf-log list \
   ]
 }
 ```
+
+Antes de fecharmos o capítulo, que mostrar mais uma opção que o _[WAF](https://docs.oracle.com/pt-br/iaas/Content/WAF/Concepts/overview.htm)_ disponibiliza. As _[regras de proteção recomendadas](https://docs.oracle.com/pt-br/iaas/Content/WAF/Tasks/wafprotectionrules.htm)_. Estas começarão a aparecer quando uma quantidade de tráfego suficiente  já estiver passado pelo _[WAF](https://docs.oracle.com/pt-br/iaas/Content/WAF/Concepts/overview.htm)_.
+
+Essas _regras recomendadas_ podem ser consultadas com o comando abaixo:
+
+```
+darmbrust@hoodwink:~$ oci waas recommendation list \
+> --waas-policy-id "ocid1.waaspolicy.oc1..aaaaaaaayymwxrhoqps3zpp4paiwjd7hyza2w7oyjzoyehndp34oa2cdwq6a" \
+> --query "data[].{key:key,name:name,\"recommended-action\":\"recommended-action\"}" \
+> --output table
++----------+---------------------------------------------------------------------------------+--------------------+
+| key      | name                                                                            | recommended-action |
++----------+---------------------------------------------------------------------------------+--------------------+
+| 920320   | Missing User-Agent header                                                       | DETECT             |
+| 920300   | Missing Accept Header                                                           | DETECT             |
+| 920390   | Limit arguments total length                                                    | DETECT             |
+| 920370   | Limit argument value length                                                     | DETECT             |
+| 920380   | Number of Arguments Limits                                                      | DETECT             |
+| 94114032 | Cross-Site Scripting (XSS) Attempt: XSS Filters - Category 4                    | DETECT             |
+| 93012032 | Local File Inclusion (LFI) - OS File Access                                     | DETECT             |
+| 9330000  | PHP Injection Attacks Collaborative Group - PHP Filters Categories              | DETECT             |
+| 9320000  | Remote Code Execution (RCE) Collaborative Group - Unix RCE Filter Categories    | DETECT             |
+| 9320001  | Remote Code Execution (RCE) Collaborative Group - Windows RCE Filter Categories | DETECT             |
++----------+---------------------------------------------------------------------------------+--------------------+
+opc-next-page: 2
+etag: W/"2021-10-04T11:56:09.195Z"
+WARNING: This operation supports pagination and not all resources were returned.  Re-run using the --all option to auto paginate and list all resources.
+```
+
+>_**__NOTA:__** A saída do comando acima foi limitada para poupar espaço. Se deseja ver a lista completa de recomendações, utilize a opção --all._
+
+Perceba que o próprio _[WAF](https://docs.oracle.com/pt-br/iaas/Content/WAF/Concepts/overview.htm)_ sugere o _modo DETECT_, com o intuito de prevalescer os testes antes do bloqueio.
+
+Irei aplicar as recomendações. Através de uma _"manobra"_ no _[shell](https://pt.wikipedia.org/wiki/Shell_do_Unix)_, irei gerar um arquivo no qual contém todos os IDs de todas as regras recomendadas:
+
+```
+darmbrust@hoodwink:~$ oci waas recommendation list \
+> --waas-policy-id "ocid1.waaspolicy.oc1..aaaaaaaayymwxrhoqps3zpp4paiwjd7hyza2w7oyjzoyehndp34oa2cdwq6a" \
+> --all \
+> --query 'data[].key | join(`\n`,@)' --raw-output | while read rule_key; do
+> echo \"$rule_key\", >> /tmp/waf-recommendation-list.json 
+> done
+```
+
+Arquivo criado, irei ajustar alguns caracteres para formar um vetor dentro das especificações do _[JSON](https://pt.wikipedia.org/wiki/JSON)_:
+
+```
+darmbrust@hoodwink:~$ sed -i '1 i [' /tmp/waf-recommendation-list.json
+darmbrust@hoodwink:~$ echo ']' >> /tmp/waf-recommendation-list.json
+darmbrust@hoodwink:~$ sed -i 'x;${s/,$//;p;x;};1d' /tmp/waf-recommendation-list.json
+```
+
+Agora basta aplicar as recomendações com o comando abaixo:
+
+```
+darmbrust@hoodwink:~$ oci waas recommendation accept \
+> --waas-policy-id "ocid1.waaspolicy.oc1..aaaaaaaayymwxrhoqps3zpp4paiwjd7hyza2w7oyjzoyehndp34oa2cdwq6a" \
+> --protection-rule-keys "$(cat /tmp/waf-recommendation-list.json)"
+{
+  "opc-work-request-id": "ocid1.waasworkrequest.oc1..aaaaaaaasoqyhxhfaakkdduprnm6ydyvzvk3o2n4z653x36fjucm2uqswx3a"
+}
+```
+
+Pronto! _[WAF](https://docs.oracle.com/pt-br/iaas/Content/WAF/Concepts/overview.htm)_ já em _modo de atualização (Updating)_ para teremos as regras recomendadas aplicadas.
