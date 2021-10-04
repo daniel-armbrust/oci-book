@@ -430,3 +430,59 @@ Agora é o _[WAF](https://docs.oracle.com/pt-br/iaas/Content/WAF/Concepts/overvi
 
 >_**__NOTA:__** A lista dos códigos de resposta usados pelo HTTP pode ser consultado neste [link aqui](https://pt.wikipedia.org/wiki/Lista_de_c%C3%B3digos_de_estado_HTTP)._
 
+É possível verificar nos _[logs](https://docs.oracle.com/pt-br/iaas/Content/WAF/Tasks/logs.htm)_ do _[WAF](https://docs.oracle.com/pt-br/iaas/Content/WAF/Concepts/overview.htm)_ se houve bloqueio ou não de determinada regra. Pelo comando abaixo, estou exibindo somente as requisições no qual houve correspondência com a regra _"941110"_ que foi aplicada como _BLOCK_:
+
+```
+darmbrust@hoodwink:~$ oci waas waf-log list \
+> --waas-policy-id "ocid1.waaspolicy.oc1..aaaaaaaayymwxrhoqps3zpp4paiwjd7hyza2w7oyjzoyehndp34oa2cdwq6a" \
+> --protection-rule-key "941110" \
+> --all
+{
+  "data": [
+    {
+      "access-rule-key": null,
+      "action": "BLOCK",
+      "address-rate-limiting-key": null,
+      "captcha-action": null,
+      "captcha-expected": null,
+      "captcha-fail-count": "0",
+      "captcha-received": null,
+      "client-address": "201.33.196.77",
+      "country-code": "BR",
+      "country-name": "Brazil",
+      "device": null,
+      "domain": "wordpress.ocibook.com.br",
+      "fingerprint": null,
+      "http-headers": {
+        "Accept": "*/*",
+        "Host": "wordpress.ocibook.com.br",
+        "Request-Id": "2021-10-04T11:27:19Z|da8fcf186b|201.33.196.77|ovOqLkPxQ8",
+        "User-Agent": "curl/7.68.0",
+        "X-Client-Ip": "201.33.196.77",
+        "X-Country-Code": "BR",
+        "X-Forwarded-For": "201.33.196.77",
+        "Zen-Host": "ZENEDGE"
+      },
+      "http-method": "GET",
+      "incident-key": "2021-10-04T11:27:19Z|da8fcf186b|201.33.196.77|ovOqLkPxQ8",
+      "log-type": "PROTECTION_RULES",
+      "origin-address": null,
+      "origin-response-time": null,
+      "protection-rule-detections": {
+        "941110": {
+          "Message": "Pattern match \"(?i)([<\\xef\\xbc\\x9c]script[^>\\xef\\xbc\\x9e]*[>\\xef\\xbc\\x9e][\\\\s\\\\S]*?)\" at ARGS:id.",
+          "Message details": "Matched Data: <script> found within ARGS:id: <script>alert(\\x22TESTE\\x22);</script>"
+        }
+      },
+      "referrer": null,
+      "request-headers": null,
+      "request-url": "/?id=<script>alert(\"TESTE\");</script>",
+      "response-code": null,
+      "response-size": null,
+      "threat-feed-key": null,
+      "timestamp": "2021-10-04T11:27:19+00:00",
+      "user-agent": "curl/7.68.0"
+    }
+  ]
+}
+```
