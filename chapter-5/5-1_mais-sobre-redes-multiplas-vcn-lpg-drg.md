@@ -275,7 +275,9 @@ Action completed. Waiting until the resource has entered state: ('AVAILABLE',)
 }
 ```
 
-A conexão das duas _[VCNs](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingVCNs_topic-Overview_of_VCNs_and_Subnets.htm)_ é feita pelo _[LPG](https://docs.oracle.com/en-us/iaas/Content/Network/Tasks/localVCNpeering.htm#Local_VCN_Peering_Within_Region)_  _solicitante (--local-peering-gateway-id)_ com o _aceitador (--peer-id)_:
+Após cada _[Local Peering Gateway](https://docs.oracle.com/en-us/iaas/Content/Network/Tasks/localVCNpeering.htm#Local_VCN_Peering_Within_Region)_ estar criado, devemos conectá-los. Isto é feito através do _solicitante (--local-peering-gateway-id)_ com um _aceitador (--peer-id)_. 
+
+Em nosso caso quem _solicita a conexão_ é o _[LPG](https://docs.oracle.com/en-us/iaas/Content/Network/Tasks/localVCNpeering.htm#Local_VCN_Peering_Within_Region)_ que foi plugado na _vcn-prd_, sendo que quem _aceita_ é _[LPG](https://docs.oracle.com/en-us/iaas/Content/Network/Tasks/localVCNpeering.htm#Local_VCN_Peering_Within_Region)_ que foi plugado na _vcn-db_.
 
 ```
 darmbrust@hoodwink:~$ oci network local-peering-gateway connect \
