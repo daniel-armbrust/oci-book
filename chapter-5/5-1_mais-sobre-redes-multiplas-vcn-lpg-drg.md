@@ -21,8 +21,8 @@ Começaremos pela criação da _[VCN](https://docs.oracle.com/pt-br/iaas/Content
 
 ```
 darmbrust@hoodwink:~$ oci network vcn create \
-> --compartment-id "ocid1.compartment.oc1..aaaaaaaauvqvbbx3oridcm5d2ztxkftwr362u2vl5zdsayzbehzwbjs56soq" 
-> --cidr-blocks '["10.0.0.0/16"]' \
+> --compartment-id "ocid1.compartment.oc1..aaaaaaaauvqvbbx3oridcm5d2ztxkftwr362u2vl5zdsayzbehzwbjs56soq" \
+> --cidr-blocks '["192.168.0.0/16"]' \
 > --display-name "vcn-prd" \
 > --dns-label "vcnprd" \
 > --is-ipv6-enabled false \
@@ -30,80 +30,80 @@ darmbrust@hoodwink:~$ oci network vcn create \
 Action completed. Waiting until the resource has entered state: ('AVAILABLE',)
 {
   "data": {
-    "cidr-block": "10.0.0.0/16",
+    "cidr-block": "192.168.0.0/16",
     "cidr-blocks": [
-      "10.0.0.0/16"
+      "192.168.0.0/16"
     ],
     "compartment-id": "ocid1.compartment.oc1..aaaaaaaauvqvbbx3oridcm5d2ztxkftwr362u2vl5zdsayzbehzwbjs56soq",
-    "default-dhcp-options-id": "ocid1.dhcpoptions.oc1.sa-saopaulo-1.aaaaaaaaobne6utiqo6ri6mbajytx2o2gibdtlxir5oujcedlwtwghjmhq3q",
-    "default-route-table-id": "ocid1.routetable.oc1.sa-saopaulo-1.aaaaaaaazkbucct2vc522pcye6jcldcrrqjm7kdcjlsvkyvosaopbmlywr7q",
-    "default-security-list-id": "ocid1.securitylist.oc1.sa-saopaulo-1.aaaaaaaacczjrwz7gftbl46vhm5a3b3rd2ntuu7dvwawc3zc5zc6pn4gav7a",
+    "default-dhcp-options-id": "ocid1.dhcpoptions.oc1.sa-saopaulo-1.aaaaaaaaiy5nysqze6m47rsj3guzmpkksjnlzp6oudk6rgc2b4du2wgetnra",
+    "default-route-table-id": "ocid1.routetable.oc1.sa-saopaulo-1.aaaaaaaae2rhesecc4amfji763v3m324abufiml5asyxd64xfn57e7veipaq",
+    "default-security-list-id": "ocid1.securitylist.oc1.sa-saopaulo-1.aaaaaaaass5hvduram6ehbzrzo6fyhflw7zewdsji45w5t3aq2m3agvsqnkq",
     "defined-tags": {
       "Oracle-Tags": {
         "CreatedBy": "oracleidentitycloudservice/daniel.armbrust@algumdominio.com",
-        "CreatedOn": "2021-09-22T18:41:26.573Z"
+        "CreatedOn": "2021-10-05T17:21:31.182Z"
       }
     },
     "display-name": "vcn-prd",
     "dns-label": "vcnprd",
     "freeform-tags": {},
-    "id": "ocid1.vcn.oc1.sa-saopaulo-1.amaaaaaa6noke4qapu7nhvarjqmxzj4323rvn55flsj2salguah54hjuipva",
+    "id": "ocid1.vcn.oc1.sa-saopaulo-1.amaaaaaa6noke4qaasugozouqxfpwajtaj3oymelmqwv2i2chmuil5ttesma",
     "ipv6-cidr-blocks": null,
     "lifecycle-state": "AVAILABLE",
-    "time-created": "2021-09-22T18:41:26.732000+00:00",
+    "time-created": "2021-10-05T17:21:31.275000+00:00",
     "vcn-domain-name": "vcnprd.oraclevcn.com"
   },
-  "etag": "a49a4af8"
+  "etag": "589e1d66"
 }
 ```
 
-Para a subrede pública de produção, usaremos os recursos _[dhcp options](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingDHCP.htm)_, _[tabela de roteamento](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingroutetables.htm)_ e _[security lists](https://docs.oracle.com/en-us/iaas/api/#/en/iaas/20160918/datatypes/IngressSecurityRule)_ que foram criados por padrão no momento em que a _[VCN](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingVCNs_topic-Overview_of_VCNs_and_Subnets.htm)_ foi criada.
+Para a subrede privada de produção, usaremos os recursos _[dhcp options](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingDHCP.htm)_, _[tabela de roteamento](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingroutetables.htm)_ e _[security lists](https://docs.oracle.com/en-us/iaas/api/#/en/iaas/20160918/datatypes/IngressSecurityRule)_ que foram criados por padrão no momento em que a _[VCN](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingVCNs_topic-Overview_of_VCNs_and_Subnets.htm)_ foi criada.
 
 ```
 darmbrust@hoodwink:~$ oci network subnet create \
 > --compartment-id "ocid1.compartment.oc1..aaaaaaaauvqvbbx3oridcm5d2ztxkftwr362u2vl5zdsayzbehzwbjs56soq" \
-> --vcn-id "ocid1.vcn.oc1.sa-saopaulo-1.amaaaaaa6noke4qapu7nhvarjqmxzj4323rvn55flsj2salguah54hjuipva" \
-> --dhcp-options-id "ocid1.dhcpoptions.oc1.sa-saopaulo-1.aaaaaaaaobne6utiqo6ri6mbajytx2o2gibdtlxir5oujcedlwtwghjmhq3q" \
-> --route-table-id "ocid1.routetable.oc1.sa-saopaulo-1.aaaaaaaazkbucct2vc522pcye6jcldcrrqjm7kdcjlsvkyvosaopbmlywr7q" \
-> --security-list-ids '["ocid1.securitylist.oc1.sa-saopaulo-1.aaaaaaaacczjrwz7gftbl46vhm5a3b3rd2ntuu7dvwawc3zc5zc6pn4gav7a"]' \
-> --display-name "subnpub_vcn-prd" \
-> --dns-label "subnpub" \
-> --cidr-block "10.0.50.0/24" \
-> --prohibit-public-ip-on-vnic false \
+> --vcn-id "ocid1.vcn.oc1.sa-saopaulo-1.amaaaaaa6noke4qaasugozouqxfpwajtaj3oymelmqwv2i2chmuil5ttesma" \
+> --dhcp-options-id "ocid1.dhcpoptions.oc1.sa-saopaulo-1.aaaaaaaaiy5nysqze6m47rsj3guzmpkksjnlzp6oudk6rgc2b4du2wgetnra" \
+> --route-table-id "ocid1.routetable.oc1.sa-saopaulo-1.aaaaaaaae2rhesecc4amfji763v3m324abufiml5asyxd64xfn57e7veipaq" \
+> --security-list-ids '["ocid1.securitylist.oc1.sa-saopaulo-1.aaaaaaaass5hvduram6ehbzrzo6fyhflw7zewdsji45w5t3aq2m3agvsqnkq"]' \
+> --display-name "subnprv_vcn-prd" \
+> --dns-label "subnprv" \
+> --cidr-block "192.168.20.0/24" \
+> --prohibit-public-ip-on-vnic true \
 > --wait-for-state AVAILABLE
 Action completed. Waiting until the resource has entered state: ('AVAILABLE',)
 {
   "data": {
     "availability-domain": null,
-    "cidr-block": "10.0.50.0/24",
+    "cidr-block": "192.168.20.0/24",
     "compartment-id": "ocid1.compartment.oc1..aaaaaaaauvqvbbx3oridcm5d2ztxkftwr362u2vl5zdsayzbehzwbjs56soq",
     "defined-tags": {
       "Oracle-Tags": {
         "CreatedBy": "oracleidentitycloudservice/daniel.armbrust@algumdominio.com",
-        "CreatedOn": "2021-09-22T19:01:26.495Z"
+        "CreatedOn": "2021-10-05T17:49:24.203Z"
       }
     },
-    "dhcp-options-id": "ocid1.dhcpoptions.oc1.sa-saopaulo-1.aaaaaaaaobne6utiqo6ri6mbajytx2o2gibdtlxir5oujcedlwtwghjmhq3q",
-    "display-name": "subnpub_vcn-prd",
-    "dns-label": "subnpub",
+    "dhcp-options-id": "ocid1.dhcpoptions.oc1.sa-saopaulo-1.aaaaaaaaiy5nysqze6m47rsj3guzmpkksjnlzp6oudk6rgc2b4du2wgetnra",
+    "display-name": "subnprv_vcn-prd",
+    "dns-label": "subnprv",
     "freeform-tags": {},
-    "id": "ocid1.subnet.oc1.sa-saopaulo-1.aaaaaaaakopvvmb5eyqcz4bupfsxhztoiixhbskhli4zrrzevbdxfgwhzyfq",
+    "id": "ocid1.subnet.oc1.sa-saopaulo-1.aaaaaaaary7wcifmwmmmavtfbjp45fxivvvisigjw76fr6pmyopulcbmjugq",
     "ipv6-cidr-block": null,
     "ipv6-virtual-router-ip": null,
     "lifecycle-state": "AVAILABLE",
-    "prohibit-internet-ingress": false,
-    "prohibit-public-ip-on-vnic": false,
-    "route-table-id": "ocid1.routetable.oc1.sa-saopaulo-1.aaaaaaaazkbucct2vc522pcye6jcldcrrqjm7kdcjlsvkyvosaopbmlywr7q",
+    "prohibit-internet-ingress": true,
+    "prohibit-public-ip-on-vnic": true,
+    "route-table-id": "ocid1.routetable.oc1.sa-saopaulo-1.aaaaaaaae2rhesecc4amfji763v3m324abufiml5asyxd64xfn57e7veipaq",
     "security-list-ids": [
-      "ocid1.securitylist.oc1.sa-saopaulo-1.aaaaaaaacczjrwz7gftbl46vhm5a3b3rd2ntuu7dvwawc3zc5zc6pn4gav7a"
+      "ocid1.securitylist.oc1.sa-saopaulo-1.aaaaaaaass5hvduram6ehbzrzo6fyhflw7zewdsji45w5t3aq2m3agvsqnkq"
     ],
-    "subnet-domain-name": "subnpub.vcnprd.oraclevcn.com",
-    "time-created": "2021-09-22T19:01:26.551000+00:00",
-    "vcn-id": "ocid1.vcn.oc1.sa-saopaulo-1.amaaaaaa6noke4qapu7nhvarjqmxzj4323rvn55flsj2salguah54hjuipva",
-    "virtual-router-ip": "10.0.50.1",
-    "virtual-router-mac": "00:00:17:66:FE:43"
+    "subnet-domain-name": "subnprv.vcnprd.oraclevcn.com",
+    "time-created": "2021-10-05T17:49:24.257000+00:00",
+    "vcn-id": "ocid1.vcn.oc1.sa-saopaulo-1.amaaaaaa6noke4qaasugozouqxfpwajtaj3oymelmqwv2i2chmuil5ttesma",
+    "virtual-router-ip": "192.168.20.1",
+    "virtual-router-mac": "00:00:17:92:3D:E4"
   },
-  "etag": "773e861b"
+  "etag": "7868c9e5"
 }
 ```
 
@@ -113,8 +113,8 @@ O processo de criação da _[VCN](https://docs.oracle.com/pt-br/iaas/Content/Net
 
 ```
 darmbrust@hoodwink:~$ oci network vcn create \
-> --compartment-id "ocid1.compartment.oc1..aaaaaaaaie4exnvj2ktkjlliahl2bxmdnteu2xmn27oc5cy5mdcmocl4vd7q" \
-> --cidr-blocks '["172.16.30.0/24"]' \
+> --compartment-id "ocid1.compartment.oc1..aaaaaaaauvqvbbx3oridcm5d2ztxkftwr362u2vl5zdsayzbehzwbjs56soq" \
+> --cidr-blocks '["172.16.0.0/16"]' \
 > --display-name "vcn-db" \
 > --dns-label "vcndb" \
 > --is-ipv6-enabled false \
@@ -122,40 +122,42 @@ darmbrust@hoodwink:~$ oci network vcn create \
 Action completed. Waiting until the resource has entered state: ('AVAILABLE',)
 {
   "data": {
-    "cidr-block": "172.16.30.0/24",
+    "cidr-block": "172.16.0.0/16",
     "cidr-blocks": [
-      "172.16.30.0/24"
+      "172.16.0.0/16"
     ],
-    "compartment-id": "ocid1.compartment.oc1..aaaaaaaaie4exnvj2ktkjlliahl2bxmdnteu2xmn27oc5cy5mdcmocl4vd7q",
-    "default-dhcp-options-id": "ocid1.dhcpoptions.oc1.sa-saopaulo-1.aaaaaaaal25rtfga7lidrfwcxgrbhxbkl7fik2jsxxvo5j6da7nuar7yxl4q",
-    "default-route-table-id": "ocid1.routetable.oc1.sa-saopaulo-1.aaaaaaaap5aco4nbigwa4fz2nlda3er2lp4jhccq3gyq4bsx7qloqumg5faa",
-    "default-security-list-id": "ocid1.securitylist.oc1.sa-saopaulo-1.aaaaaaaaolot54cbhbw4fmm62rcx4u4ayidxicm2y4s7dw7mj6osboa5qvvq",
+    "compartment-id": "ocid1.compartment.oc1..aaaaaaaauvqvbbx3oridcm5d2ztxkftwr362u2vl5zdsayzbehzwbjs56soq",
+    "default-dhcp-options-id": "ocid1.dhcpoptions.oc1.sa-saopaulo-1.aaaaaaaali3ocb5hxqhpohgv5ml52yiue2ugvwyicprorfoplgbks6uoxuea",
+    "default-route-table-id": "ocid1.routetable.oc1.sa-saopaulo-1.aaaaaaaamv5sy4life5tbektd6wnkgcqwzqcj5yk2pnkdnavqhacgj5buonq",
+    "default-security-list-id": "ocid1.securitylist.oc1.sa-saopaulo-1.aaaaaaaakiuso7lpjmfgbqeopmc75vusixj3cwkrpycc5356d7h36nrdxmcq",
     "defined-tags": {
       "Oracle-Tags": {
         "CreatedBy": "oracleidentitycloudservice/daniel.armbrust@algumdominio.com",
-        "CreatedOn": "2021-09-22T18:43:56.895Z"
+        "CreatedOn": "2021-10-05T17:53:07.934Z"
       }
     },
     "display-name": "vcn-db",
     "dns-label": "vcndb",
     "freeform-tags": {},
-    "id": "ocid1.vcn.oc1.sa-saopaulo-1.amaaaaaa6noke4qahidmpliuijfn6mum4maic3nhtgqlofvfdsl6hpfg3d3q",
+    "id": "ocid1.vcn.oc1.sa-saopaulo-1.amaaaaaa6noke4qauzzbffpcd7xtcpxk7i3njt44gmurmaxvizr6mfz6eibq",
     "ipv6-cidr-blocks": null,
     "lifecycle-state": "AVAILABLE",
-    "time-created": "2021-09-22T18:43:57.136000+00:00",
+    "time-created": "2021-10-05T17:53:08.037000+00:00",
     "vcn-domain-name": "vcndb.oraclevcn.com"
   },
-  "etag": "cb1b5107"
+  "etag": "30115019"
 }
 ```
 
+Agora a subrede privada para banco de dados:
+
 ```
 darmbrust@hoodwink:~$ oci network subnet create \
-> --compartment-id "ocid1.compartment.oc1..aaaaaaaaie4exnvj2ktkjlliahl2bxmdnteu2xmn27oc5cy5mdcmocl4vd7q" \
-> --vcn-id "ocid1.vcn.oc1.sa-saopaulo-1.amaaaaaa6noke4qahidmpliuijfn6mum4maic3nhtgqlofvfdsl6hpfg3d3q" \
-> --dhcp-options-id "ocid1.dhcpoptions.oc1.sa-saopaulo-1.aaaaaaaal25rtfga7lidrfwcxgrbhxbkl7fik2jsxxvo5j6da7nuar7yxl4q" \
-> --route-table-id "ocid1.routetable.oc1.sa-saopaulo-1.aaaaaaaap5aco4nbigwa4fz2nlda3er2lp4jhccq3gyq4bsx7qloqumg5faa" \
-> --security-list-ids '["ocid1.securitylist.oc1.sa-saopaulo-1.aaaaaaaaolot54cbhbw4fmm62rcx4u4ayidxicm2y4s7dw7mj6osboa5qvvq"]' \
+> --compartment-id "ocid1.compartment.oc1..aaaaaaaauvqvbbx3oridcm5d2ztxkftwr362u2vl5zdsayzbehzwbjs56soq" \
+> --vcn-id "ocid1.vcn.oc1.sa-saopaulo-1.amaaaaaa6noke4qauzzbffpcd7xtcpxk7i3njt44gmurmaxvizr6mfz6eibq" \
+> --dhcp-options-id "ocid1.dhcpoptions.oc1.sa-saopaulo-1.aaaaaaaali3ocb5hxqhpohgv5ml52yiue2ugvwyicprorfoplgbks6uoxuea" \
+> --route-table-id "ocid1.routetable.oc1.sa-saopaulo-1.aaaaaaaamv5sy4life5tbektd6wnkgcqwzqcj5yk2pnkdnavqhacgj5buonq" \
+> --security-list-ids '["ocid1.securitylist.oc1.sa-saopaulo-1.aaaaaaaakiuso7lpjmfgbqeopmc75vusixj3cwkrpycc5356d7h36nrdxmcq"]' \
 > --display-name "subnprv_vcn-db" \
 > --dns-label "subnprv" \
 > --cidr-block "172.16.30.0/24" \
@@ -166,34 +168,34 @@ Action completed. Waiting until the resource has entered state: ('AVAILABLE',)
   "data": {
     "availability-domain": null,
     "cidr-block": "172.16.30.0/24",
-    "compartment-id": "ocid1.compartment.oc1..aaaaaaaaie4exnvj2ktkjlliahl2bxmdnteu2xmn27oc5cy5mdcmocl4vd7q",
+    "compartment-id": "ocid1.compartment.oc1..aaaaaaaauvqvbbx3oridcm5d2ztxkftwr362u2vl5zdsayzbehzwbjs56soq",
     "defined-tags": {
       "Oracle-Tags": {
         "CreatedBy": "oracleidentitycloudservice/daniel.armbrust@algumdominio.com",
-        "CreatedOn": "2021-09-22T19:34:44.016Z"
+        "CreatedOn": "2021-10-05T17:57:54.610Z"
       }
     },
-    "dhcp-options-id": "ocid1.dhcpoptions.oc1.sa-saopaulo-1.aaaaaaaal25rtfga7lidrfwcxgrbhxbkl7fik2jsxxvo5j6da7nuar7yxl4q",
+    "dhcp-options-id": "ocid1.dhcpoptions.oc1.sa-saopaulo-1.aaaaaaaali3ocb5hxqhpohgv5ml52yiue2ugvwyicprorfoplgbks6uoxuea",
     "display-name": "subnprv_vcn-db",
     "dns-label": "subnprv",
     "freeform-tags": {},
-    "id": "ocid1.subnet.oc1.sa-saopaulo-1.aaaaaaaagniylqruzn35iv3n7ntxnix6ew3t5z3kwj5ey72fpwrablass65q",
+    "id": "ocid1.subnet.oc1.sa-saopaulo-1.aaaaaaaa5v2vsetv73xem2hlxf25uibpwcvci6nifidj3b6enf52m6bgy7ua",
     "ipv6-cidr-block": null,
     "ipv6-virtual-router-ip": null,
     "lifecycle-state": "AVAILABLE",
     "prohibit-internet-ingress": true,
     "prohibit-public-ip-on-vnic": true,
-    "route-table-id": "ocid1.routetable.oc1.sa-saopaulo-1.aaaaaaaap5aco4nbigwa4fz2nlda3er2lp4jhccq3gyq4bsx7qloqumg5faa",
+    "route-table-id": "ocid1.routetable.oc1.sa-saopaulo-1.aaaaaaaamv5sy4life5tbektd6wnkgcqwzqcj5yk2pnkdnavqhacgj5buonq",
     "security-list-ids": [
-      "ocid1.securitylist.oc1.sa-saopaulo-1.aaaaaaaaolot54cbhbw4fmm62rcx4u4ayidxicm2y4s7dw7mj6osboa5qvvq"
+      "ocid1.securitylist.oc1.sa-saopaulo-1.aaaaaaaakiuso7lpjmfgbqeopmc75vusixj3cwkrpycc5356d7h36nrdxmcq"
     ],
     "subnet-domain-name": "subnprv.vcndb.oraclevcn.com",
-    "time-created": "2021-09-22T19:34:44.078000+00:00",
-    "vcn-id": "ocid1.vcn.oc1.sa-saopaulo-1.amaaaaaa6noke4qahidmpliuijfn6mum4maic3nhtgqlofvfdsl6hpfg3d3q",
+    "time-created": "2021-10-05T17:57:54.682000+00:00",
+    "vcn-id": "ocid1.vcn.oc1.sa-saopaulo-1.amaaaaaa6noke4qauzzbffpcd7xtcpxk7i3njt44gmurmaxvizr6mfz6eibq",
     "virtual-router-ip": "172.16.30.1",
-    "virtual-router-mac": "00:00:17:C1:12:B0"
+    "virtual-router-mac": "00:00:17:24:D6:D8"
   },
-  "etag": "7a9ef2e5"
+  "etag": "114e5e57"
 }
 ```
 
