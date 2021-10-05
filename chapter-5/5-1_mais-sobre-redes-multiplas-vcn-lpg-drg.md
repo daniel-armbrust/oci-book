@@ -288,37 +288,37 @@ darmbrust@hoodwink:~$ oci network local-peering-gateway connect \
 }
 ```
 
-Para verificar o status da conexão, usamos o comando abaixo:
+Para verificar o _status_ desta conectividade, usamos o comando abaixo:
 
 ```
 darmbrust@hoodwink:~$ oci network local-peering-gateway get \
-> --local-peering-gateway-id "ocid1.localpeeringgateway.oc1.sa-saopaulo-1.aaaaaaaajtpagmjpddmhrqfvp6w6jsqvdhx3nmijhmblq3sgbnrkmefuaaza"
+> --local-peering-gateway-id "ocid1.localpeeringgateway.oc1.sa-saopaulo-1.aaaaaaaa7yc6nig6frgdcl2rpqsblbmotvbda3onjkmxdsbcra4ztmkbvs2a"
 {
   "data": {
     "compartment-id": "ocid1.compartment.oc1..aaaaaaaauvqvbbx3oridcm5d2ztxkftwr362u2vl5zdsayzbehzwbjs56soq",
     "defined-tags": {
       "Oracle-Tags": {
         "CreatedBy": "oracleidentitycloudservice/daniel.armbrust@algumdominio.com",
-        "CreatedOn": "2021-09-22T19:48:15.835Z"
+        "CreatedOn": "2021-10-05T18:17:48.461Z"
       }
     },
     "display-name": "lpg_vcn-prd",
     "freeform-tags": {},
-    "id": "ocid1.localpeeringgateway.oc1.sa-saopaulo-1.aaaaaaaajtpagmjpddmhrqfvp6w6jsqvdhx3nmijhmblq3sgbnrkmefuaaza",
+    "id": "ocid1.localpeeringgateway.oc1.sa-saopaulo-1.aaaaaaaa7yc6nig6frgdcl2rpqsblbmotvbda3onjkmxdsbcra4ztmkbvs2a",
     "is-cross-tenancy-peering": false,
     "lifecycle-state": "AVAILABLE",
-    "peer-advertised-cidr": "172.16.30.0/24",
+    "peer-advertised-cidr": "172.16.0.0/16",
     "peer-advertised-cidr-details": [
-      "172.16.30.0/24"
+      "172.16.0.0/16"
     ],
-    "peer-id": "ocid1.localpeeringgateway.oc1.sa-saopaulo-1.aaaaaaaa7ntl6vzave2qrlmmpx5ynbmjnnn7xsmh76zzg4ihdwsq5mzqxaoa",
+    "peer-id": "ocid1.localpeeringgateway.oc1.sa-saopaulo-1.aaaaaaaa6j6l2svl5eesdetjkggyohypxqtzbqfv5qeqa7p7xkdbhdg7qfsa",
     "peering-status": "PEERED",
     "peering-status-details": "Connected to a peer.",
     "route-table-id": null,
-    "time-created": "2021-09-22T19:48:15.875000+00:00",
-    "vcn-id": "ocid1.vcn.oc1.sa-saopaulo-1.amaaaaaa6noke4qapu7nhvarjqmxzj4323rvn55flsj2salguah54hjuipva"
+    "time-created": "2021-10-05T18:17:48.548000+00:00",
+    "vcn-id": "ocid1.vcn.oc1.sa-saopaulo-1.amaaaaaa6noke4qaasugozouqxfpwajtaj3oymelmqwv2i2chmuil5ttesma"
   },
-  "etag": "48472ecc"
+  "etag": "49890a12"
 }
 ```
 
