@@ -331,5 +331,75 @@ Não é novidade que toda _[VNIC](https://docs.oracle.com/pt-br/iaas/Content/Net
 Para o nosso exemplo, começarei ajustando a _[tabela de roteamento](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingroutetables.htm)_ da subrede _"subnprv_vcn-prd"_:
 
 ```
+darmbrust@hoodwink:~$ oci network route-table update \
+> --rt-id "ocid1.routetable.oc1.sa-saopaulo-1.aaaaaaaae2rhesecc4amfji763v3m324abufiml5asyxd64xfn57e7veipaq" \
+> --route-rules '[{"cidrBlock": "172.16.30.0/24", "networkEntityId": "ocid1.localpeeringgateway.oc1.sa-saopaulo-1.aaaaaaaa7yc6nig6frgdcl2rpqsblbmotvbda3onjkmxdsbcra4ztmkbvs2a"}]' \
+> --force \
+> --wait-for-state "AVAILABLE"
+Action completed. Waiting until the resource has entered state: ('AVAILABLE',)
+{
+  "data": {
+    "compartment-id": "ocid1.compartment.oc1..aaaaaaaauvqvbbx3oridcm5d2ztxkftwr362u2vl5zdsayzbehzwbjs56soq",
+    "defined-tags": {
+      "Oracle-Tags": {
+        "CreatedBy": "oracleidentitycloudservice/daniel.armbrust@algumdominio.com",
+        "CreatedOn": "2021-10-05T17:21:31.182Z"
+      }
+    },
+    "display-name": "Default Route Table for vcn-prd",
+    "freeform-tags": {},
+    "id": "ocid1.routetable.oc1.sa-saopaulo-1.aaaaaaaae2rhesecc4amfji763v3m324abufiml5asyxd64xfn57e7veipaq",
+    "lifecycle-state": "AVAILABLE",
+    "route-rules": [
+      {
+        "cidr-block": "172.16.30.0/24",
+        "description": null,
+        "destination": "172.16.30.0/24",
+        "destination-type": "CIDR_BLOCK",
+        "network-entity-id": "ocid1.localpeeringgateway.oc1.sa-saopaulo-1.aaaaaaaa7yc6nig6frgdcl2rpqsblbmotvbda3onjkmxdsbcra4ztmkbvs2a"
+      }
+    ],
+    "time-created": "2021-10-05T17:21:31.275000+00:00",
+    "vcn-id": "ocid1.vcn.oc1.sa-saopaulo-1.amaaaaaa6noke4qaasugozouqxfpwajtaj3oymelmqwv2i2chmuil5ttesma"
+  },
+  "etag": "1ed3f051"
+}
+```
 
+Logo após, vem a _[tabela de roteamento](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingroutetables.htm)_ da subrede _"subnprv_vcn-db"_:
+
+```
+darmbrust@hoodwink:~$ oci network route-table update \
+> --rt-id "ocid1.routetable.oc1.sa-saopaulo-1.aaaaaaaamv5sy4life5tbektd6wnkgcqwzqcj5yk2pnkdnavqhacgj5buonq" \
+> --route-rules '[{"cidrBlock": "192.168.20.0/24", "networkEntityId": "ocid1.localpeeringgateway.oc1.sa-saopaulo-1.aaaaaaaa6j6l2svl5eesdetjkggyohypxqtzbqfv5qeqa7p7xkdbhdg7qfsa"}]' \
+> --force \
+> --wait-for-state "AVAILABLE"
+Action completed. Waiting until the resource has entered state: ('AVAILABLE',)
+{
+  "data": {
+    "compartment-id": "ocid1.compartment.oc1..aaaaaaaauvqvbbx3oridcm5d2ztxkftwr362u2vl5zdsayzbehzwbjs56soq",
+    "defined-tags": {
+      "Oracle-Tags": {
+        "CreatedBy": "oracleidentitycloudservice/daniel.armbrust@algumdominio.com",
+        "CreatedOn": "2021-10-05T17:53:07.934Z"
+      }
+    },
+    "display-name": "Default Route Table for vcn-db",
+    "freeform-tags": {},
+    "id": "ocid1.routetable.oc1.sa-saopaulo-1.aaaaaaaamv5sy4life5tbektd6wnkgcqwzqcj5yk2pnkdnavqhacgj5buonq",
+    "lifecycle-state": "AVAILABLE",
+    "route-rules": [
+      {
+        "cidr-block": "192.168.20.0/24",
+        "description": null,
+        "destination": "192.168.20.0/24",
+        "destination-type": "CIDR_BLOCK",
+        "network-entity-id": "ocid1.localpeeringgateway.oc1.sa-saopaulo-1.aaaaaaaa6j6l2svl5eesdetjkggyohypxqtzbqfv5qeqa7p7xkdbhdg7qfsa"
+      }
+    ],
+    "time-created": "2021-10-05T17:53:08.037000+00:00",
+    "vcn-id": "ocid1.vcn.oc1.sa-saopaulo-1.amaaaaaa6noke4qauzzbffpcd7xtcpxk7i3njt44gmurmaxvizr6mfz6eibq"
+  },
+  "etag": "2694d619"
+}
 ```
