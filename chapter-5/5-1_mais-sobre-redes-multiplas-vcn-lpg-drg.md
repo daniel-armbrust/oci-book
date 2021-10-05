@@ -403,3 +403,5 @@ Action completed. Waiting until the resource has entered state: ('AVAILABLE',)
   "etag": "2694d619"
 }
 ```
+
+Pronto! Agora as redes já se _"falam"_.
