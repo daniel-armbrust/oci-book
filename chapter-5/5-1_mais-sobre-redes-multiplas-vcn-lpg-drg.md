@@ -326,4 +326,10 @@ darmbrust@hoodwink:~$ oci network local-peering-gateway get \
 
 #### Ajustes no roteamento
 
-Não é novidade que toda _[VNIC](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingVNICs.htm)_ reside em uma subrede, e que uma subrede reside dentro de uma _[VCN](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingVCNs_topic-Overview_of_VCNs_and_Subnets.htm)_. Para existir comunicação entre duas _[VNICs](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingVNICs.htm)_ que residem em duas _[VCNs](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingVCNs_topic-Overview_of_VCNs_and_Subnets.htm)_ diferentes, devemos instruir esta ação através da _[tabela de roteamento](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingroutetables.htm)_. Ou seja, criamos uma regra de roteamento que utiliza o gateway mais próximo da rede de destino que queremos alcançar.
+Não é novidade que toda _[VNIC](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingVNICs.htm)_ reside em uma subrede, e que uma subrede reside dentro de uma _[VCN](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingVCNs_topic-Overview_of_VCNs_and_Subnets.htm)_. Para existir comunicação entre _[VNICs](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingVNICs.htm)_ que residem em _[VCNs](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingVCNs_topic-Overview_of_VCNs_and_Subnets.htm)_ diferentes, devemos instruir esta ação através da _[tabela de roteamento](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingroutetables.htm)_ de cada subrede. Ou seja, criamos uma regra de roteamento que utiliza o gateway mais próximo da rede de destino que queremos alcançar.
+
+Para o nosso exemplo, começarei ajustando a _[tabela de roteamento](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingroutetables.htm)_ da subrede _"subnprv_vcn-prd"_:
+
+```
+
+```
