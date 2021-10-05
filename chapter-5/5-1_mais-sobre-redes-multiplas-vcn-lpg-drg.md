@@ -149,7 +149,7 @@ Action completed. Waiting until the resource has entered state: ('AVAILABLE',)
 }
 ```
 
-Agora a subrede privada para banco de dados:
+Agora a subrede privada:
 
 ```
 darmbrust@hoodwink:~$ oci network subnet create \
@@ -196,42 +196,6 @@ Action completed. Waiting until the resource has entered state: ('AVAILABLE',)
     "virtual-router-mac": "00:00:17:24:D6:D8"
   },
   "etag": "114e5e57"
-}
-```
-
-#### VCN de Banco de Dados (vcn-db)
-
-```
-darmbrust@hoodwink:~$ oci network local-peering-gateway create \
-> --compartment-id "ocid1.compartment.oc1..aaaaaaaauvqvbbx3oridcm5d2ztxkftwr362u2vl5zdsayzbehzwbjs56soq" \
-> --vcn-id "ocid1.vcn.oc1.sa-saopaulo-1.amaaaaaa6noke4qapu7nhvarjqmxzj4323rvn55flsj2salguah54hjuipva" \
-> --display-name "lpg_vcn-prd" \
-> --wait-for-state AVAILABLE
-Action completed. Waiting until the resource has entered state: ('AVAILABLE',)
-{
-  "data": {
-    "compartment-id": "ocid1.compartment.oc1..aaaaaaaauvqvbbx3oridcm5d2ztxkftwr362u2vl5zdsayzbehzwbjs56soq",
-    "defined-tags": {
-      "Oracle-Tags": {
-        "CreatedBy": "oracleidentitycloudservice/daniel.armbrust@algumdominio.com",
-        "CreatedOn": "2021-09-22T19:48:15.835Z"
-      }
-    },
-    "display-name": "lpg_vcn-prd",
-    "freeform-tags": {},
-    "id": "ocid1.localpeeringgateway.oc1.sa-saopaulo-1.aaaaaaaajtpagmjpddmhrqfvp6w6jsqvdhx3nmijhmblq3sgbnrkmefuaaza",
-    "is-cross-tenancy-peering": false,
-    "lifecycle-state": "AVAILABLE",
-    "peer-advertised-cidr": null,
-    "peer-advertised-cidr-details": null,
-    "peer-id": null,
-    "peering-status": "NEW",
-    "peering-status-details": "Not connected to a peer.",
-    "route-table-id": null,
-    "time-created": "2021-09-22T19:48:15.875000+00:00",
-    "vcn-id": "ocid1.vcn.oc1.sa-saopaulo-1.amaaaaaa6noke4qapu7nhvarjqmxzj4323rvn55flsj2salguah54hjuipva"
-  },
-  "etag": "d316556c"
 }
 ```
 
