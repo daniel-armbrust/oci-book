@@ -201,14 +201,14 @@ Action completed. Waiting until the resource has entered state: ('AVAILABLE',)
 
 #### Conexão através do Local Peering Gateway (LPG)
 
-É necessário criar um _[LPG](https://docs.oracle.com/en-us/iaas/Content/Network/Tasks/localVCNpeering.htm#Local_VCN_Peering_Within_Region)_ do lado de cada _[VCN](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingVCNs_topic-Overview_of_VCNs_and_Subnets.htm)_:
+Para que as _[VCNs](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingVCNs_topic-Overview_of_VCNs_and_Subnets.htm)_ se comuniquem, é necessário criar um _[LPG](https://docs.oracle.com/en-us/iaas/Content/Network/Tasks/localVCNpeering.htm#Local_VCN_Peering_Within_Region)_ do lado de cada _[VCN](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingVCNs_topic-Overview_of_VCNs_and_Subnets.htm)_:
 
 - **vcn-prd**
 
 ```
 darmbrust@hoodwink:~$ oci network local-peering-gateway create \
 > --compartment-id "ocid1.compartment.oc1..aaaaaaaauvqvbbx3oridcm5d2ztxkftwr362u2vl5zdsayzbehzwbjs56soq" \
-> --vcn-id "ocid1.vcn.oc1.sa-saopaulo-1.amaaaaaa6noke4qapu7nhvarjqmxzj4323rvn55flsj2salguah54hjuipva" \
+> --vcn-id "ocid1.vcn.oc1.sa-saopaulo-1.amaaaaaa6noke4qaasugozouqxfpwajtaj3oymelmqwv2i2chmuil5ttesma" \
 > --display-name "lpg_vcn-prd" \
 > --wait-for-state AVAILABLE
 Action completed. Waiting until the resource has entered state: ('AVAILABLE',)
@@ -218,12 +218,12 @@ Action completed. Waiting until the resource has entered state: ('AVAILABLE',)
     "defined-tags": {
       "Oracle-Tags": {
         "CreatedBy": "oracleidentitycloudservice/daniel.armbrust@algumdominio.com",
-        "CreatedOn": "2021-09-22T19:48:15.835Z"
+        "CreatedOn": "2021-10-05T18:17:48.461Z"
       }
     },
     "display-name": "lpg_vcn-prd",
     "freeform-tags": {},
-    "id": "ocid1.localpeeringgateway.oc1.sa-saopaulo-1.aaaaaaaajtpagmjpddmhrqfvp6w6jsqvdhx3nmijhmblq3sgbnrkmefuaaza",
+    "id": "ocid1.localpeeringgateway.oc1.sa-saopaulo-1.aaaaaaaa7yc6nig6frgdcl2rpqsblbmotvbda3onjkmxdsbcra4ztmkbvs2a",
     "is-cross-tenancy-peering": false,
     "lifecycle-state": "AVAILABLE",
     "peer-advertised-cidr": null,
@@ -232,10 +232,10 @@ Action completed. Waiting until the resource has entered state: ('AVAILABLE',)
     "peering-status": "NEW",
     "peering-status-details": "Not connected to a peer.",
     "route-table-id": null,
-    "time-created": "2021-09-22T19:48:15.875000+00:00",
-    "vcn-id": "ocid1.vcn.oc1.sa-saopaulo-1.amaaaaaa6noke4qapu7nhvarjqmxzj4323rvn55flsj2salguah54hjuipva"
+    "time-created": "2021-10-05T18:17:48.548000+00:00",
+    "vcn-id": "ocid1.vcn.oc1.sa-saopaulo-1.amaaaaaa6noke4qaasugozouqxfpwajtaj3oymelmqwv2i2chmuil5ttesma"
   },
-  "etag": "d316556c"
+  "etag": "92011d8"
 }
 ```
 
@@ -244,7 +244,7 @@ Action completed. Waiting until the resource has entered state: ('AVAILABLE',)
 ```
 darmbrust@hoodwink:~$ oci network local-peering-gateway create \
 > --compartment-id "ocid1.compartment.oc1..aaaaaaaauvqvbbx3oridcm5d2ztxkftwr362u2vl5zdsayzbehzwbjs56soq" \
-> --vcn-id "ocid1.vcn.oc1.sa-saopaulo-1.amaaaaaa6noke4qahidmpliuijfn6mum4maic3nhtgqlofvfdsl6hpfg3d3q" \
+> --vcn-id "ocid1.vcn.oc1.sa-saopaulo-1.amaaaaaa6noke4qauzzbffpcd7xtcpxk7i3njt44gmurmaxvizr6mfz6eibq" \
 > --display-name "lpg_vcn-db" \
 > --wait-for-state AVAILABLE
 Action completed. Waiting until the resource has entered state: ('AVAILABLE',)
@@ -254,12 +254,12 @@ Action completed. Waiting until the resource has entered state: ('AVAILABLE',)
     "defined-tags": {
       "Oracle-Tags": {
         "CreatedBy": "oracleidentitycloudservice/daniel.armbrust@algumdominio.com",
-        "CreatedOn": "2021-09-22T19:52:02.559Z"
+        "CreatedOn": "2021-10-05T18:21:16.171Z"
       }
     },
     "display-name": "lpg_vcn-db",
     "freeform-tags": {},
-    "id": "ocid1.localpeeringgateway.oc1.sa-saopaulo-1.aaaaaaaa7ntl6vzave2qrlmmpx5ynbmjnnn7xsmh76zzg4ihdwsq5mzqxaoa",
+    "id": "ocid1.localpeeringgateway.oc1.sa-saopaulo-1.aaaaaaaa6j6l2svl5eesdetjkggyohypxqtzbqfv5qeqa7p7xkdbhdg7qfsa",
     "is-cross-tenancy-peering": false,
     "lifecycle-state": "AVAILABLE",
     "peer-advertised-cidr": null,
@@ -268,10 +268,10 @@ Action completed. Waiting until the resource has entered state: ('AVAILABLE',)
     "peering-status": "NEW",
     "peering-status-details": "Not connected to a peer.",
     "route-table-id": null,
-    "time-created": "2021-09-22T19:52:02.598000+00:00",
-    "vcn-id": "ocid1.vcn.oc1.sa-saopaulo-1.amaaaaaa6noke4qahidmpliuijfn6mum4maic3nhtgqlofvfdsl6hpfg3d3q"
+    "time-created": "2021-10-05T18:21:16.220000+00:00",
+    "vcn-id": "ocid1.vcn.oc1.sa-saopaulo-1.amaaaaaa6noke4qauzzbffpcd7xtcpxk7i3njt44gmurmaxvizr6mfz6eibq"
   },
-  "etag": "2f1e88ec"
+  "etag": "85632e9f"
 }
 ```
 
