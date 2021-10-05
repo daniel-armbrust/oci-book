@@ -323,3 +323,7 @@ darmbrust@hoodwink:~$ oci network local-peering-gateway get \
 ```
 
 É possível confirmar a conectividade pela propriedade _"peering-status"_ com o valor _"PEERED"_. Também é possível ver o anúncio do bloco _[CIDR](https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing)_ vindo da _[VCN](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingVCNs_topic-Overview_of_VCNs_and_Subnets.htm)_ de banco de dados (vcn-db) através da propriedade _"peer-advertised-cidr"_ e que contém o valor _"172.16.0.0/16"_.
+
+#### Ajustes no roteamento
+
+Não é novidade que toda VNIC reside em uma subrede, e que uma subrede reside dentro de uma _[VCN](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingVCNs_topic-Overview_of_VCNs_and_Subnets.htm)_. Para existir comunicação entre duas VNICs que residem em duas VCNs diferentes, devemos instruir esta ação através da tabela de roteamento. Ou seja, criamos uma regra de roteamento que tem como destino a rede que queremos alcançar, e que aponta para o seu gateway mais próximo.
