@@ -417,7 +417,8 @@ darmbrust@hoodwink:~$ oci network security-list update \
 > --security-list-id "ocid1.securitylist.oc1.sa-saopaulo-1.aaaaaaaass5hvduram6ehbzrzo6fyhflw7zewdsji45w5t3aq2m3agvsqnkq" \
 > --egress-security-rules '[{"destination": "0.0.0.0/0", "protocol": "all", "isStateless": false}]' \
 > --ingress-security-rules '[{"source": "0.0.0.0/0", "protocol": "all", "isStateless": false}]' \
-> --force --wait-for-state "AVAILABLE"
+> --force \
+> --wait-for-state "AVAILABLE"
 ```
 
 ```
@@ -428,3 +429,5 @@ darmbrust@hoodwink:~$ oci network security-list update \
 > --force \
 > --wait-for-state "AVAILABLE"
 ```
+
+>_**__NOTA:__** O propósito aqui é o teste de conectividade entre as [VCNs](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingVCNs_topic-Overview_of_VCNs_and_Subnets.htm). Ajuste as [security list](https://docs.oracle.com/pt-br/iaas/Content/Network/Concepts/securitylists.htm) de acordo com as exigências de segurança do seu ambiente. Evite escancarar o acesso desta forma._
