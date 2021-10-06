@@ -667,7 +667,7 @@ darmbrust@hoodwink:~$ oci mysql db-system create \
 }
 ```
 
-Após uma [sessão SSH](https://docs.oracle.com/pt-br/iaas/Content/Bastion/Concepts/bastionoverview.htm#session_types) ser estabelecida pelo bastion até a instância, é possível confirmar a conectividade entre os recursos:
+Após uma _[sessão SSH](https://docs.oracle.com/pt-br/iaas/Content/Bastion/Concepts/bastionoverview.htm#session_types)_ ser estabelecida pelo bastion até a instância, é possível confirmar a conectividade entre os recursos:
 
 ```
 [opc@vmlnx-1 ~]$ ip addr sh ens3
