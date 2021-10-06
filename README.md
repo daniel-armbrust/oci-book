@@ -76,3 +76,4 @@ Esse livro apresenta o **OCI (Oracle Cloud Infraestructure)** e por quê você d
     9.6 - Oracle Cloud Advisor
     9.7 - Cloud Guard
     9.8 - Oracle Ksplice   
+    9.9 - OS Management

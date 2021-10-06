@@ -510,3 +510,182 @@ Action completed. Waiting until the resource has entered state: ('AVAILABLE',)
 ```
 
 Perceba que atualizar um recurso é no modo _"tudo ou nada"_. Não há atualização incremental. Neste caso, eu tive que inserir as duas regras na _[tabela de roteamento](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingroutetables.htm)_.
+
+Abaixo os comandos que criam a instância e em seguida o banco de dados:
+
+```
+darmbrust@hoodwink:~$ oci compute instance launch \
+> --compartment-id "ocid1.compartment.oc1..aaaaaaaamcff6exkhvp4aq3ubxib2wf74v7cx22b3yj56jnfkazoissdzefq" \
+> --availability-domain "ynrK:SA-SAOPAULO-1-AD-1" \
+> --shape "VM.Standard.E2.1" \
+> --subnet-id "ocid1.subnet.oc1.sa-saopaulo-1.aaaaaaaary7wcifmwmmmavtfbjp45fxivvvisigjw76fr6pmyopulcbmjugq" \
+> --display-name "vmlnx-1_subnprv_vcn-prd" \
+> --fault-domain "FAULT-DOMAIN-1" \
+> --hostname-label "vmlnx-1" \
+> --image-id "ocid1.image.oc1.sa-saopaulo-1.aaaaaaaasahnls6nmev22raz7ecw6i64d65fu27pmqjn4pgz7zue56ojj7qq" \
+> --wait-for-state "RUNNING"
+{
+  "data": {
+    "agent-config": {
+      "are-all-plugins-disabled": false,
+      "is-management-disabled": false,
+      "is-monitoring-disabled": false,
+      "plugins-config": null
+    },
+    "availability-config": {
+      "is-live-migration-preferred": null,
+      "recovery-action": "RESTORE_INSTANCE"
+    },
+    "availability-domain": "ynrK:SA-SAOPAULO-1-AD-1",
+    "capacity-reservation-id": null,
+    "compartment-id": "ocid1.compartment.oc1..aaaaaaaamcff6exkhvp4aq3ubxib2wf74v7cx22b3yj56jnfkazoissdzefq",
+    "dedicated-vm-host-id": null,
+    "defined-tags": {
+      "Oracle-Tags": {
+        "CreatedBy": "oracleidentitycloudservice/daniel.armbrust@algumdominio.com",
+        "CreatedOn": "2021-10-06T18:01:29.361Z"
+      }
+    },
+    "display-name": "vmlnx-1_subnprv_vcn-prd",
+    "extended-metadata": {},
+    "fault-domain": "FAULT-DOMAIN-1",
+    "freeform-tags": {},
+    "id": "ocid1.instance.oc1.sa-saopaulo-1.antxeljr6noke4qcjjfy7pwmafgmjy6zfz5mtdbvh7xzsjghzjvw3hhltrmq",
+    "image-id": "ocid1.image.oc1.sa-saopaulo-1.aaaaaaaasahnls6nmev22raz7ecw6i64d65fu27pmqjn4pgz7zue56ojj7qq",
+    "instance-options": {
+      "are-legacy-imds-endpoints-disabled": false
+    },
+    "ipxe-script": null,
+    "launch-mode": "PARAVIRTUALIZED",
+    "launch-options": {
+      "boot-volume-type": "PARAVIRTUALIZED",
+      "firmware": "UEFI_64",
+      "is-consistent-volume-naming-enabled": true,
+      "is-pv-encryption-in-transit-enabled": false,
+      "network-type": "PARAVIRTUALIZED",
+      "remote-data-volume-type": "PARAVIRTUALIZED"
+    },
+    "lifecycle-state": "RUNNING",
+    "metadata": {},
+    "platform-config": null,
+    "preemptible-instance-config": null,
+    "region": "sa-saopaulo-1",
+    "shape": "VM.Standard.E2.1",
+    "shape-config": {
+      "baseline-ocpu-utilization": null,
+      "gpu-description": null,
+      "gpus": 0,
+      "local-disk-description": null,
+      "local-disks": 0,
+      "local-disks-total-size-in-gbs": null,
+      "max-vnic-attachments": 2,
+      "memory-in-gbs": 8.0,
+      "networking-bandwidth-in-gbps": 0.7,
+      "ocpus": 1.0,
+      "processor-description": "2.0 GHz AMD EPYC\u2122 7551 (Naples)"
+    },
+    "source-details": {
+      "boot-volume-size-in-gbs": null,
+      "image-id": "ocid1.image.oc1.sa-saopaulo-1.aaaaaaaasahnls6nmev22raz7ecw6i64d65fu27pmqjn4pgz7zue56ojj7qq",
+      "kms-key-id": null,
+      "source-type": "image"
+    },
+    "system-tags": {},
+    "time-created": "2021-10-06T18:01:29.952000+00:00",
+    "time-maintenance-reboot-due": null
+  },
+  "etag": "1e671e8d78d8291352edae7504bc096772155c1cc9972fb2f2f3894404d4d86b"
+}
+```
+
+```
+darmbrust@hoodwink:~$ oci mysql db-system create \
+> --compartment-id "ocid1.compartment.oc1..aaaaaaaamcff6exkhvp4aq3ubxib2wf74v7cx22b3yj56jnfkazoissdzefq" \
+> --availability-domain "ynrK:SA-SAOPAULO-1-AD-1" \
+> --subnet-id "ocid1.subnet.oc1.sa-saopaulo-1.aaaaaaaa5v2vsetv73xem2hlxf25uibpwcvci6nifidj3b6enf52m6bgy7ua" \
+> --shape-name "VM.Standard.E2.1" \
+> --configuration-id "ocid1.mysqlconfiguration.oc1..aaaaaaaah6o6qu3gdbxnqg6aw56amnosmnaycusttaa7abyq2tdgpgubvsgi" \
+> --hostname-label "mysql" \
+> --admin-username admin \
+> --admin-password Sup3rS3cr3t0# \
+> --data-storage-size-in-gbs 50 \
+> --display-name "mysql_subnprv_vcn-db" \
+> --backup-policy '{"isEnabled": false}'
+{
+  "data": {
+    "analytics-cluster": null,
+    "availability-domain": "ynrK:SA-SAOPAULO-1-AD-1",
+    "backup-policy": {
+      "defined-tags": null,
+      "freeform-tags": null,
+      "is-enabled": false,
+      "retention-in-days": 7,
+      "window-start-time": "05:10"
+    },
+    "channels": [],
+    "compartment-id": "ocid1.compartment.oc1..aaaaaaaamcff6exkhvp4aq3ubxib2wf74v7cx22b3yj56jnfkazoissdzefq",
+    "configuration-id": "ocid1.mysqlconfiguration.oc1..aaaaaaaah6o6qu3gdbxnqg6aw56amnosmnaycusttaa7abyq2tdgpgubvsgi",
+    "current-placement": {
+      "availability-domain": null,
+      "fault-domain": null
+    },
+    "data-storage-size-in-gbs": 50,
+    "defined-tags": {
+      "Oracle-Tags": {
+        "CreatedBy": "oracleidentitycloudservice/daniel.armbrust@algumdominio.com",
+        "CreatedOn": "2021-10-06T18:12:40.161Z"
+      }
+    },
+    "description": null,
+    "display-name": "mysql_subnprv_vcn-db",
+    "endpoints": [],
+    "fault-domain": null,
+    "freeform-tags": {},
+    "heat-wave-cluster": null,
+    "hostname-label": "mysql",
+    "id": "ocid1.mysqldbsystem.oc1.sa-saopaulo-1.aaaaaaaanhtufquzjk4euggk6lbvpkrlaqatztaq2eljxnea3cghuy3vgona",
+    "ip-address": null,
+    "is-analytics-cluster-attached": false,
+    "is-heat-wave-cluster-attached": false,
+    "is-highly-available": false,
+    "lifecycle-details": null,
+    "lifecycle-state": "CREATING",
+    "maintenance": {
+      "window-start-time": "WEDNESDAY 03:45"
+    },
+    "mysql-version": null,
+    "port": null,
+    "port-x": null,
+    "shape-name": "VM.Standard.E2.1",
+    "source": null,
+    "subnet-id": "ocid1.subnet.oc1.sa-saopaulo-1.aaaaaaaa5v2vsetv73xem2hlxf25uibpwcvci6nifidj3b6enf52m6bgy7ua",
+    "time-created": "2021-10-06T18:12:41.376000+00:00",
+    "time-updated": "2021-10-06T18:12:41.376000+00:00"
+  },
+  "etag": "c4b4d22517275d261b1c37d772d53a7c0d42e386372699fad6211b604328662b",
+  "opc-work-request-id": "ocid1.mysqlworkrequest.oc1.sa-saopaulo-1.0069bdc4-5198-45e1-8a13-29aa5795336b.aaaaaaaas22kde2dnlgfhz47wh34n77eymldjq3svda6fr2fphb2yqibqtta"
+}
+```
+
+Após uma [sessão SSH](https://docs.oracle.com/pt-br/iaas/Content/Bastion/Concepts/bastionoverview.htm#session_types) ser estabelecida pelo bastion até a instância, é possível confirmar a conectividade entre os recursos:
+
+```
+[opc@vmlnx-1 ~]$ ip addr sh ens3
+2: ens3: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 9000 qdisc pfifo_fast state UP group default qlen 1000
+    link/ether 02:00:17:02:1f:88 brd ff:ff:ff:ff:ff:ff
+    inet 192.168.20.10/24 brd 192.168.20.255 scope global dynamic ens3
+       valid_lft 84736sec preferred_lft 84736sec
+    inet6 fe80::17ff:fe02:1f88/64 scope link
+       valid_lft forever preferred_lft forever
+[opc@vmlnx-1 ~]$ ping -c 3 172.16.30.225
+PING 172.16.30.225 (172.16.30.225) 56(84) bytes of data.
+64 bytes from 172.16.30.225: icmp_seq=1 ttl=64 time=0.410 ms
+64 bytes from 172.16.30.225: icmp_seq=2 ttl=64 time=0.413 ms
+64 bytes from 172.16.30.225: icmp_seq=3 ttl=64 time=0.768 ms
+
+--- 172.16.30.225 ping statistics ---
+3 packets transmitted, 3 received, 0% packet loss, time 2088ms
+rtt min/avg/max/mdev = 0.410/0.530/0.768/0.169 ms
+```
+
+>_**__NOTA:__** Para criar uma [sessão SSH](https://docs.oracle.com/pt-br/iaas/Content/Bastion/Concepts/bastionoverview.htm#session_types) através do [serviço bastion](https://docs.oracle.com/pt-br/iaas/Content/Bastion/Concepts/bastionoverview.htm), consulte o capítulo "[3.3 - Apresentando o Serviço Bastion](https://github.com/daniel-armbrust/oci-book/blob/main/chapter-3/3-3_servico-bastion.md)"_.
