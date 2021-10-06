@@ -431,3 +431,82 @@ darmbrust@hoodwink:~$ oci network security-list update \
 ```
 
 >_**__NOTA:__** O propósito aqui é o teste de conectividade entre as [VCNs](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingVCNs_topic-Overview_of_VCNs_and_Subnets.htm). Ajuste as [security list](https://docs.oracle.com/pt-br/iaas/Content/Network/Concepts/securitylists.htm) de acordo com as exigências de segurança do seu ambiente. Evite escancarar o acesso desta forma._
+
+Irei criar um _[NAT Gateway](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/NATgateway.htm)_ e ajustar a _[tabela de roteamento](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingroutetables.htm)_ da subrede _"subnprv_vcn-prd"_ para poder usar este recurso. Isto também é necessário por conta do plugin _Bastion_ que será habilitado na instância a ser criada.
+
+```
+darmbrust@hoodwink:~$ oci network nat-gateway create \
+> --compartment-id "ocid1.compartment.oc1..aaaaaaaauvqvbbx3oridcm5d2ztxkftwr362u2vl5zdsayzbehzwbjs56soq" \
+> --vcn-id "ocid1.vcn.oc1.sa-saopaulo-1.amaaaaaa6noke4qaasugozouqxfpwajtaj3oymelmqwv2i2chmuil5ttesma" \
+> --block-traffic false \
+> --display-name "ntgw_vcn-prd" \
+> --wait-for-state "AVAILABLE"
+Action completed. Waiting until the resource has entered state: ('AVAILABLE',)
+{
+  "data": {
+    "block-traffic": false,
+    "compartment-id": "ocid1.compartment.oc1..aaaaaaaauvqvbbx3oridcm5d2ztxkftwr362u2vl5zdsayzbehzwbjs56soq",
+    "defined-tags": {
+      "Oracle-Tags": {
+        "CreatedBy": "oracleidentitycloudservice/daniel.armbrust@algumdominio.com",
+        "CreatedOn": "2021-10-06T16:35:53.633Z"
+      }
+    },
+    "display-name": "ntgw_vcn-prd",
+    "freeform-tags": {},
+    "id": "ocid1.natgateway.oc1.sa-saopaulo-1.aaaaaaaaldivjb67v6fbb54yx5pgtkebseejjgjn6kw3zu6fusxvspcchyaa",
+    "lifecycle-state": "AVAILABLE",
+    "nat-ip": "140.238.237.44",
+    "public-ip-id": "ocid1.publicip.oc1.sa-saopaulo-1.aaaaaaaaumw77elrmpp5xgwvovvqwxjfmfu5lb5zmcpguv567jsag5matjqa",
+    "time-created": "2021-10-06T16:35:54.088000+00:00",
+    "vcn-id": "ocid1.vcn.oc1.sa-saopaulo-1.amaaaaaa6noke4qaasugozouqxfpwajtaj3oymelmqwv2i2chmuil5ttesma"
+  },
+  "etag": "69083304--gzip"
+}
+```
+
+```
+darmbrust@hoodwink:~$ oci network route-table update \
+> --rt-id "ocid1.routetable.oc1.sa-saopaulo-1.aaaaaaaae2rhesecc4amfji763v3m324abufiml5asyxd64xfn57e7veipaq" \
+> --route-rules '[{"cidrBlock": "0.0.0.0/0", "networkEntityId": "ocid1.natgateway.oc1.sa-saopaulo-1.aaaaaaaaldivjb67v6fbb54yx5pgtkebseejjgjn6kw3zu6fusxvspcchyaa"},
+> {"cidrBlock": "172.16.30.0/24", "networkEntityId": "ocid1.localpeeringgateway.oc1.sa-saopaulo-1.aaaaaaaa7yc6nig6frgdcl2rpqsblbmotvbda3onjkmxdsbcra4ztmkbvs2a"}]' \
+> --force \
+> --wait-for-state "AVAILABLE"
+Action completed. Waiting until the resource has entered state: ('AVAILABLE',)
+{
+  "data": {
+    "compartment-id": "ocid1.compartment.oc1..aaaaaaaauvqvbbx3oridcm5d2ztxkftwr362u2vl5zdsayzbehzwbjs56soq",
+    "defined-tags": {
+      "Oracle-Tags": {
+        "CreatedBy": "oracleidentitycloudservice/daniel.armbrust@algumdominio.com",
+        "CreatedOn": "2021-10-05T17:21:31.182Z"
+      }
+    },
+    "display-name": "Default Route Table for vcn-prd",
+    "freeform-tags": {},
+    "id": "ocid1.routetable.oc1.sa-saopaulo-1.aaaaaaaae2rhesecc4amfji763v3m324abufiml5asyxd64xfn57e7veipaq",
+    "lifecycle-state": "AVAILABLE",
+    "route-rules": [
+      {
+        "cidr-block": "0.0.0.0/0",
+        "description": null,
+        "destination": "0.0.0.0/0",
+        "destination-type": "CIDR_BLOCK",
+        "network-entity-id": "ocid1.natgateway.oc1.sa-saopaulo-1.aaaaaaaaldivjb67v6fbb54yx5pgtkebseejjgjn6kw3zu6fusxvspcchyaa"
+      },
+      {
+        "cidr-block": "172.16.30.0/24",
+        "description": null,
+        "destination": "172.16.30.0/24",
+        "destination-type": "CIDR_BLOCK",
+        "network-entity-id": "ocid1.localpeeringgateway.oc1.sa-saopaulo-1.aaaaaaaa7yc6nig6frgdcl2rpqsblbmotvbda3onjkmxdsbcra4ztmkbvs2a"
+      }
+    ],
+    "time-created": "2021-10-05T17:21:31.275000+00:00",
+    "vcn-id": "ocid1.vcn.oc1.sa-saopaulo-1.amaaaaaa6noke4qaasugozouqxfpwajtaj3oymelmqwv2i2chmuil5ttesma"
+  },
+  "etag": "4e515a83"
+}
+```
+
+Perceba que atualizar um recurso é no modo _"tudo ou nada"_. Não há atualização incremental. Neste caso, eu tive que inserir as duas regras na _[tabela de roteamento](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingroutetables.htm)_.
