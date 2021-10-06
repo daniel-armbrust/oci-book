@@ -405,3 +405,26 @@ Action completed. Waiting until the resource has entered state: ('AVAILABLE',)
 ```
 
 Pronto! Agora as redes já se _"falam"_.
+
+#### Teste de conectividade
+
+Para demonstrar a conectividade entre essas duas redes, na subrede de produção _"subnprv_vcn-prd"_ irei provisionar uma instância e na subrede _"subnprv_vcn-db"_, será provisionado um banco de dados _[MySQL](https://docs.oracle.com/pt-br/iaas/mysql-database/index.html)_.
+
+Antes de qualquer provisionamento, irei ajustas ambas as _[security list](https://docs.oracle.com/pt-br/iaas/Content/Network/Concepts/securitylists.htm)_ para permitir tráfego total:
+
+```
+darmbrust@hoodwink:~$ oci network security-list update \
+> --security-list-id "ocid1.securitylist.oc1.sa-saopaulo-1.aaaaaaaass5hvduram6ehbzrzo6fyhflw7zewdsji45w5t3aq2m3agvsqnkq" \
+> --egress-security-rules '[{"destination": "0.0.0.0/0", "protocol": "all", "isStateless": false}]' \
+> --ingress-security-rules '[{"source": "0.0.0.0/0", "protocol": "all", "isStateless": false}]' \
+> --force --wait-for-state "AVAILABLE"
+```
+
+```
+darmbrust@hoodwink:~$ oci network security-list update \
+> --security-list-id "ocid1.securitylist.oc1.sa-saopaulo-1.aaaaaaaakiuso7lpjmfgbqeopmc75vusixj3cwkrpycc5356d7h36nrdxmcq" \
+> --egress-security-rules '[{"destination": "0.0.0.0/0", "protocol": "all", "isStateless": false}]' \
+> --ingress-security-rules '[{"source": "0.0.0.0/0", "protocol": "all", "isStateless": false}]' \
+> --force \
+> --wait-for-state "AVAILABLE"
+```

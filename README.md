@@ -55,6 +55,8 @@ Esse livro apresenta o **OCI (Oracle Cloud Infraestructure)** e por quê você d
     [5.7 - Múltiplos DRGs e múltiplas VCNs](https://github.com/daniel-armbrust/oci-book/blob/main/chapter-5/5-7_mais-sobre-redes-multiplos-drgs-multiplos-vcns.md) <br>
 
 - [Capítulo 6: Storage no OCI](https://github.com/daniel-armbrust/oci-book/blob/main/chapter-6/README.md) <br>
+    [6.1 - Object Storage]() <br>
+    [6.2 - Criando um site sem servidor]() <br>
 
 - [Capítulo 7: Banco de Dados](https://github.com/daniel-armbrust/oci-book/blob/main/chapter-7/README.md) <br>
     [7.1 - MySQL](https://github.com/daniel-armbrust/oci-book/blob/main/chapter-7/7-1_mysql.md) <br>
@@ -63,6 +65,14 @@ Esse livro apresenta o **OCI (Oracle Cloud Infraestructure)** e por quê você d
     7.4 - Autonomous DB <br>
     7.5 - Oracle NoSQL <br>
 
-- Capítulo 6: Criando um site sem servidor.
+- [Capítulo 8: A aplicação FotoGal](https://github.com/daniel-armbrust/oci-book/blob/main/chapter-8/README.md) <br>
 
-- Capítulo 7: Portal de anuncio de veículos
+- [Capítulo 9: Segurança no OCI](https://github.com/daniel-armbrust/oci-book/blob/main/chapter-9/README.md) <br>
+    9.1 - Zonas de Segurança
+    9.2 - Security Advisor
+    9.3 - Serviço Vault
+    9.4 - Verificação de Vulnerabilidades
+    9.5 - Detecção de Anomalia
+    9.6 - Oracle Cloud Advisor
+    9.7 - Cloud Guard
+    9.8 - Oracle Ksplice   
