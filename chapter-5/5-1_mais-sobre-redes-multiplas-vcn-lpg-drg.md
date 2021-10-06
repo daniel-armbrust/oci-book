@@ -408,7 +408,7 @@ Pronto! Agora as redes já se _"falam"_.
 
 #### Teste de conectividade
 
-Para demonstrar a conectividade entre essas duas redes, na subrede de produção _"subnprv_vcn-prd"_ irei provisionar uma instância e na subrede _"subnprv_vcn-db"_, será provisionado um banco de dados _[MySQL](https://docs.oracle.com/pt-br/iaas/mysql-database/index.html)_.
+Para demonstrar a conectividade entre essas duas redes, irei criar na subrede de produção _"subnprv_vcn-prd"_ uma instância, e na subrede _"subnprv_vcn-db"_ um banco de dados _[MySQL](https://docs.oracle.com/pt-br/iaas/mysql-database/index.html)_.
 
 Antes de qualquer provisionamento, irei ajustas ambas as _[security list](https://docs.oracle.com/pt-br/iaas/Content/Network/Concepts/securitylists.htm)_ para permitir tráfego total:
 
