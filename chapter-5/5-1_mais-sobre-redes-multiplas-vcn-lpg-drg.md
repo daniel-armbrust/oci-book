@@ -677,15 +677,16 @@ Após uma _[sessão SSH](https://docs.oracle.com/pt-br/iaas/Content/Bastion/Conc
        valid_lft 84736sec preferred_lft 84736sec
     inet6 fe80::17ff:fe02:1f88/64 scope link
        valid_lft forever preferred_lft forever
+
 [opc@vmlnx-1 ~]$ ping -c 3 172.16.30.225
 PING 172.16.30.225 (172.16.30.225) 56(84) bytes of data.
-64 bytes from 172.16.30.225: icmp_seq=1 ttl=64 time=0.410 ms
-64 bytes from 172.16.30.225: icmp_seq=2 ttl=64 time=0.413 ms
-64 bytes from 172.16.30.225: icmp_seq=3 ttl=64 time=0.768 ms
+64 bytes from 172.16.30.225: icmp_seq=1 ttl=64 time=0.334 ms
+64 bytes from 172.16.30.225: icmp_seq=2 ttl=64 time=0.467 ms
+64 bytes from 172.16.30.225: icmp_seq=3 ttl=64 time=0.435 ms
 
 --- 172.16.30.225 ping statistics ---
-3 packets transmitted, 3 received, 0% packet loss, time 2088ms
-rtt min/avg/max/mdev = 0.410/0.530/0.768/0.169 ms
+3 packets transmitted, 3 received, 0% packet loss, time 2067ms
+rtt min/avg/max/mdev = 0.334/0.412/0.467/0.056 ms
 ```
 
 >_**__NOTA:__** Para criar uma [sessão SSH](https://docs.oracle.com/pt-br/iaas/Content/Bastion/Concepts/bastionoverview.htm#session_types) através do [serviço bastion](https://docs.oracle.com/pt-br/iaas/Content/Bastion/Concepts/bastionoverview.htm), consulte o capítulo "[3.3 - Apresentando o Serviço Bastion](https://github.com/daniel-armbrust/oci-book/blob/main/chapter-3/3-3_servico-bastion.md)"_.
