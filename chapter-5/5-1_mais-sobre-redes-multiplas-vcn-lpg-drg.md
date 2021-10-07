@@ -600,7 +600,7 @@ darmbrust@hoodwink:~$ oci compute instance launch \
 
 ```
 darmbrust@hoodwink:~$ oci mysql db-system create \
-> --compartment-id "ocid1.compartment.oc1..aaaaaaaamcff6exkhvp4aq3ubxib2wf74v7cx22b3yj56jnfkazoissdzefq" \
+> --compartment-id "ocid1.compartment.oc1..aaaaaaaa6d2s5sgmxmyxu2vca3pn46y56xisijjyhdjwgqg3f6goh3obj4qq" \
 > --availability-domain "ynrK:SA-SAOPAULO-1-AD-1" \
 > --subnet-id "ocid1.subnet.oc1.sa-saopaulo-1.aaaaaaaa5v2vsetv73xem2hlxf25uibpwcvci6nifidj3b6enf52m6bgy7ua" \
 > --shape-name "VM.Standard.E2.1" \
@@ -623,7 +623,7 @@ darmbrust@hoodwink:~$ oci mysql db-system create \
       "window-start-time": "05:10"
     },
     "channels": [],
-    "compartment-id": "ocid1.compartment.oc1..aaaaaaaamcff6exkhvp4aq3ubxib2wf74v7cx22b3yj56jnfkazoissdzefq",
+    "compartment-id": "ocid1.compartment.oc1..aaaaaaaa6d2s5sgmxmyxu2vca3pn46y56xisijjyhdjwgqg3f6goh3obj4qq",
     "configuration-id": "ocid1.mysqlconfiguration.oc1..aaaaaaaah6o6qu3gdbxnqg6aw56amnosmnaycusttaa7abyq2tdgpgubvsgi",
     "current-placement": {
       "availability-domain": null,
@@ -706,6 +706,36 @@ Começaremos demonstrando como conectar diferentes _[VCNs](https://docs.oracle.c
 
 >_**__NOTA:__** Um [DRG](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingDRGs.htm) criado antes de 17 de maio de 2021 usa software legado. Somente o [DRG](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingDRGs.htm) que é criado recentemente consegue anexar múltiplas [VCNs](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingVCNs_topic-Overview_of_VCNs_and_Subnets.htm). O processo de upgrade é automatizado e não há opção de fazer rollback para um [DRG](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingDRGs.htm) legado, depois que o processo de upgrade foi iniciado. De qualquer forma, sua atualização é um processo recomendado. Consulte os detalhes neste [link aqui](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingDRGs.htm#overview)._
 
-```
+A criação do _[DRG](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingDRGs.htm)_ é bem simples e pode ser feita com o comando abaixo:
 
+```
+darmbrust@hoodwink:~$ oci network drg create \
+> --compartment-id "ocid1.compartment.oc1..aaaaaaaauvqvbbx3oridcm5d2ztxkftwr362u2vl5zdsayzbehzwbjs56soq" \
+> --display-name "drg_saopaulo" \
+> --wait-for-state "AVAILABLE"
+Action completed. Waiting until the resource has entered state: ('AVAILABLE',)
+{
+  "data": {
+    "compartment-id": "ocid1.compartment.oc1..aaaaaaaauvqvbbx3oridcm5d2ztxkftwr362u2vl5zdsayzbehzwbjs56soq",
+    "default-drg-route-tables": {
+      "ipsec-tunnel": "ocid1.drgroutetable.oc1.sa-saopaulo-1.aaaaaaaay66egq4uteae2xc4heaaz3sevjcixonho3f2gv3ayl76ma2arq3a",
+      "remote-peering-connection": "ocid1.drgroutetable.oc1.sa-saopaulo-1.aaaaaaaay66egq4uteae2xc4heaaz3sevjcixonho3f2gv3ayl76ma2arq3a",
+      "vcn": "ocid1.drgroutetable.oc1.sa-saopaulo-1.aaaaaaaa3cedvhht3rt6o27epz4ynzlprs3ng6f7e7y5ljre7zuihz7qnerq",
+      "virtual-circuit": "ocid1.drgroutetable.oc1.sa-saopaulo-1.aaaaaaaay66egq4uteae2xc4heaaz3sevjcixonho3f2gv3ayl76ma2arq3a"
+    },
+    "default-export-drg-route-distribution-id": "ocid1.drgroutedistribution.oc1.sa-saopaulo-1.aaaaaaaabnd6snscysni23phvqwvuhkcm3p2qoafirguzxh62dizbtftceya",
+    "defined-tags": {
+      "Oracle-Tags": {
+        "CreatedBy": "oracleidentitycloudservice/daniel.armbrust@algumdominio.com",
+        "CreatedOn": "2021-10-07T13:37:20.495Z"
+      }
+    },
+    "display-name": "drg_saopaulo",
+    "freeform-tags": {},
+    "id": "ocid1.drg.oc1.sa-saopaulo-1.aaaaaaaapysyr2tysnoqlsrbss6cjibexcjzgbygh7rheranpnfo6hdhrfpq",
+    "lifecycle-state": "AVAILABLE",
+    "time-created": "2021-10-07T13:37:20.536000+00:00"
+  },
+  "etag": "69199825--gzip"
+}
 ```
