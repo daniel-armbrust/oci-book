@@ -690,3 +690,16 @@ rtt min/avg/max/mdev = 0.334/0.412/0.467/0.056 ms
 ```
 
 >_**__NOTA:__** Para criar uma [sessão SSH](https://docs.oracle.com/pt-br/iaas/Content/Bastion/Concepts/bastionoverview.htm#session_types) através do [serviço bastion](https://docs.oracle.com/pt-br/iaas/Content/Bastion/Concepts/bastionoverview.htm) consulte o capítulo "[3.3 - Apresentando o Serviço Bastion](https://github.com/daniel-armbrust/oci-book/blob/main/chapter-3/3-3_servico-bastion.md)"_.
+
+### __Dynamic Routing Gateway (DRG)__
+
+_[DRG](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingDRGs.htm)_ ou _[Dynamic Routing Gateway](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingDRGs.htm)_, é uma espécie de _"roteador virtual"_ no qual você pode anexar diferentes recursos de redes:
+
+- _[VCNs](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingVCNs_topic-Overview_of_VCNs_and_Subnets.htm)_
+- _[Remote Peering Gateway (RPG)](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/remoteVCNpeering.htm#Remote_VCN_Peering_Across_Regions)_ para conectar redes existentes em diferentes regiões.
+- _[Túneis IPSec (VPN Site-To-Site)](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/overviewIPsec.htm)_.
+- _[FastConnect](https://docs.oracle.com/pt-br/iaas/Content/Network/Concepts/fastconnect.htm)_
+
+É o _[DRG](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingDRGs.htm)_ quem possibilita conectividade do seu _data center local (on-premises)_ ao _[OCI](https://www.oracle.com/cloud/)_, seja via _[VPN](https://pt.wikipedia.org/wiki/Rede_privada_virtual)_ ou através de _link dedicado ([FastConnect](https://docs.oracle.com/pt-br/iaas/Content/Network/Concepts/fastconnect.htm))_. Uma outra funcionalidade do _[DRG](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingDRGs.htm)_ está em possibilitar conectividade de redes existentes em diferentes regiões através do _[Remote Peering Gateway (RPG)](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/remoteVCNpeering.htm#Remote_VCN_Peering_Across_Regions)_.
+
+Aqui, irei demonstrar como conectar diferentes _[VCNs](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingVCNs_topic-Overview_of_VCNs_and_Subnets.htm)_ através do _[DRG](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingDRGs.htm)_ que se assemelha a uma _[rede em estrela](https://pt.wikipedia.org/wiki/Rede_em_estrela)_.
