@@ -6,7 +6,7 @@
 
 A infraestrutura do OCI está presente em diversas regiões do mundo. As regiões são os locais onde a Oracle tem infraestrutura instalada. De tempos em tempos, a Oracle cria e expande suas regiões.
 
-Um dos critérios utilizados para a escolha de uma região, está na proximidade do data center aos seus clientes. Quanto menor essa distância, menor a latência e melhor a experiência na utilização dos serviços.  
+Um dos critérios utilizados para a escolha de uma _[região](https://www.oracle.com/cloud/data-regions/)_, está na proximidade do data center aos seus clientes. Quanto menor essa distância, menor a latência e melhor a experiência na utilização dos serviços.  
 
 Esta diversidade geográfica pode ser vista na imagem abaixo:
 
@@ -47,9 +47,9 @@ darmbrust@hoodwink:~$ oci iam region list --output table
 
 >_**__NOTA:__** Consulte este [link](https://www.oracle.com/cloud/architecture-and-regions/) para uma visão atualizada sobre o mapa de regiões._
 
-Uma região é composta de múltiplos data centes isolados chamados de _"[Dominios de Disponibilidade (Availability Domains ou AD)](https://docs.oracle.com/pt-br/iaas/Content/General/Concepts/regions.htm#top)"_. Normalmente por região, existem até três _"[Dominios de Disponibilidades](https://docs.oracle.com/pt-br/iaas/Content/General/Concepts/regions.htm#top)"_. Estes não compartilham infraestrutura (energia, refrigeração, rede, etc), são isolados entre si, tolerantes a falhas e dificilmente falham ao mesmo tempo. Caso um _"[dominio de disponibilidade](https://docs.oracle.com/pt-br/iaas/Content/General/Concepts/regions.htm#top)"_ dentro de uma região falhe, ele não afeta a disponibilidade dos outros _"[dominios de disponibilidade](https://docs.oracle.com/pt-br/iaas/Content/General/Concepts/regions.htm#top)"_ existentes na região. Para qualquer região, com apenas um _"[dominio de disponibilidade](https://docs.oracle.com/pt-br/iaas/Content/General/Concepts/regions.htm#top)"_, um segundo _"[dominio de disponibilidade](https://docs.oracle.com/pt-br/iaas/Content/General/Concepts/regions.htm#top)"_ ou região no mesmo país ou área geopolítica será disponibilizada dentro de um ano. A ideia é disponibilizar mais opções de _[recuperação de desastres](https://pt.wikipedia.org/wiki/Recupera%C3%A7%C3%A3o_de_desastres)_ que atendam aos requisitos dos clientes.
+Uma _[região](https://www.oracle.com/cloud/data-regions/)_ é composta de múltiplos data centes isolados chamados de _"[Dominios de Disponibilidade (Availability Domains ou AD)](https://docs.oracle.com/pt-br/iaas/Content/General/Concepts/regions.htm#top)"_. Normalmente por _[região](https://www.oracle.com/cloud/data-regions/)_, existem até três _"[Dominios de Disponibilidades](https://docs.oracle.com/pt-br/iaas/Content/General/Concepts/regions.htm#top)"_. Estes não compartilham infraestrutura (energia, refrigeração, rede, etc), são isolados entre si, tolerantes a falhas e dificilmente falham ao mesmo tempo. Caso um _"[dominio de disponibilidade](https://docs.oracle.com/pt-br/iaas/Content/General/Concepts/regions.htm#top)"_ dentro de uma _[região](https://www.oracle.com/cloud/data-regions/)_ falhe, ele não afeta a disponibilidade dos outros _"[dominios de disponibilidade](https://docs.oracle.com/pt-br/iaas/Content/General/Concepts/regions.htm#top)"_ existentes na _[região](https://www.oracle.com/cloud/data-regions/)_. Para qualquer _[região](https://www.oracle.com/cloud/data-regions/)_, com apenas um _"[dominio de disponibilidade](https://docs.oracle.com/pt-br/iaas/Content/General/Concepts/regions.htm#top)"_, um segundo _"[dominio de disponibilidade](https://docs.oracle.com/pt-br/iaas/Content/General/Concepts/regions.htm#top)"_ ou _[região](https://www.oracle.com/cloud/data-regions/)_ no mesmo país ou área geopolítica será disponibilizada dentro de um ano. A ideia é disponibilizar mais opções de _[recuperação de desastres](https://pt.wikipedia.org/wiki/Recupera%C3%A7%C3%A3o_de_desastres)_ que atendam aos requisitos dos clientes.
 
-Os _"[dominios de disponibilidade](https://docs.oracle.com/pt-br/iaas/Content/General/Concepts/regions.htm#top)_" da mesma região são conectados entre si por uma rede de baixa latência e alta largura de banda. Isto permite que você distribua suas aplicações em data centers diferentes na mesma região, e se comunicando como se estivessem em uma rede local.
+Os _"[dominios de disponibilidade](https://docs.oracle.com/pt-br/iaas/Content/General/Concepts/regions.htm#top)_" da mesma _[região](https://www.oracle.com/cloud/data-regions/)_ são conectados entre si por uma rede de baixa latência e alta largura de banda. Isto permite que você distribua suas aplicações em data centers diferentes na mesma _[região](https://www.oracle.com/cloud/data-regions/)_, e se comunicando como se estivessem em uma rede local.
 
 ![alt_text](./images/ch1_1-2_3.jpg  "Oracle Regions and Availability Domains")
 
@@ -67,16 +67,16 @@ A ideia geral é poder distribuir suas soluções tecnológicas em diferentes re
 
 Resumindo:
 
-- Uma região contém um ou mais data centers chamados de _"[Dominios de Disponibilidade (Availability Domains ou AD)](https://docs.oracle.com/pt-br/iaas/Content/General/Concepts/regions.htm#top)"_.
+- Uma _[região](https://www.oracle.com/cloud/data-regions/)_ contém um ou mais data centers chamados de _"[Dominios de Disponibilidade (Availability Domains ou AD)](https://docs.oracle.com/pt-br/iaas/Content/General/Concepts/regions.htm#top)"_.
 - Um "_[Dominio de Disponibilidade](https://docs.oracle.com/pt-br/iaas/Content/General/Concepts/regions.htm#top)_" contém três "_[Domínios de Falha](https://docs.oracle.com/pt-br/iaas/Content/General/Concepts/regions.htm#fault)_".
 
-Quando criamos ou utilizamos um recurso cloud, é importante sabermos o seu "escopo". Alguns recursos do OCI são específicos da região, como uma rede virtual na nuvem, ou específicos de um _"[dominio de disponibilidade](https://docs.oracle.com/pt-br/iaas/Content/General/Concepts/regions.htm#top)"_, como uma instância de computação. O "escopo" de um recurso pode ser caracterizado como:
+Quando criamos ou utilizamos um recurso cloud, é importante sabermos o seu "escopo". Alguns recursos do OCI são específicos da _[região](https://www.oracle.com/cloud/data-regions/)_, como uma rede virtual na nuvem, ou específicos de um _"[dominio de disponibilidade](https://docs.oracle.com/pt-br/iaas/Content/General/Concepts/regions.htm#top)"_, como uma instância de computação. O "escopo" de um recurso pode ser caracterizado como:
 
 - Global
-    - Por exemplo um usuário criado no seviço global _[IAM](https://docs.oracle.com/pt-br/iaas/Content/Identity/Concepts/overview.htm)_, pode se autenticar em qualquer região disponível.
+    - Por exemplo um usuário criado no seviço global _[IAM](https://docs.oracle.com/pt-br/iaas/Content/Identity/Concepts/overview.htm)_, pode se autenticar em qualquer _[região](https://www.oracle.com/cloud/data-regions/)_ disponível.
         
 - Regional 
-    - Existente dentro de uma região e pode ser acessado por todos os _"[Dominios de Disponibilidade (Availability Domains ou AD)](https://docs.oracle.com/pt-br/iaas/Content/General/Concepts/regions.htm#top)"_ da região.
+    - Existente dentro de uma _[região](https://www.oracle.com/cloud/data-regions/)_ e pode ser acessado por todos os _"[Dominios de Disponibilidade (Availability Domains ou AD)](https://docs.oracle.com/pt-br/iaas/Content/General/Concepts/regions.htm#top)"_ da _[região](https://www.oracle.com/cloud/data-regions/)_.
 
 - Por "_[dominios de disponibilidade](https://docs.oracle.com/pt-br/iaas/Content/General/Concepts/regions.htm#top)_":
     - Por exemplo um bloco de disco. Este que é criado dentro de um _"[dominios de disponibilidade](https://docs.oracle.com/pt-br/iaas/Content/General/Concepts/regions.htm#top)"_ só existe aqui. 
@@ -84,7 +84,7 @@ Quando criamos ou utilizamos um recurso cloud, é importante sabermos o seu "esc
 
 Para os exemplos demonstrados no decorrer do livro, utilizaremos as regiões abaixo:
 
-| Nome da Região | Identificador da Região | Local da Região | Chave da Região | Domínios de Disponibilidade | 
+| Nome da _[região](https://www.oracle.com/cloud/data-regions/)_ | Identificador da _[região](https://www.oracle.com/cloud/data-regions/)_ | Local da _[região](https://www.oracle.com/cloud/data-regions/)_ | Chave da _[região](https://www.oracle.com/cloud/data-regions/)_ | Domínios de Disponibilidade | 
 | -------------- | ----------------------- | --------------- | --------------- | --------------------------- |
 | Brazil East (Sao Paulo) | sa-saopaulo-1  | Sao Paulo, Brazil | GRU | 1
 | Sudeste do Brasil (Vinhedo) | sa-vinhedo-1  | Vinhedo, Brasil | VCP | 1
@@ -167,7 +167,7 @@ ocid1.instance.oc1.sa-saopaulo-1.antxeljr6noke4qc6gXnyfvzfj43135yh2hpvu5li6n5GF5
 
 ### __OCI Status__
 
-_[OCI Status](https://ocistatus.oraclecloud.com)_ ou _[OCI Service Health Dashboard](https://ocistatus.oraclecloud.com)_, é um painel de acesso público que disponibiliza o _"status atual"_ de todos os serviços do OCI por região. Além desta monitoração em tempo real, é possível ver o _[histórico de incidentes](https://ocistatus.oraclecloud.com/history)_ que já ocorreram na infraestrutura do OCI.
+_[OCI Status](https://ocistatus.oraclecloud.com)_ ou _[OCI Service Health Dashboard](https://ocistatus.oraclecloud.com)_, é um painel de acesso público que disponibiliza o _"status atual"_ de todos os serviços do OCI por _[região](https://www.oracle.com/cloud/data-regions/)_. Além desta monitoração em tempo real, é possível ver o _[histórico de incidentes](https://ocistatus.oraclecloud.com/history)_ que já ocorreram na infraestrutura do OCI.
 
 Acesse o _[OCI Status](https://ocistatus.oraclecloud.com)_ através deste _[link aqui](https://ocistatus.oraclecloud.com)_.
 
