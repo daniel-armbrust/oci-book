@@ -793,4 +793,25 @@ Action completed. Waiting until the resource has entered state: ('ATTACHED',)
 }
 ```
 
-Uma [VCN](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingVCNs_topic-Overview_of_VCNs_and_Subnets.htm) só pode ser anexada a apenas um _[DRG](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingDRGs.htm)_ por vez, mas um _[DRG](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingDRGs.htm)_ pode ser anexado a mais de um _[VCN](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingVCNs_topic-Overview_of_VCNs_and_Subnets.htm)_. 
+>_**__NOTA:__** Uma [VCN](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingVCNs_topic-Overview_of_VCNs_and_Subnets.htm) só pode ser anexada a apenas um [DRG](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingDRGs.htm) por vez, mas um [DRG](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingDRGs.htm) pode ser anexado a mais de uma [VCN](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingVCNs_topic-Overview_of_VCNs_and_Subnets.htm)_. 
+
+Será poupado espaço por aqui. A sintaxe geral do comando para anexar as demais _[VCNs](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingVCNs_topic-Overview_of_VCNs_and_Subnets.htm)_ é o mesmo, mudando apenas o _OCID_ e _DISPLAY NAME_ correspondentes.
+
+O comando abaixo exibe as _[VCNs](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingVCNs_topic-Overview_of_VCNs_and_Subnets.htm)_ que foram anexadas ao _[DRG](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingDRGs.htm)_ criado:
+
+```
+darmbrust@hoodwink:~$ oci network drg-attachment list \
+> --compartment-id "ocid1.compartment.oc1..aaaaaaaauvqvbbx3oridcm5d2ztxkftwr362u2vl5zdsayzbehzwbjs56soq" \
+> --drg-id "ocid1.drg.oc1.sa-saopaulo-1.aaaaaaaaonbn7qh4no24ublpdxhlu2solzkgkmoivpvg5ayxh45m3qn2puea" \
+> --attachment-type "VCN" \
+> --all \
+> --query "data[].{\"display-name\":\"display-name\",id:id}" \
+> --output table
++----------------------------+----------------------------------------------------------------------------------------------------+
+| display-name               | id                                                                                                 |
++----------------------------+----------------------------------------------------------------------------------------------------+
+| vcn-prd_attch_drg-saopaulo | ocid1.drgattachment.oc1.sa-saopaulo-1.aaaaaaaavbajhgmvqrdqbquto7icvcv22w4ai5vthzverlbapksov55z4tgq |
+| vcn-dev_attch_drg-saopaulo | ocid1.drgattachment.oc1.sa-saopaulo-1.aaaaaaaaucaaicrg7raskilprcboatfyhhap4yfiam7iv2z5fxg2rcaybmya |
+| vcn-db_attch_drg-saopaulo  | ocid1.drgattachment.oc1.sa-saopaulo-1.aaaaaaaadiz5hjhqhjxbiffh533opvg45oua4lysduukklfqlwflopusnjna |
++----------------------------+----------------------------------------------------------------------------------------------------+
+```
