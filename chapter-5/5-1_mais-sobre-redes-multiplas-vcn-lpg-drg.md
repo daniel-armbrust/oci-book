@@ -797,7 +797,7 @@ Action completed. Waiting until the resource has entered state: ('ATTACHED',)
 
 Será poupado espaço por aqui. A sintaxe geral do comando para anexar as demais _[VCNs](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingVCNs_topic-Overview_of_VCNs_and_Subnets.htm)_ é o mesmo, mudando apenas o _OCID_ e _DISPLAY NAME_ correspondentes.
 
-O comando abaixo exibe as _[VCNs](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingVCNs_topic-Overview_of_VCNs_and_Subnets.htm)_ que foram anexadas ao _[DRG](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingDRGs.htm)_ criado:
+O comando abaixo exibe as _[VCNs](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingVCNs_topic-Overview_of_VCNs_and_Subnets.htm)_ que estão anexadas ao _[DRG](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingDRGs.htm)_:
 
 ```
 darmbrust@hoodwink:~$ oci network drg-attachment list \
