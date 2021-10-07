@@ -693,7 +693,7 @@ rtt min/avg/max/mdev = 0.334/0.412/0.467/0.056 ms
 
 ### __Dynamic Routing Gateway (DRG)__
 
-_[DRG](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingDRGs.htm)_ ou _[Dynamic Routing Gateway](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingDRGs.htm)_, é uma espécie de _"roteador virtual"_ no qual você pode anexar diferentes recursos de redes:
+_[DRG](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingDRGs.htm)_ ou _[Dynamic Routing Gateway](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingDRGs.htm)_, é uma espécie de _"roteador virtual"_ no qual você pode anexar diferentes recursos de redes, sendo eles:
 
 - _[VCNs](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingVCNs_topic-Overview_of_VCNs_and_Subnets.htm)_
 - _[Remote Peering Gateway (RPG)](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/remoteVCNpeering.htm#Remote_VCN_Peering_Across_Regions)_ para conectar redes existentes em diferentes regiões.
