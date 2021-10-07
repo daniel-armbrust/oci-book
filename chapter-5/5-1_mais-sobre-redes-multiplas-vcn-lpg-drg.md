@@ -704,7 +704,7 @@ _[DRG](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingDRGs.htm
 
 Começaremos demonstrando como conectar diferentes _[VCNs](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingVCNs_topic-Overview_of_VCNs_and_Subnets.htm)_ através do _[DRG](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingDRGs.htm)_, que se assemelha a uma _[rede em estrela](https://pt.wikipedia.org/wiki/Rede_em_estrela)_. 
 
-Em sua última atualização, o _[DRG](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingDRGs.htm)_ ganhou a capacidade de poder anexar até _300 [VCNs](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingVCNs_topic-Overview_of_VCNs_and_Subnets.htm)_ nele. Anteriormente, a conectividade entre _[VCNs](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingVCNs_topic-Overview_of_VCNs_and_Subnets.htm)_ era através do _[Local Peering Gateway (LPG)](https://docs.oracle.com/en-us/iaas/Content/Network/Tasks/localVCNpeering.htm#Local_VCN_Peering_Within_Region)_ com um limite máximo de _10 peers_.
+Em sua _[última atualização](https://blogs.oracle.com/cloud-infrastructure/post/introducing-global-connectivity-and-enhanced-cloud-networking-with-the-dynamic-routing-gateway)_, o _[DRG](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingDRGs.htm)_ ganhou a capacidade de poder anexar até _300 [VCNs](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingVCNs_topic-Overview_of_VCNs_and_Subnets.htm)_ nele. Anteriormente, a conectividade entre _[VCNs](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingVCNs_topic-Overview_of_VCNs_and_Subnets.htm)_ era através do _[Local Peering Gateway (LPG)](https://docs.oracle.com/en-us/iaas/Content/Network/Tasks/localVCNpeering.htm#Local_VCN_Peering_Within_Region)_ com um limite máximo de _10 peers_.
 
 >_**__NOTA:__** Um [DRG](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingDRGs.htm) criado antes de 17 de maio de 2021 usa software legado. Somente o [DRG](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingDRGs.htm) que é criado recentemente consegue anexar múltiplas [VCNs](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingVCNs_topic-Overview_of_VCNs_and_Subnets.htm). O processo de upgrade é automatizado, ele redefine as sessões BGP existentes para a VPN Site-to-Site e FastConnect, e não há opção de fazer rollback de volta ao legado. De qualquer forma, sua atualização é um processo recomendado. Consulte os detalhes neste [link aqui](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingDRGs.htm#upgrading_a_drg)._
 
@@ -741,3 +741,21 @@ Action completed. Waiting until the resource has entered state: ('AVAILABLE',)
   "etag": "69199825--gzip"
 }
 ```
+
+De acordo com o nosso exemplo, criei três _[VCNs](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingVCNs_topic-Overview_of_VCNs_and_Subnets.htm)_:
+
+```
+darmbrust@hoodwink:~$ oci network vcn list \
+> --compartment-id "ocid1.compartment.oc1..aaaaaaaauvqvbbx3oridcm5d2ztxkftwr362u2vl5zdsayzbehzwbjs56soq" \
+> --all \
+> --query "data[?contains(\"display-name\", 'vcn-')].{\"display-name\":\"display-name\",id:id,\"cidr-block\":\"cidr-block\"}" \
+> --output table
++----------------+--------------+------------------------------------------------------------------------------------------+
+| cidr-block     | display-name | id                                                                                       |
++----------------+--------------+------------------------------------------------------------------------------------------+
+| 10.0.0.0/16    | vcn-dev      | ocid1.vcn.oc1.sa-saopaulo-1.amaaaaaa6noke4qa73odinzzgqfds2leynhtvlggvhyka3o7jfjhetvt6cyq |
+| 172.16.0.0/16  | vcn-hml      | ocid1.vcn.oc1.sa-saopaulo-1.amaaaaaa6noke4qaqfvrcdah4nx2vxh7kb6goahrflh4gnvz25izp52nkhlq |
+| 192.168.0.0/16 | vcn-prd      | ocid1.vcn.oc1.sa-saopaulo-1.amaaaaaa6noke4qajyhldrnbvs6fbf6yke5dh4z7eiypy4t47pjmac33wb4q |
++----------------+--------------+------------------------------------------------------------------------------------------+
+```
+
