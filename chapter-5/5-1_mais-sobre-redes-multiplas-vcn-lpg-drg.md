@@ -713,32 +713,32 @@ A criação do _[DRG](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/m
 ```
 darmbrust@hoodwink:~$ oci network drg create \
 > --compartment-id "ocid1.compartment.oc1..aaaaaaaauvqvbbx3oridcm5d2ztxkftwr362u2vl5zdsayzbehzwbjs56soq" \
-> --display-name "drg_saopaulo" \
+> --display-name "drg-saopaulo" \
 > --wait-for-state "AVAILABLE"
 Action completed. Waiting until the resource has entered state: ('AVAILABLE',)
 {
   "data": {
     "compartment-id": "ocid1.compartment.oc1..aaaaaaaauvqvbbx3oridcm5d2ztxkftwr362u2vl5zdsayzbehzwbjs56soq",
     "default-drg-route-tables": {
-      "ipsec-tunnel": "ocid1.drgroutetable.oc1.sa-saopaulo-1.aaaaaaaay66egq4uteae2xc4heaaz3sevjcixonho3f2gv3ayl76ma2arq3a",
-      "remote-peering-connection": "ocid1.drgroutetable.oc1.sa-saopaulo-1.aaaaaaaay66egq4uteae2xc4heaaz3sevjcixonho3f2gv3ayl76ma2arq3a",
-      "vcn": "ocid1.drgroutetable.oc1.sa-saopaulo-1.aaaaaaaa3cedvhht3rt6o27epz4ynzlprs3ng6f7e7y5ljre7zuihz7qnerq",
-      "virtual-circuit": "ocid1.drgroutetable.oc1.sa-saopaulo-1.aaaaaaaay66egq4uteae2xc4heaaz3sevjcixonho3f2gv3ayl76ma2arq3a"
+      "ipsec-tunnel": "ocid1.drgroutetable.oc1.sa-saopaulo-1.aaaaaaaa7uiuayzduvzyrvzbyim6qbezc4twbfxhica6ivs6bpjwxncwb2tq",
+      "remote-peering-connection": "ocid1.drgroutetable.oc1.sa-saopaulo-1.aaaaaaaa7uiuayzduvzyrvzbyim6qbezc4twbfxhica6ivs6bpjwxncwb2tq",
+      "vcn": "ocid1.drgroutetable.oc1.sa-saopaulo-1.aaaaaaaa52mtpqflbvzt5xhax4tji3n7xt44vsxofd54wmnj5zbcmr3gxf5a",
+      "virtual-circuit": "ocid1.drgroutetable.oc1.sa-saopaulo-1.aaaaaaaa7uiuayzduvzyrvzbyim6qbezc4twbfxhica6ivs6bpjwxncwb2tq"
     },
-    "default-export-drg-route-distribution-id": "ocid1.drgroutedistribution.oc1.sa-saopaulo-1.aaaaaaaabnd6snscysni23phvqwvuhkcm3p2qoafirguzxh62dizbtftceya",
+    "default-export-drg-route-distribution-id": "ocid1.drgroutedistribution.oc1.sa-saopaulo-1.aaaaaaaaykfkm3ewktdxp2xyfi4o4wqqghqtpbsmmrtkilguzpmruo5pvgza",
     "defined-tags": {
       "Oracle-Tags": {
         "CreatedBy": "oracleidentitycloudservice/daniel.armbrust@algumdominio.com",
-        "CreatedOn": "2021-10-07T13:37:20.495Z"
+        "CreatedOn": "2021-10-07T14:32:48.024Z"
       }
     },
-    "display-name": "drg_saopaulo",
+    "display-name": "drg-saopaulo",
     "freeform-tags": {},
-    "id": "ocid1.drg.oc1.sa-saopaulo-1.aaaaaaaapysyr2tysnoqlsrbss6cjibexcjzgbygh7rheranpnfo6hdhrfpq",
+    "id": "ocid1.drg.oc1.sa-saopaulo-1.aaaaaaaaonbn7qh4no24ublpdxhlu2solzkgkmoivpvg5ayxh45m3qn2puea",
     "lifecycle-state": "AVAILABLE",
-    "time-created": "2021-10-07T13:37:20.536000+00:00"
+    "time-created": "2021-10-07T14:32:48.056000+00:00"
   },
-  "etag": "69199825--gzip"
+  "etag": "69204645--gzip"
 }
 ```
 
@@ -753,9 +753,44 @@ darmbrust@hoodwink:~$ oci network vcn list \
 +----------------+--------------+------------------------------------------------------------------------------------------+
 | cidr-block     | display-name | id                                                                                       |
 +----------------+--------------+------------------------------------------------------------------------------------------+
-| 10.0.0.0/16    | vcn-dev      | ocid1.vcn.oc1.sa-saopaulo-1.amaaaaaa6noke4qa73odinzzgqfds2leynhtvlggvhyka3o7jfjhetvt6cyq |
-| 172.16.0.0/16  | vcn-hml      | ocid1.vcn.oc1.sa-saopaulo-1.amaaaaaa6noke4qaqfvrcdah4nx2vxh7kb6goahrflh4gnvz25izp52nkhlq |
-| 192.168.0.0/16 | vcn-prd      | ocid1.vcn.oc1.sa-saopaulo-1.amaaaaaa6noke4qajyhldrnbvs6fbf6yke5dh4z7eiypy4t47pjmac33wb4q |
+| 172.16.0.0/16  | vcn-db       | ocid1.vcn.oc1.sa-saopaulo-1.amaaaaaa6noke4qa6jfxe5kay2cqjgo3lvb4mg5prscmpo62t2mk4h6wxsqa |
+| 10.0.0.0/16    | vcn-dev      | ocid1.vcn.oc1.sa-saopaulo-1.amaaaaaa6noke4qalaq2ftbdwt3ximh5gxgfrybjoj4xhzirdyka5pmsiysa |
+| 192.168.0.0/16 | vcn-prd      | ocid1.vcn.oc1.sa-saopaulo-1.amaaaaaa6noke4qafpwo6g7txowljx2dvdppnavruldbydbi3wvzaxr33d7q |
 +----------------+--------------+------------------------------------------------------------------------------------------+
 ```
 
+Uma _[VCN](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingVCNs_topic-Overview_of_VCNs_and_Subnets.htm)_ é anexada (atachada) ao _[DRG](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingDRGs.htm)_ através do comando abaixo:
+
+```
+darmbrust@hoodwink:~$ oci network drg-attachment create \
+> --drg-id "ocid1.drg.oc1.sa-saopaulo-1.aaaaaaaaonbn7qh4no24ublpdxhlu2solzkgkmoivpvg5ayxh45m3qn2puea" \
+> --vcn-id "ocid1.vcn.oc1.sa-saopaulo-1.amaaaaaa6noke4qa6jfxe5kay2cqjgo3lvb4mg5prscmpo62t2mk4h6wxsqa" \
+> --display-name "vcn-db_attch_drg-saopaulo" \
+> --wait-for-state "ATTACHED"
+Action completed. Waiting until the resource has entered state: ('ATTACHED',)
+{
+  "data": {
+    "compartment-id": "ocid1.compartment.oc1..aaaaaaaauvqvbbx3oridcm5d2ztxkftwr362u2vl5zdsayzbehzwbjs56soq",
+    "defined-tags": {},
+    "display-name": "vcn-db_attch_drg-saopaulo",
+    "drg-id": "ocid1.drg.oc1.sa-saopaulo-1.aaaaaaaaonbn7qh4no24ublpdxhlu2solzkgkmoivpvg5ayxh45m3qn2puea",
+    "drg-route-table-id": "ocid1.drgroutetable.oc1.sa-saopaulo-1.aaaaaaaa52mtpqflbvzt5xhax4tji3n7xt44vsxofd54wmnj5zbcmr3gxf5a",
+    "export-drg-route-distribution-id": null,
+    "freeform-tags": {},
+    "id": "ocid1.drgattachment.oc1.sa-saopaulo-1.aaaaaaaadiz5hjhqhjxbiffh533opvg45oua4lysduukklfqlwflopusnjna",
+    "is-cross-tenancy": false,
+    "lifecycle-state": "ATTACHED",
+    "network-details": {
+      "id": "ocid1.vcn.oc1.sa-saopaulo-1.amaaaaaa6noke4qa6jfxe5kay2cqjgo3lvb4mg5prscmpo62t2mk4h6wxsqa",
+      "route-table-id": null,
+      "type": "VCN"
+    },
+    "route-table-id": null,
+    "time-created": "2021-10-07T16:51:50.739000+00:00",
+    "vcn-id": "ocid1.vcn.oc1.sa-saopaulo-1.amaaaaaa6noke4qa6jfxe5kay2cqjgo3lvb4mg5prscmpo62t2mk4h6wxsqa"
+  },
+  "etag": "69217292--gzip"
+}
+```
+
+Uma [VCN](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingVCNs_topic-Overview_of_VCNs_and_Subnets.htm) só pode ser anexada a apenas um _[DRG](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingDRGs.htm)_ por vez, mas um _[DRG](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingDRGs.htm)_ pode ser anexado a mais de um _[VCN](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingVCNs_topic-Overview_of_VCNs_and_Subnets.htm)_. 
