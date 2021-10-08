@@ -837,7 +837,7 @@ darmbrust@hoodwink:~$ oci network route-table create \
 > --wait-for-state "AVAILABLE"
 ```
 
-  - Tabela de Roteamento
+    - Tabela de Roteamento
 
 ```
 darmbrust@hoodwink:~$ oci network security-list create \
