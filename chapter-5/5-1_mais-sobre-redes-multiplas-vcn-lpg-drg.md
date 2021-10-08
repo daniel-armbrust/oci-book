@@ -818,7 +818,7 @@ darmbrust@hoodwink:~$ oci network drg-attachment list \
 
 #### Ajustes no roteamento
 
-- **VCN de Banco de Dados (vcn-db)**
+- VCN de Banco de Dados (vcn-db)
 
 ```
 darmbrust@hoodwink:~$ oci network route-table create \
