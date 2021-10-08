@@ -826,12 +826,26 @@ Abaixo, irei criar uma tabela de roteamento para cada subrede de cada _[VCN](htt
 
 - **vcn-prd**
 
+    - Tabela de Roteamento
+
 ```
 darmbrust@hoodwink:~$ oci network route-table create \
 > --compartment-id "ocid1.compartment.oc1..aaaaaaaauvqvbbx3oridcm5d2ztxkftwr362u2vl5zdsayzbehzwbjs56soq" \
 > --vcn-id "ocid1.vcn.oc1.sa-saopaulo-1.amaaaaaa6noke4qafpwo6g7txowljx2dvdppnavruldbydbi3wvzaxr33d7q" \
 > --display-name "rtb_subnprv_vcn-prd" \
 > --route-rules '[{"destination": "172.16.60.0/24", "destinationType": "CIDR_BLOCK", "networkEntityId": "ocid1.drg.oc1.sa-saopaulo-1.aaaaaaaaonbn7qh4no24ublpdxhlu2solzkgkmoivpvg5ayxh45m3qn2puea"}]' \
+> --wait-for-state "AVAILABLE"
+```
+
+    - Security List
+
+```
+darmbrust@hoodwink:~$ oci network security-list create \
+> --compartment-id "ocid1.compartment.oc1..aaaaaaaaie4exnvj2ktkjlliahl2bxmdnteu2xmn27oc5cy5mdcmocl4vd7q" \
+> --egress-security-rules '[{"destination": "0.0.0.0/0", "protocol": "all", "isStateless": false}]' \
+> --ingress-security-rules '[]' \
+> --vcn-id "ocid1.vcn.oc1.sa-saopaulo-1.amaaaaaa6noke4qafpwo6g7txowljx2dvdppnavruldbydbi3wvzaxr33d7q" \
+> --display-name "secl-1_subnprv_vcn-prd" \
 > --wait-for-state "AVAILABLE"
 ```
 
@@ -850,7 +864,7 @@ darmbrust@hoodwink:~$ oci network route-table create \
 
 Aqui merece uma simples explicação. 
 
-Foi criado uma rede para hospedar os bancos de dados de produção _(subnprv-prd_vcn-db)_ e desenvolvimento _(subnprv-dev_vcn-db)_, cada um na sua respectiva subrede. Cada subrede tem sua própria _[tabela de roteamento](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingroutetables.htm)_ que possibilita a conectividade com seu destino correspondente através do _[DRG](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingDRGs.htm)_.
+Foi criado uma rede para hospedar os bancos de dados de produção _(subnprv-prd_vcn-db)_ e desenvolvimento _(subnprv-dev_vcn-db)_. Cada subrede tem sua própria _[tabela de roteamento](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingroutetables.htm)_ que possibilita a conectividade com seu destino correspondente através do _[DRG](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingDRGs.htm)_.
 
 ```
 darmbrust@hoodwink:~$ oci network route-table create \
@@ -870,3 +884,4 @@ darmbrust@hoodwink:~$ oci network route-table create \
 > --wait-for-state "AVAILABLE"
 ```
 
+Para não ficar algo muito repetitivo, será poupado espaço por aqui também. A criação das subredes e _[security list](https://docs.oracle.com/pt-br/iaas/Content/Network/Concepts/securitylists.htm)_ já é algo conhecido.
