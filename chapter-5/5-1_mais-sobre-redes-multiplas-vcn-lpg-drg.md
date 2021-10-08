@@ -850,7 +850,7 @@ darmbrust@hoodwink:~$ oci network route-table create \
 
 Aqui merece uma simples explicação. 
 
-Foi criado uma rede para hospedar os bancos de dados, tanto de produção (subnprv-prd_vcn-db) quanto de desenvolvimento (subnprv-dev_vcn-db), cada um na sua respectiva subrede. Cada subrede tem sua própria _[tabela de roteamento](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingroutetables.htm)_ que possibilita a conectividade com seu destino correspondente através do _[DRG](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingDRGs.htm)_.
+Foi criado uma rede para hospedar os bancos de dados, tanto de produção _(subnprv-prd_vcn-db)_ quanto de desenvolvimento _(subnprv-dev_vcn-db)_, cada um na sua respectiva subrede. Cada subrede tem sua própria _[tabela de roteamento](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingroutetables.htm)_ que possibilita a conectividade com seu destino correspondente através do _[DRG](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingDRGs.htm)_.
 
 ```
 darmbrust@hoodwink:~$ oci network route-table create \
