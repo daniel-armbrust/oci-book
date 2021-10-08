@@ -817,3 +817,14 @@ darmbrust@hoodwink:~$ oci network drg-attachment list \
 ```
 
 #### Ajustes no roteamento
+
+- **VCN de Banco de Dados (vcn-db)**
+
+```
+darmbrust@hoodwink:~$ oci network route-table create \
+> --compartment-id "ocid1.compartment.oc1..aaaaaaaauvqvbbx3oridcm5d2ztxkftwr362u2vl5zdsayzbehzwbjs56soq" \
+> --vcn-id "ocid1.vcn.oc1.sa-saopaulo-1.amaaaaaa6noke4qa6jfxe5kay2cqjgo3lvb4mg5prscmpo62t2mk4h6wxsqa" \
+> --display-name "rtb_subnprv-prd_vcn-db" \
+> --route-rules '[{"destination":"192.168.20.0/24", "destinationType": "CIDR_BLOCK", "networkEntityId": "ocid1.drg.oc1.sa-saopaulo-1.aaaaaaaaonbn7qh4no24ublpdxhlu2solzkgkmoivpvg5ayxh45m3qn2puea"}]' \
+> --wait-for-state "AVAILABLE"
+```
