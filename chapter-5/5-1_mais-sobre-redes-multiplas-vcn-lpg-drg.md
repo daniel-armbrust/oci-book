@@ -826,7 +826,7 @@ Abaixo, irei criar uma tabela de roteamento para cada subrede de cada _[VCN](htt
 
 - **vcn-prd**
 
-    - Tabela de Roteamento
+- Tabela de Roteamento
 
 ```
 darmbrust@hoodwink:~$ oci network route-table create \
@@ -837,7 +837,7 @@ darmbrust@hoodwink:~$ oci network route-table create \
 > --wait-for-state "AVAILABLE"
 ```
 
-    - Tabela de Roteamento
+- Security List
 
 ```
 darmbrust@hoodwink:~$ oci network security-list create \
