@@ -818,6 +818,32 @@ darmbrust@hoodwink:~$ oci network drg-attachment list \
 
 #### Ajustes no roteamento
 
+Depois das _[VCNs](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingVCNs_topic-Overview_of_VCNs_and_Subnets.htm)_ estarem anexadas ao _[DRG](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingDRGs.htm)_, para se ter conectividade é muito simples. A partir da subrede de origem, todo o tráfego de destino que se deseja alcançar, basta que o mesmo _"aponte"_ para o _[DRG](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingDRGs.htm)_.
+
+Abaixo, irei criar uma tabela de roteamento para cada subrede de cada _[VCN](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingVCNs_topic-Overview_of_VCNs_and_Subnets.htm)_ criada, com os destinos que quero alcançar já configurados.
+
+- **vcn-prd**
+
+```
+darmbrust@hoodwink:~$ oci network route-table create \
+> --compartment-id "ocid1.compartment.oc1..aaaaaaaauvqvbbx3oridcm5d2ztxkftwr362u2vl5zdsayzbehzwbjs56soq" \
+> --vcn-id "ocid1.vcn.oc1.sa-saopaulo-1.amaaaaaa6noke4qafpwo6g7txowljx2dvdppnavruldbydbi3wvzaxr33d7q" \
+> --display-name "rtb_subnprv_vcn-prd" \
+> --route-rules '[{"destination": "172.16.60.0/24", "destinationType": "CIDR_BLOCK", "networkEntityId": "ocid1.drg.oc1.sa-saopaulo-1.aaaaaaaaonbn7qh4no24ublpdxhlu2solzkgkmoivpvg5ayxh45m3qn2puea"}]' \
+> --wait-for-state "AVAILABLE"
+```
+
+- **vcn-dev**
+
+```
+darmbrust@hoodwink:~$ oci network route-table create \
+> --compartment-id "ocid1.compartment.oc1..aaaaaaaauvqvbbx3oridcm5d2ztxkftwr362u2vl5zdsayzbehzwbjs56soq" \
+> --vcn-id "ocid1.vcn.oc1.sa-saopaulo-1.amaaaaaa6noke4qalaq2ftbdwt3ximh5gxgfrybjoj4xhzirdyka5pmsiysa" \
+> --display-name "rtb_subnprv_vcn-dev" \
+> --route-rules '[{"destination": "172.16.30.0/24", "destinationType": "CIDR_BLOCK", "networkEntityId": "ocid1.drg.oc1.sa-saopaulo-1.aaaaaaaaonbn7qh4no24ublpdxhlu2solzkgkmoivpvg5ayxh45m3qn2puea"}]' \
+> --wait-for-state "AVAILABLE"
+```
+
 - **vcn-db**
 
 ```
@@ -837,3 +863,4 @@ darmbrust@hoodwink:~$ oci network route-table create \
 > --route-rules '[{"destination":"10.0.10.0/24", "destinationType": "CIDR_BLOCK", "networkEntityId": "ocid1.drg.oc1.sa-saopaulo-1.aaaaaaaaonbn7qh4no24ublpdxhlu2solzkgkmoivpvg5ayxh45m3qn2puea"}]' \
 > --wait-for-state "AVAILABLE"
 ```
+
