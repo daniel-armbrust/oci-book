@@ -815,3 +815,5 @@ darmbrust@hoodwink:~$ oci network drg-attachment list \
 | vcn-db_attch_drg-saopaulo  | ocid1.drgattachment.oc1.sa-saopaulo-1.aaaaaaaadiz5hjhqhjxbiffh533opvg45oua4lysduukklfqlwflopusnjna |
 +----------------------------+----------------------------------------------------------------------------------------------------+
 ```
+
+#### Ajustes no roteamento
