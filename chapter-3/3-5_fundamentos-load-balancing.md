@@ -23,7 +23,7 @@ Pelo fato do _[Network Load Balancing (NLB)](https://docs.oracle.com/pt-br/iaas/
 
 Como aqui estamos falando de uma aplicação Web, o _[Wordpress](https://pt.wikipedia.org/wiki/WordPress)_, iremos nos atentar aos detalhes que envolvem o _[Application Load Balancing](https://docs.oracle.com/pt-br/iaas/Content/Balance/Concepts/balanceoverview.htm)_ de _[camada 7](https://pt.wikipedia.org/wiki/Camada_de_aplica%C3%A7%C3%A3o)_. Porém, muito dos conceitos que iremos aprensentar abaixo, se aplicam a ambos balanceadores de cargas.
 
->_**__NOTA:__** Irei utilizar o termo [Load Balancing (LB)](https://docs.oracle.com/pt-br/iaas/Content/Balance/Concepts/balanceoverview.htm) para se referir aos dois tipos presentes no [OCI](https://www.oracle.com/cloud/). Quando houver diferença, o tipo exato será mencionado._
+>_**__NOTA:__** Irei utilizar o termo [Load Balancing (LB)](https://docs.oracle.com/pt-br/iaas/Content/Balance/Concepts/balanceoverview.htm) para se referir aos dois tipos de balanceador de carga presentes no [OCI](https://www.oracle.com/cloud/). Quando houver diferença, o tipo exato será mencionado._
 
 - **Público ou Privado**
     - Um balanceador de carga _**público**_ é criado em uma subrede pública com um endereço IP público e acessível pela internet. Este pode ser criado em uma subrede regional no qual irá consumir dois endereços IPs privados, ou pode ser criado em duas subredes públicas sobre dois _[ADs](https://docs.oracle.com/pt-br/iaas/Content/General/Concepts/regions.htm#About)_ diferentes, consumindo dois endereços IPs privados por _[ADs](https://docs.oracle.com/pt-br/iaas/Content/General/Concepts/regions.htm#About)_.
