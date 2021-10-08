@@ -818,15 +818,15 @@ darmbrust@hoodwink:~$ oci network drg-attachment list \
 +----------------------------+----------------------------------------------------------------------------------------------------+
 ```
 
-#### Ajustes no roteamento
+#### Criação dos demais recursos e ajustes no roteamento
 
 Depois das _[VCNs](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingVCNs_topic-Overview_of_VCNs_and_Subnets.htm)_ estarem anexadas ao _[DRG](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingDRGs.htm)_, para se ter conectividade é muito simples. A partir da subrede de origem, todo o tráfego de destino que se deseja alcançar, basta que o mesmo _"aponte"_ para o _[DRG](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingDRGs.htm)_.
 
-Abaixo, irei criar uma tabela de roteamento para cada subrede de cada _[VCN](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingVCNs_topic-Overview_of_VCNs_and_Subnets.htm)_ criada, com os destinos que quero alcançar já configurados.
+Abaixo, irei criar os recursos para formar as redes já especificando a correta regra de roteamento de cada subrede.
 
 - **vcn-prd**
 
-Tabela de Roteamento:
+**Tabela de Roteamento**:
 
 ```
 darmbrust@hoodwink:~$ oci network route-table create \
@@ -837,17 +837,46 @@ darmbrust@hoodwink:~$ oci network route-table create \
 > --wait-for-state "AVAILABLE"
 ```
 
-Tabela de Roteamento:
+Security List:
 
 ```
 darmbrust@hoodwink:~$ oci network security-list create \
-> --compartment-id "ocid1.compartment.oc1..aaaaaaaaie4exnvj2ktkjlliahl2bxmdnteu2xmn27oc5cy5mdcmocl4vd7q" \
+> --compartment-id "ocid1.compartment.oc1..aaaaaaaauvqvbbx3oridcm5d2ztxkftwr362u2vl5zdsayzbehzwbjs56soq" \
 > --egress-security-rules '[{"destination": "0.0.0.0/0", "protocol": "all", "isStateless": false}]' \
 > --ingress-security-rules '[]' \
 > --vcn-id "ocid1.vcn.oc1.sa-saopaulo-1.amaaaaaa6noke4qafpwo6g7txowljx2dvdppnavruldbydbi3wvzaxr33d7q" \
 > --display-name "secl-1_subnprv_vcn-prd" \
 > --wait-for-state "AVAILABLE"
 ```
+
+DHCP Options
+
+```
+darmbrust@hoodwink:~$ oci network dhcp-options create \
+> --compartment-id "ocid1.compartment.oc1..aaaaaaaauvqvbbx3oridcm5d2ztxkftwr362u2vl5zdsayzbehzwbjs56soq" \
+> --options '[{"type": "DomainNameServer", "serverType": "VcnLocalPlusInternet"}]' \
+> --display-name "dhcp_vcn-prd" \
+> --domain-name-type VCN_DOMAIN \
+> --vcn-id "ocid1.vcn.oc1.sa-saopaulo-1.amaaaaaa6noke4qafpwo6g7txowljx2dvdppnavruldbydbi3wvzaxr33d7q" \
+> --wait-for-state "AVAILABLE"
+```
+
+Subrede:
+
+```
+darmbrust@hoodwink:~$ oci network subnet create \
+> --compartment-id "ocid1.compartment.oc1..aaaaaaaauvqvbbx3oridcm5d2ztxkftwr362u2vl5zdsayzbehzwbjs56soq" \
+> --vcn-id "ocid1.vcn.oc1.sa-saopaulo-1.amaaaaaa6noke4qafpwo6g7txowljx2dvdppnavruldbydbi3wvzaxr33d7q" \
+> --dhcp-options-id "ocid1.dhcpoptions.oc1.sa-saopaulo-1.aaaaaaaaaezixfnh765nbuzt4evr3dkariexsmh7xmrpx5em5ewbudajdvia" \
+> --route-table-id "ocid1.routetable.oc1.sa-saopaulo-1.aaaaaaaaslzwy7ogyzc555dowwsxiiwtqlejb2vprsivygydqwmcfx7klhja" \
+> --security-list-ids '["ocid1.securitylist.oc1.sa-saopaulo-1.aaaaaaaaakhdinc4rf6uxjp55nrfbp7sxy5lbszmtguitmanq67ck3poo6da"]' \
+> --display-name "subnprv_vcn-prd" \
+> --dns-label "subnprvprd" \
+> --cidr-block "192.168.20.0/24" \
+> --prohibit-public-ip-on-vnic true \
+> --wait-for-state "AVAILABLE"
+```
+
 
 - **vcn-dev**
 
