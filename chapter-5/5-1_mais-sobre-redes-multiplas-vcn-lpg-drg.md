@@ -826,7 +826,7 @@ Abaixo, irei criar os recursos para formar as redes já especificando a correta 
 
 - **vcn-prd**
 
-    - Tabela de Roteamento:
+Tabela de Roteamento:
 
 ```
 darmbrust@hoodwink:~$ oci network route-table create \
@@ -837,7 +837,7 @@ darmbrust@hoodwink:~$ oci network route-table create \
 > --wait-for-state "AVAILABLE"
 ```
 
-    * Security List:
+Security List:
 
 ```
 darmbrust@hoodwink:~$ oci network security-list create \
