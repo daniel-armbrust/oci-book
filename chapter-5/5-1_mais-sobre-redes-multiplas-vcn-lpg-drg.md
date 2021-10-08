@@ -828,6 +828,14 @@ Abaixo, irei criar uma tabela de roteamento para cada subrede de cada _[VCN](htt
 
     - Tabela de Roteamento
 
+```
+darmbrust@hoodwink:~$ oci network route-table create \
+> --compartment-id "ocid1.compartment.oc1..aaaaaaaauvqvbbx3oridcm5d2ztxkftwr362u2vl5zdsayzbehzwbjs56soq" \
+> --vcn-id "ocid1.vcn.oc1.sa-saopaulo-1.amaaaaaa6noke4qafpwo6g7txowljx2dvdppnavruldbydbi3wvzaxr33d7q" \
+> --display-name "rtb_subnprv_vcn-prd" \
+> --route-rules '[{"destination": "172.16.60.0/24", "destinationType": "CIDR_BLOCK", "networkEntityId": "ocid1.drg.oc1.sa-saopaulo-1.aaaaaaaaonbn7qh4no24ublpdxhlu2solzkgkmoivpvg5ayxh45m3qn2puea"}]' \
+> --wait-for-state "AVAILABLE"
+```
 
     - Tabela de Roteamento
 
