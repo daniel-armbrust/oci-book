@@ -837,7 +837,7 @@ darmbrust@hoodwink:~$ oci network route-table create \
 > --wait-for-state "AVAILABLE"
 ```
 
-    - Security List
+    - **Security List**
 
 ```
 darmbrust@hoodwink:~$ oci network security-list create \
