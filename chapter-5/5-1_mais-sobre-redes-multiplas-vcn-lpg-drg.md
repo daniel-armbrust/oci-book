@@ -1019,3 +1019,17 @@ darmbrust@hoodwink:~$ oci network subnet create \
 > --prohibit-public-ip-on-vnic true \
 > --wait-for-state "AVAILABLE"
 ```
+
+#### Teste de conectividade
+
+```
+[opc@vmlnx_vcn-prd ~]$ ping -c 3 172.16.60.2
+PING 172.16.60.2 (172.16.60.2) 56(84) bytes of data.
+64 bytes from 172.16.60.2: icmp_seq=1 ttl=63 time=0.564 ms
+64 bytes from 172.16.60.2: icmp_seq=2 ttl=63 time=0.555 ms
+64 bytes from 172.16.60.2: icmp_seq=3 ttl=63 time=0.539 ms
+
+--- 172.16.60.2 ping statistics ---
+3 packets transmitted, 3 received, 0% packet loss, time 2074ms
+rtt min/avg/max/mdev = 0.539/0.552/0.564/0.029 ms
+```
