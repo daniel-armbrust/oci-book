@@ -843,13 +843,13 @@ Security List:
 darmbrust@hoodwink:~$ oci network security-list create \
 > --compartment-id "ocid1.compartment.oc1..aaaaaaaauvqvbbx3oridcm5d2ztxkftwr362u2vl5zdsayzbehzwbjs56soq" \
 > --egress-security-rules '[{"destination": "0.0.0.0/0", "protocol": "all", "isStateless": false}]' \
-> --ingress-security-rules '[]' \
+> --ingress-security-rules '[{"source": "0.0.0.0/0", "protocol": "all", "isStateless": false}]' \
 > --vcn-id "ocid1.vcn.oc1.sa-saopaulo-1.amaaaaaa6noke4qafpwo6g7txowljx2dvdppnavruldbydbi3wvzaxr33d7q" \
 > --display-name "secl-1_subnprv_vcn-prd" \
 > --wait-for-state "AVAILABLE"
 ```
 
-DHCP Options
+DHCP Options:
 
 ```
 darmbrust@hoodwink:~$ oci network dhcp-options create \
@@ -877,8 +877,9 @@ darmbrust@hoodwink:~$ oci network subnet create \
 > --wait-for-state "AVAILABLE"
 ```
 
-
 - **vcn-dev**
+
+Tabela de Roteamento:
 
 ```
 darmbrust@hoodwink:~$ oci network route-table create \
@@ -886,6 +887,46 @@ darmbrust@hoodwink:~$ oci network route-table create \
 > --vcn-id "ocid1.vcn.oc1.sa-saopaulo-1.amaaaaaa6noke4qalaq2ftbdwt3ximh5gxgfrybjoj4xhzirdyka5pmsiysa" \
 > --display-name "rtb_subnprv_vcn-dev" \
 > --route-rules '[{"destination": "172.16.30.0/24", "destinationType": "CIDR_BLOCK", "networkEntityId": "ocid1.drg.oc1.sa-saopaulo-1.aaaaaaaaonbn7qh4no24ublpdxhlu2solzkgkmoivpvg5ayxh45m3qn2puea"}]' \
+> --wait-for-state "AVAILABLE"
+```
+
+Security List:
+
+```
+darmbrust@hoodwink:~$ oci network security-list create \
+> --compartment-id "ocid1.compartment.oc1..aaaaaaaauvqvbbx3oridcm5d2ztxkftwr362u2vl5zdsayzbehzwbjs56soq" \
+> --egress-security-rules '[{"destination": "0.0.0.0/0", "protocol": "all", "isStateless": false}]' \
+> --ingress-security-rules '[{"source": "0.0.0.0/0", "protocol": "all", "isStateless": false}]' \
+> --display-name "secl-1_subnprv_vcn-dev" \
+> --vcn-id "ocid1.vcn.oc1.sa-saopaulo-1.amaaaaaa6noke4qalaq2ftbdwt3ximh5gxgfrybjoj4xhzirdyka5pmsiysa" \
+> --wait-for-state "AVAILABLE"
+```
+
+DHCP Options:
+
+```
+darmbrust@hoodwink:~$ oci network dhcp-options create \
+> --compartment-id "ocid1.compartment.oc1..aaaaaaaauvqvbbx3oridcm5d2ztxkftwr362u2vl5zdsayzbehzwbjs56soq" \
+> --options '[{"type": "DomainNameServer", "serverType": "VcnLocalPlusInternet"}]' \
+> --display-name "dhcp_vcn-dev" \
+> --domain-name-type VCN_DOMAIN \
+> --vcn-id "ocid1.vcn.oc1.sa-saopaulo-1.amaaaaaa6noke4qalaq2ftbdwt3ximh5gxgfrybjoj4xhzirdyka5pmsiysa" \
+> --wait-for-state "AVAILABLE"
+```
+
+Subrede:
+
+```
+darmbrust@hoodwink:~$ oci network subnet create \
+> --compartment-id "ocid1.compartment.oc1..aaaaaaaauvqvbbx3oridcm5d2ztxkftwr362u2vl5zdsayzbehzwbjs56soq" \
+> --vcn-id "ocid1.vcn.oc1.sa-saopaulo-1.amaaaaaa6noke4qalaq2ftbdwt3ximh5gxgfrybjoj4xhzirdyka5pmsiysa" \
+> --dhcp-options-id "ocid1.dhcpoptions.oc1.sa-saopaulo-1.aaaaaaaaeqdywbm5oefqsgozehpojbdcex4t5gpyeqyqvp5bzfl3e6ewszfa" \
+> --route-table-id "ocid1.routetable.oc1.sa-saopaulo-1.aaaaaaaar57jlty5c2bz7hd6zlz7dcn7twfvklh7vstuvevxayy3rvm4vlkq" \
+> --security-list-ids '["ocid1.securitylist.oc1.sa-saopaulo-1.aaaaaaaagxnlxyo7utdqi7cot2iordjhtppaenzezjlfc3i6ryjv2mmi5zua"]' \
+> --display-name "subnprv_vcn-dev" \
+> --dns-label "subnprvdev" \
+> --cidr-block "10.0.10.0/24" \
+> --prohibit-public-ip-on-vnic true \
 > --wait-for-state "AVAILABLE"
 ```
 
