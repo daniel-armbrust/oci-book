@@ -989,3 +989,33 @@ darmbrust@hoodwink:~$ oci network dhcp-options create \
 > --vcn-id "ocid1.vcn.oc1.sa-saopaulo-1.amaaaaaa6noke4qa6jfxe5kay2cqjgo3lvb4mg5prscmpo62t2mk4h6wxsqa" \
 > --wait-for-state "AVAILABLE"
 ```
+
+Subrede:
+
+```
+darmbrust@hoodwink:~$ oci network subnet create \
+> --compartment-id "ocid1.compartment.oc1..aaaaaaaauvqvbbx3oridcm5d2ztxkftwr362u2vl5zdsayzbehzwbjs56soq" \
+> --vcn-id "ocid1.vcn.oc1.sa-saopaulo-1.amaaaaaa6noke4qa6jfxe5kay2cqjgo3lvb4mg5prscmpo62t2mk4h6wxsqa" \
+> --dhcp-options-id "ocid1.dhcpoptions.oc1.sa-saopaulo-1.aaaaaaaawcxysjb7sy5ohcbu4wh2jtyvmdrlrn4rqzbh24tksdazq5njso3a" \
+> --route-table-id "ocid1.routetable.oc1.sa-saopaulo-1.aaaaaaaavui46ym3y24xnyc4h6uzrtbq63ybywu6y33we6k6uy3624btisea" \
+> --security-list-ids '["ocid1.securitylist.oc1.sa-saopaulo-1.aaaaaaaahrs4lcp7a6dlnsqda5u4shdmvfpkd6tsxbc2nqygcrz2pfhwyxna"]' \
+> --display-name "subnprv-dev_vcn-db" \
+> --dns-label "subnprvdevdb" \
+> --cidr-block "172.16.30.0/24" \
+> --prohibit-public-ip-on-vnic true \
+> --wait-for-state "AVAILABLE"
+```
+
+```
+darmbrust@hoodwink:~$ oci network subnet create \
+> --compartment-id "ocid1.compartment.oc1..aaaaaaaauvqvbbx3oridcm5d2ztxkftwr362u2vl5zdsayzbehzwbjs56soq" \
+> --vcn-id "ocid1.vcn.oc1.sa-saopaulo-1.amaaaaaa6noke4qa6jfxe5kay2cqjgo3lvb4mg5prscmpo62t2mk4h6wxsqa" \
+> --dhcp-options-id "ocid1.dhcpoptions.oc1.sa-saopaulo-1.aaaaaaaawcxysjb7sy5ohcbu4wh2jtyvmdrlrn4rqzbh24tksdazq5njso3a" \
+> --route-table-id "ocid1.routetable.oc1.sa-saopaulo-1.aaaaaaaauhcustvcljfpjocdktkmmijhdznl5eaz4e4enzgnlbez7yslzdfq" \
+> --security-list-ids '["ocid1.securitylist.oc1.sa-saopaulo-1.aaaaaaaafnbfv4scm42ko5vcwztiv457asv2ghcig4l3nju4vjvsim276wsq"]' \
+> --display-name "subnprv-prd_vcn-db" \
+> --dns-label "subnprvprddb" \
+> --cidr-block "172.16.60.0/24" \
+> --prohibit-public-ip-on-vnic true \
+> --wait-for-state "AVAILABLE"
+```
