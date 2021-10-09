@@ -1024,7 +1024,7 @@ darmbrust@hoodwink:~$ oci network subnet create \
 
 Tendo algumas instâncias criadas nas respectivas subredes, é possível realizar um simples teste pelo utilitário _[ping](https://pt.wikipedia.org/wiki/Ping)_ e confirmar a conectividade entre as redes:
 
-- vcn-prd (subnprv_vcn-prd) p/ vcn-db (subnprv-prd_vcn-db)
+- vcn-prd (subnprv_vcn-prd) -> vcn-db (subnprv-prd_vcn-db)
 
 ```
 [opc@vmlnx_vcn-prd ~]$ ip addr sh ens3
@@ -1046,7 +1046,7 @@ PING 172.16.60.2 (172.16.60.2) 56(84) bytes of data.
 rtt min/avg/max/mdev = 0.539/0.552/0.564/0.029 ms
 ```
 
-- vcn-dev (subnprv_vcn-dev) p/ vcn-db (subnprv-dev_vcn-db)
+- vcn-dev (subnprv_vcn-dev) -> vcn-db (subnprv-dev_vcn-db)
 
 ```
 [opc@vmlnx_vcn-dev ~]$ ip addr sh ens3
