@@ -61,7 +61,7 @@ darmbrust@hoodwink:~$ oci compute instance update \
 WARNING: Updates to defined-tags and freeform-tags and agent-config and metadata and extended-metadata and shape-config and instance-options and launch-options and availability-config will replace any existing values. Are you sure you want to continue? [y/N]: y
 ```
 
-Lembrando que a subrede onde reside a instância, deve possuir rota de saída para Internet ou, se a ideia é ter um ambiente com maior controle, basta uma rota de saída para um _[Service Gateway](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/servicegateway.htm)_. Sem isto o _[plugin](https://docs.oracle.com/pt-br/iaas/Content/Compute/Tasks/manage-plugins.htm#available-plugins)_ não será ativado.
+Lembrando que a subrede onde reside a instância, deve possuir uma _"rota de saída"_ para a internet ou, se a ideia é ter um ambiente com maior controle, basta configurar uma _"rota de saída"_ para um _[Service Gateway](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/servicegateway.htm)_. Sem isto o _[plugin](https://docs.oracle.com/pt-br/iaas/Content/Compute/Tasks/manage-plugins.htm#available-plugins)_ não ativa.
 
 Depois de alguns minutos e após confirmarmos as alteração no _[OCA](https://docs.oracle.com/pt-br/iaas/Content/Compute/Tasks/manage-plugins.htm)_ da instância, podemos ver que o _[plugin](https://docs.oracle.com/pt-br/iaas/Content/Compute/Tasks/manage-plugins.htm#available-plugins)_ _**Bastion**_ está ativo e em execução:
 
