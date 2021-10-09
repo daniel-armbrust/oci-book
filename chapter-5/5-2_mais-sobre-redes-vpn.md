@@ -21,7 +21,7 @@ Uma _[VPN](https://pt.wikipedia.org/wiki/Rede_privada_virtual)_ (_[Virtual Priva
 
 Seu propósito é criar _"túneis criptografados"_ entre dois pontos autorizados que neste caso são um data center local _(on-premises)_ e o _[OCI](https://www.oracle.com/cloud/)_. Este _"túnel criptografado"_ mantém os dados que trafegam, seguros e confiáveis, através de técnicas de criptografia. Usa-se a internet por ser financeiramente mais barato do que adquirir links de dados dedicados.
 
-Basicamente existem dois tipos de VPN:
+Basicamente existem dois tipos de _[VPN](https://pt.wikipedia.org/wiki/Rede_privada_virtual)_:
 
 - _[Client-To-Site (Host-To-Network)](https://pt.wikipedia.org/wiki/Rede_privada_virtual#Tipos)_ ou _[Remote Access](https://pt.wikipedia.org/wiki/Rede_privada_virtual#Tipos)_.
 - _[Site-To-Site (Router-To-Router)](https://pt.wikipedia.org/wiki/Rede_privada_virtual#Tipos)_.
