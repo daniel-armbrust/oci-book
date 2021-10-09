@@ -1072,4 +1072,4 @@ rtt min/avg/max/mdev = 0.396/0.465/0.563/0.071 ms
 
 Aqui encerramos este capítulo que trata a conectividade de várias redes no _[OCI](https://www.oracle.com/cloud/)_. O processo de conectividade é simples, sempre se atentando para não haver sobreposição das redes _(overlap)_ e cuidando bem das suas regras de segurança _([security list](https://docs.oracle.com/pt-br/iaas/Content/Network/Concepts/securitylists.htm) e [nsg](https://docs.oracle.com/pt-br/iaas/Content/Network/Concepts/networksecuritygroups.htm))_, são o sucesso de um bom design de redes.
 
-Toda _[security list](https://docs.oracle.com/pt-br/iaas/Content/Network/Concepts/securitylists.htm)_ _"escancarada"_ aqui, tem o propósito somente de demonstrar a conectividade. Para o seu ambiente, recomendo não fazer isto!
+Toda _[security list](https://docs.oracle.com/pt-br/iaas/Content/Network/Concepts/securitylists.htm)_ _"escancarada"_ aqui, tem o propósito somente de demonstrar a conectividade. Volto a dizer: para o seu ambiente não faça isto!
