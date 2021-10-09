@@ -26,7 +26,7 @@ darmbrust@hoodwink:~$ oci network vcn create \
 > --display-name "vcn-prd" \
 > --dns-label "vcnprd" \
 > --is-ipv6-enabled false \
-> --wait-for-state AVAILABLE
+> --wait-for-state "AVAILABLE"
 Action completed. Waiting until the resource has entered state: ('AVAILABLE',)
 {
   "data": {
@@ -70,7 +70,7 @@ darmbrust@hoodwink:~$ oci network subnet create \
 > --dns-label "subnprv" \
 > --cidr-block "192.168.20.0/24" \
 > --prohibit-public-ip-on-vnic true \
-> --wait-for-state AVAILABLE
+> --wait-for-state "AVAILABLE"
 Action completed. Waiting until the resource has entered state: ('AVAILABLE',)
 {
   "data": {
@@ -118,7 +118,7 @@ darmbrust@hoodwink:~$ oci network vcn create \
 > --display-name "vcn-db" \
 > --dns-label "vcndb" \
 > --is-ipv6-enabled false \
-> --wait-for-state AVAILABLE
+> --wait-for-state "AVAILABLE"
 Action completed. Waiting until the resource has entered state: ('AVAILABLE',)
 {
   "data": {
@@ -162,7 +162,7 @@ darmbrust@hoodwink:~$ oci network subnet create \
 > --dns-label "subnprv" \
 > --cidr-block "172.16.30.0/24" \
 > --prohibit-public-ip-on-vnic true \
-> --wait-for-state AVAILABLE
+> --wait-for-state "AVAILABLE"
 Action completed. Waiting until the resource has entered state: ('AVAILABLE',)
 {
   "data": {
@@ -210,7 +210,7 @@ darmbrust@hoodwink:~$ oci network local-peering-gateway create \
 > --compartment-id "ocid1.compartment.oc1..aaaaaaaauvqvbbx3oridcm5d2ztxkftwr362u2vl5zdsayzbehzwbjs56soq" \
 > --vcn-id "ocid1.vcn.oc1.sa-saopaulo-1.amaaaaaa6noke4qaasugozouqxfpwajtaj3oymelmqwv2i2chmuil5ttesma" \
 > --display-name "lpg_vcn-prd" \
-> --wait-for-state AVAILABLE
+> --wait-for-state "AVAILABLE"
 Action completed. Waiting until the resource has entered state: ('AVAILABLE',)
 {
   "data": {
@@ -246,7 +246,7 @@ darmbrust@hoodwink:~$ oci network local-peering-gateway create \
 > --compartment-id "ocid1.compartment.oc1..aaaaaaaauvqvbbx3oridcm5d2ztxkftwr362u2vl5zdsayzbehzwbjs56soq" \
 > --vcn-id "ocid1.vcn.oc1.sa-saopaulo-1.amaaaaaa6noke4qauzzbffpcd7xtcpxk7i3njt44gmurmaxvizr6mfz6eibq" \
 > --display-name "lpg_vcn-db" \
-> --wait-for-state AVAILABLE
+> --wait-for-state "AVAILABLE"
 Action completed. Waiting until the resource has entered state: ('AVAILABLE',)
 {
   "data": {
@@ -856,7 +856,7 @@ darmbrust@hoodwink:~$ oci network dhcp-options create \
 > --compartment-id "ocid1.compartment.oc1..aaaaaaaauvqvbbx3oridcm5d2ztxkftwr362u2vl5zdsayzbehzwbjs56soq" \
 > --options '[{"type": "DomainNameServer", "serverType": "VcnLocalPlusInternet"}]' \
 > --display-name "dhcp_vcn-prd" \
-> --domain-name-type VCN_DOMAIN \
+> --domain-name-type "VCN_DOMAIN" \
 > --vcn-id "ocid1.vcn.oc1.sa-saopaulo-1.amaaaaaa6noke4qafpwo6g7txowljx2dvdppnavruldbydbi3wvzaxr33d7q" \
 > --wait-for-state "AVAILABLE"
 ```
@@ -909,7 +909,7 @@ darmbrust@hoodwink:~$ oci network dhcp-options create \
 > --compartment-id "ocid1.compartment.oc1..aaaaaaaauvqvbbx3oridcm5d2ztxkftwr362u2vl5zdsayzbehzwbjs56soq" \
 > --options '[{"type": "DomainNameServer", "serverType": "VcnLocalPlusInternet"}]' \
 > --display-name "dhcp_vcn-dev" \
-> --domain-name-type VCN_DOMAIN \
+> --domain-name-type "VCN_DOMAIN" \
 > --vcn-id "ocid1.vcn.oc1.sa-saopaulo-1.amaaaaaa6noke4qalaq2ftbdwt3ximh5gxgfrybjoj4xhzirdyka5pmsiysa" \
 > --wait-for-state "AVAILABLE"
 ```
@@ -934,7 +934,9 @@ darmbrust@hoodwink:~$ oci network subnet create \
 
 Aqui merece uma simples explicação. 
 
-Foi criado uma rede para hospedar os bancos de dados de produção _(subnprv-prd_vcn-db)_ e desenvolvimento _(subnprv-dev_vcn-db)_. Cada subrede tem sua própria _[tabela de roteamento](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingroutetables.htm)_ que possibilita a conectividade com seu destino correspondente através do _[DRG](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingDRGs.htm)_.
+Será criado uma rede para hospedar os bancos de dados de produção _(subnprv-prd_vcn-db)_ e desenvolvimento _(subnprv-dev_vcn-db)_. Cada subrede tem sua própria _[tabela de roteamento](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingroutetables.htm)_ que possibilita a conectividade com seu destino correspondente através do _[DRG](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingDRGs.htm)_.
+
+Tabela de Roteamento:
 
 ```
 darmbrust@hoodwink:~$ oci network route-table create \
@@ -954,4 +956,36 @@ darmbrust@hoodwink:~$ oci network route-table create \
 > --wait-for-state "AVAILABLE"
 ```
 
-Para não ficar algo muito repetitivo, será poupado espaço por aqui também. A criação das subredes e _[security list](https://docs.oracle.com/pt-br/iaas/Content/Network/Concepts/securitylists.htm)_ já é algo conhecido.
+Security List:
+
+```
+darmbrust@hoodwink:~$ oci network security-list create \
+> --compartment-id "ocid1.compartment.oc1..aaaaaaaauvqvbbx3oridcm5d2ztxkftwr362u2vl5zdsayzbehzwbjs56soq" \
+> --egress-security-rules '[{"destination": "0.0.0.0/0", "protocol": "all", "isStateless": false}]' \
+> --ingress-security-rules '[{"source": "10.0.10.0/24", "protocol": "all", "isStateless": false}]' \
+> --display-name "secl-1_subnprv-dev_vcn-db" \
+> --vcn-id "ocid1.vcn.oc1.sa-saopaulo-1.amaaaaaa6noke4qa6jfxe5kay2cqjgo3lvb4mg5prscmpo62t2mk4h6wxsqa" \
+> --wait-for-state "AVAILABLE"
+```
+
+```
+darmbrust@hoodwink:~$  oci network security-list create \
+> --compartment-id "ocid1.compartment.oc1..aaaaaaaauvqvbbx3oridcm5d2ztxkftwr362u2vl5zdsayzbehzwbjs56soq" \
+> --egress-security-rules '[{"destination": "0.0.0.0/0", "protocol": "all", "isStateless": false}]' \
+> --ingress-security-rules '[{"source": "192.168.20.0/24", "protocol": "all", "isStateless": false}]' \
+> --display-name "secl-1_subnprv-prd_vcn-db" \
+> --vcn-id "ocid1.vcn.oc1.sa-saopaulo-1.amaaaaaa6noke4qa6jfxe5kay2cqjgo3lvb4mg5prscmpo62t2mk4h6wxsqa" \
+> --wait-for-state "AVAILABLE"
+```
+
+DHCP Options:
+
+```
+darmbrust@hoodwink:~$ oci network dhcp-options create \
+> --compartment-id "ocid1.compartment.oc1..aaaaaaaauvqvbbx3oridcm5d2ztxkftwr362u2vl5zdsayzbehzwbjs56soq" \
+> --options '[{"type": "DomainNameServer", "serverType": "VcnLocalPlusInternet"}]' \
+> --display-name "dhcp_vcn-db" \
+> --domain-name-type "VCN_DOMAIN" \
+> --vcn-id "ocid1.vcn.oc1.sa-saopaulo-1.amaaaaaa6noke4qa6jfxe5kay2cqjgo3lvb4mg5prscmpo62t2mk4h6wxsqa" \
+> --wait-for-state "AVAILABLE"
+```
