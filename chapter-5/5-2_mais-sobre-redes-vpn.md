@@ -25,5 +25,5 @@ Seu objetivo é manter os dados que trafegam entre estes dois pontos, seguros e 
 
 Basicamente existem dois tipos de VPN:
 
-- Client-To-Site (Host-To-Network) ou Remote Access.
-- Site-To-Site (Router-To-Router).
+- _[Client-To-Site (Host-To-Network)](https://pt.wikipedia.org/wiki/Rede_privada_virtual#Tipos)_ ou _[Remote Access](https://pt.wikipedia.org/wiki/Rede_privada_virtual#Tipos)_.
+- _[Site-To-Site (Router-To-Router)](https://pt.wikipedia.org/wiki/Rede_privada_virtual#Tipos)_.
