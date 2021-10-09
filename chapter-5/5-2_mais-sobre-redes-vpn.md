@@ -19,9 +19,7 @@ Porém esta transição não acontece do dia para a noite. Iremos exemplificar c
 
 Uma _[VPN](https://pt.wikipedia.org/wiki/Rede_privada_virtual)_ (_[Virtual Private Network](https://pt.wikipedia.org/wiki/Rede_privada_virtual)_) ou _[Rede privada virtual](https://pt.wikipedia.org/wiki/Rede_privada_virtual)_, é uma rede de comunicação construída sobre uma infraestrutura compartilhada. Para o nosso exemplo, essa infraestrutura compartilhada será um link público de Internet.
 
-Seu propósito é cria _"túneis criptografados"_ entre dois pontos autorizados, que neste caso são um data center local _(on-premises)_ e o _[OCI](https://www.oracle.com/cloud/)_.
-
-Seu objetivo é manter os dados que trafegam entre estes dois pontos, seguros e confiáveis, usando técnicas de criptografia. Usa-se a internet por ser financeiramente mais barato do que adquirir links de dados dedicados.
+Seu propósito é criar _"túneis criptografados"_ entre dois pontos autorizados, que neste caso são um data center local _(on-premises)_ e o _[OCI](https://www.oracle.com/cloud/)_, e manter os dados que trafegam seguros e confiáveis, usando técnicas de criptografia. Usa-se a internet por ser financeiramente mais barato do que adquirir links de dados dedicados.
 
 Basicamente existem dois tipos de VPN:
 
