@@ -1022,7 +1022,9 @@ darmbrust@hoodwink:~$ oci network subnet create \
 
 #### Teste de conectividade
 
-Tendo alguns instâncias criadas nas respectivas subredes, é possível realizar um simples teste pelo utilitário ping
+Tendo algumas instâncias criadas nas respectivas subredes, é possível realizar um simples teste pelo utilitário _[ping](https://pt.wikipedia.org/wiki/Ping)_ e confirmar a conectividade entre as redes:
+
+- vcn-prd p/ vcn-db (subnprv-prd_vcn-db)
 
 ```
 [opc@vmlnx_vcn-prd ~]$ ping -c 3 172.16.60.2
@@ -1036,6 +1038,8 @@ PING 172.16.60.2 (172.16.60.2) 56(84) bytes of data.
 rtt min/avg/max/mdev = 0.539/0.552/0.564/0.029 ms
 ```
 
+- vcn-dev p/ vcn-db (subnprv-dev_vcn-db)
+
 ```
 [opc@vmlnx_vcn-dev ~]$ ping -c 3 172.16.30.111
 PING 172.16.30.111 (172.16.30.111) 56(84) bytes of data.
@@ -1047,3 +1051,5 @@ PING 172.16.30.111 (172.16.30.111) 56(84) bytes of data.
 3 packets transmitted, 3 received, 0% packet loss, time 2061ms
 rtt min/avg/max/mdev = 0.396/0.465/0.563/0.071 ms
 ```
+
+### __Conclusão__
