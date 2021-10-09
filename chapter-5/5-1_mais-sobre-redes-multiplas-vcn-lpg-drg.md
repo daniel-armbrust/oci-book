@@ -1022,6 +1022,8 @@ darmbrust@hoodwink:~$ oci network subnet create \
 
 #### Teste de conectividade
 
+Tendo alguns instâncias criadas nas respectivas subredes, é possível realizar um simples teste pelo utilitário ping
+
 ```
 [opc@vmlnx_vcn-prd ~]$ ping -c 3 172.16.60.2
 PING 172.16.60.2 (172.16.60.2) 56(84) bytes of data.
@@ -1032,4 +1034,16 @@ PING 172.16.60.2 (172.16.60.2) 56(84) bytes of data.
 --- 172.16.60.2 ping statistics ---
 3 packets transmitted, 3 received, 0% packet loss, time 2074ms
 rtt min/avg/max/mdev = 0.539/0.552/0.564/0.029 ms
+```
+
+```
+[opc@vmlnx_vcn-dev ~]$ ping -c 3 172.16.30.111
+PING 172.16.30.111 (172.16.30.111) 56(84) bytes of data.
+64 bytes from 172.16.30.111: icmp_seq=1 ttl=63 time=0.436 ms
+64 bytes from 172.16.30.111: icmp_seq=2 ttl=63 time=0.563 ms
+64 bytes from 172.16.30.111: icmp_seq=3 ttl=63 time=0.396 ms
+
+--- 172.16.30.111 ping statistics ---
+3 packets transmitted, 3 received, 0% packet loss, time 2061ms
+rtt min/avg/max/mdev = 0.396/0.465/0.563/0.071 ms
 ```
