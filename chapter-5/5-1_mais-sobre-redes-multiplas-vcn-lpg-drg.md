@@ -1027,6 +1027,14 @@ Tendo algumas instâncias criadas nas respectivas subredes, é possível realiza
 - vcn-prd p/ vcn-db (subnprv-prd_vcn-db)
 
 ```
+[opc@vmlnx_vcn-prd ~]$ ip addr sh ens3
+2: ens3: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 9000 qdisc pfifo_fast state UP group default qlen 1000
+    link/ether 02:00:17:02:1f:88 brd ff:ff:ff:ff:ff:ff
+    inet 192.168.20.46/24 brd 192.168.20.255 scope global dynamic ens3
+       valid_lft 84736sec preferred_lft 84736sec
+    inet6 fe80::17ff:fe02:1f88/64 scope link
+       valid_lft forever preferred_lft forever
+
 [opc@vmlnx_vcn-prd ~]$ ping -c 3 172.16.60.2
 PING 172.16.60.2 (172.16.60.2) 56(84) bytes of data.
 64 bytes from 172.16.60.2: icmp_seq=1 ttl=63 time=0.564 ms
@@ -1041,6 +1049,14 @@ rtt min/avg/max/mdev = 0.539/0.552/0.564/0.029 ms
 - vcn-dev p/ vcn-db (subnprv-dev_vcn-db)
 
 ```
+[opc@vmlnx_vcn-dev ~]$ ip addr sh ens3
+2: ens3: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 9000 qdisc pfifo_fast state UP group default qlen 1000
+    link/ether 84:39:be:6c:fa:82 brd ff:ff:ff:ff:ff:ff
+    inet 10.0.10.5/24 brd 10.0.10.255 scope global dynamic ens3
+       valid_lft 84736sec preferred_lft 84736sec
+    inet6 fe80::17ff:fe02:1f88/64 scope link
+       valid_lft forever preferred_lft forever
+
 [opc@vmlnx_vcn-dev ~]$ ping -c 3 172.16.30.111
 PING 172.16.30.111 (172.16.30.111) 56(84) bytes of data.
 64 bytes from 172.16.30.111: icmp_seq=1 ttl=63 time=0.436 ms
