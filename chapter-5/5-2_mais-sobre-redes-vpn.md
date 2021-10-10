@@ -25,3 +25,7 @@ Basicamente existem dois tipos de _[VPN](https://pt.wikipedia.org/wiki/Rede_priv
 
 - _[Client-To-Site (Host-To-Network)](https://pt.wikipedia.org/wiki/Rede_privada_virtual#Tipos)_ ou _[Remote Access](https://pt.wikipedia.org/wiki/Rede_privada_virtual#Tipos)_
 - _[Site-To-Site (Router-To-Router)](https://pt.wikipedia.org/wiki/Rede_privada_virtual#Tipos)_
+
+ Aqui, iremos nos concentrar na _[VPN](https://pt.wikipedia.org/wiki/Rede_privada_virtual)_ do tipo _[Site-To-Site](https://pt.wikipedia.org/wiki/Rede_privada_virtual#Tipos)_, pois nosso objetivo é conectar a rede de um _data center (Network-A)_ ao _[OCI](https://www.oracle.com/cloud/) (Network-B)_. 
+
+![alt_text](./images/data_a_cloud_b_1.jpg "VPN Site-To-Site")
