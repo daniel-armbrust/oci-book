@@ -33,3 +33,15 @@ Basicamente existem dois tipos de _[VPN](https://pt.wikipedia.org/wiki/Rede_priv
 O _[OCI](https://www.oracle.com/cloud/)_ disponibiliza o serviço _[VPN Site-to-Site](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/overviewIPsec.htm)_, que nada mais é do que um serviço gerenciado pela própria Oracle e que utiliza o protocolo _[IPSec](https://pt.wikipedia.org/wiki/IPsec)_ para a construção de _[VPNs](https://pt.wikipedia.org/wiki/Rede_privada_virtual)_.
 
 ### __Falando um pouco sobre IPSec__
+
+_[Internet Protocol Security](https://pt.wikipedia.org/wiki/IPsec)_ ou _[IPSec](https://pt.wikipedia.org/wiki/IPsec)_, é um conjunto de protocolos que basicamente autêntica e criptografa os pacotes de dados trocados entre duas redes _(Network A e B)_. O tráfego IP é criptografado antes que os pacotes sejam transferidos da origem para o destino, e descriptografados quando ele chega.
+
+O _[IPSec](https://pt.wikipedia.org/wiki/IPsec)_ pode ser configurado a partir de um dos modos abaixo:
+
+- Modo de Transporte (Transport mode)
+    - O _[IPSec](https://pt.wikipedia.org/wiki/IPsec)_ criptografa e autêntica somente o _payload do pacote (dados)_. Informações contidas no cabeçalho do pacote não são alteradas.
+
+- Modo Túnel (Tunnel mode):
+    - Aqui o _[IPSec](https://pt.wikipedia.org/wiki/IPsec)_ criptografa e autêntica todo o pacote. Após isto, o pacote original já com seus dados criptografados, é colocado dentro de um novo pacote gerado (pacote original é encapsulado em um novo pacote).
+
+Além de ser o mais seguro, o _*"Modo Túnel"*_  é o único suportado pelo _[OCI](https://www.oracle.com/cloud/)_.
