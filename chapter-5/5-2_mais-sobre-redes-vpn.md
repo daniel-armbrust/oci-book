@@ -38,10 +38,10 @@ _[Internet Protocol Security](https://pt.wikipedia.org/wiki/IPsec)_ ou _[IPSec](
 
 O _[IPSec](https://pt.wikipedia.org/wiki/IPsec)_ pode ser configurado a partir de um dos modos abaixo:
 
-- Modo de Transporte (Transport mode)
+- **Modo de Transporte (Transport mode)**
     - O _[IPSec](https://pt.wikipedia.org/wiki/IPsec)_ criptografa e autêntica somente o _payload do pacote (dados)_. Informações contidas no cabeçalho do pacote não são alteradas.
 
-- Modo Túnel (Tunnel mode):
+- **Modo Túnel (Tunnel mode)**
     - Aqui o _[IPSec](https://pt.wikipedia.org/wiki/IPsec)_ criptografa e autêntica todo o pacote. Após isto, o pacote original já com seus dados criptografados, é colocado dentro de um novo pacote gerado (pacote original é encapsulado em um novo pacote).
 
-Além de ser o mais seguro, o _*"Modo Túnel"*_  é o único suportado pelo _[OCI](https://www.oracle.com/cloud/)_.
+Além de ser o mais seguro, o _"Modo Túnel"_  é o único suportado pelo _[OCI](https://www.oracle.com/cloud/)_.
