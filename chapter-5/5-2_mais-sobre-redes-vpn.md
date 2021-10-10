@@ -29,3 +29,7 @@ Basicamente existem dois tipos de _[VPN](https://pt.wikipedia.org/wiki/Rede_priv
  Aqui, iremos nos concentrar na _[VPN](https://pt.wikipedia.org/wiki/Rede_privada_virtual)_ do tipo _[Site-To-Site](https://pt.wikipedia.org/wiki/Rede_privada_virtual#Tipos)_, pois nosso objetivo é conectar a rede de um _data center (Network-A)_ ao _[OCI](https://www.oracle.com/cloud/) (Network-B)_. 
 
 ![alt_text](./images/data_a_cloud_b_1.jpg "VPN Site-To-Site")
+
+O _[OCI](https://www.oracle.com/cloud/)_ disponibiliza o serviço _[VPN Site-to-Site](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/overviewIPsec.htm)_, que nada mais é do que um serviço gerenciado pela própria Oracle e que utiliza o protocolo _[IPSec](https://pt.wikipedia.org/wiki/IPsec)_ para a construção de _[VPNs](https://pt.wikipedia.org/wiki/Rede_privada_virtual)_.
+
+### __Falando um pouco sobre IPSec__
