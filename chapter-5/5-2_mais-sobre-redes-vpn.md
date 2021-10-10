@@ -49,3 +49,14 @@ Além de ser o mais seguro, o _"Modo Túnel"_  é o único suportado pelo _[OCI]
 ### Conexão através de VPN
 
 Existem vários dispositivos ou softwares existentes no mercado no qual é possível ser utilizado para realizar conectividade via _[VPN](https://pt.wikipedia.org/wiki/Rede_privada_virtual)_ ao _[OCI](https://www.oracle.com/cloud/)_. A _Oracle_ testa, verifica e disponibiliza, todo o passo a passo de configuração por dispositivo ou software, de diversos fabricantes diferentes neste _[link aqui](https://docs.oracle.com/pt-br/iaas/Content/Network/Reference/CPElist.htm)_.
+
+Neste nosso exemplo, iremos demonstrar a configuração do software _[Libreswan](https://libreswan.org/)_ em um servidor _[Oracle Linux](https://www.oracle.com/linux/)_ localizado em um data center qualquer (on-premises).
+
+_[Libreswan](https://libreswan.org/)_ é uma implementação do protocolo _[IPSec](https://pt.wikipedia.org/wiki/IPsec)_ de _[código aberto](https://en.wikipedia.org/wiki/Open_source)_, baseado no _[FreeS/WAN](https://www.freeswan.org/)_ e _[Openswan](https://www.openswan.org/)_. Para este nosso exemplo, será necessário:
+
+- **Libreswan >= 3.18**
+- **Linux Kernel 3.x ou 4.x**
+
+>_**__NOTA:__** Iremos utilizar em nosso data center fictício, o [Oracle Linux versão 7.9](https://docs.oracle.com/en/operating-systems/oracle-linux/7/relnotes7.9/index.html), pois ele já contempla as versões de software que precisamos._ 
+
+
