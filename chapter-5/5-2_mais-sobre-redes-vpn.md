@@ -154,7 +154,6 @@ Como iremos utilizar o _[Libreswan](https://libreswan.org/)_ para conectividade 
 
 O comando abaixo pode ser usado para obter este _id_:
 
-
 ```
 darmbrust@hoodwink:~$ oci network cpe-device-shape list \
 > --all \
@@ -198,12 +197,12 @@ darmbrust@hoodwink:~$ oci network cpe create \
 }
 ```
 
->_**__NOTA:__** Como já foi dito, um [CPE](https://docs.oracle.com/en-us/iaas/Content/Network/Tasks/configuringCPE.htm) somente tem a função de representar o seu dispositivo ou software de [VPN](https://pt.wikipedia.org/wiki/Rede_privada_virtual). O parâmetro --cpe-device-shape-id usado na criação do mesmo é opcional e só tem sentido informativo. Este não intefere em nada no seu funcionamento. Caso você não especifique, o valor "others" será usado._
+>_**__NOTA:__** Como já foi dito, um [CPE](https://docs.oracle.com/en-us/iaas/Content/Network/Tasks/configuringCPE.htm) somente tem a função de representar o seu dispositivo ou software de [VPN](https://pt.wikipedia.org/wiki/Rede_privada_virtual). O parâmetro "--cpe-device-shape-id" usado na criação do mesmo é opcional e só tem sentido informativo. Este não intefere em nada no seu funcionamento. Caso você não especifique, o valor "others" será usado._
 
-Existe um detalhe importante aqui!
+Antes de deixar este capítulo, quero comentar um detalhe importante quando falamos de _[CPE](https://docs.oracle.com/en-us/iaas/Content/Network/Tasks/configuringCPE.htm)_.
 
-Toda comunicação que este servidor _[Oracle Linux](https://www.oracle.com/linux/)_ faz com a Internet, passa por um dispositivo de _"borda"_. Este executa um _[NAT](https://pt.wikipedia.org/wiki/Network_address_translation)_, que _"troca"_ o endereço IP privado _10.34.0.82_ para o endereço IP público _201.33.196.77_, válido e que permite comunicação na Internet (também chamado de endereço roteável). Em resumo, a técnica _[NAT](https://pt.wikipedia.org/wiki/Network_address_translation)_ se faz necessário pois os endereços IPs da rede privada não conseguem se comunicar diretamente com outros servidores na Internet, sem um endereço IP público.
+Toda comunicação que o servidor _[Oracle Linux](https://www.oracle.com/linux/) (onpremises)_ faz com a Internet, passa por um dispositivo de _"borda"_. Este executa um _[NAT](https://pt.wikipedia.org/wiki/Network_address_translation)_, que _"troca"_ o endereço IP privado _10.34.0.82_ para o endereço IP público _201.33.196.77_, válido e que permite comunicação na Internet (também chamado de endereço roteável). Em resumo, a técnica _[NAT](https://pt.wikipedia.org/wiki/Network_address_translation)_ se faz necessário pois os endereços IPs da rede privada não conseguem se comunicar diretamente com outros servidores na Internet, sem um endereço IP público.
 
-Lembrando que uma das principais características do protocolo _[IPSec](https://pt.wikipedia.org/wiki/IPsec)_ é prover _confidencialidade_, _autenticidade_ e _integridade dos dados_ trafegados. Toda vez que um pacote de dados é criado pela _[VPN](https://pt.wikipedia.org/wiki/Rede_privada_virtual)_, e passa por um dispositivo _([CPE](https://docs.oracle.com/en-us/iaas/Content/Network/Tasks/configuringCPE.htm))_ que faz um _[NAT](https://pt.wikipedia.org/wiki/Network_address_translation)_, ele perde sua _autenticidade_ e _integridade_. Isto se dá pelo fato da técnica _[NAT](https://pt.wikipedia.org/wiki/Network_address_translation)_ alterar o pacote de dados. Se um pacote de dados for alterado, ele será _"descartado" (dropado)_, pelas regras do _[IPSec](https://pt.wikipedia.org/wiki/IPsec)_.
+Lembrando que uma das principais características do protocolo _[IPSec](https://pt.wikipedia.org/wiki/IPsec)_ é prover _confidencialidade_, _autenticidade_ e _integridade dos dados_ trafegados. Toda vez que um pacote de dados é criado pela _[VPN](https://pt.wikipedia.org/wiki/Rede_privada_virtual)_, e passa por um dispositivo _([CPE](https://docs.oracle.com/en-us/iaas/Content/Network/Tasks/configuringCPE.htm))_ que faz um _[NAT](https://pt.wikipedia.org/wiki/Network_address_translation)_, ele perde sua _autenticidade_ e _integridade_. Isto se dá pelo fato da técnica _[NAT](https://pt.wikipedia.org/wiki/Network_address_translation)_ alterar o pacote de dados. Se um pacote de dados for alterado, ele será _"descartado" (dropado)_, pela funcionalidade do _[IPSec](https://pt.wikipedia.org/wiki/IPsec)_.
 
 Expliquei toda essa teoria, para que fique claro alguns parâmetros mandatórios, quando formos configurar o _túnel [IPSec](https://pt.wikipedia.org/wiki/IPsec)_. Com isto, não teremos problemas em relação a existência deste _[NAT](https://pt.wikipedia.org/wiki/Network_address_translation)_. Alguns outros detalhes também podem ser verificados _[aqui](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/overviewIPsec.htm#nat)_.
