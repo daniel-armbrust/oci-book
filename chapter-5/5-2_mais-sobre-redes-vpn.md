@@ -63,7 +63,7 @@ Antes de mais nada, precisamos criar um _[DRG](https://docs.oracle.com/pt-br/iaa
 
 ```
 darmbrust@hoodwink:~$ oci network drg create \
-> --compartment-id "ocid1.compartment.oc1..aaaaaaaaie4exnvj2ktkjlliahl2bxmdnteu2xmn27oc5cy5mdcmocl4vd7q" \
+> --compartment-id "ocid1.compartment.oc1..aaaaaaaauvqvbbx3oridcm5d2ztxkftwr362u2vl5zdsayzbehzwbjs56soq" \
 > --display-name "drg-saopaulo" \
 > --wait-for-state "AVAILABLE"
 ```
@@ -79,7 +79,7 @@ darmbrust@hoodwink:~$ oci network drg-attachment create \
 Action completed. Waiting until the resource has entered state: ('ATTACHED',)
 {
   "data": {
-    "compartment-id": "ocid1.compartment.oc1..aaaaaaaaro7baesjtceeuntyqxajzotsthm4bg46bwumacmbltuhw6gvb2mq",
+    "compartment-id": "ocid1.compartment.oc1..aaaaaaaauvqvbbx3oridcm5d2ztxkftwr362u2vl5zdsayzbehzwbjs56soq",
     "defined-tags": {},
     "display-name": "vcn-hub_attch_drg-saopaulo",
     "drg-id": "ocid1.drg.oc1.sa-saopaulo-1.aaaaaaaaan7n3zxikyf6ga4zeqbffhu4zhst5goxumb4cei5awdd4r5q5hhq",
@@ -127,3 +127,28 @@ Toda comunicação que este servidor _[Oracle Linux](https://www.oracle.com/linu
 Lembrando que uma das principais características do protocolo _[IPSec](https://pt.wikipedia.org/wiki/IPsec)_ é prover _confidencialidade_, _autenticidade_ e _integridade dos dados_ trafegados. Toda vez que um pacote de dados é criado pela _[VPN](https://pt.wikipedia.org/wiki/Rede_privada_virtual)_, e passa por um dispositivo _([CPE](https://docs.oracle.com/en-us/iaas/Content/Network/Tasks/configuringCPE.htm))_ que faz um _[NAT](https://pt.wikipedia.org/wiki/Network_address_translation)_, ele perde sua _autenticidade_ e _integridade_. Isto se dá pelo fato da técnica _[NAT](https://pt.wikipedia.org/wiki/Network_address_translation)_ alterar o pacote de dados. Se um pacote de dados for alterado, ele será _"descartado" (dropado)_, pelas regras do _[IPSec](https://pt.wikipedia.org/wiki/IPsec)_.
 
 Expliquei toda essa teoria, para que fique claro alguns parâmetros mandatórios, quando formos configurar o _túnel [IPSec](https://pt.wikipedia.org/wiki/IPsec)_. Com isto, não teremos problemas em relação a existência deste _[NAT](https://pt.wikipedia.org/wiki/Network_address_translation)_. Alguns outros detalhes também podem ser verificados _[aqui](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/overviewIPsec.htm#nat)_.
+
+```
+darmbrust@hoodwink:~$ oci network cpe create \
+> --compartment-id "ocid1.compartment.oc1..aaaaaaaauvqvbbx3oridcm5d2ztxkftwr362u2vl5zdsayzbehzwbjs56soq" \
+> --ip-address "201.33.196.77" \
+> --display-name "cpe-1"
+{
+  "data": {
+    "compartment-id": "ocid1.compartment.oc1..aaaaaaaauvqvbbx3oridcm5d2ztxkftwr362u2vl5zdsayzbehzwbjs56soq",
+    "cpe-device-shape-id": "bc75d22f-ef43-4868-ac7d-df6e34d9f488",
+    "defined-tags": {
+      "Oracle-Tags": {
+        "CreatedBy": "oracleidentitycloudservice/daniel.armbrust@algumdominio.com",
+        "CreatedOn": "2021-10-11T15:40:26.657Z"
+      }
+    },
+    "display-name": "cpe-1",
+    "freeform-tags": {},
+    "id": "ocid1.cpe.oc1.sa-saopaulo-1.aaaaaaaaq5kvwbglckqydpudeopgefzzyidp4lf27e3ui4omjbbueb2niukq",
+    "ip-address": "201.33.196.77",
+    "time-created": "2021-10-11T15:40:26.725000+00:00"
+  },
+  "etag": "e14f8550cbd5f7359df9a38acea2862f"
+}
+```
