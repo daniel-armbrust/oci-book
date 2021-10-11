@@ -15,6 +15,8 @@ Sobre as vantagens apresentadas, podemos dizer que a tecnologia deixa de ser uma
 
 Porém esta transição não acontece do dia para a noite. Iremos exemplificar como podemos conectar um data center qualquer _(on-premises)_ através de uma _[VPN](https://pt.wikipedia.org/wiki/Rede_privada_virtual)_ ao _[OCI](https://www.oracle.com/cloud/)_.
 
+Diferente das sessões de acessos pontuais que usamos através do _[Serviço Bastion](https://docs.oracle.com/pt-br/iaas/Content/Bastion/Concepts/bastionoverview.htm)_, a _[VPN](https://pt.wikipedia.org/wiki/Rede_privada_virtual)_ é um meio de conexão ao _[OCI](https://www.oracle.com/cloud/)_ permantente que depende da Internet para funcionar.
+
 ### __O que é uma VPN?__
 
 Uma _[VPN](https://pt.wikipedia.org/wiki/Rede_privada_virtual)_ (_[Virtual Private Network](https://pt.wikipedia.org/wiki/Rede_privada_virtual)_) ou _[Rede privada virtual](https://pt.wikipedia.org/wiki/Rede_privada_virtual)_, é uma rede de comunicação construída sobre uma infraestrutura compartilhada. Para o nosso exemplo, essa infraestrutura compartilhada será um link público de Internet.
@@ -48,7 +50,35 @@ Além de ser o mais seguro, o _"Modo Túnel"_  é o único suportado pelo _[OCI]
 
 ### Conectando meu data center ao OCI
 
-Existem vários dispositivos ou softwares existentes no mercado no qual é possível ser utilizado para realizar conectividade via _[VPN](https://pt.wikipedia.org/wiki/Rede_privada_virtual)_ ao _[OCI](https://www.oracle.com/cloud/)_. A _Oracle_ testa, verifica e disponibiliza, todo o passo a passo de configuração por dispositivo ou software, de diversos fabricantes diferentes neste _[link aqui](https://docs.oracle.com/pt-br/iaas/Content/Network/Reference/CPElist.htm)_.
+Há vários dispositivos ou softwares existentes no mercado no qual é possível ser utilizado para realizar conectividade via _[VPN](https://pt.wikipedia.org/wiki/Rede_privada_virtual)_ ao _[OCI](https://www.oracle.com/cloud/)_. A _Oracle_ testa, verifica e disponibiliza, todo o passo a passo de configuração por dispositivo ou software, de diversos fabricantes diferentes neste _[link aqui](https://docs.oracle.com/pt-br/iaas/Content/Network/Reference/CPElist.htm)_.
+
+Esta lista dos diferentes fabricantes e versões, também pode ser consultada pelo comando abaixo:
+
+```
+darmbrust@hoodwink:~$ oci network cpe-device-shape list \
+> --all \
+> --query "data[].{vendor: \"cpe-device-info\".vendor, version: \"cpe-device-info\".\"platform-software-version\"}" \
+> --output table
++-------------+--------------------------------------------------------------------+
+| vendor      | version                                                            |
++-------------+--------------------------------------------------------------------+
+| Palo Alto   | PAN-OS 8.0.0                                                       |
+| Cisco       | IOS version 15.4M or later                                         |
+| WatchGuard  | Firebox with Fireware v12                                          |
+| Fortinet    | FortiGate 6.0.4 or later                                           |
+| Cisco       | ASA Route-Based VPN 9.7.1 or later                                 |
+| Libreswan   | 3.18 or later                                                      |
+| Juniper     | SRX Series - JunOS 11.0 or later                                   |
+| Juniper     | MX Series - JunOS 15.1 or later                                    |
+| Yamaha      | RTX RTX830 Firmware Rev.15.02.03                                   |
+| Yamaha      | RTX RTX1210 Firmware Rev.14.01.28                                  |
+| Other       | N.A                                                                |
+| Cisco       | ASA Policy-Based VPN 8.5+ (single tunnel, static)                  |
+| Check Point | R80.20                                                             |
+| Furukawa    | FITELnet-F220/F221 Firmware 01.00(00)[0]00.00.0 [2019/07/05 15:00] |
+| NEC         | IX Series 10.1.16                                                  |
++-------------+--------------------------------------------------------------------+
+```
 
 Neste nosso exemplo, iremos demonstrar a configuração do software _[Libreswan](https://libreswan.org/)_ em um servidor _[Oracle Linux](https://www.oracle.com/linux/)_ localizado em um data center qualquer _(on-premises)_.
 
@@ -145,7 +175,7 @@ darmbrust@hoodwink:~$ oci network cpe create \
     },
     "display-name": "cpe-1",
     "freeform-tags": {},
-    "id": "ocid1.cpe.oc1.sa-saopaulo-1.aaaaaaaaq5kvwbglckqydpudeopgefzzyidp4lf27e3ui4omjbbueb2niukq",
+    "id": "ocid1.cpe.oc1.sa-saopaulo-1.aaaaaaaaty5yhydioqgvcaerz55gmhflmoowxylrgpecljm7jedwxgz3jtwq",
     "ip-address": "201.33.196.77",
     "time-created": "2021-10-11T15:40:26.725000+00:00"
   },
