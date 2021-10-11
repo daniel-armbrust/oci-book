@@ -150,7 +150,7 @@ Atrás deste dispositivo, está o servidor _[Oracle Linux](https://www.oracle.co
        valid_lft forever preferred_lft forever
 ```
 
-Como iremos utilizar o _[Libreswan](https://libreswan.org/)_ para conectividade com o _[OCI](https://www.oracle.com/cloud/)_, ao criar o _[CPE](https://docs.oracle.com/en-us/iaas/Content/Network/Tasks/configuringCPE.htm)_ devemos informar o _id_ que representa as configurações do _[Libreswan](https://libreswan.org/)_.
+Como iremos utilizar o _[Libreswan](https://libreswan.org/)_ para conectividade com o _[OCI](https://www.oracle.com/cloud/)_, ao criar o _[CPE](https://docs.oracle.com/en-us/iaas/Content/Network/Tasks/configuringCPE.htm)_ irei informar o _id_ que representa as configurações do _[Libreswan](https://libreswan.org/)_.
 
 ```
 darmbrust@hoodwink:~$ oci network cpe-device-shape list \
