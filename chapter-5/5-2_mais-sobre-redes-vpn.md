@@ -138,7 +138,7 @@ Action completed. Waiting until the resource has entered state: ('ATTACHED',)
 
 _[CPE](https://docs.oracle.com/en-us/iaas/Content/Network/Tasks/configuringCPE.htm)_ ou _[Customer-premises Equipment](https://docs.oracle.com/en-us/iaas/Content/Network/Tasks/configuringCPE.htm)_ nada mais é do que um termo usado para representar o dispositivo ou software de _[VPN](https://pt.wikipedia.org/wiki/Rede_privada_virtual)_ localizado no seu data center _(on-premises)_. Para o nosso exemplo, o _[CPE](https://docs.oracle.com/en-us/iaas/Content/Network/Tasks/configuringCPE.htm)_ é um dispositivo (roteador ou firewall) que possui o endereço IP público _201.33.196.77_. 
 
-Atrás deste dispositivo, está o servidor _[Oracle Linux](https://www.oracle.com/linux/)_ versão _7.9_ equipado com _[Libreswan](https://libreswan.org/)_ no endereço IP _10.34.0.82_.
+Atrás deste dispositivo, está o servidor _[Oracle Linux](https://www.oracle.com/linux/)_ versão _7.9_ no endereço IP _10.34.0.82_:
 
 ```
 [opc@onpremises ~]$ ip addr sh ens3
@@ -150,6 +150,53 @@ Atrás deste dispositivo, está o servidor _[Oracle Linux](https://www.oracle.co
        valid_lft forever preferred_lft forever
 ```
 
+Como iremos utilizar o _[Libreswan](https://libreswan.org/)_ para conectividade com o _[OCI](https://www.oracle.com/cloud/)_, ao criar o _[CPE](https://docs.oracle.com/en-us/iaas/Content/Network/Tasks/configuringCPE.htm)_ devemos informar o _id_ que representa as configurações do _[Libreswan](https://libreswan.org/)_.
+
+```
+darmbrust@hoodwink:~$ oci network cpe-device-shape list \
+> --all \
+> --query "data[?\"cpe-device-info\".vendor=='Libreswan']"
+[
+  {
+    "cpe-device-info": {
+      "platform-software-version": "3.18 or later",
+      "vendor": "Libreswan"
+    },
+    "id": "56b1eb67-19c6-4ed1-924e-bad6e227f5ba"
+  }
+]
+```
+
+Agora, podemos criar o _[CPE](https://docs.oracle.com/en-us/iaas/Content/Network/Tasks/configuringCPE.htm)_ específico para _[Libreswan](https://libreswan.org/)_:
+
+```
+darmbrust@hoodwink:~$ oci network cpe create \
+> --compartment-id "ocid1.compartment.oc1..aaaaaaaauvqvbbx3oridcm5d2ztxkftwr362u2vl5zdsayzbehzwbjs56soq" \
+> --ip-address "201.33.196.77" \
+> --cpe-device-shape-id "56b1eb67-19c6-4ed1-924e-bad6e227f5ba" \
+> --display-name "cpe-1" 
+{
+  "data": {
+    "compartment-id": "ocid1.compartment.oc1..aaaaaaaauvqvbbx3oridcm5d2ztxkftwr362u2vl5zdsayzbehzwbjs56soq",
+    "cpe-device-shape-id": "56b1eb67-19c6-4ed1-924e-bad6e227f5ba",
+    "defined-tags": {
+      "Oracle-Tags": {
+        "CreatedBy": "oracleidentitycloudservice/daniel.armbrust@algumdominio.com",
+        "CreatedOn": "2021-10-11T18:57:13.115Z"
+      }
+    },
+    "display-name": "cpe-1",
+    "freeform-tags": {},
+    "id": "ocid1.cpe.oc1.sa-saopaulo-1.aaaaaaaaq4duvw3wi4cpzx7zsjolhsqkhg6nt5lnnko65u3zqsinmwdzyhhq",
+    "ip-address": "201.33.196.77",
+    "time-created": "2021-10-11T18:57:13.126000+00:00"
+  },
+  "etag": "110ce961b27d0bc8f58b41fb08ab2623"
+}
+```
+
+>_**__NOTA:__** Como já foi dito, um [CPE](https://docs.oracle.com/en-us/iaas/Content/Network/Tasks/configuringCPE.htm) somente tem a função de representar o seu dispositivo ou software de [VPN](https://pt.wikipedia.org/wiki/Rede_privada_virtual). O parâmetro --cpe-device-shape-id usado na criação do mesmo é opcional e só tem sentido informativo. Este não intefere em nada no seu funcionamento. Caso você não especifique, o valor "others" será usado._
+
 Existe um detalhe importante aqui!
 
 Toda comunicação que este servidor _[Oracle Linux](https://www.oracle.com/linux/)_ faz com a Internet, passa por um dispositivo de _"borda"_. Este executa um _[NAT](https://pt.wikipedia.org/wiki/Network_address_translation)_, que _"troca"_ o endereço IP privado _10.34.0.82_ para o endereço IP público _201.33.196.77_, válido e que permite comunicação na Internet (também chamado de endereço roteável). Em resumo, a técnica _[NAT](https://pt.wikipedia.org/wiki/Network_address_translation)_ se faz necessário pois os endereços IPs da rede privada não conseguem se comunicar diretamente com outros servidores na Internet, sem um endereço IP público.
@@ -157,28 +204,3 @@ Toda comunicação que este servidor _[Oracle Linux](https://www.oracle.com/linu
 Lembrando que uma das principais características do protocolo _[IPSec](https://pt.wikipedia.org/wiki/IPsec)_ é prover _confidencialidade_, _autenticidade_ e _integridade dos dados_ trafegados. Toda vez que um pacote de dados é criado pela _[VPN](https://pt.wikipedia.org/wiki/Rede_privada_virtual)_, e passa por um dispositivo _([CPE](https://docs.oracle.com/en-us/iaas/Content/Network/Tasks/configuringCPE.htm))_ que faz um _[NAT](https://pt.wikipedia.org/wiki/Network_address_translation)_, ele perde sua _autenticidade_ e _integridade_. Isto se dá pelo fato da técnica _[NAT](https://pt.wikipedia.org/wiki/Network_address_translation)_ alterar o pacote de dados. Se um pacote de dados for alterado, ele será _"descartado" (dropado)_, pelas regras do _[IPSec](https://pt.wikipedia.org/wiki/IPsec)_.
 
 Expliquei toda essa teoria, para que fique claro alguns parâmetros mandatórios, quando formos configurar o _túnel [IPSec](https://pt.wikipedia.org/wiki/IPsec)_. Com isto, não teremos problemas em relação a existência deste _[NAT](https://pt.wikipedia.org/wiki/Network_address_translation)_. Alguns outros detalhes também podem ser verificados _[aqui](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/overviewIPsec.htm#nat)_.
-
-```
-darmbrust@hoodwink:~$ oci network cpe create \
-> --compartment-id "ocid1.compartment.oc1..aaaaaaaauvqvbbx3oridcm5d2ztxkftwr362u2vl5zdsayzbehzwbjs56soq" \
-> --ip-address "201.33.196.77" \
-> --display-name "cpe-1"
-{
-  "data": {
-    "compartment-id": "ocid1.compartment.oc1..aaaaaaaauvqvbbx3oridcm5d2ztxkftwr362u2vl5zdsayzbehzwbjs56soq",
-    "cpe-device-shape-id": "bc75d22f-ef43-4868-ac7d-df6e34d9f488",
-    "defined-tags": {
-      "Oracle-Tags": {
-        "CreatedBy": "oracleidentitycloudservice/daniel.armbrust@algumdominio.com",
-        "CreatedOn": "2021-10-11T15:40:26.657Z"
-      }
-    },
-    "display-name": "cpe-1",
-    "freeform-tags": {},
-    "id": "ocid1.cpe.oc1.sa-saopaulo-1.aaaaaaaaty5yhydioqgvcaerz55gmhflmoowxylrgpecljm7jedwxgz3jtwq",
-    "ip-address": "201.33.196.77",
-    "time-created": "2021-10-11T15:40:26.725000+00:00"
-  },
-  "etag": "e14f8550cbd5f7359df9a38acea2862f"
-}
-```
