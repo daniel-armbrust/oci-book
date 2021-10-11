@@ -57,6 +57,56 @@ _[Libreswan](https://libreswan.org/)_ é uma implementação do protocolo _[IPSe
 - **Libreswan >= 3.18**
 - **Linux Kernel 3.x ou 4.x**
 
->_**__NOTA:__** Iremos utilizar em nosso data center fictício, o [Oracle Linux versão 7.9](https://docs.oracle.com/en/operating-systems/oracle-linux/7/relnotes7.9/index.html), pois ele já contempla as versões de software que precisamos._ 
+>_**__NOTA:__** Iremos utilizar em nosso data center fictício uma máquina com [Oracle Linux versão 7.9](https://docs.oracle.com/en/operating-systems/oracle-linux/7/relnotes7.9/index.html), pois ele já contempla as versões de software que precisamos._ 
+
+Antes de mais nada, precisamos criar um _[DRG](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingDRGs.htm)_ e anexá-lo a _vcn-hub_ de acordo com o nosso exemplo.
+
+```
+darmbrust@hoodwink:~$ oci network drg create \
+> --compartment-id "ocid1.compartment.oc1..aaaaaaaaie4exnvj2ktkjlliahl2bxmdnteu2xmn27oc5cy5mdcmocl4vd7q" \
+> --display-name "drg-saopaulo" \
+> --wait-for-state "AVAILABLE"
+```
+
+Para anexar, usamos o comando abaixo:
+
+```
+darmbrust@hoodwink:~$ oci network drg-attachment create \
+> --drg-id "ocid1.drg.oc1.sa-saopaulo-1.aaaaaaaaan7n3zxikyf6ga4zeqbffhu4zhst5goxumb4cei5awdd4r5q5hhq" \
+> --vcn-id "ocid1.vcn.oc1.sa-saopaulo-1.amaaaaaa6noke4qaesd2qse4224ophc5rx2ckte6rukphbsdiky5vq7uflaq" \
+> --display-name "vcn-hub_attch_drg-saopaulo" \
+> --wait-for-state "ATTACHED"
+Action completed. Waiting until the resource has entered state: ('ATTACHED',)
+{
+  "data": {
+    "compartment-id": "ocid1.compartment.oc1..aaaaaaaaro7baesjtceeuntyqxajzotsthm4bg46bwumacmbltuhw6gvb2mq",
+    "defined-tags": {},
+    "display-name": "vcn-hub_attch_drg-saopaulo",
+    "drg-id": "ocid1.drg.oc1.sa-saopaulo-1.aaaaaaaaan7n3zxikyf6ga4zeqbffhu4zhst5goxumb4cei5awdd4r5q5hhq",
+    "drg-route-table-id": "ocid1.drgroutetable.oc1.sa-saopaulo-1.aaaaaaaatjlinzltqpc5uzrjd7aapa4os5etroqwswk56h6e2ubayi2iw2gq",
+    "export-drg-route-distribution-id": null,
+    "freeform-tags": {},
+    "id": "ocid1.drgattachment.oc1.sa-saopaulo-1.aaaaaaaalw2vitkanr7kwtxzbdhfe4va4izmcym3yjwoii4aqlhbxttdyksa",
+    "is-cross-tenancy": false,
+    "lifecycle-state": "ATTACHED",
+    "network-details": {
+      "id": "ocid1.vcn.oc1.sa-saopaulo-1.amaaaaaa6noke4qaesd2qse4224ophc5rx2ckte6rukphbsdiky5vq7uflaq",
+      "route-table-id": null,
+      "type": "VCN"
+    },
+    "route-table-id": null,
+    "time-created": "2021-10-11T14:33:16.970000+00:00",
+    "vcn-id": "ocid1.vcn.oc1.sa-saopaulo-1.amaaaaaa6noke4qaesd2qse4224ophc5rx2ckte6rukphbsdiky5vq7uflaq"
+  },
+  "etag": "69736179--gzip"
+}
+```
+
+>_**__NOTA:__** Para detalhes sobre a criação de [VCNs](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingVCNs_topic-Overview_of_VCNs_and_Subnets.htm), subredes, [DRG](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingDRGs.htm) e demais componentes de redes no [OCI](https://www.oracle.com/cloud/), consulte os capítulos "[3.1 - Fundamentos do Serviço de Redes](https://github.com/daniel-armbrust/oci-book/blob/main/chapter-3/3-1_fundamentos-redes.md)" e "[5.1 - Conectando múltiplas VCNs na mesma região](https://github.com/daniel-armbrust/oci-book/blob/main/chapter-5/5-1_mais-sobre-redes-multiplas-vcn-lpg-drg.md)"._
+
+### Detalhes sobre o CPE
+
+
+
 
 
