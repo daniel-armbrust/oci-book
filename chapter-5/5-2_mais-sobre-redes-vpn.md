@@ -59,7 +59,7 @@ _[Libreswan](https://libreswan.org/)_ é uma implementação do protocolo _[IPSe
 
 >_**__NOTA:__** Iremos utilizar em nosso data center fictício uma máquina com [Oracle Linux versão 7.9](https://docs.oracle.com/en/operating-systems/oracle-linux/7/relnotes7.9/index.html), pois ele já contempla as versões de software que precisamos._ 
 
-Antes de mais nada, precisamos criar um _[DRG](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingDRGs.htm)_ e anexá-lo a _vcn-hub_ de acordo com o nosso exemplo.
+Antes de mais nada, precisamos criar um _[DRG](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingDRGs.htm)_ e anexá-lo a _vcn-hub_ de acordo com o nosso exemplo. O _[DRG](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingDRGs.htm)_ é uma _"peça"_ fundamental, pois é a partir dele que será possível criar os túneis _[IPSec](https://pt.wikipedia.org/wiki/IPsec)_.
 
 ```
 darmbrust@hoodwink:~$ oci network drg create \
