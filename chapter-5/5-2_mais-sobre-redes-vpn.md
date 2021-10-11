@@ -106,4 +106,24 @@ Action completed. Waiting until the resource has entered state: ('ATTACHED',)
 
 ### Detalhes sobre o CPE
 
-_[CPE](https://docs.oracle.com/en-us/iaas/Content/Network/Tasks/configuringCPE.htm)_ ou _[Customer-premises Equipment](https://docs.oracle.com/en-us/iaas/Content/Network/Tasks/configuringCPE.htm)_ nada mais é do que um termo usado para representar o dispositivo ou software de _[VPN](https://pt.wikipedia.org/wiki/Rede_privada_virtual)_ localizado no seu data center _(on-premises)_. Para o nosso exemplo, o _[CPE](https://docs.oracle.com/en-us/iaas/Content/Network/Tasks/configuringCPE.htm)_ é um dispositivo (roteador ou firewall) que possui o endereço IP público _201.33.196.77_. Atrás deste dispositivo, está o servidor _[Oracle Linux](https://www.oracle.com/linux/)_ versão _7.9_ equipado com _[Libreswan](https://libreswan.org/)_ no endereço IP _10.34.0.82_.
+_[CPE](https://docs.oracle.com/en-us/iaas/Content/Network/Tasks/configuringCPE.htm)_ ou _[Customer-premises Equipment](https://docs.oracle.com/en-us/iaas/Content/Network/Tasks/configuringCPE.htm)_ nada mais é do que um termo usado para representar o dispositivo ou software de _[VPN](https://pt.wikipedia.org/wiki/Rede_privada_virtual)_ localizado no seu data center _(on-premises)_. Para o nosso exemplo, o _[CPE](https://docs.oracle.com/en-us/iaas/Content/Network/Tasks/configuringCPE.htm)_ é um dispositivo (roteador ou firewall) que possui o endereço IP público _201.33.196.77_. 
+
+Atrás deste dispositivo, está o servidor _[Oracle Linux](https://www.oracle.com/linux/)_ versão _7.9_ equipado com _[Libreswan](https://libreswan.org/)_ no endereço IP _10.34.0.82_.
+
+```
+[opc@onpremises ~]$ ip addr sh ens3
+2: ens3: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 9000 qdisc pfifo_fast state UP group default qlen 1000
+    link/ether 02:00:17:00:40:7d brd ff:ff:ff:ff:ff:ff
+    inet 10.34.0.82/24 brd 10.34.0.255 scope global dynamic ens3
+       valid_lft 76954sec preferred_lft 76954sec
+    inet6 fe80::17ff:fe00:407d/64 scope link
+       valid_lft forever preferred_lft forever
+```
+
+Existe um detalhe importante aqui!
+
+Toda comunicação que este servidor _[Oracle Linux](https://www.oracle.com/linux/)_ faz com a Internet, passa por um dispositivo de _"borda"_. Este executa um _[NAT](https://pt.wikipedia.org/wiki/Network_address_translation)_, que _"troca"_ o endereço IP privado _10.34.0.82_ para o endereço IP público _201.33.196.77_, válido e que permite comunicação na Internet (também chamado de endereço roteável). Em resumo, a técnica _[NAT](https://pt.wikipedia.org/wiki/Network_address_translation)_ se faz necessário pois os endereços IPs da rede privada não conseguem se comunicar diretamente com outros servidores na Internet, sem um endereço IP público.
+
+Lembrando que uma das principais características do protocolo _[IPSec](https://pt.wikipedia.org/wiki/IPsec)_ é prover _confidencialidade_, _autenticidade_ e _integridade dos dados_ trafegados. Toda vez que um pacote de dados é criado pela _[VPN](https://pt.wikipedia.org/wiki/Rede_privada_virtual)_, e passa por um dispositivo _([CPE](https://docs.oracle.com/en-us/iaas/Content/Network/Tasks/configuringCPE.htm))_ que faz um _[NAT](https://pt.wikipedia.org/wiki/Network_address_translation)_, ele perde sua _autenticidade_ e _integridade_. Isto se dá pelo fato da técnica _[NAT](https://pt.wikipedia.org/wiki/Network_address_translation)_ alterar o pacote de dados. Se um pacote de dados for alterado, ele será _"descartado" (dropado)_, pelas regras do _[IPSec](https://pt.wikipedia.org/wiki/IPsec)_.
+
+Expliquei toda essa teoria, para que fique claro alguns parâmetros mandatórios, quando formos configurar o _túnel [IPSec](https://pt.wikipedia.org/wiki/IPsec)_. Com isto, não teremos problemas em relação a existência deste _[NAT](https://pt.wikipedia.org/wiki/Network_address_translation)_. Alguns outros detalhes também podem ser verificados _[aqui](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/overviewIPsec.htm#nat)_.
