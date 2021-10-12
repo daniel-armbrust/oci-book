@@ -211,8 +211,12 @@ Expliquei toda essa teoria, para que fique claro alguns parâmetros mandatórios
 
 Quando se cria uma conexão _[IPSec](https://pt.wikipedia.org/wiki/IPsec)_ através de um _[DRG](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingDRGs.htm)_, o _[OCI](https://www.oracle.com/cloud/)_ disponibiliza _dois túneis redundantes_. A _[Oracle](https://www.oracle.com/cloud/)_ recomenda que você utilize ambos os túneis (se o seu dispositivo suportar essa configuração).
 
-Para cada túnel em separado, há a possibilidade de escolher qual é o tipo de roteamento que será usado:
+Para cada túnel em separado, há a possibilidade de escolher qual é o _tipo de roteamento_ que será usado. Existem dois, são eles:
 
 - **Roteamento dinâmico via BGP**
     - As rotas disponíveis são obtidas dinamicamente através do protocolo _[BGP (Border Gateway Protocol)](https://pt.wikipedia.org/wiki/Border_Gateway_Protocol)_. Isto quer dizer que o _[DRG](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingDRGs.htm)_ obtém dinamicamente as rotas do seu _on-premises_, além também de _"anunciar"_ os endereços das subredes presentes nas _[VCNs](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingVCNs_topic-Overview_of_VCNs_and_Subnets.htm)_ do _[OCI](https://www.oracle.com/cloud/)_ ao _on-premises_.
    
+- **Roteamento estático**
+    - É o meio pelo qual você informa manualmente quais as redes do seu _on-premises_ que serão _"alcançadas"_ pelo túnel _[IPSec](https://pt.wikipedia.org/wiki/IPsec)_ que foi criado no _[OCI](https://www.oracle.com/cloud/)_. O termo _["roteamento estático"](https://en.wikipedia.org/wiki/Static_routing)_ está associado a ação manual de inserir informações sobre as redes, ao contrário do meio automático e dinâmico disponível pelo protocolo _[BGP (Border Gateway Protocol)](https://pt.wikipedia.org/wiki/Border_Gateway_Protocol)_, por exemplo.
+
+Apesar de ser possível usar roteamento dinâmico para um túnel e estático para o outro, é recomendado usar um tipo só para ambos. Isto simplifica as suas configurações. A exceção é por conta de você estar em um processo de transição entre _[roteamento estático](https://en.wikipedia.org/wiki/Static_routing)_ e _[BGP](https://pt.wikipedia.org/wiki/Border_Gateway_Protocol)_, um túnel ainda pode usar temporariamente o _[roteamento estático](https://en.wikipedia.org/wiki/Static_routing)_ enquanto o outro já foi  alternado para _[BGP](https://pt.wikipedia.org/wiki/Border_Gateway_Protocol)_.
