@@ -206,3 +206,13 @@ Em nosso exemplo, toda comunicação que o servidor _[Oracle Linux](https://www.
 Lembrando que uma das principais características do protocolo _[IPSec](https://pt.wikipedia.org/wiki/IPsec)_ é prover _confidencialidade_, _autenticidade_ e _integridade dos dados_ trafegados. Toda vez que um pacote de dados é criado pela _[VPN](https://pt.wikipedia.org/wiki/Rede_privada_virtual)_, e passa por um dispositivo _([CPE](https://docs.oracle.com/en-us/iaas/Content/Network/Tasks/configuringCPE.htm))_ que faz um _[NAT](https://pt.wikipedia.org/wiki/Network_address_translation)_, ele perde sua _autenticidade_ e _integridade_. Isto se dá pelo fato da técnica _[NAT](https://pt.wikipedia.org/wiki/Network_address_translation)_ alterar o pacote de dados. Se um pacote de dados for alterado, ele será _"descartado" (dropado)_, pela funcionalidade do _[IPSec](https://pt.wikipedia.org/wiki/IPsec)_.
 
 Expliquei toda essa teoria, para que fique claro alguns parâmetros mandatórios, quando formos configurar o _túnel [IPSec](https://pt.wikipedia.org/wiki/IPsec)_. Com isto, não teremos problemas em relação a existência deste _[NAT](https://pt.wikipedia.org/wiki/Network_address_translation)_. Alguns outros detalhes também podem ser verificados _[aqui](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/overviewIPsec.htm#nat)_.
+
+### Criando a conexão IPSec
+
+Quando se cria uma conexão _[IPSec](https://pt.wikipedia.org/wiki/IPsec)_ através de um _[DRG](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingDRGs.htm)_, o _[OCI](https://www.oracle.com/cloud/)_ disponibiliza _dois túneis redundantes_. A _[Oracle](https://www.oracle.com/cloud/)_ recomenda que você utilize ambos os túneis (se o seu dispositivo suportar essa configuração).
+
+Para cada túnel em separado, há a possibilidade de escolher qual é o tipo de roteamento que será usado:
+
+- **Roteamento dinâmico via _[BGP](https://pt.wikipedia.org/wiki/Border_Gateway_Protocol)_**
+    - As rotas disponíveis são obtidas dinamicamente através do protocolo _[BGP (Border Gateway Protocol)](https://pt.wikipedia.org/wiki/Border_Gateway_Protocol)_. Isto quer dizer que o _[DRG](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingDRGs.htm)_ obtém dinamicamente as rotas do seu _on-premises_, além também de _"anunciar"_ os endereços das subredes presentes nas _[VCNs](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingVCNs_topic-Overview_of_VCNs_and_Subnets.htm)_ do _[OCI](https://www.oracle.com/cloud/)_ ao _on-premises_.
+   
