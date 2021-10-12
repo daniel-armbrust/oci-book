@@ -213,6 +213,6 @@ Quando se cria uma conexão _[IPSec](https://pt.wikipedia.org/wiki/IPsec)_ atrav
 
 Para cada túnel em separado, há a possibilidade de escolher qual é o tipo de roteamento que será usado:
 
-- **Roteamento dinâmico via _[BGP](https://pt.wikipedia.org/wiki/Border_Gateway_Protocol)_**
+- **Roteamento dinâmico via BGP**
     - As rotas disponíveis são obtidas dinamicamente através do protocolo _[BGP (Border Gateway Protocol)](https://pt.wikipedia.org/wiki/Border_Gateway_Protocol)_. Isto quer dizer que o _[DRG](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingDRGs.htm)_ obtém dinamicamente as rotas do seu _on-premises_, além também de _"anunciar"_ os endereços das subredes presentes nas _[VCNs](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingVCNs_topic-Overview_of_VCNs_and_Subnets.htm)_ do _[OCI](https://www.oracle.com/cloud/)_ ao _on-premises_.
    
