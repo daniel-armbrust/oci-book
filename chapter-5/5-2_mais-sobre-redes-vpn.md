@@ -519,6 +519,8 @@ Do lado do _[Libreswan](https://libreswan.org/)_, especificamos que para se _"al
 [darmbrust@onpremises ~]$ sudo ip route add 192.168.20.0/26 nexthop dev vti1 nexthop dev vti2
 ```
 
+>_**__NOTA:__** A rota criada com o comando acima não é persistente. Caso o servidor seja reiniciado, essa configuração será perdida. Consulte detalhes na documentação oficial do [Oracle Linux](https://docs.oracle.com/en/operating-systems/oracle-linux/7/admin/toc.htm) neste [link aqui](https://docs.oracle.com/en/operating-systems/oracle-linux/7/admin/toc.htm) para tornar esta rota persistente._
+
 Como as redes agora se _"conhecem"_, podemos conferir sua conectividade pelo utilitário _[ping](https://pt.wikipedia.org/wiki/Ping)_:
 
 ```
