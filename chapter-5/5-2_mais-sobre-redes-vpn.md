@@ -470,3 +470,45 @@ darmbrust@hoodwink:~$ oci network ip-sec-connection get-status \
   }
 }
 ```
+
+#### Ajustes no roteamento e Teste de conectividade
+
+Para concluír, devemos ajustar as regras de roteamento tanto na subrede do _[OCI](https://www.oracle.com/cloud/)_ quanto do _[Oracle Linux](https://www.oracle.com/linux/)_ equipado com o _[Libreswan](https://libreswan.org/)_.
+
+Primeiramente, vamos atualizar a _[tabela de roteamento](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingroutetables.htm)_ com a informação da rede _"10.34.0.0/24"_ que corresponde a rede do _on-premises_. O tráfego que deseja _"alcançar"_ o _on-premises_, deve ter como _destino_ o _[DRG](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingDRGs.htm)_ onde foi criado a _[VPN](https://pt.wikipedia.org/wiki/Rede_privada_virtual)_:
+
+```
+darmbrust@hoodwink:~$ oci network route-table update \
+> --rt-id "ocid1.routetable.oc1.sa-saopaulo-1.aaaaaaaa5zkqzc6sx2gsjrx57wuyihcelgifmi2t2del63x4rrco47nfco2q" \
+> --route-rules '[{"cidrBlock": "10.34.0.0/24", "networkEntityId": "ocid1.drg.oc1.sa-saopaulo-1.aaaaaaaaan7n3zxikyf6ga4zeqbffhu4zhst5goxumb4cei5awdd4r5q5hhq"}]' \
+> --force \
+> --wait-for-state "AVAILABLE"
+Action completed. Waiting until the resource has entered state: ('AVAILABLE',)
+{
+  "data": {
+    "compartment-id": "ocid1.compartment.oc1..aaaaaaaaro7baesjtceeuntyqxajzotsthm4bg46bwumacmbltuhw6gvb2mq",
+    "defined-tags": {
+      "Oracle-Tags": {
+        "CreatedBy": "oracleidentitycloudservice/daniel.armbrust@algumdominio.com",
+        "CreatedOn": "2021-10-11T12:26:59.843Z"
+      }
+    },
+    "display-name": "Default Route Table for vcn-hub",
+    "freeform-tags": {},
+    "id": "ocid1.routetable.oc1.sa-saopaulo-1.aaaaaaaa5zkqzc6sx2gsjrx57wuyihcelgifmi2t2del63x4rrco47nfco2q",
+    "lifecycle-state": "AVAILABLE",
+    "route-rules": [
+      {
+        "cidr-block": "10.34.0.0/24",
+        "description": null,
+        "destination": "10.34.0.0/24",
+        "destination-type": "CIDR_BLOCK",
+        "network-entity-id": "ocid1.drg.oc1.sa-saopaulo-1.aaaaaaaaan7n3zxikyf6ga4zeqbffhu4zhst5goxumb4cei5awdd4r5q5hhq"
+      }
+    ],
+    "time-created": "2021-10-11T12:26:59.949000+00:00",
+    "vcn-id": "ocid1.vcn.oc1.sa-saopaulo-1.amaaaaaa6noke4qaesd2qse4224ophc5rx2ckte6rukphbsdiky5vq7uflaq"
+  },
+  "etag": "366e0922"
+}
+```
