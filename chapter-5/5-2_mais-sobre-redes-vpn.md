@@ -313,10 +313,10 @@ darmbrust@hoodwink:~$ oci network ip-sec-connection get-status \
 Para deixar evidente as versões do servidor _[Oracle Linux](https://www.oracle.com/linux/)_ que estamos usando no _on-premises_:
 
 ```
-[opc@onpremises ~]$ cat /etc/oracle-release
+[darmbrust@onpremises ~]$ cat /etc/oracle-release
 Oracle Linux Server release 7.9
 
-[opc@onpremises ~]$ uname -a
+[darmbrust@onpremises ~]$ uname -a
 Linux onpremises 5.4.17-2102.205.7.3.el7uek.x86_64 #2 SMP Fri Sep 17 16:52:13 PDT 2021 x86_64 x86_64 x86_64 GNU/Linux
 ```
 
@@ -331,9 +331,9 @@ Antes de começarmos com as configurações, iremos desabilitar o _[firewall](ht
 - _[Firewall](https://firewalld.org/)_
 
 ```
-[opc@onpremises ~]$ sudo systemctl stop firewalld
+[darmbrust@onpremises ~]$ sudo systemctl stop firewalld
 
-[opc@onpremises ~]$ sudo systemctl disable firewalld
+[darmbrust@onpremises ~]$ sudo systemctl disable firewalld
 Removed symlink /etc/systemd/system/multi-user.target.wants/firewalld.service.
 Removed symlink /etc/systemd/system/dbus-org.fedoraproject.FirewallD1.service.
 ```
@@ -341,8 +341,8 @@ Removed symlink /etc/systemd/system/dbus-org.fedoraproject.FirewallD1.service.
 - _[SELinux](https://docs.oracle.com/en/operating-systems/oracle-linux/selinux/)_
 
 ```
-[opc@onpremises ~]$ sudo setenforce permissive
-[opc@onpremises ~]$ sudo sed -i 's/SELINUX=enforcing/SELINUX=permissive/' /etc/selinux/config
+[darmbrust@onpremises ~]$ sudo setenforce permissive
+[darmbrust@onpremises ~]$ sudo sed -i 's/SELINUX=enforcing/SELINUX=permissive/' /etc/selinux/config
 ```
 
 >_**__NOTA:__** Tanto o [firewall](https://firewalld.org/) quanto o [SELinux](https://docs.oracle.com/en/operating-systems/oracle-linux/selinux/), são aliados importantes de segurança que devemos ter ativos e devidamente configurados em qualquer servidor produtivo. Porém, aqui o nosso foco é a configuração do Libreswan e comunicação com a Cloud da Oracle. Não iremos nos atentar aos detalhes de configuração do  [firewall](https://firewalld.org/) e [SELinux](https://docs.oracle.com/en/operating-systems/oracle-linux/selinux/). Para saber mais, consulte a documentação oficial do [Oracle Linux 7](https://docs.oracle.com/en/operating-systems/oracle-linux/7/admin/pref.html)._
@@ -350,20 +350,20 @@ Removed symlink /etc/systemd/system/dbus-org.fedoraproject.FirewallD1.service.
 Vamos para a instalação e configuração do _[Libreswan](https://libreswan.org/)_:
 
 ```
-[opc@onpremises ~]$ sudo yum -y install libreswan
+[darmbrust@onpremises ~]$ sudo yum -y install libreswan
 ```
 
 Precisamos criar dois arquivos para manter suas configurações. Iremos criá-los com o comando abaixo:
 
 ```
-[opc@onpremises ~]$ sudo touch /etc/ipsec.d/oci-ipsec.conf
-[opc@onpremises ~]$ sudo touch /etc/ipsec.d/oci-ipsec.secrets
+[darmbrust@onpremises ~]$ sudo touch /etc/ipsec.d/oci-ipsec.conf
+[darmbrust@onpremises ~]$ sudo touch /etc/ipsec.d/oci-ipsec.secrets
 ```
 
 O arquivo _**/etc/ipsec.d/oci-ipsec.conf**_ irá receber o seguinte conteúdo:
 
 ```
-[opc@onpremises ~]$ sudo cat /etc/ipsec.d/oci-ipsec.conf
+[darmbrust@onpremises ~]$ sudo cat /etc/ipsec.d/oci-ipsec.conf
 conn oci-tunnel-1
     left=10.34.0.82
     leftid=10.34.0.82
@@ -402,3 +402,18 @@ conn oci-tunnel-2
 ```
 
 Neste arquivo, existem as configurações dos dois túneis _[IPSec](https://pt.wikipedia.org/wiki/IPsec)_ entre o _[Libreswan](https://libreswan.org/)_ e o _[OCI](https://www.oracle.com/cloud/)_. Os valores para os parâmetros _**left**_ e _**leftid**_, correspondem ao endereço IP privado do _[Libreswan](https://libreswan.org/)_. Já o parâmetro _**right**_, é o endereço IP público de cada um dos túneis que foi criado.
+
+Para o conteúdo do arquivo _**/etc/ipsec.d/oci-ipsec.secrets**_, temos os valores para o _[Shared Secret](https://en.wikipedia.org/wiki/Shared_secret)_ de cada túnel:
+
+```
+[darmbrust@onpremises ~]$ sudo cat /etc/ipsec.d/oci-ipsec.secrets
+10.34.0.82 168.138.239.75: PSK "9HdmXoXKyY8UErDupAJFTfqwImQQ0pa3wfhYcAN3RdFNGo9zrEcY0khD3yHMFm"
+10.34.0.82 168.138.248.179: PSK "9HdmXoXKyY8UErDupAJFTfqwImQQ0pa3wfhYcAN3RdFNGo9zrEcY0khD3yHMFm"
+```
+
+Por se tratar de um arquivo confidencial, suas permissões devem ser ajustadas para sua proteção:
+
+```
+[darmbrust@onpremises ~]$ sudo chmod 0400 /etc/ipsec.d/oci-ipsec.secrets
+[darmbrust@onpremises ~]$ sudo chown root:root /etc/ipsec.d/oci-ipsec.secrets
+```
