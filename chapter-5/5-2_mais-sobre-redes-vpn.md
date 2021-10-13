@@ -417,3 +417,56 @@ Por se tratar de um arquivo confidencial, suas permissões devem ser ajustadas p
 [darmbrust@onpremises ~]$ sudo chmod 0400 /etc/ipsec.d/oci-ipsec.secrets
 [darmbrust@onpremises ~]$ sudo chown root:root /etc/ipsec.d/oci-ipsec.secrets
 ```
+
+Tendo tudo pronto, podemos habilitar e iniciar o _[Libreswan](https://libreswan.org/)_ com os comandos abaixo:
+
+```
+[darmbrust@onpremises ~]$ sudo systemctl enable ipsec
+Created symlink from /etc/systemd/system/multi-user.target.wants/ipsec.service to /usr/lib/systemd/system/ipsec.service.
+
+[darmbrust@onpremises ~]$ sudo systemctl start ipsec
+```
+
+Após iniciado, o _[Libreswan](https://libreswan.org/)_ cria duas interfaces de rede _(vti1 e vti2)_ no servidor para os dois túneis:
+
+```
+[darmbrust@onpremises ~]$ ip addr sh vti1
+5: vti1@NONE: <POINTOPOINT,NOARP,UP,LOWER_UP> mtu 8980 qdisc noqueue state UNKNOWN group default qlen 1000
+    link/ipip 10.34.0.82 peer 168.138.239.75
+    inet6 fe80::5efe:a22:52/64 scope link
+       valid_lft forever preferred_lft forever
+
+[darmbrust@onpremises ~]$ ip addr sh vti2
+4: vti2@NONE: <POINTOPOINT,NOARP,UP,LOWER_UP> mtu 8980 qdisc noqueue state UNKNOWN group default qlen 1000
+    link/ipip 10.34.0.82 peer 168.138.248.179
+    inet6 fe80::5efe:a22:52/64 scope link
+       valid_lft forever preferred_lft forever
+```
+
+Além disto, é possível agora verificar que ambos os túneis estão com status _"UP"_:
+
+```
+darmbrust@hoodwink:~$ oci network ip-sec-connection get-status \
+> --ipsc-id "ocid1.ipsecconnection.oc1.sa-saopaulo-1.aaaaaaaak2ofspq67zy2sta4pcsnimdctwkmkwgtib2y7b5gqtm6lkt7koaa"
+{
+  "data": {
+    "compartment-id": "ocid1.compartment.oc1..aaaaaaaauvqvbbx3oridcm5d2ztxkftwr362u2vl5zdsayzbehzwbjs56soq",
+    "id": "ocid1.ipsecconnection.oc1.sa-saopaulo-1.aaaaaaaak2ofspq67zy2sta4pcsnimdctwkmkwgtib2y7b5gqtm6lkt7koaa",
+    "time-created": "2021-10-13T14:14:38.531000+00:00",
+    "tunnels": [
+      {
+        "ip-address": "168.138.248.179",
+        "lifecycle-state": "UP",
+        "time-created": "2021-10-13T14:14:39.955000+00:00",
+        "time-state-modified": "2021-10-13T17:15:53.522000+00:00"
+      },
+      {
+        "ip-address": "168.138.239.75",
+        "lifecycle-state": "UP",
+        "time-created": "2021-10-13T14:14:39.917000+00:00",
+        "time-state-modified": "2021-10-13T17:15:54.488000+00:00"
+      }
+    ]
+  }
+}
+```
