@@ -227,4 +227,13 @@ Quando há poucas redes, como é o nosso caso de exemplo, utilizar _[roteamento 
 
 A primeira atividade antes de criarmos a conexão _[IPSec](https://pt.wikipedia.org/wiki/IPsec)_ é a geração do chamado _"Segredo Compartilhado do Túnel" ([Shared Secret](https://en.wikipedia.org/wiki/Shared_secret))_. Este nada mais é do que uma _[string](https://pt.wikipedia.org/wiki/Cadeia_de_caracteres)_ que será usada para compor os pacotes que são criptografados pelo _[IPSec](https://pt.wikipedia.org/wiki/IPsec)_. 
 
-Dizemos que uma _[Shared Secret](https://en.wikipedia.org/wiki/Shared_secret)_ é usado por _"[Algoritmos de Chave Simétrica](https://pt.wikipedia.org/wiki/Algoritmo_de_chave_sim%C3%A9trica)_" que usam a mesma chave criptográfica 
+Tecnicamente falando, uma _[Shared Secret](https://en.wikipedia.org/wiki/Shared_secret)_ é usada por _"[Algoritmos de Chave Simétrica](https://pt.wikipedia.org/wiki/Algoritmo_de_chave_sim%C3%A9trica)_" e que usam a mesma _chave criptográfica_ para _encriptação_ e _decriptação_ dos dados. Mantenha sua _[Shared Secret](https://en.wikipedia.org/wiki/Shared_secret)_ segura e compartilhe somente com a outra _"ponta"_ do túnel.
+
+Irei gerar uma _[Shared Secret](https://en.wikipedia.org/wiki/Shared_secret)_ que será usada por nossos dois túneis com o comando abaixo:
+
+```
+darmbrust@hoodwink:~$ cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w ${1:-62} | head -n 1
+9HdmXoXKyY8UErDupAJFTfqwImQQ0pa3wfhYcAN3RdFNGo9zrEcY0khD3yHMFm
+```
+
+Lembrando que uma _[Shared Secret](https://en.wikipedia.org/wiki/Shared_secret)_ deve contém apenas letras, numeros e espaços em branco. Seu comprimento máximo não deve ultrapassar dos 255 caracteres, e é possível ter uma _[Shared Secret](https://en.wikipedia.org/wiki/Shared_secret)_ diferente por túnel. Ao criar a conexão _[IPSec](https://pt.wikipedia.org/wiki/IPsec)_, se você não especificar um valor para a _[Shared Secret](https://en.wikipedia.org/wiki/Shared_secret)_, o _[OCI](https://www.oracle.com/cloud/)_ irá gerar este valor automaticamente para você.
