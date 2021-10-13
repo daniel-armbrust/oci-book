@@ -233,7 +233,7 @@ Irei gerar uma _[Shared Secret](https://en.wikipedia.org/wiki/Shared_secret)_ qu
 
 ```
 darmbrust@hoodwink:~$ cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w ${1:-62} | head -n 1
-9HdmXoXKyY8UErDupAJFTfqwImQQ0pa3wfhYcAN3RdFNGo9zrEcY0khD3yHMFm
+9HdmXoXccY8UErDupAJFTfqwIiii0pa3wfhYcAN3RdFNGo988EcY0khD3yHMFm
 ```
 
 Lembrando que uma _[Shared Secret](https://en.wikipedia.org/wiki/Shared_secret)_ deve contém apenas letras, números e espaços em branco. Seu comprimento máximo não deve ultrapassar dos _255 caracteres_, e é possível ter uma _[Shared Secret](https://en.wikipedia.org/wiki/Shared_secret)_ diferente por túnel. Ao criar a conexão _[IPSec](https://pt.wikipedia.org/wiki/IPsec)_, se você não especificar um valor para a _[Shared Secret](https://en.wikipedia.org/wiki/Shared_secret)_, o _[OCI](https://www.oracle.com/cloud/)_ irá gerar este valor automaticamente para você.
@@ -249,7 +249,7 @@ darmbrust@hoodwink:~$ oci network ip-sec-connection create \
 > --static-routes '["10.34.0.0/24"]' \
 > --cpe-local-identifier-type "IP_ADDRESS" \
 > --cpe-local-identifier "10.34.0.82" \
-> --tunnel-configuration '[{"displayName": "tunnel-1_vpn-1", "routing": "STATIC", "sharedSecret": "9HdmXoXKyY8UErDupAJFTfqwImQQ0pa3wfhYcAN3RdFNGo9zrEcY0khD3yHMFm"},{"displayName": "tunnel-2_vpn-1", "routing": "STATIC", "sharedSecret": "9HdmXoXKyY8UErDupAJFTfqwImQQ0pa3wfhYcAN3RdFNGo9zrEcY0khD3yHMFm"}]' \
+> --tunnel-configuration '[{"displayName": "tunnel-1_vpn-1", "routing": "STATIC", "sharedSecret": "9HdmXoXccY8UErDupAJFTfqwIiii0pa3wfhYcAN3RdFNGo988EcY0khD3yHMFm"},{"displayName": "tunnel-2_vpn-1", "routing": "STATIC", "sharedSecret": "9HdmXoXccY8UErDupAJFTfqwIiii0pa3wfhYcAN3RdFNGo988EcY0khD3yHMFm"}]' \
 > --wait-for-state "AVAILABLE"
 Action completed. Waiting until the resource has entered state: ('AVAILABLE',)
 {
@@ -407,8 +407,8 @@ Para o conteúdo do arquivo _**/etc/ipsec.d/oci-ipsec.secrets**_, temos os valor
 
 ```
 [darmbrust@onpremises ~]$ sudo cat /etc/ipsec.d/oci-ipsec.secrets
-10.34.0.82 168.138.239.75: PSK "9HdmXoXKyY8UErDupAJFTfqwImQQ0pa3wfhYcAN3RdFNGo9zrEcY0khD3yHMFm"
-10.34.0.82 168.138.248.179: PSK "9HdmXoXKyY8UErDupAJFTfqwImQQ0pa3wfhYcAN3RdFNGo9zrEcY0khD3yHMFm"
+10.34.0.82 168.138.239.75: PSK "9HdmXoXccY8UErDupAJFTfqwIiii0pa3wfhYcAN3RdFNGo988EcY0khD3yHMFm"
+10.34.0.82 168.138.248.179: PSK "9HdmXoXccY8UErDupAJFTfqwIiii0pa3wfhYcAN3RdFNGo988EcY0khD3yHMFm"
 ```
 
 Por se tratar de um arquivo confidencial, suas permissões devem ser ajustadas para sua proteção:
