@@ -553,7 +553,7 @@ rtt min/avg/max/mdev = 1.773/2.165/2.763/0.429 ms
 
 ### __Conclusão__
 
-A conectividade através de _[VPN](https://pt.wikipedia.org/wiki/Rede_privada_virtual)_ é de fato um meio rápido e barato de ter o seu ambiente _on-premises_ _"ligado"_ ao _[OCI](https://www.oracle.com/cloud/)_. Uma conexão persistente como a _[VPN](https://pt.wikipedia.org/wiki/Rede_privada_virtual)_, permite um meio seguro para acessar os recursos que a cloud oferece, realizar uma migração de dados, ou mesmo ter uma conexão redundante, caso você tenha um _[FastConnect](https://www.oracle.com/cloud/networking/fastconnect.html)_.
+A conectividade através de _[VPN](https://pt.wikipedia.org/wiki/Rede_privada_virtual)_ é de fato um meio rápido e barato de ter o seu ambiente _on-premises_ _"ligado"_ ao _[OCI](https://www.oracle.com/cloud/)_. Uma conexão persistente como a _[VPN](https://pt.wikipedia.org/wiki/Rede_privada_virtual)_, permite um meio seguro para acessar os recursos que a cloud oferece ou realizar uma migração de dados.
 
 Lembre-se que conectividade através de _[VPN](https://pt.wikipedia.org/wiki/Rede_privada_virtual)_, por utilizar a internet pública, não há garantias de altas taxas de transferências ou mesmo altos indíces de _[SLA](https://pt.wikipedia.org/wiki/Acordo_de_n%C3%ADvel_de_servi%C3%A7o)_. É por isto que o serviço sempre disponibiliza dois canais para conexão por _[IPSec](https://pt.wikipedia.org/wiki/IPsec)_. Sempre utilize os dois!
 
