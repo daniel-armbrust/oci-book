@@ -224,3 +224,7 @@ Apesar de ser possível usar _roteamento dinâmico_ para um túnel e _estático_
 Quando há poucas redes, como é o nosso caso de exemplo, utilizar _[roteamento estático](https://en.wikipedia.org/wiki/Static_routing)_ é o meio mais indicado e simples de ser feito. Por isto, usaremos _[roteamento estático](https://en.wikipedia.org/wiki/Static_routing)_ aqui.
 
 >_**__NOTA:__** O [OCI](https://www.oracle.com/cloud/) usa **roteamento assimétrico** dos túneis que constituem a conexão [IPSec](https://pt.wikipedia.org/wiki/IPsec). Mesmo se você configurar um túnel como primário e outro como backup, o tráfego da sua [VCN](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingVCNs_topic-Overview_of_VCNs_and_Subnets.htm) para o seu on-premises, pode usar qualquer túnel marcado como "ativo". Configure seus firewalls de acordo, caso contrário a conectividade não irá funcionar._
+
+A primeira atividade antes de criarmos a conexão _[IPSec](https://pt.wikipedia.org/wiki/IPsec)_ é a geração do chamado _"Segredo Compartilhado do Túnel" ([Shared Secret](https://en.wikipedia.org/wiki/Shared_secret))_. Este nada mais é do que uma _[string](https://pt.wikipedia.org/wiki/Cadeia_de_caracteres)_ que será usada para compor os pacotes que são criptografados pelo _[IPSec](https://pt.wikipedia.org/wiki/IPsec)_. 
+
+Dizemos que uma _[Shared Secret](https://en.wikipedia.org/wiki/Shared_secret)_ é usado por _"[Algoritmos de Chave Simétrica](https://pt.wikipedia.org/wiki/Algoritmo_de_chave_sim%C3%A9trica)_" que usam a mesma chave criptográfica 
