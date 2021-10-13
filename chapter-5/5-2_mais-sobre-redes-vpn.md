@@ -237,3 +237,45 @@ darmbrust@hoodwink:~$ cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w ${1:-62} |
 ```
 
 Lembrando que uma _[Shared Secret](https://en.wikipedia.org/wiki/Shared_secret)_ deve contém apenas letras, números e espaços em branco. Seu comprimento máximo não deve ultrapassar dos 255 caracteres, e é possível ter uma _[Shared Secret](https://en.wikipedia.org/wiki/Shared_secret)_ diferente por túnel. Ao criar a conexão _[IPSec](https://pt.wikipedia.org/wiki/IPsec)_, se você não especificar um valor para a _[Shared Secret](https://en.wikipedia.org/wiki/Shared_secret)_, o _[OCI](https://www.oracle.com/cloud/)_ irá gerar este valor automaticamente para você.
+
+Abaixo o comando usado para criar o _[IPSec](https://pt.wikipedia.org/wiki/IPsec)_ com as informações que foram apresentadas aqui:
+
+```
+darmbrust@hoodwink:~$ oci network ip-sec-connection create \
+> --compartment-id "ocid1.compartment.oc1..aaaaaaaauvqvbbx3oridcm5d2ztxkftwr362u2vl5zdsayzbehzwbjs56soq" \
+> --cpe-id "ocid1.cpe.oc1.sa-saopaulo-1.aaaaaaaaq4duvw3wi4cpzx7zsjolhsqkhg6nt5lnnko65u3zqsinmwdzyhhq" \
+> --drg-id "ocid1.drg.oc1.sa-saopaulo-1.aaaaaaaaan7n3zxikyf6ga4zeqbffhu4zhst5goxumb4cei5awdd4r5q5hhq" \
+> --display-name "vpn-1" \
+> --static-routes '["10.34.0.0/24"]' \
+> --cpe-local-identifier-type "IP_ADDRESS" \
+> --cpe-local-identifier "10.34.0.82" \
+> --tunnel-configuration '[{"displayName": "tunnel-1_vpn-1", "routing": "STATIC", "sharedSecret": "9HdmXoXKyY8UErDupAJFTfqwImQQ0pa3wfhYcAN3RdFNGo9zrEcY0khD3yHMFm"},{"displayName": "tunnel-2_vpn-1", "routing": "STATIC", "sharedSecret": "9HdmXoXKyY8UErDupAJFTfqwImQQ0pa3wfhYcAN3RdFNGo9zrEcY0khD3yHMFm"}]' \
+> --wait-for-state "AVAILABLE"
+Action completed. Waiting until the resource has entered state: ('AVAILABLE',)
+{
+  "data": {
+    "compartment-id": "ocid1.compartment.oc1..aaaaaaaauvqvbbx3oridcm5d2ztxkftwr362u2vl5zdsayzbehzwbjs56soq",
+    "cpe-id": "ocid1.cpe.oc1.sa-saopaulo-1.aaaaaaaaq4duvw3wi4cpzx7zsjolhsqkhg6nt5lnnko65u3zqsinmwdzyhhq",
+    "cpe-local-identifier": "10.34.0.82",
+    "cpe-local-identifier-type": "IP_ADDRESS",
+    "defined-tags": {
+      "Oracle-Tags": {
+        "CreatedBy": "oracleidentitycloudservice/daniel.armbrust@algumdominio.com",
+        "CreatedOn": "2021-10-13T14:14:38.151Z"
+      }
+    },
+    "display-name": "vpn-1",
+    "drg-id": "ocid1.drg.oc1.sa-saopaulo-1.aaaaaaaaan7n3zxikyf6ga4zeqbffhu4zhst5goxumb4cei5awdd4r5q5hhq",
+    "freeform-tags": {},
+    "id": "ocid1.ipsecconnection.oc1.sa-saopaulo-1.aaaaaaaak2ofspq67zy2sta4pcsnimdctwkmkwgtib2y7b5gqtm6lkt7koaa",
+    "lifecycle-state": "AVAILABLE",
+    "static-routes": [
+      "10.34.0.0/24"
+    ],
+    "time-created": "2021-10-13T14:14:38.531000+00:00"
+  },
+  "etag": "320aa8edf63ab5012a62dcd69c968653--gzip"
+}
+```
+
+>_**__NOTA:__** Os parâmetros "--cpe-local-identifier-type" e "--cpe-local-identifier" são usados para identificar o [CPE](https://docs.oracle.com/en-us/iaas/Content/Network/Tasks/configuringCPE.htm) atrás da técnica de [NAT](https://pt.wikipedia.org/wiki/Network_address_translation) que é feita pelo dispositivo de "borda", conforme já explicado. É possível espeficiar o hostname ao invés do endereço IP, se for o caso. Consulte este [link aqui](https://docs.oracle.com/en-us/iaas/tools/oci-cli/latest/oci_cli_docs/cmdref/network/ip-sec-connection.html) para mais informações._
