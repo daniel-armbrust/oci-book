@@ -87,7 +87,7 @@ Neste nosso exemplo, iremos demonstrar a configuração do software _[Libreswan]
 _[Libreswan](https://libreswan.org/)_ é uma implementação do protocolo _[IPSec](https://pt.wikipedia.org/wiki/IPsec)_ de _[código aberto](https://en.wikipedia.org/wiki/Open_source)_, baseado no _[FreeS/WAN](https://www.freeswan.org/)_ e _[Openswan](https://www.openswan.org/)_. Para este nosso exemplo, será necessário:
 
 - **Libreswan >= 3.18**
-- **Linux Kernel 3.x ou 4.x**
+- **Linux Kernel 3.x, 4.x ou 5.x**
 
 >_**__NOTA:__** Iremos utilizar em nosso data center fictício uma máquina com [Oracle Linux versão 7.9](https://docs.oracle.com/en/operating-systems/oracle-linux/7/relnotes7.9/index.html), pois ele já contempla as versões de software que precisamos._ 
 
