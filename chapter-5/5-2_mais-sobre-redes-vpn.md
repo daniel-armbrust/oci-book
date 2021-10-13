@@ -143,7 +143,7 @@ _[CPE](https://docs.oracle.com/en-us/iaas/Content/Network/Tasks/configuringCPE.h
 Atrás deste dispositivo, está o servidor _[Oracle Linux](https://www.oracle.com/linux/)_ versão _7.9_ no endereço IP _10.34.0.82_:
 
 ```
-[opc@onpremises ~]$ ip addr sh ens3
+[darmbrust@onpremises ~]$ ip addr sh ens3
 2: ens3: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 9000 qdisc pfifo_fast state UP group default qlen 1000
     link/ether 02:00:17:00:40:7d brd ff:ff:ff:ff:ff:ff
     inet 10.34.0.82/24 brd 10.34.0.255 scope global dynamic ens3
