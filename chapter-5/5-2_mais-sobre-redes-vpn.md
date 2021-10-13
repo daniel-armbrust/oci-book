@@ -519,7 +519,7 @@ Do lado do _[Libreswan](https://libreswan.org/)_, especificamos que para se _"al
 [darmbrust@onpremises ~]$ sudo ip route add 192.168.20.0/26 nexthop dev vti1 nexthop dev vti2
 ```
 
-Como as redes agora se conhecem, podemos conferir sua conectividade pelo utilitário _[ping](https://pt.wikipedia.org/wiki/Ping)_:
+Como as redes agora se _"conhecem"_, podemos conferir sua conectividade pelo utilitário _[ping](https://pt.wikipedia.org/wiki/Ping)_:
 
 ```
 [opc@onpremises ~]$ ping -c 3 192.168.20.6
