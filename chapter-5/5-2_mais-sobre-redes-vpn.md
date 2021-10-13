@@ -278,4 +278,32 @@ Action completed. Waiting until the resource has entered state: ('AVAILABLE',)
 }
 ```
 
->_**__NOTA:__** Os parâmetros "--cpe-local-identifier-type" e "--cpe-local-identifier" são usados para identificar o [CPE](https://docs.oracle.com/en-us/iaas/Content/Network/Tasks/configuringCPE.htm) atrás da técnica de [NAT](https://pt.wikipedia.org/wiki/Network_address_translation) que é feita pelo dispositivo de "borda", conforme já explicado. É possível espeficiar o hostname ao invés do endereço IP, se for o caso. Consulte este [link aqui](https://docs.oracle.com/en-us/iaas/tools/oci-cli/latest/oci_cli_docs/cmdref/network/ip-sec-connection.html) para mais informações._
+>_**__NOTA:__** Os parâmetros "--cpe-local-identifier-type" e "--cpe-local-identifier" são usados para identificar o [CPE](https://docs.oracle.com/en-us/iaas/Content/Network/Tasks/configuringCPE.htm), que em nosso caso é o endereço IP privado do [Libreswan](https://libreswan.org/). Isto por conta da existência do [NAT](https://pt.wikipedia.org/wiki/Network_address_translation) entre o [Libreswan](https://libreswan.org/) e o [OCI](https://www.oracle.com/cloud/). É possível especificar o hostname ao invés do endereço IP, se for o caso. Consulte este [link aqui](https://docs.oracle.com/en-us/iaas/tools/oci-cli/latest/oci_cli_docs/cmdref/network/ip-sec-connection.html) para mais informações._
+
+Com o comando abaixo, irei obter o endereço IP público dos dois túneis que foram criados:
+
+```
+darmbrust@hoodwink:~$ oci network ip-sec-connection get-status \
+> --ipsc-id "ocid1.ipsecconnection.oc1.sa-saopaulo-1.aaaaaaaak2ofspq67zy2sta4pcsnimdctwkmkwgtib2y7b5gqtm6lkt7koaa"
+{
+  "data": {
+    "compartment-id": "ocid1.compartment.oc1..aaaaaaaauvqvbbx3oridcm5d2ztxkftwr362u2vl5zdsayzbehzwbjs56soq",
+    "id": "ocid1.ipsecconnection.oc1.sa-saopaulo-1.aaaaaaaak2ofspq67zy2sta4pcsnimdctwkmkwgtib2y7b5gqtm6lkt7koaa",
+    "time-created": "2021-10-13T14:14:38.531000+00:00",
+    "tunnels": [
+      {
+        "ip-address": "168.138.248.179",
+        "lifecycle-state": "DOWN",
+        "time-created": "2021-10-13T14:14:39.955000+00:00",
+        "time-state-modified": "2021-10-13T14:40:36.526000+00:00"
+      },
+      {
+        "ip-address": "168.138.239.75",
+        "lifecycle-state": "DOWN",
+        "time-created": "2021-10-13T14:14:39.917000+00:00",
+        "time-state-modified": "2021-10-13T14:40:37.700000+00:00"
+      }
+    ]
+  }
+}
+```
