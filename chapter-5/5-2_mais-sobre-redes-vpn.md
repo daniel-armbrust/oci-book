@@ -512,3 +512,23 @@ Action completed. Waiting until the resource has entered state: ('AVAILABLE',)
   "etag": "366e0922"
 }
 ```
+
+Do lado do _[Libreswan](https://libreswan.org/)_, especificamos que para se _"alcançar"_ o _destino_ _"192.168.20.0/26"_, que corresponde a _vcn-hub_, devemos enviar o tráfego para as interfaces de rede _(vti1 e vti2)_ que foram criadas pelo próprio _[Libreswan](https://libreswan.org/)_:
+
+```
+[darmbrust@onpremises ~]$ sudo ip route add 192.168.20.0/26 nexthop dev vti1 nexthop dev vti2
+```
+
+Como as redes agora se conhecem, podemos conferir sua conectividade pelo utilitário _[ping](https://pt.wikipedia.org/wiki/Ping)_:
+
+```
+[opc@onpremises ~]$ ping -c 3 192.168.20.6
+PING 192.168.20.6 (192.168.20.6) 56(84) bytes of data.
+64 bytes from 192.168.20.6: icmp_seq=1 ttl=62 time=1.45 ms
+64 bytes from 192.168.20.6: icmp_seq=2 ttl=62 time=1.83 ms
+64 bytes from 192.168.20.6: icmp_seq=3 ttl=62 time=1.04 ms
+
+--- 192.168.20.6 ping statistics ---
+3 packets transmitted, 3 received, 0% packet loss, time 2003ms
+rtt min/avg/max/mdev = 1.043/1.444/1.833/0.325 ms
+```
