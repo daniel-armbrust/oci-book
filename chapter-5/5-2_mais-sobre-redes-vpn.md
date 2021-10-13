@@ -355,7 +355,7 @@ Vamos para a instalação e configuração do _[Libreswan](https://libreswan.org
 [darmbrust@onpremises ~]$ sudo yum -y install libreswan
 ```
 
-Precisamos criar dois arquivos para manter suas configurações. Iremos criá-los com o comando abaixo:
+Precisamos criar dois arquivos para manter suas configurações. Iremos criá-los com os comandos abaixo:
 
 ```
 [darmbrust@onpremises ~]$ sudo touch /etc/ipsec.d/oci-ipsec.conf
