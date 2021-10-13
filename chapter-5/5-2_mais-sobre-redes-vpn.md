@@ -82,6 +82,8 @@ darmbrust@hoodwink:~$ oci network cpe-device-shape list \
 
 Neste nosso exemplo, iremos demonstrar a configuração do software _[Libreswan](https://libreswan.org/)_ em um servidor _[Oracle Linux](https://www.oracle.com/linux/)_ localizado em um data center qualquer _(on-premises)_.
 
+![alt_text](./images/ch5-2_vpn-1.jpg "VPN Libreswan x OCI")
+
 _[Libreswan](https://libreswan.org/)_ é uma implementação do protocolo _[IPSec](https://pt.wikipedia.org/wiki/IPsec)_ de _[código aberto](https://en.wikipedia.org/wiki/Open_source)_, baseado no _[FreeS/WAN](https://www.freeswan.org/)_ e _[Openswan](https://www.openswan.org/)_. Para este nosso exemplo, será necessário:
 
 - **Libreswan >= 3.18**
