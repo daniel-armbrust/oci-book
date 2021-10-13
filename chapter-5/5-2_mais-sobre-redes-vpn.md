@@ -557,4 +557,4 @@ A conectividade através de _[VPN](https://pt.wikipedia.org/wiki/Rede_privada_vi
 
 Lembre-se que conectividade através de _[VPN](https://pt.wikipedia.org/wiki/Rede_privada_virtual)_, por utilizar a internet pública, não há garantias de altas taxas de transferências ou mesmo altos indíces de _[SLA](https://pt.wikipedia.org/wiki/Acordo_de_n%C3%ADvel_de_servi%C3%A7o)_. É por isto que o serviço sempre disponibiliza dois canais para conexão por _[IPSec](https://pt.wikipedia.org/wiki/IPsec)_. Sempre utilize os dois!
 
-Se você precisa ter garantia de conectividade com o _[OCI](https://www.oracle.com/cloud/)_ além de altas taxas de transferências, a recomendação é ir de _[FastConnect](https://www.oracle.com/cloud/networking/fastconnect.html)_.
+Se você precisa ter garantia de conectividade com o _[OCI](https://www.oracle.com/cloud/)_, além de altas taxas de transferências, a recomendação é ir de _[FastConnect](https://www.oracle.com/cloud/networking/fastconnect.html)_.
