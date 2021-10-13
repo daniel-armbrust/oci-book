@@ -471,7 +471,7 @@ darmbrust@hoodwink:~$ oci network ip-sec-connection get-status \
 }
 ```
 
-#### Ajustes no roteamento e Teste de conectividade
+### Ajustes no roteamento e Teste de conectividade
 
 Para concluír, devemos ajustar as regras de roteamento tanto na subrede do _[OCI](https://www.oracle.com/cloud/)_ quanto do _[Oracle Linux](https://www.oracle.com/linux/)_ equipado com o _[Libreswan](https://libreswan.org/)_.
 
