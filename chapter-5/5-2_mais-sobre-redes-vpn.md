@@ -534,3 +534,25 @@ PING 192.168.20.6 (192.168.20.6) 56(84) bytes of data.
 3 packets transmitted, 3 received, 0% packet loss, time 2003ms
 rtt min/avg/max/mdev = 1.043/1.444/1.833/0.325 ms
 ```
+
+Como é possivel ver o pacote foi e voltou com sucesso. De qualquer forma, evidênciamos a conectiviade do outro lado também:
+
+```
+[opc@vmlnx-1 ~]$ ping -c 3 10.34.0.82
+PING 10.34.0.82 (10.34.0.82) 56(84) bytes of data.
+64 bytes from 10.34.0.82: icmp_seq=1 ttl=62 time=2.76 ms
+64 bytes from 10.34.0.82: icmp_seq=2 ttl=62 time=1.77 ms
+64 bytes from 10.34.0.82: icmp_seq=3 ttl=62 time=1.95 ms
+
+--- 10.34.0.82 ping statistics ---
+3 packets transmitted, 3 received, 0% packet loss, time 2003ms
+rtt min/avg/max/mdev = 1.773/2.165/2.763/0.429 ms
+```
+
+### __Conclusão__
+
+A conectividade através de _[VPN](https://pt.wikipedia.org/wiki/Rede_privada_virtual)_ é de fato um meio rápido e barato de ter o seu ambiente _on-premises_ _"ligado"_ ao _[OCI](https://www.oracle.com/cloud/)_. Uma conexão persistente como a _[VPN](https://pt.wikipedia.org/wiki/Rede_privada_virtual)_, permite um meio seguro para acessar os recursos que a cloud oferece, realizar uma migração de dados, ou mesmo ter uma conexão redundante, caso você tenha um _[FastConnect](https://www.oracle.com/cloud/networking/fastconnect.html)_.
+
+Lembre-se que conectividade através de _[VPN](https://pt.wikipedia.org/wiki/Rede_privada_virtual)_, por utilizar a internet pública, não há garantias de altas taxas de transferências ou mesmo altos indíces de _[SLA](https://pt.wikipedia.org/wiki/Acordo_de_n%C3%ADvel_de_servi%C3%A7o)_. É por isto que o serviço sempre disponibiliza dois canais para conexão por _[IPSec](https://pt.wikipedia.org/wiki/IPsec)_. Sempre utilize os dois!
+
+Se você precisa ter garantia de conectividade com o _[OCI](https://www.oracle.com/cloud/)_ além de altas taxas de transferências, a recomendação é ir de _[FastConnect](https://www.oracle.com/cloud/networking/fastconnect.html)_.
