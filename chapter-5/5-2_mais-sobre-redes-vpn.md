@@ -136,7 +136,7 @@ Action completed. Waiting until the resource has entered state: ('ATTACHED',)
 
 ### Detalhes sobre o CPE
 
-_[CPE](https://docs.oracle.com/en-us/iaas/Content/Network/Tasks/configuringCPE.htm)_ ou _[Customer-premises Equipment](https://docs.oracle.com/en-us/iaas/Content/Network/Tasks/configuringCPE.htm)_ nada mais é do que um termo usado para representar o dispositivo ou software de _[VPN](https://pt.wikipedia.org/wiki/Rede_privada_virtual)_ localizado no seu data center _(on-premises)_. Para o nosso exemplo, o _[CPE](https://docs.oracle.com/en-us/iaas/Content/Network/Tasks/configuringCPE.htm)_ é um dispositivo (roteador ou firewall) que possui o endereço IP público _201.33.196.77_. 
+_[CPE](https://docs.oracle.com/en-us/iaas/Content/Network/Tasks/configuringCPE.htm)_ ou _[Customer-premises Equipment](https://docs.oracle.com/en-us/iaas/Content/Network/Tasks/configuringCPE.htm)_ nada mais é do que um termo usado para representar virtualmente o seu dispositivo ou software de _[VPN](https://pt.wikipedia.org/wiki/Rede_privada_virtual)_, localizado no seu data center _(on-premises)_. Para o nosso exemplo, o _[CPE](https://docs.oracle.com/en-us/iaas/Content/Network/Tasks/configuringCPE.htm)_ é um dispositivo (roteador ou firewall) que possui o endereço IP público _201.33.196.77_. 
 
 Atrás deste dispositivo, está o servidor _[Oracle Linux](https://www.oracle.com/linux/)_ versão _7.9_ no endereço IP _10.34.0.82_:
 
@@ -221,4 +221,6 @@ Para cada túnel em separado, há a possibilidade de escolher qual é o _tipo de
 
 Apesar de ser possível usar _roteamento dinâmico_ para um túnel e _estático_ para o outro, é recomendado usar um tipo só para ambos. Isto simplifica as suas configurações. A exceção é por conta de você estar em um processo de transição entre _[roteamento estático](https://en.wikipedia.org/wiki/Static_routing)_ e _[BGP](https://pt.wikipedia.org/wiki/Border_Gateway_Protocol)_. Um túnel ainda pode usar temporariamente o _[roteamento estático](https://en.wikipedia.org/wiki/Static_routing)_ enquanto o outro já foi  alternado para usar _[BGP](https://pt.wikipedia.org/wiki/Border_Gateway_Protocol)_.
 
-Quando há poucas redes, como é o nosso caso de exemplo, utilizar _[roteamento estático](https://en.wikipedia.org/wiki/Static_routing)_ é o mais indicado e simnples. Aqui, nosso túnel _[IPSec](https://pt.wikipedia.org/wiki/IPsec)_ irá utilizar o _[roteamento estático](https://en.wikipedia.org/wiki/Static_routing)_.
+Quando há poucas redes, como é o nosso caso de exemplo, utilizar _[roteamento estático](https://en.wikipedia.org/wiki/Static_routing)_ é o meio mais indicado e simples de ser feito. Por isto, usaremos _[roteamento estático](https://en.wikipedia.org/wiki/Static_routing)_ aqui.
+
+>_**__NOTA:__** O [OCI](https://www.oracle.com/cloud/) usa **roteamento assimétrico** dos túneis que constituem a conexão [IPSec](https://pt.wikipedia.org/wiki/IPsec). Mesmo se você configurar um túnel como primário e outro como backup, o tráfego da sua [VCN](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingVCNs_topic-Overview_of_VCNs_and_Subnets.htm) para o seu on-premises, pode usar qualquer túnel marcado como "ativo". Configure seus firewalls de acordo, caso contrário a conectividade não irá funcionar._
