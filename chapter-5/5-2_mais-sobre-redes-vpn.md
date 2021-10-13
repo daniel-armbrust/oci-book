@@ -401,4 +401,4 @@ conn oci-tunnel-2
     salifetime=3600s
 ```
 
-Neste arquivo, existem as configurações dos dois túneis _[IPSec](https://pt.wikipedia.org/wiki/IPsec)_ entre o _[Libreswan](https://libreswan.org/)_ e a  Cloud da Oracle. Os valores para os parâmetros _**left**_ e _**leftid**_, correspondem ao endereço IP do _[Libreswan](https://libreswan.org/)_. O parâmetro _**right**_ de ambos, é o endereço IP público dos túneis criados pelo _[OCI](https://www.oracle.com/cloud/)_.
+Neste arquivo, existem as configurações dos dois túneis _[IPSec](https://pt.wikipedia.org/wiki/IPsec)_ entre o _[Libreswan](https://libreswan.org/)_ e o _[OCI](https://www.oracle.com/cloud/)_. Os valores para os parâmetros _**left**_ e _**leftid**_, correspondem ao endereço IP do _[Libreswan](https://libreswan.org/)_. O parâmetro _**right**_ de ambos, é o endereço IP público dos túneis criados pelo _[OCI](https://www.oracle.com/cloud/)_.
