@@ -362,7 +362,7 @@ Precisamos criar dois arquivos para manter suas configurações. Iremos criá-lo
 [darmbrust@onpremises ~]$ sudo touch /etc/ipsec.d/oci-ipsec.secrets
 ```
 
-O arquivo _**/etc/ipsec.d/oci-ipsec.conf**_ irá receber o seguinte conteúdo:
+O arquivo _**/etc/ipsec.d/oci-ipsec.conf**_ foi preenchido com o seguinte conteúdo:
 
 ```
 [darmbrust@onpremises ~]$ sudo cat /etc/ipsec.d/oci-ipsec.conf
