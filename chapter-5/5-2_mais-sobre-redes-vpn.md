@@ -524,7 +524,7 @@ Do lado do _[Libreswan](https://libreswan.org/)_, especificamos que para se _"al
 Como as redes agora se _"conhecem"_, podemos conferir sua conectividade pelo utilitário _[ping](https://pt.wikipedia.org/wiki/Ping)_:
 
 ```
-[opc@onpremises ~]$ ping -c 3 192.168.20.6
+[darmbrust@onpremises ~]$ ping -c 3 192.168.20.6
 PING 192.168.20.6 (192.168.20.6) 56(84) bytes of data.
 64 bytes from 192.168.20.6: icmp_seq=1 ttl=62 time=1.45 ms
 64 bytes from 192.168.20.6: icmp_seq=2 ttl=62 time=1.83 ms
