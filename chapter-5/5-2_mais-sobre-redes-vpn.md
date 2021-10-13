@@ -347,7 +347,7 @@ Removed symlink /etc/systemd/system/dbus-org.fedoraproject.FirewallD1.service.
 
 >_**__NOTA:__** Tanto o [firewall](https://firewalld.org/) quanto o [SELinux](https://docs.oracle.com/en/operating-systems/oracle-linux/selinux/), são aliados importantes de segurança que devemos ter ativos e devidamente configurados em qualquer servidor produtivo. Porém, aqui o nosso foco é a configuração do Libreswan e comunicação com a Cloud da Oracle. Não iremos nos atentar aos detalhes de configuração do  [firewall](https://firewalld.org/) e [SELinux](https://docs.oracle.com/en/operating-systems/oracle-linux/selinux/). Para saber mais, consulte a documentação oficial do [Oracle Linux 7](https://docs.oracle.com/en/operating-systems/oracle-linux/7/admin/pref.html)._
 
-Vamos a instalação e configuração do _[Libreswan](https://libreswan.org/)_:
+Vamos para a instalação e configuração do _[Libreswan](https://libreswan.org/)_:
 
 ```
 [opc@onpremises ~]$ sudo yum -y install libreswan
