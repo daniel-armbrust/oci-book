@@ -236,7 +236,7 @@ darmbrust@hoodwink:~$ cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w ${1:-62} |
 9HdmXoXKyY8UErDupAJFTfqwImQQ0pa3wfhYcAN3RdFNGo9zrEcY0khD3yHMFm
 ```
 
-Lembrando que uma _[Shared Secret](https://en.wikipedia.org/wiki/Shared_secret)_ deve contém apenas letras, números e espaços em branco. Seu comprimento máximo não deve ultrapassar dos 255 caracteres, e é possível ter uma _[Shared Secret](https://en.wikipedia.org/wiki/Shared_secret)_ diferente por túnel. Ao criar a conexão _[IPSec](https://pt.wikipedia.org/wiki/IPsec)_, se você não especificar um valor para a _[Shared Secret](https://en.wikipedia.org/wiki/Shared_secret)_, o _[OCI](https://www.oracle.com/cloud/)_ irá gerar este valor automaticamente para você.
+Lembrando que uma _[Shared Secret](https://en.wikipedia.org/wiki/Shared_secret)_ deve contém apenas letras, números e espaços em branco. Seu comprimento máximo não deve ultrapassar dos _255 caracteres_, e é possível ter uma _[Shared Secret](https://en.wikipedia.org/wiki/Shared_secret)_ diferente por túnel. Ao criar a conexão _[IPSec](https://pt.wikipedia.org/wiki/IPsec)_, se você não especificar um valor para a _[Shared Secret](https://en.wikipedia.org/wiki/Shared_secret)_, o _[OCI](https://www.oracle.com/cloud/)_ irá gerar este valor automaticamente para você.
 
 Abaixo o comando usado para criar o _[IPSec](https://pt.wikipedia.org/wiki/IPsec)_ com as informações que foram apresentadas aqui:
 
