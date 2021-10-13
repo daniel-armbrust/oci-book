@@ -307,3 +307,96 @@ darmbrust@hoodwink:~$ oci network ip-sec-connection get-status \
   }
 }
 ```
+
+### Configurando o Libreswan
+
+Para deixar evidente as versões do servidor _[Oracle Linux](https://www.oracle.com/linux/)_ que estamos usando no _on-premises_:
+
+```
+[opc@onpremises ~]$ cat /etc/oracle-release
+Oracle Linux Server release 7.9
+
+[opc@onpremises ~]$ uname -a
+Linux onpremises 5.4.17-2102.205.7.3.el7uek.x86_64 #2 SMP Fri Sep 17 16:52:13 PDT 2021 x86_64 x86_64 x86_64 GNU/Linux
+```
+
+- **Oracle Linux Server versão 7.9**
+- **Kernel versão 5.4.17**
+
+>_**__NOTA:__** Para download do [Oracle Linux](https://www.oracle.com/linux/), consulte informações neste [link aqui](https://yum.oracle.com/oracle-linux-downloads.html?source=:ow:o:p:nav:121620LinuxHero&intcmp=:ow:o:p:nav:121620LinuxHero)._
+
+Antes de começarmos com as configurações, iremos desabilitar o _[firewall](https://firewalld.org/)_ do servidor e colocar o _[SELinux](https://docs.oracle.com/en/operating-systems/oracle-linux/selinux/)_ em _[modo permissive](https://docs.oracle.com/en/operating-systems/oracle-linux/selinux/ol-selinux-1.html#ol-mode-selinux)_. Para isto, execute os comandos abaixo:
+
+
+- _[Firewall](https://firewalld.org/)_
+
+```
+[opc@onpremises ~]$ sudo systemctl stop firewalld
+
+[opc@onpremises ~]$ sudo systemctl disable firewalld
+Removed symlink /etc/systemd/system/multi-user.target.wants/firewalld.service.
+Removed symlink /etc/systemd/system/dbus-org.fedoraproject.FirewallD1.service.
+```
+
+- _[SELinux](https://docs.oracle.com/en/operating-systems/oracle-linux/selinux/)_
+
+```
+[opc@onpremises ~]$ sudo setenforce permissive
+[opc@onpremises ~]$ sudo sed -i 's/SELINUX=enforcing/SELINUX=permissive/' /etc/selinux/config
+```
+
+>_**__NOTA:__** Tanto o [firewall](https://firewalld.org/) quanto o [SELinux](https://docs.oracle.com/en/operating-systems/oracle-linux/selinux/), são aliados importantes de segurança que devemos ter ativos e devidamente configurados em qualquer servidor produtivo. Porém, aqui o nosso foco é a configuração do Libreswan e comunicação com a Cloud da Oracle. Não iremos nos atentar aos detalhes de configuração do  [firewall](https://firewalld.org/) e [SELinux](https://docs.oracle.com/en/operating-systems/oracle-linux/selinux/). Para saber mais, consulte a documentação oficial do [Oracle Linux 7](https://docs.oracle.com/en/operating-systems/oracle-linux/7/admin/pref.html)._
+
+Vamos a instalação e configuração do _[Libreswan](https://libreswan.org/)_:
+
+```
+[opc@onpremises ~]$ sudo yum -y install libreswan
+```
+
+Precisamos criar dois arquivos para manter suas configurações. Iremos criá-los com o comando abaixo:
+
+```
+[opc@onpremises ~]$ sudo touch /etc/ipsec.d/oci-ipsec.conf
+[opc@onpremises ~]$ sudo touch /etc/ipsec.d/oci-ipsec.secrets
+```
+
+O arquivo _**/etc/ipsec.d/oci-ipsec.conf**_ irá receber o seguinte conteúdo:
+
+```
+[opc@onpremises ~]$ sudo cat /etc/ipsec.d/oci-ipsec.conf
+conn oci-tunnel-1
+    left=10.34.0.82
+    leftid=10.34.0.82
+    right=168.138.239.75
+    authby=secret
+    leftsubnet=0.0.0.0/0
+    rightsubnet=0.0.0.0/0
+    auto=start
+    mark=10/0xffffffff
+    vti-interface=vti1
+    vti-routing=no
+    ikev2=no
+    ike=aes_cbc256-sha2_384;modp1536
+    phase2alg=aes_gcm256;modp1536
+    encapsulation=yes
+    ikelifetime=28800s
+    salifetime=3600s
+
+conn oci-tunnel-2
+    left=10.34.0.82
+    leftid=10.34.0.82
+    right=168.138.248.179
+    authby=secret
+    leftsubnet=0.0.0.0/0
+    rightsubnet=0.0.0.0/0
+    auto=start
+    mark=15/0xffffffff
+    vti-interface=vti2
+    vti-routing=no
+    ikev2=no
+    ike=aes_cbc256-sha2_384;modp1536
+    phase2alg=aes_gcm256;modp1536
+    encapsulation=yes
+    ikelifetime=28800s
+    salifetime=3600s
+```

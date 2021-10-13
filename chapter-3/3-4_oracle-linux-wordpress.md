@@ -470,7 +470,7 @@ A partir de uma sessão do _[Bastion](https://docs.oracle.com/pt-br/iaas/Content
 1. Primeira atividade será desabilitar o _[SELinux](https://pt.wikipedia.org/wiki/SELinux)_ da instância:
 
 ```
-[opc@wordpress ~]$ sudo setenforce 0
+[opc@wordpress ~]$ sudo setenforce permissive
 [opc@wordpress ~]$ sudo sed -i 's/SELINUX=enforcing/SELINUX=permissive/' /etc/selinux/config
 ```
 
