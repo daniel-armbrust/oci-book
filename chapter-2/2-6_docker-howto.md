@@ -372,3 +372,151 @@ meu-linux
 ```
 
 #### Reiniciando em caso de problemas
+
+- Cria e inicia um contêiner com uma política de restart. Caso o processo que _"roda"_ dentro do contêiner falhe por algum motivo, ele será reiniciado com um limite máximo de três restarts.
+
+```
+[opc@docker-lab ~]$ sudo docker run -d --restart=on-failure:3 nginx
+Unable to find image 'nginx:latest' locally
+Trying to pull repository docker.io/library/nginx ...
+latest: Pulling from docker.io/library/nginx
+b380bbd43752: Pull complete
+fca7e12d1754: Pull complete
+745ab57616cb: Pull complete
+a4723e260b6f: Pull complete
+1c84ebdff681: Pull complete
+858292fd2e56: Pull complete
+Digest: sha256:644a70516a26004c97d0d85c7fe1d0c3a67ea8ab7ddf4aff193d9f301670cf36
+Status: Downloaded newer image for nginx:latest
+f101e8b70c0adba24a3bd848311785ce53b728bb9d062963ad1ff851eb134feb
+```
+
+- Cria e inicia um contêiner com uma política de restart. Caso o processo que _"roda"_ dentro do contêiner falhe por algum motivo, ele será reiniciado infinitamente.
+
+```
+[opc@docker-lab ~]$ sudo docker run -d --restart=always nginx
+23e15a1615afc65a150ec2a048a578b432f51193484523f9981e21fef3513413
+```
+
+#### Limitando a utilização de recursos 
+
+- Exibe a quantidade de CPUs e memória disponíveis no Docker Host:
+
+```
+[opc@docker-lab ~]$ sudo docker info | egrep "(CPU|Memory)"
+ CPUs: 2
+ Total Memory: 7.488GiB
+```
+
+- Limita a utilização do contêiner para uma CPU e 128 megabytes de memória:
+
+```
+[opc@docker-lab ~]$ sudo docker run -d --cpus 1 -m 128m --name "web-server" nginx
+d8b109577b24c4dce89cb7ebf18799ee62963ef9e4acc668eb9cf25a49a980dd
+```
+
+- Atualiza a quantidade de memória e CPU disponível para um contêiner em execução:
+
+```
+[opc@docker-lab ~]$ sudo docker update --memory 1024m --memory-swap 1024m --cpus 2 web-server
+web-server
+```
+
+#### Monitorando e verificando suas propriedades
+
+- Exibe a versão de todos os componentes do Docker:
+
+```
+[opc@docker-lab ~]$ sudo docker version
+Client: Docker Engine - Community
+ Version:           19.03.11-ol
+ API version:       1.40
+ Go version:        go1.16.2
+ Git commit:        9bb540d
+ Built:             Fri Jul 23 01:33:55 2021
+ OS/Arch:           linux/amd64
+ Experimental:      false
+
+Server: Docker Engine - Community
+ Engine:
+  Version:          19.03.11-ol
+  API version:      1.40 (minimum version 1.12)
+  Go version:       go1.16.2
+  Git commit:       9bb540d
+  Built:            Fri Jul 23 01:32:08 2021
+  OS/Arch:          linux/amd64
+  Experimental:     false
+  Default Registry: docker.io
+ containerd:
+  Version:          v1.4.8
+  GitCommit:        7eba5930496d9bbe375fdf71603e610ad737d2b2
+ runc:
+  Version:          1.0.0-rc95
+  GitCommit:        2856f01
+ docker-init:
+  Version:          0.18.0
+  GitCommit:        fec3683
+```
+
+- Exibe diversas informações referente a instalação e execução do Docker:
+
+```
+[opc@docker-lab ~]$ sudo docker version
+```
+
+- Exibe o diretório raiz onde são armazenados imagens e contêineres:
+
+```
+[opc@docker-lab ~]$ sudo docker info | grep "Root Dir"
+ Docker Root Dir: /var/lib/docker
+```
+
+- Exibe os logs de um contêiner. Tudo que for enviado para STDOUT e STDERR, dos processos em execução de dentro do contêiner, será exibido com o comando abaixo:
+
+```
+[opc@docker-lab ~]$ sudo docker logs web-server
+/docker-entrypoint.sh: /docker-entrypoint.d/ is not empty, will attempt to perform configuration
+/docker-entrypoint.sh: Looking for shell scripts in /docker-entrypoint.d/
+/docker-entrypoint.sh: Launching /docker-entrypoint.d/10-listen-on-ipv6-by-default.sh
+10-listen-on-ipv6-by-default.sh: info: Getting the checksum of /etc/nginx/conf.d/default.conf
+10-listen-on-ipv6-by-default.sh: info: Enabled listen on IPv6 in /etc/nginx/conf.d/default.conf
+/docker-entrypoint.sh: Launching /docker-entrypoint.d/20-envsubst-on-templates.sh
+/docker-entrypoint.sh: Launching /docker-entrypoint.d/30-tune-worker-processes.sh
+/docker-entrypoint.sh: Configuration complete; ready for start up
+2021/10/14 20:06:38 [notice] 1#1: using the "epoll" event method
+2021/10/14 20:06:38 [notice] 1#1: nginx/1.21.3
+2021/10/14 20:06:38 [notice] 1#1: built by gcc 8.3.0 (Debian 8.3.0-6)
+2021/10/14 20:06:38 [notice] 1#1: OS: Linux 5.4.17-2102.205.7.3.el7uek.x86_64
+2021/10/14 20:06:38 [notice] 1#1: getrlimit(RLIMIT_NOFILE): 1048576:1048576
+2021/10/14 20:06:38 [notice] 1#1: start worker processes
+2021/10/14 20:06:38 [notice] 1#1: start worker process 32
+2021/10/14 20:06:38 [notice] 1#1: start worker process 33
+```
+
+- Exibe os logs de um contêiner de forma contínua:
+
+```
+[opc@docker-lab ~]$ sudo docker logs -f web-server
+```
+
+- Exibe de forma contínua algumas estatísticas (CPU, memória, I/O e o número de processos ou threads)  de todos os contêiner em execução:
+
+```
+[opc@docker-lab ~]$ sudo docker stats
+```
+
+- Exibe de forma contínua todos os eventos do Docker Host:
+
+```
+[opc@docker-lab ~]$ sudo docker events
+```
+
+- Exibe quais os processos que estão em execução em um contêiner:
+
+```
+[opc@docker-lab ~]$ sudo docker top web-server
+UID                 PID                 PPID                C                   STIME               TTY                 TIME                CMD
+root                30061               30043               0                   20:06               ?                   00:00:00            nginx: master process nginx -g daemon off;
+101                 30121               30061               0                   20:06               ?                   00:00:00            nginx: worker process
+101                 30122               30061               0                   20:06               ?                   00:00:00            nginx: worker process
+```
