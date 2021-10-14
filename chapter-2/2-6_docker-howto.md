@@ -291,3 +291,9 @@ Total reclaimed space: 82B
 ```
 
 >_**__NOTA:__** Use com cuidado!_
+
+#### Anatomia do comando: "docker run"
+
+A execução do comando _"docker run"_ é dividida em dois comandos separados:
+
+![alt_text](./images/docker-3.jpg  "Anatomia do comando: docker run")
