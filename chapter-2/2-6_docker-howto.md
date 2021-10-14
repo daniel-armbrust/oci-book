@@ -32,7 +32,9 @@ _"Menos trabalho e incômodo ao provisionar ambientes de execução (runtime). T
 
 Das suas diversas vantagens, podemos destacar:
 - Contêineres provêm ambientes isolados (Loose coupling - baixo acoplamento). Mantêm programas e suas dependências isoladas uns dos outros.
+
 - São provisionados, desprovisionados e inicializados muito mais rápidos do que máquinas virtuais.
+
 - Consome menos recursos em termos de hardware, comparados com máquinas virtuais. São mais _"leves"_ e ocupam menos espaço. Permite que as organizações otimizem a utilização de seus recursos de infraestrutura, economizando também custos operacionais.
 - Maior eficiência em termos de escalabilidade e desempenho.
 - Na maioria dos casos, uma aplicação que _"roda"_ em um contêiner é bastante _"enxuta"_, havendo somente o necessário para o seu funcionamento.
