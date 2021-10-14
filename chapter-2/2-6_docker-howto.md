@@ -192,3 +192,11 @@ root@03b683604b20:/# cat /etc/debian_version
 root@03b683604b20:/# exit
 exit
 ```
+
+- Exibe os contêineres em execução:
+
+```
+[opc@docker-lab ~]$ sudo docker ps
+CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES
+fcdfecbc8f7e        centos:latest       "/bin/bash"         4 minutes ago       Up 4 minutes                            meu-linux
+```
