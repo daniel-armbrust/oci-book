@@ -32,9 +32,7 @@ _"Menos trabalho e incômodo ao provisionar ambientes de execução (runtime). T
 
 Das suas diversas vantagens, podemos destacar:
 - Contêineres provêm ambientes isolados (Loose coupling - baixo acoplamento). Mantêm programas e suas dependências isoladas uns dos outros.
-
 - São provisionados, desprovisionados e inicializados muito mais rápidos do que máquinas virtuais.
-
 - Consome menos recursos em termos de hardware, comparados com máquinas virtuais. São mais _"leves"_ e ocupam menos espaço. Permite que as organizações otimizem a utilização de seus recursos de infraestrutura, economizando também custos operacionais.
 - Maior eficiência em termos de escalabilidade e desempenho.
 - Na maioria dos casos, uma aplicação que _"roda"_ em um contêiner é bastante _"enxuta"_, havendo somente o necessário para o seu funcionamento.
@@ -42,3 +40,29 @@ Das suas diversas vantagens, podemos destacar:
 - Aplicações conteinerizadas são portáveis. Tudo que é necessário para _"rodar"_ já está dentro do contêiner e não há dependência externa. Através do conceito de imagens, é possível fazer o deploy em diferentes provedores de Nuvem ou mesmo em ambientes on-premises.
 - Possibilita que as aplicações sejam construídas sob o modelo Cloud Native.
 - Permite a padronização dos ambientes de desenvolvimento.
+
+### O surgimento do Docker
+
+De acordo com a _[documentação oficial do Docker](https://docs.docker.com/get-started/)_, containers não é uma tecnologia nova. Porém, usar contêineres para o deploy de aplicações é algo novo. 
+
+Criado em Março de 2013, o Docker é um conjunto de ferramentas (ferramental) que facilita a criação e administração de contêineres. Ele não é uma tecnologia de virtualização. Ele ajuda a resolver os problemas mais comuns referente a instalação, remoção, atualização e execução de softwares em contêineres. Resolve conflitos relacionados a ambientes de desenvolvimento, eliminando frases do tipo: _"Isto funciona na minha máquina"_.
+
+Podemos dizer que o Docker é um novo formato para _"empacotar"_ aplicações (através de imagens Docker). Qualquer aplicação que _"roda"_ em um terminal Linux, _"roda"_ em Docker.
+
+_"O Docker permite empacotar uma aplicação com todas as suas dependências em uma unidade padronizada, chamado de Imagem Docker."_
+
+_"Docker - Construir, Transportar e Rodar em qualquer lugar."_
+
+### Arquitetura
+
+O Docker usa uma _[arquitetura cliente-servidor](https://pt.wikipedia.org/wiki/Modelo_cliente%E2%80%93servidor)_ e faz uso das tecnologias Linux Namespace e cgroups para prover um _"espaço de trabalho"_ isolado, no qual é chamado de contêiner. Todo o ferramental que o Docker disponibiliza permite a construção e implantação de imagens local ou remotamente.
+
+Alguns dos componentes descritos aqui são:
+
+- **Docker Client (docker)**
+    - Programa de linha de comando no qual usa REST API para se comunicar com o Docker Daemon.
+    - Ferramenta principal usada pela maioria das pessoas.
+
+- **Docker Daemon (dockerd)**
+    - Processo que permanece em execução o tempo todo. Verifica as requisições vindas do cliente para gerenciar os objetos Docker (imagens, contêineres, redes e volumes). Todo o trabalho _"pesado"_ referente a criação, execução e distribuição dos contêineres é feito feito pelo Docker Daemon.
+    - Transforma o Linux em um servidor Docker que pode receber ações de um cliente remoto.
