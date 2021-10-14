@@ -66,3 +66,28 @@ Alguns dos componentes descritos aqui são:
 - **Docker Daemon (dockerd)**
     - Processo que permanece em execução o tempo todo. Verifica as requisições vindas do cliente para gerenciar os objetos Docker (imagens, contêineres, redes e volumes). Todo o trabalho _"pesado"_ referente a criação, execução e distribuição dos contêineres é feito feito pelo Docker Daemon.
     - Transforma o Linux em um servidor Docker que pode receber ações de um cliente remoto.
+
+- **Docker Image**
+    - É uma espécie de template no qual contém instruções para a criação de contêineres.
+    - Imagens são usadas para armazenar e transportar aplicações. É uma coleção de arquivos (bibliotecas, executáveis, arquivos de configuração, etc).
+    - Você pode criar suas próprias imagens ou baixar imagens criadas por outras pessoas, publicadas em um _[registry](https://en.wikipedia.org/wiki/Docker_(software))_.
+    - Uma mesma imagem pode ser copiada para inúmeros hosts.
+
+- **Docker Registry**
+    - É um serviço que hospeda repositório(s) de imagen(s), permitindo que tais imagens sejam baixadas pelo comando _"docker pull"_.  
+    - Pode ser privado ou público como o Docker Hub.
+
+- **Docker Hub (_[https://hub.docker.com/](https://hub.docker.com/)_)**
+    - Repositório oficial de imagens Docker. Nele é possível armazenar suas imagens e torná-las públicas ou privadas.
+    - É um serviço acessado através da Internet, que permite você procurar, baixar e compartilhar imagens Docker.
+
+- **Docker Contêiner**
+    - É a instância de uma imagem (Docker Image) em execução.
+    - É possível criar uma infinidade de contêineres a partir de uma imagem.
+    - Você só pode executar processos conteinerizados compatíveis com o Kernel do sistema operacional host. Aplicações Windows não podem ser executadas em contêiner Linux.
+
+- **Dockerfile**
+    - É um arquivo texto no qual contém a lista de comandos em forma declarativa (receita) usados para construir uma imagem Docker.
+    - Após este arquivo de instruções ser criado, usamos o comando docker build no qual irá de fato criar uma imagem.
+  
+![alt_text](./images/docker-2.jpg  "Arquitetura Docker") 
