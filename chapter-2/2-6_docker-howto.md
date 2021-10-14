@@ -96,3 +96,99 @@ Alguns dos componentes descritos aqui são:
 
 A instalação do Docker é bem simples e difere um pouco, dependendo da distribuição Linux usada. Aqui irei descrever o passo-a-passo utilizando um _[Oracle Linux versão 7.9](https://docs.oracle.com/en/operating-systems/oracle-linux/7/relnotes7.9/index.html)_. Consulte a página oficial do Docker _[aqui](https://docs.docker.com/get-docker/)_ para detalhes de outras distribuições Linux.
 
+```
+[opc@docker-lab ~]$ cat /etc/oracle-release
+Oracle Linux Server release 7.9
+
+[opc@docker-lab ~]$ uname -a
+Linux docker-lab 5.4.17-2102.205.7.3.el7uek.x86_64 #2 SMP Fri Sep 17 16:52:13 PDT 2021 x86_64 x86_64 x86_64 GNU/Linux
+```
+
+```
+[opc@docker-lab ~]$ sudo yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
+Loaded plugins: langpacks
+adding repo from: https://download.docker.com/linux/centos/docker-ce.repo
+grabbing file https://download.docker.com/linux/centos/docker-ce.repo to /etc/yum.repos.d/docker-ce.repo
+repo saved to /etc/yum.repos.d/docker-ce.repo
+
+[opc@docker-lab ~]$ sudo yum -y install docker-engine
+```
+
+```
+[opc@docker-lab ~]$ sudo systemctl enable docker
+[opc@docker-lab ~]$ sudo systemctl start docker
+```
+
+```
+[opc@docker-lab ~]$ docker -v
+Docker version 19.03.11-ol, build 9bb540d
+```
+
+### Administrando contêineres
+
+Aqui descrevo de forma resumida os comandos básicos no qual eu uso no dia-a-dia para manuseio dos contêineres Docker. A documentação oficial, bem mais detalhada, pode ser encontrada _[aqui](https://docs.docker.com/engine/reference/commandline/container/)_.
+
+Somente lembrando que é uma boa prática executar um único processo dentro de um contêiner. Um contêiner deve ser uma _"peça imutável"_. Isto significa que um contêiner não pode executar nada internamente que o modifique. Um contêiner deve conter somente o necessário para prover sua funcionalidade, pois isto facilita a ação de escalar horizontalmente os componentes que formam sua aplicação.
+
+#### Criando, executando e removendo
+
+- Cria um contêiner usando uma imagem do _[Oracle Linux](https://docs.oracle.com/en/operating-systems/oracle-linux/7/relnotes7.9/index.html)_:
+
+```
+[opc@docker-lab ~]$ sudo docker container create oraclelinux:6.9
+Unable to find image 'oraclelinux:6.9' locally
+Trying to pull repository docker.io/library/oraclelinux ...
+6.9: Pulling from docker.io/library/oraclelinux
+a3b2bc283bf3: Pull complete
+Digest: sha256:9152d3d98e35e36109e7e7585e0fa547d5cd8e6f58c0e622c7a7f5c6452fc396
+Status: Downloaded newer image for oraclelinux:6.9
+0198fc9b7e3f80a4ce82c65c2cbd6d37621ab733e854ec98a6e8feba282ccd6a
+``` 
+
+- Após isto, executa o utilitário _[ping](https://pt.wikipedia.org/wiki/Ping)_ dentro dele:
+
+```
+[opc@docker-lab ~]$ sudo docker run -i oraclelinux:6.9 ping -c 2 cloud.oracle.com
+PING e130756.dscx.akamaiedge.net (23.54.22.232) 56(84) bytes of data.
+64 bytes from a23-54-22-232.deploy.static.akamaitechnologies.com (23.54.22.232): icmp_seq=1 ttl=59 time=0.868 ms
+64 bytes from a23-54-22-232.deploy.static.akamaitechnologies.com (23.54.22.232): icmp_seq=2 ttl=59 time=0.942 ms
+
+--- e130756.dscx.akamaiedge.net ping statistics ---
+2 packets transmitted, 2 received, 0% packet loss, time 1001ms
+rtt min/avg/max/mdev = 0.868/0.905/0.942/0.037 ms
+```
+
+- Cria um contêiner com o nome _"meu-linux"_ usando uma imagem do _[CentOS](https://pt.wikipedia.org/wiki/CentOS)_. Após criado, será executado o binário _/bin/bash_ dentro dele, e o mesmo será colocado em _"background"_.
+
+```
+[opc@docker-lab ~]$ sudo docker run -tdi --name "meu-linux" centos:latest /bin/bash
+Unable to find image 'centos:latest' locally
+Trying to pull repository docker.io/library/centos ...
+latest: Pulling from docker.io/library/centos
+a1d0c7532777: Pull complete
+Digest: sha256:a27fd8080b517143cbbbab9dfb7c8571c40d67d534bbdee55bd6c473f432b177
+Status: Downloaded newer image for centos:latest
+fcdfecbc8f7ed4b6d38efd6ea80a6e5add4f37b1ed8666a7659ceb38917fb46b
+```
+
+Nota para outras opções:
+- **-t** : Aloca um pseudo-TTY (terminal). Necessário para a execução de um shell.
+- **-d** : Executa o contêiner em background (detach) e exibe o container ID.
+- **-i** : Executa o contêiner de modo interativo (abre o STDIN do processo). Necessário para a execução de um shell.
+
+- Cria e executa um contêiner usando uma imagem do _[Debian](https://pt.wikipedia.org/wiki/Debian)_. Após criado, será executado de forma interativa, o binário _/bin/bash_ dentro dele. Note que o comando abaixo irá te _"jogar"_ pra dentro do contêiner que acaba de ser criado:
+
+```
+[opc@docker-lab ~]$ sudo docker run -ti debian /bin/bash
+Unable to find image 'debian:latest' locally
+Trying to pull repository docker.io/library/debian ...
+latest: Pulling from docker.io/library/debian
+bb7d5a84853b: Pull complete
+Digest: sha256:4d6ab716de467aad58e91b1b720f0badd7478847ec7a18f66027d0f8a329a43c
+Status: Downloaded newer image for debian:latest
+
+root@03b683604b20:/# cat /etc/debian_version
+11.1
+root@03b683604b20:/# exit
+exit
+```
