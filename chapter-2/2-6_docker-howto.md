@@ -303,3 +303,70 @@ A execução do comando _"docker run"_ é dividida em dois comandos separados:
 2. Como resultado da criação do contêiner bem sucedida, é retornado um ID.
 
 3. A partir desse ID, o contêiner será iniciado através do comando: _"docker start \<CONTAINER ID\>"_
+
+#### Iniciando, reiniciando, parando, pausando e sinais
+
+Para os comandos abaixo, é possível especificar o _CONTAINER ID_ ou o nome que foi especificado pelo parâmetro _"--name"_, no momento da sua criação.
+
+- Parar a execução de um contêiner (envia um sinal SIGTERM):
+
+```
+[opc@docker-lab ~]$ sudo docker stop meu-linux
+meu-linux
+```
+
+- Parar _"forçadamente"_ a execução de um contêiner (envia um sinal SIGKILL):
+
+```
+[opc@docker-lab ~]$ sudo docker kill meu-linux
+meu-linux
+```
+
+- Tenta parar a execução do contêiner (SIGTERM). Depois de 15 segundos, para _"forçadamente"_ (SIGKILL):
+
+```
+[opc@docker-lab ~]$ sudo docker stop -t 15 meu-linux
+meu-linux
+```
+
+- Parar todos os contêineres em execução:
+
+```
+[opc@docker-lab ~]$ sudo docker stop $(sudo docker ps -q)
+f74ffc8b124a
+```
+
+- Envia um sinal do tipo SIGHUP para o contêiner:
+
+```
+[opc@docker-lab ~]$ sudo docker kill --signal=HUP meu-linux
+meu-linux
+``` 
+
+- Inicia um contêiner:
+
+```
+[opc@docker-lab ~]$ sudo docker start meu-linux
+meu-linux
+```
+
+- Pausa a execução de um contêiner (congela os processos em execução): 
+
+```
+[opc@docker-lab ~]$ sudo docker pause meu-linux
+meu-linux
+```
+
+- Despausa a execução de um contêiner:
+
+```
+[opc@docker-lab ~]$ sudo docker unpause meu-linux
+meu-linux
+```
+
+- Reinicia a execução de um contêiner:
+
+```
+[opc@docker-lab ~]$ sudo docker restart meu-linux
+meu-linux
+```
