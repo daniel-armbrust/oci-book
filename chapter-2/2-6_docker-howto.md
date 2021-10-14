@@ -194,3 +194,71 @@ exit
 CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES
 fcdfecbc8f7e        centos:latest       "/bin/bash"         4 minutes ago       Up 4 minutes                            meu-linux
 ```
+
+- Exibe os contêineres em execução e também os que já foram encerrados:
+
+```
+[opc@docker-lab ~]$ sudo docker ps -a
+CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS                      PORTS               NAMES
+03b683604b20        debian              "/bin/bash"              7 minutes ago       Exited (0) 6 minutes ago                        jovial_proskuriakova
+fcdfecbc8f7e        centos:latest       "/bin/bash"              10 minutes ago      Up 9 minutes                                    meu-linux
+8289f2054c2f        oraclelinux:6.9     "ping -c 2 cloud.ora…"   13 minutes ago      Exited (0) 13 minutes ago                       eager_galileo
+```
+
+- Acessa o processo em execução _"dentro"_ do container (pode ser através do CONTAINER ID ou do seu nome):
+
+```
+[opc@docker-lab ~]$ sudo docker attach meu-linux
+[root@fcdfecbc8f7e /]# cat /etc/redhat-release
+CentOS Linux release 8.4.2105
+
+[opc@docker-lab ~]$ sudo docker attach fcdfecbc8f7e
+[root@fcdfecbc8f7e /]# cat /etc/redhat-release
+CentOS Linux release 8.4.2105
+```
+
+>_**__NOTA:__**  Esta ação de "atachar" (attach) basicamente sobrescreve o seu terminal (docker host) com o terminal do contêiner. Lembra da opção -t quando criamos o contêiner? Além disso, é possível referenciar o contêiner em execução pelo seu ID ou nome._
+
+>_**__NOTA:__** Para retornar ao shell do Docker Host, execute o conjunto de teclas: CTRL+p+q_
+
+- Executa um comando dentro de um contêiner que esteja em execução:
+
+```
+[opc@docker-lab ~]$ sudo docker exec meu-linux whoami
+root
+``` 
+
+- Remove automaticamente um contêiner após completar sua execução:
+
+```
+[opc@docker-lab ~]$ sudo docker run --rm hello-world
+Unable to find image 'hello-world:latest' locally
+Trying to pull repository docker.io/library/hello-world ...
+latest: Pulling from docker.io/library/hello-world
+2db29710123e: Pull complete
+Digest: sha256:37a0b92b08d4919615c3ee023f7ddb068d12b8387475d64c622ac30f45c29c51
+Status: Downloaded newer image for hello-world:latest
+
+Hello from Docker!
+This message shows that your installation appears to be working correctly.
+
+To generate this message, Docker took the following steps:
+ 1. The Docker client contacted the Docker daemon.
+ 2. The Docker daemon pulled the "hello-world" image from the Docker Hub.
+    (amd64)
+ 3. The Docker daemon created a new container from that image which runs the
+    executable that produces the output you are currently reading.
+ 4. The Docker daemon streamed that output to the Docker client, which sent it
+    to your terminal.
+
+To try something more ambitious, you can run an Ubuntu container with:
+ $ docker run -it ubuntu bash
+
+Share images, automate workflows, and more with a free Docker ID:
+ https://hub.docker.com/
+
+For more examples and ideas, visit:
+ https://docs.docker.com/get-started/
+
+```
+
