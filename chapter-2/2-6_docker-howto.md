@@ -262,3 +262,32 @@ For more examples and ideas, visit:
 
 ```
 
+- Remove _"forçadamente"_ um contêiner em execução:
+
+```
+[opc@docker-lab ~]$ sudo docker rm -f meu-linux
+meu-linux
+```
+
+- Remove _"forçadamente"_ **TODOS** os contêineres que não estão em execução (stopped):
+
+```
+[opc@docker-lab ~]$ sudo docker container prune -f
+Deleted Containers:
+4c1ac6150ee903cacaa30ffe363414db256c95f9e5f932060110f276ceb8f7a7
+03b683604b201e3ceb04eec46eaecbeb02afc9c25aae30421070ca1a2e08e666
+fcdfecbc8f7ed4b6d38efd6ea80a6e5add4f37b1ed8666a7659ceb38917fb46b
+dde36922c450ac5c2794c6215a8fb9f2708313617689a7610c82a8c66caad61d
+8289f2054c2fb5a402048f1632faacec44441da2dfc43d8d8462bc8103a79efe
+0198fc9b7e3f80a4ce82c65c2cbd6d37621ab733e854ec98a6e8feba282ccd6a
+
+Total reclaimed space: 82B
+```
+
+- Remove _"forçadamente"_ **TODOS** os contêineres em execução ou não:
+
+```
+[opc@docker-lab ~]$ sudo docker rm -f $(sudo docker ps -aq)
+```
+
+>_**__NOTA:__** Use com cuidado!_
