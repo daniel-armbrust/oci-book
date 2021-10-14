@@ -520,3 +520,7 @@ root                30061               30043               0                   
 101                 30121               30061               0                   20:06               ?                   00:00:00            nginx: worker process
 101                 30122               30061               0                   20:06               ?                   00:00:00            nginx: worker process
 ```
+
+>_**__NOTA:__** Executar o comando "ps" diretamente no Docker Host, exibe todos os processos, de todos os contêineres em execução neste host._
+
+>_**__NOTA:__** É possível utilizar o comando "ps axlfww" diretamente no Docker Host para facilitar a visualização dos processos._
