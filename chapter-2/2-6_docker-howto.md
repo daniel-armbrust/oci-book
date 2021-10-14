@@ -90,4 +90,9 @@ Alguns dos componentes descritos aqui são:
     - É um arquivo texto no qual contém a lista de comandos em forma declarativa (receita) usados para construir uma imagem Docker.
     - Após este arquivo de instruções ser criado, usamos o comando docker build no qual irá de fato criar uma imagem.
   
-![alt_text](./images/docker-2.jpg  "Arquitetura Docker") 
+![alt_text](./images/docker-2.jpg  "Arquitetura Docker")
+
+### Instalação
+
+A instalação do Docker é bem simples e difere um pouco, dependendo da distribuição Linux usada. Aqui irei descrever o passo-a-passo utilizando um _[Oracle Linux versão 7.9](https://docs.oracle.com/en/operating-systems/oracle-linux/7/relnotes7.9/index.html)_. Consulte a página oficial do Docker _[aqui](https://docs.docker.com/get-docker/)_ para detalhes de outras distribuições Linux.
+
