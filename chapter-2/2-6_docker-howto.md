@@ -298,8 +298,8 @@ A execução do comando _"docker run"_ é dividida em dois comandos separados:
 
 ![alt_text](./images/docker-3.jpg  "Anatomia do comando: docker run")
 
-1. Primeiramente é verificado se a imagem (centos) existe localmente. Caso contrário, ela será baixada de um registry. No nosso caso é o _[Docker Hub](https://hub.docker.com/)_. Em seguida, o contêiner será criado através do comando: _"docker container create <IMAGEM>"_.
+1. Primeiramente é verificado se a imagem (centos) existe localmente. Caso contrário, ela será baixada de um registry. No nosso caso é o _[Docker Hub](https://hub.docker.com/)_. Em seguida, o contêiner será criado através do comando: _"docker container create \<IMAGEM\>"_.
 
 2. Como resultado da criação do contêiner bem sucedida, é retornado um ID.
 
-3. A partir desse ID, o contêiner será iniciado através do comando: _"docker start <CONTAINER ID>"_
+3. A partir desse ID, o contêiner será iniciado através do comando: _"docker start \<CONTAINER ID\>"_
