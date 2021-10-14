@@ -105,12 +105,6 @@ Linux docker-lab 5.4.17-2102.205.7.3.el7uek.x86_64 #2 SMP Fri Sep 17 16:52:13 PD
 ```
 
 ```
-[opc@docker-lab ~]$ sudo yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
-Loaded plugins: langpacks
-adding repo from: https://download.docker.com/linux/centos/docker-ce.repo
-grabbing file https://download.docker.com/linux/centos/docker-ce.repo to /etc/yum.repos.d/docker-ce.repo
-repo saved to /etc/yum.repos.d/docker-ce.repo
-
 [opc@docker-lab ~]$ sudo yum -y install docker-engine
 ```
 
