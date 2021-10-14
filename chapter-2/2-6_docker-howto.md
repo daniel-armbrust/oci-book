@@ -370,3 +370,5 @@ meu-linux
 [opc@docker-lab ~]$ sudo docker restart meu-linux
 meu-linux
 ```
+
+#### Reiniciando em caso de problemas
