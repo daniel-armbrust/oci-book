@@ -757,7 +757,6 @@ CentOS Linux release 8.4.2105
 ```
 [root@17c2843e88ba /]# exit
 exit
-
 [opc@docker-lab ~]$
 ``` 
 
