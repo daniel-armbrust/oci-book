@@ -1067,3 +1067,79 @@ Para visualizar os metadados de uma imagem:
 #### Compartilhando Imagens
 
 Após criarmos uma imagem e termos ela disponível localmente, é possível fazer upload para um Image Registry. Um Image Registry ou simplesmente Registry, nada mais é do que um repositório que contém diversas imagens Docker disponíveis para uso. Este repositório pode ser público, como o Docker Hub, ou privado.
+
+- Para fazer upload das suas imagens, primeiramente você deve realizar login:
+
+```
+[opc@docker-lab ~]$ sudo docker login
+Login with your Docker ID to push and pull images from Docker Hub. If you don't have a Docker ID, head over to https://hub.docker.com to create one.
+
+Username: armbrust
+Password:
+
+WARNING! Your password will be stored unencrypted in /root/.docker/config.json.
+Configure a credential helper to remove this warning. See
+
+https://docs.docker.com/engine/reference/commandline/login/#credentials-store
+
+Login Succeeded
+```
+
+- Você também pode especificar a URL de algum registry privado, por exemplo:
+
+```
+[opc@docker-lab ~]$ docker login registry.meudocker.com.br
+```
+
+>_**__NOTA:__** Para fazer upload das suas imagens no Docker Hub (https://hub.docker.com/) você primeiramente precisa criar uma conta. Após isto, informar as credenciais ao comando "docker login"._
+
+>_**__NOTA:__** No Docker Hub é possível utilizar a imagem de nome Registry para criar seu repositório local._
+
+>_**__NOTA:__** Sua imagem deve possuir o seguinte formato antes de ser enviada ao Docker Hub: usuario/nome-da-imagem:versão_
+
+- Após logado, para fazer upload, execute o comando _docker push_:
+
+``` 
+[opc@docker-lab ~]$ sudo docker push armbrust/django:1.0
+```
+
+- É possível procurar por imagens com o comando “docker search”:
+
+```
+[opc@docker-lab ~]$ docker search django
+```
+
+### Gerenciando a Rede dos contêineres dentro do Docker Host
+
+Por padrão, o Docker disponibiliza três tipos diferentes de redes para comunicação, sendo que cada uma está associada a um driver diferente.
+
+- Para listar as redes existentes no Docker Host, execute o comando abaixo:
+
+```
+[opc@docker-lab ~]$ sudo docker network ls
+NETWORK ID          NAME                DRIVER              SCOPE
+de6ca06d53cc        bridge              bridge              local
+6b38617a61a1        host                host                local
+0c591d662167        none                null                local
+```
+
+>_**__NOTA:__** Essas três redes são reservadas e não podem ser removidas._
+
+A última coluna especifica o escopo da rede. Esta pode ter os valores:
+
+- **Local**
+    - Local significa que a rede está restrita ao Docker Host apenas.
+
+- **Global**
+    - A rede pode ser criada em diferentes nós de um cluster. Porém estes não são roteáveis entre si.
+
+- **Swarm**
+    - A rede abrange todos os hosts que participam do _[Docker Swarm](https://docs.docker.com/get-started/swarm-deploy/)_.
+
+#### Bridge Network (docker0)
+
+Por padrão, todo novo contêiner criado, sem que seja especificado o contrário, será conectado a uma rede bridge baseada em software chamada _docker0_. O _docker0_ é uma espécie de switch virtual que isola a comunicação somente aos contêineres que forem conectados a ele. Além disso, por padrão, somente o tráfego do tipo egress (saída para a Internet) é permitido. Qualquer tráfego que vem _"de fora"_ (da Internet para o container), é bloqueado. 
+
+>_**__NOTA:__** Como acréscimo de informação: uma regra de NAT do tipo MASQUERADE é criada pelo docker, usando o subsistema Netfilter do Linux, para que o tráfego egress funcione. Isto permite que os containers, a partir da rede bridge, alcancem a Internet._
+
+![alt_text](./images/docker-7.jpg  "Docker Network")
