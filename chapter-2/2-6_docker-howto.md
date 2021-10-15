@@ -869,3 +869,120 @@ sha256:2e95023191608a373e331007eea62251205c36327aa325ec833581feea5eb1d1
 ```
 
 >_**__NOTA:__** Você pode usar também, a URL de um arquivo para realizar uma importação._
+
+#### Entrypoint
+
+O Entrypoint é o programa que será executado quando o contêiner iniciar.
+
+Para demonstrar sua funcionalidade, vamos criar uma nova imagem e evitar _"chamar o shell"_ toda vez que criarmos nosso container CentOS.
+
+1. Cria-se um novo contêiner em background, usando a imagem do CentOS, de nome _"meu-container-shell"_, informando que o comando _/bin/bash_ deve ser executado assim que o contêiner iniciar:
+
+```
+[opc@docker-lab ~]$ sudo docker run --rm --name meu-container-shell -di --entrypoint /bin/bash centos:latest
+0bf3b1c034c8f6523ab339ba3053842dbfaf7a1e6846d09b27c831b741d00abf
+```
+
+2. Logo após, criamos uma nova imagem de nome _"centos-shell"_ a partir do contêiner _"meu-container-shell"_ que está em execução:
+
+```
+[opc@docker-lab ~]$ sudo docker commit meu-container-shell centos-shell
+sha256:caf4de58d1121f264e3e3c98065ec9e8dcd3c3a77d1c835b03655975889239a2
+```
+
+3. Podemos verificar a imagem que acabamos de criar com o comando abaixo:
+
+```
+[opc@docker-lab ~]$ sudo docker images
+REPOSITORY                  TAG                 IMAGE ID            CREATED             SIZE
+centos-shell                latest              caf4de58d112        28 seconds ago      231MB
+```
+
+4. Com a imagem criada, podemos parar o contêiner _"meu-container-shell"_:
+
+```
+[opc@docker-lab ~]$ sudo docker stop meu-container-shell
+meu-container-shell
+```
+
+>_**__NOTA:__** Ao parar a execução do contêiner "meu-container-shell", ele automaticamente será removido, pois foi criado com a opção --rm._
+
+5. Como temos o entrypoint definido para _/bin/bash_ nesta imagem que acabamos de criar, basta iniciar um novo contêiner a partir dela que já será disponibilizado um shell interativo:
+
+```
+[opc@docker-lab ~]$ sudo docker run -ti centos-shell
+[root@682cc15fe01a /]# cat /etc/centos-release
+CentOS Linux release 8.4.2105
+```
+
+#### Criando uma Imagem a partir de um Dockerfile
+
+Dockerfile é um arquivo texto no qual especifica, comando por comando (passo-a-passo), como uma imagem Docker deve ser criada. De forma resumida: 
+
+_"É um arquivo de receita, passado como parâmetro para o comando **docker build**, e usado para gerar imagens."_
+
+Ou seja, dentro de um Dockerfile, você irá encontrar comandos para construção da imagem em si e execução do processo _"conteinerizado"_.
+
+1. Primeiramente devemos criar um diretório de trabalho. É neste diretório que iremos criar nosso Dockerfile. Lembrando que aqui você pode ter qualquer outro arquivo ou diretório, no qual deseja que faça parte de sua imagem.
+
+```
+[opc@docker-lab ~]$ cd armbrust-django/
+
+[opc@docker-lab ~]$ ls -la armbrust-django/
+total 4
+drwxrwxr-x. 2 opc opc   45 Oct 15 11:10 .
+drwx------. 6 opc opc 4096 Oct 15 11:09 ..
+-rw-rw-r--. 1 opc opc    0 Oct 15 11:10 Dockerfile
+-rw-rw-r--. 1 opc opc    0 Oct 15 11:10 .dockerignore
+```
+
+>_**__NOTA:__** É uma boa prática criar sempre um diretório de trabalho exclusivo para construir suas imagens, pois o processo que faz a construção da imagem transfere todo o conteúdo deste para o Docker daemon, de forma recursiva. Quanto menor, melhor._
+
+2. Nosso Dockerfile possui o seguinte conteúdo:
+
+```
+[opc@docker-lab ~]$ cat armbrust-django/Dockerfile
+FROM centos:latest
+
+LABEL maintainer="daniel.armbrust@algumdominio.com"
+LABEL description="Django App in Docker"
+
+# Variaveis de ambiente do container
+ENV PATH="$PATH:/usr/local/bin:/usr/local/sbin"
+WORKDIR /srv/www-motando-com-br
+
+# Atualizacao do s.o.
+RUN yum -y update
+
+# Instalacao do Python e ajustes de links simbolicos
+RUN yum -y install python38-devel.x86_64 && yum -y clean all
+RUN ln -sf /bin/python3.8 /bin/python && ln -sf /bin/pip3.8 /bin/pip
+
+# Instalacao do DJANGO Framework
+RUN pip install --no-cache-dir "django==3.*"
+
+# Criacao da estrutura inicial da aplicacao DJANGO
+RUN django-admin.py startproject motando /srv/www-motando-com-br/
+RUN /srv/www-motando-com-br/manage.py makemigrations
+RUN /srv/www-motando-com-br/manage.py migrate
+
+# Criacao da estrutura/usuario para a aplicacao
+RUN groupadd -g 5580 django && useradd -u 5580 -g django -m django
+RUN chown -R django:django /srv/www-motando-com-br/motando/
+
+USER django:django
+
+EXPOSE 80:8000
+
+# Execucao do processo persistente do container
+ENTRYPOINT ["/srv/www-motando-com-br/manage.py"]
+CMD ["runserver", "0.0.0.0:8000"]
+```
+
+Alguns detalhes referente ao Dockerfile merecem destaque:
+
+- Todo Dockerfile deve iniciar com a instrução FROM, que especifica a imagem base.
+- Toda linha que inicia com o carácter #, é tratada como um comentário.
+- Um arquivo _.dockerignore_ pode ser criado dentro do diretório de trabalho. Este possui a função de excluir arquivos ou diretórios do processo de construção da imagem.
+- Sempre que possível devemos utilizar “execuções inline” para reduzir o número de camadas que serão criadas:
+    - Ex: _yum -y update && yum -y clean all_
