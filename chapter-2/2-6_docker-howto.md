@@ -1143,3 +1143,95 @@ Por padrão, todo novo contêiner criado, sem que seja especificado o contrário
 >_**__NOTA:__** Como acréscimo de informação: uma regra de NAT do tipo MASQUERADE é criada pelo docker, usando o subsistema Netfilter do Linux, para que o tráfego egress funcione. Isto permite que os containers, a partir da rede bridge, alcancem a Internet._
 
 ![alt_text](./images/docker-7.jpg  "Docker Network")
+
+Cada contêiner possui seu próprio network namespace que inclui uma interface de rede conectada em outra interface de rede virtual _(veth - virtual ethernet)_, localizada no Docker Host. Por fim, esses pares de interfaces redes são então conectadas ao _docker0_.
+
+- No Docker Host, é possível verificar as interfaces de rede conectadas ao _docker0_:
+
+```
+[opc@docker-lab ~]$ brctl show docker0
+bridge name     bridge id               STP enabled     interfaces
+docker0         8000.0242479b2da0       no              veth27cbea9
+                                                        veth5385aa2
+                                                        veth5a91329
+``` 
+
+Observa-se também nesta topologia, que cada contêiner possui um endereço IP atribuído a partir das propriedades no qual o **docker0** foi criado. Além disso, cada contêiner contido nessa topologia, também tem como seu gateway o endereço IP 172.17.0.1, que é o endereço IP do **docker0**.
+
+- O comando abaixo exibe os detalhes da rede, além de informações dos contêineres conectados:  
+
+```
+[opc@docker-lab ~]$ sudo docker network inspect bridge
+```
+
+- Cria uma nova rede de nome _"minha-bridge"_:
+
+```
+[opc@docker-lab ~]$ sudo docker network create --driver bridge \
+> --subnet 192.168.100.0/24 \
+> --ip-range 192.168.100.32/27 \
+> --gateway 192.168.100.1 \
+> --label projeto=meus-containers minha-bridge
+fa3ced7aa3d5b126fb3e4a7077ed39ee698784edda57a629cd0583ab41ac82da
+```
+
+- Exibe todas as redes que utilizam o driver do tipo bridge:
+
+```
+[opc@docker-lab ~]$ sudo docker network ls -f 'driver=bridge'
+NETWORK ID          NAME                DRIVER              SCOPE
+de6ca06d53cc        bridge              bridge              local
+fa3ced7aa3d5        minha-bridge        bridge              local
+```
+
+- Cria um novo container conectado a rede _"minha-bridge"_:
+
+```
+[opc@docker-lab ~]$ sudo docker run -ti --network minha-bridge \
+> --hostname novo-container \
+> --dns 8.8.8.8 \
+> --dns-search novo.container.com.br alpine:latest
+Unable to find image 'alpine:latest' locally
+Trying to pull repository docker.io/library/alpine ...
+latest: Pulling from docker.io/library/alpine
+a0d0a0d46f8b: Pull complete
+Digest: sha256:e1c082e3d3c45cccac829840a25941e679c25d438cc8412c2fa221cf1a824e6a
+Status: Downloaded newer image for alpine:latest
+/ # cat /etc/alpine-release
+3.14.2
+```
+
+- Para remover a rede, execute:
+
+```
+[opc@docker-lab ~]$ sudo docker network rm minha-bridge
+minha-bridge
+```
+
+Para finalizar o nosso entendimento sobre redes do tipo bridge, vamos criar um novo container e habilitar a entrada do tráfego que vem da Internet (ingress) com destino a porta 8080/TCP. Este tráfego será redirecionado para a porta 80/TCP do contêiner. 
+
+```
+[opc@docker-lab ~]$ sudo docker run -d --name web-server --network bridge -p 8080:80 nginx:latest
+46cca1ba1a64a7f804a2e6dd960242b1dd564b7462bf30572a316aa9b1845bc0
+```
+
+Para habilitar esse tipo de tráfego, o Docker manipula algumas regras _[iptables](https://pt.wikipedia.org/wiki/Iptables)_ diretamente no Docker Host. Como resultado, o tráfego que vem da Internet consegue atingir o contêiner.
+
+![alt_text](./images/docker-8.jpg  "Docker + IPTables")
+
+>_**__NOTA:__** Sempre que é criado um contêiner que expõe uma porta de comunicação, além da adição das regras de NAT, o Docker também inicia um processo de nome docker-proxy para cada porta exposta. Para o exemplo demonstrado, o processo docker-proxy "escuta" na porta 8080/TCP do Docker Host. Este processo será usado somente em algumas circunstâncias, onde a regra NAT de entrada (PREROUTING/DNAT) não é aplicada para redirecionamento do tráfego._
+
+- Publica mais de uma porta para o mesmo contêiner:
+
+```
+[opc@docker-lab ~]$ sudo docker run -d --name web-server-2 -p 81:80 -p 1080:80 --network bridge nginx:latest
+4e8f78988f9683f64353ad02f32608d66877d3571a1874b2abac589763290ac9
+```
+
+- Exibe o conjunto das portas de comunicação utilizadas por um contêiner:
+
+```
+[opc@docker-lab ~]$ sudo docker port web-server-2
+80/tcp -> 0.0.0.0:1080
+80/tcp -> 0.0.0.0:81
+```
