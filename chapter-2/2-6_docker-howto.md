@@ -995,7 +995,6 @@ Alguns detalhes referente ao Dockerfile merecem destaque:
 
 ```
 [opc@docker-lab ~]$ cd armbrust-django/
-
 [opc@docker-lab armbrust-django]$ sudo docker image build -t armbrust/django:1.0 -t armbrust/django:latest .
 ```
 
