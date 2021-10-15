@@ -986,3 +986,9 @@ Alguns detalhes referente ao Dockerfile merecem destaque:
 - Um arquivo _.dockerignore_ pode ser criado dentro do diretório de trabalho. Este possui a função de excluir arquivos ou diretórios do processo de construção da imagem.
 - Sempre que possível devemos utilizar “execuções inline” para reduzir o número de camadas que serão criadas:
     - Ex: _yum -y update && yum -y clean all_
+
+- É recomendado a definição das entradas ENTRYPOINT e CMD no Dockerfile
+    - ENTRYPOINT deve ser o caminho do programa que irá tornar o contêiner executável. Este programa irá receber o PID 1. Caso seja encerrado, o contêiner também será.
+    - CMD deve especificar  os argumentos para o programa que foi definido em ENTRYPOINT.
+
+3. A partir do diretório de trabalho, no qual temos nosso Dockerfile, executamos o comando _"docker build"_ para que a imagem seja criada:
