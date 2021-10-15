@@ -926,8 +926,6 @@ Ou seja, dentro de um Dockerfile, você irá encontrar comandos para construçã
 1. Primeiramente devemos criar um diretório de trabalho. É neste diretório que iremos criar nosso Dockerfile. Lembrando que aqui você pode ter qualquer outro arquivo ou diretório, no qual deseja que faça parte de sua imagem.
 
 ```
-[opc@docker-lab ~]$ cd armbrust-django/
-
 [opc@docker-lab ~]$ ls -la armbrust-django/
 total 4
 drwxrwxr-x. 2 opc opc   45 Oct 15 11:10 .
