@@ -834,7 +834,7 @@ eecaeff07508        9 minutes ago       /bin/bash                               
 
 É possível salvar, exportar e importar o sistema de arquivos de uma imagem ou contêiner para fora dos domínios do Docker. Em alguns momentos pode ser útil quando se deseja trabalhar sem o sistema de camadas. Obviamente quando se faz isto, você perde todo o histórico de mudanças oferecido pelas camadas do sistema de arquivos.
 
-- Salva uma imagem em um arquivo .tar:
+- Salva uma imagem em um arquivo _.tar_:
 
 ```
 [opc@docker-lab ~]$ sudo docker image save armbrust/django:1.0 -o armbrust-django.tar
