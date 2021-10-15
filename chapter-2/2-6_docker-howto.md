@@ -617,9 +617,7 @@ ddcae0ab7a494556036113929af73cc934fa47722f71cdbf6a1b3644aa6a67c8
 
 
 [opc@docker-lab ~]$ sudo ls -lt /var/lib/docker/volumes/meu-volume-1/_data/
-
 total 0
-
 -rw-r--r--. 1 root root 0 Aug 19 10:29 meu-arquivo.txt
 ```
 
@@ -695,7 +693,7 @@ Essa camada writable é efêmera e só existe enquanto o contêiner estiver em e
 
 O que for gravado nestes volumes externos, não será perdido com o término do contêiner.Como você lerá, uma outra forma de persistir os dados da camada writable, é através do comando _"docker commit"_, que transforma todas as camadas, incluindo o conteúdo da camada writable, em uma imagem.
 
-Bem tecnicamente falando, as camadas são montadas pelo Docker sobre um _[Union FileSystem (UnionFS)](https://pt.wikipedia.org/wiki/UnionFS)_ que utiliza uma técnica chamada _[Copy-On-Write (CoW)](https://pt.wikipedia.org/wiki/C%C3%B3pia_em_grava%C3%A7%C3%A3o)_. Basicamente esta técnica permite que se altere uma cópia e preserve o original. A cada alteração, uma cópia antes é feita. Por isto o nome Copy-On-Write (CoW) ou _"cópia sobre escrita"_. A implementação do UnionFS usada atualmente pelo Docker é o _[OverlayFS2](https://docs.docker.com/storage/storagedriver/overlayfs-driver/)_. 
+Bem tecnicamente falando, as camadas são montadas pelo Docker sobre um _[Union FileSystem (UnionFS)](https://pt.wikipedia.org/wiki/UnionFS)_ que utiliza uma técnica chamada _[Copy-On-Write (CoW)](https://pt.wikipedia.org/wiki/C%C3%B3pia_em_grava%C3%A7%C3%A3o)_. Basicamente esta técnica permite que se altere uma cópia e preserve o original. A cada alteração, uma cópia antes é feita. Por isto o nome  _[Copy-On-Write (CoW)](https://pt.wikipedia.org/wiki/C%C3%B3pia_em_grava%C3%A7%C3%A3o)_ ou _"cópia sobre escrita"_. A implementação do UnionFS usada atualmente pelo Docker é o _[OverlayFS2](https://docs.docker.com/storage/storagedriver/overlayfs-driver/)_. 
 
 >_**__NOTA:__** Contêineres são efêmeros. Toda alteração realizada em seu sistema de arquivos é perdida quando a execução do contêiner termina. A imutabilidade é uma característica de uma boa engenharia de software._
 
@@ -711,3 +709,126 @@ Uma imagem Docker pode ser criada de três diferentes maneiras:
 
 3. Importar uma imagem compactada no formato _".tar"_
 
+#### Criando uma Imagem interativamente
+
+Toda imagem que você cria começa a partir de uma Imagem Base. Algumas dessas como _[Alpine](https://hub.docker.com/_/alpine)_, _[BusyBox](https://hub.docker.com/_/busybox)_ ou _[Cirros](https://hub.docker.com/_/cirros)_, são mais apropriadas para se criar aplicações em contêineres por conta do seu tamanho total ser menor. Nada impede você de usar imagens CentOS ou Ubuntu como imagem base. Porém, quanto menor for seu contêiner, melhor. Além disso, é uma boa prática seu contêiner possuir somente o necessário para desempenhar sua função. 
+
+1. Primeiramente vamos fazer o download de uma imagem base:
+
+```
+[opc@docker-lab ~]$ sudo docker pull centos
+Using default tag: latest
+Trying to pull repository docker.io/library/centos ...
+latest: Pulling from docker.io/library/centos
+Digest: sha256:a27fd8080b517143cbbbab9dfb7c8571c40d67d534bbdee55bd6c473f432b177
+Status: Image is up to date for centos:latest
+centos:latest
+```
+
+2. Criar um novo contêiner a partir da imagem base que foi baixada:
+
+```
+[opc@docker-lab ~]$ sudo docker container run --name meu-container -ti centos:latest /bin/bash
+[root@00d212550284 /]# cat /etc/centos-release
+CentOS Linux release 8.4.2105
+```
+
+3. A partir do shell iniciado dentro do contêiner, iremos executar os seguintes comandos:
+
+```
+[root@17c2843e88ba /]# yum -y update
+[root@17c2843e88ba /]# yum install -y python38-devel.x86_64
+[root@17c2843e88ba /]# yum clean all -y
+```
+
+```
+[root@17c2843e88ba /]# ln -sf /bin/python3.8 /bin/python
+[root@17c2843e88ba /]# ln -sf /bin/pip3.8 /bin/pip
+```
+
+```
+[root@17c2843e88ba /]# pip install --no-cache-dir "django==3.*"
+[root@17c2843e88ba /]# mkdir -p /srv/www-motando-com-br/
+[root@17c2843e88ba /]# /usr/local/bin/django-admin.py startproject motando /srv/www-motando-com-br/
+```
+
+4. Pronto! Temos nossa imagem base já customizada. Agora, vamos sair do contêiner para seguirmos com as demais atividades:
+
+```
+[root@17c2843e88ba /]# exit
+exit
+
+[opc@docker-lab ~]$
+``` 
+
+>_**__NOTA:__** Ao executar o comando exit, voltamos ao shell do Docker Host além do contêiner em si ser encerrado. Isto porque o único processo que estava em execução dentro deste contêiner era o /bin/bash. Dizemos então que este contêiner passou do estado "running" para "stopped"._
+
+5. Com o comando abaixo, verificamos que o contêiner que foi criado e modificado está parado: 
+
+```
+[opc@docker-lab ~]$ sudo docker ps -a
+CONTAINER ID        IMAGE               COMMAND                CREATED             STATUS                      PORTS               NAMES
+17c2843e88ba        centos:latest       "/bin/bash"            13 minutes ago      Exited (0) 2 minutes ago                        meu-container
+```
+
+6. Para visualizar todas as mudanças que foram feitas no sistema de arquivos, você pode usar o comando abaixo:
+
+```
+[opc@docker-lab ~]$ sudo docker diff meu-container
+```
+
+A saída do comando _"docker diff"_ apresenta as seguintes letras iniciais na frente de arquivos ou diretórios:
+
+- A → informa quais arquivos ou diretórios que foram adicionados (added).
+- C → informa quais arquivos ou diretórios que foram alterados (changed).
+- D → informa quais arquivos ou diretórios que foram excluídos (deleted).
+
+7. Para se criar uma imagem a partir do contêiner modificado _"meu-container"_, usamos o comando  _"docker commit"_. Ele irá persistir as modificações feitas criando uma nova imagem.
+
+```
+[opc@docker-lab ~]$ sudo docker container commit -a "Daniel Armbrust <daniel.armbrust@algumdominio.com>" -m "Django Container" meu-container minha-imagem
+sha256:eecaeff07508932d2edea39be730b92f98d74bdc9dcb771570afa3f560932017
+```
+
+>_**__NOTA:__** É uma boa prática assinar a imagem com os dados do autor (-a) além de uma mensagem que identifique e descreva este commit (-m)._
+
+8. A partir de agora já é possível ver a imagem _"minha-imagem"_ que acaba de ser criada:
+
+```
+[opc@docker-lab ~]$ sudo docker images
+REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
+minha-imagem        latest              eecaeff07508        7 minutes ago       433MB
+nginx               latest              87a94228f133        2 days ago          133MB
+debian              latest              f776cfb21b5e        3 days ago          124MB
+ubuntu              latest              597ce1600cf4        13 days ago         72.8MB
+hello-world         latest              feb5d9fea6a5        3 weeks ago         13.3kB
+centos              latest              5d0da3dc9764        4 weeks ago         231MB
+oraclelinux         6.9                 8deb00ba1b3a        3 years ago         171MB
+```
+
+9. Além de ser uma outra boa prática, é recomendado versionar suas imagens através de TAGS:
+
+```
+[opc@docker-lab ~]$ sudo docker tag minha-imagem armbrust/django:1.0
+```
+
+10. Por fim, para criar um novo contêiner a partir da imagem que criamos: 
+
+```
+[opc@docker-lab ~]$ sudo docker container run --name meu-django armbrust/django:1.0
+```
+
+>_**__NOTA:__** Como não definimos um processo persistente para ser executado dentro do contêiner, este será criado e em seguida encerrado._
+
+11. Caso deseje verificar como a imagem foi construída, use o comando docker image history conforme abaixo:
+
+```
+[opc@docker-lab ~]$ sudo docker image history minha-imagem
+IMAGE               CREATED             CREATED BY                                      SIZE                COMMENT
+eecaeff07508        9 minutes ago       /bin/bash                                       202MB               Django Container
+5d0da3dc9764        4 weeks ago         /bin/sh -c #(nop)  CMD ["/bin/bash"]            0B
+<missing>           4 weeks ago         /bin/sh -c #(nop)  LABEL org.label-schema.sc…   0B
+<missing>           4 weeks ago         /bin/sh -c #(nop) ADD file:805cb5e15fb6e0bb0…   231MB
+```
+
+#### Salvar, Exportar e Importar
