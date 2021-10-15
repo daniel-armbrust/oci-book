@@ -703,7 +703,7 @@ Uma imagem Docker pode ser criada de três diferentes maneiras:
 
 1. Executar um contêiner de forma interativa, realizar suas mudanças e alterações, e por último executar um commit, que terá como resultado uma nova imagem.
 
-**docker container run … → * mudanças * → docker container commit … → \*\* nova imagem \*\***
+_**docker container run … → * mudanças * → docker container commit … → \*\* nova imagem \*\***_
 
 2. Através de um _[Dockerfile](https://docs.docker.com/engine/reference/builder/)_, que nada mais é do que um arquivo texto que contém instruções para se criar imagens.
 
