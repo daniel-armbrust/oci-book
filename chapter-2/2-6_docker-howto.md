@@ -524,3 +524,190 @@ root                30061               30043               0                   
 >_**__NOTA:__** Executar o comando "ps" diretamente no Docker Host, exibe todos os processos, de todos os contêineres em execução neste host._
 
 >_**__NOTA:__** É possível utilizar o comando "ps axlfww" diretamente no Docker Host para facilitar a visualização dos processos._
+
+### Administrando volumes
+
+Volumes são diretórios externos e existentes no Docker Host no qual é possível _"montar"_ dentro de um contêiner. Todo contêiner possui seu próprio _[MNT Namespace](https://en.wikipedia.org/wiki/Linux_namespaces)_ e seu próprio sistema de arquivos. Lembrando que todo sistema de arquivos de um contêiner é apagado quando o mesmo encerra sua execução.
+
+Através do uso de volumes, um contêiner pode persistir dados. Isto significa que caso um contêiner esteja usando um volume, que foi montado ou anexado nele, e o mesmo seja excluído, os dados deste volume não serão perdidos. Além disso, volumes também podem ser reutilizados ou compartilhados entre contêineres.
+
+Existem três diferentes tipos de armazenamento mais comumente utilizados:
+
+- BIND Mounts
+- Armazenamento In-Memory
+- Volumes Dockers
+
+#### BIND Mounts
+
+Podemos dizer que neste modo de montagem é realizado um link ou uma _"ligação direta"_, de um arquivo ou diretório a partir do Docker Host, para dentro do contêiner especificado.  Este modo é útil quando o Docker Host disponibiliza um arquivo ou diretório que é necessário para um programa em execução dentro de um contêiner. Ou mesmo quando o contêiner disponibiliza conteúdo para ser processado pelo Docker Host, por exemplo. 
+
+- Monta um diretório através do modo BIND (link ou _"ligação direta"_) para dentro de um contêiner:
+
+```
+[opc@docker-lab ~]$ sudo docker run -tdi --mount type=bind,src=/tmp,dst=/tmp debian /bin/bash
+319a33221c5406a18d45e82c8453219a96c42a38f65771d64535aca3da3f9f13
+```
+
+- Monta um arquivo somente-leitura, através do modo BIND (link ou _"ligação direta"_) para dentro de um contêiner:
+
+```
+[opc@docker-lab ~]$ sudo docker run -tdi --mount type=bind,src=/etc/passwd,dst=/etc/passwd,readonly=true centos /bin/bash
+2dff183ee05b752b6c221ea8ecdf55ab308f9380a2a0768db2406bf41ffdba52
+```
+
+>_**__NOTA:__** Lembrando que a operação BIND pode ser feita tanto em arquivo quanto em diretório._
+
+#### Armazenamento In-Memory
+
+```
+[opc@docker-lab ~]$ sudo docker run --mount type=tmpfs,dst=/tmp,tmpfs-size=16k,tmpfs-mode=1777 centos
+```
+
+#### Volumes Docker
+
+Volumes são blocos de armazenamento, nomeados e gerenciados pelo Docker. Estes podem ser disponibilizados através do disco do Docker Host ou via algum tipo de _"cloud storage"_ mais exótico.
+
+- Cria um novo volume:
+
+```
+[opc@docker-lab ~]$ sudo docker volume create meu-volume-1
+meu-volume-1
+```
+
+- Lista os volumes criados:
+
+```
+[opc@docker-lab ~]$ sudo docker volume ls
+DRIVER              VOLUME NAME
+local               meu-volume-1
+```
+
+- Exibindo a localização real dos volumes no Docker Host: 
+
+```
+[opc@docker-lab ~]$ sudo ls -ltr /var/lib/docker/volumes/
+total 24
+drwxr-xr-x. 3 root root    19 Oct 14 22:59 meu-volume-1
+-rw-------. 1 root root 32768 Oct 14 22:59 metadata.db
+```
+
+>_**__NOTA:__** Todos os volumes são criados abaixo do diretório: "/var/lib/docker/volumes"_
+
+- Monta um volume em um contêiner:
+
+```
+[opc@docker-lab ~]$ sudo docker run -tdi --mount type=volume,src=meu-volume-1,dst=/mnt/vol1 centos
+60d6d57452ef1d928a30199f3b914de77f3da20039b1835cd4316ac223c7d4d6
+``` 
+
+- Utiliza volumes de outro contêiner (copia as definições de montagem de outro contêiner):
+
+```
+[opc@docker-lab ~]$ sudo docker run -d --name meu-linux-1 ubuntu
+ddcae0ab7a494556036113929af73cc934fa47722f71cdbf6a1b3644aa6a67c8
+
+[opc@docker-lab ~]$ sudo docker run -d --name outro-linux --volumes-from meu-linux-1 ubuntu
+40a30c0c753c1a63aefbe9db8bc2903f766d884d0bb56d6a79a95d6b6c547265
+```
+
+- Exibe a criação de um arquivo dentro de um volume:
+
+```
+[opc@docker-lab ~]$ sudo docker exec linux /bin/bash -c "touch /mnt/vol1/meu-arquivo.txt"
+
+
+[opc@docker-lab ~]$ sudo ls -lt /var/lib/docker/volumes/meu-volume-1/_data/
+
+total 0
+
+-rw-r--r--. 1 root root 0 Aug 19 10:29 meu-arquivo.txt
+```
+
+- Exibe detalhes de um volume:
+
+```
+[opc@docker-lab ~]$ sudo docker volume inspect meu-volume-1
+[
+    {
+        "CreatedAt": "2021-10-14T22:59:06Z",
+        "Driver": "local",
+        "Labels": {},
+        "Mountpoint": "/var/lib/docker/volumes/meu-volume-1/_data",
+        "Name": "meu-volume-1",
+        "Options": {},
+        "Scope": "local"
+    }
+]
+```
+
+- Cria um contêiner com um volume anônimo:
+
+```
+[opc@docker-lab ~]$ sudo docker run -tdi --mount type=volume,dst=/dados debian:latest /bin/bash
+1623346daa7f0a7729531b474f09791832de97f853867706c7914d121cdf3a29
+
+[opc@docker-lab ~]$ sudo docker volume ls
+DRIVER              VOLUME NAME
+local               929bcbf90964ef693e06de7130bbbfeff6b0906d4553275269beef0482b74993
+local               meu-volume-1
+```
+
+- Remove um volume que não está em uso:
+
+```
+[opc@docker-lab ~]$ sudo docker volume rm meu-volume-1
+meu-volume-1
+```
+
+- Remove TODOS os volumes que não estão em uso:
+
+```
+[opc@docker-lab ~]$ sudo docker volume prune
+WARNING! This will remove all local volumes not used by at least one container.
+Are you sure you want to continue? [y/N] n
+Total reclaimed space: 0B
+```
+
+- Remove sem solicitar confirmação, TODOS os volumes que não estão em uso:
+
+```
+[opc@docker-lab ~]$ sudo docker volume prune -f
+Total reclaimed space: 0B
+``` 
+
+### Administrando contêineres
+
+Uma imagem é basicamente um arquivo _".tar.gz"_ que armazena um sistema de arquivos em camadas. Podemos dizer também, que uma imagem docker é um pacote executável, um template no qual é possível criar contêineres. Em uma imagem, temos tudo o que é necessário para executar sua aplicação (runtime, binários, bibliotecas, variáveis de ambiente, arquivos de configuração, etc).
+
+Quando dizemos _"sistema de arquivos em camadas"_, estamos nos referindo a uma pilha de camadas imutáveis (somente leitura e que não podem ser modificadas), permitindo escrita somente pela camada mais alta (writable layer). A camada mais alta, é o nosso contêiner em execução. Além disso, a imutabilidade facilita o compartilhamento das imagens Docker ao invés de ter que criar cópias independentes de cada contêiner. Camadas individuais são reutilizáveis.
+
+_"Uma pilha de camadas somente-leitura (ro) e uma no topo leitura-escrita (rw), que é o nosso container em execução."_
+
+![alt_text](./images/docker-4.jpg  "Pilha de Camadas")
+
+>_**__NOTA:__** As camadas abaixo da "writable layer" são imutáveis e não podem ser modificadas._
+
+De um modo mais direto, quando um contêiner inicia, o Docker aloca uma camada writable vazia (empty) no topo das outras camadas existentes, onde é possível termos escrita.
+
+![alt_text](./images/docker-5.jpg  "Writable Layer")
+
+Essa camada writable é efêmera e só existe enquanto o contêiner estiver em execução. Ao eliminar o contêiner, essa camada writable morre junto com seus dados. Exceto quando usamos volumes externos.
+
+O que for gravado nestes volumes externos, não será perdido com o término do contêiner.Como você lerá, uma outra forma de persistir os dados da camada writable, é através do comando _"docker commit"_, que transforma todas as camadas, incluindo o conteúdo da camada writable, em uma imagem.
+
+Bem tecnicamente falando, as camadas são montadas pelo Docker sobre um _[Union FileSystem (UnionFS)](https://pt.wikipedia.org/wiki/UnionFS)_ que utiliza uma técnica chamada _[Copy-On-Write (CoW)](https://pt.wikipedia.org/wiki/C%C3%B3pia_em_grava%C3%A7%C3%A3o)_. Basicamente esta técnica permite que se altere uma cópia e preserve o original. A cada alteração, uma cópia antes é feita. Por isto o nome Copy-On-Write (CoW) ou _"cópia sobre escrita"_. A implementação do UnionFS usada atualmente pelo Docker é o _[OverlayFS2](https://docs.docker.com/storage/storagedriver/overlayfs-driver/)_. 
+
+>_**__NOTA:__** Contêineres são efêmeros. Toda alteração realizada em seu sistema de arquivos é perdida quando a execução do contêiner termina. A imutabilidade é uma característica de uma boa engenharia de software._
+
+>_**__NOTA:__** As imagens Docker que utilizam OverlayFS2 são armazenadas neste diretório: /var/lib/docker/overlay2_
+
+Uma imagem Docker pode ser criada de três diferentes maneiras:
+
+1. Executar um contêiner de forma interativa, realizar suas mudanças e alterações, e por último executar um commit, que terá como resultado uma nova imagem.
+
+**docker container run … → * mudanças * → docker container commit … → \*\* nova imagem \*\***
+
+2. Através de um _[Dockerfile](https://docs.docker.com/engine/reference/builder/)_, que nada mais é do que um arquivo texto que contém instruções para se criar imagens.
+
+3. Importar uma imagem compactada no formato _".tar"_
+
