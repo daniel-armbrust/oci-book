@@ -64,7 +64,7 @@ Esse livro apresenta o **OCI (Oracle Cloud Infraestructure)** e por quê você d
     7.2 - Banco de Dados Oracle <br>
     7.3 - Exadata <br>
     7.4 - Autonomous DB <br>
-    7.5 - Oracle NoSQL <br>
+    [7.5 - Oracle NoSQL](https://github.com/daniel-armbrust/oci-book/blob/main/chapter-7/7-5_nosql.md) <br>
 
 - [Capítulo 8: A aplicação FotoGal](https://github.com/daniel-armbrust/oci-book/blob/main/chapter-8/README.md) <br>
 
