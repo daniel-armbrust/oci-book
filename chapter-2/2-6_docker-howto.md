@@ -1235,3 +1235,40 @@ Para habilitar esse tipo de tráfego, o Docker manipula algumas regras _[iptable
 80/tcp -> 0.0.0.0:1080
 80/tcp -> 0.0.0.0:81
 ```
+
+#### Host Network
+
+Ao criar um contêiner na rede do tipo host, o Docker não irá criar nenhum namespace de rede em específico. O que significa, que o container utilizará diretamente a rede do Docker Host, sem qualquer regra de NAT ou placa de rede em modo bridge. Além disso, como não há isolamento, o contêiner pode acessar qualquer serviço em execução no localhost da máquina.
+
+```
+[opc@docker-lab ~]$ sudo docker run -d --name web-server-3 --network host nginx:latest
+5dc09e198696d6bff8f32510b9dd69f44b566f1d05fb895ad426dc730f4a47fb
+```
+
+>_**__NOTA:__** Perceba pelo comando que não é necessário especificar qualquer porta para redirecionar o tráfego de rede. Qualquer porta que for exposta pelo processo conteinerizado, no nosso caso o NGINX, será publicada diretamente pelo namespace de rede no Docker Host._
+
+#### None Network
+
+- A rede do tipo none, cria um contêiner sem qualquer conectividade de rede:
+
+```
+[opc@docker-lab ~]$ sudo docker run -tdi --name sem-rede --network none centos:latest
+26962049a3abb4ec2a6426d45c0780bb65c901035ec3932d270ff36549a5af3c
+```
+
+- Para remover todas as redes que foram criadas:
+
+```
+[opc@docker-lab ~]$ sudo docker network prune --force
+```
+
+### Referências
+
+- Matthias, Karl; Kane, Sean P. Primeiros Passos com Docker: Novatec, ISBN: 978-85-7522-473-1.
+- Vitalino, Jeferson Fernando Noronha ; Castro, Marcus André Nunes. Descomplicando o Docker 2a edição: Brasport, ISBN: 978-85-7452-901-1.
+- da Silva, Wellington Figueira. Aprendendo Docker: Novatec, ISBN: 978-85-7522-486-1.
+- Schenker, Gabriel N. Learn Docker - Fundamentals of Docker 19.x - Second Edition: Packt, ISBN: 9781838827472.
+- Nickoloff, Jeff; Nickoloff, Stephen. Docker in Action, Second Edition: Manning Publications, ISBN 9781633430235.
+- _[What Is A Docker Container?](https://www.youtube.com/watch?v=xnuXKYsZv2Y&t=201s)_
+- _[Bridge Networking for Single Host Container Networking](https://www.youtube.com/watch?v=Js_140tDlVI)_
+- _[The docker-proxy](https://windsock.io/the-docker-proxy/)_
