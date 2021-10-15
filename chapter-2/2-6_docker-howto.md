@@ -988,7 +988,83 @@ Alguns detalhes referente ao Dockerfile merecem destaque:
     - Ex: _yum -y update && yum -y clean all_
 
 - É recomendado a definição das entradas ENTRYPOINT e CMD no Dockerfile
-    - ENTRYPOINT deve ser o caminho do programa que irá tornar o contêiner executável. Este programa irá receber o PID 1. Caso seja encerrado, o contêiner também será.
+    - ENTRYPOINT deve ser o caminho do programa que irá tornar o contêiner executável. Este programa irá receber o _PID 1_. Caso seja encerrado, o contêiner também será.
     - CMD deve especificar  os argumentos para o programa que foi definido em ENTRYPOINT.
 
 3. A partir do diretório de trabalho, no qual temos nosso Dockerfile, executamos o comando _"docker build"_ para que a imagem seja criada:
+
+```
+[opc@docker-lab ~]$ cd armbrust-django/
+
+[opc@docker-lab armbrust-django]$ sudo docker image build -t armbrust/django:1.0 -t armbrust/django:latest .
+```
+
+>_**__NOTA:__** Podemos informar multiplas tags através parâmetro -t._
+
+Este comando irá enviar todo o conteúdo do diretório de trabalho, de forma recursiva, para o Docker Daemon. Isto pode ser verificado pela primeira mensagem exibida pelo comando _docker build_:
+
+```
+Sending build context to Docker daemon  3.584kB
+```
+
+>_**__NOTA:__** Evitar grandes arquivos neste diretório de trabalho é uma boa prática pois irá evitar uploads longos pela rede até o Docker Daemon._
+
+Além disso, cada comando contido em um Dockerfile, executado, e que altera o sistema de arquivos, dispara a criação de uma nova camada, um novo contêiner intermediário, dentro do processo de build da imagem. O processo de build, irá gerar várias camadas, uma que se sobrepõe a outra, fazendo commit atrás de commit, até termos a imagem final construída.
+
+![alt_text](./images/docker-6.jpg  "Docker Image")
+
+>_**__NOTA:__** Ao construir um Dockerfile, devemos colocar os comandos que tendem a não modificar a imagem, sempre no início do arquivo, logo abaixo da cláusula FROM. Com isso, teremos um rebuild mais eficiente e rápido, caso as coisas mudem._
+
+>_**__NOTA:__** Quanto menor o número de camadas, menor o tamanho da imagem resultando em um tempo menor de download a partir de um registry._
+
+4. Após o build da imagem, a mesma já encontra-se localmente disponível para uso:
+
+```
+[opc@docker-lab armbrust-django]$ sudo docker images
+REPOSITORY                  TAG                 IMAGE ID            CREATED             SIZE
+armbrust/django             1.0                 48a305bd8c27        3 minutes ago       488MB
+armbrust/django             latest              48a305bd8c27        3 minutes ago       488MB
+centos-shell                latest              caf4de58d112        18 minutes ago      231MB
+```
+
+5. Para se criar um contêiner a partir da imagem que criamos, execute:
+
+```
+[opc@docker-lab ~]$ sudo  docker container run --name meu-app-django -td -p 80:8000 armbrust/django
+0ef4bebbca1826f354905f31786bf57587eb09b8d793e2d33f041ecde821819e
+
+[opc@docker-lab ~]$ curl -L -v -s -o /dev/null localhost
+* About to connect() to localhost port 80 (#0)
+*   Trying ::1...
+* Connected to localhost (::1) port 80 (#0)
+> GET / HTTP/1.1
+> User-Agent: curl/7.29.0
+> Host: localhost
+> Accept: */*
+>
+< HTTP/1.1 200 OK
+< Date: Fri, 15 Oct 2021 11:26:24 GMT
+< Server: WSGIServer/0.2 CPython/3.8.6
+< Content-Type: text/html
+< X-Frame-Options: DENY
+< Content-Length: 10697
+< X-Content-Type-Options: nosniff
+< Referrer-Policy: same-origin
+<
+{ [data not shown]
+* Connection #0 to host localhost left intact
+``` 
+
+>_**__NOTA:__** A versão "latest" é usada como padrão quando não especificamos uma versão para criarmos um contêiner._
+
+>_**__NOTA:__** Caso seja necessário refazer o processo de build ignorando o cache, pode-se usar a flag --no-cache._
+
+Para visualizar os metadados de uma imagem:
+
+```
+[opc@docker-lab ~]$ sudo docker inspect armbrust/django:1.0
+```
+
+#### Compartilhando Imagens
+
+Após criarmos uma imagem e termos ela disponível localmente, é possível fazer upload para um Image Registry. Um Image Registry ou simplesmente Registry, nada mais é do que um repositório que contém diversas imagens Docker disponíveis para uso. Este repositório pode ser público, como o Docker Hub, ou privado.
