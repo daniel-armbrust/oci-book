@@ -831,3 +831,41 @@ eecaeff07508        9 minutes ago       /bin/bash                               
 ```
 
 #### Salvar, Exportar e Importar
+
+É possível salvar, exportar e importar o sistema de arquivos de uma imagem ou contêiner para fora dos domínios do Docker. Em alguns momentos pode ser útil quando se deseja trabalhar sem o sistema de camadas. Obviamente quando se faz isto, você perde todo o histórico de mudanças oferecido pelas camadas do sistema de arquivos.
+
+- Salva uma imagem em um arquivo .tar:
+
+```
+[opc@docker-lab ~]$ sudo docker image save armbrust/django:1.0 -o armbrust-django.tar
+
+[opc@docker-lab ~]$ ls -ld armbrust-django.tar
+-rw-------. 1 root root 455150080 Oct 15 04:38 armbrust-django.tar
+```
+
+- Carrega uma imagem a partir de um arquivo _.tar_:
+
+```
+[opc@docker-lab ~]$ sudo docker image load -i armbrust-django.tar
+Loaded image: armbrust/django:1.0
+```
+
+- Exporta um contêiner em um arquivo _.tar_:
+
+```
+[opc@docker-lab ~]$ sudo docker export meu-container -o meu-container.tar
+
+[opc@docker-lab ~]$ ls -ld meu-container.tar
+-rw-------. 1 root root 369082880 Oct 15 04:40 meu-container.tar
+```
+
+- Importa o conteúdo de um arquivo _.tar_ para criar uma imagem:
+
+```
+[opc@docker-lab ~]$ sudo chown opc: meu-container.tar
+
+[opc@docker-lab ~]$ sudo docker import - armbrust/django-importado:2.0 < meu-container.tar
+sha256:2e95023191608a373e331007eea62251205c36327aa325ec833581feea5eb1d1
+```
+
+>_**__NOTA:__** Você pode usar também, a URL de um arquivo para realizar uma importação._
