@@ -1029,7 +1029,7 @@ centos-shell                latest              caf4de58d112        18 minutes a
 5. Para se criar um contêiner a partir da imagem que criamos, execute:
 
 ```
-[opc@docker-lab ~]$ sudo  docker container run --name meu-app-django -td -p 80:8000 armbrust/django
+[opc@docker-lab ~]$ sudo docker container run --name meu-app-django -td -p 80:8000 armbrust/django
 0ef4bebbca1826f354905f31786bf57587eb09b8d793e2d33f041ecde821819e
 
 [opc@docker-lab ~]$ curl -L -v -s -o /dev/null localhost
