@@ -13,12 +13,15 @@
 NET_CMP_OCID=''
 
 # CPE Public IP
-CPE_PUBLIC_IP='201.33.196.77'
+CPE_PUBLIC_IP=''
+
+# CPE Local Identifier
+CPE_LOCAL_ID=''
 
 function show_help {
     
     cat <<EOH
-Usage: $0 [OPTIONS] [-c]
+Usage: $(basename "$0") [OPTIONS]
 
 This is a sample script from OCI-BOOK to illustrate the commands to create a "VPN Site-To-Site".
 
@@ -26,22 +29,26 @@ Part of the chapter 5.2:
 https://github.com/daniel-armbrust/oci-book/blob/main/chapter-5/5-2_mais-sobre-redes-vpn.md
 
 Options:
-   -h       Show this help and exit.   
+   -h, --help             Show this help and exit.   
          
-   -cl      List CPE devices supported on OCI.
-   -s       Get IPSec Tunnel Status.  
+   -lc, --list-cpe        List CPE devices supported on OCI.
+   -is, --ipsec-status    Get IPSec Tunnel Status.  
 
-   -vs      Setup the VPN and all the related network resources.
-   -vd      Delete the VPN and all the related network resources.
-   -c       The OCID of the compartment to use.
+   -vc, --vpn-create      Create the VPN and all the related network resources.
+   -vd, --vpn-delete      Delete the VPN and all the related network resources.
 
+   -c, --cmp-ocid         The OCID of the compartment to use.
+
+   -cip, --cpe-ip         The CPE Public IP Address.
+   -cid, --cpe-id         CPE Local Identifier.
+    
 Example:
 
     Create the VPN Site-To-Site:
-       $0 -vs -c ocid1.compartment.oc1..aaaaaaaauvqvbbx3oridcm5d2ztxkftwr362u2vl5zdsayzbehzwbjs56soq
+       $(basename "$0") -vs -c ocid1.compartment.oc1..aaaaaaaauvqvbbx3oridcm5d2ztxkftwr362u2vl5zdsayzbehzwbjs56soq -cpi 201.33.196.77 -cid 10.34.0.82
     
-    Destroy the VPN and related resources:
-       $0 -d -c ocid1.compartment.oc1..aaaaaaaauvqvbbx3oridcm5d2ztxkftwr362u2vl5zdsayzbehzwbjs56soq
+    Delete the VPN and related resources:
+       $(basename "$0") -vd -c ocid1.compartment.oc1..aaaaaaaauvqvbbx3oridcm5d2ztxkftwr362u2vl5zdsayzbehzwbjs56soq
 
 EOH
 }
@@ -59,7 +66,7 @@ function gen_shared_secret() {
 
 function open_security_list() {
    #
-   # Open the INGRESS and EGRESS rules from Security List
+   # Open the INGRESS and EGRESS rules from a Security List
    # https://docs.oracle.com/en-us/iaas/tools/oci-cli/latest/oci_cli_docs/cmdref/network/security-list.html
    #
    local vcn_ocid="$1" 
@@ -173,7 +180,7 @@ function subnet() {
 
 function drg() {
     #
-    # Create, Delete or Get OCID of a DRG    
+    # Create, Attach, Delete or Get OCID of a DRG.   
     # https://docs.oracle.com/en-us/iaas/tools/oci-cli/latest/oci_cli_docs/cmdref/network/drg.html
     #
     local cmd="$1"
@@ -242,6 +249,7 @@ function drg() {
 
 function cpe() {
     #
+    # Create, List Vendors, Delete or Get OCID of a CPE.  
     # https://docs.oracle.com/en-us/iaas/tools/oci-cli/latest/oci_cli_docs/cmdref/network/cpe.html
     #
     local cmd="$1"
@@ -297,6 +305,7 @@ function cpe() {
 
 function ipsec() {
     #
+    # Create, Get Tunnel Status, Delete or Get OCID of a IPSec connection.  
     # https://docs.oracle.com/en-us/iaas/tools/oci-cli/latest/oci_cli_docs/cmdref/network/ip-sec-connection.html
     #
     local cmd="$1"
@@ -370,7 +379,7 @@ function ipsec() {
 
 function vpn() {
     #
-    # VPN Main Function
+    # VPN Main Function.
     #
     local cmd="$1"
 
@@ -392,7 +401,7 @@ function vpn() {
 
        local cpe_ocid="$(cpe 'get_ocid' 'cpe-1')"
 
-       ipsec 'create' 'vpn-1' 'tunnel' '10.34.0.0/24' 'IP_ADDRESS' '10.34.0.82' "$drg_ocid" "$cpe_ocid"
+       ipsec 'create' 'vpn-1' 'tunnel' '10.34.0.0/24' 'IP_ADDRESS' "$CPE_LOCAL_ID" "$drg_ocid" "$cpe_ocid"
 
     elif [ "$cmd" == 'delete' ]; then
        
@@ -411,46 +420,82 @@ function vpn() {
     fi
 }
 
-case "$1" in
-  '-h')
-        show_help
-        ;;
+vpn_create=0
+vpn_delete=0
 
-  '-cl')
-        cpe 'list' 
-        ;;
+while test -n "$1" ; do
+  case "$1" in 
+     '-h'|'--help')
+              show_help
+              exit 0
+              ;;
 
-   '-vd')
-        if [ -z "$3" ]; then
-           echo "[Error] Need a compartment OCID to continue!"
-           exit 1
-        fi
+     '-lc'|'--list-cpe')
+              cpe 'list' 
+              exit 0
+              ;;
 
-        NET_CMP_OCID="$3"
+    '-is'|'--ipsec-status')
+              ipsec 'get_tunnel_status' 'vpn-1'
+              exit 0
+              ;;
 
-        vpn 'delete'
-        ;; 
+    '-c'|'--cmp-ocid')
+              shift
+              NET_CMP_OCID="$1"
+              ;;
 
-    '-s')
-        ipsec 'get_tunnel_status' 'vpn-1'
-        ;;
+    '-cip'|'--cpe-ip')
+              shift
+              CPE_PUBLIC_IP="$1"              
+              ;;
 
-    '-vs')
+    '-cid'|'--cpe-id')
+              shift
+              CPE_LOCAL_ID="$1" 
+              ;;
 
-        if [ -z "$3" ]; then
-           echo "[Error] Need a compartment OCID to continue!"
-           exit 1
-        fi
+    '-vc'|'--vpn-create')
+              vpn_create=1
+              ;;
 
-        NET_CMP_OCID="$3"
+     '-vd'|'--vpn-delete')
+              vpn_delete=1
+              ;;
 
-        vpn 'create'
-        ;; 
+              *)
+              show_help
+              exit 1
+              ;;
+  esac
 
-     *)
-        show_help
-        exit 1
-        ;;
-esac
+  shift 
+done
+
+if [ $vpn_create == 1 ] && [ $vpn_delete == 1 ]; then
+   show_help
+   exit 1
+elif [ "$vpn_create" == 1 ]; then
+
+   if [ -z "$NET_CMP_OCID" ] || [ -z "$CPE_PUBLIC_IP" ] || [ -z "$CPE_LOCAL_ID" ]; then
+      echo "[Error] Need a compartment OCID and CPE Public IP to continue!"
+      exit 1
+   else
+      vpn 'create'
+   fi
+
+elif [ "$vpn_delete" == 1 ]; then
+
+   if [ -z "$NET_CMP_OCID" ]; then
+      echo "[Error] Need a compartment OCID to continue!"
+      exit 1
+   else
+      vpn 'delete'
+   fi 
+
+else
+   show_help
+   exit 1
+fi
 
 exit 0
