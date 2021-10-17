@@ -17,6 +17,8 @@ Porém esta transição não acontece do dia para a noite. Iremos exemplificar c
 
 Diferente das sessões de acessos pontuais que usamos através do _[Serviço Bastion](https://docs.oracle.com/pt-br/iaas/Content/Bastion/Concepts/bastionoverview.htm)_, a _[VPN](https://pt.wikipedia.org/wiki/Rede_privada_virtual)_ é um meio de conexão ao _[OCI](https://www.oracle.com/cloud/)_ permantente que depende da Internet para funcionar.
 
+[vpn-setup](https://github.com/daniel-armbrust/oci-book/blob/main/chapter-5/scripts/vpn-setup.sh)
+
 ### __O que é uma VPN?__
 
 Uma _[VPN](https://pt.wikipedia.org/wiki/Rede_privada_virtual)_ (_[Virtual Private Network](https://pt.wikipedia.org/wiki/Rede_privada_virtual)_) ou _[Rede privada virtual](https://pt.wikipedia.org/wiki/Rede_privada_virtual)_, é uma rede de comunicação construída sobre uma infraestrutura compartilhada. Para o nosso exemplo, essa infraestrutura compartilhada será um link público de Internet.
