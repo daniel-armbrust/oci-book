@@ -3,7 +3,7 @@
 # vpn-setup.sh 
 # Performs setup of "VPN Site-To-Site" components in OCI. 
 #
-# Site.........: https://github.com/daniel-armbrust/oci-book/blob/main/chapter-5/5-2_mais-sobre-redes-vpn.md
+# Site.........: https://github.com/daniel-armbrust/oci-book/blob/main/chapter-5/5-3_mais-sobre-redes-vpn.md
 # Author.......: Daniel Armbrust (darmbrust@gmail.com) 
 # License .....: AGPL-3.0 
 #
@@ -26,7 +26,7 @@ Usage: $(basename "$0") [OPTIONS]
 This is a sample script from OCI-BOOK to illustrate the commands to create a "VPN Site-To-Site".
 
 Part of the chapter 5.2:
-https://github.com/daniel-armbrust/oci-book/blob/main/chapter-5/5-2_mais-sobre-redes-vpn.md
+https://github.com/daniel-armbrust/oci-book/blob/main/chapter-5/5-3_mais-sobre-redes-vpn.md
 
 Options:
    -h, --help             Show this help and exit.   
