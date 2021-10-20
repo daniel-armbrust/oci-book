@@ -15,7 +15,7 @@ Um ambiente _autônomo_ ou _[Autonomous Database](https://docs.oracle.com/pt-br/
 - _[Exadata Cloud Service (ExaCS)](https://docs.oracle.com/pt-br/iaas/Content/Database/Concepts/exaoverview.htm)_
 - _[Exadata Cloud@Customer (ExaCC)](https://docs.oracle.com/pt-br/iaas/exadata/index.html)_
 
-Banco de Dados Oracle criados no OCI, sobre o modelo _[PaaS](https://pt.wikipedia.org/wiki/Plataforma_como_servi%C3%A7o)_, suporta dois tipos de licença:
+_Banco de Dados Oracle_ criados no _[OCI](https://www.oracle.com/cloud/)_ suportam dois tipos de licença:
 
 - **Licença incluída (License included)**
     - O custo total do serviço já inclui o licenciamento.
@@ -23,5 +23,6 @@ Banco de Dados Oracle criados no OCI, sobre o modelo _[PaaS](https://pt.wikipedi
 - **Bring Your Own License (BYOL)**
     - Clientes do _Oracle Database_ podem usar suas licenças existentes ao migrar seu banco de dados on-premises para a nuvem. 
 
-Neste capítulo, irei apresentar detalhes que envolvem _Banco de Dados Oracle_ _"cogerenciados"_ em _[máquinas virtuais](https://docs.oracle.com/pt-br/iaas/Content/Database/Concepts/overview.htm#Virtual)_ e _[bare metal](https://docs.oracle.com/pt-br/iaas/Content/Database/Concepts/overview.htm#baremetal)_. Teremos capítulos especificos que tratam sobre _[Autonomous Database](https://docs.oracle.com/pt-br/iaas/Content/Database/Concepts/adboverview.htm#Overview_of_Autonomous_Databases)_ e _[Exadata Cloud Service (ExaCS)](https://docs.oracle.com/pt-br/iaas/Content/Database/Concepts/exaoverview.htm)_.
+Neste capítulo, irei apresentar os detalhes que envolvem _Banco de Dados Oracle_ _"cogerenciados"_ em _[máquinas virtuais](https://docs.oracle.com/pt-br/iaas/Content/Database/Concepts/overview.htm#Virtual)_ e _[bare metal](https://docs.oracle.com/pt-br/iaas/Content/Database/Concepts/overview.htm#baremetal)_. Teremos capítulos especificos que tratam sobre _[Autonomous Database](https://docs.oracle.com/pt-br/iaas/Content/Database/Concepts/adboverview.htm#Overview_of_Autonomous_Databases)_ e _[Exadata Cloud Service (ExaCS)](https://docs.oracle.com/pt-br/iaas/Content/Database/Concepts/exaoverview.htm)_.
 
+### __Oracle DB em Máquina Virtual__
