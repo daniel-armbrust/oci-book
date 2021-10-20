@@ -52,7 +52,7 @@ Esse livro apresenta o **OCI (Oracle Cloud Infraestructure)** e por quê você d
     [5.4 - Roteamento de Trânsito](https://github.com/daniel-armbrust/oci-book/blob/main/chapter-5/5-4_mais-sobre-redes-roteamento-transito.md) <br>
     [5.5 - Interligando diferentes Regiões](https://github.com/daniel-armbrust/oci-book/blob/main/chapter-5/5-5_mais-sobre-redes-interligando-regioes.md)
     [5.6 - FastConnect](https://github.com/daniel-armbrust/oci-book/blob/main/chapter-5/5-6_mais-sobre-redes-fastconnect.md) <br>
-    [5.7 - OCI e Microsoft Azure](https://github.com/daniel-armbrust/oci-book/blob/main/chapter-5/5-7_mais-sobre-redes-msazure.md) <br>    
+    [5.7 - OCI e Microsoft Azure](https://github.com/daniel-armbrust/oci-book/blob/main/chapter-5/5-7_mais-sobre-redes-msazure.md) <br>
     [5.8 - Múltiplos DRGs e múltiplas VCNs](https://github.com/daniel-armbrust/oci-book/blob/main/chapter-5/5-8_mais-sobre-redes-multiplos-drgs-multiplos-vcns.md) <br>
     [5.9 - Visualização através do Network Visualizer](https://github.com/daniel-armbrust/oci-book/blob/main/chapter-5/5-9_mais-sobre-redes-net-visualizer.md) <br>
 
