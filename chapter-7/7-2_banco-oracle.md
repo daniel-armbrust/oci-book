@@ -8,6 +8,11 @@ O serviço de Banco de Dados Oracle do OCI, também conhecido como _[DBCS (Datab
 
 O Banco de Dados Oracle criado no OCI pode ser classificado como _cogerenciadas (co-managed)_ ou _autônomo_. Vale destacar que ambos se encaixam no modelo _[PaaS](https://pt.wikipedia.org/wiki/Plataforma_como_servi%C3%A7o)_. Ou seja, você recebe acesso total aos recursos e operações disponíveis do banco de dados, mas é a Oracle quem possui e gerencia toda a sua infraestrutura.
 
-Um ambiente _autônomo_ ou Autonomous Database, são ambientes já pré-configurados _(oltp ou data warehouse)_ e totalmente gerenciados. Já ambientes _cogerenciadas_, são sistemas de Banco de Dados Oracle prontos para uso sobre diferentes hardwares (máquinas virtuais, bare metal ou Exadata).
+Um ambiente _autônomo_ ou _[Autonomous Database](https://docs.oracle.com/pt-br/iaas/Content/Database/Concepts/adboverview.htm#Overview_of_Autonomous_Databases)_, são ambientes já pré-configurados _(oltp ou data warehouse)_ e totalmente gerenciados. Já ambientes _cogerenciadas_, são sistemas de Banco de Dados Oracle prontos para uso sobre diferentes hardwares:
+
+- _[Máquinas Virtuais](https://docs.oracle.com/pt-br/iaas/Content/Database/Concepts/overview.htm#Bare)_
+- _[Bare Metal](https://docs.oracle.com/pt-br/iaas/Content/Database/Concepts/overview.htm#Bare)_
+- _[Exadata Cloud Service (ExaCS)](https://docs.oracle.com/pt-br/iaas/Content/Database/Concepts/exaoverview.htm)_
+- _[Exadata Cloud@Customer (ExaCC)](https://docs.oracle.com/pt-br/iaas/exadata/index.html)_
 
 
