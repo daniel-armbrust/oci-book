@@ -8,11 +8,11 @@ O serviço de _Banco de Dados Oracle_ do _[OCI](https://www.oracle.com/cloud/)_,
 
 O _Banco de Dados Oracle_ criado no _[OCI](https://www.oracle.com/cloud/)_, pode ser classificado como _cogerenciadas (co-managed)_ ou _autônomo_. Vale destacar que ambos se encaixam no modelo _[PaaS](https://pt.wikipedia.org/wiki/Plataforma_como_servi%C3%A7o)_. Ou seja, você recebe acesso total aos recursos e operações disponíveis do banco de dados, mas é a _Oracle_ quem possui e gerencia toda a sua infraestrutura.
 
-Um ambiente _autônomo_ ou _[Autonomous Database](https://docs.oracle.com/pt-br/iaas/Content/Database/Concepts/adboverview.htm#Overview_of_Autonomous_Databases)_, são ambientes já pré-configurados _(oltp ou data warehouse)_ e totalmente gerenciados. Já ambientes _cogerenciadas_, são sistemas de Banco de Dados Oracle prontos para uso sobre diferentes hardwares:
+Um ambiente _autônomo_ ou _[Autonomous Database](https://docs.oracle.com/pt-br/iaas/Content/Database/Concepts/adboverview.htm#Overview_of_Autonomous_Databases)_, são ambientes já pré-configurados _(oltp ou data warehouse)_ e totalmente gerenciados. Já ambientes _cogerenciadas_, são sistemas de _Banco de Dados Oracle_ prontos para uso sobre diferentes hardwares:
 
-- _[Máquinas Virtuais](https://docs.oracle.com/pt-br/iaas/Content/Database/Concepts/overview.htm#Bare)_
-- _[Bare Metal](https://docs.oracle.com/pt-br/iaas/Content/Database/Concepts/overview.htm#Bare)_
+- _[Máquinas Virtuais](https://docs.oracle.com/pt-br/iaas/Content/Database/Concepts/overview.htm#Virtual)_
+- _[Bare Metal](https://docs.oracle.com/pt-br/iaas/Content/Database/Concepts/overview.htm#baremetal)_
 - _[Exadata Cloud Service (ExaCS)](https://docs.oracle.com/pt-br/iaas/Content/Database/Concepts/exaoverview.htm)_
 - _[Exadata Cloud@Customer (ExaCC)](https://docs.oracle.com/pt-br/iaas/exadata/index.html)_
 
-
+Neste capítulo, irei apresentar detalhes que envolvem _Banco de Dados Oracle_ _cogerenciados_ em _[máquinas virtuais](https://docs.oracle.com/pt-br/iaas/Content/Database/Concepts/overview.htm#Virtual)_ e _[bare metal](https://docs.oracle.com/pt-br/iaas/Content/Database/Concepts/overview.htm#baremetal)_. Teremos capítulos especificos que tratam sobre _[Autonomous Database](https://docs.oracle.com/pt-br/iaas/Content/Database/Concepts/adboverview.htm#Overview_of_Autonomous_Databases)_ e _[Exadata Cloud Service (ExaCS)](https://docs.oracle.com/pt-br/iaas/Content/Database/Concepts/exaoverview.htm)_.
