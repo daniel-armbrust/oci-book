@@ -137,7 +137,7 @@ Action completed. Waiting until the resource has entered state: ('ATTACHED',)
 }
 ```
 
->_**__NOTA:__** Para detalhes sobre a criação de [VCNs](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingVCNs_topic-Overview_of_VCNs_and_Subnets.htm), subredes, [DRG](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingDRGs.htm) e demais componentes de redes no [OCI](https://www.oracle.com/cloud/), consulte os capítulos "[3.1 - Fundamentos do Serviço de Redes](https://github.com/daniel-armbrust/oci-book/blob/main/chapter-3/3-1_fundamentos-redes.md)" e "[5.1 - Conectando múltiplas VCNs na mesma região](https://github.com/daniel-armbrust/oci-book/blob/main/chapter-5/5-1_mais-sobre-redes-multiplas-vcn-lpg-drg.md)"._
+>_**__NOTA:__** Para detalhes sobre a criação de [VCNs](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingVCNs_topic-Overview_of_VCNs_and_Subnets.htm), subredes, [DRG](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingDRGs.htm) e demais componentes de redes no [OCI](https://www.oracle.com/cloud/), consulte os capítulos "[3.1 - Fundamentos do Serviço de Redes](https://github.com/daniel-armbrust/oci-book/blob/main/chapter-3/3-1_fundamentos-redes.md)" e "[5.2 - Conectando múltiplas VCNs na mesma região](https://github.com/daniel-armbrust/oci-book/blob/main/chapter-5/5-2_mais-sobre-redes-multiplas-vcn-lpg-drg.md)"._
 
 ### Detalhes sobre o CPE
 
