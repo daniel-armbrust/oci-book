@@ -1,5 +1,6 @@
 # Capítulo 5: Mais sobre Redes no OCI
 
-## 5.6 - Ambiente DR (Disaster Recovery)
+## 5.4 - Roteamento de Trânsito
 
 ### __Visão Geral__
+

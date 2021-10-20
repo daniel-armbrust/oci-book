@@ -1,6 +1,6 @@
 # Capítulo 5: Mais sobre Redes no OCI
 
-## 5.1 - Conectando múltiplas VCNs na mesma região
+## 5.2 - Conectando múltiplas VCNs na mesma região
 
 ### __Local Peering Gateway (LPG)__
 
