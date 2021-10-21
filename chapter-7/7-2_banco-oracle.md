@@ -4,11 +4,11 @@
 
 ### __Visão Geral__
 
-O serviço de _Banco de Dados Oracle_ do _[OCI](https://www.oracle.com/cloud/)_, também conhecido como _[DBCS (Database Cloud Service)](https://docs.oracle.com/pt-br/iaas/Content/Database/Concepts/databaseoverview.htm)_ ou _[DBaaS (Database as a Service)](https://en.wikipedia.org/wiki/Data_as_a_service)_, permite que você crie _Banco de Dados Oracle_ de uma maneira simples e rápida, eliminando qualquer necessidade de instalação ou configuração manual do software.
+O serviço de _Banco de Dados Oracle_ do _[OCI](https://www.oracle.com/cloud/)_, também conhecido como _[DBCS (Database Cloud Service)](https://docs.oracle.com/pt-br/iaas/Content/Database/Concepts/databaseoverview.htm)_ ou _[DBaaS (Database as a Service)](https://en.wikipedia.org/wiki/Data_as_a_service)_, permite que você crie _Banco de Dados Oracle_ de uma maneira simples e rápida, eliminando qualquer necessidade de instalação ou configuração manual do software. Além disto, o serviço já disponibiliza de forma integrada o gerenciamento de backups, restores e aplicação de patches.
 
 O _Banco de Dados Oracle_ criado no _[OCI](https://www.oracle.com/cloud/)_, pode ser classificado como _"cogerenciadas" (co-managed)_ ou _"autônomo"_. Vale destacar que ambos se _"encaixam"_ no modelo _[PaaS](https://pt.wikipedia.org/wiki/Plataforma_como_servi%C3%A7o)_. Ou seja, você recebe acesso total aos recursos e operações disponíveis do banco de dados, mas é a _Oracle_ quem possui e gerencia toda a sua infraestrutura.
 
-Um ambiente _autônomo_ ou _[Autonomous Database](https://docs.oracle.com/pt-br/iaas/Content/Database/Concepts/adboverview.htm#Overview_of_Autonomous_Databases)_, são ambientes já pré-configurados _(oltp ou data warehouse)_ e totalmente gerenciados. Já ambientes _cogerenciadas_, são sistemas de _Banco de Dados Oracle_ prontos para uso sobre diferentes hardwares:
+Um ambiente _autônomo_ ou _[Autonomous Database](https://docs.oracle.com/pt-br/iaas/Content/Database/Concepts/adboverview.htm#Overview_of_Autonomous_Databases)_, são ambientes já pré-configurados _(oltp ou data warehouse)_ e totalmente gerenciados. Já os ambientes _cogerenciadas_, são sistemas de _Banco de Dados Oracle_ prontos para uso sobre diferentes tipos de hardwares:
 
 - _[Máquinas Virtuais](https://docs.oracle.com/pt-br/iaas/Content/Database/Concepts/overview.htm#Virtual)_
 - _[Bare Metal](https://docs.oracle.com/pt-br/iaas/Content/Database/Concepts/overview.htm#baremetal)_
@@ -26,3 +26,4 @@ _Banco de Dados Oracle_ criados no _[OCI](https://www.oracle.com/cloud/)_ suport
 Neste capítulo, irei apresentar os detalhes que envolvem _Banco de Dados Oracle_ _"cogerenciados"_ em _[máquinas virtuais](https://docs.oracle.com/pt-br/iaas/Content/Database/Concepts/overview.htm#Virtual)_ e _[bare metal](https://docs.oracle.com/pt-br/iaas/Content/Database/Concepts/overview.htm#baremetal)_. Teremos capítulos especificos que tratam sobre _[Autonomous Database](https://docs.oracle.com/pt-br/iaas/Content/Database/Concepts/adboverview.htm#Overview_of_Autonomous_Databases)_ e _[Exadata Cloud Service (ExaCS)](https://docs.oracle.com/pt-br/iaas/Content/Database/Concepts/exaoverview.htm)_.
 
 ### __Oracle DB em Máquina Virtual__
+
