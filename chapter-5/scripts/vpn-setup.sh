@@ -45,7 +45,7 @@ Options:
 Example:
 
     Create the VPN Site-To-Site:
-       $(basename "$0") -vs -c ocid1.compartment.oc1..aaaaaaaauvqvbbx3oridcm5d2ztxkftwr362u2vl5zdsayzbehzwbjs56soq -cpi 201.33.196.77 -cid 10.34.0.82
+       $(basename "$0") -vs -c ocid1.compartment.oc1..aaaaaaaauvqvbbx3oridcm5d2ztxkftwr362u2vl5zdsayzbehzwbjs56soq -cip 201.33.196.77 -cid 10.34.0.82
     
     Delete the VPN and related resources:
        $(basename "$0") -vd -c ocid1.compartment.oc1..aaaaaaaauvqvbbx3oridcm5d2ztxkftwr362u2vl5zdsayzbehzwbjs56soq
