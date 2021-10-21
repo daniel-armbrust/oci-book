@@ -61,7 +61,7 @@ Esse livro apresenta o **OCI (Oracle Cloud Infraestructure)** e por quê você d
     [6.2 - Criando um site sem servidor]() <br>
 
 - [Capítulo 7: Banco de Dados](https://github.com/daniel-armbrust/oci-book/blob/main/chapter-7/README.md) <br>
-    [7.1 - Oracle e o Modelo Relacional](https://github.com/daniel-armbrust/oci-book/blob/main/chapter-7/7-1_intro-relacional.md) <br>    
+    [7.1 - Oracle e o Modelo Relacional](https://github.com/daniel-armbrust/oci-book/blob/main/chapter-7/7-1_intro-relacional.md) <br>
     [7.2 - Banco de Dados Oracle](https://github.com/daniel-armbrust/oci-book/blob/main/chapter-7/7-2_banco-oracle.md) <br>
     7.3 - Exadata <br>
     7.4 - Autonomous DB <br>
