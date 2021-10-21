@@ -27,3 +27,25 @@ Neste capítulo, irei apresentar os detalhes que envolvem _Banco de Dados Oracle
 
 ### __Oracle DB em Máquina Virtual__
 
+```
+darmbrust@hoodwink:~$ oci db system-shape list \
+> --compartment-id "ocid1.tenancy.oc1..aaaaaaaavv2qh5asjdcoufmb6fzpnrfqgjxxdzlvjrgkrkytnyyz6zgvjnua" \
+> --all \
+> --query "data[?\"shape-family\"=='VIRTUALMACHINE'].shape" \
+> --output table
++-----------------+
+| Column1         |
++-----------------+
+| VM.Standard2.16 |
+| VM.Standard2.4  |
+| VM.Standard1.4  |
+| VM.Standard2.1  |
+| VM.Standard1.2  |
+| VM.Standard2.2  |
+| VM.Standard1.8  |
+| VM.Standard1.16 |
+| VM.Standard1.1  |
+| VM.Standard2.24 |
+| VM.Standard2.8  |
++-----------------+
+```
