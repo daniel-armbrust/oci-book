@@ -120,3 +120,11 @@ Para facilitar o dinamismo dos seus negócios, o serviço permite através de um
 Esses detalhes e alguns outros mais podem ser consultados _[aqui](https://docs.oracle.com/en-us/iaas/nosql-database/doc/key-features.html)_.
 
 ### __Detalhes técnicos__
+
+Para utilizar o serviço, você cria tabelas que representam seu _modelo de dados ([schema](https://en.wikipedia.org/wiki/Database_schema))_. Específica o _total de armazenamento (storage)_, além de outras _duas propriedades_ que controlam suas _capacidades de leitura e escrita ([throughput](https://en.wikipedia.org/wiki/Throughput))_.
+
+>_**__NOTA:__** O termo throughput aqui diz respeito ao poder de processamento dado a uma tabela de dados NoSQL. Consulte maiores detalhes neste link [aqui](https://docs.oracle.com/pt-br/iaas/nosql-database/doc/estimating-capacity.html)._
+
+>_**__NOTA:__** Lembrando que os valores que controlam o storage, throughput de leitura e gravação, podem ser alterados a qualquer momento para atender às suas necessidades. Aqui é onde o conceito de escalabilidade horizontal se torna presente._
+
+![alt_text](./images/nosql_2.jpg "NoSQL - table")
