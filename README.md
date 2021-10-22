@@ -57,8 +57,8 @@ Esse livro apresenta o **OCI (Oracle Cloud Infraestructure)** e por quê você d
     [5.9 - Visualização através do Network Visualizer](https://github.com/daniel-armbrust/oci-book/blob/main/chapter-5/5-9_mais-sobre-redes-net-visualizer.md) <br>
 
 - [Capítulo 6: Storage no OCI](https://github.com/daniel-armbrust/oci-book/blob/main/chapter-6/README.md) <br>
-    [6.1 - Object Storage]() <br>
-    [6.2 - Criando um site sem servidor]() <br>
+    [6.1 - Object Storage](https://github.com/daniel-armbrust/oci-book/blob/main/chapter-6/6-1_intro-object-storage.md) <br>
+    6.2 - Criando um site sem servidor <br>
 
 - [Capítulo 7: Banco de Dados](https://github.com/daniel-armbrust/oci-book/blob/main/chapter-7/README.md) <br>
     [7.1 - Oracle e o Modelo Relacional](https://github.com/daniel-armbrust/oci-book/blob/main/chapter-7/7-1_intro-relacional.md) <br>
