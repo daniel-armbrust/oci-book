@@ -153,3 +153,6 @@ Quando lidamos com _dados distribuídos_, como é o caso dos bancos de dados _[N
 >_**__NOTA:__** O absolutamente consistente é mais caro, financeiramente falando, por trazer o dado mais recente quando realizamos uma leitura._
 
 Você especifica qual nível de consistência quer _(eventual ou absoluta)_, através da _[API](https://docs.oracle.com/en-us/iaas/nosql-database/doc/connecting-nosql-cloud.html)_ do _[Oracle NoSQL](https://docs.oracle.com/pt-br/iaas/nosql-database/index.html)_.
+
+
+### __Estimando a capacidade__
