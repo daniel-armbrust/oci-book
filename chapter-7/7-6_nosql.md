@@ -128,3 +128,16 @@ Para utilizar o serviço, você cria tabelas que representam seu _modelo de dado
 >_**__NOTA:__** Lembrando que os valores que controlam o storage, throughput de leitura e gravação, podem ser alterados a qualquer momento para atender às suas necessidades. Aqui é onde o conceito de escalabilidade horizontal se torna presente._
 
 ![alt_text](./images/nosql_2.jpg "NoSQL - table")
+
+- **Unidade de Escrita ou Gravação (WU - Write Unit)**
+    - Uma _unidade de escrita_ é equivalente a um _[throughput](https://en.wikipedia.org/wiki/Throughput)_ de até _1 kilobyte (KB) de dados por segundo_, para operações como _inserção, atualização ou exclusão_ de um registro de dados. Atualizações de índices também consomem _unidades de escrita_.
+    - Por exemplo: um registro menor que _1 KB de dados_, requer _1 unidade de escrita_. Para operações sobre um registro de _1,5 KB de dados_, são necessárias _2 unidades de escrita_.
+
+- **Unidades de Leitura (RU - Read Unit)**
+    - Uma _unidade de leitura_ é equivalente a um _[throughput](https://en.wikipedia.org/wiki/Throughput)_ de até _1 kilobyte (KB) de dados por segundo_, para operações de **_leitura eventualmente consistentes_**.
+    - Por exemplo: um registro menor que _1 KB de dados_, requer _1 unidade de leitura eventualmente consistente_. Para operações de leitura _eventualmente consistentes_ sobre um registro de _1,5 KB de dados_, são necessárias _2 unidades de leituras_.
+
+- **Capacidade de Armazenamento (Storage)**
+    - Capacidade total em _gigabytes (GB)_ que a tabela de dados _[NoSQL](https://pt.wikipedia.org/wiki/NoSQL)_ possui.
+
+
