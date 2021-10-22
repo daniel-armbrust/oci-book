@@ -104,3 +104,6 @@ Em 2006 a empresa _[Sleepycat Software](https://en.wikipedia.org/wiki/Sleepycat_
 O banco de dados _[NoSQL](https://pt.wikipedia.org/wiki/NoSQL)_ da _Oracle_ _([Oracle NoSQL Database](https://docs.oracle.com/pt-br/iaas/nosql-database/index.html))_ utiliza por _"baixo do capô"_, o _[Oracle Berkeley DB](https://www.oracle.com/database/technologies/related/berkeleydb.html)_ para gerenciamento dos dados. Como isso, temos um sistema _[NoSQL](https://pt.wikipedia.org/wiki/NoSQL)_ confiável, moderno e completo.
 
 ### __Oracle NoSQL Database Cloud Service__
+
+_[Oracle NoSQL Database Cloud Service](https://docs.oracle.com/en-us/iaas/nosql-database/index.html)_ é um serviço de banco de dados _[NoSQL](https://pt.wikipedia.org/wiki/NoSQL)_ em nuvem, totalmente gerenciado e que suporta o armazenamento de documentos _[JSON](https://pt.wikipedia.org/wiki/JSON)_, tipo de dados _chave/valor_ além de dados em _colunas (tabelas)_.
+
