@@ -59,3 +59,17 @@ Quando há a necessidade de executar técnicas de _[desnormalização](https://p
 Diferentes problemas são resolvidos por diferentes tecnologias. E isso se aplica também quando falamos de banco de dados. Diferentes bancos de dados para diferentes tipos de dados. Essa afirmação é muitas vezes chamada de _[Persistência Poliglota](https://en.wikipedia.org/wiki/Polyglot_persistence)_.
 
 ### __Banco de dados Relacional vs. NoSQL__
+
+Já destacamos as principais diferenças entre os tipos de bancos de dados quando falamos do surgimento do NoSQL. 
+
+Abaixo, uma tabela de rápida fixação:
+
+![alt_text](./images/rdbms_vs_nosql_1.jpg "Relacional vs. NoSQL")
+
+### __Tipos de Banco de Dados NoSQL__
+
+A maioria dos bancos _[NoSQL](https://pt.wikipedia.org/wiki/NoSQL)_ é alguma derivação de uma estrutura _chave/valor_. 
+
+Existem quatro grandes categorias mais utilizadas:
+
+![alt_text](./images/tipos_nosql.jpg "Tipos NoSQL")
