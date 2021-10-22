@@ -108,3 +108,15 @@ O banco de dados _[NoSQL](https://pt.wikipedia.org/wiki/NoSQL)_ da _Oracle_ _([O
 _[Oracle NoSQL Database Cloud Service](https://docs.oracle.com/en-us/iaas/nosql-database/index.html)_ é um serviço de banco de dados _[NoSQL](https://pt.wikipedia.org/wiki/NoSQL)_ em nuvem, totalmente gerenciado e que suporta o armazenamento de documentos _[JSON](https://pt.wikipedia.org/wiki/JSON)_, tipo de dados _chave/valor_ além de dados em _colunas (tabelas)_.
 
 Com ele, é possível se concentrar no desenvolvimento da sua solução tecnológica, ao invés de se preocupar com o gerenciamento da infraestrutura. Por padrão, o serviço já incorpora monitoração, alta disponibilidade (os dados são distribuídos automaticamente entre _[Fault Domains](https://docs.oracle.com/en-us/iaas/Content/General/Concepts/regions.htm#fault)_ e _[Availability Domains](https://docs.oracle.com/en-us/iaas/Content/General/Concepts/regions.htm#top)_), fácil escalabilidade, além de possuir tempo de resposta baixo e previsível, medido em milissegundos de um único dígito. Isto quer dizer que quanto mais seu banco cresce, tanto em tamanho quanto em _[taxa de throughput](https://en.wikipedia.org/wiki/Throughput)_, o acesso a ele permanece linear.
+
+Para facilitar o dinamismo dos seus negócios, o serviço permite através de uma simples _API_, aumentar e diminuir o _[throughput](https://en.wikipedia.org/wiki/Throughput)_ e _storage_ a qualquer momento, mantendo assim uma experiência constante aos seus usuários, além de evitar desperdícios financeiros. O serviço também possui outros recursos incorporados:
+
+- Suporte a transações _ACID_
+- Atualizações parciais em documentos _[JSON](https://pt.wikipedia.org/wiki/JSON)_
+- Criação de índices adicionais
+- Manipulação e acesso aos dados via linguagem _SQL padrão_
+- _TTL (Tempo de Vida)_ ou tempo de expiração sobre as linhas da tabela.
+
+Esses detalhes e alguns outros mais podem ser consultados _[aqui](https://docs.oracle.com/en-us/iaas/nosql-database/doc/key-features.html)_.
+
+### __Detalhes técnicos__
