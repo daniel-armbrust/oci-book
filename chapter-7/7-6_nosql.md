@@ -26,3 +26,36 @@ Já adianto a informação de que os banco de dados do tipo _[NoSQL](https://pt.
 
 ### __A origem do NoSQL__
 
+O principal propósito de um banco de dados está na sua capacidade de armazenar grandes quantidades de dados. Bancos relacionais têm a importante missão de persistir os dados de forma segura, além de ter que lidar com múltiplos acessos concorrentes através das transações.
+
+A _transação_ é quem garante a _**consistência dos dados**_, ajudando a lidar com possíveis problemas ou erros no processamento. Através das transações é possível adicionar, apagar ou modificar múltiplos registros entre diferentes _tabelas_, e decidir se queremos _persistir as alterações (commit)_ ou _descartá-las (rollback)_. Por conta disso, até então, os _bancos de dados relacionais (RDBMS)_ têm sido a escolha padrão para _aplicações comerciais (enterprise)_.
+
+>_**__NOTA:__** O termo transação aqui refere-se a [transações ACID](https://pt.wikipedia.org/wiki/ACID) (Atômicas, Consistentes, Isoladas e Duráveis). Muitas linhas existentes em diferentes tabelas são atualizadas através de uma única operação. Transações incorporam a noção de unidade de trabalho, tem sucesso total ou falha total (tudo ou nada), e nunca um meio termo. Tipicamente, envolvem múltiplas operações em diferentes entidades de dados._
+
+Para entendermos melhor o _[NoSQL](https://pt.wikipedia.org/wiki/NoSQL)_, temos que relembrar os conceitos que envolvem a palavra _escalabilidade_. Uma das vantagens em se utilizar a _Computação em Nuvem_, está ligado a _escalabilidade dos recursos_ (ajustar o sistema à capacidade desejada). Para contextualizar:
+
+- _Escalabilidade Vertical (Scale UP/DOWN)_: refere-se a ação de aumentar ou diminuir os recursos existentes em uma máquina. Por exemplo, adicionar mais memória RAM ou trocar o processador por outro, com um clock mais rápido.
+
+- _Escalabilidade Horizontal (Scale OUT/IN)_: refere-se a ação de adicionar mais máquinas a um conjunto existente de máquinas. Quanto mais máquinas trabalhando em conjunto, mais processamento temos. É aqui que temos o conceito de computação distribuída em _[cluster de computadores](https://pt.wikipedia.org/wiki/Cluster)_.
+
+Uma das principais diferenças entre os dois modos apresentados, está em relação ao custo. Basicamente, escalar uma máquina verticalmente é financeiramente mais caro e exige _tempo de indisponibilidade_. Ao longo do tempo, descobriu-se que adicionar mais máquinas menores para trabalharem juntas, é financeiramente mais barato e _não exige tempo de indisponibilidade_.
+
+O problema é que um _banco de dados relacional_, não consegue aplicar os conceitos de _escalabilidade horizontal_, por conta do funcionamento das _transações_. _[Transações ACID](https://pt.wikipedia.org/wiki/ACID)_ são incompatíveis com execução em _[cluster de computadores](https://pt.wikipedia.org/wiki/Cluster)_. Não se combinam, pois não há como garantir a _consistência dos dados_, ou mesmo realizar um _[JOIN](https://pt.wikipedia.org/wiki/Join_(SQL))_ sobre os dados que estão distribuídos no _[cluster](https://pt.wikipedia.org/wiki/Cluster)_.
+
+![alt_text](./images/rdbms_1.jpg "Banco de Dados Relacional")
+
+Vale lembrar que o modelo relacional possui grande flexibilidade ao processar as relações entre diferentes tabelas. Podemos executar um _[JOIN](https://pt.wikipedia.org/wiki/Join_(SQL))_ e retornar qualquer visualização que se queira dos dados através da união de diferentes tabelas (flexibilidade na apresentação ou composição, dos dados existentes em diferentes tabelas).
+
+>_**__NOTA:__** Como veremos, existem algumas tecnologias de bancos de dados NoSQL que suportam [transações ACID](https://pt.wikipedia.org/wiki/ACID) ou mesmo um relacionamento de dados limitado, possibilitando também, JOINs limitados._
+
+Já um banco de dados _[NoSQL](https://pt.wikipedia.org/wiki/NoSQL)_, surgiu da necessidade de processar grandes volumes de dados _não relacionados_. O fato dos dados não terem relacionamentos entre si, e possuírem um _modelo de dados mais simples_, sem um _esquema fixo (schemaless)_, possibilitou sua execução em grandes _[cluster de computadores](https://pt.wikipedia.org/wiki/Cluster)_, favoráveis ao _escalonamento horizontal_.
+
+![alt_text](./images/nosql_1.jpg "NoSQL - clusters de computadores")
+
+A partir disso, podemos dizer que os bancos de dados _[NoSQL](https://pt.wikipedia.org/wiki/NoSQL)_ são _altamente distribuídos_, não necessitam de hardware sofisticado, e fornecem suporte transacional mínimo ou nenhum.
+
+Quando há a necessidade de executar técnicas de _[desnormalização](https://pt.wikipedia.org/wiki/Normaliza%C3%A7%C3%A3o_de_dados#Desnormaliza%C3%A7%C3%A3o)_, ou mesmo quando as regras de negócio tendem a levar a criação do chamado _"tabelão" (termo usado por DBAs e desenvolvedores de software para criar tabelas que não possuem relacionamentos, ou que não seguem as regras da [normalização de dados](https://pt.wikipedia.org/wiki/Normaliza%C3%A7%C3%A3o_de_dados))_, talvez seja a hora de empregar o _[NoSQL](https://pt.wikipedia.org/wiki/NoSQL)_ em sua solução tecnológica.
+
+Diferentes problemas são resolvidos por diferentes tecnologias. E isso se aplica também quando falamos de banco de dados. Diferentes bancos de dados para diferentes tipos de dados. Essa afirmação é muitas vezes chamada de _[Persistência Poliglota](https://en.wikipedia.org/wiki/Polyglot_persistence)_.
+
+### __Banco de dados Relacional vs. NoSQL__
