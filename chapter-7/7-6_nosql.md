@@ -96,3 +96,11 @@ Existem quatro grandes categorias mais utilizadas:
 
 
 ### __Um pouco sobre o Oracle Berkeley DB__
+
+Desenvolvido em 1980, o _[Berkeley DB](https://en.wikipedia.org/wiki/Berkeley_DB)_ é uma biblioteca de software que  provê um tipo de _"banco de dados embarcado"_, de alto desempenho, para o armazenamento de dados do tipo _chave/valor_. Basicamente, aqui o termo _"embarcado"_, refere-se a uma espécie diferente de banco de dados, no qual não suporta o acesso via rede. Ele está contido ou embutido, dentro de uma aplicação (embarcado). Como um outro exemplo similar, temos o _[SQLite](https://en.wikipedia.org/wiki/SQLite)_, usado em aplicações para dispositivos _[Android](https://en.wikipedia.org/wiki/Android_(operating_system))_.
+
+Em 2006 a empresa _[Sleepycat Software](https://en.wikipedia.org/wiki/Sleepycat_Software)_, que era detentora do _[Berkeley DB](https://en.wikipedia.org/wiki/Berkeley_DB)_, foi adquirida pela _Oracle_. A partir de então, este tornou-se _[Oracle Berkeley DB](https://www.oracle.com/database/technologies/related/berkeleydb.html)_. A intenção dessa aquisição pela _Oracle_ foi justamente a construção de um sistema de banco de dados _[NoSQL](https://pt.wikipedia.org/wiki/NoSQL)_.
+
+O banco de dados _[NoSQL](https://pt.wikipedia.org/wiki/NoSQL)_ da _Oracle_ _([Oracle NoSQL Database](https://docs.oracle.com/pt-br/iaas/nosql-database/index.html))_ utiliza por _"baixo do capô"_, o _[Oracle Berkeley DB](https://www.oracle.com/database/technologies/related/berkeleydb.html)_ para gerenciamento dos dados. Como isso, temos um sistema _[NoSQL](https://pt.wikipedia.org/wiki/NoSQL)_ confiável, moderno e completo.
+
+### __Oracle NoSQL Database Cloud Service__
