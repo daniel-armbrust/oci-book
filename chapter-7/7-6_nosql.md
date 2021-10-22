@@ -141,3 +141,15 @@ Para utilizar o serviço, você cria tabelas que representam seu _modelo de dado
     - Capacidade total em _gigabytes (GB)_ que a tabela de dados _[NoSQL](https://pt.wikipedia.org/wiki/NoSQL)_ possui.
 
 
+Quando lidamos com _dados distribuídos_, como é o caso dos bancos de dados _[NoSQL](https://pt.wikipedia.org/wiki/NoSQL)_, surgem outros dois conceitos importantes quando realizamos a _leitura dos dados_. São eles:
+
+- **Consistência de leitura Eventual**
+    - Significa que os dados retornados a partir de uma operação de leitura, não são os dados mais recentemente gravados.
+    - Para entender melhor, quando realizamos uma operação de escrita (inserção, atualização ou exclusão), os dados desta precisam ser replicados a todos os nós do cluster para que o dado se torne consistente. Esse tempo de replicação, da última escrita realizada, pode afetar a _consistência da leitura_. Dependendo do negócio da sua aplicação, isto pode ser tolerado, e recebe o nome de _eventualmente consistente_.
+
+- **Consistência de leitura Absoluta**
+    - Os dados retornados a partir de uma operação de leitura, são os mais recentes gravados. Neste caso, duas unidades de leitura, em favor de uma maior consistência, são consumidas.  
+
+>_**__NOTA:__** O absolutamente consistente é mais caro, financeiramente falando, por trazer o dado mais recente quando realizamos uma leitura._
+
+Você especifica qual nível de consistência quer _(eventual ou absoluta)_, através da _[API](https://docs.oracle.com/en-us/iaas/nosql-database/doc/connecting-nosql-cloud.html)_ do _[Oracle NoSQL](https://docs.oracle.com/pt-br/iaas/nosql-database/index.html)_.
