@@ -74,8 +74,25 @@ Existem quatro grandes categorias mais utilizadas:
 
 ![alt_text](./images/tipos_nosql.jpg "Tipos NoSQL")
 
-- **Armazenamento Chave/Valor**
+- **Armazenamento _Chave/Valor_**
     - Os dados são armazenados através de _chaves_ únicas. O banco de dados não conhece e também não se importa com o _valor_ que uma _chave_ faz referência. Para o banco de dados, é somente um conjunto de bits (_[blobs](https://pt.wikipedia.org/wiki/BLOB)_).
     - Pelo fato do banco não conhecer os dados, só é possível recuperar tais dados através de consultas que envolvam os _valores da chave_.
-    - _Casos de uso_: Sessão de usuário em aplicações Web, carrinho de compras.
+    - _Casos de uso:_ Sessão de usuário em aplicações Web, carrinho de compras.
     - Alguns tipos de bancos _[NoSQL](https://pt.wikipedia.org/wiki/NoSQL)_ que se enquadram nessa categoria são: _[Riak](https://en.wikipedia.org/wiki/Riak)_, _[Redis](https://pt.wikipedia.org/wiki/Redis)_ ou _[Oracle NoSQL Database](https://docs.oracle.com/pt-br/iaas/nosql-database/index.html)_.
+
+- **Armazenamento de _Documentos_**
+    - Muito similar a implementação _chave/valor_, porém aqui, o banco de dados conhece o valor (documento) no qual a chave faz referência. O banco de dados _[NoSQL](https://pt.wikipedia.org/wiki/NoSQL)_ entende o valor armazenado, permitindo realizar interações sobre ele. Além disso, o valor armazenado aqui é mais complexo, normalmente um documento _[JSON](https://pt.wikipedia.org/wiki/JSON)_.
+    - _Casos de uso:_ Catalogo de produtos, blog posts, aplicativos de comércio eletrônico.
+    - Alguns tipos de bancos _[NoSQL](https://pt.wikipedia.org/wiki/NoSQL)_ que se enquadram nessa categoria são: _[MongoDB](https://pt.wikipedia.org/wiki/MongoDB)_, _[Oracle NoSQL Database](https://docs.oracle.com/pt-br/iaas/nosql-database/index.html)_ ou _[CouchDB](https://pt.wikipedia.org/wiki/CouchDB)_.
+
+- **Banco de dados orientados a _Grafos_**
+    - Semelhante ao modelo relacional, aqui é mais explícito o relacionamento entre os dados. Muito útil para dados que estejam bastante interligados, pois a estrutura de um _[grafo](https://pt.wikipedia.org/wiki/Teoria_dos_grafos)_ expõe naturalmente os relacionamentos entre os objetos.
+    - _Casos de uso:_ O seu uso varia de aplicações para redes sociais (onde há muita interligação de likes ou pessoas), bioinformática, software de recomendação e etc.
+    - Alguns tipos de bancos _[NoSQL](https://pt.wikipedia.org/wiki/NoSQL)_ que se enquadram nessa categoria são: _[Neo4j](https://en.wikipedia.org/wiki/Neo4j)_ e _[OrientDB](https://en.wikipedia.org/wiki/OrientDB)_.
+
+- **Armazenamento _Colunar_**
+    - O armazenamento _colunar_ é similar a uma tabela, onde cada linha pode ter uma ou mais colunas. O número de colunas por linha pode variar.
+    - Alguns tipos de bancos _[NoSQL](https://pt.wikipedia.org/wiki/NoSQL)_ que se enquadram nessa categoria são: _[Apache Cassandra](https://pt.wikipedia.org/wiki/Apache_Cassandra)_, _[Oracle NoSQL Database](https://docs.oracle.com/pt-br/iaas/nosql-database/index.html)_ ou _[Hypertable](https://en.wikipedia.org/wiki/Hypertable)_.
+
+
+### __Um pouco sobre o Oracle Berkeley DB__
