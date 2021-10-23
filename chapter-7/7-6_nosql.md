@@ -390,3 +390,145 @@ darmbrust@hoodwink:~$ oci nosql query execute \
 Perceba que utilizamos o parâmetro _"--consistency"_ que especifica uma consistência de _leitura absoluta_, garantindo que o dado consultado é o mais recente do _cluster_.
 
 >_**__NOTA:__** Para maiores informações sobre a linguagem SQL utilizada pelo NoSQL, consulte este [link aqui](https://docs.oracle.com/pt-br/iaas/nosql-database/doc/query-language-reference.html)._
+
+Podemos adicionar ou remover colunas da tabela também. Para adicionar uma coluna, seguimos com o famoso e conhecido _[ALTER TABLE](https://docs.oracle.com/en/database/other-databases/nosql-database/19.5/sqlreferencefornosql/alter-table.html)_:
+
+```
+darmbrust@hoodwink:~$ oci nosql table update \
+> --compartment-id "ocid1.compartment.oc1..aaaaaaaaafjgvmrez5krathnzafkfsaep3bs7dkioat32d23ubaimjiyw5qq" \
+> --table-name-or-id "produtos" \
+> --ddl-statement "ALTER TABLE produtos (ADD data_criacao TIMESTAMP(0))" \
+> --force \
+> --wait-for-state "SUCCEEDED"
+Action completed. Waiting until the work request has entered state: ('SUCCEEDED',)
+{
+  "data": {
+    "compartment-id": "ocid1.compartment.oc1..aaaaaaaaafjgvmrez5krathnzafkfsaep3bs7dkioat32d23ubaimjiyw5qq",
+    "id": "ocid1.nosqltableworkrequest.oc1.sa-saopaulo-1.amaaaaaa6noke4qap6ar7c5oon5qqvvkcvtds724mj75b7ibfsailuoiogyq",
+    "operation-type": "UPDATE_TABLE",
+    "percent-complete": 100.0,
+    "resources": [
+      {
+        "action-type": "UPDATED",
+        "entity-type": "TABLE",
+        "entity-uri": "/20190828/tables/produtos?compartmentId=ocid1.compartment.oc1..aaaaaaaaafjgvmrez5krathnzafkfsaep3bs7dkioat32d23ubaimjiyw5qq",
+        "identifier": "ocid1.nosqltable.oc1.sa-saopaulo-1.amaaaaaa6noke4qaro2lm6fli2nz3qnvfjn2b6cpbnwwdikn2suipzu4w6rq"
+      }
+    ],
+    "status": "SUCCEEDED",
+    "time-accepted": "2021-10-23T13:11:02.498000+00:00",
+    "time-finished": "2021-10-23T13:11:05.675000+00:00",
+    "time-started": "2021-10-23T13:11:02.507000+00:00"
+  }
+}
+```
+
+Podemos visualizar a estrutura da tabela com o comando abaixo:
+
+```
+darmbrust@hoodwink:~$ oci nosql table get \
+> --compartment-id "ocid1.compartment.oc1..aaaaaaaaafjgvmrez5krathnzafkfsaep3bs7dkioat32d23ubaimjiyw5qq" \
+> --table-name-or-id "produtos"
+{
+  "data": {
+    "compartment-id": "ocid1.compartment.oc1..aaaaaaaaafjgvmrez5krathnzafkfsaep3bs7dkioat32d23ubaimjiyw5qq",
+    "ddl-statement": "CREATE TABLE produtos(id INTEGER, propriedades JSON, valor NUMBER, frete_gratis BOOLEAN, imagens ARRAY(STRING), data_criacao TIMESTAMP(0), PRIMARY KEY(SHARD(id)))",
+    "defined-tags": {
+      "Oracle-Tags": {
+        "CreatedBy": "oracleidentitycloudservice/guilherme.rocha@oracle.com",
+        "CreatedOn": "2021-10-23T11:59:47.385Z"
+      }
+    },
+    "freeform-tags": {},
+    "id": "ocid1.nosqltable.oc1.sa-saopaulo-1.amaaaaaa6noke4qaro2lm6fli2nz3qnvfjn2b6cpbnwwdikn2suipzu4w6rq",
+    "is-auto-reclaimable": false,
+    "lifecycle-details": "The resource is ACTIVE",
+    "lifecycle-state": "ACTIVE",
+    "name": "produtos",
+    "schema": {
+      "columns": [
+        {
+          "default-value": null,
+          "is-nullable": false,
+          "name": "id",
+          "type": "INTEGER"
+        },
+        {
+          "default-value": null,
+          "is-nullable": true,
+          "name": "propriedades",
+          "type": "JSON"
+        },
+        {
+          "default-value": null,
+          "is-nullable": true,
+          "name": "valor",
+          "type": "NUMBER"
+        },
+        {
+          "default-value": null,
+          "is-nullable": true,
+          "name": "frete_gratis",
+          "type": "BOOLEAN"
+        },
+        {
+          "default-value": null,
+          "is-nullable": true,
+          "name": "imagens",
+          "type": "ARRAY(STRING)"
+        },
+        {
+          "default-value": null,
+          "is-nullable": true,
+          "name": "data_criacao",
+          "type": "TIMESTAMP(0)"
+        }
+      ],
+      "primary-key": [
+        "id"
+      ],
+      "shard-key": [
+        "id"
+      ],
+      "ttl": null
+    },
+    "system-tags": {},
+    "table-limits": {
+      "max-read-units": 15,
+      "max-storage-in-g-bs": 2,
+      "max-write-units": 10
+    },
+    "time-created": "2021-10-23T11:59:47.864000+00:00",
+    "time-of-expiration": null,
+    "time-updated": "2021-10-23T13:11:05.610000+00:00"
+  },
+  "etag": "AAABfK1GuIo="
+}
+```
+
+Ou detalhes sobre o consumo corrente das unidades de _escrita/leitura_ e storage em _Gigabytes_:
+
+```
+darmbrust@hoodwink:~$ oci nosql table list-table-usage \
+> --compartment-id "ocid1.compartment.oc1..aaaaaaaaafjgvmrez5krathnzafkfsaep3bs7dkioat32d23ubaimjiyw5qq" \
+> --table-name-or-id "produtos" \
+> --all
+{
+  "data": {
+    "items": [
+      {
+        "read-throttle-count": 0,
+        "read-units": 0,
+        "seconds-in-period": 60,
+        "storage-in-g-bs": 0,
+        "storage-throttle-count": 0,
+        "write-throttle-count": 0,
+        "write-units": 0
+      }
+    ]
+  }
+}
+```
+
+>_**__NOTA:__** Consulte este link para maiores informações sobre o [gerenciamento de dados da tabela](https://docs.oracle.com/pt-br/iaas/nosql-database/doc/managing-table-data.html)._
+
