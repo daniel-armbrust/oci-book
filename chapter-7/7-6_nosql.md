@@ -157,3 +157,35 @@ Você especifica qual nível de consistência quer _(eventual ou absoluta)_, atr
 
 ### __Estimando a capacidade__
 
+A Oracle disponibiliza o _[Oracle NoSQL Capacity Estimator](https://www.oracle.com/a/ocom/docs/oracle-nosql-capacity-estimator.zip)_, que é uma ferramenta no qual é possível prever a quantidade necessária de unidades de escrita, leitura e storage total que uma determinada _tabela NoSQL_ necessita. Esse cálculo é realizado de acordo com a quantidade de _leitura(s)_ e _escrita(s)_ feitas sobre o tamanho, em _KiloBytes_, de um registro de dados. 
+
+Veja o exemplo:
+
+![alt_text](./images/nosql_4.jpg "NoSQL Capacity Estimator")
+
+A partir dos valores de exemplo, é possível calcular qual o custo que este serviço terá, via ferramenta _[Cost Estimator](https://www.oracle.com/br/cloud/cost-estimator.html)_:
+
+![alt_text](./images/nosql_5.jpg "NoSQL Cost Estimator #1")
+
+![alt_text](./images/nosql_6.jpg "NoSQL Cost Estimator #2")
+
+>_**__NOTA:__** Para mais detalhes sobre a ferramenta Cost Estimator e valores, consulte este link [aqui](https://blogs.oracle.com/lad-cloud-experts/pt/oci-gerenciando-meus-custos-parte-1)._
+
+- Faça o download da ferramenta Cost Estimator _[aqui](https://www.oracle.com/a/ocom/docs/oracle-nosql-capacity-estimator.zip)_.
+
+Na _[página principal do serviço](https://www.oracle.com/database/nosql-cloud.html)_, também é possível verificar o custo de cada unidade computacional: 
+
+![alt_text](./images/nosql_7.jpg "NoSQL Universal Credits")
+
+Para encerrar este tópico, vale lembrar que o serviço _[NoSQL](https://pt.wikipedia.org/wiki/NoSQL)_ participa do programa _[Always Free da Oracle](https://www.oracle.com/br/cloud/free/)_. Isto quer dizer que você pode desenvolver e hospedar sua aplicação, sem nenhum custo, de acordo com os seguintes limites:
+
+- Criar até _3 tabelas_ Oracle NoSQL
+- 50 Unidades de leitura _(RU - Read Unit)_
+- 50 Unidades de escrita _(WU - Write Unit)_
+- 25GB para armazenamento _(storage)_
+
+>_**__NOTA:__** Os limites gerais do serviço [NoSQL](https://pt.wikipedia.org/wiki/NoSQL) também podem ser consultados neste link [aqui](https://docs.oracle.com/pt-br/iaas/nosql-database/doc/cloud-limits.html)_.
+
+Para mais informações, consulte este _[link](https://docs.oracle.com/en-us/iaas/nosql-database/doc/always-free-nosql-database-service.html)_ sobre o _[Oracle NoSQL Always Free](https://docs.oracle.com/en-us/iaas/nosql-database/doc/always-free-nosql-database-service.html)_.
+
+### __Colocando a "mão na massa"__
