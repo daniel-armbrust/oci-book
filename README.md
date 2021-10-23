@@ -70,6 +70,7 @@ Esse livro apresenta o **OCI (Oracle Cloud Infraestructure)** e por quê você d
     [7.6 - Oracle NoSQL](https://github.com/daniel-armbrust/oci-book/blob/main/chapter-7/7-6_nosql.md) <br>
 
 - [Capítulo 8: A aplicação FotoGal](https://github.com/daniel-armbrust/oci-book/blob/main/chapter-8/README.md) <br>
+    [8.1 - Desenvolvimento Conteinerizado](https://github.com/daniel-armbrust/oci-book/blob/main/chapter-8/8-1_dev_container.md) <br>
 
 - [Capítulo 9: Segurança no OCI](https://github.com/daniel-armbrust/oci-book/blob/main/chapter-9/README.md) <br>
     9.1 - Zonas de Segurança <br>
