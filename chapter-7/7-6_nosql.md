@@ -189,3 +189,19 @@ Para encerrar este tópico, vale lembrar que o serviço _[NoSQL](https://pt.wiki
 Para mais informações, consulte este _[link](https://docs.oracle.com/en-us/iaas/nosql-database/doc/always-free-nosql-database-service.html)_ sobre o _[Oracle NoSQL Always Free](https://docs.oracle.com/en-us/iaas/nosql-database/doc/always-free-nosql-database-service.html)_.
 
 ### __Colocando a "mão na massa"__
+
+Depois de entendermos os principais conceitos que envolvem o _[Oracle NoSQL](https://docs.oracle.com/pt-br/iaas/nosql-database/index.html)_, veremos como iniciar a utilização real do serviço. Vamos começar explicando sobre o design das tabelas.
+
+Os dados no _[Oracle NoSQL](https://docs.oracle.com/pt-br/iaas/nosql-database/index.html)_ são armazenados e organizados em _[tabelas](https://docs.oracle.com/pt-br/iaas/nosql-database/doc/table-management.html)_. Você verá que muito dos conceitos e sintaxe sobre a criação de tabelas que vem do modelo relacional no qual conhecemos, podem ser aplicados aqui também.
+
+Uma _[tabela](https://docs.oracle.com/pt-br/iaas/nosql-database/doc/table-management.html)_ pode conter várias linhas, sendo que cada linha armazena um _registro_. Dizemos que um _registro_, são todos os dados que pertencem a uma _linha_ em particular. Além disso, em uma linha temos as _colunas_. Cada _coluna_ precisa ter o seu _[tipo de dados](https://docs.oracle.com/pt-br/iaas/nosql-database/doc/table-design.html)_ definido. É o _[tipo de dados](https://docs.oracle.com/pt-br/iaas/nosql-database/doc/table-design.html)_ que garante a _integridade da informação_ a ser armazenada. Por exemplo, se uma _coluna_ possui um _[tipo de dados](https://docs.oracle.com/pt-br/iaas/nosql-database/doc/table-design.html)_ _INTEGER_, você só poderá armazenar números inteiros nesta _coluna_. Uma tentativa de inserção de uma palavra, do tipo _STRING_, ocasionaria em um erro.
+
+Apresentamos um exemplo onde temos uma _tabela_, que representa um simples _modelo de dados_ utilizado por um _e-commerce_:
+
+![alt_text](./images/exemplo_nosql_tabela_1.jpg "NoSQL - Tabela Produtos")
+
+Aqui é onde a flexibilidade do _[Oracle NoSQL](https://docs.oracle.com/pt-br/iaas/nosql-database/index.html)_ se torna presente. Podemos criar _tabelas schemafull (todos os campos da tabela possuem tipo de dados específicos)_, _schemaless (contendo tipo de dados JSON)_ ou ter uma combinação de ambos, formando um _modelo de dados híbrido_, como é o caso desse exemplo.
+
+Os _registros_ desta _tabela_ são os diferentes produtos que o nosso _e-commerce_ fictício vende. Aqui, exibimos somente um _registro_ que tem as informações sobre um drone de brinquedo.
+
+>_**__NOTA:__** Para o [Oracle NoSQL](https://docs.oracle.com/pt-br/iaas/nosql-database/index.html), tabela é sinônimo de infraestrutura. A tabela é uma representação, na qual você pode organizar e manipular dados. Por trás de uma tabela, você tem uma infraestrutura gerenciada pelo OCI, contendo um cluster de computadores._
