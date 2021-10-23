@@ -293,7 +293,6 @@ Action completed. Waiting until the work request has entered state: ('SUCCEEDED'
 
 >_**__NOTA:__** Para saber mais detalhes sobre DDL para criar suas tabelas, consulte este [link aqui](https://docs.oracle.com/en/database/other-databases/nosql-database/19.3/java-driver-table/table-data-definition-language-overview.html)._
 
-
 Para finalizar esta parte, quero apresentar a _escalabilidade horizontal_ na prática. Pelo comando abaixo, é muito simples adicionar mais _capacidade de throughput_ ou _storage ([scale out](https://pt.wikipedia.org/wiki/Escalabilidade))_, ou mesmo _remover tal capacidade ([scale in](https://pt.wikipedia.org/wiki/Escalabilidade))_.
 
 ```
@@ -532,3 +531,42 @@ darmbrust@hoodwink:~$ oci nosql table list-table-usage \
 
 >_**__NOTA:__** Consulte este link para maiores informações sobre o [gerenciamento de dados da tabela](https://docs.oracle.com/pt-br/iaas/nosql-database/doc/managing-table-data.html)._
 
+### __Oracle NoSQL Database Cloud Simulator__
+
+O _[Oracle NoSQL Database Cloud Simulator](https://docs.oracle.com/pt-br/iaas/nosql-database/doc/developing-oracle-nosql-database-cloud-simulator.html)_ é uma aplicação desenvolvida em _[Java](https://www.oracle.com/java/)_ que simula o serviço do _[Oracle NoSQL](https://docs.oracle.com/pt-br/iaas/nosql-database/index.html)_. Este permite que você desenvolva aplicações localmente, sem acessar o serviço diretamente. Pode ser usado também como uma maneira de testar as funcionalidades do _[Oracle NoSQL](https://docs.oracle.com/pt-br/iaas/nosql-database/index.html)_, sem necessariamente ter que se preocupar com custos ou com uma infraestrutura produtiva, por exemplo. É a maneira mais fácil de começar a desenvolver suas aplicações.
+
+Irei demonstrar aqui a instalação do _[Oracle NoSQL Simulator](https://docs.oracle.com/pt-br/iaas/nosql-database/doc/developing-oracle-nosql-database-cloud-simulator.html)_ em um _[Oracle Linux](https://www.oracle.com/br/linux/)_ padrão. Porém, antes de realizarmos a instalação, é necessário ter o _[Java](https://www.oracle.com/java/)_ instalado. Para instalar o _[Java](https://www.oracle.com/java/)_, faça o download e siga as instruções contidas _[nesta página](https://docs.oracle.com/en/java/javase/17/install/overview-jdk-installation.html)_.
+
+```
+[darmbrust@oci-dev ~]$ java -version
+java version "15.0.2" 2021-01-19
+Java(TM) SE Runtime Environment (build 15.0.2+7-27)
+Java HotSpot(TM) 64-Bit Server VM (build 15.0.2+7-27, mixed mode, sharing)
+```
+
+1. Acesse a página _[Oracle Cloud Downloads](https://www.oracle.com/downloads/cloud/oracle-cloud-downloads.html)_ e faça o download do simulador NoSQL.
+
+![alt_text](./images/nosql_simulator_1.jpg "Oracle Cloud Downloads #1")
+
+![alt_text](./images/nosql_simulator_2.jpg "Oracle Cloud Downloads #2")
+
+![alt_text](./images/nosql_simulator_3.jpg "Oracle Cloud Downloads #3") 
+
+2. Após fazer o download, basta extrair o pacote em um diretório de sua preferência:
+
+```
+[darmbrust@oci-dev ~]$ tar zxvf oracle-nosql-cloud-simulator-1.2.0.tar.gz
+``` 
+
+3. Para iniciar o simulador, é muito simples. Basta executar o script _**runCloudSim**_ informando algumas opções na linha de comando. A única opção obrigatória, é o caminho de um diretório que será usado para armazenamento dos seus dados (_-root_):
+
+```
+[darmbrust@oci-dev ~]$ cd oracle-nosql-cloud-simulator-1.2.0/  
+
+[darmbrust@oci-dev oracle-nosql-cloud-simulator-1.2.0]$ ./runCloudSim -root /home/darmbrust/nosql -host 0.0.0.0
+Oracle NoSQL Cloud Simulator is ready
+```
+
+>_**__NOTA:__** Existem outras opções que podem ser usadas. Execute **./runCloudSim -?** para obter uma lista completa. O modo de usar e seu significado, estão documentadas no arquivo **README.md**, contido no diretório raíz do simulador._
+
+4. Pronto! Nosso _NoSQL Simulator_ foi iniciado na porta _**5000/tcp**_ e pode receber conexões de qualquer host da rede _**0.0.0.0**_.
