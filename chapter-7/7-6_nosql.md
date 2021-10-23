@@ -328,3 +328,23 @@ Action completed. Waiting until the work request has entered state: ('SUCCEEDED'
 
 ### __Manipulando Dados no NoSQL__
 
+```
+darmbrust@hoodwink:~$ oci nosql row update \
+> --compartment-id "ocid1.compartment.oc1..aaaaaaaaafjgvmrez5krathnzafkfsaep3bs7dkioat32d23ubaimjiyw5qq" \
+> --table-name-or-id "produtos" \
+> --value '{"id": 1, "propriedades": {"nome": "Drone Eachine", "marca": "Eachine", "modelo": "e58a", "versão": "Dual Camera 720p", "cor": "preto"}, "valor": 237.85, "frete_gratis": true, "imagens": ["drone-1.jpg", "drone-2.jpg", "drone-3.jpg"]}' \
+> --force
+{
+  "data": {
+    "existing-value": null,
+    "existing-version": null,
+    "generated-value": null,
+    "usage": {
+      "read-units-consumed": 0,
+      "write-units-consumed": 1
+    },
+    "version": "rO0ABXcsABidoE77XFVFaojy01KzspsGAAAAAGXh6nMBAwAAAAIAAAACAAAFWCH7ah8="
+  },
+  "etag": "rO0ABXcsABidoE77XFVFaojy01KzspsGAAAAAGXh6nMBAwAAAAIAAAACAAAFWCH7ah8="
+}
+```
