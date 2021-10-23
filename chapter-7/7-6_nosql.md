@@ -570,3 +570,12 @@ Oracle NoSQL Cloud Simulator is ready
 >_**__NOTA:__** Existem outras opções que podem ser usadas. Execute **./runCloudSim -?** para obter uma lista completa. O modo de usar e seu significado, estão documentadas no arquivo **README.md**, contido no diretório raíz do simulador._
 
 4. Pronto! Nosso _NoSQL Simulator_ foi iniciado na porta _**5000/tcp**_ e pode receber conexões de qualquer host da rede _**0.0.0.0**_.
+
+### __Conclusão__
+
+Este capítulo apresentou o _[Oracle NoSQL](https://docs.oracle.com/pt-br/iaas/nosql-database/index.html)_ e uma introdução sobre a teoria por trás do _[NoSQL](https://pt.wikipedia.org/wiki/NoSQL)_, além de compará-lo com o conhecido _[modelo relacional](https://pt.wikipedia.org/wiki/Modelo_relacional)_.
+
+É preciso entender o que é a tecnologia _[NoSQL](https://pt.wikipedia.org/wiki/NoSQL)_ e como podemos agregar seu uso em uma solução tecnológica de persistência de dados. Como você leu, tecnologias _[NoSQL](https://pt.wikipedia.org/wiki/NoSQL)_ não substituem o _[modelo relacional](https://pt.wikipedia.org/wiki/Modelo_relacional)_. Ela complementa.
+
+Deixo aqui o _[FAQ](https://www.oracle.com/database/nosql-cloud-faq.html)_ oficial do _[Oracle NoSQL](https://docs.oracle.com/pt-br/iaas/nosql-database/index.html)_ e um _[repositório no github](https://github.com/daniel-armbrust/oci-nosql)_ contendo códigos de exemplo em _[Python](https://pt.wikipedia.org/wiki/Python)_. Ambos servem como complemento ao entendimento demonstrado aqui.
+
