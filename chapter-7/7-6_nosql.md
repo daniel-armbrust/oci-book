@@ -328,6 +328,8 @@ Action completed. Waiting until the work request has entered state: ('SUCCEEDED'
 
 ### __Manipulando Dados no NoSQL__
 
+Irei apresentar o básico para manipularmos a _tabela produtos_ que criamos, iniciando pela possibilidade de _inserir dados_:
+
 ```
 darmbrust@hoodwink:~$ oci nosql row update \
 > --compartment-id "ocid1.compartment.oc1..aaaaaaaaafjgvmrez5krathnzafkfsaep3bs7dkioat32d23ubaimjiyw5qq" \
@@ -348,3 +350,43 @@ darmbrust@hoodwink:~$ oci nosql row update \
   "etag": "rO0ABXcsABidoE77XFVFaojy01KzspsGAAAAAGXh6nMBAwAAAAIAAAACAAAFWCH7ah8="
 }
 ```
+
+Uma outra funcionalidade útil, é poder executar _consultas simples_, através de expressões do tipo _[SELECT](https://docs.oracle.com/pt-br/iaas/nosql-database/doc/query-language-reference.html)_:
+
+```
+darmbrust@hoodwink:~$ oci nosql query execute \
+> --compartment-id "ocid1.compartment.oc1..aaaaaaaaafjgvmrez5krathnzafkfsaep3bs7dkioat32d23ubaimjiyw5qq" \
+> --consistency "ABSOLUTE" \
+> --statement "SELECT * FROM produtos"
+{
+  "data": {
+    "items": [
+      {
+        "frete_gratis": true,
+        "id": 1,
+        "imagens": [
+          "drone-1.jpg",
+          "drone-2.jpg",
+          "drone-3.jpg"
+        ],
+        "propriedades": {
+          "cor": "preto",
+          "marca": "Eachine",
+          "modelo": "e58a",
+          "nome": "Drone Eachine",
+          "vers\u00e3o": "Dual Camera 720p"
+        },
+        "valor": 237.85
+      }
+    ],
+    "usage": {
+      "read-units-consumed": 6,
+      "write-units-consumed": 0
+    }
+  }
+}
+```
+
+Perceba que utilizamos o parâmetro _"--consistency"_ que especifica uma consistência de _leitura absoluta_, garantindo que o dado consultado é o mais recente do _cluster_.
+
+>_**__NOTA:__** Para maiores informações sobre a linguagem SQL utilizada pelo NoSQL, consulte este [link aqui](https://docs.oracle.com/pt-br/iaas/nosql-database/doc/query-language-reference.html)._
