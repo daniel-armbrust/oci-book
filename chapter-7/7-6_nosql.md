@@ -221,3 +221,6 @@ CREATE TABLE produtos (
     imagens ARRAY(STRING),
     PRIMARY KEY(id))
 ```
+
+>_**__NOTA:__** Nossa chave-primária é uma coluna auto-increment. Isto quer dizer que toda nova linha inserida nesta tabela, o Oracle NoSQL gera e insere automaticamente um valor para ID. Somente uma coluna IDENTITY pode existir por tabela, e ela deve ser do tipo INTEGER, LONG ou NUMBER. Se quiser saber mais sobre colunas IDENTITY, consulte este [link aqui](https://docs.oracle.com/en/database/other-databases/nosql-database/19.3/java-driver-table/defining-tables-identity-column.html)._
+
