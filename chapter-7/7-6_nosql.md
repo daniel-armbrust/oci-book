@@ -190,7 +190,7 @@ Para mais informações, consulte este _[link](https://docs.oracle.com/en-us/iaa
 
 ### __Colocando a "mão na massa"__
 
-Depois de entendermos os principais conceitos que envolvem o _[Oracle NoSQL](https://docs.oracle.com/pt-br/iaas/nosql-database/index.html)_, veremos como iniciar a utilização real do serviço. Vamos começar explicando sobre o design das tabelas.
+Depois de entendermos os principais conceitos que envolvem o _[Oracle NoSQL](https://docs.oracle.com/pt-br/iaas/nosql-database/index.html)_, veremos como iniciar a utilização real do serviço. Irei começar explicando sobre o design das tabelas.
 
 Os dados no _[Oracle NoSQL](https://docs.oracle.com/pt-br/iaas/nosql-database/index.html)_ são armazenados e organizados em _[tabelas](https://docs.oracle.com/pt-br/iaas/nosql-database/doc/table-management.html)_. Você verá que muito dos conceitos e sintaxe sobre a criação de tabelas que vem do modelo relacional no qual conhecemos, podem ser aplicados aqui também.
 
@@ -292,3 +292,39 @@ Action completed. Waiting until the work request has entered state: ('SUCCEEDED'
 ```
 
 >_**__NOTA:__** Para saber mais detalhes sobre DDL para criar suas tabelas, consulte este [link aqui](https://docs.oracle.com/en/database/other-databases/nosql-database/19.3/java-driver-table/table-data-definition-language-overview.html)._
+
+
+Para finalizar esta parte, quero apresentar a _escalabilidade horizontal_ na prática. Pelo comando abaixo, é muito simples adicionar mais _capacidade de throughput_ ou _storage ([scale out](https://pt.wikipedia.org/wiki/Escalabilidade))_, ou mesmo _remover tal capacidade ([scale in](https://pt.wikipedia.org/wiki/Escalabilidade))_.
+
+```
+darmbrust@hoodwink:~$ oci nosql table update \
+> --compartment-id "ocid1.compartment.oc1..aaaaaaaaafjgvmrez5krathnzafkfsaep3bs7dkioat32d23ubaimjiyw5qq" \
+> --table-name-or-id "produtos" \
+> --table-limits '{"maxReadUnits": 15, "maxWriteUnits": 10, "maxStorageInGBs": 2}' \
+> --force \
+> --wait-for-state "SUCCEEDED"
+Action completed. Waiting until the work request has entered state: ('SUCCEEDED',)
+{
+  "data": {
+    "compartment-id": "ocid1.compartment.oc1..aaaaaaaaafjgvmrez5krathnzafkfsaep3bs7dkioat32d23ubaimjiyw5qq",
+    "id": "ocid1.nosqltableworkrequest.oc1.sa-saopaulo-1.amaaaaaa6noke4qaktokmkakgmojg5js2qzlkvvj6lewqj2rktzqnldw53lq",
+    "operation-type": "UPDATE_TABLE",
+    "percent-complete": 100.0,
+    "resources": [
+      {
+        "action-type": "UPDATED",
+        "entity-type": "TABLE",
+        "entity-uri": "/20190828/tables/produtos?compartmentId=ocid1.compartment.oc1..aaaaaaaaafjgvmrez5krathnzafkfsaep3bs7dkioat32d23ubaimjiyw5qq",
+        "identifier": "ocid1.nosqltable.oc1.sa-saopaulo-1.amaaaaaa6noke4qaro2lm6fli2nz3qnvfjn2b6cpbnwwdikn2suipzu4w6rq"
+      }
+    ],
+    "status": "SUCCEEDED",
+    "time-accepted": "2021-10-23T12:08:43.440000+00:00",
+    "time-finished": "2021-10-23T12:08:46.890000+00:00",
+    "time-started": "2021-10-23T12:08:43.448000+00:00"
+  }
+}
+```
+
+### __Manipulando Dados no NoSQL__
+
