@@ -156,3 +156,4 @@ Você especifica qual nível de consistência quer _(eventual ou absoluta)_, atr
 
 
 ### __Estimando a capacidade__
+
