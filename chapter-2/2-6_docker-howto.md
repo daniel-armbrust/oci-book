@@ -217,7 +217,7 @@ CentOS Linux release 8.4.2105
 CentOS Linux release 8.4.2105
 ```
 
->_**__NOTA:__**  Esta ação de "atachar" (attach) basicamente sobrescreve o seu terminal (docker host) com o terminal do contêiner. Lembra da opção -t quando criamos o contêiner? Além disso, é possível referenciar o contêiner em execução pelo seu ID ou nome._
+>_**__NOTA:__** Esta ação de "atachar" (attach) basicamente sobrescreve o seu terminal (docker host) com o terminal do contêiner. Lembra da opção -t quando criamos o contêiner? Além disso, é possível referenciar o contêiner em execução pelo seu ID ou nome._
 
 >_**__NOTA:__** Para retornar ao shell do Docker Host, execute o conjunto de teclas: CTRL+p+q_
 
