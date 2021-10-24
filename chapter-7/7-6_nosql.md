@@ -531,6 +531,37 @@ darmbrust@hoodwink:~$ oci nosql table list-table-usage \
 
 >_**__NOTA:__** Consulte este link para maiores informações sobre o [gerenciamento de dados da tabela](https://docs.oracle.com/pt-br/iaas/nosql-database/doc/managing-table-data.html)._
 
+Para encerrar, irei excluír a tabela:
+
+```
+darmbrust@hoodwink:~$ oci nosql table delete \
+> --compartment-id "ocid1.compartment.oc1..aaaaaaaaafjgvmrez5krathnzafkfsaep3bs7dkioat32d23ubaimjiyw5qq" \
+> --table-name-or-id "produtos" \
+> --wait-for-state "SUCCEEDED"
+Are you sure you want to delete this resource? [y/N]: y
+Action completed. Waiting until the work request has entered state: ('SUCCEEDED',)
+{
+  "data": {
+    "compartment-id": "ocid1.compartment.oc1..aaaaaaaaafjgvmrez5krathnzafkfsaep3bs7dkioat32d23ubaimjiyw5qq",
+    "id": "ocid1.nosqltableworkrequest.oc1.sa-saopaulo-1.amaaaaaa6noke4qasogvlz5hsuhlsw3ly6dcvvq4geke4jjr6w6iabuxgbda",
+    "operation-type": "DELETE_TABLE",
+    "percent-complete": 100.0,
+    "resources": [
+      {
+        "action-type": "DELETED",
+        "entity-type": "TABLE",
+        "entity-uri": "/20190828/tables/produtos?compartmentId=ocid1.compartment.oc1..aaaaaaaaafjgvmrez5krathnzafkfsaep3bs7dkioat32d23ubaimjiyw5qq",
+        "identifier": "ocid1.nosqltable.oc1.sa-saopaulo-1.amaaaaaa6noke4qax4wdlimzrqvawono3nbf4wzs23b73yuicccxslt476dq"
+      }
+    ],
+    "status": "SUCCEEDED",
+    "time-accepted": "2021-10-24T12:59:17.911000+00:00",
+    "time-finished": "2021-10-24T12:59:21.097000+00:00",
+    "time-started": "2021-10-24T12:59:17.921000+00:00"
+  }
+}
+```
+
 ### __Oracle NoSQL Database Cloud Simulator__
 
 O _[Oracle NoSQL Database Cloud Simulator](https://docs.oracle.com/pt-br/iaas/nosql-database/doc/developing-oracle-nosql-database-cloud-simulator.html)_ é uma aplicação desenvolvida em _[Java](https://www.oracle.com/java/)_ que simula o serviço do _[Oracle NoSQL](https://docs.oracle.com/pt-br/iaas/nosql-database/index.html)_. Este permite que você desenvolva aplicações localmente, sem acessar o serviço diretamente. Pode ser usado também como uma maneira de testar as funcionalidades do _[Oracle NoSQL](https://docs.oracle.com/pt-br/iaas/nosql-database/index.html)_, sem necessariamente ter que se preocupar com custos ou com uma infraestrutura produtiva, por exemplo. É a maneira mais fácil de começar a desenvolver suas aplicações.
