@@ -68,4 +68,6 @@ Segundo _[Martin Fowler](https://pt.wikipedia.org/wiki/Martin_Fowler)_, ele afir
 
 Na nuvem, os aplicativos devem ser capazes de executar simultaneamente em vários _nós_ através de contêineres e _[Kubernetes](https://pt.wikipedia.org/wiki/Kubernetes)_, utilizar mecanismos para registro em log centralizado, usam processos _[CI/CD](https://pt.wikipedia.org/wiki/CI/CD)_ além de estarem estritamente _"ligados"_ a uma cultura _[DevOps](https://pt.wikipedia.org/wiki/DevOps)_.
 
+### __Conclusão__
+
 
