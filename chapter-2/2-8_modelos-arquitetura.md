@@ -54,7 +54,8 @@ Podemos destacar algumas vantagens e desvantagens:
     
     - Service Discovery 
         - Cada _microsserviço_ deve ter meios de _"descobrir"_ outros _microsserviços_.
-        
+
+![alt_text](./images/arch-microsservices.jpg  "Arquitetura em Microsserviços")
 
 Segundo _[Martin Fowler](https://pt.wikipedia.org/wiki/Martin_Fowler)_, ele afirma que: _"não considere migrar para microsserviços a menos que você já tenha um sistema que seja muito complexo para gerenciar como um monolito."_
 
