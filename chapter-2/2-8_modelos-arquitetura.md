@@ -64,7 +64,7 @@ Segundo _[Martin Fowler](https://pt.wikipedia.org/wiki/Martin_Fowler)_, ele afir
 
 ### Arquitetura Cloud Native
 
-É uma arquitetura projetada especificamente para aplicações construída sobre o modelo computacional da nuvem _[(Computação em Nuvem)](https://pt.wikipedia.org/wiki/Computa%C3%A7%C3%A3o_em_nuvem)_. Aplicações construídas sobre este tipo de arquitetura são conhecidas como _"cloud-centric applications (nascido na nuvem)"_, pois também fazem uso de muitos dos serviços que um provedor de nuvem disponibiliza.
+É uma arquitetura projetada especificamente para aplicações construída sobre o modelo computacional da nuvem _[(Computação em Nuvem)](https://pt.wikipedia.org/wiki/Computa%C3%A7%C3%A3o_em_nuvem)_. Aplicações construídas sobre este tipo de arquitetura, são conhecidas como _"cloud-centric applications (nascido na nuvem)"_, pois também fazem uso de muitos dos serviços que um provedor de nuvem disponibiliza.
 
 Na nuvem, os aplicativos devem ser capazes de executar simultaneamente em vários _nós_ através de contêineres e _[Kubernetes](https://pt.wikipedia.org/wiki/Kubernetes)_, utilizar mecanismos para registro em log centralizado, usam processos _[CI/CD](https://pt.wikipedia.org/wiki/CI/CD)_ além de estarem estritamente _"ligados"_ a uma cultura _[DevOps](https://pt.wikipedia.org/wiki/DevOps)_.
 
