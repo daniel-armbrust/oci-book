@@ -10,7 +10,7 @@ Muitas aplicações do _[mundo corporativo (enterprise)](https://en.wikipedia.or
 
 Apesar de ainda ser um modelo ainda em uso, pode-se dizer que este é um modelo desatualizado neste _"tempo de cloud"_ em que vivemos. Crescer uma aplicação dentro deste modelo ou escalar verticalmente, torna-se difícil e complexo. 
 
-Aplicações executadas sobre este modelo são chamadas de _[aplicações monolíticas](https://pt.wikipedia.org/wiki/Aplica%C3%A7%C3%A3o_monol%C3%ADtica)_.
+Aplicações executadas sobre este modelo também são chamadas de _[aplicações monolíticas](https://pt.wikipedia.org/wiki/Aplica%C3%A7%C3%A3o_monol%C3%ADtica)_.
 
 ![alt_text](./images/arch-monolitico.jpg  "Arquitetura Monolítica")
 
