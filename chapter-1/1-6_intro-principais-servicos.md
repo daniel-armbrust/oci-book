@@ -16,6 +16,8 @@ A principal função do serviço _[IAM](https://docs.oracle.com/pt-br/iaas/Conte
 
 Através dele é possivel especificar qual o **_tipo de acesso_** que um **_grupo de usuários_** possui, sobre determinados **_recursos_**. É aqui que você identifica, autentica e controla o acesso (autorização) de indivíduos ou aplicações, que utilizam os recursos do OCI (no seu tenant pra ser mais exato).
 
+![alt_text](./images/iam-identity-concepts.jpg  "OCI IAM Identity Concepts")
+
 >_**__NOTA:__** Um **recurso** é um "objeto de nuvem" que você cria no OCI. Por exemplo: instâncias de computação, volumes de armazenamento em blocos, redes virtuais, etc._
 
 Ao criar sua conta da conta no OCI, você começa com uma única identidade de login que tem acesso total a todos os recursos e serviços do seu _[tenancy](https://docs.oracle.com/pt-br/iaas/Content/Identity/Tasks/managingtenancy.htm)_. Este primeiro usuário criado recebe o título de _"Administrador do Tenant"_ ou _"Administrador Padrão"_. 
@@ -26,7 +28,7 @@ O privilégio de _"acesso total"_, é concedido através de uma _política de se
 
 #### __Usuários e Grupos__
 
-Um novo _[Tenant](https://docs.oracle.com/pt-br/iaas/Content/Identity/Tasks/managingtenancy.htm)_ criado nasce "fechado". É função do _Administrador_ criar e disponibilizar acesso a novos usuários.
+Um novo _[Tenant](https://docs.oracle.com/pt-br/iaas/Content/Identity/Tasks/managingtenancy.htm)_ criado nasce _"fechado"_. É função do _Administrador_ criar e disponibilizar acesso a novos usuários.
 
 Um **usuário** é um indivíduo da sua organização que precisa gerenciar ou usar os recursos do seu _[Tenant](https://docs.oracle.com/pt-br/iaas/Content/Identity/Tasks/managingtenancy.htm)_. Um usuário não precisa ser uma pessoa. Ele também pode representar uma aplicação.
 
@@ -37,7 +39,10 @@ O serviço _[IAM](https://docs.oracle.com/pt-br/iaas/Content/Identity/Concepts/o
 Utilize o comando abaixo para se criar um novo usuário:
 
 ```
-darmbrust@hoodwink:~$ oci iam user create --name "mflores" --email "maria@algumdominio.com.br" --description "Maria das Flores"    
+darmbrust@hoodwink:~$ oci iam user create \
+> --name "mflores" \
+> --email "maria@algumdominio.com.br" \
+> --description "Maria das Flores"    
 {
   "data": {
     "capabilities": {
@@ -84,7 +89,8 @@ darmbrust@hoodwink:~$ oci iam user list --query "data[?name=='mflores'].id"
 ```
 
 ```
-darmbrust@hoodwink:~$ oci iam user ui-password create-or-reset --user-id ocid1.user.oc1..aaaaaaaagpov2dclzaxb4hoyapkwnwsdcymlvsl3fgrjuhdzka34kd4fmxbq
+darmbrust@hoodwink:~$ oci iam user ui-password create-or-reset \
+> --user-id ocid1.user.oc1..aaaaaaaagpov2dclzaxb4hoyapkwnwsdcymlvsl3fgrjuhdzka34kd4fmxbq
 {
   "data": {
     "inactive-status": null,
@@ -104,7 +110,9 @@ Um **grupo** é um meio de se organizar usuários que terão permissões em comu
 Para se criar um grupo, usamos o comando abaixo:
 
 ```
-darmbrust@hoodwink:~$ oci iam group create --name "grp-netadm" --description "Usuários administradores dos recursos de rede."
+darmbrust@hoodwink:~$ oci iam group create \
+> --name "grp-netadm" \
+> --description "Usuários administradores dos recursos de rede."
 {
   "data": {
     "compartment-id": "ocid1.tenancy.oc1..aaaaaaaavv2qh5asjdcoufmb6fzpnrfqgjxxdzlvjrgkrkytnyyz6zgvjnua",
