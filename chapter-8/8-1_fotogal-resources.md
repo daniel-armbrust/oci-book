@@ -4,7 +4,7 @@
 
 ### __Visão Geral__
 
-A aplicação _FotoGal_ do ponto de vista de arquitetura, é bem simples.
+A aplicação _FotoGal_ do ponto de vista de arquitetura é bem simples.
 
 ![alt_text](./images/fotogal-arch.jpg "FotoGal Arquitetura")
 
