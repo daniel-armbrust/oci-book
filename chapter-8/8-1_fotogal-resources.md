@@ -4,7 +4,7 @@
 
 ### __Visão Geral__
 
-A aplicação _FotoGal_ do ponto de vista de arquitetura é bem simples.
+A aplicação _FotoGal_ do ponto de vista de arquitetura é bem simples:
 
 ![alt_text](./images/fotogal-arch.jpg "FotoGal Arquitetura")
 
@@ -15,6 +15,12 @@ Começarei demonstrando a criação dos recursos de infraestrutura via _[OCI CLI
 Seguimos com os recursos da aplicação...
 
 ### __Upload de imagens no Object Storage__
+
+A aplicação _FotoGal_ utiliza o serviço _[Object Storage](https://github.com/daniel-armbrust/oci-book/blob/main/chapter-6/6-1_intro-object-storage.md)_ para armazenar todas as _imagens_ dos usuários.
+
+Utilizar um serviço como o _[Object Storage](https://github.com/daniel-armbrust/oci-book/blob/main/chapter-6/6-1_intro-object-storage.md)_ para armazenar _imagens_ ou _dados não estruturados_, é uma boa escolha. Além de ser financeiramente _mais barato_ em comparação ao _[armazenamento em disco](https://docs.oracle.com/pt-br/iaas/Content/Block/Concepts/overview.htm)_, sabemos que este é um serviço escalável no qual permite armazenar uma quantidade ilimitada de dados de qualquer tipo, durável e extremamente confiável.
+
+Para a aplicação _FotoGal_, foi construído uma _camada_ na _"frente"_ do _[Object Storage](https://github.com/daniel-armbrust/oci-book/blob/main/chapter-6/6-1_intro-object-storage.md)_, que permite somente usuários _autenticados_ a realizar _[upload](https://en.wikipedia.org/wiki/Upload)_ das _imagens_ de sua escolha. Estas por sua vez, são persistidas no _[Object Storage](https://github.com/daniel-armbrust/oci-book/blob/main/chapter-6/6-1_intro-object-storage.md)_.
 
 ### __NoSQL__
 
