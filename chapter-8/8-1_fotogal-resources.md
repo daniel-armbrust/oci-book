@@ -12,15 +12,82 @@ Ela foi desenvolvida com o objetivo de ser executada em um _[cluster Kubernetes]
 
 Começarei demonstrando a criação dos recursos de infraestrutura via _[OCI CLI](https://github.com/daniel-armbrust/oci-book/blob/main/chapter-1/1-5_ocicli-cloudshell.md)_, seguindo pelos passos necessários que envolvem a construção e execução do _[contêiner](https://github.com/daniel-armbrust/oci-book/blob/main/chapter-2/2-6_docker-howto.md)_ da aplicação.
 
-Seguimos com os recursos da aplicação...
+Antes de seguir, criarei um compartimento de nome _"cmp-fotogal"_ para abrigar todos os recursos que fazem parte da aplicação:
+
+```
+darmbrust@hoodwink:~$ oci iam compartment create \
+> --compartment-id "ocid1.tenancy.oc1..aaaaaaaavv2qh5asjdcoufmb6fzpnrfqgjxxdzlvjrgkrkytnyyz6zgvjnua" \
+> --name "cmp-fotogal" \
+> --description "Recursos da aplicação FotoGal"
+{
+  "data": {
+    "compartment-id": "ocid1.tenancy.oc1..aaaaaaaavv2qh5asjdcoufmb6fzpnrfqgjxxdzlvjrgkrkytnyyz6zgvjnua",
+    "defined-tags": {
+      "Oracle-Tags": {
+        "CreatedBy": "oracleidentitycloudservice/daniel.armbrust@algumdominio.com",
+        "CreatedOn": "2021-10-28T23:40:09.184Z"
+      }
+    },
+    "description": "Recursos da aplica\u00e7\u00e3o FotoGal",
+    "freeform-tags": {},
+    "id": "ocid1.compartment.oc1..aaaaaaaabuevop234bdezdv6wrfzw4us35yugjjqezyck23tdl2qja3c4ixq",
+    "inactive-status": null,
+    "is-accessible": true,
+    "lifecycle-state": "ACTIVE",
+    "name": "cmp-fotogal",
+    "time-created": "2021-10-28T23:40:09.417000+00:00"
+  },
+  "etag": "36737a006f73bfd0acc193dc39cbb8e86de429fc"
+}
+```
 
 ### __Upload de imagens no Object Storage__
 
 A aplicação _FotoGal_ utiliza o serviço _[Object Storage](https://github.com/daniel-armbrust/oci-book/blob/main/chapter-6/6-1_intro-object-storage.md)_ para armazenar todas as _imagens_ dos usuários.
 
-Utilizar um serviço como o _[Object Storage](https://github.com/daniel-armbrust/oci-book/blob/main/chapter-6/6-1_intro-object-storage.md)_ para armazenar _imagens_ ou _dados não estruturados_, é uma boa escolha. Além de ser financeiramente _mais barato_ em comparação ao _[armazenamento em disco](https://docs.oracle.com/pt-br/iaas/Content/Block/Concepts/overview.htm)_, sabemos que este é um serviço escalável no qual permite armazenar uma quantidade ilimitada de dados de qualquer tipo, durável e extremamente confiável.
+Utilizar um serviço como o _[Object Storage](https://github.com/daniel-armbrust/oci-book/blob/main/chapter-6/6-1_intro-object-storage.md)_ para armazenar _imagens_ ou _dados não estruturados_, é uma boa escolha. Além de ser financeiramente _mais barato_ em comparação ao _[armazenamento em disco](https://docs.oracle.com/pt-br/iaas/Content/Block/Concepts/overview.htm)_, sabemos que este é um serviço _escalável_ no qual permite armazenar uma quantidade ilimitada de dados de qualquer tipo, _durável_ e extremamente confiável.
 
 Para a aplicação _FotoGal_, foi construído uma _camada_ na _"frente"_ do _[Object Storage](https://github.com/daniel-armbrust/oci-book/blob/main/chapter-6/6-1_intro-object-storage.md)_, que permite somente usuários _autenticados_ a realizar _[upload](https://en.wikipedia.org/wiki/Upload)_ das _imagens_ de sua escolha. Estas por sua vez, são persistidas no _[Object Storage](https://github.com/daniel-armbrust/oci-book/blob/main/chapter-6/6-1_intro-object-storage.md)_.
+
+```
+darmbrust@hoodwink:~$ oci os bucket create \
+> --compartment-id "ocid1.compartment.oc1..aaaaaaaabuevop234bdezdv6wrfzw4us35yugjjqezyck23tdl2qja3c4ixq" \
+> --name "fotogal_bucket_images" \
+> --public-access-type "NoPublicAccess" \
+> --storage-tier "Standard" \
+> --versioning "Disabled"
+{
+  "data": {
+    "approximate-count": null,
+    "approximate-size": null,
+    "auto-tiering": null,
+    "compartment-id": "ocid1.compartment.oc1..aaaaaaaabuevop234bdezdv6wrfzw4us35yugjjqezyck23tdl2qja3c4ixq",
+    "created-by": "ocid1.user.oc1..aaaaaaaauf3dvc2aou6z5wmrm225a5rwkmp2ncoaj3726gpzlqdwjgby5zya",
+    "defined-tags": {
+      "Oracle-Tags": {
+        "CreatedBy": "oracleidentitycloudservice/daniel.armbrust@algumdominio.com",
+        "CreatedOn": "2021-10-28T23:45:00.417Z"
+      }
+    },
+    "etag": "7606d054-31cf-40dd-a6c1-ed0111ca703c",
+    "freeform-tags": {},
+    "id": "ocid1.bucket.oc1.sa-saopaulo-1.aaaaaaaa5ccdq7qpbw3rhjsijmpc5ln6rzl25deizdmytenlhvofzipfpclq",
+    "is-read-only": false,
+    "kms-key-id": null,
+    "metadata": {},
+    "name": "fotogal_bucket_images",
+    "namespace": "idreywyoj0pu",
+    "object-events-enabled": false,
+    "object-lifecycle-policy-etag": null,
+    "public-access-type": "NoPublicAccess",
+    "replication-enabled": false,
+    "storage-tier": "Standard",
+    "time-created": "2021-10-28T23:45:00.530000+00:00",
+    "versioning": "Disabled"
+  },
+  "etag": "7606d054-31cf-40dd-a6c1-ed0111ca703c"
+}
+```
 
 ### __NoSQL__
 
