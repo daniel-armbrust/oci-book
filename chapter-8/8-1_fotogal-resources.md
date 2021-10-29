@@ -159,7 +159,7 @@ darmbrust@hoodwink:~$ oci nosql index create \
 > --wait-for-state "SUCCEEDED"
 ```
 
-_[Índices](https://docs.oracle.com/pt-br/iaas/nosql-database/doc/using-tables-java.html#GUID-4382BC75-5448-440E-B9DF-13E6FEC764C1)_ representam uma maneira alternativa de recuperar linhas da tabela. Ao criar um _[índice](https://docs.oracle.com/pt-br/iaas/nosql-database/doc/using-tables-java.html#GUID-4382BC75-5448-440E-B9DF-13E6FEC764C1)_, você pode recuperar linhas com mais eficiência e com base em campos que não fazem parte da _chave primária_.
+_[Índices](https://docs.oracle.com/pt-br/iaas/nosql-database/doc/using-tables-java.html#GUID-4382BC75-5448-440E-B9DF-13E6FEC764C1)_ representam uma maneira alternativa de recuperar linhas da tabela. Ao criar um _[índice](https://docs.oracle.com/pt-br/iaas/nosql-database/doc/using-tables-java.html#GUID-4382BC75-5448-440E-B9DF-13E6FEC764C1)_, você pode recuperar linhas com mais eficiência e com base em campos que não fazem parte da _[chave primária](https://pt.wikipedia.org/wiki/Chave_prim%C3%A1ria)_.
 
 Após, serão criadas outras duas tabelas. A tabela _"fotogal_ntable_users"_ armazena os usuários da aplicação:
 
