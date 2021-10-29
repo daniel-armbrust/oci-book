@@ -6,3 +6,12 @@ _FotoGal (Foto Galeria)_ é uma aplicação _[Web/Cloud Native](https://en.wikip
 
 ![alt_text](./images/fotogal-logo.jpg "FotoGal")
 
+Por enquanto, a aplicação utiliza os seguintes serviços do _[OCI](https://www.oracle.com/br/cloud/)_:
+
+- [Object Storage](https://docs.oracle.com/pt-br/iaas/Content/Object/Concepts/objectstorageoverview.htm)
+- [Banco de Dados NoSQL](https://docs.oracle.com/pt-br/iaas/nosql-database/index.html)
+- [Log](https://docs.oracle.com/pt-br/iaas/Content/Logging/Concepts/loggingoverview.htm)
+- [Container Engine for Kubernetes](https://docs.oracle.com/pt-br/iaas/Content/ContEng/Concepts/contengoverview.htm)
+- [Load Balancing](https://docs.oracle.com/pt-br/iaas/Content/Balance/Concepts/balanceoverview.htm)
+
+A tendência, com o tempo, é aumentar as funcionalidades da aplicação através da utilização de mais serviços.
