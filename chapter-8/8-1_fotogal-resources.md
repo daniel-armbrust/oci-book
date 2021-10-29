@@ -93,7 +93,7 @@ darmbrust@hoodwink:~$ oci os bucket create \
 
 ### __NoSQL como catálogo de URL__
 
-O serviço _[NoSQL](https://github.com/daniel-armbrust/oci-book/blob/main/chapter-7/7-6_nosql.md)_ é utilizado pela aplicação com o propósito de _catalogar_ as imagens dos usuários (URL da imagem salva no _[Object Storage](https://github.com/daniel-armbrust/oci-book/blob/main/chapter-6/6-1_intro-object-storage.md)_ para ser mais exato). Ou seja, toda vez que um usuário faz _[upload](https://en.wikipedia.org/wiki/Upload)_ de uma imagem, esta após de ser salva no _[Object Storage](https://github.com/daniel-armbrust/oci-book/blob/main/chapter-6/6-1_intro-object-storage.md)_, será inserido um registro no _[NoSQL](https://github.com/daniel-armbrust/oci-book/blob/main/chapter-7/7-6_nosql.md)_ que identifica que determinada imagem pertence a determinado usuário.
+O serviço _[NoSQL](https://github.com/daniel-armbrust/oci-book/blob/main/chapter-7/7-6_nosql.md)_ é utilizado pela aplicação com o propósito de _catalogar_ as imagens dos usuários. Ou seja, toda vez que um usuário faz _[upload](https://en.wikipedia.org/wiki/Upload)_ de uma imagem, esta após de ser salva no _[Object Storage](https://github.com/daniel-armbrust/oci-book/blob/main/chapter-6/6-1_intro-object-storage.md)_, será inserido um registro no _[NoSQL](https://github.com/daniel-armbrust/oci-book/blob/main/chapter-7/7-6_nosql.md)_ que identifica que determinada imagem pertence a determinado usuário.
 
 Estas informações são salvas na tabela _"fotogal_ntable_images"_ que será criada com o comando abaixo:
 
