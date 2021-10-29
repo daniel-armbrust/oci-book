@@ -258,6 +258,82 @@ darmbrust@hoodwink:~$  oci nosql index create \
 
 Pronto! A infraestrutura para persistência dos dodos foi criada.
 
+### __Serviço de Logging__
+
+O _[serviço Logging](https://docs.oracle.com/pt-br/iaas/Content/Logging/home.htm)_ disponível no _[OCI](https://www.oracle.com/br/cloud/)_, possibilita armazenar de forma centralizada os _logs_ gerados pela aplicação.
+
+Para usarmos o serviço, primeiramente devemos criar um _[grupo de logs](https://docs.oracle.com/pt-br/iaas/Content/Logging/Task/managinglogs.htm)_. Este nada mais é do que um contêiner lógico para organizar logs que podem ser gerados de várias fontes diferentes.
+
+```
+darmbrust@hoodwink:~$ oci logging log-group create \
+> --compartment-id "ocid1.compartment.oc1..aaaaaaaabuevop234bdezdv6wrfzw4us35yugjjqezyck23tdl2qja3c4ixq" \
+> --display-name "fotogal_loggroup" \
+> --wait-for-state "SUCCEEDED"
+Action completed. Waiting until the work request has entered state: ('SUCCEEDED',)
+{
+  "data": {
+    "compartment-id": "ocid1.compartment.oc1..aaaaaaaabuevop234bdezdv6wrfzw4us35yugjjqezyck23tdl2qja3c4ixq",
+    "id": "ocid1.logworkrequest.oc1.sa-saopaulo-1.aaaaaaaanvzeowcll4gfldb6voj3nemfbs6u7ur6vyivsan4is4sv6snanga",
+    "operation-type": "CREATE_LOG_GROUP",
+    "percent-complete": 100.0,
+    "resources": [
+      {
+        "action-type": "CREATED",
+        "entity-type": "loggroup",
+        "entity-uri": "/logGroups/ocid1.loggroup.oc1.sa-saopaulo-1.amaaaaaa6noke4qax3f3icuckaccm522v3qnn7d2iib3lxnegr2aanf6k5va",
+        "identifier": "ocid1.loggroup.oc1.sa-saopaulo-1.amaaaaaa6noke4qax3f3icuckaccm522v3qnn7d2iib3lxnegr2aanf6k5va"
+      }
+    ],
+    "status": "SUCCEEDED",
+    "time-accepted": "2021-10-29T14:35:22.184000+00:00",
+    "time-finished": "2021-10-29T14:35:22.184000+00:00",
+    "time-started": "2021-10-29T14:35:22.184000+00:00"
+  }
+}
+```
+
+```
+darmbrust@hoodwink:~$ oci logging log-group list \
+> --compartment-id "ocid1.compartment.oc1..aaaaaaaabuevop234bdezdv6wrfzw4us35yugjjqezyck23tdl2qja3c4ixq" \
+> --all \
+> --display-name "fotogal_loggroup" \
+> --query 'data[].id'
+[
+  "ocid1.loggroup.oc1.sa-saopaulo-1.amaaaaaa6noke4qax3f3icuckaccm522v3qnn7d2iib3lxnegr2aanf6k5va"
+]
+```
+
+```
+darmbrust@hoodwink:~$ oci logging log create \
+> --display-name "fotogal_customlog_app" \
+> --log-group-id "ocid1.loggroup.oc1.sa-saopaulo-1.amaaaaaa6noke4qax3f3icuckaccm522v3qnn7d2iib3lxnegr2aanf6k5va" \
+> --log-type "CUSTOM" \
+> --is-enabled "true" \
+> --wait-for-state "SUCCEEDED"
+Action completed. Waiting until the work request has entered state: ('SUCCEEDED',)
+{
+  "data": {
+    "compartment-id": "ocid1.compartment.oc1..aaaaaaaabuevop234bdezdv6wrfzw4us35yugjjqezyck23tdl2qja3c4ixq",
+    "id": "ocid1.logworkrequest.oc1.sa-saopaulo-1.aaaaaaaa3dt7ookm6puvgaqctenyqqnkwocxipkx7jq35qme76dl2gtivcoa",
+    "operation-type": "CREATE_LOG",
+    "percent-complete": 100.0,
+    "resources": [
+      {
+        "action-type": "CREATED",
+        "entity-type": "log",
+        "entity-uri": "/logs/ocid1.log.oc1.sa-saopaulo-1.amaaaaaa6noke4qag4aomc72aibongjjvewvenncatpz5tivuughkjmp5mmq",
+        "identifier": "ocid1.log.oc1.sa-saopaulo-1.amaaaaaa6noke4qag4aomc72aibongjjvewvenncatpz5tivuughkjmp5mmq"
+      }
+    ],
+    "status": "SUCCEEDED",
+    "time-accepted": "2021-10-29T14:44:52.205000+00:00",
+    "time-finished": "2021-10-29T14:44:52.205000+00:00",
+    "time-started": "2021-10-29T14:44:52.205000+00:00"
+  }
+}
+```
+
+
 ### __Desenvolvimento Conteinerizado__
 
 Antes de começar vamos entender o que é _"desenvolvimento conteinerizado"_. 
