@@ -141,7 +141,7 @@ Action completed. Waiting until the work request has entered state: ('SUCCEEDED'
 }
 ```
 
-Para a tabela _"fotogal_ntable_images"_ serão criado dois _[índices](https://docs.oracle.com/pt-br/iaas/nosql-database/doc/using-tables-java.html#GUID-4382BC75-5448-440E-B9DF-13E6FEC764C1)_:
+Para a tabela _"fotogal_ntable_images"_ serão criados dois _[índices](https://docs.oracle.com/pt-br/iaas/nosql-database/doc/using-tables-java.html#GUID-4382BC75-5448-440E-B9DF-13E6FEC764C1)_:
 
 ```
 darmbrust@hoodwink:~$ oci nosql index create \
