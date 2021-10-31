@@ -382,7 +382,7 @@ drwxr-xr-x 4 darmbrust darmbrust 4096 Oct 31 10:11 ../
 -r-------- 1 darmbrust darmbrust 1679 Oct 31 10:11 oci_api_key.pem
 ```
 
-Básico. O arquivo _"fotogal/oci_config/oci.conf"_ possui algumas informações básica sobre o _tenant_, _OCID_ do usuário que possui os privilégios necessários para usar os serviços que a aplicação necessita, além do compartimento onde residem esses recursos:
+O arquivo _"fotogal/oci_config/oci.conf"_ possui algumas informações básica sobre o _tenant_, _OCID_ do usuário que possui os privilégios necessários para usar os serviços que a aplicação necessita, além do compartimento onde residem esses recursos:
 
 ```
 darmbrust@sladar:~/fotogal$ cat fotogal/oci_config/oci.conf
@@ -392,6 +392,14 @@ fingerprint=2e:c4:dd:57:c2:df:e6:17:7f:da:e7:6c:e4:74:97:18
 tenancy=ocid1.tenancy.oc1..aaaaaaaavv2qh5asjdcoufmb6fzpnrfqgjxxdzlvjrgkrkytnyyz6zgvjnua
 region=sa-saopaulo-1
 compartment=ocid1.compartment.oc1..aaaaaaaabuevop234bdezdv6wrfzw4us35yugjjqezyck23tdl2qja3c4ixq
+```
+
+Já o arquivo _"fotogal/oci_config/oci_api_key.pem"_, possui a _[chave privada](https://docs.oracle.com/pt-br/iaas/Content/API/Concepts/apisigningkey.htm)_ do usuário no formato _[PEM](https://en.wikipedia.org/wiki/Privacy-Enhanced_Mail)_:
+
+```
+darmbrust@sladar:~/fotogal$ cat fotogal/oci_config/oci_api_key.pem
+-----BEGIN RSA PRIVATE KEY-----
+-----END RSA PRIVATE KEY-----
 ```
 
 >_**__NOTA:__** Todas essas informações básicas (OCID, tenant, chaves de acesso, etc) já foram vistas no setup inicial do [OCI CLI](https://github.com/daniel-armbrust/oci-book/blob/main/chapter-1/1-5_ocicli-cloudshell.md) que estão no capítulo [1.5 - OCI CLI e Cloud Shell](https://github.com/daniel-armbrust/oci-book/blob/main/chapter-1/1-5_ocicli-cloudshell.md)._
