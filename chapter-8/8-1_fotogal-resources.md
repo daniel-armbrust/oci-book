@@ -341,28 +341,68 @@ Action completed. Waiting until the work request has entered state: ('SUCCEEDED'
 
 _Conteinerização_ é um termo usado no qual se refere a ação de _"empacotar o código de um software"_ junto com suas bibliotecas, arquivos de configuração e demais dependências, gerando assim uma _[imagem](https://docs.docker.com/language/python/build-images/)_ que pode ser implantada _(deploy)_ e executada em qualquer infraestrutura que suporte a execução de contêineres _("written once and run anywhere")_. 
 
-Os _contêineres_ por serem portáveis e mais eficientes do que _máquinas virtuais (VMs)_, sobre a perspectiva de utilização de recursos, tornaram-se o padrão para desenvolvimento de aplicações modernas e _"nativos da nuvem"_ _[(Cloud Native)](https://en.wikipedia.org/wiki/Cloud_native_computing)_.
+Os _contêineres_ por serem portáveis e mais eficientes do que _máquinas virtuais (VMs)_, sobre a perspectiva de utilização de recursos, tornaram-se o padrão para desenvolvimento de aplicações modernas, _"nativos da nuvem"_ _[(Cloud Native)](https://en.wikipedia.org/wiki/Cloud_native_computing)_, além de trazer a tona um novo estilo arquitetural chamado de _[microsserviços](https://en.wikipedia.org/wiki/Microservices)_.
 
-Métodos de desenvolvimentos antigos, onde o código era desenvolvido em um ambiente específico e quando era transferido para _"rodar"_ em produção por exemplo, sempre ocasionavam erros, _[bugs](https://en.wikipedia.org/wiki/Software_bug)_ e exigiam diferentes adequações. Uma das grandes vantagens no _"desenvolvimento conteinerizado"_ está na sua _portabilidade_. O contêiner que é usado para desenvolver, é o mesmo usado na produção. O mesmo pacote _auto-contido_ ou _[imagem](https://docs.docker.com/language/python/build-images/)_, pode ser executado em diferentes infraestruturas. Eu posso desenvolver localmente na minha máquina desktop, move e executar no _[OCI](https://www.oracle.com/br/cloud/)_, por exemplo.
+Métodos de desenvolvimentos antigos, onde o código era desenvolvido em um ambiente específico e quando era transferido para _"rodar"_ em produção por exemplo, sempre ocasionavam erros, _[bugs](https://en.wikipedia.org/wiki/Software_bug)_ e exigiam diferentes adequações. Uma das grandes vantagens no _"desenvolvimento conteinerizado"_ está na sua _portabilidade_. O _contêiner_ por ser uma unidade de software _"empacotada"_ com todas as suas dependências, permite que sua execução seja feita em diferentes infraestruturas. Eu posso desenvolver localmente na minha máquina desktop, move e executar este _contêiner_ no _[OCI](https://www.oracle.com/br/cloud/)_, por exemplo.
 
 >_**__NOTA:__** Para saber mais sobre [Docker](https://github.com/daniel-armbrust/oci-book/blob/main/chapter-2/2-6_docker-howto.md) e seus detalhes, consulte o capítulo [2.6 - Docker HOWTO](https://github.com/daniel-armbrust/oci-book/blob/main/chapter-2/2-6_docker-howto.md)._
 
-Irei apresentar como é desenvolver uma aplicação em _contêiner_ e como realizar o _deploy_ no _[Serviço Container Engine for Kubernetes](https://docs.oracle.com/pt-br/iaas/Content/ContEng/Concepts/contengoverview.htm)_ do _[OCI](https://www.oracle.com/br/cloud/)_. O intuíto não é falar da linguagem de programação _[Python](https://www.python.org/)_ ou do framework _[Flask](https://flask.palletsprojects.com)_ que foram utilizados na programação da aplicação _FotoGal_. E sim mostrar como é feito o desenvolvimento de uma aplicação que usa os serviços do _[OCI](https://www.oracle.com/br/cloud/)_.
+Irei apresentar como é desenvolver uma aplicação em _contêiner_ e como realizar o _deploy_ no _[Serviço Container Engine for Kubernetes](https://docs.oracle.com/pt-br/iaas/Content/ContEng/Concepts/contengoverview.htm)_ do _[OCI](https://www.oracle.com/br/cloud/)_. O intuíto não é falar da linguagem de programação _[Python](https://www.python.org/)_ ou do framework _[Flask](https://pt.wikipedia.org/wiki/Flask_(framework_web))_ que foram utilizados na programação da aplicação _FotoGal_. Mas sim, mostrar como é feito o desenvolvimento de uma aplicação que usa os serviços do _[OCI](https://www.oracle.com/br/cloud/)_.
 
-Como todo o código já está pronto, iremos _"clonar"_ o _[repositório](https://github.com/daniel-armbrust/fotogal)_ da aplicação _FotoGal_:
+Como todo o código já está pronto, irei primeiramente _"clonar"_ o _[repositório](https://github.com/daniel-armbrust/fotogal)_ da aplicação _FotoGal_:
 
 ```
 darmbrust@sladar:~$ git clone https://github.com/daniel-armbrust/fotogal.git
 darmbrust@sladar:~$ cd fotogal
-darmbrust@sladar:~/fotogal$ ls -l
-total 76
--rw-r--r-- 1 darmbrust darmbrust   723 Oct 29 15:29 Dockerfile
--rw-r--r-- 1 darmbrust darmbrust 35149 Oct 24 08:06 LICENSE
--rw-r--r-- 1 darmbrust darmbrust     0 Oct 29 15:28 Makefile
--rw-r--r-- 1 darmbrust darmbrust 12509 Oct 29 15:55 README.md
-drwxr-xr-x 4 darmbrust darmbrust  4096 Oct 29 15:37 fotogal
-drwxr-xr-x 2 darmbrust darmbrust  4096 Oct 29 15:34 gthimgs
--rw-r--r-- 1 darmbrust darmbrust   423 Oct 29 15:31 requirements.txt
-drwxr-xr-x 4 darmbrust darmbrust  4096 Oct 28 08:33 terraform
-drwxr-xr-x 2 darmbrust darmbrust  4096 Oct 29 15:32 tools
+darmbrust@sladar:~/fotogal$ ls -aFl
+total 96
+drwxr-xr-x  8 darmbrust darmbrust  4096 Oct 29 15:33 ./
+drwxr-xr-x 12 darmbrust darmbrust  4096 Oct 28 07:56 ../
+drwxr-xr-x  8 darmbrust darmbrust  4096 Oct 29 20:49 .git/
+-rw-r--r--  1 darmbrust darmbrust  2726 Oct 29 15:38 .gitignore
+-rw-r--r--  1 darmbrust darmbrust   723 Oct 29 15:29 Dockerfile
+-rw-r--r--  1 darmbrust darmbrust 35149 Oct 24 08:06 LICENSE
+-rw-r--r--  1 darmbrust darmbrust     0 Oct 29 15:28 Makefile
+-rw-r--r--  1 darmbrust darmbrust 12509 Oct 29 15:55 README.md
+drwxr-xr-x  4 darmbrust darmbrust  4096 Oct 29 15:37 fotogal/
+drwxr-xr-x  2 darmbrust darmbrust  4096 Oct 29 15:34 gthimgs/
+-rw-r--r--  1 darmbrust darmbrust   422 Oct 30 08:46 requirements.txt
+drwxr-xr-x  4 darmbrust darmbrust  4096 Oct 28 08:33 terraform/
+drwxr-xr-x  2 darmbrust darmbrust  4096 Oct 29 15:32 tools/
 ```
+
+A aplicação necessita de dois arquivos para comunicar-se com os serviços do _[OCI](https://www.oracle.com/br/cloud/)_ através do _[SDK para Python](https://docs.oracle.com/pt-br/iaas/Content/API/SDKDocs/pythonsdk.htm)_. Estes dois arquivos, após o _"clone"_ do _[repositório](https://github.com/daniel-armbrust/fotogal)_, devem ser criados antes da construção da _[imagem](https://docs.docker.com/language/python/build-images/)_.
+
+```
+darmbrust@sladar:~/fotogal$ ls -laF fotogal/oci_config/
+total 20
+drwxr-xr-x 2 darmbrust darmbrust 4096 Oct 31 10:11 ./
+drwxr-xr-x 4 darmbrust darmbrust 4096 Oct 31 10:11 ../
+-rw-r--r-- 1 darmbrust darmbrust  356 Oct 31 10:08 oci.conf
+-r-------- 1 darmbrust darmbrust 1679 Oct 31 10:11 oci_api_key.pem
+```
+
+O arquivo _"fotogal/oci_config/oci.conf"_ possui algumas informações básica sobre o _tenant_, _OCID_ do usuário que possui os privilégios necessários para usar os serviços que a aplicação necessita, além do compartimento onde residem esses recursos:
+
+```
+darmbrust@sladar:~/fotogal$ cat fotogal/oci_config/oci.conf
+[DEFAULT]
+user=ocid1.user.oc1..aaaaaaaagpov2dclzaxb4hoyapkwnwsdcymlvsl3fgrjuhdzka34kd4fmxbq
+fingerprint=2e:c4:dd:57:c2:df:e6:17:7f:da:e7:6c:e4:74:97:18
+tenancy=ocid1.tenancy.oc1..aaaaaaaavv2qh5asjdcoufmb6fzpnrfqgjxxdzlvjrgkrkytnyyz6zgvjnua
+region=sa-saopaulo-1
+compartment=ocid1.compartment.oc1..aaaaaaaabuevop234bdezdv6wrfzw4us35yugjjqezyck23tdl2qja3c4ixq
+```
+
+>_**__NOTA:__** Todas essas informações básicas (OCID, tenant, chaves de acesso) já foram vistas no setup inicial do [OCI CLI](https://github.com/daniel-armbrust/oci-book/blob/main/chapter-1/1-5_ocicli-cloudshell.md) que estão no capítulo [1.5 - OCI CLI e Cloud Shell](https://github.com/daniel-armbrust/oci-book/blob/main/chapter-1/1-5_ocicli-cloudshell.md)._
+
+Uma vez que todo o ferramental _[Docker](https://github.com/daniel-armbrust/oci-book/blob/main/chapter-2/2-6_docker-howto.md)_ já está instalado, posso me atentar aos detalhes que envolvem a construção da _[imagem](https://docs.docker.com/language/python/build-images/)_ desta aplicação.
+
+Dois arquivos que merecem destaque por aqui usados na construção da _[imagem](https://docs.docker.com/language/python/build-images/)_:
+
+- **Dockerfile**
+    - Arquivo no qual contém a sequência dos comandos usados na construção da _[imagem](https://docs.docker.com/language/python/build-images/)_.
+    
+- **requirements.txt**
+    - Contém todas as dependências _[Python](https://www.python.org/)_ que são necessários para execução da aplicação. Cada pacote listado neste arquivo será instalado pela ferramenta _[pip](https://pt.wikipedia.org/wiki/Pip_(gerenciador_de_pacotes))_.
+
