@@ -382,7 +382,7 @@ drwxr-xr-x 4 darmbrust darmbrust 4096 Oct 31 10:11 ../
 -r-------- 1 darmbrust darmbrust 1679 Oct 31 10:11 oci_api_key.pem
 ```
 
-O arquivo _"fotogal/oci_config/oci.conf"_ possui algumas informações básica sobre o _tenant_, _OCID_ do usuário que possui os privilégios necessários para usar os serviços que a aplicação necessita, além do compartimento onde residem esses recursos:
+Básico. O arquivo _"fotogal/oci_config/oci.conf"_ possui algumas informações básica sobre o _tenant_, _OCID_ do usuário que possui os privilégios necessários para usar os serviços que a aplicação necessita, além do compartimento onde residem esses recursos:
 
 ```
 darmbrust@sladar:~/fotogal$ cat fotogal/oci_config/oci.conf
