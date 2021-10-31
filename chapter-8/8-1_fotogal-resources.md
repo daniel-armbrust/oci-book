@@ -394,7 +394,7 @@ region=sa-saopaulo-1
 compartment=ocid1.compartment.oc1..aaaaaaaabuevop234bdezdv6wrfzw4us35yugjjqezyck23tdl2qja3c4ixq
 ```
 
->_**__NOTA:__** Todas essas informações básicas (OCID, tenant, chaves de acesso) já foram vistas no setup inicial do [OCI CLI](https://github.com/daniel-armbrust/oci-book/blob/main/chapter-1/1-5_ocicli-cloudshell.md) que estão no capítulo [1.5 - OCI CLI e Cloud Shell](https://github.com/daniel-armbrust/oci-book/blob/main/chapter-1/1-5_ocicli-cloudshell.md)._
+>_**__NOTA:__** Todas essas informações básicas (OCID, tenant, chaves de acesso, etc) já foram vistas no setup inicial do [OCI CLI](https://github.com/daniel-armbrust/oci-book/blob/main/chapter-1/1-5_ocicli-cloudshell.md) que estão no capítulo [1.5 - OCI CLI e Cloud Shell](https://github.com/daniel-armbrust/oci-book/blob/main/chapter-1/1-5_ocicli-cloudshell.md)._
 
 Uma vez que todo o ferramental _[Docker](https://github.com/daniel-armbrust/oci-book/blob/main/chapter-2/2-6_docker-howto.md)_ já está instalado, posso me atentar aos detalhes que envolvem a construção da _[imagem](https://docs.docker.com/language/python/build-images/)_ desta aplicação.
 
