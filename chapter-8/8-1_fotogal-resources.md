@@ -414,8 +414,47 @@ Dois arquivos que merecem destaque por aqui usados na construção da _[imagem](
 - **requirements.txt**
     - Contém todas as dependências _[Python](https://www.python.org/)_ que são necessários para execução da aplicação. Cada pacote listado neste arquivo será instalado pela ferramenta _[pip](https://pt.wikipedia.org/wiki/Pip_(gerenciador_de_pacotes))_.
 
-Toda _[imagem](https://docs.docker.com/language/python/build-images/)_ deve necessáriamente possuir uma _TAG_ que basicamente indica sua versão. Porém, uma _[imagem](https://docs.docker.com/language/python/build-images/)_ que será enviada ao Registry do OCI, necessita seguir um padrão de _TAG_.
+Antes de partirmos para realizar a contrução da _[imagem](https://docs.docker.com/language/python/build-images/)_, iremos verificar um obrigatoriedade que envolve sua _TAG_. 
+
+Toda _[imagem](https://docs.docker.com/language/python/build-images/)_ deve necessáriamente possuir uma _TAG_ que basicamente indica sua versão. Porém, uma _[imagem](https://docs.docker.com/language/python/build-images/)_ que será enviada ao _[Container Registry](https://docs.oracle.com/pt-br/iaas/Content/Registry/Concepts/registryoverview.htm)_ do _[OCI](https://www.oracle.com/br/cloud/)_, necessita seguir um padrão específico para _TAG_ conforme exibido abaixo:
 
 ```
 <Chave da Região>.ocir.io/<Tenancy Namespace>/<Usuário/Repositório>/<Nome/Versão da Aplicação>
+```
+
+Para o valor _"\<Chave da Região\>"_, este nada mais é do que o identificador da _[região](https://www.oracle.com/cloud/data-regions/)_ onde esta _[imagem](https://docs.docker.com/language/python/build-images/)_ estará disponível para _deploy_.
+
+Em nosso caso, queremos levar a _[imagem](https://docs.docker.com/language/python/build-images/)_ para a _[região](https://www.oracle.com/cloud/data-regions/)_ de São Paulo. Para obter sua chave, usamos o comando abaixo:
+
+```
+darmbrust@hoodwink:~$ oci iam region-subscription list \
+> --all \
+> --query "data[?\"region-name\"=='sa-saopaulo-1']" \
+> --output table
++----------------+------------+---------------+--------+
+| is-home-region | region-key | region-name   | status |
++----------------+------------+---------------+--------+
+| True           | GRU        | sa-saopaulo-1 | READY  |
++----------------+------------+---------------+--------+
+```
+
+>_**__NOTA:__** As [regiões](https://www.oracle.com/cloud/data-regions/) e URLs onde o serviço [Container Registry](https://docs.oracle.com/pt-br/iaas/Content/Registry/Concepts/registryoverview.htm) encontra-se disponível, podem ser visualizadas neste [link aqui](https://docs.oracle.com/pt-br/iaas/Content/Registry/Concepts/registryprerequisites.htm#regional-availability)._
+
+O próximo valor \"\<Tenancy Namespace\>" está ligado ao serviço _[Object Storage](https://github.com/daniel-armbrust/oci-book/blob/main/chapter-6/6-1_intro-object-storage.md)_. Todo _[tenancy](https://docs.oracle.com/pt-br/iaas/Content/Identity/Tasks/managingtenancy.htm)_ recebe um valor único, exclusivo e não editável de _[namespace](https://docs.oracle.com/pt-br/iaas/Content/Object/Tasks/understandingnamespaces.htm)_. Este serve como o _"contêiner pai"_ (uma espécie de pasta raíz) para todos os buckets e objetos que forem criados, inclusive _[imagem Docker](https://docs.docker.com/language/python/build-images/)_ que criaremos aqui.
+
+Para obtermos o valor _[namespace](https://docs.oracle.com/pt-br/iaas/Content/Object/Tasks/understandingnamespaces.htm)_ do nosso _[tenancy](https://docs.oracle.com/pt-br/iaas/Content/Identity/Tasks/managingtenancy.htm)_, usamos o comando abaixo:
+
+```
+darmbrust@hoodwink:~$ oci os ns get
+{
+  "data": "iwreyhyoj0puy"
+}
+```
+
+Os próximos dois valores _"\<Usuário/Repositório\>"_ e  _"\<Nome/Versão da Aplicação\>"_, são o nome do meu usuário criado pelo _[Serviço IAM](https://docs.oracle.com/pt-br/iaas/Content/Identity/Concepts/overview.htm)_ e uma string simples que indica o nome da aplicação e sua versão.
+
+Juntando todas essas informações, temos:
+
+```
+gru.ocir.io/iwreyhyoj0puy/daniel.armbrust/fotogal:1.0.0
 ```

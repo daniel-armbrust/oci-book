@@ -12,7 +12,7 @@ Esta diversidade geográfica pode ser vista na imagem abaixo:
 
 ![alt_text](./images/ch1_1-2_1.jpg  "Oracle Cloud Regions Available Worldwide")
 
-Uma outra forma de visualizar as regiões disponíveis é através do comando abaixo:
+Uma outra forma de visualizar as _[regiões](https://www.oracle.com/cloud/data-regions/)_ disponíveis é através do comando abaixo:
 
 ```
 darmbrust@hoodwink:~$ oci iam region list --all --output table
