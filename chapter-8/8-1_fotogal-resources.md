@@ -493,3 +493,92 @@ gru.ocir.io/iwreyhyoj0puy/daniel.armbrust/fotogal  1.0.0     bfcccb7a7602   13 m
 ```
 
 ### __Enviando a imagem ao Container Registry__
+
+Para poder enviar e baixar _[imagens Docker](https://docs.docker.com/language/python/build-images/)_ do _[Serviço Container Registry](https://docs.oracle.com/pt-br/iaas/Content/Registry/Concepts/registryoverview.htm)_, primeiramente temos que criar um _[Token de Autenticação](https://docs.oracle.com/pt-br/iaas/Content/Registry/Tasks/registrygettingauthtoken.htm)_.
+
+Para criar o _[Token de Autenticação](https://docs.oracle.com/pt-br/iaas/Content/Registry/Tasks/registrygettingauthtoken.htm)_ específico do meu usuário, uso o comando abaixo:
+
+```
+darmbrust@hoodwink:~$ oci iam auth-token create \
+> --user-id "ocid1.user.oc1..aaaaaaaagpov2dclzaxb4hoyapkwnwsdcymlvsl3fgrjuhdzka34kd4fmxbq" \
+> --description "Auth Token para OCI Registry"
+{
+  "data": {
+    "description": "Auth Token para OCI Registry",
+    "id": "ocid1.credential.oc1..aaaaasaaau4z47bnsiirxmpii3lm44dwh3hzbgjzg43all5khy6twl2f7qpa",
+    "inactive-status": null,
+    "lifecycle-state": "ACTIVE",
+    "time-created": "2021-11-01T13:53:49.220000+00:00",
+    "time-expires": null,
+    "token": "VwP}p7YcjZ213-LaPsSPmMaUOot",
+    "user-id": "ocid1.user.oc1..aaaaaaaagpov2dclzaxb4hoyapkwnwsdcymlvsl3fgrjuhdzka34kd4fmxbq"
+  },
+  "etag": "d35c84478c65e6af000d637b007b8b461f42805d"
+}
+```
+
+Lembrando que o valor do _"token"_ não pode ser recuperado depois que foi criado. Caso você perca este valor, você terá que gerar outro _[Token de Autenticação](https://docs.oracle.com/pt-br/iaas/Content/Registry/Tasks/registrygettingauthtoken.htm)_.
+
+Com o _[Token de Autenticação](https://docs.oracle.com/pt-br/iaas/Content/Registry/Tasks/registrygettingauthtoken.htm)_ em mãos, podemos efetuar um login no _[Container Registry](https://docs.oracle.com/pt-br/iaas/Content/Registry/Concepts/registryoverview.htm)_ do _[OCI](https://www.oracle.com/br/cloud/)_ para realizarmos o _[upload](https://en.wikipedia.org/wiki/Upload)_ da _[imagem](https://docs.docker.com/language/python/build-images/)_ que criamos.
+
+```
+darmbrust@hoodwink:~$ docker login -u iwreyhyoj0puy/oracleidentitycloudservice/daniel.armbrust@algumdominio.com gru.ocir.io
+Password:
+Login Succeeded
+``` 
+
+>_**__NOTA:__** Para a [região](https://www.oracle.com/cloud/data-regions/) de São Paulo o [Container Registry](https://docs.oracle.com/pt-br/iaas/Content/Registry/Concepts/registryoverview.htm) é acessado pelo endereço "gru.ocir.io". Para outras [regiões](https://www.oracle.com/cloud/data-regions/) verifique os endereços neste [link aqui](https://docs.oracle.com/pt-br/iaas/Content/Registry/Concepts/registryprerequisites.htm#regional-availability)._
+
+Agora basta realizar _[upload](https://en.wikipedia.org/wiki/Upload)_ especificando qual é a _[imagem](https://docs.docker.com/language/python/build-images/)_:
+
+```
+darmbrust@hoodwink:~$ docker push gru.ocir.io/iwreyhyoj0puy/daniel.armbrust/fotogal:1.0.0
+The push refers to repository [gru.ocir.io/iwreyhyoj0puy/daniel.armbrust/fotogal]
+1ef465084843: Pushed
+5aa8c349681f: Pushed
+82c520e19575: Pushed
+ae07538520ed: Pushed
+8f0c06de869c: Pushed
+4ec58225ca47: Pushed
+902e02e83d8d: Pushed
+2ff754c2db47: Pushed
+2308a80e3ab3: Pushed
+a2f23be74558: Pushed
+e2eb06d8af82: Pushed
+1.0.0: digest: sha256:b19aa75b1f0289061a77e011eebc4fcfe85068fe72dbacbbd493cd508dd2bd73 size: 2625
+```
+
+Pronto! É possível verificar que a _[imagem](https://docs.docker.com/language/python/build-images/)_ que subimos já encontra-se no _[Container Registry](https://docs.oracle.com/pt-br/iaas/Content/Registry/Concepts/registryoverview.htm)_ do _[OCI](https://www.oracle.com/br/cloud/)_:
+
+```
+darmbrust@hoodwink:~$ oci artifacts container image list \
+> --compartment-id "ocid1.tenancy.oc1..aaaaaaaavv2qh5asjdcoufmb6fzpnrfqgjxxdzlvjrgkrkytnyyz6zgvjnua" \
+> --all \
+> --compartment-id-in-subtree "true" \
+> --display-name "daniel.armbrust/fotogal:1.0.0"
+{
+  "data": {
+    "items": [
+      {
+        "compartment-id": "ocid1.tenancy.oc1..aaaaaaaavv2qh5asjdcoufmb6fzpnrfqgjxxdzlvjrgkrkytnyyz6zgvjnua",
+        "digest": "sha256:b19aa75b1f0289061a77e011eebc4fcfe85068fe72dbacbbd493cd508dd2bd73",
+        "display-name": "daniel.armbrust/fotogal:1.0.0",
+        "id": "ocid1.containerimage.oc1.sa-saopaulo-1.0.idreywyoj0pu.aaaaaaaa5fjxtie3ufpmu3pxpwfld4pi4elz2cjsk2l3r20pufj5p2m4rstq",
+        "lifecycle-state": "AVAILABLE",
+        "repository-id": "ocid1.containerrepo.oc1.sa-saopaulo-1.0.idreywyoj0pu.aaaaaaaag6mljpekwtey3w4bxdjdfno2bwchnobw2a5ulcpiweutsksjeweq",
+        "repository-name": "daniel.armbrust/fotogal",
+        "time-created": "2021-11-01T14:28:01.136000+00:00",
+        "version": "1.0.0"
+      }
+    ],
+    "remaining-items-count": 0
+  }
+}
+```
+
+Para se deslogar do _[Container Registry](https://docs.oracle.com/pt-br/iaas/Content/Registry/Concepts/registryoverview.htm)_, usamos o comando abaixo:
+
+```
+darmbrust@hoodwink:~$ docker logout
+Removing login credentials for https://index.docker.io/v1/
+```
