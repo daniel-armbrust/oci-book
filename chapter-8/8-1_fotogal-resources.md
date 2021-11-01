@@ -352,9 +352,9 @@ Irei apresentar como é desenvolver uma aplicação em _contêiner_ e como reali
 Como todo o código já está pronto, irei primeiramente _"clonar"_ o _[repositório](https://github.com/daniel-armbrust/fotogal)_ da aplicação _FotoGal_:
 
 ```
-darmbrust@sladar:~$ git clone https://github.com/daniel-armbrust/fotogal.git
-darmbrust@sladar:~$ cd fotogal
-darmbrust@sladar:~/fotogal$ ls -aFl
+darmbrust@hoodwink:~$ git clone https://github.com/daniel-armbrust/fotogal.git
+darmbrust@hoodwink:~$ cd fotogal
+darmbrust@hoodwink:~/fotogal$ ls -aFl
 total 96
 drwxr-xr-x  8 darmbrust darmbrust  4096 Oct 29 15:33 ./
 drwxr-xr-x 12 darmbrust darmbrust  4096 Oct 28 07:56 ../
@@ -374,7 +374,7 @@ drwxr-xr-x  2 darmbrust darmbrust  4096 Oct 29 15:32 tools/
 A aplicação necessita de dois arquivos para comunicar-se com os serviços do _[OCI](https://www.oracle.com/br/cloud/)_ através do _[SDK para Python](https://docs.oracle.com/pt-br/iaas/Content/API/SDKDocs/pythonsdk.htm)_. Estes dois arquivos, após o _"clone"_ do _[repositório](https://github.com/daniel-armbrust/fotogal)_, devem ser criados antes da construção da _[imagem](https://docs.docker.com/language/python/build-images/)_.
 
 ```
-darmbrust@sladar:~/fotogal$ ls -laF fotogal/oci_config/
+darmbrust@hoodwink:~/fotogal$ ls -laF fotogal/oci_config/
 total 20
 drwxr-xr-x 2 darmbrust darmbrust 4096 Oct 31 10:11 ./
 drwxr-xr-x 4 darmbrust darmbrust 4096 Oct 31 10:11 ../
@@ -385,7 +385,7 @@ drwxr-xr-x 4 darmbrust darmbrust 4096 Oct 31 10:11 ../
 O arquivo _"fotogal/oci_config/oci.conf"_ possui algumas informações básica sobre o _tenant_, _OCID_ do usuário que possui os privilégios necessários para usar os serviços que a aplicação necessita, além do compartimento onde residem esses recursos:
 
 ```
-darmbrust@sladar:~/fotogal$ cat fotogal/oci_config/oci.conf
+darmbrust@hoodwink:~/fotogal$ cat fotogal/oci_config/oci.conf
 [DEFAULT]
 user=ocid1.user.oc1..aaaaaaaagpov2dclzaxb4hoyapkwnwsdcymlvsl3fgrjuhdzka34kd4fmxbq
 fingerprint=2e:c4:dd:57:c2:df:e6:17:7f:da:e7:6c:e4:74:97:18
@@ -397,7 +397,7 @@ compartment=ocid1.compartment.oc1..aaaaaaaabuevop234bdezdv6wrfzw4us35yugjjqezyck
 Já o arquivo _"fotogal/oci_config/oci_api_key.pem"_, possui a _[chave privada](https://docs.oracle.com/pt-br/iaas/Content/API/Concepts/apisigningkey.htm)_ do usuário no formato _[PEM](https://en.wikipedia.org/wiki/Privacy-Enhanced_Mail)_:
 
 ```
-darmbrust@sladar:~/fotogal$ cat fotogal/oci_config/oci_api_key.pem
+darmbrust@hoodwink:~/fotogal$ cat fotogal/oci_config/oci_api_key.pem
 -----BEGIN RSA PRIVATE KEY-----
 -----END RSA PRIVATE KEY-----
 ```
@@ -419,7 +419,7 @@ Para o valor _"\<Chave da Região\>"_, este nada mais é do que o identificador 
 Em nosso caso, queremos levar a _[imagem](https://docs.docker.com/language/python/build-images/)_ para a _[região](https://www.oracle.com/cloud/data-regions/)_ de São Paulo. Para obter sua chave, usamos o comando abaixo:
 
 ```
-darmbrust@sladar:~/fotogal$ oci iam region-subscription list \
+darmbrust@hoodwink:~/fotogal$ oci iam region-subscription list \
 > --all \
 > --query "data[?\"region-name\"=='sa-saopaulo-1']" \
 > --output table
@@ -437,7 +437,7 @@ O próximo valor _"\<Tenancy Namespace\>"_ está ligado ao serviço _[Object Sto
 Para obtermos o valor _[namespace](https://docs.oracle.com/pt-br/iaas/Content/Object/Tasks/understandingnamespaces.htm)_ do nosso _[tenancy](https://docs.oracle.com/pt-br/iaas/Content/Identity/Tasks/managingtenancy.htm)_, usamos o comando abaixo:
 
 ```
-darmbrust@sladar:~/fotogal$ oci os ns get
+darmbrust@hoodwink:~/fotogal$ oci os ns get
 {
   "data": "iwreyhyoj0puy"
 }
@@ -462,7 +462,7 @@ Para a _[imagem](https://docs.docker.com/language/python/build-images/)_, os doi
 Usamos o comando _"docker build"_, informando a _TAG_ que compomos como valor do parâmetro _"-t"_. Lembrando que estamos no diretório _"raíz"_ da aplicação, onde residem os arquivos _Dockerfile_ e _requirements.txt_, por isto temos um _ponto final_ após a _TAG_:
 
 ```
-darmbrust@sladar:~/fotogal$ docker build -t gru.ocir.io/iwreyhyoj0puy/daniel.armbrust/fotogal:1.0.0 .
+darmbrust@hoodwink:~/fotogal$ docker build -t gru.ocir.io/iwreyhyoj0puy/daniel.armbrust/fotogal:1.0.0 .
 [+] Building 130.7s (12/12) FINISHED
  => [internal] load build definition from Dockerfile                                                                                                                    0.0s
  => => transferring dockerfile: 38B                                                                                                                                     0.0s
@@ -487,7 +487,7 @@ darmbrust@sladar:~/fotogal$ docker build -t gru.ocir.io/iwreyhyoj0puy/daniel.arm
 Pelo comando _"docker images"_ é possível ver a _[imagem](https://docs.docker.com/language/python/build-images/)_ que acabamos de criar:
 
 ```
-darmbrust@sladar:~/fotogal$ docker images
+darmbrust@hoodwink:~/fotogal$ docker images
 REPOSITORY                                         TAG       IMAGE ID       CREATED          SIZE
 gru.ocir.io/iwreyhyoj0puy/daniel.armbrust/fotogal  1.0.0     bfcccb7a7602   13 minutes ago   420MB
 ```
