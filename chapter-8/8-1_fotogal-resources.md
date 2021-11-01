@@ -406,17 +406,9 @@ darmbrust@sladar:~/fotogal$ cat fotogal/oci_config/oci_api_key.pem
 
 Uma vez que todo o ferramental _[Docker](https://github.com/daniel-armbrust/oci-book/blob/main/chapter-2/2-6_docker-howto.md)_ já está instalado, posso me atentar aos detalhes que envolvem a construção da _[imagem](https://docs.docker.com/language/python/build-images/)_ desta aplicação.
 
-Dois arquivos que merecem destaque por aqui usados na construção da _[imagem](https://docs.docker.com/language/python/build-images/)_:
+Antes de seguirmos, iremos verificar uma obrigatoriedade que envolve sua _TAG_. 
 
-- **Dockerfile**
-    - Arquivo no qual contém a sequência dos comandos usados na construção da _[imagem](https://docs.docker.com/language/python/build-images/)_.
-    
-- **requirements.txt**
-    - Contém todas as dependências _[Python](https://www.python.org/)_ que são necessários para execução da aplicação. Cada pacote listado neste arquivo será instalado pela ferramenta _[pip](https://pt.wikipedia.org/wiki/Pip_(gerenciador_de_pacotes))_.
-
-Antes de partirmos para realizar a contrução da _[imagem](https://docs.docker.com/language/python/build-images/)_, iremos verificar um obrigatoriedade que envolve sua _TAG_. 
-
-Toda _[imagem](https://docs.docker.com/language/python/build-images/)_ deve necessáriamente possuir uma _TAG_ que basicamente indica sua versão. Porém, uma _[imagem](https://docs.docker.com/language/python/build-images/)_ que será enviada ao _[Container Registry](https://docs.oracle.com/pt-br/iaas/Content/Registry/Concepts/registryoverview.htm)_ do _[OCI](https://www.oracle.com/br/cloud/)_, necessita seguir um padrão específico para _TAG_ conforme exibido abaixo:
+Toda _[imagem](https://docs.docker.com/language/python/build-images/)_ deve necessáriamente possuir uma _TAG_ que basicamente indica sua versão. Porém, uma _[imagem](https://docs.docker.com/language/python/build-images/)_ que será enviada ao _[Container Registry](https://docs.oracle.com/pt-br/iaas/Content/Registry/Concepts/registryoverview.htm)_ do _[OCI](https://www.oracle.com/br/cloud/)_, necessita seguir um padrão específico de _TAG_ conforme exibido abaixo:
 
 ```
 <Chave da Região>.ocir.io/<Tenancy Namespace>/<Usuário/Repositório>/<Nome/Versão da Aplicação>
@@ -427,7 +419,7 @@ Para o valor _"\<Chave da Região\>"_, este nada mais é do que o identificador 
 Em nosso caso, queremos levar a _[imagem](https://docs.docker.com/language/python/build-images/)_ para a _[região](https://www.oracle.com/cloud/data-regions/)_ de São Paulo. Para obter sua chave, usamos o comando abaixo:
 
 ```
-darmbrust@hoodwink:~$ oci iam region-subscription list \
+darmbrust@sladar:~/fotogal$ oci iam region-subscription list \
 > --all \
 > --query "data[?\"region-name\"=='sa-saopaulo-1']" \
 > --output table
@@ -445,7 +437,7 @@ O próximo valor _"\<Tenancy Namespace\>"_ está ligado ao serviço _[Object Sto
 Para obtermos o valor _[namespace](https://docs.oracle.com/pt-br/iaas/Content/Object/Tasks/understandingnamespaces.htm)_ do nosso _[tenancy](https://docs.oracle.com/pt-br/iaas/Content/Identity/Tasks/managingtenancy.htm)_, usamos o comando abaixo:
 
 ```
-darmbrust@hoodwink:~$ oci os ns get
+darmbrust@sladar:~/fotogal$ oci os ns get
 {
   "data": "iwreyhyoj0puy"
 }
@@ -457,4 +449,45 @@ Juntando todas essas informações, temos:
 
 ```
 gru.ocir.io/iwreyhyoj0puy/daniel.armbrust/fotogal:1.0.0
+```
+
+Para a _[imagem](https://docs.docker.com/language/python/build-images/)_, os dois arquivos abaixo merecem destaque e serão usados na sua construção:
+
+- **Dockerfile**
+    - Arquivo no qual contém a sequência dos comandos usados na construção da _[imagem](https://docs.docker.com/language/python/build-images/)_.
+    
+- **requirements.txt**
+    - Contém todas as dependências _[Python](https://www.python.org/)_ que são necessários para execução da aplicação. Cada pacote listado neste arquivo será instalado pela ferramenta _[pip](https://pt.wikipedia.org/wiki/Pip_(gerenciador_de_pacotes))_.
+
+Usamos o comando _"docker build"_, informando a _TAG_ que compomos como valor do parâmetro _"-t"_. Lembrando que estamos no diretório _"raíz"_ da aplicação, onde residem os arquivos _Dockerfile_ e _requirements.txt_, por isto temos um _ponto final_ após a _TAG_:
+
+```
+darmbrust@sladar:~/fotogal$ docker build -t gru.ocir.io/iwreyhyoj0puy/daniel.armbrust/fotogal:1.0.0 .
+[+] Building 130.7s (12/12) FINISHED
+ => [internal] load build definition from Dockerfile                                                                                                                    0.0s
+ => => transferring dockerfile: 38B                                                                                                                                     0.0s
+ => [internal] load .dockerignore                                                                                                                                       0.0s
+ => => transferring context: 2B                                                                                                                                         0.0s
+ => [internal] load metadata for docker.io/library/python:3.8-alpine                                                                                                    2.1s
+ => [internal] load build context                                                                                                                                       0.0s
+ => => transferring context: 6.62kB                                                                                                                                     0.0s
+ => [1/7] FROM docker.io/library/python:3.8-alpine@sha256:661ad93defe82c3255b59bab8e16dd6c73e5c98411f97272b1780fac0406344c                                              0.0s
+ => CACHED [2/7] WORKDIR /opt/fotogal                                                                                                                                   0.0s
+ => [3/7] RUN apk update --no-cache &&     apk add --no-cache --virtual .build-deps gcc python3-dev libc-dev libffi-dev openssl-dev                                     8.5s
+ => [4/7] COPY requirements.txt ./                                                                                                                                      0.3s
+ => [5/7] RUN python -m pip install --no-cache-dir --upgrade pip &&     pip install --no-cache-dir -r requirements.txt &&     apk del .build-deps && rm -rf /var/cach  70.8s
+ => [6/7] RUN adduser -D -H -h /opt/fotogal fotogal                                                                                                                     1.3s
+ => [7/7] COPY --chown=fotogal:fotogal ./fotogal /opt/fotogal/                                                                                                          0.3s
+ => exporting to image                                                                                                                                                  2.0s
+ => => exporting layers                                                                                                                                                 1.9s
+ => => writing image sha256:bfcccb7a760222a36407c68cc8a4cdea2a634802fceb2a6d7749bbf3a7a16e04                                                                            0.0s
+ => => naming to gru.ocir.io/iwreyhyoj0puy/daniel.armbrust/fotogal:1.0.0
+```
+
+Pelo comando _"docker images"_ é possível ver a _[imagem](https://docs.docker.com/language/python/build-images/)_ que acabamos de criar:
+
+```
+darmbrust@sladar:~/fotogal$ docker images
+REPOSITORY                                         TAG       IMAGE ID       CREATED          SIZE
+gru.ocir.io/idreywyoj0pu/daniel.armbrust/fotogal   1.0.0     bfcccb7a7602   13 minutes ago   420MB
 ```
