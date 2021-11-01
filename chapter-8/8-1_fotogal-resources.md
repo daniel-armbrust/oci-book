@@ -582,3 +582,7 @@ Para se deslogar do _[Container Registry](https://docs.oracle.com/pt-br/iaas/Con
 darmbrust@hoodwink:~$ docker logout
 Removing login credentials for https://index.docker.io/v1/
 ```
+
+### __Conclusão__
+
+Este capítulo apresentou os passos básicos envolvidos na criação da aplicação _FotoGal_. Agora que temos a _[imagem](https://docs.docker.com/language/python/build-images/)_ da aplicação já disponível no _[Container Registry](https://docs.oracle.com/pt-br/iaas/Content/Registry/Concepts/registryoverview.htm)_ do _[OCI](https://www.oracle.com/br/cloud/)_, no próximo capítulo iremos realizar seu _deploy_ no _[Serviço de Container Engine para Kubernetes](https://docs.oracle.com/pt-br/iaas/Content/ContEng/Concepts/contengoverview.htm)_, que é popularmente chamado também de _[OKE](https://docs.oracle.com/pt-br/iaas/Content/ContEng/Concepts/contengoverview.htm)_.
