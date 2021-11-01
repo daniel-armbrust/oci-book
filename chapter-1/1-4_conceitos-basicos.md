@@ -15,7 +15,7 @@ Esta diversidade geográfica pode ser vista na imagem abaixo:
 Uma outra forma de visualizar as regiões disponíveis é através do comando abaixo:
 
 ```
-darmbrust@hoodwink:~$ oci iam region list --output table
+darmbrust@hoodwink:~$ oci iam region list --all --output table
 +-----+----------------+
 | key | name           |
 +-----+----------------+
@@ -32,9 +32,12 @@ darmbrust@hoodwink:~$ oci iam region list --output table
 | KIX | ap-osaka-1     |
 | LHR | uk-london-1    |
 | MEL | ap-melbourne-1 |
+| MRS | eu-marseille-1 |
+| MTZ | il-jerusalem-1 |
 | NRT | ap-tokyo-1     |
 | PHX | us-phoenix-1   |
 | SCL | sa-santiago-1  |
+| SIN | ap-singapore-1 |
 | SJC | us-sanjose-1   |
 | SYD | ap-sydney-1    |
 | VCP | sa-vinhedo-1   |

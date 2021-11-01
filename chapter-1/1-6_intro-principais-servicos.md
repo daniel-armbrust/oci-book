@@ -330,3 +330,75 @@ darmbrust@hoodwink:~$ oci iam policy delete \
 > --policy-id "ocid1.policy.oc1..aaaaaaaak2vbsh3rhgqd33zan63nfxq7zlvqobogxjpu7mjkvvxrfttrfdvq"
 Are you sure you want to delete this resource? [y/N]: y
 ```
+
+#### __Regiões ativas e novas subscrições__
+
+Um outro conjunto de ações presentes também nos comandos do _[IAM](https://docs.oracle.com/pt-br/iaas/Content/Identity/Concepts/overview.htm)_, é poder verificar quais as _[regiões](https://www.oracle.com/cloud/data-regions/)_ no qual meu _[tenancy](https://docs.oracle.com/pt-br/iaas/Content/Identity/Tasks/managingtenancy.htm)_ está inscrito e a possibilidade de fazer uma nova subscrição a uma nova _[região](https://www.oracle.com/cloud/data-regions/)_.
+
+Como já foi escrito, a Oracle está em constante expansão dos seus serviços de cloud pelo mundo. Sendo assim, de tempos em tempos, novas _[regiões](https://www.oracle.com/cloud/data-regions/)_ tornam-se disponíveis para subscrição.
+
+Para verificar quais as _[regiões](https://www.oracle.com/cloud/data-regions/)_ estou inscrito, utilizo o comando abaixo:
+
+```
+darmbrust@hoodwink:~$ oci iam region-subscription list \
+> --all \
+> --tenancy-id "ocid1.tenancy.oc1..aaaaaaaavv2qh5asjdcoufmb6fzpnrfqgjxxdzlvjrgkrkytnyyz6zgvjnua" \
+> --output table
++----------------+------------+----------------+--------+
+| is-home-region | region-key | region-name    | status |
++----------------+------------+----------------+--------+
+| False          | AMS        | eu-amsterdam-1 | READY  |
+| False          | BOM        | ap-mumbai-1    | READY  |
+| False          | FRA        | eu-frankfurt-1 | READY  |
+| True           | GRU        | sa-saopaulo-1  | READY  |
+| False          | HYD        | ap-hyderabad-1 | READY  |
+| False          | IAD        | us-ashburn-1   | READY  |
+| False          | ICN        | ap-seoul-1     | READY  |
+| False          | JED        | me-jeddah-1    | READY  |
+| False          | KIX        | ap-osaka-1     | READY  |
+| False          | LHR        | uk-london-1    | READY  |
+| False          | MEL        | ap-melbourne-1 | READY  |
+| False          | NRT        | ap-tokyo-1     | READY  |
+| False          | PHX        | us-phoenix-1   | READY  |
+| False          | SCL        | sa-santiago-1  | READY  |
+| False          | SJC        | us-sanjose-1   | READY  |
+| False          | SYD        | ap-sydney-1    | READY  |
+| False          | VCP        | sa-vinhedo-1   | READY  |
+| False          | YNY        | ap-chuncheon-1 | READY  |
+| False          | YUL        | ca-montreal-1  | READY  |
+| False          | YYZ        | ca-toronto-1   | READY  |
+| False          | ZRH        | eu-zurich-1    | READY  |
++----------------+------------+----------------+--------+
+```
+
+Para realizar a subscrição para uma nova _[região](https://www.oracle.com/cloud/data-regions/)_, usamos o comando abaixo:
+
+```
+darmbrust@hoodwink:~$ oci iam region-subscription create \
+> --tenancy-id "ocid1.tenancy.oc1..aaaaaaaavv2qh5asjdcoufmb6fzpnrfqgjxxdzlvjrgkrkytnyyz6zgvjnua" \
+> --region-key "DXB"
+{
+  "data": {
+    "is-home-region": false,
+    "region-key": "DXB",
+    "region-name": "me-dubai-1",
+    "status": "IN_PROGRESS"
+  }
+}
+```
+
+Após alguns minutos, é possível verificar que a nova _[região](https://www.oracle.com/cloud/data-regions/)_ já se encontra disponível:
+
+```
+darmbrust@hoodwink:~$ oci iam region-subscription list \
+> --all \
+> --query "data[?\"region-key\"=='DXB']" \
+> --output table
++----------------+------------+-------------+--------+
+| is-home-region | region-key | region-name | status |
++----------------+------------+-------------+--------+
+| False          | DXB        | me-dubai-1  | READY  |
++----------------+------------+-------------+--------+
+```
+
+>_**__NOTA:__** Para listar todas as [regiões](https://www.oracle.com/cloud/data-regions/) disponíveis, utilize o comando "oci iam region list --all" conforme demonstrado no capítulo [1.4 - Conceitos básicos sobre o OCI](https://github.com/daniel-armbrust/oci-book/blob/main/chapter-1/1-4_conceitos-basicos.md)._

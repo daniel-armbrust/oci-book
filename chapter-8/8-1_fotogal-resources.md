@@ -414,3 +414,8 @@ Dois arquivos que merecem destaque por aqui usados na construção da _[imagem](
 - **requirements.txt**
     - Contém todas as dependências _[Python](https://www.python.org/)_ que são necessários para execução da aplicação. Cada pacote listado neste arquivo será instalado pela ferramenta _[pip](https://pt.wikipedia.org/wiki/Pip_(gerenciador_de_pacotes))_.
 
+Toda _[imagem](https://docs.docker.com/language/python/build-images/)_ deve necessáriamente possuir uma _TAG_ que basicamente indica sua versão. Porém, uma _[imagem](https://docs.docker.com/language/python/build-images/)_ que será enviada ao Registry do OCI, necessita seguir um padrão de _TAG_.
+
+```
+<Chave da Região>.ocir.io/<Tenancy Namespace>/<Usuário/Repositório>/<Nome/Versão da Aplicação>
+```
