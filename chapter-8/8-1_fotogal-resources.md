@@ -583,6 +583,15 @@ darmbrust@hoodwink:~$ docker logout
 Removing login credentials for https://index.docker.io/v1/
 ```
 
+Caso queira, é possível excluír o _[Token de Autenticação](https://docs.oracle.com/pt-br/iaas/Content/Registry/Tasks/registrygettingauthtoken.htm)_ que foi criado:
+
+```
+darmbrust@hoodwink:~$ oci iam auth-token delete \
+> --user-id "ocid1.user.oc1..aaaaaaaagpov2dclzaxb4hoyapkwnwsdcymlvsl3fgrjuhdzka34kd4fmxbq" \
+> --auth-token-id "ocid1.credential.oc1..aaaaasaaau4z47bnsiirxmpii3lm44dwh3hzbgjzg43all5khy6twl2f7qpa" \
+> --force
+```
+
 ### __Conclusão__
 
 Este capítulo apresentou os passos básicos envolvidos na criação da aplicação _FotoGal_. Agora que temos a _[imagem](https://docs.docker.com/language/python/build-images/)_ da aplicação já disponível no _[Container Registry](https://docs.oracle.com/pt-br/iaas/Content/Registry/Concepts/registryoverview.htm)_ do _[OCI](https://www.oracle.com/br/cloud/)_, no próximo capítulo iremos realizar seu _deploy_ no _[Serviço de Container Engine para Kubernetes](https://docs.oracle.com/pt-br/iaas/Content/ContEng/Concepts/contengoverview.htm)_, que é popularmente chamado também de _[OKE](https://docs.oracle.com/pt-br/iaas/Content/ContEng/Concepts/contengoverview.htm)_.
