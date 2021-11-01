@@ -583,7 +583,7 @@ darmbrust@hoodwink:~$ docker logout
 Removing login credentials for https://index.docker.io/v1/
 ```
 
-Caso queira, é possível excluír o _[Token de Autenticação](https://docs.oracle.com/pt-br/iaas/Content/Registry/Tasks/registrygettingauthtoken.htm)_ que foi criado:
+Caso queira, é possível excluír o _[Token de Autenticação](https://docs.oracle.com/pt-br/iaas/Content/Registry/Tasks/registrygettingauthtoken.htm)_ que foi criado com o comando abaixo:
 
 ```
 darmbrust@hoodwink:~$ oci iam auth-token delete \
