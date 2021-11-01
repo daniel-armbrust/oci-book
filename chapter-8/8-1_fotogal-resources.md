@@ -529,7 +529,7 @@ Login Succeeded
 
 >_**__NOTA:__** Para a [região](https://www.oracle.com/cloud/data-regions/) de São Paulo o [Container Registry](https://docs.oracle.com/pt-br/iaas/Content/Registry/Concepts/registryoverview.htm) é acessado pelo endereço "gru.ocir.io". Para outras [regiões](https://www.oracle.com/cloud/data-regions/) verifique os endereços neste [link aqui](https://docs.oracle.com/pt-br/iaas/Content/Registry/Concepts/registryprerequisites.htm#regional-availability)._
 
-Agora basta realizar _[upload](https://en.wikipedia.org/wiki/Upload)_ especificando qual é a _[imagem](https://docs.docker.com/language/python/build-images/)_:
+Agora basta realizar _[upload](https://en.wikipedia.org/wiki/Upload)_ especificando o nome da _[imagem](https://docs.docker.com/language/python/build-images/)_:
 
 ```
 darmbrust@hoodwink:~$ docker push gru.ocir.io/iwreyhyoj0puy/daniel.armbrust/fotogal:1.0.0
