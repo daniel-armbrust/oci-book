@@ -71,6 +71,7 @@ Esse livro apresenta o **OCI (Oracle Cloud Infraestructure)** e por quê você d
 
 - [Capítulo 8: A aplicação FotoGal](https://github.com/daniel-armbrust/oci-book/blob/main/chapter-8/README.md) <br>
     [8.1 - Recursos da Aplicação](https://github.com/daniel-armbrust/oci-book/blob/main/chapter-8/8-1_fotogal-resources.md) <br>
+    [8.2 - Introdução ao Serviço Container Engine for Kubernetes](https://github.com/daniel-armbrust/oci-book/blob/main/chapter-8/8-2_intro-oke.md) <br>
     
 - [Capítulo 9: Segurança no OCI](https://github.com/daniel-armbrust/oci-book/blob/main/chapter-9/README.md) <br>
     9.1 - Zonas de Segurança <br>

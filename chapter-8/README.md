@@ -15,3 +15,6 @@ Por enquanto, a aplicação utiliza os seguintes serviços do _[OCI](https://www
 - [Load Balancing](https://docs.oracle.com/pt-br/iaas/Content/Balance/Concepts/balanceoverview.htm)
 
 A tendência, com o tempo, é aumentar as funcionalidades da aplicação através da utilização de mais serviços.
+
+[8.1 - Recursos da Aplicação](https://github.com/daniel-armbrust/oci-book/blob/main/chapter-8/8-1_fotogal-resources.md) <br>
+[8.2 - Introdução ao Serviço Container Engine for Kubernetes](https://github.com/daniel-armbrust/oci-book/blob/main/chapter-8/8-2_intro-oke.md) <br>
