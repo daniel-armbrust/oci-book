@@ -491,3 +491,5 @@ darmbrust@sladar:~/fotogal$ docker images
 REPOSITORY                                         TAG       IMAGE ID       CREATED          SIZE
 gru.ocir.io/iwreyhyoj0puy/daniel.armbrust/fotogal  1.0.0     bfcccb7a7602   13 minutes ago   420MB
 ```
+
+### __Enviando a imagem ao Container Registry__
