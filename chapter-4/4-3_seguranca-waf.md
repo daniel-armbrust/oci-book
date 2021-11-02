@@ -4,7 +4,7 @@
 
 ### __Visão Geral__
 
-O _[Serviço Web Application Firewall](https://docs.oracle.com/pt-br/iaas/Content/WAF/Concepts/overview.htm)_ ou _[WAF](https://docs.oracle.com/pt-br/iaas/Content/WAF/Concepts/overview.htm)_, é um serviço de segurança que ajuda a proteger seus aplicativos web contra tráfego malicioso e indesejado da Internet. O serviço é compatível com o padrão _[PCI (Payment Card Industry)](https://en.wikipedia.org/wiki/Payment_card_industry)_ e outras vulnerabilidades definidas pelo _[OWASP (Open Web Application Security Project)](https://pt.wikipedia.org/wiki/OWASP)_.
+O _[Serviço Web Application Firewall](https://docs.oracle.com/pt-br/iaas/Content/WAF/Concepts/overview.htm)_ ou _[WAF](https://docs.oracle.com/pt-br/iaas/Content/WAF/Concepts/overview.htm)_, é um serviço de segurança que ajuda a proteger seus aplicativos web contra tráfego malicioso e indesejado da Internet. Ele é compatível com o padrão _[PCI (Payment Card Industry)](https://en.wikipedia.org/wiki/Payment_card_industry)_ e outras vulnerabilidades definidas pelo _[OWASP (Open Web Application Security Project)](https://pt.wikipedia.org/wiki/OWASP)_.
 
 Para você ter uma ideia, qualquer empresa que aceita pagamentos com cartão de crédito/débito, que processa ou armazena dados de cartões, precisa se preocupar em estar em conformidade com o _[PCI](https://en.wikipedia.org/wiki/Payment_card_industry)_. Para maiores informações, consulte este _[link aqui](https://pt.pcisecuritystandards.org/minisite/env2/)_.
 
@@ -26,6 +26,8 @@ Começaremos adicionando proteção diretamente no _[Load Balancing](https://git
 ### __Injetando segurança no LB__
 
 ### __Criando uma Política WAF__
+
+### __Criando uma Política WAF Edge__
 
 O _[Serviço WAF](https://docs.oracle.com/pt-br/iaas/Content/WAF/Concepts/overview.htm)_ é um serviço já existente e disponível globalmente. Não há a necessidade de realizar o provisionamento da sua infraestrutura. 
 
