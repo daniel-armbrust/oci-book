@@ -23,9 +23,16 @@ Com a implementação do _[Serviço WAF](https://docs.oracle.com/pt-br/iaas/Cont
 
 Começaremos adicionando proteção diretamente no _[Load Balancing](https://github.com/daniel-armbrust/oci-book/blob/main/chapter-3/3-5_fundamentos-load-balancing.md)_ da aplicação _[Wordpress](https://pt.wikipedia.org/wiki/WordPress)_. Depois, mostraremos como criar o _[WAF](https://docs.oracle.com/pt-br/iaas/Content/WAF/Concepts/overview.htm)_ _"fora"_ da _[VCN](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingVCNs_topic-Overview_of_VCNs_and_Subnets.htm)_, adicionando o chamado _"proteção de borda"_.
 
-### __Injetando segurança no LB__
-
 ### __Criando uma Política WAF__
+
+Criarei um _[Política WAF](https://docs.oracle.com/pt-br/iaas/Content/WAF/Policies/waf-policy_management.htm)_ que irá abrigar todas as demais configurações do serviço. Estas incluem:
+
+- _[Controle de Acesso](https://docs.oracle.com/pt-br/iaas/Content/WAF/AccessControl/access_control_management.htm)_
+- Definições de _[rate limiting](https://docs.oracle.com/pt-br/iaas/Content/WAF/RateLimiting/rate_limiting_rule_management.htm)_ 
+- _[Regras de Proteção](https://docs.oracle.com/pt-br/iaas/Content/WAF/Protections/protections_management.htm)_
+
+
+
 
 ### __Criando uma Política WAF Edge__
 
