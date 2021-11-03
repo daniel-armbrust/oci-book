@@ -28,11 +28,90 @@ Começaremos adicionando proteção diretamente no _[Load Balancing](https://git
 Criarei um _[Política WAF](https://docs.oracle.com/pt-br/iaas/Content/WAF/Policies/waf-policy_management.htm)_ que irá abrigar todas as demais configurações do serviço. Estas incluem:
 
 - _[Controle de Acesso](https://docs.oracle.com/pt-br/iaas/Content/WAF/AccessControl/access_control_management.htm)_
-- Definições de _[rate limiting](https://docs.oracle.com/pt-br/iaas/Content/WAF/RateLimiting/rate_limiting_rule_management.htm)_ 
+- Definições para _[Rate Limiting](https://docs.oracle.com/pt-br/iaas/Content/WAF/RateLimiting/rate_limiting_rule_management.htm)_ 
 - _[Regras de Proteção](https://docs.oracle.com/pt-br/iaas/Content/WAF/Protections/protections_management.htm)_
 
+Para criar uma _[política WAF](https://docs.oracle.com/pt-br/iaas/Content/WAF/Policies/waf-policy_management.htm)_, usamos o comando abaixo:
 
+```
+darmbrust@hoodwink:~$ oci waf web-app-firewall-policy create \
+> --compartment-id "ocid1.compartment.oc1..aaaaaaaauvqvbbx3oridcm5d2ztxkftwr362u2vl5zdsayzbehzwbjs56soq" \
+> --display-name "waf-policy_wordpress" \
+> --wait-for-state "SUCCEEDED"
+Action completed. Waiting until the work request has entered state: ('SUCCEEDED',)
+{
+  "data": {
+    "compartment-id": "ocid1.compartment.oc1..aaaaaaaauvqvbbx3oridcm5d2ztxkftwr362u2vl5zdsayzbehzwbjs56soq",
+    "id": "ocid1.webappfirewallworkrequest.oc1..aaaaaaaafhfar3s4f5dvjcc2b24isu7hpv2oh6sx7oelmexazm5qbk7klapa",
+    "operation-type": "CREATE_WAF_POLICY",
+    "percent-complete": 100.0,
+    "resources": [
+      {
+        "action-type": "CREATED",
+        "entity-type": "webAppFirewallPolicy",
+        "entity-uri": "/webAppFirewallPolicies/ocid1.webappfirewallpolicy.oc1.sa-saopaulo-1.amaaaaaa6noke4qa5daq3r3gvijbznjy5rsgvhamguxgeqaal6ah2iesdfna",
+        "identifier": "ocid1.webappfirewallpolicy.oc1.sa-saopaulo-1.amaaaaaa6noke4qa5daq3r3gvijbznjy5rsgvhamguxgeqaal6ah2iesdfna"
+      }
+    ],
+    "status": "SUCCEEDED",
+    "time-accepted": "2021-11-03T13:24:39.129000+00:00",
+    "time-finished": "2021-11-03T13:24:50.950000+00:00",
+    "time-started": "2021-11-03T13:24:50.516000+00:00"
+  }
+}
+```
 
+Após criada, basta anexá-la ao _[Load Balancer](https://github.com/daniel-armbrust/oci-book/blob/main/chapter-3/3-5_fundamentos-load-balancing.md)_. 
+
+Primeiramente irei recuperar o _OCID_ do _[Load Balancer](https://github.com/daniel-armbrust/oci-book/blob/main/chapter-3/3-5_fundamentos-load-balancing.md)_ da aplicação _[Wordpress](https://pt.wikipedia.org/wiki/WordPress)_ que foi criado:
+
+```
+darmbrust@hoodwink:~$ oci lb load-balancer list \
+> --compartment-id "ocid1.compartment.oc1..aaaaaaaauvqvbbx3oridcm5d2ztxkftwr362u2vl5zdsayzbehzwbjs56soq" \
+> --display-name "lb-pub_wordpress" \
+> --query "data[].id"
+[
+  "ocid1.loadbalancer.oc1.sa-saopaulo-1.aaaaaaaa5ledgzqveh3o73m3mnv42pkxcm5y64hjmkwl7tnhvsee2zv7gbga"
+]
+```
+
+Agora, podemos anexar a política no _[Load Balancer](https://github.com/daniel-armbrust/oci-book/blob/main/chapter-3/3-5_fundamentos-load-balancing.md)_:
+
+```
+darmbrust@hoodwink:~$ oci waf web-app-firewall create-for-load-balancer \
+> --compartment-id "ocid1.compartment.oc1..aaaaaaaauvqvbbx3oridcm5d2ztxkftwr362u2vl5zdsayzbehzwbjs56soq" \
+> --load-balancer-id "ocid1.loadbalancer.oc1.sa-saopaulo-1.aaaaaaaa5ledgzqveh3o73m3mnv42pkxcm5y64hjmkwl7tnhvsee2zv7gbga" \
+> --web-app-firewall-policy-id "ocid1.webappfirewallpolicy.oc1.sa-saopaulo-1.amaaaaaa6noke4qa5daq3r3gvijbznjy5rsgvhamguxgeqaal6ah2iesdfna" \
+> --display-name "waf_lb-pub_wordpress" \
+> --wait-for-state "SUCCEEDED"
+Action completed. Waiting until the work request has entered state: ('SUCCEEDED',)
+{
+  "data": {
+    "compartment-id": "ocid1.compartment.oc1..aaaaaaaauvqvbbx3oridcm5d2ztxkftwr362u2vl5zdsayzbehzwbjs56soq",
+    "id": "ocid1.webappfirewallworkrequest.oc1..aaaaaaaaalooxc7lrxmqcgnpa4ggxxgmuknohkebef6kdojb37nrlojuvj7q",
+    "operation-type": "CREATE_WEB_APP_FIREWALL",
+    "percent-complete": 100.0,
+    "resources": [
+      {
+        "action-type": "CREATED",
+        "entity-type": "webAppFirewall",
+        "entity-uri": "/webAppFirewalls/ocid1.webappfirewall.oc1.sa-saopaulo-1.amaaaaaa6noke4qacekjnipfsnkktdka5ryvbvfg7ustnyqvuy4asgp7hepq",
+        "identifier": "ocid1.webappfirewall.oc1.sa-saopaulo-1.amaaaaaa6noke4qacekjnipfsnkktdka5ryvbvfg7ustnyqvuy4asgp7hepq"
+      }
+    ],
+    "status": "SUCCEEDED",
+    "time-accepted": "2021-11-03T13:48:39.625000+00:00",
+    "time-finished": "2021-11-03T13:48:45.489000+00:00",
+    "time-started": "2021-11-03T13:48:44.793000+00:00"
+  }
+}
+```
+
+Pronto! Temos agora uma camada extra de segurança junto ao _[Load Balancer](https://github.com/daniel-armbrust/oci-book/blob/main/chapter-3/3-5_fundamentos-load-balancing.md)_.
+
+![alt_text](./images/waf-lb-1.jpg "WAF anexado no Load Balancer")
+
+>_**__NOTA:__** É possível anexar a mesma [política WAF](https://docs.oracle.com/pt-br/iaas/Content/WAF/Policies/waf-policy_management.htm) em diferentes [Load Balancers](https://github.com/daniel-armbrust/oci-book/blob/main/chapter-3/3-5_fundamentos-load-balancing.md). Isto é útil quando criamos regras de proteção em comum, para diferentes aplicações existentes no [tenancy](https://docs.oracle.com/pt-br/iaas/Content/Identity/Tasks/managingtenancy.htm)._
 
 ### __Criando uma Política WAF Edge__
 
