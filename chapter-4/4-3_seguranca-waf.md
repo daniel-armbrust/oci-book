@@ -113,6 +113,198 @@ Pronto! Temos agora uma camada extra de segurança junto ao _[Load Balancer](htt
 
 >_**__NOTA:__** É possível anexar a mesma [política WAF](https://docs.oracle.com/pt-br/iaas/Content/WAF/Policies/waf-policy_management.htm) em diferentes [Load Balancers](https://github.com/daniel-armbrust/oci-book/blob/main/chapter-3/3-5_fundamentos-load-balancing.md). Isto é útil quando criamos regras de proteção em comum, para diferentes aplicações existentes no [tenancy](https://docs.oracle.com/pt-br/iaas/Content/Identity/Tasks/managingtenancy.htm)._
 
+### __Habilitando Regras de Proteção__
+
+A função das _[regras de proteção](https://docs.oracle.com/pt-br/iaas/Content/WAF/Protections/protections_management.htm)_ é proteger aplicações Web buscando _padrões de ataques_ através da inspeção do tráfego _[HTTP](https://pt.wikipedia.org/wiki/Hypertext_Transfer_Protocol)_. Uma _[regra de proteção](https://docs.oracle.com/pt-br/iaas/Content/WAF/Protections/protections_management.htm)_ pode _bloquear_ o acesso a aplicação ou somente _registrar em log_, caso seja identificado um _"ataque"_.
+
+>_**__NOTA:__** O [WAF](https://docs.oracle.com/pt-br/iaas/Content/WAF/Concepts/overview.htm) utiliza o [Serviço de Logging](https://docs.oracle.com/pt-br/iaas/Content/Logging/Concepts/loggingoverview.htm) para todas as suas necessidades de registro em log._
+
+O _[Serviço WAF](https://docs.oracle.com/pt-br/iaas/Content/WAF/Concepts/overview.htm)_ já vem equipado com várias _[regras de proteção](https://docs.oracle.com/pt-br/iaas/Content/WAF/Protections/protections_management.htm)_, bastando somente sua ativação. Através deste _[link aqui](https://docs.oracle.com/pt-br/iaas/Content/WAF/Protections/protections_management.htm#ProtectionRules)_, é possível consultar todas as _[regras de proteção](https://docs.oracle.com/pt-br/iaas/Content/WAF/Protections/protections_management.htm)_ suportadas.
+
+Por existirem muitas regras, elas são agrupadas por diferentes _nomes (tags)_. Utilize o comando abaixo para listar todos os grupos de regras disponíveis:
+
+```
+darmbrust@hoodwink:~$ oci waf protection-capability list-protection-capability-group-tags \
+> --compartment-id "ocid1.compartment.oc1..aaaaaaaauvqvbbx3oridcm5d2ztxkftwr362u2vl5zdsayzbehzwbjs56soq" \
+> --all \
+> --query "data.items[].name" \
+> --output table \
+> --sort-order DESC
++-------------------------+
+| Column1                 |
++-------------------------+
+| webserver               |
+| server-webapp           |
+| policy-other            |
+| platform-multi          |
+| language-multi          |
+| application-wordpress   |
+| application-weblogic    |
+| application-netscaler   |
+| application-apache      |
+| application-F5-BigIP    |
+| XSS                     |
+| WordPress               |
+| Windows                 |
+| WASCTC                  |
+| Unix                    |
+| System Access           |
+| Struts                  |
+| SQLi                    |
+| SQL Injection           |
+```
+
+>_**__NOTA:__** A listagem acima foi "cortada" para poupar espaço por aqui._
+
+Destro desses grupos de regras disponíveis, existe um grupo categorizado como sendo _recomendado de utilização (recommended)_. Usamos o comando abaixo para exibir as regras que fazem parte deste grupo:
+
+```
+darmbrust@hoodwink:~$ oci waf protection-capability list \
+> --compartment-id "ocid1.compartment.oc1..aaaaaaaauvqvbbx3oridcm5d2ztxkftwr362u2vl5zdsayzbehzwbjs56soq" \
+> --group-tag "Recommended" \
+> --query "data.items[].{name:\"display-name\",key:key,version:version}" \
+> --output table
++---------+---------------------------------------------------------------------------------+---------+
+| key     | name                                                                            | version |
++---------+---------------------------------------------------------------------------------+---------+
+| 9420000 | SQL Injection (SQLi) Collaborative Group - SQLi Filters Categories              | 1       |
+| 941140  | Cross-Site Scripting (XSS) Attempt: XSS Filters - Category 4                    | 2       |
+| 9410000 | Cross-Site Scripting (XSS) Collaborative Group - XSS Filters Categories         | 1       |
+| 9330000 | PHP Injection Attacks Collaborative Group - PHP Filters Categories              | 1       |
+| 9320001 | Remote Code Execution (RCE) Collaborative Group - Windows RCE Filter Categories | 1       |
+| 9320000 | Remote Code Execution (RCE) Collaborative Group - Unix RCE Filter Categories    | 1       |
+| 930120  | Local File Inclusion (LFI) - OS File Access                                     | 2       |
+| 9300000 | Local File Inclusion (LFI) Collaborative Group - LFI Filter Categories          | 1       |
+| 920390  | Limit arguments total length                                                    | 1       |
+| 920380  | Number of Arguments Limits                                                      | 1       |
+| 920370  | Limit argument value length                                                     | 1       |
+| 920320  | Missing User-Agent header                                                       | 1       |
+| 920300  | Missing Accept Header                                                           | 1       |
+| 911100  | Restrict HTTP Request Methods                                                   | 1       |
++---------+---------------------------------------------------------------------------------+---------+
+```
+
+Caso queira saber sobre a _descrição_ de uma determinada regra _(9330000)_, usamos o comando abaixo:
+
+```
+darmbrust@hoodwink:~$ oci waf protection-capability list \
+> --compartment-id "ocid1.compartment.oc1..aaaaaaaaie4exnvj2ktkjlliahl2bxmdnteu2xmn27oc5cy5mdcmocl4vd7q" \
+> --group-tag "Recommended" \
+> --query "data.items[?key=='9330000'].description"
+[
+  "PHP Injection Attempt: PHP Filters - Detects PHP open tags \"<?\", \"<?php\", \"[php]\", \"[/php]\" and \"[\\php]\" - PHP Script Uploads, PHP Config Directives, PHP Functions, PHP Object Injection."
+]
+```
+
+De qualquer forma, o melhor meio para se consultar as descrições das regras é através da _[documentação](https://docs.oracle.com/pt-br/iaas/Content/WAF/Protections/protections_management.htm#ProtectionRules)_ contida no site do _[OCI](https://www.oracle.com/cloud/)_ neste _[link aqui](https://docs.oracle.com/pt-br/iaas/Content/WAF/Protections/protections_management.htm#ProtectionRules)_.
+
+Antes de habilitarmos qualquer _[regra de proteção](https://docs.oracle.com/pt-br/iaas/Content/WAF/Protections/protections_management.htm)_, devemos primeiramente configurar uma _[ação](https://docs.oracle.com/pt-br/iaas/Content/WAF/Actions/actions_management.htm)_ como resposta a um _padrão de ataque_ que foi identificado.
+
+Uma _[ação](https://docs.oracle.com/pt-br/iaas/Content/WAF/Actions/actions_management.htm)_ pode ser do tipo:
+
+- __ALLOW (Permitir)__
+    - A _[ação](https://docs.oracle.com/pt-br/iaas/Content/WAF/Actions/actions_management.htm)_ _ALLOW_ faz com que todas as regras restantes do grupo de regras sejam ignoradas.
+        
+- __CHECK (Verificar)__
+    - Será registrado em _[Log](https://docs.oracle.com/pt-br/iaas/Content/Logging/Concepts/loggingoverview.htm)_ a regra que combinou com o possível _padrão de ataque_.
+
+- __RETURN_HTTP_RESPONSE (Retornar resposta HTTP)__
+    - A solicitação será _bloqueada_ e uma _resposta HTTP_ será retornada.
+
+É recomendado sempre optar primeiramente pela _[ação](https://docs.oracle.com/pt-br/iaas/Content/WAF/Actions/actions_management.htm)_ de _CHECK (Verificar)_ antes de _bloquear (RETURN_HTTP_RESPONSE)_. Isto evita _bloquear indevidamente_ qualquer tráfego legítimo. 
+
+Começaremos pela configuração de uma _[ação](https://docs.oracle.com/pt-br/iaas/Content/WAF/Actions/actions_management.htm)_ para _bloquear_ uma tentativa de _ataque_. Para isto, configuro uma resposta _[HTTP](https://pt.wikipedia.org/wiki/Hypertext_Transfer_Protocol)_ do tipo _[403 Forbidden (proibido)](https://pt.wikipedia.org/wiki/HTTP_403)_:
+
+```
+darmbrust@hoodwink:~$ oci waf web-app-firewall-policy update \
+> --web-app-firewall-policy-id "ocid1.webappfirewallpolicy.oc1.sa-saopaulo-1.amaaaaaa6noke4qa5daq3r3gvijbznjy5rsgvhamguxgeqaal6ah2iesdfna" \
+> --actions '[{"name": "Retorna 403 Forbidden", "type": "RETURN_HTTP_RESPONSE", "code": 403, "body": {"type": "STATIC_TEXT", "text": "403 - Forbidden"}}]' \
+> --force --wait-for-state "SUCCEEDED"
+Action completed. Waiting until the work request has entered state: ('SUCCEEDED',)
+{
+  "data": {
+    "compartment-id": "ocid1.compartment.oc1..aaaaaaaauvqvbbx3oridcm5d2ztxkftwr362u2vl5zdsayzbehzwbjs56soq",
+    "id": "ocid1.webappfirewallworkrequest.oc1.sa-saopaulo-1.amaaaaaa6noke4qarbextavq4wwxjjfz67vnxvxs7w5oblndkz7tbkw5hwya",
+    "operation-type": "UPDATE_WAF_POLICY",
+    "percent-complete": 100.0,
+    "resources": [
+      {
+        "action-type": "UPDATED",
+        "entity-type": "webAppFirewallPolicy",
+        "entity-uri": "/webAppFirewallPolicies/ocid1.webappfirewallpolicy.oc1.sa-saopaulo-1.amaaaaaa6noke4qa5daq3r3gvijbznjy5rsgvhamguxgeqaal6ah2iesdfna",
+        "identifier": "ocid1.webappfirewallpolicy.oc1.sa-saopaulo-1.amaaaaaa6noke4qa5daq3r3gvijbznjy5rsgvhamguxgeqaal6ah2iesdfna"
+      }
+    ],
+    "status": "SUCCEEDED",
+    "time-accepted": "2021-11-04T17:54:11.439000+00:00",
+    "time-finished": "2021-11-04T17:54:11.450000+00:00",
+    "time-started": "2021-11-04T17:54:11.450000+00:00"
+  }
+}
+```
+
+O _[Serviço WAF](https://docs.oracle.com/pt-br/iaas/Content/WAF/Concepts/overview.htm)_ é bem customizável. Veja que é possível especificar qualquer _[código de resposta HTTP](https://pt.wikipedia.org/wiki/Lista_de_c%C3%B3digos_de_estado_HTTP)_ e qualquer texto estático como resposta _[(body)](https://en.wikipedia.org/wiki/HTTP_message_body)_.
+
+Antes de ativarmos qualquer _[regra de proteção](https://docs.oracle.com/pt-br/iaas/Content/WAF/Protections/protections_management.htm)_, vamos verificar como a aplicação _[Wordpress](https://pt.wikipedia.org/wiki/WordPress)_ se comporta mediante dados que podem ser entendidos como um _ataque_.
+
+Irei inserir um treço de código _[JavaScript](https://pt.wikipedia.org/wiki/JavaScript)_ em uma requisição feita ao _[Wordpress](https://pt.wikipedia.org/wiki/WordPress)_ através do comando abaixo:
+
+```
+darmbrust@hoodwink:~$ curl -o /dev/null -s -w "%{http_code}\n" 'https://wordpress.ocibook.com.br/?id=<script>alert("TESTE");</script>'
+200
+```
+
+Perceba que a aplicação retornou o _[código HTTP 200](https://pt.wikipedia.org/wiki/Lista_de_c%C3%B3digos_de_estado_HTTP#2xx_Sucesso)_ que indica _Sucesso_. Ou seja, a requisição foi recebida, compreendida, aceita e processada com êxito.
+
+Agora, vamos habilitar uma regra que protege contra ataques do tipo _[Cross-site Scripting (XSS)](https://pt.wikipedia.org/wiki/Cross-site_scripting)_:
+
+```
+darmbrust@hoodwink:~$ oci waf web-app-firewall-policy update \
+> --web-app-firewall-policy-id "ocid1.webappfirewallpolicy.oc1.sa-saopaulo-1.amaaaaaa6noke4qa5daq3r3gvijbznjy5rsgvhamguxgeqaal6ah2iesdfna" \
+> --request-protection '{"rules": [{"name": "Retorna 403 Forbidden para ataques XSS", "type": "PROTECTION", "actionName": "Retorna 403 Forbidden", "protectionCapabilities": [{"key": "941110", "version": 2}]}]}' \
+> --force \
+> --wait-for-state "SUCCEEDED"
+Action completed. Waiting until the work request has entered state: ('SUCCEEDED',)
+{
+  "data": {
+    "compartment-id": "ocid1.compartment.oc1..aaaaaaaauvqvbbx3oridcm5d2ztxkftwr362u2vl5zdsayzbehzwbjs56soq",
+    "id": "ocid1.webappfirewallworkrequest.oc1.sa-saopaulo-1.amaaaaaa6noke4qaxsnr67qes26f7wsh3obsartt7ygu64jr5nqz4rhucwsa",
+    "operation-type": "UPDATE_WAF_POLICY",
+    "percent-complete": 100.0,
+    "resources": [
+      {
+        "action-type": "UPDATED",
+        "entity-type": "webAppFirewallPolicy",
+        "entity-uri": "/webAppFirewallPolicies/ocid1.webappfirewallpolicy.oc1.sa-saopaulo-1.amaaaaaa6noke4qa5daq3r3gvijbznjy5rsgvhamguxgeqaal6ah2iesdfna",
+        "identifier": "ocid1.webappfirewallpolicy.oc1.sa-saopaulo-1.amaaaaaa6noke4qa5daq3r3gvijbznjy5rsgvhamguxgeqaal6ah2iesdfna"
+      }
+    ],
+    "status": "SUCCEEDED",
+    "time-accepted": "2021-11-05T11:14:01.749000+00:00",
+    "time-finished": "2021-11-05T11:14:11.796000+00:00",
+    "time-started": "2021-11-05T11:14:11.341000+00:00"
+  }
+}
+```
+
+>_**__NOTA:__** Especificar a versão correta da regra é uma obrigatoriedade ("version": 2). Você pode obter a versão pelo comando de listagem já mostrado aqui, ou pelo próprio site do [OCI](https://docs.oracle.com/pt-br/iaas/Content/WAF/Protections/protections_management.htm#ProtectionRules) neste [link aqui](https://docs.oracle.com/pt-br/iaas/Content/WAF/Protections/protections_management.htm#ProtectionRules)._
+
+Podemos executar o mesmo teste e ver a _[regra de proteção](https://docs.oracle.com/pt-br/iaas/Content/WAF/Protections/protections_management.htm)_ em ação, retornando uma resposta do tipo _[403 Forbidden (proibido)](https://pt.wikipedia.org/wiki/HTTP_403)_ conforme configurado:
+
+```
+darmbrust@hoodwink:~$ curl -o /dev/null -s -w "%{http_code}\n" 'https://wordpress.ocibook.com.br/?id=<script>alert("TESTE");</script>'
+403
+```
+
+Apesar de já existirem diferentes _[regras de proteção](https://docs.oracle.com/pt-br/iaas/Content/WAF/Protections/protections_management.htm)_ testadas contra diferentes _tipos de ataques_, uma determinada aplicação pode gerar determinado tipo de conteúdo no qual o _[WAF](https://docs.oracle.com/pt-br/iaas/Content/WAF/Concepts/overview.htm)_ pode entender como um _ataque_. Isto depende muito de como a aplicação espera receber os dados ou como ela gera os dados.
+
+Lembre-se, o protocolo _[HTTP](https://pt.wikipedia.org/wiki/Hypertext_Transfer_Protocol)_ é um protocolo que faz troca de mensagens, que nada mais são do que _[strings](https://pt.wikipedia.org/wiki/Cadeia_de_caracteres)_. Operar sobre essas _[strings](https://pt.wikipedia.org/wiki/Cadeia_de_caracteres)_ é complexo e pode levar ao chamado _["falso positivo"](https://pt.wikipedia.org/wiki/Falso_positivo)_. Por isso, teste antes!
+
+O intuíto aqui foi demonstrar como habilitar as _[regras de proteção](https://docs.oracle.com/pt-br/iaas/Content/WAF/Protections/protections_management.htm)_. Como já foi dito, há um grande número de _[regras](https://docs.oracle.com/pt-br/iaas/Content/WAF/Protections/protections_management.htm)_ já disponíveis e que podem ser consultadas neste _[link aqui](https://docs.oracle.com/pt-br/iaas/Content/WAF/Protections/protections_management.htm#ProtectionRules)_. 
+
+Além das _[regras de proteção](https://docs.oracle.com/pt-br/iaas/Content/WAF/Tasks/wafprotectionrules.htm)_ que o serviço possui, você pode criar suas próprias _[regras personalizadas](https://docs.oracle.com/pt-br/iaas/Content/WAF/Tasks/customprotectionrules.htm)_.
+
+
 ### __Criando uma Política WAF Edge__
 
 O _[Serviço WAF](https://docs.oracle.com/pt-br/iaas/Content/WAF/Concepts/overview.htm)_ é um serviço já existente e disponível globalmente. Não há a necessidade de realizar o provisionamento da sua infraestrutura. 
@@ -149,7 +341,7 @@ darmbrust@hoodwink:~$ oci waas certificate create \
 > --display-name "wordpress_waf_cert"
 ```
 
-Após criado, irei obter o seu OCID pois será necessário na criação da _[política](https://docs.oracle.com/pt-br/iaas/Content/WAF/Tasks/managingwaf.htm)_:
+Após criado, irei obter o seu _OCID_ pois será necessário na criação da _[política](https://docs.oracle.com/pt-br/iaas/Content/WAF/Tasks/managingwaf.htm)_:
 
 ```
 darmbrust@hoodwink:~$ oci waas certificate list \

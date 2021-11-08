@@ -56,6 +56,7 @@ Esse livro apresenta o **OCI (Oracle Cloud Infraestructure)** e por quê você d
     [5.7 - OCI e Microsoft Azure](https://github.com/daniel-armbrust/oci-book/blob/main/chapter-5/5-7_mais-sobre-redes-msazure.md) <br>
     [5.8 - Múltiplos DRGs e múltiplas VCNs](https://github.com/daniel-armbrust/oci-book/blob/main/chapter-5/5-8_mais-sobre-redes-multiplos-drgs-multiplos-vcns.md) <br>
     [5.9 - Visualização através do Network Visualizer](https://github.com/daniel-armbrust/oci-book/blob/main/chapter-5/5-9_mais-sobre-redes-net-visualizer.md) <br>
+    [5.10 - DNS Híbrido](https://github.com/daniel-armbrust/oci-book/blob/main/chapter-5/5-10_mais-sobre-redes-hybrid-dns.md) <br>
 
 - [Capítulo 6: Storage no OCI](https://github.com/daniel-armbrust/oci-book/blob/main/chapter-6/README.md) <br>
     [6.1 - Object Storage](https://github.com/daniel-armbrust/oci-book/blob/main/chapter-6/6-1_intro-object-storage.md) <br>
