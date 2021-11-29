@@ -348,11 +348,11 @@ darmbrust@hoodwink:~$ oci compute instance launch \
 > --shape "VM.Standard2.2" \
 > --subnet-id "ocid1.subnet.oc1.sa-saopaulo-1.aaaaaaaajb4wma763mz6uowun3pfeltobe4fmiegdeyma5ehvnf3kzy3jvxa" \
 > --boot-volume-size-in-gbs 100 \
-> --display-name "vm-wordpress_subnprv-app_vcn-prd" \
+> --display-name "vm-wordpress-tmp" \
 > --fault-domain "FAULT-DOMAIN-3" \
 > --hostname-label "wordpress" \
 > --image-id "ocid1.image.oc1.sa-saopaulo-1.aaaaaaaasahnls6nmev22raz7ecw6i64d65fu27pmqjn4pgz7zue56ojj7qq" \
-> --ssh-authorized-keys-file ./wordpress-key.pub 
+> --ssh-authorized-keys-file ./wordpress-key.pub \
 > --wait-for-state "RUNNING"
 Action completed. Waiting until the resource has entered state: ('RUNNING',)
 {
@@ -377,11 +377,11 @@ Action completed. Waiting until the resource has entered state: ('RUNNING',)
         "CreatedOn": "2021-09-07T22:29:56.823Z"
       }
     },
-    "display-name": "vm-wordpress_subnprv-app_vcn-prd",
+    "display-name": "vm-wordpress-tmp",
     "extended-metadata": {},
     "fault-domain": "FAULT-DOMAIN-3",
     "freeform-tags": {},
-    "id": "ocid1.instance.oc1.sa-saopaulo-1.antxeljr6noke4qcf4yilvaofwpt5aiavnsx7cfev3fhp2bpc3xfcxo5k6zq",
+    "id": "ocid1.instance.oc1.sa-saopaulo-1.antxeljr6noke4qcric5qfuocpbpeuuydcbqdquokl6erikoxitmzsckmnra",
     "image-id": "ocid1.image.oc1.sa-saopaulo-1.aaaaaaaasahnls6nmev22raz7ecw6i64d65fu27pmqjn4pgz7zue56ojj7qq",
     "instance-options": {
       "are-legacy-imds-endpoints-disabled": false
@@ -454,7 +454,7 @@ darmbrust@hoodwink:~$ oci compute instance list \
 > --compartment-id "ocid1.compartment.oc1..aaaaaaaamcff6exkhvp4aq3ubxib2wf74v7cx22b3yj56jnfkazoissdzefq" \
 > --query "data[?\"display-name\"=='vm-wordpress_subnprv-app_vcn-prd'].id"
 [
-  "ocid1.instance.oc1.sa-saopaulo-1.antxeljr6noke4qcf4yilvaofwpt5aiavnsx7cfev3fhp2bpc3xfcxo5k6zq"
+  "ocid1.instance.oc1.sa-saopaulo-1.antxeljr6noke4qcric5qfuocpbpeuuydcbqdquokl6erikoxitmzsckmnra"
 ]
 ```
 
@@ -487,7 +487,7 @@ Para critério de demostração, vamos reiniciar nossa instância com o comando 
 
 ```
 darmbrust@hoodwink:~$ oci compute instance action \
-> --instance-id "ocid1.instance.oc1.sa-saopaulo-1.antxeljr6noke4qcf4yilvaofwpt5aiavnsx7cfev3fhp2bpc3xfcxo5k6zq" 
+> --instance-id "ocid1.instance.oc1.sa-saopaulo-1.antxeljr6noke4qcric5qfuocpbpeuuydcbqdquokl6erikoxitmzsckmnra" 
 > --action "SOFTRESET"
 ```
 
