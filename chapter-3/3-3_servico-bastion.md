@@ -36,7 +36,7 @@ Para listarmos todos os _[plugins](https://docs.oracle.com/pt-br/iaas/Content/Co
 ```
 darmbrust@hoodwink:~$ oci instance-agent plugin list \
 > --compartment-id "ocid1.compartment.oc1..aaaaaaaamcff6exkhvp4aq3ubxib2wf74v7cx22b3yj56jnfkazoissdzefq" \
-> --instanceagent-id "ocid1.instance.oc1.sa-saopaulo-1.antxeljr6noke4qcf4yilvaofwpt5aiavnsx7cfev3fhp2bpc3xfcxo5k6zq" \
+> --instanceagent-id "ocid1.instance.oc1.sa-saopaulo-1.antxeljr6noke4qcric5qfuocpbpeuuydcbqdquokl6erikoxitmzsckmnra" \
 > --output table
 +------------------------------+---------+----------------------------------+
 | name                         | status  | time-last-updated-utc            |
@@ -56,7 +56,7 @@ Perceba que o _[plugin](https://docs.oracle.com/pt-br/iaas/Content/Compute/Tasks
 
 ```
 darmbrust@hoodwink:~$ oci compute instance update \
-> --instance-id "ocid1.instance.oc1.sa-saopaulo-1.antxeljr6noke4qcf4yilvaofwpt5aiavnsx7cfev3fhp2bpc3xfcxo5k6zq" \
+> --instance-id "ocid1.instance.oc1.sa-saopaulo-1.antxeljr6noke4qcric5qfuocpbpeuuydcbqdquokl6erikoxitmzsckmnra" \
 > --agent-config '{"pluginsConfig": [{"name": "Bastion", "desiredState": "ENABLED"}]}'
 WARNING: Updates to defined-tags and freeform-tags and agent-config and metadata and extended-metadata and shape-config and instance-options and launch-options and availability-config will replace any existing values. Are you sure you want to continue? [y/N]: y
 ```
@@ -68,7 +68,7 @@ Depois de alguns minutos e após confirmarmos as alteração no _[OCA](https://d
 ```
 darmbrust@hoodwink:~$ oci instance-agent plugin list \
 > --compartment-id "ocid1.compartment.oc1..aaaaaaaamcff6exkhvp4aq3ubxib2wf74v7cx22b3yj56jnfkazoissdzefq" \
-> --instanceagent-id "ocid1.instance.oc1.sa-saopaulo-1.antxeljr6noke4qcf4yilvaofwpt5aiavnsx7cfev3fhp2bpc3xfcxo5k6zq" \
+> --instanceagent-id "ocid1.instance.oc1.sa-saopaulo-1.antxeljr6noke4qcric5qfuocpbpeuuydcbqdquokl6erikoxitmzsckmnra" \
 > --name "Bastion"
 {
   "data": [
@@ -156,7 +156,8 @@ _[Bastion](https://docs.oracle.com/pt-br/iaas/Content/Bastion/Concepts/bastionov
 ```
 darmbrust@hoodwink:~$ oci bastion bastion list \
 > --compartment-id "ocid1.compartment.oc1..aaaaaaaauvqvbbx3oridcm5d2ztxkftwr362u2vl5zdsayzbehzwbjs56soq" \
-> --query "data[?name=='BastionSubnprvAppVcnPrd'].id"
+> --query "data[?name=='BastionSubnprvAppVcnPrd'].id" \
+> --all
 [
   "ocid1.bastion.oc1.sa-saopaulo-1.amaaaaaa6noke4qavfjoxi4kunt3sdo7ps46lbkfq3loxgqqomhmizoxhf4q"  
 ]
@@ -258,7 +259,7 @@ Agora, vou obter o endereço IP privado que a instância _[Wordpress](https://pt
 ```
 darmbrust@hoodwink:~$ oci compute vnic-attachment list \
 > --compartment-id "ocid1.compartment.oc1..aaaaaaaamcff6exkhvp4aq3ubxib2wf74v7cx22b3yj56jnfkazoissdzefq" \
-> --instance-id "ocid1.instance.oc1.sa-saopaulo-1.antxeljr6noke4qcf4yilvaofwpt5aiavnsx7cfev3fhp2bpc3xfcxo5k6zq" \
+> --instance-id "ocid1.instance.oc1.sa-saopaulo-1.antxeljr6noke4qcric5qfuocpbpeuuydcbqdquokl6erikoxitmzsckmnra" \
 > --query "data[].\"vnic-id\""
 [
   "ocid1.vnic.oc1.sa-saopaulo-1.abtxeljrxckhpgqp27r55nl4nbhd3ruawu33zenc2mwhavi3h2rqtzvg2ica"
@@ -280,7 +281,7 @@ darmbrust@hoodwink:~$ oci network vnic get \
         "CreatedOn": "2021-09-09T18:14:58.697Z"
       }
     },
-    "display-name": "vm-wordpress_subnprv-app_vcn-prd",
+    "display-name": "vm-wordpress-tmp",
     "freeform-tags": {},
     "hostname-label": "wordpress",
     "id": "ocid1.vnic.oc1.sa-saopaulo-1.abtxeljrxckhpgqp27r55nl4nbhd3ruawu33zenc2mwhavi3h2rqtzvg2ica",
@@ -288,7 +289,7 @@ darmbrust@hoodwink:~$ oci network vnic get \
     "lifecycle-state": "AVAILABLE",
     "mac-address": "02:00:17:02:F4:E7",
     "nsg-ids": [],
-    "private-ip": "10.0.10.240",
+    "private-ip": "10.0.10.154",
     "public-ip": null,
     "skip-source-dest-check": false,
     "subnet-id": "ocid1.subnet.oc1.sa-saopaulo-1.aaaaaaaajb4wma763mz6uowun3pfeltobe4fmiegdeyma5ehvnf3kzy3jvxa",
@@ -299,7 +300,7 @@ darmbrust@hoodwink:~$ oci network vnic get \
 }
 ```
 
-Pronto! Como pode ver, o endereço IP _"10.0.10.240"_ é exibido pela propriedade _"private-ip"_ da _[VNIC](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingVNICs.htm)_.
+Pronto! Como pode ver, o endereço IP _"10.0.10.154"_ é exibido pela propriedade _"private-ip"_ da _[VNIC](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingVNICs.htm)_.
 
 Juntando as informações, iremos criar a sessão pelo _[Bastion](https://docs.oracle.com/pt-br/iaas/Content/Bastion/Concepts/bastionoverview.htm)_ através do comando abaixo:
 
@@ -309,9 +310,9 @@ darmbrust@hoodwink:~$ oci bastion session create-managed-ssh \
 > --display-name "wordpress_session" \
 > --session-ttl "7200" \
 > --ssh-public-key-file "./sessao-temp.pub" \
-> --target-resource-id "ocid1.instance.oc1.sa-saopaulo-1.antxeljr6noke4qcf4yilvaofwpt5aiavnsx7cfev3fhp2bpc3xfcxo5k6zq" \
-> --target-os-username "opc" 
-> --target-private-ip "10.0.10.240" \
+> --target-resource-id "ocid1.instance.oc1.sa-saopaulo-1.antxeljr6noke4qcric5qfuocpbpeuuydcbqdquokl6erikoxitmzsckmnra" \
+> --target-os-username "opc" \ 
+> --target-private-ip "10.0.10.154" \
 > --target-port "22" \
 > --wait-for-state "SUCCEEDED"
 Action completed. Waiting until the work request has entered state: ('SUCCEEDED',)
@@ -352,7 +353,7 @@ darmbrust@hoodwink:~$ oci bastion session get \
 > --session-id "ocid1.bastionsession.oc1.sa-saopaulo-1.amaaaaaa6noke4qar76rq6xg4llxhfssk2zfqmb6f6l4nr6l2uwrqpwb6e6a" \
 > --query "data.\"ssh-metadata\".command" \
 > --raw-output
-ssh -i <privateKey> -o ProxyCommand="ssh -i <privateKey> -W %h:%p -p 22 ocid1.bastionsession.oc1.sa-saopaulo-1.amaaaaaa6noke4qar76rq6xg4llxhfssk2zfqmb6f6l4nr6l2uwrqpwb6e6a@host.bastion.sa-saopaulo-1.oci.oraclecloud.com" -p 22 opc@10.0.10.240
+ssh -i <privateKey> -o ProxyCommand="ssh -i <privateKey> -W %h:%p -p 22 ocid1.bastionsession.oc1.sa-saopaulo-1.amaaaaaa6noke4qar76rq6xg4llxhfssk2zfqmb6f6l4nr6l2uwrqpwb6e6a@host.bastion.sa-saopaulo-1.oci.oraclecloud.com" -p 22 opc@10.0.10.154
 ```
 
 Perceba que o comando SSH possui _duas posições_ nomeadas como _**\<privateKey\>**_ que devemos preencher com o caminho da nossa chave privada, criada anteriormente. Ao ajustarmos isto, é possível realizar a conexão:
@@ -397,10 +398,10 @@ darmbrust@hoodwink:~$ oci bastion session list \
       "target-resource-details": {
         "session-type": "MANAGED_SSH",
         "target-resource-display-name": "vm-wordpress_subnprv-app_vcn-prd",
-        "target-resource-id": "ocid1.instance.oc1.sa-saopaulo-1.antxeljr6noke4qcf4yilvaofwpt5aiavnsx7cfev3fhp2bpc3xfcxo5k6zq",
+        "target-resource-id": "ocid1.instance.oc1.sa-saopaulo-1.antxeljr6noke4qcric5qfuocpbpeuuydcbqdquokl6erikoxitmzsckmnra",
         "target-resource-operating-system-user-name": "opc",
         "target-resource-port": 22,
-        "target-resource-private-ip-address": "10.0.10.240"
+        "target-resource-private-ip-address": "10.0.10.154"
       },
       "time-created": "2021-09-11T13:30:52.875000+00:00",
       "time-updated": "2021-09-11T13:31:08.301000+00:00"
@@ -444,8 +445,8 @@ Após a confirmação da exclusão, se houver alguma conexão SSH presente na in
 ```
 Last login: Sat Sep 11 12:06:17 2021 from 10.0.10.112
 [opc@wordpress ~]$ Connection to host.bastion.sa-saopaulo-1.oci.oraclecloud.com closed by remote host.
-Connection to 10.0.10.240 closed by remote host.
-Connection to 10.0.10.240 closed.
+Connection to 10.0.10.154 closed by remote host.
+Connection to 10.0.10.154 closed.
 ```
 
 ### __Conclusão__
