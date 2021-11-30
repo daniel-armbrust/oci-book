@@ -8,9 +8,9 @@ O _[Banco de Dados MySQL](https://docs.oracle.com/pt-br/iaas/mysql-database/inde
 
 Neste capítulo, irei apresentar o básico sobre o _[MySQL](https://docs.oracle.com/pt-br/iaas/mysql-database/index.html)_ para que a aplicação _[Wordpress](https://pt.wikipedia.org/wiki/WordPress)_ funcione. Existe um capítulo mais completo sobre o tema que contém questões mais detalhadas e completas. Sugiro sua consulta caso necessite conhecer mais detalhes.
 
-Existem diversas vantagens ao se utilizar o _[MySQL](https://docs.oracle.com/pt-br/iaas/mysql-database/index.html)_ como serviço, começando pelo provisionamento automático das instâncias, aplicação de patches, atualizações, facilidade para realizar backups e restaurações, fácil escalabilidade e monitoração incluída.
+Existem diversas vantagens ao se utilizar o _[MySQL](https://docs.oracle.com/pt-br/iaas/mysql-database/index.html)_ como serviço, começando pelo provisionamento automático das instâncias, aplicação de patches, atualizações, facilidade para realizar backups, restaurações e monitoração incluída.
 
-Antes de disparar a criação do _[MySQL](https://docs.oracle.com/pt-br/iaas/mysql-database/index.html)_, irei exibir e explicar sobre algumas informações básicas necessárias para compor o comando de criação do serviço.
+Antes de disparar a criação do _[MySQL](https://docs.oracle.com/pt-br/iaas/mysql-database/index.html)_, irei exibir e explicar sobre algumas informações básicas necessárias para compor todo o comando de criação do serviço.
 
 ### __Listando os shapes disponíveis__
 
@@ -43,7 +43,7 @@ darmbrust@hoodwink:~$ oci mysql shape list \
 +----------------+-----------------------------------------------------+--------------------+--------------------------------+
 ```
 
-Por hora, ficaremos com o _[shape](https://docs.oracle.com/pt-br/iaas/mysql-database/doc/db-systems.html#GUID-E2A83218-9700-4A49-B55D-987867D81871)_ _VM.Standard.E2.2_ que é equipado com _2 vCPUs_ e _16 GB de RAM_.
+Por hora, ficaremos com o _[shape](https://docs.oracle.com/pt-br/iaas/mysql-database/doc/db-systems.html#GUID-E2A83218-9700-4A49-B55D-987867D81871)_ _MySQL.VM.Standard.E3.1.8GB_ que é equipado com _1 vCPU_ e _8 GB de RAM_.
 
 ### __Listando as configurações disponíveis__
 
@@ -51,24 +51,37 @@ As configurações são coleções de variáveis e valores que definem a operaç
 
 São análogos aos arquivos _my.ini_ ou _my.cnf_ usados em instalações locais. 
 
-Para cada tipo de _[shape](https://docs.oracle.com/pt-br/iaas/mysql-database/doc/db-systems.html#GUID-E2A83218-9700-4A49-B55D-987867D81871)_ há uma _"configuração"_ disponível para uso que é aplicado ao sistema como um todo e aos usuários que fazem conexão e usam o serviço.
+Para cada tipo de _[shape](https://docs.oracle.com/pt-br/iaas/mysql-database/doc/db-systems.html#GUID-E2A83218-9700-4A49-B55D-987867D81871)_ há uma _"configuração"_ disponível para uso que é aplicado ao sistema como um todo, e aos usuários que fazem conexão e usam o serviço.
 
-Abaixo, irei listar a _"configuração"_ disponível para o _[shape](https://docs.oracle.com/pt-br/iaas/mysql-database/doc/db-systems.html#GUID-E2A83218-9700-4A49-B55D-987867D81871)_ _VM.Standard.E2.2_. escolhido:
+Abaixo, irei listar as _"configurações"_ disponíveis para o _[shape](https://docs.oracle.com/pt-br/iaas/mysql-database/doc/db-systems.html#GUID-E2A83218-9700-4A49-B55D-987867D81871)_ _MySQL.VM.Standard.E3.1.8GB_:
 
 ```
 darmbrust@hoodwink:~$ oci mysql configuration list \
 > --compartment-id "ocid1.tenancy.oc1..aaaaaaaavv2qh5asjdcoufmb6fzpnrfqgjxxdzlvjrgkrkytnyyz6zgvjnua" \
-> --query "data[?\"shape-name\"=='VM.Standard.E2.2']"
+> --query "data[?\"shape-name\"=='MySQL.VM.Standard.E3.1.8GB']"
 [
   {
     "compartment-id": null,
     "defined-tags": null,
-    "description": "Default Standalone configuration for the VM.Standard.E2.2 MySQL Shape",
-    "display-name": "VM.Standard.E2.2.Standalone",
+    "description": "Default Standalone configuration for the MySQL.VM.Standard.E3.1.8GB MySQL Shape",
+    "display-name": "MySQL.VM.Standard.E3.1.8GB.Standalone",
     "freeform-tags": null,
-    "id": "ocid1.mysqlconfiguration.oc1..aaaaaaaah6o6qu3gdbxnqg6aw56amnosmnaycusttaa7abyq2tdgpgubvsgj",
+    "id": "ocid1.mysqlconfiguration.oc1..aaaaaaaalwzc2a22xqm56fwjwfymixnulmbq3v77p5v4lcbb6qhkftxf2trq",
     "lifecycle-state": "ACTIVE",
-    "shape-name": "VM.Standard.E2.2",
+    "shape-name": "MySQL.VM.Standard.E3.1.8GB",
+    "time-created": "2018-09-21T10:00:00+00:00",
+    "time-updated": null,
+    "type": "DEFAULT"
+  },
+  {
+    "compartment-id": null,
+    "defined-tags": null,
+    "description": "Default HA configuration for the MySQL.VM.Standard.E3.1.8GB MySQL Shape",
+    "display-name": "MySQL.VM.Standard.E3.1.8GB.HA",
+    "freeform-tags": null,
+    "id": "ocid1.mysqlconfiguration.oc1..aaaaaaaantprksu6phqfgr5xvyut46wdfesdszonbclybfwvahgysfjbrb4q",
+    "lifecycle-state": "ACTIVE",
+    "shape-name": "MySQL.VM.Standard.E3.1.8GB",
     "time-created": "2018-09-21T10:00:00+00:00",
     "time-updated": null,
     "type": "DEFAULT"
@@ -76,17 +89,19 @@ darmbrust@hoodwink:~$ oci mysql configuration list \
 ]
 ```
 
+Perceba que há duas _"configurações"_ para o _[shape](https://docs.oracle.com/pt-br/iaas/mysql-database/doc/db-systems.html#GUID-E2A83218-9700-4A49-B55D-987867D81871)_ escolhido. Usaremos a configuração _MySQL.VM.Standard.E3.1.8GB.HA_ no qual especifica _"Alta Disponibilidade"_, criando três instâncias, uma principal e duas secundárias do _[MySQL](https://docs.oracle.com/pt-br/iaas/mysql-database/index.html)_.
+
 ### __Manutenção e Backup__
 
 #### Janela de Manutenção
 
-A _"janela de manutenção"_ é o horário que você especifica de acordo com suas necessidades, para aplicação de patches e manutenção geral do _[MySQL](https://docs.oracle.com/pt-br/iaas/mysql-database/index.html)_. Isto é necessário para garantir o funcionamento e a disponibilidade do serviço.
+A _"janela de manutenção"_ é o horário que você especifica de acordo com suas necessidades, para aplicação de patches e manutenção geral do _[MySQL](https://docs.oracle.com/pt-br/iaas/mysql-database/index.html)_. A definição da _"janela"_ é necessária, para garantir o funcionamento e a disponibilidade do serviço.
 
-Tanto patches do sistema operacional, do próprio _[MySQL](https://docs.oracle.com/pt-br/iaas/mysql-database/index.html)_ e de qualquer hardware subjacente são executados durante _"janela de manutenção"_ de forma automática. É recomendado você definir este horário, caso contrário o serviço escolherá um horário de início para você.
+Tanto patches do sistema operacional, do próprio _[MySQL](https://docs.oracle.com/pt-br/iaas/mysql-database/index.html)_ e de qualquer hardware subjacente, são executados durante a _"janela de manutenção"_ de forma automática. É recomendado você definir este horário, caso contrário o serviço escolherá um horário de início para você.
 
-Essas manutenções são realizadas raramente e somente quando for absolutamente necessário. Normalmente quando há problemas de segurança ou confiabilidade.
+Essas manutenções são realizadas raramente e somente quando for absolutamente necessário, normalmente quando há problemas de segurança ou confiabilidade.
 
-Quando a manutenção é executada, o status do serviço _[MySQL](https://docs.oracle.com/pt-br/iaas/mysql-database/index.html)_ muda para _UPDATING_ e o banco de dados pode ficar indisponível por um curto período de tempo, até que a manutenção seja concluída.
+Essa é a vantagem de se utilizar uma configuração em _"Alta Disponibilidade"_. Quando existe a necessidade de executar qualquer manutenção, não há indisponibilidade do _[MySQL](https://docs.oracle.com/pt-br/iaas/mysql-database/index.html)_. Diferente de uma configuração _"Standalone"_, quando uma manutenção é executada, o status do serviço _[MySQL](https://docs.oracle.com/pt-br/iaas/mysql-database/index.html)_ muda para _UPDATING_, e o banco de dados fica indisponível por um curto período de tempo até que a manutenção seja concluída.
 
 Para a _"janela de manutenção"_, irei especificar _DOMINGO (SUNDAY)_ com início as _04:30 AM_ _[horário de Brasília](https://pt.wikipedia.org/wiki/Fusos_hor%C3%A1rios_no_Brasil#Hor%C3%A1rio_de_Bras%C3%ADlia)_ _(07:30 UTC)_.
 
@@ -98,13 +113,13 @@ O _[backup automático](https://docs.oracle.com/pt-br/iaas/mysql-database/doc/ba
 
 Além do _[backup automático](https://docs.oracle.com/pt-br/iaas/mysql-database/doc/backing-db-system.html)_, você pode iniciar uma ação manual de _backup_ a qualquer momento.
 
-Para os _[backup automático](https://docs.oracle.com/pt-br/iaas/mysql-database/doc/backing-db-system.html)_ do nosso exemplo, iremos especificar o horário de início as _05:50 AM_ _[horário de Brasília](https://pt.wikipedia.org/wiki/Fusos_hor%C3%A1rios_no_Brasil#Hor%C3%A1rio_de_Bras%C3%ADlia)_ _(08:50 UTC)_ e um _período de retenção_ de _10 dias_.
+Para os _[backup automático](https://docs.oracle.com/pt-br/iaas/mysql-database/doc/backing-db-system.html)_ do nosso exemplo, irei especificar o horário de início as _05:50 AM_ _[horário de Brasília](https://pt.wikipedia.org/wiki/Fusos_hor%C3%A1rios_no_Brasil#Hor%C3%A1rio_de_Bras%C3%ADlia)_ _(08:50 UTC)_ e um _período de retenção_ de _10 dias_.
 
 >_**__NOTA:__** Como já foi dito, todo horário no [OCI](https://www.oracle.com/cloud/) deve ser especificado em [UTC+0](https://pt.wikipedia.org/wiki/UTC%2B0)_.
 
 ### __Criando um Banco de Dados MySQL__
 
-Juntando as informações, iremos criar nosso _[MySQL](https://docs.oracle.com/pt-br/iaas/mysql-database/index.html)_ inicialmente com _100 GB_ disponível para armazenamento de dados _(--data-storage-size-in-gbs)_. Iremos definir também o nome do _usuário administrador (--admin-username)_ e uma senha inicial _(--admin-password)_, necessários para acesso ao banco de dados.
+Juntando as informações, iremos criar nosso _[MySQL](https://docs.oracle.com/pt-br/iaas/mysql-database/index.html)_ em _"Alta Disponibilidade" (--is-highly-available true)_ inicialmente com _100 GB_ disponível para armazenamento de dados _(--data-storage-size-in-gbs)_. Iremos definir também o nome do _usuário administrador (--admin-username)_ e uma senha inicial _(--admin-password)_, necessários para acesso ao banco de dados.
 
 ```
 darmbrust@hoodwink:~$ oci mysql db-system create \
@@ -112,12 +127,13 @@ darmbrust@hoodwink:~$ oci mysql db-system create \
 > --availability-domain "ynrK:SA-SAOPAULO-1-AD-1" \
 > --subnet-id "ocid1.subnet.oc1.sa-saopaulo-1.aaaaaaaagyg2sk2c4j46ky3lngceejohdzswlffsavqqybepekbean3gytba" \
 > --shape-name "VM.Standard.E2.2" \
-> --configuration-id "ocid1.mysqlconfiguration.oc1..aaaaaaaah6o6qu3gdbxnqg6aw56amnosmnaycusttaa7abyq2tdgpgubvsgj" \
+> --configuration-id "ocid1.mysqlconfiguration.oc1..aaaaaaaantprksu6phqfgr5xvyut46wdfesdszonbclybfwvahgysfjbrb4q" \
 > --hostname-label "mysql-wordpress" \
+> --is-highly-available true \
 > --admin-username admin \
 > --admin-password Sup3rS3cr3t0# \
 > --data-storage-size-in-gbs 100 \
-> --display-name "mysql_subnprv-db_vcn-prd" \
+> --display-name "mysql-wordpress_subnprv-db_vcn-prd" \
 > --description "MySQL para o Wordpress" \
 > --backup-policy '{"isEnabled": true, "retentionInDays": 10, "windowStartTime": "08:50"}' \
 > --maintenance '{"window-start-time": "SUNDAY 07:30"}' 
@@ -134,7 +150,7 @@ darmbrust@hoodwink:~$ oci mysql db-system create \
     },
     "channels": [],
     "compartment-id": "ocid1.compartment.oc1..aaaaaaaa6d2s5sgmxmyxu2vca3pn46y56xisijjyhdjwgqg3f6goh3obj4qq",
-    "configuration-id": "ocid1.mysqlconfiguration.oc1..aaaaaaaah6o6qu3gdbxnqg6aw56amnosmnaycusttaa7abyq2tdgpgubvsgj",
+    "configuration-id": "ocid1.mysqlconfiguration.oc1..aaaaaaaantprksu6phqfgr5xvyut46wdfesdszonbclybfwvahgysfjbrb4q",
     "current-placement": {
       "availability-domain": null,
       "fault-domain": null
@@ -143,21 +159,21 @@ darmbrust@hoodwink:~$ oci mysql db-system create \
     "defined-tags": {
       "Oracle-Tags": {
         "CreatedBy": "oracleidentitycloudservice/daniel.armbrust@algumdominio.com",
-        "CreatedOn": "2021-09-23T11:18:08.492Z"
+        "CreatedOn": "2021-11-30T16:04:03.187Z"
       }
     },
     "description": "MySQL para o Wordpress",
-    "display-name": "mysql_subnprv-db_vcn-prd",
+    "display-name": "mysql-wordpress_subnprv-db_vcn-prd",
     "endpoints": [],
     "fault-domain": null,
     "freeform-tags": {},
     "heat-wave-cluster": null,
     "hostname-label": "mysql-wordpress",
-    "id": "ocid1.mysqldbsystem.oc1.sa-saopaulo-1.aaaaaaaanvgvchfiecm6oyrz5fs3lhtnas3bmpmpcdualz52ad4gekfyspma",
+    "id": "ocid1.mysqldbsystem.oc1.sa-saopaulo-1.aaaaaaaagec23mzhxhwfwzduofjj346lh5qbkvncamtv6cucyt5wvs52kwzq",
     "ip-address": null,
     "is-analytics-cluster-attached": false,
     "is-heat-wave-cluster-attached": false,
-    "is-highly-available": false,
+    "is-highly-available": true,
     "lifecycle-details": null,
     "lifecycle-state": "CREATING",
     "maintenance": {
@@ -166,14 +182,14 @@ darmbrust@hoodwink:~$ oci mysql db-system create \
     "mysql-version": null,
     "port": null,
     "port-x": null,
-    "shape-name": "VM.Standard.E2.2",
+    "shape-name": "MySQL.VM.Standard.E3.1.8GB",
     "source": null,
     "subnet-id": "ocid1.subnet.oc1.sa-saopaulo-1.aaaaaaaagyg2sk2c4j46ky3lngceejohdzswlffsavqqybepekbean3gytba",
-    "time-created": "2021-09-23T11:18:09.610000+00:00",
-    "time-updated": "2021-09-23T11:18:09.610000+00:00"
+    "time-created": "2021-11-30T16:04:05.676000+00:00",
+    "time-updated": "2021-11-30T16:04:05.676000+00:00"
   },
-  "etag": "7abd67ec35e86cf3abb537f40cf884ed0174fc0abea260a02d85ba9c4e0d9bbb",
-  "opc-work-request-id": "ocid1.mysqlworkrequest.oc1.sa-saopaulo-1.0671994e-7391-449f-8bc5-3b2ec520133d.aaaaaaaacpjqndjcyrzu6qsmp73s4nkyn3gg4y7rhysskxitcci3gay2kgaa"
+  "etag": "b00deef38bdccf19c0ebb32db2724e7c0573d7d5088ca39db650a4b063ac0844",
+  "opc-work-request-id": "ocid1.mysqlworkrequest.oc1.sa-saopaulo-1.f606d2aa-bf0f-4b55-a055-22115c8dd2d6.aaaaaaaa5vofgtfiggb2fyggeh57fvuznsl63b2t5wdkf5yqvbciqtmovgqa"
 }
 ```
 
@@ -181,7 +197,7 @@ Após alguns minutos, podemos ver que o serviço foi corretamente provisionado:
 
 ```
 darmbrust@hoodwink:~$ oci mysql db-system get \
-> --db-system-id "ocid1.mysqldbsystem.oc1.sa-saopaulo-1.aaaaaaaanvgvchfiecm6oyrz5fs3lhtnas3bmpmpcdualz52ad4gekfyspma"
+> --db-system-id "ocid1.mysqldbsystem.oc1.sa-saopaulo-1.aaaaaaaagec23mzhxhwfwzduofjj346lh5qbkvncamtv6cucyt5wvs52kwzq"
 {
   "data": {
     "analytics-cluster": null,
@@ -195,24 +211,24 @@ darmbrust@hoodwink:~$ oci mysql db-system get \
     },
     "channels": [],
     "compartment-id": "ocid1.compartment.oc1..aaaaaaaa6d2s5sgmxmyxu2vca3pn46y56xisijjyhdjwgqg3f6goh3obj4qq",
-    "configuration-id": "ocid1.mysqlconfiguration.oc1..aaaaaaaah6o6qu3gdbxnqg6aw56amnosmnaycusttaa7abyq2tdgpgubvsgj",
+    "configuration-id": "ocid1.mysqlconfiguration.oc1..aaaaaaaantprksu6phqfgr5xvyut46wdfesdszonbclybfwvahgysfjbrb4q",
     "current-placement": {
       "availability-domain": "ynrK:SA-SAOPAULO-1-AD-1",
-      "fault-domain": "FAULT-DOMAIN-1"
+      "fault-domain": "FAULT-DOMAIN-3"
     },
     "data-storage-size-in-gbs": 100,
     "defined-tags": {
       "Oracle-Tags": {
         "CreatedBy": "oracleidentitycloudservice/daniel.armbrust@algumdominio.com",
-        "CreatedOn": "2021-09-23T11:18:08.492Z"
+        "CreatedOn": "2021-11-30T16:04:03.187Z"
       }
     },
     "description": "MySQL para o Wordpress",
-    "display-name": "mysql_subnprv-db_vcn-prd",
+    "display-name": "mysql-wordpress_subnprv-db_vcn-prd",
     "endpoints": [
       {
         "hostname": "mysql-wordpress.subnprvdb.vcnprd.oraclevcn.com",
-        "ip-address": "10.0.20.185",
+        "ip-address": "10.0.20.242",
         "modes": [
           "READ",
           "WRITE"
@@ -223,30 +239,30 @@ darmbrust@hoodwink:~$ oci mysql db-system get \
         "status-details": null
       }
     ],
-    "fault-domain": "FAULT-DOMAIN-1",
+    "fault-domain": "FAULT-DOMAIN-3",
     "freeform-tags": {},
     "heat-wave-cluster": null,
     "hostname-label": "mysql-wordpress",
-    "id": "ocid1.mysqldbsystem.oc1.sa-saopaulo-1.aaaaaaaanvgvchfiecm6oyrz5fs3lhtnas3bmpmpcdualz52ad4gekfyspma",
-    "ip-address": "10.0.20.185",
+    "id": "ocid1.mysqldbsystem.oc1.sa-saopaulo-1.aaaaaaaagec23mzhxhwfwzduofjj346lh5qbkvncamtv6cucyt5wvs52kwzq",
+    "ip-address": "10.0.20.242",
     "is-analytics-cluster-attached": false,
     "is-heat-wave-cluster-attached": false,
-    "is-highly-available": false,
+    "is-highly-available": true,
     "lifecycle-details": null,
     "lifecycle-state": "ACTIVE",
     "maintenance": {
       "window-start-time": "SUNDAY 07:30"
     },
-    "mysql-version": "8.0.26-u2-cloud",
+    "mysql-version": "8.0.27-u1-cloud",
     "port": 3306,
     "port-x": 33060,
-    "shape-name": "VM.Standard.E2.2",
+    "shape-name": "MySQL.VM.Standard.E3.1.8GB",
     "source": null,
-    "subnet-id": "ocid1.subnet.oc1.sa-saopaulo-1.aaaaaaaaucjocmapsp3azvvzfnqlvp3j4qlzyv2hmtj5fliystr6u4wlpmma",
-    "time-created": "2021-09-23T11:18:09.610000+00:00",
-    "time-updated": "2021-09-23T11:26:05.218000+00:00"
+    "subnet-id": "ocid1.subnet.oc1.sa-saopaulo-1.aaaaaaaagyg2sk2c4j46ky3lngceejohdzswlffsavqqybepekbean3gytba",
+    "time-created": "2021-11-30T16:04:05.676000+00:00",
+    "time-updated": "2021-11-30T16:18:35.229000+00:00"
   },
-  "etag": "9433f42f00a22dc838cc6898e344e943de136c786f352c264cd9f8c161e5c8a3--gzip"
+  "etag": "08cdef5cfdef824de611f196a4ec2d297ce4aea11d7f3c11e6c457ab93d20759--gzip"
 }
 ```
 

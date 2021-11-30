@@ -223,45 +223,7 @@ Action completed. Waiting until the work request has entered state: ('SUCCEEDED'
 }
 ```
 
-Agora, vamos atualizar o _[NSG](https://docs.oracle.com/pt-br/iaas/Content/Network/Concepts/networksecuritygroups.htm)_ das instâncias da aplicação _[Wordpress](https://pt.wikipedia.org/wiki/WordPress)_ para permitir _"tráfego de entrada (ingress)"_ a partir da subrede pública _(10.0.5.0/24)_ na porta _80/TCP_. Esta é uma ação necessária pois permite o _[serviço de Load Balancing](https://docs.oracle.com/pt-br/iaas/Content/Balance/Concepts/balanceoverview.htm)_ a se comunicar com as instâncias da aplicação, além do teste de _"Health Check"_:
-
-```
-darmbrust@hoodwink:~$ oci network nsg rules add \
-> --nsg-id "ocid1.networksecuritygroup.oc1.sa-saopaulo-1.aaaaaaaa6jz4tjisvsnk4u7xaxkwmywx72jrkxeyjdpmdwgstt5nw4yzskpa" \
-> --security-rules '[
-> {"isStateless": false, "protocol": "6", "direction": "INGRESS", "sourceType": "CIDR_BLOCK", "source": "10.0.5.0/24", "tcpOptions": {"destinationPortRange": {"min": 80, "max": 80}}}
-> ]'
-{
-  "data": {
-    "security-rules": [
-      {
-        "description": null,
-        "destination": null,
-        "destination-type": null,
-        "direction": "INGRESS",
-        "icmp-options": null,
-        "id": "22A0FD",
-        "is-stateless": false,
-        "is-valid": true,
-        "protocol": "6",
-        "source": "10.0.5.0/24",
-        "source-type": "CIDR_BLOCK",
-        "tcp-options": {
-          "destination-port-range": {
-            "max": 80,
-            "min": 80
-          },
-          "source-port-range": null
-        },
-        "time-created": "2021-09-19T19:04:23.627000+00:00",
-        "udp-options": null
-      }
-    ]
-  }
-}
-```
-
-O comando abaixo lista quais _[políticas de balanceamento](https://docs.oracle.com/pt-br/iaas/Content/Balance/Concepts/balanceoverview.htm#Policies)_ temos a disposição:
+Através do comando abaixo, irei listar quais _[políticas de balanceamento](https://docs.oracle.com/pt-br/iaas/Content/Balance/Concepts/balanceoverview.htm#Policies)_ temos a disposição:
 
 ```
 darmbrust@hoodwink:~$ oci lb policy list \
@@ -326,33 +288,18 @@ Action completed. Waiting until the work request has entered state: ('SUCCEEDED'
 }
 ```
 
-Irei inserir as duas instâncias que temos no _"conjunto de backend"_ que foi criado. A primeira é a instância principal e recebe o parâmetro _"--backup false"_:
+Para concluírmos a instalação, irei inserir a instância do _[Wordpress](https://pt.wikipedia.org/wiki/WordPress)_ ao _"conjunto de backend"_ que foi criado.
 
 ```
 darmbrust@hoodwink:~$ oci lb backend create \
 > --load-balancer-id "ocid1.loadbalancer.oc1.sa-saopaulo-1.aaaaaaaa5ledgzqveh3o73m3mnv42pkxcm5y64hjmkwl7tnhvsee2zv7gbga" \
 > --backend-set-name "lb-pub_wordpress_backend" \
-> --ip-address 10.0.10.240 \
+> --ip-address 10.0.10.154 \
 > --port 80 \
 > --backup false \
 > --offline false \
 > --wait-for-state "SUCCEEDED"
 ```
-
-Já a segunda instância irá receber o parâmetro _"--backup true"_:
-
-```
-darmbrust@hoodwink:~$ oci lb backend create \
-> --load-balancer-id "ocid1.loadbalancer.oc1.sa-saopaulo-1.aaaaaaaa5ledgzqveh3o73m3mnv42pkxcm5y64hjmkwl7tnhvsee2zv7gbga" \
-> --backend-set-name "lb-pub_wordpress_backend" \
-> --ip-address 10.0.10.103 \
-> --port 80 \
-> --backup true \
-> --offline false \
-> --wait-for-state "SUCCEEDED"
-```
-
->_**__NOTA:__** Você não pode utilizar uma instância de backend com a opcão "--backup true" caso utilize a [políticas de balanceamento](https://docs.oracle.com/pt-br/iaas/Content/Balance/Concepts/balanceoverview.htm#Policies) IP\_HASH._
 
 Depois de alguns minutos, é possível verificar a saúde geral do _[Load Balancer](https://docs.oracle.com/pt-br/iaas/Content/Balance/Concepts/balanceoverview.htm)_ com o comando abaixo:
 
@@ -364,7 +311,7 @@ darmbrust@hoodwink:~$ oci lb backend-set-health get \
   "data": {
     "critical-state-backend-names": [],
     "status": "OK",
-    "total-backend-count": 2,
+    "total-backend-count": 1,
     "unknown-state-backend-names": [],
     "warning-state-backend-names": []
   }
@@ -407,7 +354,7 @@ darmbrust@hoodwink:~$ curl -v http://152.70.221.188
 * Connection #0 to host 152.70.221.188 left intact
 ```
 
->_**__NOTA:__** Caso não obtenha resposta, confirme se a [Security List](https://docs.oracle.com/en-us/iaas/api/#/en/iaas/20160918/datatypes/IngressSecurityRule) da subrede pública onde foi criado o [Load Balancer](https://docs.oracle.com/pt-br/iaas/Content/Balance/Concepts/balanceoverview.htm) possui as corretas regras que permitam o acesso._
+>_**__NOTA:__** Caso não obtenha resposta, confirme se a [Security List](https://docs.oracle.com/en-us/iaas/api/#/en/iaas/20160918/datatypes/IngressSecurityRule) da subrede pública onde foi criado o [Load Balancer](https://docs.oracle.com/pt-br/iaas/Content/Balance/Concepts/balanceoverview.htm), possui as corretas regras que permitam o acesso da sua origem._
 
 ### __Conclusão__
 
