@@ -64,13 +64,13 @@ Aprensento abaixo, alguns dos componentes existentes do serviço de _[Networking
         - **Dynamic Routing Gateway**
             - Possibilita conectividade das suas VCNs com seu ambiente on-premises, através de VPN ou FastConnect (link dedicado). <br><br>
 
-Um dos trabalhos do arquiteto ou engenheiro cloud, é saber utilizar esses recursos para compor sua infraestrutura. Utilizaremos o desenho abaixo como guia do nosso primeiro deploy no OCI:
+Um dos trabalhos do arquiteto ou engenheiro cloud, é saber utilizar esses recursos para compor sua infraestrutura. Utilizaremos o desenho abaixo como guia para o deploy da aplicação _[Wordpress](https://pt.wikipedia.org/wiki/WordPress)_ no _[OCI](https://www.oracle.com/cloud/)_:
 
 <br>
 
 ![alt_text](./images/fundamentos-de-redes-no-oci.jpeg "Fundamentos de Redes no OCI")
 
->_**__NOTA:__** Este diagrama no formato Visio pode ser baixado neste [link aqui](https://github.com/daniel-armbrust/oci-book/blob/main/chapter-4/resources/fundamentos-de-redes-no-oci.vsdx)._
+>_**__NOTA:__** Este diagrama no formato Visio pode ser baixado neste [link aqui](https://github.com/daniel-armbrust/oci-book/blob/main/chapter-3/resources/fundamentos-de-redes-no-oci.vsdx)._
 
 ### __Decompondo o desenho em recursos Cloud__
 
