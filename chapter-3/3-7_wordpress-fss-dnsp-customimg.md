@@ -1,6 +1,6 @@
 # Capítulo 3: Primeira aplicação no OCI
 
-## 3.7 - File Storage, DNS privado e Custom Image
+## 3.7 - File Storage, DNS Privado e Custom Image
 
 ### __Visão Geral__
 
@@ -144,4 +144,20 @@ Action completed. Waiting until the resource has entered state: ('ACTIVE',)
   },
   "etag": "11b046bd750b736f4d7f9b495e1e03b88ae26d8eba7c6c961e4c7d82d15d1814--gzip"
 }
+```
+
+Pronto! _[Serviço File Storage](https://docs.oracle.com/pt-br/iaas/Content/File/Concepts/filestorageoverview.htm)_ foi criado e encontra-se disponível para uso.
+
+### __DNS Privado__
+
+```
+darmbrust@hoodwink:~$ oci fs mount-target list \
+> --compartment-id "ocid1.compartment.oc1..aaaaaaaauvqvbbx3oridcm5d2ztxkftwr362u2vl5zdsayzbehzwbjs56soq" \
+> --availability-domain "ynrK:SA-SAOPAULO-1-AD-1" \
+> --query "data [?contains(\"display-name\", 'mt-fss-wordpress_subnprv-app_vcn-prd')].\"private-ip-ids\""
+[
+  [
+    "ocid1.privateip.oc1.sa-saopaulo-1.aaaaaaaahmvcco6gba3ocvwpk3sagbfy6fxuusossgaio4gqfzgrd4awayha"
+  ]
+]
 ```
