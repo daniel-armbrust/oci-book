@@ -150,6 +150,90 @@ Pronto! _[Serviço File Storage](https://docs.oracle.com/pt-br/iaas/Content/File
 
 ### __DNS Privado__
 
+O _[Serviço de DNS Privado](https://docs.oracle.com/pt-br/iaas/Content/DNS/Tasks/privatedns.htm)_ é um serviço de _[DNS](https://pt.wikipedia.org/wiki/Sistema_de_Nomes_de_Dom%C3%ADnio)_ completo, no qual possibilita o gerenciamento de _[Zonas DNS](https://pt.wikipedia.org/wiki/Zona_DNS)_. Uma _[Zonas DNS](https://pt.wikipedia.org/wiki/Zona_DNS)_ pode armazenar diferentes _[registros DNS](https://en.wikipedia.org/wiki/List_of_DNS_record_types)_, que fazem referência aos recursos de sua infraestrutura interna (dentro e entre VCNs), ou qualquer outro _endereço IP privado_ localizado no seu data center local _(on-premises)_.
+
+>_**__NOTA:__** Neste capítulo, só mostrarei o básico sobre [DNS](https://pt.wikipedia.org/wiki/Sistema_de_Nomes_de_Dom%C3%ADnio) para completar a infraestrutura da aplicação [Wordpress](https://pt.wikipedia.org/wiki/WordPress). Para maiores detalhes sobre o protocolo, consulte o capítulo [4.1 - Utilizando o Serviço de DNS](https://github.com/daniel-armbrust/oci-book/blob/main/chapter-4/4-1_servico-dns.md)._
+
+Lembrando que o _[Serviço de DNS Privado](https://docs.oracle.com/pt-br/iaas/Content/DNS/Tasks/privatedns.htm)_, como o próprio nome diz, cuida somente da resolução de nomes _privados e/ou internos_. Para o nosso exemplo, criarei uma _[Zona DNS](https://pt.wikipedia.org/wiki/Zona_DNS)_ chamada _"ocibook.local"_. Qualquer _[registros](https://en.wikipedia.org/wiki/List_of_DNS_record_types)_ criado dentro desta _[Zona](https://pt.wikipedia.org/wiki/Zona_DNS)_, só consegue ser _"resolvido"_ dentro da VCN. Por hora isto basta, no decorrer dos capítulos iremos estender esta _resolução de nomes_ para o _on-premises (DNS Híbrido)_.
+
+Quando uma VCN é criada, é criado também um _[Private View](https://docs.oracle.com/pt-br/iaas/Content/DNS/Tasks/privatedns.htm#overview)_ pelo _[OCI](https://www.oracle.com/cloud/)_. Uma _[View](https://docs.oracle.com/pt-br/iaas/Content/DNS/Tasks/privatedns.htm#overview)_ é uma coleção de _[Zonas DNS](https://pt.wikipedia.org/wiki/Zona_DNS)_, e uma _[Zona](https://pt.wikipedia.org/wiki/Zona_DNS)_ conforme já dito, contém uma coleção de _[registros](https://en.wikipedia.org/wiki/List_of_DNS_record_types)_.
+
+Para que a _[Zona](https://pt.wikipedia.org/wiki/Zona_DNS)_ de nome  _"ocibook.local"_ seja criada, será preciso anexá-la com a _[Private View](https://docs.oracle.com/pt-br/iaas/Content/DNS/Tasks/privatedns.htm#overview)_ da VCN. Isto possibilita que todos os recursos da VCN, possam resolver os nomes DNS que criaremos na _[Zona](https://pt.wikipedia.org/wiki/Zona_DNS)_ _"ocibook.local"_.
+
+Através do comando abaixo, irei obter o OCID da _[Private View](https://docs.oracle.com/pt-br/iaas/Content/DNS/Tasks/privatedns.htm#overview)_ da VCN de produção:
+
+```
+darmbrust@hoodwink:~$ oci dns view list \
+> --compartment-id "ocid1.compartment.oc1..aaaaaaaauvqvbbx3oridcm5d2ztxkftwr362u2vl5zdsayzbehzwbjs56soq" \
+> --scope "PRIVATE" \
+> --all
+{
+  "data": [
+    {
+      "-self": "https://dns.sa-saopaulo-1.oci.oraclecloud.com/20180115/views/ocid1.dnsview.oc1.sa-saopaulo-1.aaaaaaaa4a5vohi67qnx2jkk4bfvgy54agw24w23tdyxfohpowluupxrj4bq",
+      "compartment-id": "ocid1.compartment.oc1..aaaaaaaauvqvbbx3oridcm5d2ztxkftwr362u2vl5zdsayzbehzwbjs56soq",
+      "defined-tags": {
+        "Oracle-Tags": {
+          "CreatedBy": "oracleidentitycloudservice/daniel.armbrust@algumdominio.com",
+          "CreatedOn": "2021-09-07T13:15:22.344Z"
+        }
+      },
+      "display-name": "vcn-prd",
+      "freeform-tags": {},
+      "id": "ocid1.dnsview.oc1.sa-saopaulo-1.aaaaaaaa4a5vohi67qnx2jkk4bfvgy54agw24w23tdyxfohpowluupxrj4bq",
+      "is-protected": true,
+      "lifecycle-state": "ACTIVE",
+      "time-created": "2021-09-07T13:15:26.353000+00:00",
+      "time-updated": "2021-09-07T22:26:02.125000+00:00"
+    }
+  ]
+}
+```
+
+Para criar a _[Zona](https://pt.wikipedia.org/wiki/Zona_DNS)_ interna e privada, usarei o comando abaixo:
+
+```
+darmbrust@hoodwink:~$ oci dns zone create \
+> --compartment-id "ocid1.compartment.oc1..aaaaaaaauvqvbbx3oridcm5d2ztxkftwr362u2vl5zdsayzbehzwbjs56soq" \
+> --name "ocibook.local" \
+> --zone-type "PRIMARY" \
+> --scope "PRIVATE" \
+> --view-id "ocid1.dnsview.oc1.sa-saopaulo-1.aaaaaaaa4a5vohi67qnx2jkk4bfvgy54agw24w23tdyxfohpowluupxrj4bq" \
+> --wait-for-state "ACTIVE" 
+Action completed. Waiting until the resource has entered state: ('ACTIVE',)
+{
+  "data": {
+    "compartment-id": "ocid1.compartment.oc1..aaaaaaaauvqvbbx3oridcm5d2ztxkftwr362u2vl5zdsayzbehzwbjs56soq",
+    "defined-tags": {
+      "Oracle-Tags": {
+        "CreatedBy": "oracleidentitycloudservice/daniel.armbrust@algumdominio.com",
+        "CreatedOn": "2021-12-03T21:17:11.494Z"
+      }
+    },
+    "external-masters": [],
+    "freeform-tags": {},
+    "id": "ocid1.dns-zone.oc1.sa-saopaulo-1.aaaaaaaaacc2ofxn7xgixci6u666z4nebtduucrf5kph2ipeglkk3nvwnoea",
+    "is-protected": false,
+    "lifecycle-state": "ACTIVE",
+    "name": "ocibook.local",
+    "nameservers": [
+      {
+        "hostname": "vcn-dns.oraclevcn.com."
+      }
+    ],
+    "scope": "PRIVATE",
+    "self-uri": "https://dns.sa-saopaulo-1.oci.oraclecloud.com/20180115/zones/ocid1.dns-zone.oc1.sa-saopaulo-1.aaaaaaaaacc2ofxn7xgixci6u666z4nebtduucrf5kph2ipeglkk3nvwnoea",
+    "serial": 1,
+    "time-created": "2021-12-03T21:17:11.592000+00:00",
+    "version": "1",
+    "view-id": "ocid1.dnsview.oc1.sa-saopaulo-1.aaaaaaaa4a5vohi67qnx2jkk4bfvgy54agw24w23tdyxfohpowluupxrj4bq",
+    "zone-transfer-servers": [],
+    "zone-type": "PRIMARY"
+  },
+  "etag": "\"1ocid1.dns-zone.oc1.sa-saopaulo-1.aaaaaaaaacc2ofxn7xgixci6u666z4nebtduucrf5kph2ipeglkk3nvwnoea52e29219737484138d86060d72390e82#application/json--gzip\""
+}
+```
+
 ```
 darmbrust@hoodwink:~$ oci fs mount-target list \
 > --compartment-id "ocid1.compartment.oc1..aaaaaaaauvqvbbx3oridcm5d2ztxkftwr362u2vl5zdsayzbehzwbjs56soq" \
