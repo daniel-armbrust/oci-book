@@ -18,7 +18,21 @@ O _[Serviço File Storage](https://docs.oracle.com/pt-br/iaas/Content/File/Conce
 
 Você pode se conectar a um _[sistema de arquivos](https://pt.wikipedia.org/wiki/Sistema_de_ficheiros)_ criado pelo _[Serviço File Storage](https://docs.oracle.com/pt-br/iaas/Content/File/Concepts/filestorageoverview.htm)_ a partir de qualquer instância computacional em sua _[VCN](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingVCNs_topic-Overview_of_VCNs_and_Subnets.htm)_, ou a partir do seu data center local _(on-premises)_ via _[FastConnect](https://docs.oracle.com/pt-br/iaas/Content/Network/Concepts/fastconnectoverview.htm#FastConnect_Overview)_ ou _[VPN](https://pt.wikipedia.org/wiki/Rede_privada_virtual)_.
 
-Você verá que para criarmos o _[File Storage](https://docs.oracle.com/pt-br/iaas/Content/File/Concepts/filestorageoverview.htm)_ iremos criar três recursos diferentes. Veja na imagem abaixo:
+Para criarmos o _[File Storage](https://docs.oracle.com/pt-br/iaas/Content/File/Concepts/filestorageoverview.htm)_, serão necessários criar três recursos diferentes. Esses recursos são:
+
+- **File System**
+    - Este é apenas o _[sistema de arquivos](https://pt.wikipedia.org/wiki/Sistema_de_ficheiros)_ que será compartilhado. É o ponto inicial para criarmos os demais recursos. 
+    - É necessário especificar em qual _[Availability Domain (AD)](https://docs.oracle.com/pt-br/iaas/Content/General/Concepts/regions.htm#top)_ o _[sistema de arquivos](https://pt.wikipedia.org/wiki/Sistema_de_ficheiros)_ irá residir.
+
+- **Mount Target**
+    - É um _"endpoint NFS"_ ou _"ponto-de-montagem NFS"_. Este necessáriamente deve residir em uma subrede, pois ele consome um endereço IP no qual permite os clientes da rede se conectar. Você verá que é possível utilizar um _[Mount Target](https://docs.oracle.com/en-us/iaas/Content/File/Tasks/managingmounttargets.htm)_ e ter vários _[exports NFS](https://pt.wikipedia.org/wiki/Network_File_System)_ associados a ele.
+
+- **Exports**
+    - Um _export_, termo intimamente ligado ao protocolo _[NFS](https://pt.wikipedia.org/wiki/Network_File_System)_, é o meio pelo qual é disponibilizado um _[diretório](https://pt.wikipedia.org/wiki/Diret%C3%B3rio_(computa%C3%A7%C3%A3o))_ na rede. 
+    - Cada _[Mount Target](https://docs.oracle.com/en-us/iaas/Content/File/Tasks/managingmounttargets.htm)_ pode conter um ou mais _exports_ ou _export sets_. É necessário haver pelo menos um _[diretório](https://pt.wikipedia.org/wiki/Diret%C3%B3rio_(computa%C3%A7%C3%A3o))_ _"exportado"_, para que os clientes da rede possam se conectar.
+    - Ao ser criado, um _export_ possibilita definir quais clientes da rede podem se conectar através de um único endereço IP ou bloco CIDR.
+
+Veja na imagem abaixo:
 
 ![alt_text](./images/file-storage-1.jpg "Apresentação - File Storage")
 
