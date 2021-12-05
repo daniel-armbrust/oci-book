@@ -25,7 +25,7 @@ Para criarmos o _[File Storage](https://docs.oracle.com/pt-br/iaas/Content/File/
     - É necessário especificar em qual _[Availability Domain (AD)](https://docs.oracle.com/pt-br/iaas/Content/General/Concepts/regions.htm#top)_ o _[sistema de arquivos](https://pt.wikipedia.org/wiki/Sistema_de_ficheiros)_ irá residir.
 
 - **Mount Target**
-    - É um _"endpoint NFS"_ ou _"ponto-de-montagem NFS"_. Este necessáriamente deve residir em uma subrede, pois ele consome um endereço IP no qual permite os clientes da rede se conectar. Você verá que é possível utilizar um _[Mount Target](https://docs.oracle.com/en-us/iaas/Content/File/Tasks/managingmounttargets.htm)_ e ter vários _[exports NFS](https://pt.wikipedia.org/wiki/Network_File_System)_ associados a ele.
+    - É um _"endpoint NFS"_. Este necessáriamente deve residir em uma subrede, pois ele consome um endereço IP no qual permite os clientes da rede se conectar. Você verá que é possível utilizar um _[Mount Target](https://docs.oracle.com/en-us/iaas/Content/File/Tasks/managingmounttargets.htm)_ e ter vários _[exports NFS](https://pt.wikipedia.org/wiki/Network_File_System)_ associados a ele.
 
 - **Exports**
     - Um _export_, termo intimamente ligado ao protocolo _[NFS](https://pt.wikipedia.org/wiki/Network_File_System)_, é o meio pelo qual é disponibilizado um _[diretório](https://pt.wikipedia.org/wiki/Diret%C3%B3rio_(computa%C3%A7%C3%A3o))_ na rede. 
