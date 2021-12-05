@@ -18,7 +18,7 @@ O _[Serviço File Storage](https://docs.oracle.com/pt-br/iaas/Content/File/Conce
 
 Você pode se conectar a um _[sistema de arquivos](https://pt.wikipedia.org/wiki/Sistema_de_ficheiros)_ criado pelo _[Serviço File Storage](https://docs.oracle.com/pt-br/iaas/Content/File/Concepts/filestorageoverview.htm)_ a partir de qualquer instância computacional em sua _[VCN](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingVCNs_topic-Overview_of_VCNs_and_Subnets.htm)_, ou a partir do seu data center local _(on-premises)_ via _[FastConnect](https://docs.oracle.com/pt-br/iaas/Content/Network/Concepts/fastconnectoverview.htm#FastConnect_Overview)_ ou _[VPN](https://pt.wikipedia.org/wiki/Rede_privada_virtual)_.
 
-O _[File Storage](https://docs.oracle.com/pt-br/iaas/Content/File/Concepts/filestorageoverview.htm)_ é composto de três recursos diferentes, veja na imagem abaixo onde apresento tais recursos que serão criados para a aplicação _[Wordpress](https://pt.wikipedia.org/wiki/WordPress)_:
+Você verá que a criação do _[File Storage](https://docs.oracle.com/pt-br/iaas/Content/File/Concepts/filestorageoverview.htm)_ é composto de três recursos diferentes. Veja na imagem abaixo onde apresento tais recursos que serão criados para a aplicação _[Wordpress](https://pt.wikipedia.org/wiki/WordPress)_:
 
 ![alt_text](./images/file-storage-1.jpg "Apresentação - File Storage")
 
