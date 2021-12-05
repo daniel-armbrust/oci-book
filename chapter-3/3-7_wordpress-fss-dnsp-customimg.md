@@ -30,7 +30,7 @@ Para criarmos o _[File Storage](https://docs.oracle.com/pt-br/iaas/Content/File/
 - **Exports**
     - Um _export_, termo intimamente ligado ao protocolo _[NFS](https://pt.wikipedia.org/wiki/Network_File_System)_, é o meio pelo qual é disponibilizado um _[diretório](https://pt.wikipedia.org/wiki/Diret%C3%B3rio_(computa%C3%A7%C3%A3o))_ na rede. 
     - Cada _[Mount Target](https://docs.oracle.com/en-us/iaas/Content/File/Tasks/managingmounttargets.htm)_ pode conter um ou mais _exports_, ou também chamado de _export sets_. É necessário haver pelo menos um _[diretório](https://pt.wikipedia.org/wiki/Diret%C3%B3rio_(computa%C3%A7%C3%A3o))_ _"exportado"_, para que os clientes da rede possam se conectar.
-    - Ao ser criado, um _export_ possibilita definir quais clientes da rede podem se conectar através de um único endereço IP ou bloco CIDR.
+    - Ao ser criado, um _export_ possibilita definir quais clientes podem se conectar, através de um único _endereço IP_ ou _bloco CIDR_. Há também outras opções, como permitir que determinados clientes somente visualizem os dados _(Read Only access)_.
 
 Veja na imagem abaixo:
 
