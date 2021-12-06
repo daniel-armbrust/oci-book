@@ -314,7 +314,7 @@ Other names may be trademarks of their respective owners.
 Type '\help' or '\?' for help; '\quit' to exit.
 Creating a session to 'admin@mysql-sp.subnprvdb.vcnprd.oraclevcn.com'
 Fetching schema names for autocompletion... Press ^C to stop.
-Your MySQL connection id is 78
+Your MySQL connection id is 100
 Server version: 8.0.27-u1-cloud MySQL Enterprise - Cloud
 No default schema selected; type \use <schema> to set one.
  MySQL  mysql-sp.subnprvdb.vcnprd.oraclevcn.com:3306 ssl  SQL >
