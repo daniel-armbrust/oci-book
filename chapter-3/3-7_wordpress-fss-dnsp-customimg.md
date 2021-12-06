@@ -328,7 +328,7 @@ darmbrust@hoodwink:~$ oci dns record domain patch \
 
 O mesmo será feito para o _[MySQL](https://docs.oracle.com/pt-br/iaas/mysql-database/index.html)_. Este recebeu o _hostname_ _"mysql-sp"_ no seu provisionamento, porém este foi criado na _subrede para Banco de Dados_. Seu nome completamente qualificado ficou _"mysql-sp.subnprvdb.vcnprd.oraclevcn.com"_.
 
-Seu _[registro](https://en.wikipedia.org/wiki/List_of_DNS_record_types)_ _CNAME_ será criado com o comando abaixo:
+Seu _[registro](https://en.wikipedia.org/wiki/List_of_DNS_record_types)_ _CNAME_, será criado com o comando abaixo:
 
 ```
 darmbrust@hoodwink:~$ oci dns record domain patch \
