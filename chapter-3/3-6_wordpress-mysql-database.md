@@ -126,9 +126,9 @@ darmbrust@hoodwink:~$ oci mysql db-system create \
 > --compartment-id "ocid1.compartment.oc1..aaaaaaaa6d2s5sgmxmyxu2vca3pn46y56xisijjyhdjwgqg3f6goh3obj4qq" \
 > --availability-domain "ynrK:SA-SAOPAULO-1-AD-1" \
 > --subnet-id "ocid1.subnet.oc1.sa-saopaulo-1.aaaaaaaagyg2sk2c4j46ky3lngceejohdzswlffsavqqybepekbean3gytba" \
-> --shape-name "VM.Standard.E2.2" \
+> --shape-name "MySQL.VM.Standard.E3.1.8GB" \
 > --configuration-id "ocid1.mysqlconfiguration.oc1..aaaaaaaantprksu6phqfgr5xvyut46wdfesdszonbclybfwvahgysfjbrb4q" \
-> --hostname-label "mysql-wordpress" \
+> --hostname-label "mysql-sp" \
 > --is-highly-available true \
 > --admin-username admin \
 > --admin-password Sup3rS3cr3t0# \
@@ -159,7 +159,7 @@ darmbrust@hoodwink:~$ oci mysql db-system create \
     "defined-tags": {
       "Oracle-Tags": {
         "CreatedBy": "oracleidentitycloudservice/daniel.armbrust@algumdominio.com",
-        "CreatedOn": "2021-11-30T16:04:03.187Z"
+        "CreatedOn": "2021-12-06T18:38:41.257Z"
       }
     },
     "description": "MySQL para o Wordpress",
@@ -168,8 +168,8 @@ darmbrust@hoodwink:~$ oci mysql db-system create \
     "fault-domain": null,
     "freeform-tags": {},
     "heat-wave-cluster": null,
-    "hostname-label": "mysql-wordpress",
-    "id": "ocid1.mysqldbsystem.oc1.sa-saopaulo-1.aaaaaaaagec23mzhxhwfwzduofjj346lh5qbkvncamtv6cucyt5wvs52kwzq",
+    "hostname-label": "mysql-sp",
+    "id": "ocid1.mysqldbsystem.oc1.sa-saopaulo-1.aaaaaaaa27uvcqja5sr477ha2qaq2bl6zeykm5dyxwp4lfoektji54pfrv2a",
     "ip-address": null,
     "is-analytics-cluster-attached": false,
     "is-heat-wave-cluster-attached": false,
@@ -185,11 +185,11 @@ darmbrust@hoodwink:~$ oci mysql db-system create \
     "shape-name": "MySQL.VM.Standard.E3.1.8GB",
     "source": null,
     "subnet-id": "ocid1.subnet.oc1.sa-saopaulo-1.aaaaaaaagyg2sk2c4j46ky3lngceejohdzswlffsavqqybepekbean3gytba",
-    "time-created": "2021-11-30T16:04:05.676000+00:00",
-    "time-updated": "2021-11-30T16:04:05.676000+00:00"
+    "time-created": "2021-12-06T18:38:43.311000+00:00",
+    "time-updated": "2021-12-06T18:38:43.311000+00:00"
   },
-  "etag": "b00deef38bdccf19c0ebb32db2724e7c0573d7d5088ca39db650a4b063ac0844",
-  "opc-work-request-id": "ocid1.mysqlworkrequest.oc1.sa-saopaulo-1.f606d2aa-bf0f-4b55-a055-22115c8dd2d6.aaaaaaaa5vofgtfiggb2fyggeh57fvuznsl63b2t5wdkf5yqvbciqtmovgqa"
+  "etag": "0d1d6cf65e1b44e0e61b2e17076c7f6c34f0a9020750e2109f354e5a82ae254b",
+  "opc-work-request-id": "ocid1.mysqlworkrequest.oc1.sa-saopaulo-1.d3abcf40-0ae1-4561-89b0-b5e89a255ed6.aaaaaaaa5rv6snp5yifwnraovgj5neczs5caeuwiov2wwbgaqf77gas4qyua"
 }
 ```
 
@@ -197,7 +197,7 @@ Após alguns minutos, podemos ver que o serviço foi corretamente provisionado:
 
 ```
 darmbrust@hoodwink:~$ oci mysql db-system get \
-> --db-system-id "ocid1.mysqldbsystem.oc1.sa-saopaulo-1.aaaaaaaagec23mzhxhwfwzduofjj346lh5qbkvncamtv6cucyt5wvs52kwzq"
+> --db-system-id "ocid1.mysqldbsystem.oc1.sa-saopaulo-1.aaaaaaaa27uvcqja5sr477ha2qaq2bl6zeykm5dyxwp4lfoektji54pfrv2a"
 {
   "data": {
     "analytics-cluster": null,
@@ -214,21 +214,21 @@ darmbrust@hoodwink:~$ oci mysql db-system get \
     "configuration-id": "ocid1.mysqlconfiguration.oc1..aaaaaaaantprksu6phqfgr5xvyut46wdfesdszonbclybfwvahgysfjbrb4q",
     "current-placement": {
       "availability-domain": "ynrK:SA-SAOPAULO-1-AD-1",
-      "fault-domain": "FAULT-DOMAIN-3"
+      "fault-domain": "FAULT-DOMAIN-2"
     },
     "data-storage-size-in-gbs": 100,
     "defined-tags": {
       "Oracle-Tags": {
         "CreatedBy": "oracleidentitycloudservice/daniel.armbrust@algumdominio.com",
-        "CreatedOn": "2021-11-30T16:04:03.187Z"
+        "CreatedOn": "2021-12-06T18:38:41.257Z"
       }
     },
     "description": "MySQL para o Wordpress",
     "display-name": "mysql-wordpress_subnprv-db_vcn-prd",
     "endpoints": [
       {
-        "hostname": "mysql-wordpress.subnprvdb.vcnprd.oraclevcn.com",
-        "ip-address": "10.0.20.242",
+        "hostname": "mysql-sp.subnprvdb.vcnprd.oraclevcn.com",
+        "ip-address": "10.0.20.49",
         "modes": [
           "READ",
           "WRITE"
@@ -239,12 +239,12 @@ darmbrust@hoodwink:~$ oci mysql db-system get \
         "status-details": null
       }
     ],
-    "fault-domain": "FAULT-DOMAIN-3",
+    "fault-domain": "FAULT-DOMAIN-2",
     "freeform-tags": {},
     "heat-wave-cluster": null,
-    "hostname-label": "mysql-wordpress",
-    "id": "ocid1.mysqldbsystem.oc1.sa-saopaulo-1.aaaaaaaagec23mzhxhwfwzduofjj346lh5qbkvncamtv6cucyt5wvs52kwzq",
-    "ip-address": "10.0.20.242",
+    "hostname-label": "mysql-sp",
+    "id": "ocid1.mysqldbsystem.oc1.sa-saopaulo-1.aaaaaaaa27uvcqja5sr477ha2qaq2bl6zeykm5dyxwp4lfoektji54pfrv2a",
+    "ip-address": "10.0.20.49",
     "is-analytics-cluster-attached": false,
     "is-heat-wave-cluster-attached": false,
     "is-highly-available": true,
@@ -258,11 +258,11 @@ darmbrust@hoodwink:~$ oci mysql db-system get \
     "port-x": 33060,
     "shape-name": "MySQL.VM.Standard.E3.1.8GB",
     "source": null,
-    "subnet-id": "ocid1.subnet.oc1.sa-saopaulo-1.aaaaaaaagyg2sk2c4j46ky3lngceejohdzswlffsavqqybepekbean3gytba",
-    "time-created": "2021-11-30T16:04:05.676000+00:00",
-    "time-updated": "2021-11-30T16:18:35.229000+00:00"
+    "subnet-id": "ocid1.subnet.oc1.sa-saopaulo-1.aaaaaaaaucjocmapsp3azvvzfnqlvp3j4qlzyv2hmtj5fliystr6u4wlpmma",
+    "time-created": "2021-12-06T18:38:43.311000+00:00",
+    "time-updated": "2021-12-06T18:54:01.337000+00:00"
   },
-  "etag": "08cdef5cfdef824de611f196a4ec2d297ce4aea11d7f3c11e6c457ab93d20759--gzip"
+  "etag": "1fe1c7ea8f68af7ac35577ff3269ff79014edf340c0621557bcc14727e209560--gzip"
 }
 ```
 

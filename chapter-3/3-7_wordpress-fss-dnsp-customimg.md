@@ -104,7 +104,7 @@ darmbrust@hoodwink:~$ oci fs mount-target create \
 > --availability-domain "ynrK:SA-SAOPAULO-1-AD-1" \
 > --subnet-id "ocid1.subnet.oc1.sa-saopaulo-1.aaaaaaaajb4wma763mz6uowun3pfeltobe4fmiegdeyma5ehvnf3kzy3jvxa" \
 > --display-name "mt-fss-wordpress_subnprv-app_vcn-prd" \
-> --hostname-label "fss-wordpress" \
+> --hostname-label "fss-sp" \
 > --wait-for-state "ACTIVE"
 Action completed. Waiting until the resource has entered state: ('ACTIVE',)
 {
@@ -114,23 +114,23 @@ Action completed. Waiting until the resource has entered state: ('ACTIVE',)
     "defined-tags": {
       "Oracle-Tags": {
         "CreatedBy": "oracleidentitycloudservice/daniel.armbrust@algumdominio.com",
-        "CreatedOn": "2021-12-02T12:19:16.238Z"
+        "CreatedOn": "2021-12-06T19:15:44.060Z"
       }
     },
     "display-name": "mt-fss-wordpress_subnprv-app_vcn-prd",
-    "export-set-id": "ocid1.exportset.oc1.sa_saopaulo_1.aaaaaa4np2s2rg76m5zhkllqojxwiottmewxgylpobqxk3dpfuys2ylefuyqaaaa",
+    "export-set-id": "ocid1.exportset.oc1.sa_saopaulo_1.aaaaaa4np2s2ve2lm5zhkllqojxwiottmewxgylpobqxk3dpfuys2ylefuyqaaaa",
     "freeform-tags": {},
-    "id": "ocid1.mounttarget.oc1.sa_saopaulo_1.aaaaaa4np2s2rg77m5zhkllqojxwiottmewxgylpobqxk3dpfuys2ylefuyqaaaa",
+    "id": "ocid1.mounttarget.oc1.sa_saopaulo_1.aaaaaa4np2s2ve2mm5zhkllqojxwiottmewxgylpobqxk3dpfuys2ylefuyqaaaa",
     "lifecycle-details": "",
     "lifecycle-state": "ACTIVE",
     "nsg-ids": [],
     "private-ip-ids": [
-      "ocid1.privateip.oc1.sa-saopaulo-1.aaaaaaaahmvcco6gba3ocvwpk3sagbfy6fxuusossgaio4gqfzgrd4awayha"
+      "ocid1.privateip.oc1.sa-saopaulo-1.aaaaaaaallwehmsazp4w2cs5wfd2u5abj4gvgmshcxe7zduiuvcnu7eeukra"
     ],
     "subnet-id": "ocid1.subnet.oc1.sa-saopaulo-1.aaaaaaaajb4wma763mz6uowun3pfeltobe4fmiegdeyma5ehvnf3kzy3jvxa",
-    "time-created": "2021-12-02T12:19:17.892000+00:00"
+    "time-created": "2021-12-06T19:15:45.628000+00:00"
   },
-  "etag": "8ff6cec6bcc678b6a6238598977f449e3407ebdf74db8e5b9825c41b4230d034--gzip"
+  "etag": "e297ea0da532ce21e11a9c4faa4f41117994d83b45dd4f8baa39f2eb5e8d551a--gzip"
 }
 ```
 
@@ -141,7 +141,7 @@ Para criar o _"[export](https://docs.oracle.com/pt-br/iaas/Content/File/Tasks/ma
 ```
 darmbrust@hoodwink:~$ oci fs export create \
 > --file-system-id "ocid1.filesystem.oc1.sa_saopaulo_1.aaaaaaaaaaac4gcam5zhkllqojxwiottmewxgylpobqxk3dpfuys2ylefuyqaaaa" \
-> --export-set-id "ocid1.exportset.oc1.sa_saopaulo_1.aaaaaa4np2s2rg76m5zhkllqojxwiottmewxgylpobqxk3dpfuys2ylefuyqaaaa" \
+> --export-set-id "ocid1.exportset.oc1.sa_saopaulo_1.aaaaaa4np2s2ve2lm5zhkllqojxwiottmewxgylpobqxk3dpfuys2ylefuyqaaaa" \
 > --path "/wordpress-uploads" \
 > --export-options '[{"source": "10.0.10.0/24", "require-privileged-source-port": "true", "access": "READ_WRITE", "identitysquash": "ROOT", "anonymousuid": "65534","anonymousgid": "65534"}]' \
 > --wait-for-state "ACTIVE"
@@ -158,14 +158,14 @@ Action completed. Waiting until the resource has entered state: ('ACTIVE',)
         "source": "10.0.10.0/24"
       }
     ],
-    "export-set-id": "ocid1.exportset.oc1.sa_saopaulo_1.aaaaaa4np2s2rg76m5zhkllqojxwiottmewxgylpobqxk3dpfuys2ylefuyqaaaa",
+    "export-set-id": "ocid1.exportset.oc1.sa_saopaulo_1.aaaaaa4np2s2ve2lm5zhkllqojxwiottmewxgylpobqxk3dpfuys2ylefuyqaaaa",
     "file-system-id": "ocid1.filesystem.oc1.sa_saopaulo_1.aaaaaaaaaaac4gcam5zhkllqojxwiottmewxgylpobqxk3dpfuys2ylefuyqaaaa",
-    "id": "ocid1.export.oc1.sa_saopaulo_1.aaaaaa4np2s2u3nfm5zhkllqojxwiottmewxgylpobqxk3dpfuys2ylefuyqaaaa",
+    "id": "ocid1.export.oc1.sa_saopaulo_1.aaaaaa4np2s2vbxsm5zhkllqojxwiottmewxgylpobqxk3dpfuys2ylefuyqaaaa",
     "lifecycle-state": "ACTIVE",
     "path": "/wordpress-uploads",
-    "time-created": "2021-12-06T12:22:26+00:00"
+    "time-created": "2021-12-06T19:21:34+00:00"
   },
-  "etag": "c271c0adfd7c8f631a6ce4486303db0407631400e764e65b4dec489d76a75d40--gzip"
+  "etag": "80c251058d0893c0da45b01797404e73eef627db3370938a01af6c40b1d46359--gzip"
 }
 ```
 
@@ -276,7 +276,7 @@ darmbrust@hoodwink:~$ oci fs mount-target list \
 > --query "data [?contains(\"display-name\", 'mt-fss-wordpress_subnprv-app_vcn-prd')].\"private-ip-ids\""
 [
   [
-    "ocid1.privateip.oc1.sa-saopaulo-1.aaaaaaaahmvcco6gba3ocvwpk3sagbfy6fxuusossgaio4gqfzgrd4awayha"
+    "ocid1.privateip.oc1.sa-saopaulo-1.aaaaaaaallwehmsazp4w2cs5wfd2u5abj4gvgmshcxe7zduiuvcnu7eeukra"
   ]
 ]
 ```
@@ -293,21 +293,21 @@ darmbrust@hoodwink:~$ oci network private-ip get \
     "defined-tags": {
       "Oracle-Tags": {
         "CreatedBy": "fssoc1prod",
-        "CreatedOn": "2021-12-02T12:19:35.158Z"
+        "CreatedOn": "2021-12-06T19:15:56.216Z"
       }
     },
-    "display-name": "privateip20211202121935",
+    "display-name": "privateip20211206191556",
     "freeform-tags": {},
-    "hostname-label": "fss-wordpress",
-    "id": "ocid1.privateip.oc1.sa-saopaulo-1.aaaaaaaahmvcco6gba3ocvwpk3sagbfy6fxuusossgaio4gqfzgrd4awayha",
-    "ip-address": "10.0.10.186",
+    "hostname-label": "fss-sp",
+    "id": "ocid1.privateip.oc1.sa-saopaulo-1.aaaaaaaallwehmsazp4w2cs5wfd2u5abj4gvgmshcxe7zduiuvcnu7eeukra",
+    "ip-address": "10.0.10.16",
     "is-primary": false,
-    "subnet-id": "ocid1.subnet.oc1.sa-saopaulo-1.aaaaaaaans5d7xtvurugjpyecws4kazd23lfmcdzyoj2jpqg4cyi56sy6nzq",
-    "time-created": "2021-12-02T12:19:35.199000+00:00",
+    "subnet-id": "ocid1.subnet.oc1.sa-saopaulo-1.aaaaaaaajb4wma763mz6uowun3pfeltobe4fmiegdeyma5ehvnf3kzy3jvxa",
+    "time-created": "2021-12-06T19:15:56.245000+00:00",
     "vlan-id": null,
-    "vnic-id": "ocid1.vnic.oc1.sa-saopaulo-1.abtxeljrpe5xl6knebvnpn2x4if5gnihhf7sfcui66b4nfdnjpps2mzmnmqq"
+    "vnic-id": "ocid1.vnic.oc1.sa-saopaulo-1.abtxeljrospcum5zwzn75nmva6gxg2vphxqzm6zyvjv64nmy6cvkcgf7xgoq"
   },
-  "etag": "14fd38ce"
+  "etag": "6f7af44f"
 }
 ```
 
@@ -319,7 +319,7 @@ darmbrust@hoodwink:~$ oci dns record domain patch \
 > --domain "fss-sp.ocibook.local" \
 > --view-id "ocid1.dnsview.oc1.sa-saopaulo-1.aaaaaaaa4a5vohi67qnx2jkk4bfvgy54agw24w23tdyxfohpowluupxrj4bq" \
 > --scope "PRIVATE" \
-> --items '[{"domain": "fss-sp.ocibook.local", "rdata": "10.0.10.186", "rtype": "A", "ttl": 300}]'
+> --items '[{"domain": "fss-sp.ocibook.local", "rdata": "10.0.10.16", "rtype": "A", "ttl": 300}]'
 {
   "data": {
     "items": [
