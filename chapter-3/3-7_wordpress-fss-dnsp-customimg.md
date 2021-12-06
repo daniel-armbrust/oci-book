@@ -183,7 +183,7 @@ Quando uma _[VCN](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/manag
 
 Para que a _[Zona](https://pt.wikipedia.org/wiki/Zona_DNS)_ de nome  _"ocibook.local"_ seja criada, será preciso anexá-la com a _[Private View](https://docs.oracle.com/pt-br/iaas/Content/DNS/Tasks/privatedns.htm#overview)_ da _[VCN](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingVCNs_topic-Overview_of_VCNs_and_Subnets.htm)_ na qual queremos a _"resolução"_ dos _[registros](https://en.wikipedia.org/wiki/List_of_DNS_record_types)_. Isto possibilita que todos os recursos desta _[VCN](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingVCNs_topic-Overview_of_VCNs_and_Subnets.htm)_, possam _resolver_ os _nomes DNS_ que criaremos na _[Zona](https://pt.wikipedia.org/wiki/Zona_DNS)_ _"ocibook.local"_.
 
-Através do comando abaixo, irei obter o _OCID_ da _[Private View](https://docs.oracle.com/pt-br/iaas/Content/DNS/Tasks/privatedns.htm#overview)_ da VCN de produção:
+Através do comando abaixo, irei obter o _OCID_ da _[Private View](https://docs.oracle.com/pt-br/iaas/Content/DNS/Tasks/privatedns.htm#overview)_ da _[VCN](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingVCNs_topic-Overview_of_VCNs_and_Subnets.htm)_ de produção:
 
 ```
 darmbrust@hoodwink:~$ oci dns view list \
