@@ -265,6 +265,8 @@ A figura abaixo destaca os dois _CNAMEs_ que serão criados:
 
 Como você verá, futuramente a ideia é poder ter um _[Wordpress](https://pt.wikipedia.org/wiki/WordPress)_ distribuído entre as _[regiões](https://docs.oracle.com/pt-br/iaas/Content/General/Concepts/regions.htm#top)_ do _[OCI](https://www.oracle.com/cloud/)_. As instâncias que executam a aplicação, necessitam de um meio único e comum para acesso aos serviços de infraestrutura. Uma forma de se garantir este acesso é através do _nome DNS_ e nunca por _endereço IP_. Não se preocupe, estes conceitos ficarão mais claros no decorrer dos capítulos.
 
+Com o comando abaixo, irei listar todas as _[Zonas](https://pt.wikipedia.org/wiki/Zona_DNS)_ existentes dentro do compartimento _"cmp-network"_:
+
 ```
 darmbrust@hoodwink:~$ oci dns zone list \
 > --compartment-id "ocid1.compartment.oc1..aaaaaaaauvqvbbx3oridcm5d2ztxkftwr362u2vl5zdsayzbehzwbjs56soq" \
@@ -294,104 +296,9 @@ darmbrust@hoodwink:~$ oci dns zone list \
 ]
 ```
 
+Sabemos que o _[File Storage](https://docs.oracle.com/pt-br/iaas/Content/File/Concepts/filestorageoverview.htm)_ criado dentro da _subrede de aplicação_, foi criado com o _hostname_ _"fss-sp"_. Acrescentando o _hostname_ ao nome da _[Zona](https://pt.wikipedia.org/wiki/Zona_DNS)_, temos o nome _"fss-sp.subnprvapp.vcnprd.oraclevcn.com"_.
 
-Por hora, vamos obter o _endereço IP_ do _[File Storage](https://docs.oracle.com/pt-br/iaas/Content/File/Concepts/filestorageoverview.htm)_ que criamos. Para isto, irei consultar as informações do _[Mount Target](https://docs.oracle.com/en-us/iaas/Content/File/Tasks/managingmounttargets.htm)_, pois é ele quem recebeu o _endereço IP_:
-
-```
-darmbrust@hoodwink:~$ oci fs mount-target list \
-> --compartment-id "ocid1.compartment.oc1..aaaaaaaauvqvbbx3oridcm5d2ztxkftwr362u2vl5zdsayzbehzwbjs56soq" \
-> --availability-domain "ynrK:SA-SAOPAULO-1-AD-1" \
-> --query "data [?contains(\"display-name\", 'mt-fss-wordpress_subnprv-app_vcn-prd')].\"private-ip-ids\""
-[
-  [
-    "ocid1.privateip.oc1.sa-saopaulo-1.aaaaaaaallwehmsazp4w2cs5wfd2u5abj4gvgmshcxe7zduiuvcnu7eeukra"
-  ]
-]
-```
-
-Através do _OCID_ retornado, é possível consultar suas propriedades e também o seu _endereço IP_ com o comando abaixo:
-
-```
-darmbrust@hoodwink:~$ oci network private-ip get \
-> --private-ip-id "ocid1.privateip.oc1.sa-saopaulo-1.aaaaaaaahmvcco6gba3ocvwpk3sagbfy6fxuusossgaio4gqfzgrd4awayha"
-{
-  "data": {
-    "availability-domain": null,
-    "compartment-id": "ocid1.compartment.oc1..aaaaaaaauvqvbbx3oridcm5d2ztxkftwr362u2vl5zdsayzbehzwbjs56soq",
-    "defined-tags": {
-      "Oracle-Tags": {
-        "CreatedBy": "fssoc1prod",
-        "CreatedOn": "2021-12-06T19:15:56.216Z"
-      }
-    },
-    "display-name": "privateip20211206191556",
-    "freeform-tags": {},
-    "hostname-label": "fss-sp",
-    "id": "ocid1.privateip.oc1.sa-saopaulo-1.aaaaaaaallwehmsazp4w2cs5wfd2u5abj4gvgmshcxe7zduiuvcnu7eeukra",
-    "ip-address": "10.0.10.16",
-    "is-primary": false,
-    "subnet-id": "ocid1.subnet.oc1.sa-saopaulo-1.aaaaaaaajb4wma763mz6uowun3pfeltobe4fmiegdeyma5ehvnf3kzy3jvxa",
-    "time-created": "2021-12-06T19:15:56.245000+00:00",
-    "vlan-id": null,
-    "vnic-id": "ocid1.vnic.oc1.sa-saopaulo-1.abtxeljrospcum5zwzn75nmva6gxg2vphxqzm6zyvjv64nmy6cvkcgf7xgoq"
-  },
-  "etag": "6f7af44f"
-}
-```
-
-Para consultar o endereço IP do Mysql, usamos o comando abaixo:
-
-```
-darmbrust@hoodwink:~$ oci mysql db-system list \
-> --compartment-id "ocid1.compartment.oc1..aaaaaaaa6d2s5sgmxmyxu2vca3pn46y56xisijjyhdjwgqg3f6goh3obj4qq" \
-> --query "data[?\"display-name\"=='mysql-wordpress_subnprv-db_vcn-prd'].endpoints"
-[
-  [
-    {
-      "hostname": "mysql-sp.subnprvdb.vcnprd.oraclevcn.com",
-      "ip-address": "10.0.20.49",
-      "modes": [
-        "READ",
-        "WRITE"
-      ],
-      "port": 3306,
-      "port-x": 33060,
-      "status": "ACTIVE",
-      "status-details": null
-    }
-  ]
-]
-```
-
-Tendo o _endereço IP_ em mãos, podemos atualizar a _[Zona DNS](https://pt.wikipedia.org/wiki/Zona_DNS)_ criando o _[registro](https://en.wikipedia.org/wiki/List_of_DNS_record_types)_ do tipo _A_, que _"aponta"_ para o _endereço IP_ do _[File Storage](https://docs.oracle.com/pt-br/iaas/Content/File/Concepts/filestorageoverview.htm)_:
-
-```
-darmbrust@hoodwink:~$ oci dns record domain patch \
-> --zone-name-or-id "ocibook.local" \
-> --domain "fss-sp.ocibook.local" \
-> --view-id "ocid1.dnsview.oc1.sa-saopaulo-1.aaaaaaaa4a5vohi67qnx2jkk4bfvgy54agw24w23tdyxfohpowluupxrj4bq" \
-> --scope "PRIVATE" \
-> --items '[{"domain": "fss-sp.ocibook.local", "rdata": "10.0.10.16", "rtype": "A", "ttl": 300}]'
-{
-  "data": {
-    "items": [
-      {
-        "domain": "fss-sp.ocibook.local",
-        "is-protected": false,
-        "rdata": "10.0.10.186",
-        "record-hash": "12cc74df18f0ae2a8572b90562401104",
-        "rrset-version": "2",
-        "rtype": "A",
-        "ttl": 300
-      }
-    ]
-  },
-  "etag": "\"2ocid1.dns-zone.oc1.sa-saopaulo-1.aaaaaaaaacc2ofxn7xgixci6u666z4nebtduucrf5kph2ipeglkk3nvwnoea52e29219737484138d86060d72390e82#application/json\"",
-  "opc-total-items": "1"
-}
-```
-
-Por fim, seguiremos a mesma lógica para criar o _[registro](https://en.wikipedia.org/wiki/List_of_DNS_record_types)_ do tipo _CNAME_:
+Para criarmos o _[registro](https://en.wikipedia.org/wiki/List_of_DNS_record_types)_ _CNAME_ dentro da _[Zona](https://pt.wikipedia.org/wiki/Zona_DNS)_ _"ocibook.local"_, utilizamos o comando abaixo:
 
 ```
 darmbrust@hoodwink:~$ oci dns record domain patch \
@@ -399,26 +306,56 @@ darmbrust@hoodwink:~$ oci dns record domain patch \
 > --domain "fss.ocibook.local" \
 > --view-id "ocid1.dnsview.oc1.sa-saopaulo-1.aaaaaaaa4a5vohi67qnx2jkk4bfvgy54agw24w23tdyxfohpowluupxrj4bq" \
 > --scope "PRIVATE" \
-> --items '[{"domain": "fss.ocibook.local", "rdata": "fss-sp.ocibook.local", "rtype": "CNAME", "ttl": 300}]'
+> --items '[{"domain": "fss.ocibook.local", "rdata": "fss-sp.subnprvapp.vcnprd.oraclevcn.com", "rtype": "CNAME", "ttl": 300}]'
 {
   "data": {
     "items": [
       {
         "domain": "fss.ocibook.local",
         "is-protected": false,
-        "rdata": "fss-sp.ocibook.local.",
-        "record-hash": "97dd18affb78cb93999d5897da2d79f3",
-        "rrset-version": "3",
+        "rdata": "fss-sp.subnprvapp.vcnprd.oraclevcn.com.",
+        "record-hash": "f8df3de1d2261039949fe539dd3f15c0",
+        "rrset-version": "5",
         "rtype": "CNAME",
         "ttl": 300
       }
     ]
   },
-  "etag": "\"3ocid1.dns-zone.oc1.sa-saopaulo-1.aaaaaaaaacc2ofxn7xgixci6u666z4nebtduucrf5kph2ipeglkk3nvwnoea4d5075e071bed29852a43f55d8521789#application/json\"",
+  "etag": "\"5ocid1.dns-zone.oc1.sa-saopaulo-1.aaaaaaaaacc2ofxn7xgixci6u666z4nebtduucrf5kph2ipeglkk3nvwnoea2bc5d520ac6fef0f2e85e012459eee6a#application/json\"",
   "opc-total-items": "1"
 }
 ```
 
-Com isto, a infraestrutura do _[DNS Privado](https://docs.oracle.com/pt-br/iaas/Content/DNS/Tasks/privatedns.htm)_ está pronta!
+O mesmo será feito para o _[MySQL](https://docs.oracle.com/pt-br/iaas/mysql-database/index.html)_. Este recebeu o _hostname_ _"mysql-sp"_, porém este foi criado na _subrede para Banco de Dados_. Seu nome completamente qualificado ficou _"mysql-sp.subnprvdb.vcnprd.oraclevcn.com"_.
+
+Seu _[registro](https://en.wikipedia.org/wiki/List_of_DNS_record_types)_ _CNAME_ será criado com o comando abaixo:
+
+```
+darmbrust@hoodwink:~$ oci dns record domain patch \
+> --zone-name-or-id "ocibook.local" \
+> --domain "mysql.ocibook.local" \
+> --view-id "ocid1.dnsview.oc1.sa-saopaulo-1.aaaaaaaa4a5vohi67qnx2jkk4bfvgy54agw24w23tdyxfohpowluupxrj4bq" \
+> --scope "PRIVATE" \
+> --items '[{"domain": "mysql.ocibook.local", "rdata": "mysql-sp.subnprvdb.vcnprd.oraclevcn.com", "rtype": "CNAME", "ttl": 300}]'
+{
+  "data": {
+    "items": [
+      {
+        "domain": "mysql.ocibook.local",
+        "is-protected": false,
+        "rdata": "mysql-sp.subnprvdb.vcnprd.oraclevcn.com.",
+        "record-hash": "71af191e0774f2336326fae8e0abe2ab",
+        "rrset-version": "6",
+        "rtype": "CNAME",
+        "ttl": 300
+      }
+    ]
+  },
+  "etag": "\"6ocid1.dns-zone.oc1.sa-saopaulo-1.aaaaaaaaacc2ofxn7xgixci6u666z4nebtduucrf5kph2ipeglkk3nvwnoea03f18075b5ef9cc2c00eead2605bb5d1#application/json\"",
+  "opc-total-items": "1"
+}
+```
+
+Com isto, a básica infraestrutura de _[DNS](https://pt.wikipedia.org/wiki/Sistema_de_Nomes_de_Dom%C3%ADnio)_ para atender a aplicação _[Wordpress](https://pt.wikipedia.org/wiki/WordPress)_ está pronta!
 
 ### __Custom Image__
