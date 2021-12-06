@@ -336,3 +336,35 @@ darmbrust@hoodwink:~$ oci dns record domain patch \
   "opc-total-items": "1"
 }
 ```
+
+Por fim, seguiremos a mesma lógica para criar o _[registro](https://en.wikipedia.org/wiki/List_of_DNS_record_types)_ do tipo _CNAME_:
+
+```
+darmbrust@hoodwink:~$ oci dns record domain patch \
+> --zone-name-or-id "ocibook.local" \
+> --domain "fss.ocibook.local" \
+> --view-id "ocid1.dnsview.oc1.sa-saopaulo-1.aaaaaaaa4a5vohi67qnx2jkk4bfvgy54agw24w23tdyxfohpowluupxrj4bq" \
+> --scope "PRIVATE" \
+> --items '[{"domain": "fss.ocibook.local", "rdata": "fss-sp.ocibook.local", "rtype": "CNAME", "ttl": 300}]'
+{
+  "data": {
+    "items": [
+      {
+        "domain": "fss.ocibook.local",
+        "is-protected": false,
+        "rdata": "fss-sp.ocibook.local.",
+        "record-hash": "97dd18affb78cb93999d5897da2d79f3",
+        "rrset-version": "3",
+        "rtype": "CNAME",
+        "ttl": 300
+      }
+    ]
+  },
+  "etag": "\"3ocid1.dns-zone.oc1.sa-saopaulo-1.aaaaaaaaacc2ofxn7xgixci6u666z4nebtduucrf5kph2ipeglkk3nvwnoea4d5075e071bed29852a43f55d8521789#application/json\"",
+  "opc-total-items": "1"
+}
+```
+
+Com isto, a infraestrutura do _[DNS Privado](https://docs.oracle.com/pt-br/iaas/Content/DNS/Tasks/privatedns.htm)_ está pronta!
+
+### __Custom Image__
