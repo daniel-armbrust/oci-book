@@ -257,6 +257,10 @@ Action completed. Waiting until the resource has entered state: ('ACTIVE',)
 }
 ```
 
+Agora, irei criar dois _[registros](https://en.wikipedia.org/wiki/List_of_DNS_record_types)_. Um do tipo _A_ e outro _CNAME_, que será um _"apelido"_ para o registro do tipo _A_. 
+
+![alt_text](./images/dns-priv-1.jpg "DNS Privado - Wordpress")
+
 ```
 darmbrust@hoodwink:~$ oci fs mount-target list \
 > --compartment-id "ocid1.compartment.oc1..aaaaaaaauvqvbbx3oridcm5d2ztxkftwr362u2vl5zdsayzbehzwbjs56soq" \
