@@ -257,9 +257,9 @@ Action completed. Waiting until the resource has entered state: ('ACTIVE',)
 }
 ```
 
-Agora, irei criar dois _[registros](https://en.wikipedia.org/wiki/List_of_DNS_record_types)_ do tipo _CNAME_, que será um _"apelido"_ para o registro do tipo _A_. 
+Agora, irei criar dois _[registros](https://en.wikipedia.org/wiki/List_of_DNS_record_types)_ do tipo _CNAME_, que serão _"apelidos"_ para os _[registros](https://en.wikipedia.org/wiki/List_of_DNS_record_types)_ do tipo _A_.
 
-Ficará mais ou menos assim:
+Teremos a seguinte configuração:
 
 ![alt_text](./images/dns-priv-1.jpg "DNS Privado - Wordpress")
 
