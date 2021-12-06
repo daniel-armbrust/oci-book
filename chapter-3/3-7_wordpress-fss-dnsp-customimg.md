@@ -257,13 +257,9 @@ Action completed. Waiting until the resource has entered state: ('ACTIVE',)
 }
 ```
 
-Agora, irei criar dois _[registros](https://en.wikipedia.org/wiki/List_of_DNS_record_types)_ do tipo _CNAME_, que serão _"apelidos"_ para os _[registros](https://en.wikipedia.org/wiki/List_of_DNS_record_types)_ do tipo _A_.
-
-Teremos a seguinte configuração:
+O _[registro DNS](https://en.wikipedia.org/wiki/List_of_DNS_record_types)_ do tipo _A_ já foi criado no momento da criação dos serviços _[File Storage](https://docs.oracle.com/pt-br/iaas/Content/File/Concepts/filestorageoverview.htm)_ e _[MySQL](https://docs.oracle.com/pt-br/iaas/mysql-database/index.html)_. Criaremos o registro do tipo _CNAME_ que _"aponta"_ para o valor de cada _[registro](https://en.wikipedia.org/wiki/List_of_DNS_record_types)_ do tipo _A_.
 
 ![alt_text](./images/dns-priv-1.jpg "DNS Privado - Wordpress")
-
-O _[registro DNS](https://en.wikipedia.org/wiki/List_of_DNS_record_types)_ do tipo _A_ já foi criado no momento da criação dos serviços _[File Storage](https://docs.oracle.com/pt-br/iaas/Content/File/Concepts/filestorageoverview.htm)_ e _[MySQL](https://docs.oracle.com/pt-br/iaas/mysql-database/index.html)_. Criaremos o registro do tipo _CNAME_ que _"aponta"_ para o valor de cada _[registro](https://en.wikipedia.org/wiki/List_of_DNS_record_types)_ do tipo _A_.
 
 - fss-sp.subnprvapp.vcnprd.oraclevcn.com -> fss.ocibook.local
 - mysql-sp.subnprvdb.vcnprd.oraclevcn.com -> mysql.ocibook.local
