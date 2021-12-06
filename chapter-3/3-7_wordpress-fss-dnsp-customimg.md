@@ -94,7 +94,7 @@ Action completed. Waiting until the resource has entered state: ('ACTIVE',)
 }
 ```
 
-Um _[sistema de arquivos](https://pt.wikipedia.org/wiki/Sistema_de_ficheiros)_ criado pelo _[File Storage](https://docs.oracle.com/pt-br/iaas/Content/File/Concepts/filestorageoverview.htm)_, necessita de _[Mount Target](https://docs.oracle.com/en-us/iaas/Content/File/Tasks/managingmounttargets.htm)_, conhecido também como _"ponto-de-montagem NFS"_. 
+Já sabemos que um _[sistema de arquivos](https://pt.wikipedia.org/wiki/Sistema_de_ficheiros)_ criado pelo _[File Storage](https://docs.oracle.com/pt-br/iaas/Content/File/Concepts/filestorageoverview.htm)_ necessita de _[Mount Target](https://docs.oracle.com/en-us/iaas/Content/File/Tasks/managingmounttargets.htm)_, conhecido também como _"ponto-de-montagem NFS"_. 
 
 O _[Mount Target](https://docs.oracle.com/en-us/iaas/Content/File/Tasks/managingmounttargets.htm)_ ao ser criado, recebe um _endereço IP_ e um _hostname_, para que os clientes da rede possam se conectar. Por conta disto, o _[Mount Target](https://docs.oracle.com/en-us/iaas/Content/File/Tasks/managingmounttargets.htm)_ necessita residir em uma subrede. Para o nosso caso, a subrede será a mesma das instâncias da aplicação.
 
@@ -134,15 +134,16 @@ Action completed. Waiting until the resource has entered state: ('ACTIVE',)
 }
 ```
 
-Para finalizar, é necessário criar um _"[export](https://docs.oracle.com/pt-br/iaas/Content/File/Tasks/managingmounttargets.htm#Overview)"_. Um _[sistema de arquivos](https://pt.wikipedia.org/wiki/Sistema_de_ficheiros)_ pode ser exportado por meio de um ou mais _"pontos de acesso NFS"_. É necessário pelo menos um _"[export](https://docs.oracle.com/pt-br/iaas/Content/File/Tasks/managingmounttargets.htm#Overview)"_ para que os clientes da rede possam _"montar"_ o _[sistema de arquivos](https://pt.wikipedia.org/wiki/Sistema_de_ficheiros)_.
+Para finalizar, é necessário criar um _"[export](https://docs.oracle.com/pt-br/iaas/Content/File/Tasks/managingmounttargets.htm#Overview)"_. Sabemos também, que um _[sistema de arquivos](https://pt.wikipedia.org/wiki/Sistema_de_ficheiros)_ pode ser exportado por meio de um ou mais _"pontos de acesso NFS"_. É necessário pelo menos um _"[export](https://docs.oracle.com/pt-br/iaas/Content/File/Tasks/managingmounttargets.htm#Overview)"_ para que os clientes da rede possam _"montar"_ o _[sistema de arquivos](https://pt.wikipedia.org/wiki/Sistema_de_ficheiros)_.
 
-Para criar o _"[export](https://docs.oracle.com/pt-br/iaas/Content/File/Tasks/managingmounttargets.htm#Overview)"_, especificamos um caminho qualquer _(--path)_ junto com os _OCIDs_ do _[sistema de arquivos](https://pt.wikipedia.org/wiki/Sistema_de_ficheiros)_ e _[Mount Target](https://docs.oracle.com/en-us/iaas/Content/File/Tasks/managingmounttargets.htm)_ que foram criados:
+Para criar o _"[export](https://docs.oracle.com/pt-br/iaas/Content/File/Tasks/managingmounttargets.htm#Overview)"_, especificamos um caminho qualquer _(--path)_ junto com os _OCIDs_ do _[sistema de arquivos](https://pt.wikipedia.org/wiki/Sistema_de_ficheiros)_ e _[Mount Target](https://docs.oracle.com/en-us/iaas/Content/File/Tasks/managingmounttargets.htm)_ que foram criados.
 
 ```
 darmbrust@hoodwink:~$ oci fs export create \
-> --file-system-id "ocid1.filesystem.oc1.sa_saopaulo_1.aaaaaaaaaaac4dpmm5zhkllqojxwiottmewxgylpobqxk3dpfuys2ylefuyqaaaa" \
+> --file-system-id "ocid1.filesystem.oc1.sa_saopaulo_1.aaaaaaaaaaac4gcam5zhkllqojxwiottmewxgylpobqxk3dpfuys2ylefuyqaaaa" \
 > --export-set-id "ocid1.exportset.oc1.sa_saopaulo_1.aaaaaa4np2s2rg76m5zhkllqojxwiottmewxgylpobqxk3dpfuys2ylefuyqaaaa" \
 > --path "/wordpress-uploads" \
+> --export-options '[{"source": "10.0.10.0/24", "require-privileged-source-port": "true", "access": "READ_WRITE", "identitysquash": "ROOT", "anonymousuid": "65534","anonymousgid": "65534"}]' \
 > --wait-for-state "ACTIVE"
 Action completed. Waiting until the resource has entered state: ('ACTIVE',)
 {
@@ -152,19 +153,19 @@ Action completed. Waiting until the resource has entered state: ('ACTIVE',)
         "access": "READ_WRITE",
         "anonymous-gid": 65534,
         "anonymous-uid": 65534,
-        "identity-squash": "NONE",
-        "require-privileged-source-port": false,
-        "source": "0.0.0.0/0"
+        "identity-squash": "ROOT",
+        "require-privileged-source-port": true,
+        "source": "10.0.10.0/24"
       }
     ],
     "export-set-id": "ocid1.exportset.oc1.sa_saopaulo_1.aaaaaa4np2s2rg76m5zhkllqojxwiottmewxgylpobqxk3dpfuys2ylefuyqaaaa",
-    "file-system-id": "ocid1.filesystem.oc1.sa_saopaulo_1.aaaaaaaaaaac4dpmm5zhkllqojxwiottmewxgylpobqxk3dpfuys2ylefuyqaaaa",
-    "id": "ocid1.export.oc1.sa_saopaulo_1.aaaaaa4np2s2rhhnm5zhkllqojxwiottmewxgylpobqxk3dpfuys2ylefuyqaaaa",
+    "file-system-id": "ocid1.filesystem.oc1.sa_saopaulo_1.aaaaaaaaaaac4gcam5zhkllqojxwiottmewxgylpobqxk3dpfuys2ylefuyqaaaa",
+    "id": "ocid1.export.oc1.sa_saopaulo_1.aaaaaa4np2s2u3nfm5zhkllqojxwiottmewxgylpobqxk3dpfuys2ylefuyqaaaa",
     "lifecycle-state": "ACTIVE",
     "path": "/wordpress-uploads",
-    "time-created": "2021-12-02T14:15:55+00:00"
+    "time-created": "2021-12-06T12:22:26+00:00"
   },
-  "etag": "11b046bd750b736f4d7f9b495e1e03b88ae26d8eba7c6c961e4c7d82d15d1814--gzip"
+  "etag": "c271c0adfd7c8f631a6ce4486303db0407631400e764e65b4dec489d76a75d40--gzip"
 }
 ```
 
