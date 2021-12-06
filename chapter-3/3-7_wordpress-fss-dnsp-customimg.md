@@ -263,7 +263,7 @@ Agora, irei criar dois _[registros](https://en.wikipedia.org/wiki/List_of_DNS_re
 
 O _[registro DNS](https://en.wikipedia.org/wiki/List_of_DNS_record_types)_ do tipo _A_ terá o nome _"fss-sp.ocibook.local"_ com o valor sendo o _endereço IP_ do _[File Storage](https://docs.oracle.com/pt-br/iaas/Content/File/Concepts/filestorageoverview.htm)_ que criamos. Já o registro _CNAME_, terá o nome _"fss.ocibook.local"_ apontando para o nome _"fss-sp.ocibook.local"_.
 
-Como você verá, a ideia por trás disto é poder ter um _[Wordpress](https://pt.wikipedia.org/wiki/WordPress)_ distribuído entre as _[regiões](https://docs.oracle.com/pt-br/iaas/Content/General/Concepts/regions.htm#top)_ do _[OCI](https://www.oracle.com/cloud/)_. A instância que executam a aplicação, necessitam de um meio único e comum para acesso ao _[Serviço File Storage](https://docs.oracle.com/pt-br/iaas/Content/File/Concepts/filestorageoverview.htm)_. Uma forma de se garantir este acesso universal é através de _nomes DNS_ e nunca através de _endereço IP_. Não se preocupe, estes conceitos ficarão mais claros no decorrer dos capítulos.
+Como você verá, a ideia por trás disto é poder ter um _[Wordpress](https://pt.wikipedia.org/wiki/WordPress)_ distribuído entre as _[regiões](https://docs.oracle.com/pt-br/iaas/Content/General/Concepts/regions.htm#top)_ do _[OCI](https://www.oracle.com/cloud/)_. As instâncias que executam a aplicação, necessitam de um meio único e comum para acesso ao _[Serviço File Storage](https://docs.oracle.com/pt-br/iaas/Content/File/Concepts/filestorageoverview.htm)_. Uma forma de se garantir este acesso universal é através de _nomes DNS_ e nunca através de _endereço IP_. Não se preocupe, estes conceitos ficarão mais claros no decorrer dos capítulos.
 
 
 ```
