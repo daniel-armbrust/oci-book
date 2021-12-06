@@ -38,6 +38,8 @@ Veja a demonstração dos recursos do nosso exemplo na imagem abaixo:
 
 A ideia em utilizar o _[File Storage](https://docs.oracle.com/pt-br/iaas/Content/File/Concepts/filestorageoverview.htm)_, é por conta de que o _[Wordpress](https://pt.wikipedia.org/wiki/WordPress)_ armazena as imagens que vem via _[upload](https://en.wikipedia.org/wiki/Upload)_ dos usuários em um diretório específico na instância: _/var/www/html/wp-content/uploads_
 
+Se é possível centralizar o acesso aos _[uploads](https://en.wikipedia.org/wiki/Upload)_ em um serviço como este, é possível ter múltiplas instâncias da aplicação acessando o mesmo conteúdo, evitando assim o _"[ponto único de falha](https://pt.wikipedia.org/wiki/Ponto_%C3%BAnico_de_falha)"_ e promovendo a _[escalabilidade horizontal](https://pt.wikipedia.org/wiki/Escalabilidade)_.
+
 ![alt_text](./images/file-storage-2.jpg "Wordpress + File Storage")
 
 Para começar, precisamos do nome do _[availability domain (AD)](https://docs.oracle.com/pt-br/iaas/Content/General/Concepts/regions.htm#top)_ dentro da _[região](https://www.oracle.com/cloud/data-regions/)_ no qual iremos criar o _[File Storage](https://docs.oracle.com/pt-br/iaas/Content/File/Concepts/filestorageoverview.htm)_:
