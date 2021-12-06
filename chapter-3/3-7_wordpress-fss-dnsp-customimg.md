@@ -356,6 +356,6 @@ darmbrust@hoodwink:~$ oci dns record domain patch \
 }
 ```
 
-Com isto, a básica infraestrutura de _[DNS](https://pt.wikipedia.org/wiki/Sistema_de_Nomes_de_Dom%C3%ADnio)_ para atender a aplicação _[Wordpress](https://pt.wikipedia.org/wiki/WordPress)_ está pronta!
+Com isto, concluímos infraestrutura de _[DNS](https://pt.wikipedia.org/wiki/Sistema_de_Nomes_de_Dom%C3%ADnio)_ básica para atender a aplicação _[Wordpress](https://pt.wikipedia.org/wiki/WordPress)_.
 
 ### __Custom Image__
