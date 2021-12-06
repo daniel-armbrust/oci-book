@@ -265,6 +265,7 @@ O _[registro DNS](https://en.wikipedia.org/wiki/List_of_DNS_record_types)_ do ti
 
 Como você verá, a ideia por trás disto é poder ter um _[Wordpress](https://pt.wikipedia.org/wiki/WordPress)_ distribuído entre as _[regiões](https://docs.oracle.com/pt-br/iaas/Content/General/Concepts/regions.htm#top)_ do _[OCI](https://www.oracle.com/cloud/)_. As instâncias que executam a aplicação, necessitam de um meio único e comum para acesso ao _[Serviço File Storage](https://docs.oracle.com/pt-br/iaas/Content/File/Concepts/filestorageoverview.htm)_. Uma forma de se garantir este acesso universal é através de _nomes DNS_, e nunca através de _endereço IP_. Não se preocupe, estes conceitos ficarão mais claros no decorrer dos capítulos.
 
+Por hora, vamos obter o _endereço IP_ do _[File Storage](https://docs.oracle.com/pt-br/iaas/Content/File/Concepts/filestorageoverview.htm)_ que criamos. Para isto, irei consultar as informações do _[Mount Target](https://docs.oracle.com/en-us/iaas/Content/File/Tasks/managingmounttargets.htm)_ pois é nele que o _endereço IP_ foi atribuído:
 
 ```
 darmbrust@hoodwink:~$ oci fs mount-target list \
