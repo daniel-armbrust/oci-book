@@ -257,15 +257,48 @@ Action completed. Waiting until the resource has entered state: ('ACTIVE',)
 }
 ```
 
-Agora, irei criar dois _[registros](https://en.wikipedia.org/wiki/List_of_DNS_record_types)_. Um do tipo _A_ e outro _CNAME_, que será um _"apelido"_ para o registro do tipo _A_. 
+Agora, irei criar dois _[registros](https://en.wikipedia.org/wiki/List_of_DNS_record_types)_ do tipo _CNAME_, que será um _"apelido"_ para o registro do tipo _A_. 
 
 Ficará mais ou menos assim:
 
 ![alt_text](./images/dns-priv-1.jpg "DNS Privado - Wordpress")
 
-O _[registro DNS](https://en.wikipedia.org/wiki/List_of_DNS_record_types)_ do tipo _A_ terá o nome _"fss-sp.ocibook.local"_ com o valor sendo o _endereço IP_ do _[File Storage](https://docs.oracle.com/pt-br/iaas/Content/File/Concepts/filestorageoverview.htm)_ que criamos. Já o registro _CNAME_, terá o nome _"fss.ocibook.local"_ apontando para o nome _"fss-sp.ocibook.local"_. Teremos o mesmo esquema de nomes também para o serviço _[MySQL](https://docs.oracle.com/pt-br/iaas/mysql-database/index.html)_.
+O _[registro DNS](https://en.wikipedia.org/wiki/List_of_DNS_record_types)_ do tipo _A_ já foi criado no momento da criação dos serviços _[File Storage](https://docs.oracle.com/pt-br/iaas/Content/File/Concepts/filestorageoverview.htm)_ e _[MySQL](https://docs.oracle.com/pt-br/iaas/mysql-database/index.html)_. Criaremos o registro do tipo _CNAME_ que _"aponta"_ para o valor de cada _[registro](https://en.wikipedia.org/wiki/List_of_DNS_record_types)_ do tipo _A_.
 
-Como você verá, a ideia por trás disto é poder ter um _[Wordpress](https://pt.wikipedia.org/wiki/WordPress)_ distribuído entre as _[regiões](https://docs.oracle.com/pt-br/iaas/Content/General/Concepts/regions.htm#top)_ do _[OCI](https://www.oracle.com/cloud/)_. As instâncias que executam a aplicação, necessitam de um meio único e comum para acesso aos serviços de infraestrutura. Uma forma de se garantir este acesso é através de _nome DNS_ e nunca por de _endereço IP_. Não se preocupe, estes conceitos ficarão mais claros no decorrer dos capítulos.
+- fss-sp.subnprvapp.vcnprd.oraclevcn.com -> fss.ocibook.local
+- mysql-sp.subnprvdb.vcnprd.oraclevcn.com -> mysql.ocibook.local
+
+Como você verá, a ideia é poder ter um _[Wordpress](https://pt.wikipedia.org/wiki/WordPress)_ distribuído entre as _[regiões](https://docs.oracle.com/pt-br/iaas/Content/General/Concepts/regions.htm#top)_ do _[OCI](https://www.oracle.com/cloud/)_. As instâncias que executam a aplicação, necessitam de um meio único e comum para acesso aos serviços de infraestrutura. Uma forma de se garantir este acesso é através do _nome DNS_ e nunca por _endereço IP_. Não se preocupe, estes conceitos ficarão mais claros no decorrer dos capítulos.
+
+```
+darmbrust@hoodwink:~$ oci dns zone list \
+> --compartment-id "ocid1.compartment.oc1..aaaaaaaauvqvbbx3oridcm5d2ztxkftwr362u2vl5zdsayzbehzwbjs56soq" \
+> --scope "PRIVATE" \
+> --query "data[].{name:name,\"view-id\":\"view-id\"}"
+[
+  {
+    "name": "ocibook.local",
+    "view-id": "ocid1.dnsview.oc1.sa-saopaulo-1.aaaaaaaa4a5vohi67qnx2jkk4bfvgy54agw24w23tdyxfohpowluupxrj4bq"
+  },
+  {
+    "name": "subnpub.vcnprd.oraclevcn.com",
+    "view-id": "ocid1.dnsview.oc1.sa-saopaulo-1.aaaaaaaa4a5vohi67qnx2jkk4bfvgy54agw24w23tdyxfohpowluupxrj4bq"
+  },
+  {
+    "name": "subnprvapp.vcnprd.oraclevcn.com",
+    "view-id": "ocid1.dnsview.oc1.sa-saopaulo-1.aaaaaaaa4a5vohi67qnx2jkk4bfvgy54agw24w23tdyxfohpowluupxrj4bq"
+  },
+  {
+    "name": "subnprvdb.vcnprd.oraclevcn.com",
+    "view-id": "ocid1.dnsview.oc1.sa-saopaulo-1.aaaaaaaa4a5vohi67qnx2jkk4bfvgy54agw24w23tdyxfohpowluupxrj4bq"
+  },
+  {
+    "name": "0.10.in-addr.arpa",
+    "view-id": "ocid1.dnsview.oc1.sa-saopaulo-1.aaaaaaaa4a5vohi67qnx2jkk4bfvgy54agw24w23tdyxfohpowluupxrj4bq"
+  }
+]
+```
+
 
 Por hora, vamos obter o _endereço IP_ do _[File Storage](https://docs.oracle.com/pt-br/iaas/Content/File/Concepts/filestorageoverview.htm)_ que criamos. Para isto, irei consultar as informações do _[Mount Target](https://docs.oracle.com/en-us/iaas/Content/File/Tasks/managingmounttargets.htm)_, pois é ele quem recebeu o _endereço IP_:
 
@@ -309,6 +342,30 @@ darmbrust@hoodwink:~$ oci network private-ip get \
   },
   "etag": "6f7af44f"
 }
+```
+
+Para consultar o endereço IP do Mysql, usamos o comando abaixo:
+
+```
+darmbrust@hoodwink:~$ oci mysql db-system list \
+> --compartment-id "ocid1.compartment.oc1..aaaaaaaa6d2s5sgmxmyxu2vca3pn46y56xisijjyhdjwgqg3f6goh3obj4qq" \
+> --query "data[?\"display-name\"=='mysql-wordpress_subnprv-db_vcn-prd'].endpoints"
+[
+  [
+    {
+      "hostname": "mysql-sp.subnprvdb.vcnprd.oraclevcn.com",
+      "ip-address": "10.0.20.49",
+      "modes": [
+        "READ",
+        "WRITE"
+      ],
+      "port": 3306,
+      "port-x": 33060,
+      "status": "ACTIVE",
+      "status-details": null
+    }
+  ]
+]
 ```
 
 Tendo o _endereço IP_ em mãos, podemos atualizar a _[Zona DNS](https://pt.wikipedia.org/wiki/Zona_DNS)_ criando o _[registro](https://en.wikipedia.org/wiki/List_of_DNS_record_types)_ do tipo _A_, que _"aponta"_ para o _endereço IP_ do _[File Storage](https://docs.oracle.com/pt-br/iaas/Content/File/Concepts/filestorageoverview.htm)_:
