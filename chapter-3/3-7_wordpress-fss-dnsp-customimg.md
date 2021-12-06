@@ -278,3 +278,61 @@ darmbrust@hoodwink:~$ oci fs mount-target list \
   ]
 ]
 ```
+
+Através do _OCID_ retornado, é possível consultar suas propriedades e também o seu _endereço IP_ com o comando abaixo:
+
+```
+darmbrust@hoodwink:~$ oci network private-ip get \
+> --private-ip-id "ocid1.privateip.oc1.sa-saopaulo-1.aaaaaaaahmvcco6gba3ocvwpk3sagbfy6fxuusossgaio4gqfzgrd4awayha"
+{
+  "data": {
+    "availability-domain": null,
+    "compartment-id": "ocid1.compartment.oc1..aaaaaaaauvqvbbx3oridcm5d2ztxkftwr362u2vl5zdsayzbehzwbjs56soq",
+    "defined-tags": {
+      "Oracle-Tags": {
+        "CreatedBy": "fssoc1prod",
+        "CreatedOn": "2021-12-02T12:19:35.158Z"
+      }
+    },
+    "display-name": "privateip20211202121935",
+    "freeform-tags": {},
+    "hostname-label": "fss-wordpress",
+    "id": "ocid1.privateip.oc1.sa-saopaulo-1.aaaaaaaahmvcco6gba3ocvwpk3sagbfy6fxuusossgaio4gqfzgrd4awayha",
+    "ip-address": "10.0.10.186",
+    "is-primary": false,
+    "subnet-id": "ocid1.subnet.oc1.sa-saopaulo-1.aaaaaaaans5d7xtvurugjpyecws4kazd23lfmcdzyoj2jpqg4cyi56sy6nzq",
+    "time-created": "2021-12-02T12:19:35.199000+00:00",
+    "vlan-id": null,
+    "vnic-id": "ocid1.vnic.oc1.sa-saopaulo-1.abtxeljrpe5xl6knebvnpn2x4if5gnihhf7sfcui66b4nfdnjpps2mzmnmqq"
+  },
+  "etag": "14fd38ce"
+}
+```
+
+Tendo o _endereço IP_ em mãos, podemos atualizar a _[Zona DNS](https://pt.wikipedia.org/wiki/Zona_DNS)_ criando o _[registro](https://en.wikipedia.org/wiki/List_of_DNS_record_types)_ do tipo _A_, que _"aponta"_ para o _endereço IP_ do _[File Storage](https://docs.oracle.com/pt-br/iaas/Content/File/Concepts/filestorageoverview.htm)_:
+
+```
+darmbrust@hoodwink:~$ oci dns record domain patch \
+> --zone-name-or-id "ocibook.local" \
+> --domain "fss-sp.ocibook.local" \
+> --view-id "ocid1.dnsview.oc1.sa-saopaulo-1.aaaaaaaa4a5vohi67qnx2jkk4bfvgy54agw24w23tdyxfohpowluupxrj4bq" \
+> --scope "PRIVATE" \
+> --items '[{"domain": "fss-sp.ocibook.local", "rdata": "10.0.10.186", "rtype": "A", "ttl": 300}]'
+{
+  "data": {
+    "items": [
+      {
+        "domain": "fss-sp.ocibook.local",
+        "is-protected": false,
+        "rdata": "10.0.10.186",
+        "record-hash": "12cc74df18f0ae2a8572b90562401104",
+        "rrset-version": "2",
+        "rtype": "A",
+        "ttl": 300
+      }
+    ]
+  },
+  "etag": "\"2ocid1.dns-zone.oc1.sa-saopaulo-1.aaaaaaaaacc2ofxn7xgixci6u666z4nebtduucrf5kph2ipeglkk3nvwnoea52e29219737484138d86060d72390e82#application/json\"",
+  "opc-total-items": "1"
+}
+```
