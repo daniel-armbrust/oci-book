@@ -263,7 +263,7 @@ A figura abaixo destaca os dois _CNAMEs_ que serão criados:
 
 ![alt_text](./images/dns-priv-1.jpg "DNS Privado - Wordpress")
 
-Como você verá, a ideia é poder ter um _[Wordpress](https://pt.wikipedia.org/wiki/WordPress)_ distribuído entre as _[regiões](https://docs.oracle.com/pt-br/iaas/Content/General/Concepts/regions.htm#top)_ do _[OCI](https://www.oracle.com/cloud/)_. As instâncias que executam a aplicação, necessitam de um meio único e comum para acesso aos serviços de infraestrutura. Uma forma de se garantir este acesso é através do _nome DNS_ e nunca por _endereço IP_. Não se preocupe, estes conceitos ficarão mais claros no decorrer dos capítulos.
+Como você verá, futuramente a ideia é poder ter um _[Wordpress](https://pt.wikipedia.org/wiki/WordPress)_ distribuído entre as _[regiões](https://docs.oracle.com/pt-br/iaas/Content/General/Concepts/regions.htm#top)_ do _[OCI](https://www.oracle.com/cloud/)_. As instâncias que executam a aplicação, necessitam de um meio único e comum para acesso aos serviços de infraestrutura. Uma forma de se garantir este acesso é através do _nome DNS_ e nunca por _endereço IP_. Não se preocupe, estes conceitos ficarão mais claros no decorrer dos capítulos.
 
 ```
 darmbrust@hoodwink:~$ oci dns zone list \
