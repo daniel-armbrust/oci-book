@@ -55,11 +55,11 @@ darmbrust@hoodwink:~$ oci iam availability-domain list \
 ]
 ```
 
-Tendo o _[availability domain (AD)](https://docs.oracle.com/pt-br/iaas/Content/General/Concepts/regions.htm#top)_, é possível criar o _[sistema de arquivos](https://pt.wikipedia.org/wiki/Sistema_de_ficheiros)_:
+Tendo a informação do _[availability domain (AD)](https://docs.oracle.com/pt-br/iaas/Content/General/Concepts/regions.htm#top)_, dentro do compartimento _"cmp-app"_, irei criar o _[sistema de arquivos](https://pt.wikipedia.org/wiki/Sistema_de_ficheiros)_ com o comando abaixo:
 
 ```
 darmbrust@hoodwink:~$ oci fs file-system create \
-> --compartment-id "ocid1.compartment.oc1..aaaaaaaauvqvbbx3oridcm5d2ztxkftwr362u2vl5zdsayzbehzwbjs56soq" \
+> --compartment-id "ocid1.compartment.oc1..aaaaaaaamcff6exkhvp4aq3ubxib2wf74v7cx22b3yj56jnfkazoissdzefq" \
 > --region "sa-saopaulo-1" \
 > --availability-domain "ynrK:SA-SAOPAULO-1-AD-1" \
 > --display-name "fss-wordpress_subnprv-app_vcn-prd" \
@@ -68,7 +68,7 @@ Action completed. Waiting until the resource has entered state: ('ACTIVE',)
 {
   "data": {
     "availability-domain": "ynrK:SA-SAOPAULO-1-AD-1",
-    "compartment-id": "ocid1.compartment.oc1..aaaaaaaauvqvbbx3oridcm5d2ztxkftwr362u2vl5zdsayzbehzwbjs56soq",
+    "compartment-id": "ocid1.compartment.oc1..aaaaaaaamcff6exkhvp4aq3ubxib2wf74v7cx22b3yj56jnfkazoissdzefq",
     "defined-tags": {
       "Oracle-Tags": {
         "CreatedBy": "oracleidentitycloudservice/daniel.armbrust@algumdominio.com",
@@ -143,7 +143,7 @@ darmbrust@hoodwink:~$ oci fs export create \
 > --file-system-id "ocid1.filesystem.oc1.sa_saopaulo_1.aaaaaaaaaaac4gcam5zhkllqojxwiottmewxgylpobqxk3dpfuys2ylefuyqaaaa" \
 > --export-set-id "ocid1.exportset.oc1.sa_saopaulo_1.aaaaaa4np2s2ve2lm5zhkllqojxwiottmewxgylpobqxk3dpfuys2ylefuyqaaaa" \
 > --path "/wordpress-uploads" \
-> --export-options '[{"source": "10.0.10.0/24", "require-privileged-source-port": "true", "access": "READ_WRITE", "identitysquash": "ROOT", "anonymousuid": "65534","anonymousgid": "65534"}]' \
+> --export-options ''[{"source": "10.0.10.0/24", "access": "READ_WRITE", "identity-squash": "NONE", "anonymous-uid": "65534", "anonymous-gid": "65534"}]' \
 > --wait-for-state "ACTIVE"
 Action completed. Waiting until the resource has entered state: ('ACTIVE',)
 {
@@ -153,7 +153,7 @@ Action completed. Waiting until the resource has entered state: ('ACTIVE',)
         "access": "READ_WRITE",
         "anonymous-gid": 65534,
         "anonymous-uid": 65534,
-        "identity-squash": "ROOT",
+        "identity-squash": "NONE",
         "require-privileged-source-port": true,
         "source": "10.0.10.0/24"
       }
@@ -402,10 +402,27 @@ Agora, basta criar o arquivo _"var-www-html-wp\\\x2dcontent-uploads.mount"_ no d
 > EOF'
 ```
 
-Podemos ver que o arquivo foi criado conforme o comando abaixo:
+Podemos confirmar que o arquivo foi criado conforme o comando abaixo:
 
 ```
 [opc@wordpress ~]$ ls -ld /etc/systemd/system/var-www-html-wp\\x2dcontent-uploads.mount
 -rw-r--r--. 1 root root 219 Dec  7 09:56 /etc/systemd/system/var-www-html-wp\x2dcontent-uploads.mount
 ```
 
+A sequência dos comandos abaixo, habilitam pelo _[systemd](https://pt.wikipedia.org/wiki/Systemd)_ a _"montagem"_ automática e persistente entre reboots da instância:
+
+```
+[opc@wordpress ~]$ sudo systemctl daemon-reload
+[opc@wordpress ~]$ sudo systemctl start var-www-html-wp\\x2dcontent-uploads.mount
+[opc@wordpress ~]$ sudo systemctl enable var-www-html-wp\\x2dcontent-uploads.mount
+Created symlink from /etc/systemd/system/multi-user.target.wants/var-www-html-wp\x2dcontent-uploads.mount to /etc/systemd/system/var-www-html-wp\x2dcontent-uploads.mount.
+[opc@wordpress ~]$ sudo chown apache: /var/www/html/wp-content/uploads
+```
+
+É possível confirmar pelo comando abaixo, que agora o diretório _/var/www/html/wp-content/uploads_, está _"montado"_ pelo _[File Storage](https://docs.oracle.com/pt-br/iaas/Content/File/Concepts/filestorageoverview.htm)_ através do nome _fss.ocibook.local_:
+
+```
+[opc@wordpress ~]$ df -h /var/www/html/wp-content/uploads
+Filesystem                            Size  Used Avail Use% Mounted on
+fss.ocibook.local:/wordpress-uploads  8.0E     0  8.0E   0% /var/www/html/wp-content/uploads
+```
