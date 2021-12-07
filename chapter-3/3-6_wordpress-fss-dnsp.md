@@ -381,5 +381,5 @@ Sabemos que o diretório _"/var/www/html/wp-content/uploads"_ é onde será salv
 var-www-html-wp\x2dcontent-uploads.mount
 ```
 
-Por conta de haver um hífem, que foi traduzido para o código _[Unicode](https://pt.wikipedia.org/wiki/Unicode)_ _\x2d_, devemos também _"escapar"_ esta barra, tendo como resultado final a string: _var-www-html-wp\\\x2dcontent-uploads.mount_
+Por conta de haver um hífen, que foi traduzido para o código _[Unicode](https://pt.wikipedia.org/wiki/Unicode)_ _\x2d_, devemos também _"escapar"_ esta barra, tendo como resultado final a string: _var-www-html-wp\\\x2dcontent-uploads.mount_
 
