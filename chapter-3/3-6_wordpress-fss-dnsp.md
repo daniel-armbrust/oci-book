@@ -374,7 +374,7 @@ Dentro da instância, através do comando abaixo, irei instalar o pacote de util
 [opc@wordpress ~]$ yum search nfs-utils
 ```
 
-Sabemos que o diretório _"/var/www/html/wp-content/uploads"_ é onde será salvo as imagens. Usarei o comando _[systemd-escape](https://www.freedesktop.org/software/systemd/man/systemd-escape.html)_ necessário para _"escapar"_ as string que formam o nome do arquivo de unidade do _[systemd](https://pt.wikipedia.org/wiki/Systemd)_:
+Sabemos que o diretório _"/var/www/html/wp-content/uploads"_ é onde será salvo as imagens. Usarei o comando _[systemd-escape](https://www.freedesktop.org/software/systemd/man/systemd-escape.html)_, necessário para _"escapar"_ as string que formam o nome do arquivo de unidade do _[systemd](https://pt.wikipedia.org/wiki/Systemd)_:
 
 ```
 [opc@wordpress ~]$ systemd-escape -p --suffix=mount /var/www/html/wp-content/uploads
