@@ -401,3 +401,10 @@ Agora, basta criar o arquivo _"var-www-html-wp\\\x2dcontent-uploads.mount"_ no d
 > WantedBy=multi-user.target
 > EOF'
 ```
+
+Arquivo criado conforme a confirmação abaixo:
+
+```
+[opc@wordpress ~]$ ls -ld /etc/systemd/system/var-www-html-wp\\x2dcontent-uploads.mount
+-rw-r--r--. 1 root root 219 Dec  7 09:56 /etc/systemd/system/var-www-html-wp\x2dcontent-uploads.mount
+```
