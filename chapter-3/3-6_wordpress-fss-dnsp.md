@@ -413,7 +413,9 @@ A sequência dos comandos abaixo, habilitam pelo _[systemd](https://pt.wikipedia
 
 ```
 [opc@wordpress ~]$ sudo systemctl daemon-reload
+
 [opc@wordpress ~]$ sudo systemctl start var-www-html-wp\\x2dcontent-uploads.mount
+
 [opc@wordpress ~]$ sudo systemctl enable var-www-html-wp\\x2dcontent-uploads.mount
 Created symlink from /etc/systemd/system/multi-user.target.wants/var-www-html-wp\x2dcontent-uploads.mount to /etc/systemd/system/var-www-html-wp\x2dcontent-uploads.mount.
 
