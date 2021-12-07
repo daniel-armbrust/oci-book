@@ -358,4 +358,28 @@ darmbrust@hoodwink:~$ oci dns record domain patch \
 
 Com isto, concluímos infraestrutura de _[DNS](https://pt.wikipedia.org/wiki/Sistema_de_Nomes_de_Dom%C3%ADnio)_ básica para atender a aplicação _[Wordpress](https://pt.wikipedia.org/wiki/WordPress)_.
 
-### __Custom Image__
+### __Acessando o File Storage a partir do Wordpress__
+
+Já temos o _[File Storage](https://docs.oracle.com/pt-br/iaas/Content/File/Concepts/filestorageoverview.htm)_ provisionado e o _[DNS](https://pt.wikipedia.org/wiki/Sistema_de_Nomes_de_Dom%C3%ADnio)_ devidamente configurado. Agora, a ideia é tornar a _"montagem"_ do _[File Storage](https://docs.oracle.com/pt-br/iaas/Content/File/Concepts/filestorageoverview.htm)_ de forma automática pela instância do _[Wordpress](https://pt.wikipedia.org/wiki/WordPress)_.
+
+Esta _"montagem automática"_ será feita pelo _[systemd](https://pt.wikipedia.org/wiki/Systemd)_. O _[systemd](https://pt.wikipedia.org/wiki/Systemd)_, software presente na maioria das distribuições _[Linux](https://www.oracle.com/linux/)_, é usado principalmente para gerenciar serviços ou processos do sistema após a inicialização (boot).
+
+Não há como entrarmos nos detalhes do _[systemd](https://pt.wikipedia.org/wiki/Systemd)_ aqui. Há diversas documentações disponíveis na internet e também da própria _[Oracle](https://docs.oracle.com/en/learn/use_systemd/index.html)_ que falam sobre o tema. Para os não familiarizados, vou deixar este _[link aqui](https://docs.oracle.com/en/learn/use_systemd/index.html)_, que é um tutorial básico sobre o _[systemd](https://pt.wikipedia.org/wiki/Systemd)_.
+
+Irei criar uma nova sessão através do serviço _[Bastion](https://docs.oracle.com/pt-br/iaas/Content/Bastion/Concepts/bastionoverview.htm)_ e me conectar a instância do _[Wordpress](https://pt.wikipedia.org/wiki/WordPress)_. 
+
+Dentro da instância, através do comando abaixo, irei instalar o pacote de utilitários _[NFS](https://pt.wikipedia.org/wiki/Network_File_System)_ no qual irá permitir _"montagem"_ do _[File Storage](https://docs.oracle.com/pt-br/iaas/Content/File/Concepts/filestorageoverview.htm)_:
+
+```
+[opc@wordpress ~]$ yum search nfs-utils
+```
+
+Sabemos que o diretório _"/var/www/html/wp-content/uploads"_ é onde será salvo as imagens. Usarei o comando _[systemd-escape](https://www.freedesktop.org/software/systemd/man/systemd-escape.html)_ necessário para _"escapar"_ as string que formam o nome do arquivo de unidade do _[systemd](https://pt.wikipedia.org/wiki/Systemd)_:
+
+```
+[opc@wordpress ~]$ systemd-escape -p --suffix=mount /var/www/html/wp-content/uploads
+var-www-html-wp\x2dcontent-uploads.mount
+```
+
+Por conta de haver um hífem, que foi traduzido para o código _[Unicode](https://pt.wikipedia.org/wiki/Unicode)_ _\x2d_, devemos também _"escapar"_ esta barra, tendo como resultado final a string: var-www-html-wp\\x2dcontent-uploads.mount
+
