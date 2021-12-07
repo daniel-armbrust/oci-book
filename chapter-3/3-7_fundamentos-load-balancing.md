@@ -1,6 +1,6 @@
 # Capítulo 3: Primeira aplicação no OCI
 
-## 3.5 - Fundamentos do Serviço de Load Balancing
+## 3.7 - Fundamentos do Serviço de Load Balancing
 
 ### __Visão Geral__
 

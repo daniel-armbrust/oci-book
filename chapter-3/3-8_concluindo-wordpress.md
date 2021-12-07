@@ -1,6 +1,6 @@
 # Capítulo 3: Primeira aplicação no OCI
 
-## 3.7 - Concluindo a instalação do Wordpress
+## 3.8 - Concluindo a instalação do Wordpress
 
 ### __Visão Geral__
 

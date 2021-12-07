@@ -1,6 +1,6 @@
 # Capítulo 3: Primeira aplicação no OCI
 
-## 3.7 - File Storage, DNS Privado e Custom Image
+## 3.6 - File Storage e DNS Privado
 
 ### __Visão Geral__
 
