@@ -383,3 +383,21 @@ var-www-html-wp\x2dcontent-uploads.mount
 
 Por conta de haver um hífen, que foi traduzido para o código _[Unicode](https://pt.wikipedia.org/wiki/Unicode)_ _\x2d_, devemos também _"escapar"_ esta barra, tendo como resultado final a string: _var-www-html-wp\\\x2dcontent-uploads.mount_
 
+Agora, basta criar o arquivo _"var-www-html-wp\\\x2dcontent-uploads.mount"_ no diretório _"/etc/systemd/system"_, que contém as instruções de _"montagem"_ via _[systemd](https://pt.wikipedia.org/wiki/Systemd)_:
+
+```
+[opc@wordpress ~]$ sudo bash -c 'cat <<EOF >/etc/systemd/system/var-www-html-wp\\x2dcontent-uploads.mount
+> [Unit]
+> Description=FSS Wordpress Upload
+> After=network.target
+> 
+> [Mount]
+> What=fss.ocibook.local:/wordpress-uploads
+> Where=/var/www/html/wp-content/uploads
+> Type=nfs
+> Options=_netdev,auto
+> 
+> [Install]
+> WantedBy=multi-user.target
+> EOF'
+```
