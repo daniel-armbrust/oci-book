@@ -422,7 +422,7 @@ Created symlink from /etc/systemd/system/multi-user.target.wants/var-www-html-wp
 [opc@wordpress ~]$ sudo chown apache: /var/www/html/wp-content/uploads
 ```
 
-É possível confirmar pelo comando abaixo, que agora o diretório _/var/www/html/wp-content/uploads_, está _"montado"_ pelo _[File Storage](https://docs.oracle.com/pt-br/iaas/Content/File/Concepts/filestorageoverview.htm)_ através do nome _fss.ocibook.local_:
+É possível confirmar pelo comando abaixo, que agora o diretório _/var/www/html/wp-content/uploads_, está _"montado"_ ao _[File Storage](https://docs.oracle.com/pt-br/iaas/Content/File/Concepts/filestorageoverview.htm)_ através do nome _fss.ocibook.local_:
 
 ```
 [opc@wordpress ~]$ df -h /var/www/html/wp-content/uploads
