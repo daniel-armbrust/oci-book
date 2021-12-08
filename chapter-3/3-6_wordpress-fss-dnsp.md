@@ -434,4 +434,4 @@ fss.ocibook.local:/wordpress-uploads  8.0E     0  8.0E   0% /var/www/html/wp-con
 
 Aqui concluímos algumas configurações importantes para criarmos uma imagem do _[Wordpress](https://pt.wikipedia.org/wiki/WordPress)_ que seja reutilizável.
 
-Além disto, os serviços de _[File Storage](https://docs.oracle.com/pt-br/iaas/Content/File/Concepts/filestorageoverview.htm)_ e _[DNS](https://docs.oracle.com/pt-br/iaas/Content/DNS/Tasks/privatedns.htm)_, são serviços fundamentais que ajudam a eliminar algumas _"dependências"_. A instância da aplicação passou _"enxergar"_ os serviços através de nomes únicos, e a gravar seus uploads de maneira centralizada. 
+Além disto, os serviços de _[File Storage](https://docs.oracle.com/pt-br/iaas/Content/File/Concepts/filestorageoverview.htm)_ e _[DNS](https://docs.oracle.com/pt-br/iaas/Content/DNS/Tasks/privatedns.htm)_, são serviços fundamentais que ajudam a eliminar algumas _"dependências"_. A instância da aplicação agora _"enxerga"_ os serviços através de nomes únicos, e grava seus _[uploads](https://en.wikipedia.org/wiki/Upload)_ de maneira centralizada. 
