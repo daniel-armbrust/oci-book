@@ -6,7 +6,7 @@
 
 _Load Balancer_, _Balanceador de Carga_ ou _LBaaS_ são alguns nomes que identificam o serviço para _balanceamento de carga_ disponível no _[OCI](https://www.oracle.com/cloud/)_.
 
-Sua principal função é realizar a distribuição do tráfego de um ponto de entrada para vários servidores existentes em sua _[VCN](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingVCNs_topic-Overview_of_VCNs_and_Subnets.htm)_. Além de distribuir a _"carga de trabalho"_ entre duas ou mais intâncias de computação, há uma melhor utilização dos seus recursos, possibilidade de escalonamento e através da utilização de múltiplas instâncias da sua aplicação, você promove a _["alta disponibilidade"](https://en.wikipedia.org/wiki/High_availability)_.
+Sua principal função é realizar a distribuição do tráfego de um ponto de entrada para vários servidores existentes em sua _[VCN](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingVCNs_topic-Overview_of_VCNs_and_Subnets.htm)_. Além de distribuir a _"carga de trabalho"_ entre duas ou mais intâncias de computação, há uma melhor utilização dos seus recursos, possibilidade de escalonamento e através da utilização de múltiplas instâncias da sua aplicação, você promove a _["alta disponibilidade"](https://en.wikipedia.org/wiki/High_availability)_ e evita o _"[ponto único de falha](https://pt.wikipedia.org/wiki/Ponto_%C3%BAnico_de_falha)"_.
 
 Existem dois tipos de balanceadores disponíveis no _[OCI](https://www.oracle.com/cloud/)_. São eles:
 
