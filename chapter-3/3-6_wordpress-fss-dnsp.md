@@ -371,7 +371,7 @@ Irei criar uma nova sessão através do serviço _[Bastion](https://docs.oracle.
 Dentro da instância, através do comando abaixo, irei instalar o pacote de utilitários _[NFS](https://pt.wikipedia.org/wiki/Network_File_System)_ no qual irá permitir _"montagem"_ do _[File Storage](https://docs.oracle.com/pt-br/iaas/Content/File/Concepts/filestorageoverview.htm)_:
 
 ```
-[opc@wordpress ~]$ yum search nfs-utils
+[opc@wordpress ~]$ yum install -y nfs-utils
 ```
 
 Sabemos que o diretório _"/var/www/html/wp-content/uploads"_ é onde será salvo as imagens. Usarei o comando _[systemd-escape](https://www.freedesktop.org/software/systemd/man/systemd-escape.html)_, necessário para _"escapar"_ as string que formam o nome do arquivo de unidade do _[systemd](https://pt.wikipedia.org/wiki/Systemd)_:
