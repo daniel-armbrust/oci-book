@@ -449,10 +449,49 @@ Falando especificamente de _[Wordpress](https://pt.wikipedia.org/wiki/WordPress)
 
 >_**__NOTA:__** Para maiores detalhes sobre o utilitário [WP-CLI](https://wp-cli.org/), consulte sua documentação oficial neste [link aqui](https://wp-cli.org/#using)._
 
-Para concluírmos esta instalação, temporáriamente será preciso instalar o pacote no qual contém o cliente para acesso ao Banco de Dados _[MySQL](https://docs.oracle.com/pt-br/iaas/mysql-database/index.html)_: 
+Este utilitário, depende do cliente de acesso ao Banco de Dados _[MySQL](https://docs.oracle.com/pt-br/iaas/mysql-database/index.html)_ instalado:
 
 ```
 [opc@wordpress ~]$ sudo yum install -y mysql-community-client
+```
+
+Dependência satisfeita, podemos seguir com a instalação do _[Wordpress](https://pt.wikipedia.org/wiki/WordPress)_ através do _[WP-CLI](https://wp-cli.org/)_. O primeiro comando irá criar o arquivo _"wp-config.php"_ com alguns valores referente ao _[MySQL](https://docs.oracle.com/pt-br/iaas/mysql-database/index.html)_ que provisionamos:
+
+```
+[opc@wordpress ~]$ sudo /usr/local/bin/wp config create \
+> --path=/var/www/html \
+> --dbname=wordpress \
+> --dbuser=wordpress \
+> --dbpass=ComplexPass0rd! \
+> --dbhost=mysql.ocibook.local \
+> --user=admin 
+Success: Generated 'wp-config.php' file.
+```
+
+O próximo comando irá parametrizar o nosso site de exemplo _"OCIBook Wordpress"_ que será disponibilizado pelo _[Wordpress](https://pt.wikipedia.org/wiki/WordPress)_:
+
+```
+[opc@wordpress ~]$ sudo /usr/local/bin/wp core install \
+> --path=/var/www/html \
+> --url=wordpress.ocibook.com.br \
+> --title="OCIBook Wordpress" \
+> --admin_user=admin \
+> --admin_password=Ad1mS1t3#S3cr3t0 \
+> --admin_email=daniel.armbrust@algumdominio.com 
+Success: WordPress installed successfully.
+```
+
+>_**__NOTA:__** Informar qualquer senha no [shell](https://pt.wikipedia.org/wiki/Shell_do_Unix) não é legal! É possível utilizar por exemplo, o comando "set +o history" antes de qualquer comando sensível para impedir o [shell](https://pt.wikipedia.org/wiki/Shell_do_Unix) de gravar histórico dos seus comandos. Recomendo que use esta prática._
+
+Perceba que já definimos sua URL _"wordpress.ocibook.com.br"_ através do parâmetro _"--url"_. Isto para que futuramente, através do _[serviço DNS](https://docs.oracle.com/pt-br/iaas/Content/DNS/Concepts/dnszonemanagement.htm)_ público, seja possível disponibilizar a aplicação da forma correta.
+
+
+```
+[opc@wordpress ~]$ sudo chgrp apache /var/www/html/wp-config.php
+[opc@wordpress ~]$ sudo chmod 0440 /var/www/html/wp-config.php
+
+[opc@wordpress ~]$ ls -ld /var/www/html/wp-config.php
+-r--r-----. 1 root apache 2776 Dec  9 16:19 /var/www/html/wp-config.php
 ```
 
 
