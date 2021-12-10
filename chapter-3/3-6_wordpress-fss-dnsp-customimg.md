@@ -436,7 +436,7 @@ fss.ocibook.local:/wordpress-uploads  8.0E     0  8.0E   0% /var/www/html/wp-con
 
 Agora que o _[File Storage](https://docs.oracle.com/pt-br/iaas/Content/File/Concepts/filestorageoverview.htm)_ já encontra-se acessível pela instância, podemos finalizar a instalação do _[Wordpress](https://pt.wikipedia.org/wiki/WordPress)_. 
 
-Falando especificamente de _[Wordpress](https://pt.wikipedia.org/wiki/WordPress)_, há um utilitário de linha de comando chamado _[WP-CLI](https://wp-cli.org/)_ no qual irei utilizar para finalizar a instalação. Os comandos abaixo, são para a instalação deste utilitário na instância:
+Falando especificamente de _[Wordpress](https://pt.wikipedia.org/wiki/WordPress)_, há um utilitário de linha de comando chamado _[WP-CLI](https://wp-cli.org/)_ no qual irei utilizar para finalizar a instalação. Os comandos abaixo, são para download e instalação deste utilitário na instância:
 
 ```
 [opc@wordpress ~]$ curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
