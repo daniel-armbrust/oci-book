@@ -455,7 +455,15 @@ Este utilitário, depende do cliente de acesso ao Banco de Dados _[MySQL](https:
 [opc@wordpress ~]$ sudo yum install -y mysql-community-client
 ```
 
-Dependência satisfeita, podemos seguir com a instalação do _[Wordpress](https://pt.wikipedia.org/wiki/WordPress)_ através do _[WP-CLI](https://wp-cli.org/)_. O primeiro comando irá criar o arquivo _"wp-config.php"_ com alguns valores referente ao _[MySQL](https://docs.oracle.com/pt-br/iaas/mysql-database/index.html)_ que provisionamos:
+Dependência satisfeita, podemos seguir com a instalação do _[Wordpress](https://pt.wikipedia.org/wiki/WordPress)_ através do _[WP-CLI](https://wp-cli.org/)_. 
+
+Como iremos informar algumas senhas na linha de comando, como boa prática de segurança, irei desabilitar a gravação de histórico pelo _[shell](https://pt.wikipedia.org/wiki/Shell_do_Unix)_:
+
+```
+[opc@wordpress ~]$ set +o history
+```
+
+O primeiro comando irá criar o arquivo _"wp-config.php"_ com alguns valores referente ao _[MySQL](https://docs.oracle.com/pt-br/iaas/mysql-database/index.html)_ que provisionamos:
 
 ```
 [opc@wordpress ~]$ sudo /usr/local/bin/wp config create \
@@ -468,7 +476,7 @@ Dependência satisfeita, podemos seguir com a instalação do _[Wordpress](https
 Success: Generated 'wp-config.php' file.
 ```
 
-O próximo comando irá parametrizar o nosso site de exemplo _"OCIBook Wordpress"_ que será disponibilizado pelo _[Wordpress](https://pt.wikipedia.org/wiki/WordPress)_:
+Já o próximo, irá parametrizar o nosso site de exemplo _"OCIBook Wordpress"_ que será disponibilizado pelo _[Wordpress](https://pt.wikipedia.org/wiki/WordPress)_:
 
 ```
 [opc@wordpress ~]$ sudo /usr/local/bin/wp core install \
@@ -481,10 +489,9 @@ O próximo comando irá parametrizar o nosso site de exemplo _"OCIBook Wordpress
 Success: WordPress installed successfully.
 ```
 
->_**__NOTA:__** Informar qualquer senha no [shell](https://pt.wikipedia.org/wiki/Shell_do_Unix) não é legal! É possível utilizar por exemplo, o comando "set +o history" antes de qualquer outro comando sensível para impedir o [shell](https://pt.wikipedia.org/wiki/Shell_do_Unix) de gravar histórico dos seus comandos. Recomendo que use esta prática._
-
 Perceba que já definimos sua URL _"wordpress.ocibook.com.br"_ através do parâmetro _"--url"_. Isto para que futuramente, através do _[serviço DNS](https://docs.oracle.com/pt-br/iaas/Content/DNS/Concepts/dnszonemanagement.htm)_ público, seja possível disponibilizar a aplicação da forma correta.
 
+Como último detalhe da instalação, irei restringir as permissões do arquivo _"wp-config.php"_ pois há senhas nele:
 
 ```
 [opc@wordpress ~]$ sudo chgrp apache /var/www/html/wp-config.php
