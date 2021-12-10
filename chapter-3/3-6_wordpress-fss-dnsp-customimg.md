@@ -360,6 +360,8 @@ Com isto, concluímos infraestrutura de _[DNS](https://pt.wikipedia.org/wiki/Sis
 
 ### __Custom Image__
 
+#### __Finalizando a instalação do Wordpress__
+
 Antes de seguirmos para os detalhes de construção da _[Custom Image](https://docs.oracle.com/pt-br/iaas/Content/Compute/Tasks/managingcustomimages.htm)_, iremos finalizar a instalação da aplicação _[Wordpress](https://pt.wikipedia.org/wiki/WordPress)_.
 
 Já temos o _[File Storage](https://docs.oracle.com/pt-br/iaas/Content/File/Concepts/filestorageoverview.htm)_ provisionado e o _[DNS](https://pt.wikipedia.org/wiki/Sistema_de_Nomes_de_Dom%C3%ADnio)_ devidamente configurado. Agora, a ideia é tornar a _"montagem"_ do _[File Storage](https://docs.oracle.com/pt-br/iaas/Content/File/Concepts/filestorageoverview.htm)_ de forma automática pela instância do _[Wordpress](https://pt.wikipedia.org/wiki/WordPress)_.
@@ -500,6 +502,62 @@ Como último detalhe da instalação, irei restringir as permissões do arquivo 
 [opc@wordpress ~]$ ls -ld /var/www/html/wp-config.php
 -r--r-----. 1 root apache 2776 Dec  9 16:19 /var/www/html/wp-config.php
 ```
+
+#### __Gerando a Custom Image__
+
+Todos as atividades que envolveram a instalação e configuração do _[Wordpress](https://pt.wikipedia.org/wiki/WordPress)_ foram salvas diretamente no _[boot volume](https://docs.oracle.com/pt-br/iaas/Content/Block/Concepts/bootvolumes.htm)_ da instância. A partir dessas customizações, podemos _"congelar"_ este _"estado atual"_ e gerar uma imagem própria, para que posteriormente seja possível criar cópias deste _[Wordpress](https://pt.wikipedia.org/wiki/WordPress)_. 
+
+Em certas literaturas, essa imagem que foi salva e pode ser reutilizada, recebe o nome de **Golden ou Gold Image**. Aqui no _[OCI](https://www.oracle.com/cloud/)_ ela recebe o nome de _[Custom Image](https://docs.oracle.com/pt-br/iaas/Content/Compute/Tasks/managingcustomimages.htm)_.
+
+Esta é mais uma prática que iremos usar quando pensamos em _["alta disponibilidade"](https://en.wikipedia.org/wiki/High_availability)_. Se eu tenho o _"estado atual"_ do _[Wordpress](https://pt.wikipedia.org/wiki/WordPress)_ salvo, criar novas instâncias a partir desta imagem, em caso de problemas, é rápido e fácil.
+
+Para gerar uma _[custom image](https://docs.oracle.com/pt-br/iaas/Content/Compute/Tasks/managingcustomimages.htm)_ da instância do _[Wordpress](https://pt.wikipedia.org/wiki/WordPress)_, usamos o comando abaixo:
+
+```
+darmbrust@hoodwink:~$ oci compute image create \
+> --compartment-id "ocid1.compartment.oc1..aaaaaaaamcff6exkhvp4aq3ubxib2wf74v7cx22b3yj56jnfkazoissdzefq" \
+> --instance-id "ocid1.instance.oc1.sa-saopaulo-1.antxeljr6noke4qcric5qfuocpbpeuuydcbqdquokl6erikoxitmzsckmnra" \
+> --display-name "ol7-wordpress_img" \
+> --wait-for-state "AVAILABLE"
+Action completed. Waiting until the resource has entered state: ('AVAILABLE',)
+{
+  "data": {
+    "agent-features": null,
+    "base-image-id": "ocid1.image.oc1.sa-saopaulo-1.aaaaaaaasahnls6nmev22raz7ecw6i64d65fu27pmqjn4pgz7zue56ojj7qq",
+    "billable-size-in-gbs": 6,
+    "compartment-id": "ocid1.compartment.oc1..aaaaaaaamcff6exkhvp4aq3ubxib2wf74v7cx22b3yj56jnfkazoissdzefq",
+    "create-image-allowed": true,
+    "defined-tags": {
+      "Oracle-Tags": {
+        "CreatedBy": "oracleidentitycloudservice/daniel.armbrust@oracle.com",
+        "CreatedOn": "2021-12-10T20:11:17.404Z"
+      }
+    },
+    "display-name": "ol7-wordpress_img",
+    "freeform-tags": {},
+    "id": "ocid1.image.oc1.sa-saopaulo-1.aaaaaaaacdmbrlmzub7p7rwddzfupslb7lx7dvh4insdcz4sw6bxre6ccgkq",
+    "launch-mode": "PARAVIRTUALIZED",
+    "launch-options": {
+      "boot-volume-type": "PARAVIRTUALIZED",
+      "firmware": "UEFI_64",
+      "is-consistent-volume-naming-enabled": true,
+      "is-pv-encryption-in-transit-enabled": false,
+      "network-type": "PARAVIRTUALIZED",
+      "remote-data-volume-type": "PARAVIRTUALIZED"
+    },
+    "lifecycle-state": "AVAILABLE",
+    "listing-type": null,
+    "operating-system": "Oracle Linux",
+    "operating-system-version": "7.9",
+    "size-in-mbs": 102400,
+    "time-created": "2021-12-10T20:11:17.756000+00:00"
+  },
+  "etag": "4dea0cbcc596507cd4ebd3f8210ea27c8d94b3cad8533552553153ac57a9fc1e"
+}
+```
+
+>_**__NOTA:__** Gerar uma imagem, gera uma cópia do estado atual da instância. Se você alterar o [boot volume](https://docs.oracle.com/pt-br/iaas/Content/Block/Concepts/bootvolumes.htm), você deve gerar uma nova [custom image](https://docs.oracle.com/pt-br/iaas/Content/Compute/Tasks/managingcustomimages.htm) que contenha tais alterações._
+
 
 
 ### __Conclusão__

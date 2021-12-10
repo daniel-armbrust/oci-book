@@ -210,7 +210,7 @@ Veja abaixo a consulta dos metadados da instância:
 }
 ```
 
-### __Instalação do Wordpress__
+### __Iniciando o processo de instalação do Wordpress__
 
  _[Wordpress](https://pt.wikipedia.org/wiki/WordPress)_ é um dos sistemas de _[gerenciamento de conteúdo (CMS)](https://pt.wikipedia.org/wiki/Sistema_de_gerenciamento_de_conte%C3%BAdo)_ mais populares. Este _[CMS](https://pt.wikipedia.org/wiki/Sistema_de_gerenciamento_de_conte%C3%BAdo)_ é comumente usado no gerenciamento de blogs, mas há muitos complementos e módulos para expandir seus recursos. 
 
@@ -309,7 +309,7 @@ success
 [opc@wordpress ~]$ sudo chown apache:apache /var/www/html/wp-content/uploads
 ```
 
-9. Pronto! _[Wordpress](https://pt.wikipedia.org/wiki/WordPress)_ instalado.
+9. Pronto! _[Wordpress](https://pt.wikipedia.org/wiki/WordPress)_ parcialmente instalado.
 
 ### __Conclusão__
 
