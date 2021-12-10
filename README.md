@@ -35,7 +35,7 @@ Esse livro apresenta o **OCI (Oracle Cloud Infraestructure)** e por quê você d
     [3.3 - Apresentando o Serviço Bastion](https://github.com/daniel-armbrust/oci-book/blob/main/chapter-3/3-3_servico-bastion.md) <br>
     [3.4 - Oracle Linux com WordPress na nuvem](https://github.com/daniel-armbrust/oci-book/blob/main/chapter-3/3-4_oracle-linux-wordpress.md) <br>
     [3.5 - MySQL: Banco de Dados do Wordpress](https://github.com/daniel-armbrust/oci-book/blob/main/chapter-3/3-5_wordpress-mysql-database.md) <br>
-    [3.6 - File Storage e DNS privado](https://github.com/daniel-armbrust/oci-book/blob/main/chapter-3/3-6_wordpress-fss-dnsp.md) <br>
+    [3.6 - File Storage, DNS privado e Custom Image](https://github.com/daniel-armbrust/oci-book/blob/main/chapter-3/3-6_wordpress-fss-dnsp-customimg.md) <br>
     [3.7 - Fundamentos do Serviço de Load Balancing](https://github.com/daniel-armbrust/oci-book/blob/main/chapter-3/3-7_fundamentos-load-balancing.md) <br>
     [3.8 - Concluindo a instalação do Wordpress](https://github.com/daniel-armbrust/oci-book/blob/main/chapter-3/3-8_concluindo-wordpress.md) <br>
     [3.9 - Quanto custa tudo isto?](https://github.com/daniel-armbrust/oci-book/blob/main/chapter-3/3-9_quanto-custa-wordpress.md) <br>

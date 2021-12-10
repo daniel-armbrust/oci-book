@@ -1,6 +1,6 @@
 # Capítulo 3: Primeira aplicação no OCI
 
-## 3.6 - File Storage e DNS Privado
+## 3.6 - File Storage, DNS Privado e Custom Image
 
 ### __Visão Geral__
 
@@ -358,23 +358,25 @@ darmbrust@hoodwink:~$ oci dns record domain patch \
 
 Com isto, concluímos infraestrutura de _[DNS](https://pt.wikipedia.org/wiki/Sistema_de_Nomes_de_Dom%C3%ADnio)_ básica para atender a aplicação _[Wordpress](https://pt.wikipedia.org/wiki/WordPress)_.
 
-### __Acessando o File Storage a partir do Wordpress__
+### __Custom Image__
+
+Antes de seguirmos para os detalhes de construção da _[Custom Image](https://docs.oracle.com/pt-br/iaas/Content/Compute/Tasks/managingcustomimages.htm)_, iremos finalizar a instalação da aplicação _[Wordpress](https://pt.wikipedia.org/wiki/WordPress)_.
 
 Já temos o _[File Storage](https://docs.oracle.com/pt-br/iaas/Content/File/Concepts/filestorageoverview.htm)_ provisionado e o _[DNS](https://pt.wikipedia.org/wiki/Sistema_de_Nomes_de_Dom%C3%ADnio)_ devidamente configurado. Agora, a ideia é tornar a _"montagem"_ do _[File Storage](https://docs.oracle.com/pt-br/iaas/Content/File/Concepts/filestorageoverview.htm)_ de forma automática pela instância do _[Wordpress](https://pt.wikipedia.org/wiki/WordPress)_.
 
 Esta _"montagem automática"_ será feita pelo _[systemd](https://pt.wikipedia.org/wiki/Systemd)_. O _[systemd](https://pt.wikipedia.org/wiki/Systemd)_, software presente na maioria das distribuições _[Linux](https://www.oracle.com/linux/)_, é usado principalmente para gerenciar serviços ou processos do sistema após a inicialização (boot).
 
-Não há como entrarmos nos detalhes do _[systemd](https://pt.wikipedia.org/wiki/Systemd)_ aqui. Há diversas documentações disponíveis na internet e também da própria _[Oracle](https://docs.oracle.com/en/learn/use_systemd/index.html)_ que falam sobre o tema. Para os não familiarizados, vou deixar este _[link aqui](https://docs.oracle.com/en/learn/use_systemd/index.html)_, que é um tutorial básico sobre o _[systemd](https://pt.wikipedia.org/wiki/Systemd)_.
+Não há como entrarmos nos detalhes do _[systemd](https://pt.wikipedia.org/wiki/Systemd)_ aqui. Há diversas documentações disponíveis na internet e também da própria _[Oracle](https://docs.oracle.com/en/learn/use_systemd/index.html)_ que falam sobre o tema. Para os não familiarizados, vou deixar este _[link aqui](https://docs.oracle.com/en/learn/use_systemd/index.html)_ que é um tutorial básico sobre o _[systemd](https://pt.wikipedia.org/wiki/Systemd)_.
 
-Irei criar uma nova sessão através do serviço _[Bastion](https://docs.oracle.com/pt-br/iaas/Content/Bastion/Concepts/bastionoverview.htm)_ e me conectar a instância do _[Wordpress](https://pt.wikipedia.org/wiki/WordPress)_. 
+A partir de uma nova sessão criada pelo serviço _[Bastion](https://docs.oracle.com/pt-br/iaas/Content/Bastion/Concepts/bastionoverview.htm)_, irei me conectar na instância do _[Wordpress](https://pt.wikipedia.org/wiki/WordPress)_. 
 
-Dentro da instância, através do comando abaixo, irei instalar o pacote de utilitários _[NFS](https://pt.wikipedia.org/wiki/Network_File_System)_ no qual irá permitir _"montagem"_ do _[File Storage](https://docs.oracle.com/pt-br/iaas/Content/File/Concepts/filestorageoverview.htm)_:
+Já dentro da instância, através do comando abaixo, irei instalar o pacote de utilitários _[NFS](https://pt.wikipedia.org/wiki/Network_File_System)_ para permitir a _"montagem"_ do _[File Storage](https://docs.oracle.com/pt-br/iaas/Content/File/Concepts/filestorageoverview.htm)_:
 
 ```
 [opc@wordpress ~]$ yum install -y nfs-utils
 ```
 
-Sabemos que o diretório _"/var/www/html/wp-content/uploads"_ é onde será salvo as imagens. Usarei o comando _[systemd-escape](https://www.freedesktop.org/software/systemd/man/systemd-escape.html)_, necessário para _"escapar"_ as string que formam o nome do arquivo de unidade do _[systemd](https://pt.wikipedia.org/wiki/Systemd)_:
+Sabemos que o diretório _"/var/www/html/wp-content/uploads"_ é onde será salvo as _imagens_ dos usuários vindas através de _[upload](https://en.wikipedia.org/wiki/Upload)_. Usarei o comando _[systemd-escape](https://www.freedesktop.org/software/systemd/man/systemd-escape.html)_, necessário para _"escapar"_ as string que formam o nome do arquivo de unidade do _[systemd](https://pt.wikipedia.org/wiki/Systemd)_:
 
 ```
 [opc@wordpress ~]$ systemd-escape -p --suffix=mount /var/www/html/wp-content/uploads
@@ -409,7 +411,7 @@ Podemos confirmar que o arquivo foi criado conforme o comando abaixo:
 -rw-r--r--. 1 root root 219 Dec  7 09:56 /etc/systemd/system/var-www-html-wp\x2dcontent-uploads.mount
 ```
 
-A sequência dos comandos abaixo, habilitam pelo _[systemd](https://pt.wikipedia.org/wiki/Systemd)_ a _"montagem"_ automática e persistente entre reboots da instância:
+A sequência dos comandos abaixo, irão possibilitar a _"montagem"_ automática e persistente entre reboots da instância:
 
 ```
 [opc@wordpress ~]$ sudo systemctl daemon-reload
@@ -429,6 +431,30 @@ Created symlink from /etc/systemd/system/multi-user.target.wants/var-www-html-wp
 Filesystem                            Size  Used Avail Use% Mounted on
 fss.ocibook.local:/wordpress-uploads  8.0E     0  8.0E   0% /var/www/html/wp-content/uploads
 ```
+
+Agora que o _[File Storage](https://docs.oracle.com/pt-br/iaas/Content/File/Concepts/filestorageoverview.htm)_ já encontra-se acessível pela instância, podemos finalizar a instalação do _[Wordpress](https://pt.wikipedia.org/wiki/WordPress)_. 
+
+Falando especificamente de _[Wordpress](https://pt.wikipedia.org/wiki/WordPress)_, há um utilitário de linha de comando chamado _[WP-CLI](https://wp-cli.org/)_ no qual irei utilizar para finalizar a instalação. Os comandos abaixo, são para a instalação deste utilitário na instância:
+
+```
+[opc@wordpress ~]$ curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100 5951k  100 5951k    0     0  15.3M      0 --:--:-- --:--:-- --:--:-- 15.3M
+
+[opc@wordpress ~]$ chmod +x wp-cli.phar
+
+[opc@wordpress ~]$ sudo mv wp-cli.phar /usr/local/bin/wp
+```
+
+>_**__NOTA:__** Para maiores detalhes sobre o utilitário [WP-CLI](https://wp-cli.org/), consulte sua documentação oficial neste [link aqui](https://wp-cli.org/#using)._
+
+Para concluírmos esta instalação, temporáriamente será preciso instalar o pacote no qual contém o cliente para acesso ao Banco de Dados _[MySQL](https://docs.oracle.com/pt-br/iaas/mysql-database/index.html)_: 
+
+```
+[opc@wordpress ~]$ sudo yum install -y mysql-community-client
+```
+
 
 ### __Conclusão__
 
