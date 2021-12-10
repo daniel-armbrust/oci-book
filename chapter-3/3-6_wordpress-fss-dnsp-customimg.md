@@ -372,7 +372,7 @@ Não há como entrarmos nos detalhes do _[systemd](https://pt.wikipedia.org/wiki
 
 A partir de uma nova sessão criada através do serviço _[Bastion](https://docs.oracle.com/pt-br/iaas/Content/Bastion/Concepts/bastionoverview.htm)_, irei me conectar na instância do _[Wordpress](https://pt.wikipedia.org/wiki/WordPress)_. 
 
-Já dentro da instância, através do comando abaixo, irei instalar o pacote de utilitários _[NFS](https://pt.wikipedia.org/wiki/Network_File_System)_ para permitir a _"montagem"_ do _[File Storage](https://docs.oracle.com/pt-br/iaas/Content/File/Concepts/filestorageoverview.htm)_:
+Já dentro da instância, pelo comando abaixo, irei instalar o pacote de utilitários _[NFS](https://pt.wikipedia.org/wiki/Network_File_System)_ para permitir a _"montagem"_ do _[File Storage](https://docs.oracle.com/pt-br/iaas/Content/File/Concepts/filestorageoverview.htm)_:
 
 ```
 [opc@wordpress ~]$ yum install -y nfs-utils
