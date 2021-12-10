@@ -562,6 +562,6 @@ Action completed. Waiting until the resource has entered state: ('AVAILABLE',)
 
 ### __Conclusão__
 
-Aqui concluímos algumas configurações importantes para criarmos uma imagem do _[Wordpress](https://pt.wikipedia.org/wiki/WordPress)_ que seja reutilizável.
+Aqui concluímos a instalação do _[Wordpress](https://pt.wikipedia.org/wiki/WordPress)_. Deixamos uma cópia de tudo guardado através de uma _[Custom Image](https://docs.oracle.com/pt-br/iaas/Content/Compute/Tasks/managingcustomimages.htm)_, para que futuramente possamos criar quantas cópias forem necessárias.
 
-Além disto, os serviços de _[File Storage](https://docs.oracle.com/pt-br/iaas/Content/File/Concepts/filestorageoverview.htm)_ e _[DNS](https://docs.oracle.com/pt-br/iaas/Content/DNS/Tasks/privatedns.htm)_, são serviços fundamentais que ajudam a eliminar algumas _"dependências"_. A instância da aplicação agora _"enxerga"_ os serviços através de nomes únicos, e grava seus _[uploads](https://en.wikipedia.org/wiki/Upload)_ de maneira centralizada. 
+Além disto, os serviços de _[File Storage](https://docs.oracle.com/pt-br/iaas/Content/File/Concepts/filestorageoverview.htm)_ e _[DNS](https://docs.oracle.com/pt-br/iaas/Content/DNS/Tasks/privatedns.htm)_, são serviços fundamentais que ajudam a eliminar algumas _"dependências"_. A instância da aplicação agora _"enxerga"_ os serviços através de nomes únicos, e grava seus _[uploads](https://en.wikipedia.org/wiki/Upload)_ de maneira centralizada. Como você verá, ao retirarmos essas _"dependências"_ do caminho, podemos criar quantas instâncias do _[Wordpress](https://pt.wikipedia.org/wiki/WordPress)_ forem necessárias.
