@@ -413,7 +413,7 @@ Podemos confirmar que o arquivo foi criado conforme o comando abaixo:
 -rw-r--r--. 1 root root 219 Dec  7 09:56 /etc/systemd/system/var-www-html-wp\x2dcontent-uploads.mount
 ```
 
-A sequência dos seguintes comandos, irão possibilitar a _"montagem"_ automática do diretório configurado:
+A sequência dos seguintes comandos, irão possibilitar a _"montagem"_ automática do diretório configurado através do _[systemd](https://pt.wikipedia.org/wiki/Systemd)_:
 
 ```
 [opc@wordpress ~]$ sudo systemctl daemon-reload
