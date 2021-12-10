@@ -387,7 +387,7 @@ var-www-html-wp\x2dcontent-uploads.mount
 
 Por conta de haver um hífen, que foi traduzido para o código _[Unicode](https://pt.wikipedia.org/wiki/Unicode)_ _\x2d_, devemos também _"escapar"_ esta barra, tendo como resultado final a string: _var-www-html-wp\\\x2dcontent-uploads.mount_
 
-Basta criar o arquivo _"var-www-html-wp\\\x2dcontent-uploads.mount"_ no diretório _"/etc/systemd/system"_, que contém as instruções de _"montagem"_ via _[systemd](https://pt.wikipedia.org/wiki/Systemd)_:
+Basta criar o arquivo _"var-www-html-wp\\\x2dcontent-uploads.mount"_ no diretório _"/etc/systemd/system"_ que contém as instruções de _"montagem"_ via _[systemd](https://pt.wikipedia.org/wiki/Systemd)_:
 
 ```
 [opc@wordpress ~]$ sudo bash -c 'cat <<EOF >/etc/systemd/system/var-www-html-wp\\x2dcontent-uploads.mount
