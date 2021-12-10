@@ -481,7 +481,7 @@ O próximo comando irá parametrizar o nosso site de exemplo _"OCIBook Wordpress
 Success: WordPress installed successfully.
 ```
 
->_**__NOTA:__** Informar qualquer senha no [shell](https://pt.wikipedia.org/wiki/Shell_do_Unix) não é legal! É possível utilizar por exemplo, o comando "set +o history" antes de qualquer comando sensível para impedir o [shell](https://pt.wikipedia.org/wiki/Shell_do_Unix) de gravar histórico dos seus comandos. Recomendo que use esta prática._
+>_**__NOTA:__** Informar qualquer senha no [shell](https://pt.wikipedia.org/wiki/Shell_do_Unix) não é legal! É possível utilizar por exemplo, o comando "set +o history" antes de qualquer outro comando sensível para impedir o [shell](https://pt.wikipedia.org/wiki/Shell_do_Unix) de gravar histórico dos seus comandos. Recomendo que use esta prática._
 
 Perceba que já definimos sua URL _"wordpress.ocibook.com.br"_ através do parâmetro _"--url"_. Isto para que futuramente, através do _[serviço DNS](https://docs.oracle.com/pt-br/iaas/Content/DNS/Concepts/dnszonemanagement.htm)_ público, seja possível disponibilizar a aplicação da forma correta.
 
