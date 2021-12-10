@@ -529,7 +529,7 @@ Action completed. Waiting until the resource has entered state: ('AVAILABLE',)
     "create-image-allowed": true,
     "defined-tags": {
       "Oracle-Tags": {
-        "CreatedBy": "oracleidentitycloudservice/daniel.armbrust@oracle.com",
+        "CreatedBy": "oracleidentitycloudservice/daniel.armbrust@algumdominio.com",
         "CreatedOn": "2021-12-10T20:11:17.404Z"
       }
     },
