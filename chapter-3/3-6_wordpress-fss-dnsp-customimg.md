@@ -368,7 +368,7 @@ Já temos o _[File Storage](https://docs.oracle.com/pt-br/iaas/Content/File/Conc
 
 Esta _"montagem automática"_ será feita pelo _[systemd](https://pt.wikipedia.org/wiki/Systemd)_. O _[systemd](https://pt.wikipedia.org/wiki/Systemd)_, software presente na maioria das distribuições _[Linux](https://www.oracle.com/linux/)_, é usado principalmente para gerenciar serviços ou processos do sistema após a inicialização (boot).
 
-Não há como entrarmos nos detalhes do _[systemd](https://pt.wikipedia.org/wiki/Systemd)_ aqui. Há diversas documentações disponíveis na internet e também da própria _[Oracle](https://docs.oracle.com/en/learn/use_systemd/index.html)_ que falam sobre o tema. Para os não familiarizados, vou deixar este _[link aqui](https://docs.oracle.com/en/learn/use_systemd/index.html)_ que é um tutorial básico sobre o _[systemd](https://pt.wikipedia.org/wiki/Systemd)_.
+Não há como entrarmos nos detalhes do _[systemd](https://pt.wikipedia.org/wiki/Systemd)_ aqui. Há diversas documentações disponíveis na internet e também pela própria _[Oracle](https://docs.oracle.com/en/learn/use_systemd/index.html)_ que falam sobre o tema. Para os não familiarizados, vou deixar este _[link aqui](https://docs.oracle.com/en/learn/use_systemd/index.html)_ que é um tutorial básico sobre o _[systemd](https://pt.wikipedia.org/wiki/Systemd)_.
 
 A partir de uma nova sessão criada pelo serviço _[Bastion](https://docs.oracle.com/pt-br/iaas/Content/Bastion/Concepts/bastionoverview.htm)_, irei me conectar na instância do _[Wordpress](https://pt.wikipedia.org/wiki/WordPress)_. 
 
