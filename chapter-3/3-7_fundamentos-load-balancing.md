@@ -146,7 +146,7 @@ Action completed. Waiting until the resource has entered state: ('AVAILABLE',)
 
 Agora temos o _[endereço IP público](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingpublicIPs.htm#Public_IP_Addresses)_ reservado _152.70.221.188_ exibido pelo valor da propriedade _"ip-address"_ do comando acima.
 
-#### __Load Balancer__
+#### __Criando o Load Balancer__
 
 Irei detalhar o passo a passo da criação do _[Load Balancer](https://docs.oracle.com/pt-br/iaas/Content/Balance/Concepts/balanceoverview.htm)_ começando pela lista de shapes que temos a disposição:
 
@@ -288,20 +288,84 @@ Action completed. Waiting until the work request has entered state: ('SUCCEEDED'
 }
 ```
 
-Para concluírmos a instalação, irei inserir a instância do _[Wordpress](https://pt.wikipedia.org/wiki/WordPress)_ ao _"conjunto de backend"_ que foi criado.
+Seguindo a ideia de _"[evitar o ponto único de falha](https://pt.wikipedia.org/wiki/Ponto_%C3%BAnico_de_falha)"_, teremos duas instâncias da aplicação _[Wordpress](https://pt.wikipedia.org/wiki/WordPress)_ em execução por _[Fault Domain (FD)](https://docs.oracle.com/pt-br/iaas/Content/General/Concepts/regions.htm#fault)_. Uma _ativa_ e a outra será _backup_.
+
+Primeiro, irei obter o _OCID_ da _[custom image](https://docs.oracle.com/pt-br/iaas/Content/Compute/Tasks/managingcustomimages.htm)_ criada no _[capítulo anterior](https://github.com/daniel-armbrust/oci-book/blob/main/chapter-3/3-6_wordpress-fss-dnsp-customimg.md)_:
+
+```
+darmbrust@hoodwink:~$ oci compute image list \
+> --compartment-id "ocid1.compartment.oc1..aaaaaaaamcff6exkhvp4aq3ubxib2wf74v7cx22b3yj56jnfkazoissdzefq" \
+> --display-name "ol7-wordpress_img" \
+> --lifecycle-state "AVAILABLE" \
+> --query "data[].id"
+[
+  "ocid1.image.oc1.sa-saopaulo-1.aaaaaaaacdmbrlmzub7p7rwddzfupslb7lx7dvh4insdcz4sw6bxre6ccgkq"
+]
+```
+
+Criarei a instância _ativa_ no _FAULT-DOMAIN-3_:
+
+```
+darmbrust@hoodwink:~$ oci compute instance launch \
+> --compartment-id "ocid1.compartment.oc1..aaaaaaaamcff6exkhvp4aq3ubxib2wf74v7cx22b3yj56jnfkazoissdzefq" \
+> --availability-domain "ynrK:SA-SAOPAULO-1-AD-1" \
+> --shape "VM.Standard.E2.1" \
+> --subnet-id "ocid1.subnet.oc1.sa-saopaulo-1.aaaaaaaajb4wma763mz6uowun3pfeltobe4fmiegdeyma5ehvnf3kzy3jvxa" \
+> --boot-volume-size-in-gbs 100 \
+> --display-name "wordpress" \
+> --fault-domain "FAULT-DOMAIN-3" \
+> --hostname-label "wordpress" \
+> --image-id "ocid1.image.oc1.sa-saopaulo-1.aaaaaaaacdmbrlmzub7p7rwddzfupslb7lx7dvh4insdcz4sw6bxre6ccgkq" \
+> --ssh-authorized-keys-file ./wordpress-key.pub \
+> --wait-for-state "RUNNING"
+```
+
+A criação da instância _backup_ segue o mesmo conjunto de opções, alterando apenas o _display name_, _hostname_ e _[Fault Domain](https://docs.oracle.com/pt-br/iaas/Content/General/Concepts/regions.htm#fault)_ que será o _FAULT-DOMAIN-2_:
+
+```
+darmbrust@hoodwink:~$ oci compute instance launch \
+> --compartment-id "ocid1.compartment.oc1..aaaaaaaamcff6exkhvp4aq3ubxib2wf74v7cx22b3yj56jnfkazoissdzefq" \
+> --availability-domain "ynrK:SA-SAOPAULO-1-AD-1" \
+> --shape "VM.Standard.E2.1" \
+> --subnet-id "ocid1.subnet.oc1.sa-saopaulo-1.aaaaaaaajb4wma763mz6uowun3pfeltobe4fmiegdeyma5ehvnf3kzy3jvxa" \
+> --boot-volume-size-in-gbs 100 \
+> --display-name "wordpress-backup" \
+> --fault-domain "FAULT-DOMAIN-2" \
+> --hostname-label "wordpress-backup" \
+> --image-id "ocid1.image.oc1.sa-saopaulo-1.aaaaaaaacdmbrlmzub7p7rwddzfupslb7lx7dvh4insdcz4sw6bxre6ccgkq" \
+> --ssh-authorized-keys-file ./wordpress-key.pub \
+> --wait-for-state "RUNNING"
+```
+
+Com _backend-set_ já criado, vou inserir a instância _ativa_ ao _"conjunto de backend"_ do _[Load Balancer](https://docs.oracle.com/pt-br/iaas/Content/Balance/Concepts/balanceoverview.htm)_:
 
 ```
 darmbrust@hoodwink:~$ oci lb backend create \
 > --load-balancer-id "ocid1.loadbalancer.oc1.sa-saopaulo-1.aaaaaaaa5ledgzqveh3o73m3mnv42pkxcm5y64hjmkwl7tnhvsee2zv7gbga" \
 > --backend-set-name "lb-pub_wordpress_backend" \
-> --ip-address 10.0.10.154 \
+> --ip-address 10.0.10.240 \
 > --port 80 \
 > --backup false \
 > --offline false \
 > --wait-for-state "SUCCEEDED"
 ```
 
-Depois de alguns minutos, é possível verificar a saúde geral do _[Load Balancer](https://docs.oracle.com/pt-br/iaas/Content/Balance/Concepts/balanceoverview.htm)_ com o comando abaixo:
+Para a instância _backup_ o comando é o mesmo, alterando apenas o parâmetro _--backup_ para _true_ e _--ip-address_ para o endereço IP correspondente:
+
+```
+darmbrust@hoodwink:~$ oci lb backend create \
+> --load-balancer-id "ocid1.loadbalancer.oc1.sa-saopaulo-1.aaaaaaaa5ledgzqveh3o73m3mnv42pkxcm5y64hjmkwl7tnhvsee2zv7gbga" \
+> --backend-set-name "lb-pub_wordpress_backend" \
+> --ip-address 10.0.10.69 \
+> --port 80 \
+> --backup true \
+> --offline false \
+> --wait-for-state "SUCCEEDED"
+```
+
+>_**__NOTA:__** O [Load Balancer](https://docs.oracle.com/pt-br/iaas/Content/Balance/Concepts/balanceoverview.htm) precisa se comunicar com a instância todo o tempo através do seu "Health Check". Se esta comunicação falha, o [Load Balancer](https://docs.oracle.com/pt-br/iaas/Content/Balance/Concepts/balanceoverview.htm) marca a instância como "indisponível" e não repassa tráfego de rede. Verifique se a [Security List](https://docs.oracle.com/pt-br/iaas/Content/Network/Concepts/securitylists.htm) ou [NSG](https://docs.oracle.com/pt-br/iaas/Content/Network/Concepts/networksecuritygroups.htm) da instância permitem este acesso._
+
+Depois de alguns minutos, é possível verificar a _"saúde geral"_ do _[Load Balancer](https://docs.oracle.com/pt-br/iaas/Content/Balance/Concepts/balanceoverview.htm)_ com o comando abaixo:
 
 ```
 darmbrust@hoodwink:~$ oci lb backend-set-health get \
@@ -311,14 +375,14 @@ darmbrust@hoodwink:~$ oci lb backend-set-health get \
   "data": {
     "critical-state-backend-names": [],
     "status": "OK",
-    "total-backend-count": 1,
+    "total-backend-count": 2,
     "unknown-state-backend-names": [],
     "warning-state-backend-names": []
   }
 }
 ```
 
-Por último, a criação do _listener_ que usa o protocolo _[HTTP](https://pt.wikipedia.org/wiki/Hypertext_Transfer_Protocol)_ também na porta _80/TCP_:
+Por último, devemos criar o _Listener_ que irá possibilitar o _[Load Balancer](https://docs.oracle.com/pt-br/iaas/Content/Balance/Concepts/balanceoverview.htm)_ receber tráfego de rede. Este será criado na porta _80/TCP_ e utiliza o protocolo _[HTTP](https://pt.wikipedia.org/wiki/Hypertext_Transfer_Protocol)_:
 
 ```
 darmbrust@hoodwink:~$ oci lb listener create \
@@ -330,31 +394,19 @@ darmbrust@hoodwink:~$ oci lb listener create \
 > --wait-for-state "SUCCEEDED"
 ```
 
-Pronto! Após alguns minutos já é possível ver a aplicação _[Wordpress](https://pt.wikipedia.org/wiki/WordPress)_ respondendo através do _[Load Balancer](https://docs.oracle.com/pt-br/iaas/Content/Balance/Concepts/balanceoverview.htm)_ criado:
+Pronto! Após alguns minutos é possível verificar que o acesso a aplicação do _[Wordpress](https://pt.wikipedia.org/wiki/WordPress)_, através do _[Load Balancer](https://docs.oracle.com/pt-br/iaas/Content/Balance/Concepts/balanceoverview.htm)_, já funciona:
 
 ```
-darmbrust@hoodwink:~$ curl -v http://152.70.221.188
-*   Trying 152.70.221.188:80...
-* TCP_NODELAY set
-* Connected to 152.70.221.188 (152.70.221.188) port 80 (#0)
-> GET / HTTP/1.1
-> Host: 152.70.221.188
-> User-Agent: curl/7.68.0
-> Accept: */*
->
-* Mark bundle as not supporting multiuse
-< HTTP/1.1 302 Found
-< Date: Sun, 19 Sep 2021 22:10:49 GMT
-< Content-Type: text/html; charset=UTF-8
-< Content-Length: 0
-< Connection: keep-alive
-< X-Powered-By: PHP/7.4.23
-< Location: http://152.70.221.188/wp-admin/setup-config.php
-<
-* Connection #0 to host 152.70.221.188 left intact
+darmbrust@hoodwink:~$ curl -I http://152.70.221.188
+HTTP/1.1 200 OK
+Date: Sat, 11 Dec 2021 13:07:03 GMT
+Content-Type: text/html; charset=UTF-8
+Connection: keep-alive
+X-Powered-By: PHP/7.4.26
+Link: <http://wordpress.ocibook.com.br/index.php?rest_route=/>; rel="https://api.w.org/"
 ```
 
->_**__NOTA:__** Caso não obtenha resposta, confirme se a [Security List](https://docs.oracle.com/en-us/iaas/api/#/en/iaas/20160918/datatypes/IngressSecurityRule) da subrede pública onde foi criado o [Load Balancer](https://docs.oracle.com/pt-br/iaas/Content/Balance/Concepts/balanceoverview.htm), possui as corretas regras que permitam o acesso da sua origem._
+>_**__NOTA:__** Caso não obtenha resposta, confirme se a [Security List](https://docs.oracle.com/en-us/iaas/api/#/en/iaas/20160918/datatypes/IngressSecurityRule) da subrede pública onde foi criado o [Load Balancer](https://docs.oracle.com/pt-br/iaas/Content/Balance/Concepts/balanceoverview.htm), possui as corretas regras que permitam seu acesso._
 
 ### __Conclusão__
 
