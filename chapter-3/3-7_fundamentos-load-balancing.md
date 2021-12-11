@@ -363,9 +363,24 @@ darmbrust@hoodwink:~$ oci lb backend create \
 > --wait-for-state "SUCCEEDED"
 ```
 
+Com o comando abaixo, é possível verificar as instâncias que acabam de ser adicionadas ao _backend-set_:
+
+```
+darmbrust@hoodwink:~$ oci lb backend list \
+> --load-balancer-id "ocid1.loadbalancer.oc1.sa-saopaulo-1.aaaaaaaa5ledgzqveh3o73m3mnv42pkxcm5y64hjmkwl7tnhvsee2zv7gbga" \
+> --backend-set-name "lb-pub_wordpress_backend" \
+> --output table
++--------+-------+--------------+----------------+---------+------+--------+
+| backup | drain | ip-address   | name           | offline | port | weight |
++--------+-------+--------------+----------------+---------+------+--------+
+| True   | False | 10.0.10.103  | 10.0.10.103:80 | False   | 80   | 1      |
+| False  | False | 10.0.10.240  | 10.0.10.240:80 | False   | 80   | 1      |
++--------+-------+--------------+----------------+---------+------+--------+
+```
+
 >_**__NOTA:__** O [Load Balancer](https://docs.oracle.com/pt-br/iaas/Content/Balance/Concepts/balanceoverview.htm) precisa se comunicar com a instância todo o tempo através do seu "Health Check". Se esta comunicação falha, o [Load Balancer](https://docs.oracle.com/pt-br/iaas/Content/Balance/Concepts/balanceoverview.htm) marca a instância como "indisponível" e não repassa tráfego de rede. Verifique se a [Security List](https://docs.oracle.com/pt-br/iaas/Content/Network/Concepts/securitylists.htm) ou [NSG](https://docs.oracle.com/pt-br/iaas/Content/Network/Concepts/networksecuritygroups.htm) da instância permitem este acesso._
 
-Depois de alguns minutos, é possível verificar a _"saúde geral"_ do _[Load Balancer](https://docs.oracle.com/pt-br/iaas/Content/Balance/Concepts/balanceoverview.htm)_ com o comando abaixo:
+Depois de alguns minutos, podemos checar a _"saúde geral"_ do _[Load Balancer](https://docs.oracle.com/pt-br/iaas/Content/Balance/Concepts/balanceoverview.htm)_:
 
 ```
 darmbrust@hoodwink:~$ oci lb backend-set-health get \
