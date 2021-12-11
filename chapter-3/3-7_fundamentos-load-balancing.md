@@ -84,7 +84,7 @@ Como aqui estamos falando de uma aplicação Web, o _[Wordpress](https://pt.wiki
 
 Estes são os principais conceitos que envolvem os balanceadores de carga a disposição no _[OCI](https://www.oracle.com/cloud/)_. O _[Load Balancing](https://docs.oracle.com/pt-br/iaas/Content/Balance/Concepts/balanceoverview.htm)_ de _[camada 7](https://pt.wikipedia.org/wiki/Camada_de_aplica%C3%A7%C3%A3o)_ possui ainda mais configurações que serão exploradas em momento oportuno. Estas outras configurações estão ligadas ao protocolo _[HTTP](https://pt.wikipedia.org/wiki/Hypertext_Transfer_Protocol)_, sendo algumas delas: _[Persistência de Sessão](https://docs.oracle.com/pt-br/iaas/Content/Balance/Reference/sessionpersistence.htm)_ através de _[cookies persistentes](https://docs.oracle.com/pt-br/iaas/Content/Balance/Reference/sessionpersistence.htm#cook)_, definições de _[Keep-Alive](https://docs.oracle.com/pt-br/iaas/Content/Balance/Reference/connectionreuse.htm#KeepAliveSettings)_, _[Hosts Virtuais](https://docs.oracle.com/pt-br/iaas/Content/Balance/Tasks/managingrequest.htm)_ entre outras.
 
-### __Criando o Load Balancer__
+### __Load Balancer da aplicação Wordpress__
 
 Ao final deste capítulo, nosso propósito será termos a infraestrutura para a aplicação do _[Wordpress](https://pt.wikipedia.org/wiki/WordPress)_ com um _[Load Balancer](https://docs.oracle.com/pt-br/iaas/Content/Balance/Concepts/balanceoverview.htm)_ público (frontend) e os servidores de aplicação protegidos na subrede privada (backend).
 
