@@ -92,7 +92,7 @@ Ao final deste capítulo, nosso propósito será termos a infraestrutura para a 
 
 #### __Reservando um Endereço IP Público__
 
-Esta é uma parte bem importante de todo o processo para expor uma aplicação pública. Qualquer recurso criado e que utiliza um _[endereço IP público](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingpublicIPs.htm#Public_IP_Addresses)_ no _[OCI](https://www.oracle.com/cloud/)_ está sujeito a usar um destes dois tipos:
+Esta é uma parte bem importante de todo o processo para expor uma aplicação pública. Qualquer recurso criado e que utiliza um _[endereço IP público](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingpublicIPs.htm#Public_IP_Addresses)_ no _[OCI](https://www.oracle.com/cloud/)_, está sujeito a usar um destes dois tipos:
 
 - **IP Público Efêmero**
     - Temporário e existente durante o tempo de vida do recurso. 
@@ -102,13 +102,13 @@ Esta é uma parte bem importante de todo o processo para expor uma aplicação p
     - Persistênte e não está vinculado ao tempo de vida de qualquer recurso.
     - Se você excluír o recurso, este não excluí o IP público.
 
-Após a reserva, o _[endereço IP público](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingpublicIPs.htm#Public_IP_Addresses)_ passa a ser de _posse_ do seu _[tenancy](https://docs.oracle.com/pt-br/iaas/Content/Identity/Tasks/managingtenancy.htm)_ e você pode usá-lo em qualquer recurso que queira, um de cada vez.
+Após a reserva, o _[endereço IP público](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingpublicIPs.htm#Public_IP_Addresses)_ passa a ser de _posse_ do seu _[tenancy](https://docs.oracle.com/pt-br/iaas/Content/Identity/Tasks/managingtenancy.htm)_ e você pode usá-lo em qualquer recurso que queira.
 
-Como já dito, esta é uma ação importante quando estamos projetando uma aplicação pública e disponível por toda internet. Como você vai ver, é necessário pelo menos um endereço IP público e reservado, quando formos configurar o nome _[DNS](https://docs.oracle.com/pt-br/iaas/Content/DNS/Concepts/dnszonemanagement.htm)_ público usado pela aplicação.
+Como já dito, esta é uma ação importante quando estamos projetando uma aplicação pública e disponível por toda internet. Como você vai ver, é necessário pelo menos um endereço IP público e reservado, quando formos configurar o _[DNS](https://docs.oracle.com/pt-br/iaas/Content/DNS/Concepts/dnszonemanagement.htm)_ usado pela aplicação.
 
 >_**__NOTA:__** Após criar um IP público, você não poderá converter seu tipo de reservado para efêmero e vice versa._
 
-Para reservarmos o IP no compartimento dos recursos de rede, usamos o comando abaixo:
+Para reservarmos o IP no compartimento _"cmp-network"_ dos recursos de rede, usamos o comando abaixo:
 
 ```
 darmbrust@hoodwink:~$ oci network public-ip create \
@@ -144,7 +144,7 @@ Action completed. Waiting until the resource has entered state: ('AVAILABLE',)
 }
 ```
 
-Agora temos o _[endereço IP público](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingpublicIPs.htm#Public_IP_Addresses)_ reservado _152.70.221.188_ exibido pelo valor da propriedade _"ip-address"_ do comando acima. Este é nosso!
+Agora temos o _[endereço IP público](https://docs.oracle.com/pt-br/iaas/Content/Network/Tasks/managingpublicIPs.htm#Public_IP_Addresses)_ reservado _152.70.221.188_ exibido pelo valor da propriedade _"ip-address"_ do comando acima.
 
 #### __Load Balancer__
 
