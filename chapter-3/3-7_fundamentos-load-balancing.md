@@ -425,6 +425,8 @@ Link: <http://wordpress.ocibook.com.br/index.php?rest_route=/>; rel="https://api
 
 ### __Conclusão__
 
-Aqui concluímos este capítulo que apresenta o básico sobre o _[Serviço de Load Balancing](https://docs.oracle.com/pt-br/iaas/Content/Balance/Concepts/balanceoverview.htm)_ no _[OCI](https://www.oracle.com/cloud/)_.
+Neste capítulo concluímos o provisionamento do _[Load Balancer](https://docs.oracle.com/pt-br/iaas/Content/Balance/Concepts/balanceoverview.htm)_ que possibilita acessar a aplicação de uma maneira melhor. Além disto, retiramos o _"[ponto único de falha](https://pt.wikipedia.org/wiki/Ponto_%C3%BAnico_de_falha)"_ através da adição de uma instância _backup_. A ideia é sempre evitar a _indisponibilidade geral_ da aplicação.
 
-Deixo também o link do _[FAQ](https://www.oracle.com/cloud/networking/load-balancing-faq.html)_ do serviço para ajudar em outras questões não vistas por aqui.
+Através da configuração aplicada, você pode reiniciar ou desligar a máquina _ativa_ e verá que o _[Wordpress](https://pt.wikipedia.org/wiki/WordPress)_ permanece disponível.
+
+Deixo o link do _[FAQ](https://www.oracle.com/cloud/networking/load-balancing-faq.html)_ do serviço para ajudar em outras questões caso precise.
