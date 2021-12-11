@@ -558,8 +558,6 @@ Action completed. Waiting until the resource has entered state: ('AVAILABLE',)
 
 >_**__NOTA:__** Gerar uma imagem, gera uma cópia do estado atual da instância. Se você alterar o [boot volume](https://docs.oracle.com/pt-br/iaas/Content/Block/Concepts/bootvolumes.htm), você deve gerar uma nova [custom image](https://docs.oracle.com/pt-br/iaas/Content/Compute/Tasks/managingcustomimages.htm) que contenha tais alterações._
 
-
-
 ### __Conclusão__
 
 Aqui concluímos a instalação do _[Wordpress](https://pt.wikipedia.org/wiki/WordPress)_ e deixamos uma cópia de tudo guardado, através de uma _[Custom Image](https://docs.oracle.com/pt-br/iaas/Content/Compute/Tasks/managingcustomimages.htm)_.
