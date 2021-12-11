@@ -356,7 +356,7 @@ Para a instância _backup_ o comando é o mesmo, alterando apenas o parâmetro _
 darmbrust@hoodwink:~$ oci lb backend create \
 > --load-balancer-id "ocid1.loadbalancer.oc1.sa-saopaulo-1.aaaaaaaa5ledgzqveh3o73m3mnv42pkxcm5y64hjmkwl7tnhvsee2zv7gbga" \
 > --backend-set-name "lb-pub_wordpress_backend" \
-> --ip-address 10.0.10.69 \
+> --ip-address 10.0.10.103 \
 > --port 80 \
 > --backup true \
 > --offline false \
