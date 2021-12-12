@@ -339,7 +339,7 @@ darmbrust@hoodwink:~$ oci compute instance launch \
 > --wait-for-state "RUNNING"
 ```
 
->_**__NOTA:__** Perceba que as instâncias que foram criadas agora, utilizam processador [AMD](https://pt.wikipedia.org/wiki/Advanced_Micro_Devices) e são do tipo flexíveis. Isto quer dizer que é possível definir sua quantidade de CPU e memória, através do parâmetro --shape-config._
+>_**__NOTA:__** Perceba que as instâncias que foram criadas agora, utilizam processador [AMD](https://pt.wikipedia.org/wiki/Advanced_Micro_Devices) e são do tipo flexíveis. Isto quer dizer que é possível definir a quantidade de CPU e memória através do parâmetro --shape-config._
 
 Com _backend-set_ já criado, vou inserir a instância _ativa_ ao _"conjunto de backend"_ do _[Load Balancer](https://docs.oracle.com/pt-br/iaas/Content/Balance/Concepts/balanceoverview.htm)_:
 
