@@ -256,10 +256,9 @@ Address: 2600:2000:2020::6#53
 Server:         ns3.p68.dns.oraclecloud.net
 Address:        162.88.34.6#53
 
-wordpress.ocibook.com.br        canonical name = lb-1.ocibook.com.br.
-Name:   lb-1.ocibook.com.br
+wordpress.ocibook.com.br        canonical name = lb-sp.ocibook.com.br.
+Name:   lb-sp.ocibook.com.br
 Address: 152.70.221.188
->
 ```
 
 - Exemplo de uso do _[nslookup](https://pt.wikipedia.org/wiki/Nslookup)_ em _modo batch_:
@@ -270,8 +269,8 @@ Server:         192.168.88.1
 Address:        192.168.88.1#53
 
 Non-authoritative answer:
-wordpress.ocibook.com.br        canonical name = lb-1.ocibook.com.br.
-Name:   lb-1.ocibook.com.br
+wordpress.ocibook.com.br        canonical name = lb-sp.ocibook.com.br.
+Name:   lb-sp.ocibook.com.br
 Address: 152.70.221.188
 ```
 
