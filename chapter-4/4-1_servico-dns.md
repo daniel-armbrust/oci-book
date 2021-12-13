@@ -127,62 +127,62 @@ Action completed. Waiting until the resource has entered state: ('ACTIVE',)
 
 ### __Gerenciando registros DNS__
 
-Após a _Zona DNS_ estar devidamente criada, irei criar dois _registros_ que serão usados pela aplicação _[Wordpress](https://pt.wikipedia.org/wiki/WordPress)_. O primeiro irá apontar o nome _"lb-1.ocibook.com.br"_ para o endereço IP _"152.70.221.188"_ do _[Load Balancer](https://docs.oracle.com/pt-br/iaas/Content/Balance/Concepts/balanceoverview.htm)_ que foi criado: 
+Após a _Zona DNS_ estar devidamente criada, irei criar dois _registros_ que serão usados pela aplicação _[Wordpress](https://pt.wikipedia.org/wiki/WordPress)_. O primeiro irá apontar o nome _"lb-sp.ocibook.com.br"_ para o endereço IP _"152.70.221.188"_ do _[Load Balancer](https://docs.oracle.com/pt-br/iaas/Content/Balance/Concepts/balanceoverview.htm)_ que foi criado: 
 
 ```
 darmbrust@hoodwink:~$ oci dns record domain patch \
 > --zone-name-or-id "ocibook.com.br" \
-> --domain "lb-1.ocibook.com.br" \
+> --domain "lb-sp.ocibook.com.br" \
 > --scope "GLOBAL" \
-> --items '[{"domain": "lb-1.ocibook.com.br", "rdata": "152.70.221.188", "rtype": "A", "ttl": 3600}]'
+> --items '[{"domain": "lb-sp.ocibook.com.br", "rdata": "152.70.221.188", "rtype": "A", "ttl": 3600}]'
 {
   "data": {
     "items": [
       {
-        "domain": "lb-1.ocibook.com.br",
+        "domain": "lb-sp.ocibook.com.br",
         "is-protected": false,
         "rdata": "152.70.221.188",
-        "record-hash": "bfc2039a0e88412c8203627f84f2ba13",
-        "rrset-version": "4",
+        "record-hash": "5176235c405ac9578b78586ae232f737",
+        "rrset-version": "21",
         "rtype": "A",
         "ttl": 3600
       }
     ]
   },
-  "etag": "\"4ocid1.dns-zone.oc1..3b872f6da34a452ebd1c36678002acc3#application/json\"",
+  "etag": "\"21ocid1.dns-zone.oc1..3b872f6da34a452ebd1c36678002acc3#application/json\"",
   "opc-total-items": "1"
 }
 ```
 
-Perceba que o tipo do registro definido em _"rtype"_ é do tipo _"A"_. Este tipo indica a resolução do nome _"lb-1.ocibook.com.br"_ contido em _"domain"_, para o endereço IPv4 _"152.70.221.188"_.
+Perceba que o tipo do registro definido em _"rtype"_ é do tipo _"A"_. Este tipo indica a resolução do nome _"lb-sp.ocibook.com.br"_ contido em _"domain"_, para o endereço IPv4 _"152.70.221.188"_.
 
 O valor _3600 segundos (1 hora)_ contido em _"ttl" (Time to live ou "Tempo de Vida")_, diz sobre a _duração em cache_ do registro por outros servidores ou resolvedores DNS. Ou seja, quando houver uma resolução do nome _"lb-1.ocibook.com.br"_ para o seu respectivo endereço IP, esta resposta será válida por _1 hora"_. Após este tempo, qualquer resposta contida em _cache_ sobre este nome, deve ser invalidada pelo resolvedor que a tem, obrigando uma nova consulta ao DNS do _[OCI](https://www.oracle.com/cloud/)_.
 
 Se seus dados não mudam muito, você pode usar um valor _TTL_ de vários dias. Em nosso caso, estamos deixar um valor menor para evitar um _cache_ muito longo, pois iremos mudar esta definição em breve.
 
-Por fim, irei adicionar um registro do tipo _CNAME_ que nada mais é do que um _apelido_ _"wordpress"_ para o nome _"lb-1.ocibook.com.br"_ que foi criado.
+Por fim, irei adicionar um registro do tipo _CNAME_ que nada mais é do que um _apelido_ _"wordpress"_ para o nome _"lb-sp.ocibook.com.br"_ que foi criado.
 
 ```
 darmbrust@hoodwink:~$ oci dns record domain patch \
 > --zone-name-or-id "ocibook.com.br" \
 > --domain "wordpress.ocibook.com.br" \
 > --scope "GLOBAL" \
-> --items '[{"domain":"wordpress.ocibook.com.br", "rdata": "lb-1.ocibook.com.br", "rtype": "CNAME", "ttl": 3600}]'
+> --items '[{"domain":"wordpress.ocibook.com.br", "rdata": "lb-sp.ocibook.com.br", "rtype": "CNAME", "ttl": 3600}]'
 {
   "data": {
     "items": [
       {
         "domain": "wordpress.ocibook.com.br",
         "is-protected": false,
-        "rdata": "lb-1.ocibook.com.br.",
-        "record-hash": "9f1c7a488c404ebe3f549d56c76d563f",
-        "rrset-version": "5",
+        "rdata": "lb-sp.ocibook.com.br.",
+        "record-hash": "cf4e49d314dff97eec49eb0c91302a10",
+        "rrset-version": "22",
         "rtype": "CNAME",
         "ttl": 3600
       }
     ]
   },
-  "etag": "\"5ocid1.dns-zone.oc1..3b872f6da34a452ebd1c36678002acc3#application/json\"",
+  "etag": "\"22ocid1.dns-zone.oc1..3b872f6da34a452ebd1c36678002acc3#application/json\"",
   "opc-total-items": "1"
 }
 ```
@@ -325,11 +325,11 @@ darmbrust@hoodwink:~$ curl -L -v -s -o /dev/null http://wordpress.ocibook.com.br
 >
 * Mark bundle as not supporting multiuse
 < HTTP/1.1 200 OK
-< Date: Sat, 25 Sep 2021 14:37:26 GMT
+< Date: Mon, 13 Dec 2021 10:33:48 GMT
 < Content-Type: text/html; charset=UTF-8
 < Transfer-Encoding: chunked
 < Connection: keep-alive
-< X-Powered-By: PHP/7.4.23
+< X-Powered-By: PHP/7.4.26
 < Link: <http://wordpress.ocibook.com.br/index.php?rest_route=/>; rel="https://api.w.org/"
 <
 { [1164 bytes data]
