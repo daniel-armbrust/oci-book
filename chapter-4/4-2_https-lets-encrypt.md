@@ -59,7 +59,7 @@ Como é possível ver, o _[Certbot](https://certbot.eff.org/)_ foi corretamente 
 
 Uma das formas de se obter um _[certificado digital](https://pt.wikipedia.org/wiki/Certificado_digital)_ válido, emitido pelo _[Let’s Encrypt](https://letsencrypt.org/pt-br/)_, é através do chamado _"desafio DNS" (dns challenge)_. 
 
-Para isto você precisa demonstrar _controle_ sobre o seu _[domínio DNS](https://pt.wikipedia.org/wiki/Sistema_de_Nomes_de_Dom%C3%ADnio)_. Esta é uma das formas exigidas pelo _[Let’s Encrypt](https://letsencrypt.org/pt-br/)_ para que seja possível emitir seu certificado.
+Para isto, você precisa demonstrar _controle_ sobre o seu _[domínio DNS](https://pt.wikipedia.org/wiki/Sistema_de_Nomes_de_Dom%C3%ADnio)_. Esta é uma das formas exigidas pelo _[Let’s Encrypt](https://letsencrypt.org/pt-br/)_ para que seja possível emitir seu certificado.
 
 >_**__NOTA:__** Existe um outro tipo de "desafio" que é via "http". Consulte a [documentação](https://certbot.eff.org/docs/using.html#getting-certificates-and-choosing-plugins) do [Certbot](https://certbot.eff.org/) neste [link aqui](https://certbot.eff.org/docs/using.html#getting-certificates-and-choosing-plugins) para saber mais sobre._
 
