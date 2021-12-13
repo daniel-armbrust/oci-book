@@ -283,25 +283,24 @@ darmbrust@hoodwink:~$ dig @ns4.p68.dns.oraclecloud.net wordpress.ocibook.com.br
 ; (2 servers found)
 ;; global options: +cmd
 ;; Got answer:
-;; ->>HEADER<<- opcode: QUERY, status: NOERROR, id: 23271
+;; ->>HEADER<<- opcode: QUERY, status: NOERROR, id: 21440
 ;; flags: qr aa rd; QUERY: 1, ANSWER: 2, AUTHORITY: 0, ADDITIONAL: 1
 ;; WARNING: recursion requested but not available
 
 ;; OPT PSEUDOSECTION:
 ; EDNS: version: 0, flags:; udp: 1232
-; COOKIE: bf7667ce5d2beaef5630e38e614f1eb92600abe2b70226fe (good)
+; COOKIE: 3def85b14c4160868705b0d061b723164a1a0407a301a7f5 (good)
 ;; QUESTION SECTION:
 ;wordpress.ocibook.com.br.      IN      A
 
 ;; ANSWER SECTION:
-wordpress.ocibook.com.br. 3600  IN      CNAME   lb-1.ocibook.com.br.
-lb-1.ocibook.com.br.    3600    IN      A       152.70.221.188
+wordpress.ocibook.com.br. 3600  IN      CNAME   lb-sp.ocibook.com.br.
+lb-sp.ocibook.com.br.   3600    IN      A       152.70.221.188
 
-;; Query time: 147 msec
+;; Query time: 135 msec
 ;; SERVER: 162.88.50.6#53(162.88.50.6)
-;; WHEN: Sat Sep 25 13:06:01 UTC 2021
-;; MSG SIZE  rcvd: 116
-
+;; WHEN: Mon Dec 13 10:40:22 UTC 2021
+;; MSG SIZE  rcvd: 117
 ```
 
 No site das documentações do _[OCI](https://www.oracle.com/cloud/)_ você também encontra informações sobre a ferramenta _[dig](https://pt.wikipedia.org/wiki/Domain_Information_Groper)_ usando este _[link aqui](https://docs.cloud.oracle.com/pt-br/iaas/Content/DNS/Tasks/testingdnsusingdig.htm)_.
