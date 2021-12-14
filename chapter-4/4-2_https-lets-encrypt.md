@@ -304,11 +304,14 @@ Plugin 'really-simple-ssl' activated.
 Success: Installed 1 of 1 plugins.
 ```
 
-Depois que o _[plugin](https://docs.oracle.com/pt-br/iaas/Content/Compute/Tasks/manage-plugins.htm#available-plugins)_ foi ativado, ele automaticamente alterou as configurações de _[HTTPS](https://pt.wikipedia.org/wiki/Hyper_Text_Transfer_Protocol_Secure)_ do _[Wordpress](https://pt.wikipedia.org/wiki/WordPress)_.
+Como último detalhe, deve-se alterar o parâmetro _"siteurl"_ para o novo valor _"https://wordpress.ocibook.com.br"_ nas configurações do _[Wordpress](https://pt.wikipedia.org/wiki/WordPress)_:
 
-![alt_text](./images/wordpress-finish-install-7.jpg "Wordpress SSL Configuration")
+```
+[opc@wordpress ~]$  sudo /usr/local/bin/wp option update --path=/var/www/html siteurl 'https://wordpress.ocibook.com.br'
+Success: Updated 'siteurl' option.
+```
 
->_**__NOTA:__** A instalação deste [plugin](https://docs.oracle.com/pt-br/iaas/Content/Compute/Tasks/manage-plugins.htm#available-plugins) adicionou alguns arquivos ao [Wordpress](https://pt.wikipedia.org/wiki/WordPress). Por conta disto, é necessário criar uma nova [custom image](https://docs.oracle.com/pt-br/iaas/Content/Compute/Tasks/managingcustomimages.htm) que contenha essas informações atualizadas, além da atualização do backend-set no _[Load Balancer](https://docs.oracle.com/pt-br/iaas/Content/Balance/Concepts/balanceoverview.htm)_. Verifique o capítulo ["3.7 - Concluindo a instalação do Wordpress"](https://github.com/daniel-armbrust/oci-book/blob/main/chapter-3/3-7_concluindo-wordpress.md) no qual contém essas intruções._
+>_**__NOTA:__** A instalação deste [plugin](https://docs.oracle.com/pt-br/iaas/Content/Compute/Tasks/manage-plugins.htm#available-plugins) adicionou alguns arquivos ao [Wordpress](https://pt.wikipedia.org/wiki/WordPress). Por conta disto, é necessário criar uma nova [custom image](https://docs.oracle.com/pt-br/iaas/Content/Compute/Tasks/managingcustomimages.htm) que contenha essas informações atualizadas, além da atualização do backend-set no _[Load Balancer](https://docs.oracle.com/pt-br/iaas/Content/Balance/Concepts/balanceoverview.htm)_. Verifique o capítulo [3.6 - File Storage, DNS privado e Custom Image](https://github.com/daniel-armbrust/oci-book/blob/main/chapter-3/3-6_wordpress-fss-dnsp-customimg.md) no qual contém essas intruções._
 
 Após as configurações, é possível aplicar a _[regra de redirecionamento](https://docs.oracle.com/pt-br/iaas/Content/Balance/Tasks/managingrulesets.htm#URLRedirectRules)_ ao _listener_ com o comando abaixo:
 
