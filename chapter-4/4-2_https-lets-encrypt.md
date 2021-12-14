@@ -307,7 +307,7 @@ Success: Installed 1 of 1 plugins.
 Como último detalhe, deve-se alterar o parâmetro _"siteurl"_ para o novo valor _"https://wordpress.ocibook.com.br"_ nas configurações do _[Wordpress](https://pt.wikipedia.org/wiki/WordPress)_:
 
 ```
-[opc@wordpress ~]$  sudo /usr/local/bin/wp option update --path=/var/www/html siteurl 'https://wordpress.ocibook.com.br'
+[opc@wordpress ~]$ sudo /usr/local/bin/wp option update --path=/var/www/html siteurl 'https://wordpress.ocibook.com.br'
 Success: Updated 'siteurl' option.
 ```
 
