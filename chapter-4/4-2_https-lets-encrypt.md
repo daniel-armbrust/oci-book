@@ -283,13 +283,26 @@ Basicamente, o valor contido no parâmetro _"--items"_ especifica uma ação de 
 
 >_**__NOTA:__**  As [regras de redirecionamento](https://docs.oracle.com/pt-br/iaas/Content/Balance/Tasks/managingrulesets.htm#URLRedirectRules) de URL só se aplicam a listeners [HTTP](https://pt.wikipedia.org/wiki/Hypertext_Transfer_Protocol)._
 
-Antes de aplicarmos a _[regra de redirecionamento](https://docs.oracle.com/pt-br/iaas/Content/Balance/Tasks/managingrulesets.htm#URLRedirectRules)_ que foi criada, vamos atualizar a configuração do _[Wordpress](https://pt.wikipedia.org/wiki/WordPress)_ para habilitar o _[HTTPS](https://pt.wikipedia.org/wiki/Hyper_Text_Transfer_Protocol_Secure)_.
+Antes de aplicarmos a _[regra de redirecionamento](https://docs.oracle.com/pt-br/iaas/Content/Balance/Tasks/managingrulesets.htm#URLRedirectRules)_ que foi criada, vamos atualizar as configurações do _[Wordpress](https://pt.wikipedia.org/wiki/WordPress)_ para habilitar o _[HTTPS](https://pt.wikipedia.org/wiki/Hyper_Text_Transfer_Protocol_Secure)_.
 
-Eu tive que instalar o _[plugin](https://docs.oracle.com/pt-br/iaas/Content/Compute/Tasks/manage-plugins.htm#available-plugins)_ _"Really Simple SSL"_ diretamente pelo menu _Plugins_ do _[Wordpress](https://pt.wikipedia.org/wiki/WordPress)_ para que tudo pudesse funcionar. 
+Eu tive que instalar o _[plugin](https://docs.oracle.com/pt-br/iaas/Content/Compute/Tasks/manage-plugins.htm#available-plugins)_ _"Really Simple SSL"_ para que tudo pudesse funcionar. Isto pode ser feito diretamente pelo painel administrativo do _[Wordpress](https://pt.wikipedia.org/wiki/WordPress)_ através da _URL_ _"http://wordpress.ocibook.com.br/wp-admin/"_, ou por uma sessão do _[Bastion](https://docs.oracle.com/pt-br/iaas/Content/Bastion/Concepts/bastionoverview.htm)_ em uma das instâncias da aplicação: 
 
 ![alt_text](./images/wordpress-finish-install-5.jpg "Wordpress SSL Configuration")
 
 ![alt_text](./images/wordpress-finish-install-6.jpg "Wordpress SSL Configuration")
+
+```
+[opc@wordpress ~]$ sudo /usr/local/bin/wp plugin install --path=/var/www/html really-simple-ssl --activate
+Installing Really Simple SSL (5.2.0)
+Downloading installation package from https://downloads.wordpress.org/plugin/really-simple-ssl.5.2.0.zip...
+Using cached file '/root/.wp-cli/cache/plugin/really-simple-ssl-5.2.0.zip'...
+Unpacking the package...
+Installing the plugin...
+Plugin installed successfully.
+Activating 'really-simple-ssl'...
+Plugin 'really-simple-ssl' activated.
+Success: Installed 1 of 1 plugins.
+```
 
 Depois que o _[plugin](https://docs.oracle.com/pt-br/iaas/Content/Compute/Tasks/manage-plugins.htm#available-plugins)_ foi ativado, ele automaticamente alterou as configurações de _[HTTPS](https://pt.wikipedia.org/wiki/Hyper_Text_Transfer_Protocol_Secure)_ do _[Wordpress](https://pt.wikipedia.org/wiki/WordPress)_.
 
