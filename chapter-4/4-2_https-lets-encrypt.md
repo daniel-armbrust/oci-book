@@ -311,7 +311,73 @@ Como último detalhe, deve-se alterar o parâmetro _"siteurl"_ das configuraçõ
 Success: Updated 'siteurl' option.
 ```
 
->_**__NOTA:__** A instalação deste [plugin](https://docs.oracle.com/pt-br/iaas/Content/Compute/Tasks/manage-plugins.htm#available-plugins) adicionou/alterou alguns arquivos ao [Wordpress](https://pt.wikipedia.org/wiki/WordPress). Por conta disto, é necessário criar uma nova [custom image](https://docs.oracle.com/pt-br/iaas/Content/Compute/Tasks/managingcustomimages.htm) que contenha essas informações atualizadas, além da atualização do backend-set no _[Load Balancer](https://docs.oracle.com/pt-br/iaas/Content/Balance/Concepts/balanceoverview.htm)_. Verifique o capítulo [3.6 - File Storage, DNS privado e Custom Image](https://github.com/daniel-armbrust/oci-book/blob/main/chapter-3/3-6_wordpress-fss-dnsp-customimg.md) no qual contém essas intruções._
+Como a instalação deste _[plugin](https://docs.oracle.com/pt-br/iaas/Content/Compute/Tasks/manage-plugins.htm#available-plugins)_ adicionou/alterou alguns arquivos da insância do _[Wordpress](https://pt.wikipedia.org/wiki/WordPress)_, devemos criar uma nova _[custom image](https://docs.oracle.com/pt-br/iaas/Content/Compute/Tasks/managingcustomimages.htm)_ além de atualizar o _backend-set_ do _[Load Balancer](https://docs.oracle.com/pt-br/iaas/Content/Balance/Concepts/balanceoverview.htm)_.
+
+A nova _[custom image](https://docs.oracle.com/pt-br/iaas/Content/Compute/Tasks/managingcustomimages.htm)_ será criada no compartimento _"cmp-app"_ através do comando abaixo:
+
+```
+darmbrust@hoodwink:~$ oci compute image create \
+> --compartment-id "ocid1.compartment.oc1..aaaaaaaamcff6exkhvp4aq3ubxib2wf74v7cx22b3yj56jnfkazoissdzefq" \
+> --instance-id "ocid1.instance.oc1.sa-saopaulo-1.antxeljr6noke4qcric5qfuocpbpeuuydcbqdquokl6erikoxitmzsckmnra" \
+> --display-name "ol7-wordpress-https_img" \
+> --wait-for-state "AVAILABLE"
+{
+  "data": {
+    "agent-features": null,
+    "base-image-id": "ocid1.image.oc1.sa-saopaulo-1.aaaaaaaasahnls6nmev22raz7ecw6i64d65fu27pmqjn4pgz7zue56ojj7qq",
+    "billable-size-in-gbs": 7,
+    "compartment-id": "ocid1.compartment.oc1..aaaaaaaamcff6exkhvp4aq3ubxib2wf74v7cx22b3yj56jnfkazoissdzefq",
+    "create-image-allowed": true,
+    "defined-tags": {
+      "Oracle-Tags": {
+        "CreatedBy": "oracleidentitycloudservice/daniel.armbrust@algumdominio.com",
+        "CreatedOn": "2021-12-16T12:09:43.560Z"
+      }
+    },
+    "display-name": "ol7-wordpress-https_img",
+    "freeform-tags": {},
+    "id": "ocid1.image.oc1.sa-saopaulo-1.aaaaaaaamxolqusjbj4drwo5a4th7vbu6un5oryrerxklqiivu37hxg6t2ia",
+    "launch-mode": "PARAVIRTUALIZED",
+    "launch-options": {
+      "boot-volume-type": "PARAVIRTUALIZED",
+      "firmware": "UEFI_64",
+      "is-consistent-volume-naming-enabled": true,
+      "is-pv-encryption-in-transit-enabled": false,
+      "network-type": "PARAVIRTUALIZED",
+      "remote-data-volume-type": "PARAVIRTUALIZED"
+    },
+    "lifecycle-state": "AVAILABLE",
+    "listing-type": null,
+    "operating-system": "Oracle Linux",
+    "operating-system-version": "7.9",
+    "size-in-mbs": 102400,
+    "time-created": "2021-12-16T12:09:43.885000+00:00"
+  },
+  "etag": "47fec493f3418f141b971860aa2000240175836c7400b8b5ac7ff6cccafa4821"
+}
+```
+
+A antiga _[imagem](https://docs.oracle.com/pt-br/iaas/Content/Compute/Tasks/managingcustomimages.htm)_ pode ser excluída com o comando abaixo:
+
+```
+darmbrust@hoodwink:~$ oci compute image delete \
+> --image-id "ocid1.image.oc1.sa-saopaulo-1.aaaaaaaacdmbrlmzub7p7rwddzfupslb7lx7dvh4insdcz4sw6bxre6ccgkq"
+Are you sure you want to delete this resource? [y/N]: y
+```
+
+É possível remover a instância do _backend-set_ através do comando:
+
+```
+darmbrust@hoodwink:~$ oci lb backend delete \
+> --load-balancer-id "ocid1.loadbalancer.oc1.sa-saopaulo-1.aaaaaaaa5ledgzqveh3o73m3mnv42pkxcm5y64hjmkwl7tnhvsee2zv7gbga" \
+> --backend-set-name "lb-pub_wordpress_backend" \
+> --backend-name "10.0.10.240:80"
+Are you sure you want to delete this resource? [y/N]: y
+```
+
+Deve-se repetir o mesmo comando para a instância _[Wordpress](https://pt.wikipedia.org/wiki/WordPress)_ de backup, endereço IP _10.0.10.103_.
+
+Os comandos para a criação de uma nova instância a partir de uma _[custom image](https://docs.oracle.com/pt-br/iaas/Content/Compute/Tasks/managingcustomimages.htm)_, além da adição dessas instâncias ao _backend-set_ no _[Load Balancer](https://docs.oracle.com/pt-br/iaas/Content/Balance/Concepts/balanceoverview.htm)_, sendo uma _ativa_ e outra _backup_, não serão repetidos aqui. Consulte os capítulos _"[3.6 - File Storage, DNS privado e Custom Image](https://github.com/daniel-armbrust/oci-book/blob/main/chapter-3/3-6_wordpress-fss-dnsp-customimg.md)"_ e _"[3.7 - Fundamentos do Serviço de Load Balancing](https://github.com/daniel-armbrust/oci-book/blob/main/chapter-3/3-7_fundamentos-load-balancing.md)"_, no qual contém essas instruções.
 
 Após as configurações, é possível aplicar a _[regra de redirecionamento](https://docs.oracle.com/pt-br/iaas/Content/Balance/Tasks/managingrulesets.htm#URLRedirectRules)_ ao _listener_ com o comando abaixo:
 
