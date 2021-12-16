@@ -379,7 +379,37 @@ Deve-se repetir o mesmo comando para a instância _[Wordpress](https://pt.wikipe
 
 Os comandos para a criação de uma nova instância a partir de uma _[custom image](https://docs.oracle.com/pt-br/iaas/Content/Compute/Tasks/managingcustomimages.htm)_, além da adição dessas instâncias ao _backend-set_ no _[Load Balancer](https://docs.oracle.com/pt-br/iaas/Content/Balance/Concepts/balanceoverview.htm)_, sendo uma _ativa_ e outra _backup_, não serão repetidos aqui. Consulte os capítulos _"[3.6 - File Storage, DNS privado e Custom Image](https://github.com/daniel-armbrust/oci-book/blob/main/chapter-3/3-6_wordpress-fss-dnsp-customimg.md)"_ e _"[3.7 - Fundamentos do Serviço de Load Balancing](https://github.com/daniel-armbrust/oci-book/blob/main/chapter-3/3-7_fundamentos-load-balancing.md)"_, no qual contém essas instruções.
 
-Após as configurações, é possível aplicar a _[regra de redirecionamento](https://docs.oracle.com/pt-br/iaas/Content/Balance/Tasks/managingrulesets.htm#URLRedirectRules)_ ao _listener_ com o comando abaixo:
+É possível verificar as novas instâncias com suporte _[HTTPS](https://pt.wikipedia.org/wiki/Hyper_Text_Transfer_Protocol_Secure)_ no _backend-set_:
+
+```
+darmbrust@hoodwink:~$ oci lb backend-set list \
+> --load-balancer-id "ocid1.loadbalancer.oc1.sa-saopaulo-1.aaaaaaaa5ledgzqveh3o73m3mnv42pkxcm5y64hjmkwl7tnhvsee2zv7gbga" \
+> --query "data[].backends"
+[
+  [
+    {
+      "backup": true,
+      "drain": false,
+      "ip-address": "10.0.10.97",
+      "name": "10.0.10.97:80",
+      "offline": false,
+      "port": 80,
+      "weight": 1
+    },
+    {
+      "backup": false,
+      "drain": false,
+      "ip-address": "10.0.10.104",
+      "name": "10.0.10.104:80",
+      "offline": false,
+      "port": 80,
+      "weight": 1
+    }
+  ]
+]
+```
+
+O último detalhe é aplicar a _[regra de redirecionamento](https://docs.oracle.com/pt-br/iaas/Content/Balance/Tasks/managingrulesets.htm#URLRedirectRules)_ que foi criada ao _listener_:
 
 ```
 darmbrust@hoodwink:~$ oci lb listener update \
